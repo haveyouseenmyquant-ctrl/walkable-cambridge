@@ -226,3 +226,44 @@ Next (session 7)
   `timeout: 1800000`. Live: walkable 99.96, buildings 100, ground 100, landmarks 25, height 98.64, load 2.8–3.1 s
   (was 1.99; bigger tiles), errors 0, all 15 moves pass. Load time and fps are the cost of shaped roofs. Plane-fitted
   roofs should win it back.
+
+## 2026-11-07 — Session 7: benchmark tooling, invented passages removed, sun shadows
+
+Done
+- Benchmark pipeline, ready to run except for the photos. `scripts/make_benchmark.py` lists Mapillary images in
+  the study area, keeps perspective photos with a computed pose within 4 m of an OSM walkable sample, and picks 200
+  by farthest-point sampling seeded at Great St Mary's (at most one per sequence per 50 m). It takes pose from
+  `computed_rotation` (heading, pitch), corrects true north to grid north (−1.67°), takes hfov from the focal
+  length, downloads the 1024 px thumbnails, and writes `data/benchmark/benchmark.json` and `heldout.json` (ids plus
+  same-sequence images within 15 m, which world builders must exclude). It refuses to run again once frozen.
+  `scripts/photo_render.mjs` renders the viewer at each pose (ground + 1.65 m, matching vertical fov, UI hidden).
+  `scripts/photo_score.py` gives the DINOv2 ViT-S/14 (facebook/dinov2-small, Apache-2.0, local MPS) CLS cosine ×100.
+  `scripts/bench.sh` caches `data/benchmark/scores/<build_hash>.json` (build hash = sha256 of manifest.json).
+  measure.sh reports the cached value for the live build, and service.sh scores any new build hourly. I tested
+  it end to end on 3 dev poses (identical images give 100, different views 56).
+- **Blocked: no Mapillary token.** The Graph API needs a client token, and the signup needs email verification
+  I can't do. I asked Gaspard (tell-owner) and filed approval request a-20261107-224817-2d90. When the token
+  arrives, put it in `data/mapillary_token` (git-ignored) and run make_benchmark.py once, then bench.sh. No
+  baseline yet.
+- Removed the 94 invented connector passages (moved to `data/derived/connectors_invented_retired.json`, no
+  longer built). Honest walkable_coverage: 99.39 % (local), still above the 99 guardrail.
+- fps_median: browser_test.mjs with `WC_GPU=1` renders on the M4 (ANGLE Metal) in a 1920×1080 window and
+  reports the median frames per second over the walk. Headless Chrome throttles requestAnimationFrame to about 13–17 fps even
+  on an empty page, so the GPU run must be windowed. service.sh runs it hourly (with the moves test). Result: 60
+  (vsync cap) with shadows.
+- Lighting: sun at Cambridge mid-June 14:00 BST (azimuth ~200°, elevation ~58°), 2048 PCF-soft shadow map over a
+  240 m box that follows the camera, snapped to texels. `?quality=low` (default on touch devices) turns shadows off.
+  Screenshot: docs/shadows_session7.png. Not yet checked against the benchmark (none yet), so it's unverified.
+- Human scale: eye 1.65 m, walk 1.4 m/s.
+
+Learned
+- Swiftshader can't hold frame rate with shadows (jump and double-tap tests fail on frame time), so moves are now
+  checked in the GPU run. Swiftshader still measures load and errors.
+- The lumpy LiDAR heightfield roofs are the most visibly wrong thing at eye level near GSM (see the dev renders).
+
+Next
+1. Once the token arrives: freeze the benchmark, record the baseline photo_match_score, then add judged_realism
+   (Claude vision judge, 50 fixed views, blind A/B order) and the visual_quality rubric (30 views).
+2. Centre ring: plane-fitted roofs (RANSAC facets), facade colour/material per building from photos (Commons/Mapillary,
+   excluding the held-out set), ground materials on King's Parade and Market Square, OSM street furniture.
+3. Start the real_facade_pct / roof_match_pct / street_objects_pct measurements so finished_radius_m can be computed.
