@@ -1,0 +1,155 @@
+{
+ "note": "Fixed list of 25 landmarks written in session 1 (2026-11-07). Do not change without Gaspard's approval: it is the denominator of landmarks_detailed.",
+ "landmarks": [
+  {
+   "id": "kings-college-chapel",
+   "name": "King's College Chapel",
+   "osm_id": "way/164848633",
+   "detail": "Perpendicular Gothic chapel: four corner turrets with pinnacles, 22 buttresses, great east/west windows"
+  },
+  {
+   "id": "senate-house",
+   "name": "Senate House",
+   "osm_id": "way/5094870",
+   "detail": "Gibbs' Palladian hall: Corinthian pilasters, pediments, balustrade"
+  },
+  {
+   "id": "great-st-marys",
+   "name": "Great St Mary's, the University Church",
+   "osm_id": "way/26344507",
+   "detail": "West tower with corner pinnacles, clerestory windows"
+  },
+  {
+   "id": "bridge-of-sighs",
+   "name": "Bridge of Sighs (St John's)",
+   "osm_id": "way/576816647",
+   "detail": "Covered neo-Gothic bridge with tracery windows over the Cam (man_made=bridge)"
+  },
+  {
+   "id": "mathematical-bridge",
+   "name": "Mathematical Bridge (Queens')",
+   "osm_id": "way/570076432",
+   "detail": "Timber tangent-and-radial truss footbridge (man_made=bridge)"
+  },
+  {
+   "id": "fitzwilliam-museum",
+   "name": "Fitzwilliam Museum",
+   "osm_id": "way/5649709",
+   "detail": "Neoclassical portico with Corinthian columns, pediment, dome"
+  },
+  {
+   "id": "round-church",
+   "name": "Round Church (Holy Sepulchre)",
+   "osm_id": "way/92878394",
+   "detail": "Norman round nave with conical roof, round-arched windows"
+  },
+  {
+   "id": "trinity-great-gate",
+   "name": "Trinity College Great Gate",
+   "osm_id": "way/151179441",
+   "detail": "Tudor gate tower with four octagonal corner turrets (gate node node/443675369; part of the Great Court E-K range)"
+  },
+  {
+   "id": "wren-library",
+   "name": "Wren Library (Trinity)",
+   "osm_id": "relation/9449788",
+   "detail": "Wren's colonnaded library with arcade, balustrade and statues"
+  },
+  {
+   "id": "st-johns-chapel",
+   "name": "St John's College Chapel",
+   "osm_id": "way/158913949",
+   "detail": "Scott's chapel with tall square tower and pinnacles"
+  },
+  {
+   "id": "gibbs-building",
+   "name": "Gibbs' Building (King's)",
+   "osm_id": "way/12688565",
+   "detail": "Classical range with central arch and pediment"
+  },
+  {
+   "id": "old-schools",
+   "name": "The Old Schools",
+   "osm_id": "way/135762296",
+   "detail": "Classical east front, gateway"
+  },
+  {
+   "id": "corn-exchange",
+   "name": "Corn Exchange",
+   "osm_id": "way/5094871",
+   "detail": "Victorian brick hall with arched windows"
+  },
+  {
+   "id": "guildhall",
+   "name": "The Guildhall",
+   "osm_id": "way/5094872",
+   "detail": "1930s civic front facing Market Square"
+  },
+  {
+   "id": "pembroke-chapel",
+   "name": "Pembroke College Chapel",
+   "osm_id": "way/136601302",
+   "detail": "Wren's first building: classical chapel with pediment and lantern"
+  },
+  {
+   "id": "peterhouse-chapel",
+   "name": "Peterhouse Chapel",
+   "osm_id": "way/23470613",
+   "detail": "17th-c. chapel with gothic/baroque gables and loggias"
+  },
+  {
+   "id": "little-st-marys",
+   "name": "Little St Mary's Church",
+   "osm_id": "way/104421677",
+   "detail": "Decorated Gothic church with large traceried windows"
+  },
+  {
+   "id": "st-benets",
+   "name": "St Bene't's Church",
+   "osm_id": "way/134521042",
+   "detail": "Anglo-Saxon west tower (oldest building in Cambridgeshire)"
+  },
+  {
+   "id": "holy-trinity",
+   "name": "Holy Trinity Church",
+   "osm_id": "way/26269190",
+   "detail": "Church with west tower and spire"
+  },
+  {
+   "id": "pitt-building",
+   "name": "Pitt Building",
+   "osm_id": "way/27546289",
+   "detail": "Gothic Revival tower ('the Freshers' Church')"
+  },
+  {
+   "id": "gate-of-honour",
+   "name": "Gate of Honour (Caius)",
+   "osm_id": "way/137017447",
+   "detail": "Renaissance gate with sundials and small dome"
+  },
+  {
+   "id": "clare-bridge",
+   "name": "Clare Bridge",
+   "osm_id": "way/570077176",
+   "detail": "Oldest Cam bridge: three arches with stone balls (man_made=bridge)"
+  },
+  {
+   "id": "pepys-library",
+   "name": "Pepys Library (Magdalene)",
+   "osm_id": "way/23694476",
+   "detail": "Arcaded front range with curved gables"
+  },
+  {
+   "id": "emmanuel-chapel",
+   "name": "Emmanuel College Chapel",
+   "osm_id": "way/161131060",
+   "detail": "Wren chapel with colonnade and clock cupola"
+  },
+  {
+   "id": "our-lady-english-martyrs",
+   "name": "Our Lady and the English Martyrs",
+   "osm_id": "way/33167535",
+   "detail": "Gothic Revival church with 65 m spire"
+  }
+ ]
+}

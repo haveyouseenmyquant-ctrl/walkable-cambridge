@@ -1,0 +1,17 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Walkable Cambridge study area",
+        "south": 52.1975, "north": 52.2125, "west": 0.1080, "east": 0.1330,
+        "note": "Fixed study area. Do not change without Gaspard's approval (keeps KPIs comparable)."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[0.1080,52.1975],[0.1330,52.1975],[0.1330,52.2125],[0.1080,52.2125],[0.1080,52.1975]]]
+      }
+    }
+  ]
+}

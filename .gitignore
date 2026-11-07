@@ -1,0 +1,7 @@
+.venv/
+data/raw/
+data/lidar/
+data/testbuild/
+data/derived/lidar_building_stats.json
+__pycache__/
+.DS_Store
