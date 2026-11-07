@@ -60,3 +60,13 @@ uint8    surface[ntris]    0 = none/building, 1 = road, 2 = pavement/footway, 3 
   Building landmarks keep their `b:<osm_id>` node (render mesh = detailed model); non-building landmarks
   (bridges) are nodes `lm:<id>`. Collision always uses the plain footprint body, so detail never blocks walkable ways.
 - Reference screenshots: `landmarks/<id>.png`, from `node scripts/landmark_shots.mjs` (viewer `?debug` + `window.__cam`).
+
+## Trees and street objects (sessions 9, 11)
+- Pipeline order: `build.py` → `trees.py` → `street_objects.py` (both edit manifest.json in place).
+- `trees/<tile>.bin`: float32 `[x, y, z_ground, height, crown_r, seed]`; `objects/<tile>.bin`: float32
+  `[x, y, z_ground, type, heading, seed, n]` (types in `scripts/street_objects.py` TYPES; heading = radians of the
+  nearest way's direction, the way lies on local +y; n = bike stands for bicycle_parking).
+- `manifest.layers` = viewer defaults `{trees, objects}`; `?trees=0|1`, `?objects=0|1` override.
+- street_objects_pct: targets = OSM nodes of the TYPES in the study area plus `natural=tree` nodes
+  (data/derived/street_object_targets.json). One counts if a record of the same type (tree layer for trees) lies within
+  1 m of it in a layer the build draws by default.

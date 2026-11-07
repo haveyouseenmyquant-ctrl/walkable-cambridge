@@ -5,7 +5,7 @@ import sys
 import urllib.error
 import urllib.request
 
-FILES = ["manifest.json", "index.html", "app/main.js", "app/tiles.js", "app/materials.js", "app/trees.js",
+FILES = ["manifest.json", "index.html", "app/main.js", "app/tiles.js", "app/materials.js", "app/trees.js", "app/objects.js",
          "tex/textures.json"]
 src = sys.argv[1].rstrip("/")
 h = hashlib.sha256()

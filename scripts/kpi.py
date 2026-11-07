@@ -383,6 +383,32 @@ def main():
         if l.get("id") in fixed and l.get("detailed") and os.path.isfile(os.path.join(ROOT, "landmarks", l["id"] + ".png")):
             cnt += 1
     out["landmarks_detailed"] = cnt
+
+    # ---------------- street objects: OSM street-object nodes in the study area (scripts/street_objects.py TYPES,
+    # plus natural=tree) present within 1 m of their mapped position in a layer the viewer draws by default
+    sp = os.path.join(ROOT, "data/derived/street_object_targets.json")
+    if os.path.exists(sp):
+        st = json.load(open(sp))   # [[E, N, type]], type 0 = tree
+        layers = man.get("layers", {})
+        pts = {0: [], 1: []}   # 0 = trees layer, 1 = objects layer: [x, y, type]
+        for tile in man.get("tiles", []):
+            for key, lay, rec in (("trees", 0, 6), ("objects", 1, 7)):
+                if tile.get(key) and layers.get(key):
+                    b = fetch(tile[key])
+                    if b:
+                        a = np.frombuffer(b, np.float32).reshape(-1, rec)
+                        pts[lay] += [(x + e0, y + n0, 0 if lay == 0 else int(k)) for x, y, k in zip(a[:, 0], a[:, 1], a[:, 3])]
+        from scipy.spatial import cKDTree
+        hit = 0
+        trees = cKDTree(np.array([p[:2] for p in pts[0]])) if pts[0] else None
+        objs = np.array(pts[1]) if pts[1] else np.zeros((0, 3))
+        okd = cKDTree(objs[:, :2]) if len(objs) else None
+        for E, N, k in st:
+            if k == 0:
+                hit += bool(trees is not None and trees.query([E, N])[0] <= 1.0)
+            elif okd is not None:
+                hit += any(int(objs[i, 2]) == k for i in okd.query_ball_point([E, N], 1.0))
+        out["street_objects_pct"] = round(100.0 * hit / max(1, len(st)), 2)
     print(json.dumps(out))
 
 

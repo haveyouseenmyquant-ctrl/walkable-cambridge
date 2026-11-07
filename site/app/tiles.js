@@ -4,13 +4,15 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from '../vendor/meshoptimizer/meshopt_decoder.module.js';
 import { parseCol, ColTile } from './collision.js';
 import { makeTrees } from './trees.js';
+import { makeObjects } from './objects.js';
 import { buildingVcolMat, groundVcolMat } from './materials.js';
 
 const DEBUG = /debug/.test(location.search);
 const Q = new URLSearchParams(location.search);
-// ?trees: draw OSM + LiDAR trees (session 9). Off by default: the low-poly crowns lowered photo_match (7.75 -> 6.40 on
-// the 50-view check); they need leaf-textured crowns first.
-const TREES = Q.has('trees'), LOOK2 = Q.get('look') === 'v2';
+// Layers: manifest.layers gives the defaults (scripts/street_objects.py), ?trees=0|1 / ?objects=0|1 override.
+// Trees lowered photo_match on flat shading (session 9) but were neutral once surfaces were textured (session 11).
+const LOOK2 = Q.get('look') === 'v2';
+const layerOn = (man, k) => Q.has(k) ? Q.get(k) !== '0' : !!man.layers?.[k];
 const LOAD_R = 400, UNLOAD_R = 550, MAX_JOBS = 4;
 
 // Surface class colours (FORMAT.md) for the collision fallback mesh and the minimap.
@@ -33,6 +35,7 @@ export class TileManager {
     this.onCollision = onCollision; this.onUnload = onUnload;
     this.tiles = manifest.tiles.map(m => ({ m, state: 'idle', group: null, col: null, gen: 0 }));
     this.jobs = 0;
+    this.trees = layerOn(manifest, 'trees'); this.objects = layerOn(manifest, 'objects');
     this.loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
   }
 
@@ -63,8 +66,9 @@ export class TileManager {
     t.state = 'loading'; const gen = ++t.gen; this.jobs++;
     try {
       const bin = p => fetch(this.base + p).then(r => { if (!r.ok) throw new Error(`${r.status} ${p}`); return r.arrayBuffer(); });
-      const [gltf, buf, tbuf] = await Promise.all([
-        this.loader.loadAsync(this.base + t.m.glb), bin(t.m.collision), TREES && t.m.trees ? bin(t.m.trees) : null,
+      const [gltf, buf, tbuf, obuf] = await Promise.all([
+        this.loader.loadAsync(this.base + t.m.glb), bin(t.m.collision), this.trees && t.m.trees ? bin(t.m.trees) : null,
+        this.objects && t.m.objects ? bin(t.m.objects) : null,
       ]);
       if (gen !== t.gen) return; // unloaded meanwhile
       const t0 = performance.now();
@@ -73,6 +77,7 @@ export class TileManager {
       const t1 = performance.now();
       t.group = this.prepare(gltf.scene, col);
       if (tbuf) t.group.add(makeTrees(tbuf));
+      if (obuf) t.group.add(makeObjects(obuf));
       this.scene.add(t.group);
       t.state = 'loaded';
       const t2 = performance.now();
