@@ -34,3 +34,5 @@ Next (session 2)
 - Watch for: OSM footways that run through building polygons (passages, arches). The harness will count them as
   blocked, so the pipeline needs openings for tunnel=building_passage / covered=yes ways.
 - Then session 3: the three.js viewer and a headless Chrome test for load_seconds/site_errors.
+- Disk: only ~6.9 GB free after downloads (data/raw is 2.2 GB). Don't unzip OS Open Roads (2.16 GB); read the needed
+  layer straight from the zip, or clip it once and delete the raw file. The "2022" LiDAR composite was actually flown in 2018–2019.

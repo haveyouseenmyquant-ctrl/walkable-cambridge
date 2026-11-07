@@ -52,7 +52,7 @@ Notes: the composite is gap-filled (no holes). The NLP 2023 rasters are not gap-
 | Product | Version | Area/format | File | URL | Size (bytes) |
 |---|---|---|---|---|---|
 | OS OpenMap – Local | 2026-10 | TL 100 km square, ESRI Shapefile (GeoPackage is offered for GB only, 3.48 GB) | raw/os/OpenMapLocal/opmplc_essh_tl.zip (335 MB unzipped, not extracted) | https://api.os.uk/downloads/v1/products/OpenMapLocal/downloads?area=TL&format=ESRI%C2%AE+Shapefile&redirect | 110,082,154 |
-| OS Open Roads | 2026-10 | GB, GeoPackage (GB only) | raw/os/OpenRoads/oproad_gpkg_gb.zip (not extracted) | https://api.os.uk/downloads/v1/products/OpenRoads/downloads?area=GB&format=GeoPackage&redirect | 1,010,630,367 |
+| OS Open Roads | 2026-10 | GB, GeoPackage (GB only) | raw/os/OpenRoads/oproad_gpkg_gb.zip (contains Data/oproad_gb.gpkg, 2.16 GB unzipped; not extracted) | https://api.os.uk/downloads/v1/products/OpenRoads/downloads?area=GB&format=GeoPackage&redirect | 1,010,630,367 |
 | OS Terrain 50 | 2026-07 | GB, ASCII Grid + GML (Grid), 50 m | raw/os/Terrain50/terr50_gagg_gb.zip; the TL45 tile (10 km) was extracted to raw/os/Terrain50/tl45/ | https://api.os.uk/downloads/v1/products/Terrain50/downloads?area=GB&format=ASCII+Grid+and+GML+%28Grid%29&redirect | 161,706,566 (TL45 inner zip 52,205) |
 | OS Open Zoomstack | 2026-06 | **skipped** | — | GPKG 4,301,453,983 B; MBTiles 2,852,712,448 B (GB only) | — |
 
