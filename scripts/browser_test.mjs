@@ -56,11 +56,13 @@ async function testMoves(page) {
   const home = await page.evaluate(`({...${P}.position, yaw: ${P}.yaw})`);
   const reset = async () => { await page.evaluate(`${P}.place(${home.x}, ${home.y}, ${home.z}, ${home.yaw})`); await sleep(200); };
   const shot = async name => { if (MOVES_SHOT) { fs.mkdirSync(MOVES_SHOT, { recursive: true }); await page.screenshot({ path: path.join(MOVES_SHOT, name + '.png') }); } };
-  // jump
+  // jump (first let the player settle: neighbouring tiles may still be loading)
+  for (let i = 0, zp = NaN; i < 30; i++) { const z = await get('z'); if (Math.abs(z - zp) < 0.005) break; zp = z; await sleep(150); }
   const z0 = await get('z');
   await kb.down('Space'); await sleep(60); await kb.up('Space');
-  const jz = await track(900, 'z');
+  const jz = await track(1400, 'z');
   res.jump = Math.max(...jz) - z0 > 0.6 && Math.abs(jz.at(-1) - z0) < 0.3;
+  if (!res.jump) console.error('[browser_test] jump trace', z0, jz.map(v => v.toFixed(2)).join(' '));
   // run
   await kb.down('ShiftLeft'); await kb.down('KeyW');
   const rs = await track(800, 'speed');

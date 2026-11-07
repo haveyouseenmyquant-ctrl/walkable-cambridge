@@ -4,7 +4,7 @@ v1 ("complete and simple"):
   - ground: EA LiDAR DTM sampled on a 2 m grid per 250 m tile, each triangle classed from OSM
     (roads, footways, grass, water, squares, under-building); water is non-walkable.
   - buildings: every OSM building extruded from its lowest ground to median DTM + LiDAR P95 height,
-    flat roof, solid walls. Walkable OSM ways that cross a building get a 2.6 m wide, ~3.5 m high
+    roof shaped from the LiDAR DSM (3 m heightfield, chimneys filtered) where it isn't flat, solid walls. Walkable OSM ways that cross a building get a 2.6 m wide, ~3.5 m high
     passage cut through it (gate arches, building passages, arcades).
   - bridges: walkable ways tagged bridge=* get a deck interpolated between the ground at their ends.
 
@@ -23,7 +23,7 @@ import rasterio
 from pyproj import Transformer
 from rasterio.features import geometry_mask, rasterize
 from rasterio.windows import from_bounds
-from scipy.ndimage import map_coordinates
+from scipy.ndimage import binary_erosion, distance_transform_edt, map_coordinates, median_filter
 from shapely import STRtree
 from shapely.geometry import LineString, MultiPolygon, Point, Polygon, box, mapping
 from shapely.ops import polygonize, unary_union
@@ -226,6 +226,72 @@ def add_prism(m, poly, z0, z1, color, roof_color, top=True, bottom=False):
             m.tris(np.concatenate([T[:, ::-1], np.full((len(T), 3, 1), z0)], 2), roof_color, 0)
 
 
+ROOF_CELL = 3.0       # roof heightfield grid (m)
+
+
+def _polys(g):
+    if g.geom_type == "Polygon":
+        return [g] if g.area > 1e-6 else []
+    return [q for q in getattr(g, "geoms", []) if q.geom_type == "Polygon" and q.area > 1e-6]
+
+
+def add_lidar_roof(m, poly, z0, zf, color, roof_color, bottom=False):
+    """Like add_prism, but the roof is a heightfield zf(local xy) -> z on a ROOF_CELL grid clipped to the
+    footprint, and the walls rise from z0 to the roof edge (built from the roof's boundary edges, so the
+    shell is closed)."""
+    import shapely
+    x0, y0, x1, y1 = poly.bounds
+    gx = np.arange(math.floor(x0 / ROOF_CELL) * ROOF_CELL, x1, ROOF_CELL)
+    gy = np.arange(math.floor(y0 / ROOF_CELL) * ROOF_CELL, y1, ROOF_CELL)
+    X, Y = np.meshgrid(gx, gy)
+    cells = shapely.box(X.ravel(), Y.ravel(), X.ravel() + ROOF_CELL, Y.ravel() + ROOF_CELL)
+    pieces = shapely.intersection(cells[shapely.intersects(cells, poly)], poly)
+    T = [triangulate(q) for pc in pieces for q in _polys(pc)]
+    T = [t for t in T if len(t)]
+    if not T:
+        return False
+    T = np.concatenate(T)
+    k = len(T)
+    Z = zf(T.reshape(-1, 2)).reshape(k, 3)
+    m.tris(np.concatenate([T, Z[..., None]], 2), roof_color, 0)
+    # boundary edges = edges used by exactly one triangle (kept in the triangle's CCW direction)
+    A = T[:, [0, 1, 2]].reshape(-1, 2); B = T[:, [1, 2, 0]].reshape(-1, 2)
+    ZA = Z[:, [0, 1, 2]].ravel(); ZB = Z[:, [1, 2, 0]].ravel()
+    ka = np.round(A * 1000).astype(np.int64); kb = np.round(B * 1000).astype(np.int64)
+    lo = np.where((ka[:, 0] < kb[:, 0]) | ((ka[:, 0] == kb[:, 0]) & (ka[:, 1] < kb[:, 1])), 0, 1)
+    key = np.where(lo[:, None] == 0, np.c_[ka, kb], np.c_[kb, ka])
+    _, inv, cnt = np.unique(key, axis=0, return_inverse=True, return_counts=True)
+    e = cnt[inv.ravel()] == 1
+    a, b, za, zb = A[e], B[e], ZA[e], ZB[e]
+    A0 = np.c_[a, np.full(len(a), z0)]; B0 = np.c_[b, np.full(len(a), z0)]
+    A1 = np.c_[a, za]; B1 = np.c_[b, zb]
+    m.tris(np.concatenate([np.stack([A0, B0, B1], 1), np.stack([A0, B1, A1], 1)]), color, 0)
+    if bottom:
+        U = triangulate(poly)
+        if len(U):
+            m.tris(np.concatenate([U[:, ::-1], np.full((len(U), 3, 1), z0)], 2), roof_color, 0)
+    return True
+
+
+def roof_field(bd, lo):
+    """Height function for a building's LiDAR roof, or None if the roof is (nearly) flat."""
+    R = bd.get("roofR")
+    if R is None:
+        return None
+    vals = R[bd["roofM"]]
+    hi = float(vals.max())
+    top = bd["top"]
+    if hi - lo < 1.0:
+        return None
+    ox, oy = bd["roofO"]   # local coords of pixel (0,0) centre; rows go south
+
+    def zf(P):
+        z = map_coordinates(R, [oy - P[:, 1], P[:, 0] - ox], order=1, mode="nearest")
+        z = np.maximum(z, lo)
+        return lo + (z - lo) * (top - lo) / (hi - lo)   # peak lands on the building's LiDAR top
+    return zf
+
+
 def add_prism_local(m, g, z0, z1, color, roof_color):
     """add_prism for a (Multi)Polygon in the local frame."""
     from shapely.affinity import translate
@@ -425,7 +491,7 @@ def main():
         r0, c0 = int(win.row_off), int(win.col_off)
         r0c, c0c = max(r0, 0), max(c0, 0)
         r1, c1 = min(r0 + int(win.height), shp[0]), min(c0 + int(win.width), shp[1])
-        dmed = dmin = p95 = None
+        dmed = dmin = p95 = roof = None
         if r1 > r0c and c1 > c0c:
             a = DTM[r0c:r1, c0c:c1]; s = DSM[r0c:r1, c0c:c1]
             wtf = rasterio.transform.from_origin(LEFT + c0c, TOP - r0c, 1, 1)
@@ -435,11 +501,19 @@ def main():
             if m.sum():
                 dmed, dmin = float(np.median(a[m])), float(a[m].min())
                 p95 = float(np.percentile(s[m] - a[m], 95))
+                if m.sum() >= 20:   # roof surface: DSM inside the footprint, spread outward, chimneys filtered
+                    _, (ii, jj) = distance_transform_edt(~m, return_indices=True)
+                    R = median_filter(s[ii, jj], size=3)
+                    mi = binary_erosion(m, iterations=1)   # judge flatness away from the eave pixels
+                    q10, q90 = np.percentile(R[mi if mi.sum() >= 10 else m], [10, 90])
+                    if q90 - q10 >= 1.5:
+                        roof = (R, m, (LEFT + c0c + 0.5 - E0, TOP - r0c - 0.5 - N0))
         if dmed is None:
             c = g.centroid
             dmed = dmin = float(dtm_at([c.x], [c.y])[0])
         h = p95
         if h is None or h < 2.5:
+            roof = None
             try:
                 h = float(str(t.get("height", "")).split()[0])
             except (ValueError, IndexError):
@@ -468,6 +542,8 @@ def main():
         c = g.representative_point()
         bdata.append(dict(oid=oid, g=g, t=t, top=top, base=base, dmed=dmed, cut=cut, zcut=zcut, cx=c.x - E0, cy=c.y - N0,
                           tone=rng.uniform(-0.06, 0.06)))
+        if roof is not None:
+            bdata[-1].update(roofR=roof[0], roofM=roof[1], roofO=roof[2])
     log("building heights done", sum(b["cut"] is not None for b in bdata), "with passages")
 
     lm_extra, lm_entries = build_landmarks(bdata, ways, nodes, DTM, DSM, tf, dtm_at)
@@ -482,6 +558,7 @@ def main():
     os.makedirs(os.path.join(OUT, "tiles"), exist_ok=True)
     os.makedirs(os.path.join(OUT, "collision"), exist_ok=True)
     tiles, man_b = [], []
+    n_pitched = 0
     nt = int(2 * EXT / TILE)
     for ty in range(nt):
         for tx in range(nt):
@@ -550,16 +627,22 @@ def main():
                 roof = np.clip(np.array([0.45, 0.40, 0.38]) + tone, 0, 1)
                 g, cut, z0, z1 = bd["g"], bd["cut"], bd["base"], bd["top"]
                 zp = max(bd["dmed"] + PASS_H, (bd["zcut"] or -1e9) + 2.6)
+                zf = None if bd.get("lm") else roof_field(bd, max(bd["dmed"] + 2.0, zp + 0.5 if cut is not None else -1e9))
+                if zf is not None:
+                    roof = np.clip(np.array([0.50, 0.33, 0.28]) + tone, 0, 1)   # pitched: tiled-roof red
+                    n_pitched += 1
                 if cut is None:
                     for p in polys_of(g):
-                        add_prism(bm, p, z0, z1, wall, roof)
+                        if zf is None or not add_lidar_roof(bm, p, z0, zf, wall, roof):
+                            add_prism(bm, p, z0, z1, wall, roof)
                 else:
                     low = g.difference(cut)
                     if z1 - zp > 1.0:
                         for p in polys_of(low):
                             add_prism(bm, p, z0, zp, wall, roof, top=False)
                         for p in polys_of(g):
-                            add_prism(bm, p, zp, z1, wall, roof, bottom=True)
+                            if zf is None or not add_lidar_roof(bm, p, zp, zf, wall, roof, bottom=True):
+                                add_prism(bm, p, zp, z1, wall, roof, bottom=True)
                     else:
                         for p in polys_of(low):
                             add_prism(bm, p, z0, z1, wall, roof)
@@ -606,6 +689,7 @@ def main():
            "built": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "tiles": tiles, "buildings": man_b,
            "landmarks": lm_entries}
     json.dump(man, open(os.path.join(OUT, "manifest.json"), "w"), separators=(",", ":"))
+    log(n_pitched, "buildings with LiDAR roof shapes")
     log(f"done: {len(tiles)} tiles, {len(man_b)} buildings, spawn {spawn}, {time.time() - t0:.0f}s")
 
 

@@ -180,3 +180,45 @@ Next
 - Walkable is effectively done. Following Gaspard's priorities: roof shapes from LiDAR (pitched roofs), then textures, trees,
   river surface, meshopt compression. Check the connector passages visually (they're simple notches).
 - Real Safari check.
+
+## 2026-11-07 — Session 6: LiDAR roof shapes; change of direction
+
+Done
+- build.py: buildings whose DSM roof isn't flat (q90−q10 ≥ 1.5 m on the footprint eroded by 1 px) get a roof
+  heightfield in place of the flat top: the DSM inside the footprint, spread outward (nearest fill), 3×3 median
+  (chimneys), sampled on a 3 m grid clipped to the footprint and rescaled so the peak lands on the LiDAR top
+  (dmed+P95). Walls come from the roof's boundary edges, so the shell stays closed. Passage buildings get the
+  shaped roof on their upper body. Landmarks keep their recipes. 2,691 of 3,189 buildings now have shaped roofs, in
+  a tiled-red tone. Screenshot: docs/roofs_session6.png.
+- Size: tiles 86→147 MB, collision 46→95 MB (largest tile ~4 MB). A 2 m grid doubled the size and slowed the headless
+  test enough to fail jump/run, so I used 3 m. The browser test now waits for the player to settle and tracks a jump
+  for 1.4 s.
+- KPIs (local): walkable 99.96, buildings 100, ground 100, landmarks 25, height 98.64 (was 98.98; grid vertices
+  miss some ridge peaks), load 1.5–2.1 s, errors 0, 15/15 moves.
+
+Learned
+- Raw DSM heightfields look lumpy (see the screenshot). Real planes need plane fitting per roof facet (RANSAC on
+  the 1 m or 50 cm DSM) or straight-skeleton gables/hips fitted to the DSM. That costs fewer triangles and looks much
+  crisper, so it's the next step for roofs.
+- Headless swiftshader fps is sensitive to triangle count. With the new fps_median KPI, budget triangles per tile
+  and use LOD (far tiles: flat roofs).
+
+Change of direction (Gaspard, 22:19–22:25), taking effect from session 7
+- New main KPI photo_match_score: a held-out benchmark of 200 real street-level photos (free, licensed: Mapillary
+  CC-BY-SA / Wikimedia Commons), with coverage KPIs kept as guardrails. Step 1: build the benchmark and record an
+  honest baseline.
+- Remove the 94 invented connector passages (data/derived/connectors.json). Only real, mapped entrances count.
+  Walkable will drop to about 99.2 %. Accept that and re-derive from OSM entrances/gates where possible.
+- Work from the centre outwards: Great St Mary's (52.2052 N, 0.1183 E) → Market Square, King's Parade, Senate House.
+  Finish each ring before moving outward. New KPI finished_radius_m.
+- Long-term bar: AAA fidelity (Elden Ring cited for fidelity, not style). Route: WebGPU, PBR, TAA, cascaded
+  shadows, AO, baked GI, scanned (CC0) materials, geometric detail, vegetation, quality presets. KPIs visual_quality
+  (rubric judge, 30 fixed views) and fps_median (≥50 on the Mac mini). Do this after the baseline.
+- Long local jobs (photo matching, baking) can run in service.sh between sessions.
+
+Next (session 7)
+1. Read the updated goal and KPI definitions. Build the 200-photo benchmark (licences recorded, camera pose per
+   photo, held out) and a photo_match scorer that renders the same view from the build. Record the baseline.
+   Add photo_match_score, finished_radius_m, visual_quality and fps_median to measure.sh as defined.
+2. Remove the connectors and rebuild. Report the honest walkable number.
+3. Centre ring: crisp fitted roofs, facade textures, ground materials, and street furniture around Great St Mary's.
