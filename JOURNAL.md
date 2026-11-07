@@ -117,3 +117,36 @@ Next
 - Session 4: the movement/broom request above (top priority, per Gaspard).
 - Then: indoor/tunnel walkways (the last 0.8 % walkable), meshopt compression, pitched roofs from LiDAR for all buildings,
   textures, trees, river. Refine landmark recipes against Commons photos.
+
+## 2026-11-07 — Session 4: movement and broom (Gaspard's request)
+
+Done
+- `site/app/player.js` rewritten. On foot: acceleration-based walk/run, jump (4.6 m/s, 0.12 s coyote time,
+  0.15 s buffer), crouch (lower eye and body), slide (crouch while running, 0.9 s), dash (Q or double-tap,
+  15 m/s for 0.18 s, 1 s cooldown), ledge climb ≤1.5 m (animated), head bump, wading out of water, and V for
+  1st/3rd person with a camera that pulls in at walls. Broom (B): flies along the view direction, Space/C up/down,
+  Shift boost (28 m/s), hovers when idle, walls block it, terrain and roofs push it up, clamped to the study-area
+  quad and 150 m above the floor. Dismounting means falling with your momentum.
+- Roofs: the viewer treats upward-facing solid triangles as standable (`support(..., roofs)`) for player movement
+  only. The .col files and kpi.py are unchanged, so walkable_coverage still measures ground walking.
+- `site/app/avatar.js`: a primitive-built figure (coat, scarf) and broom with walk swing, crouch, jump and seated
+  poses. Touch buttons (Jump/Run toggle/Dash/Crouch/Broom/View), standard gamepad mapping, Help overlay (H/?),
+  mode badge.
+- `browser_test.mjs`: a moves phase before the 60 s walk checks 15 moves (jump, run, slide, crouch, dash, double-tap,
+  3rd person, broom mount/up/fly/hover/down/dismount, fall and land, ledge climb). Results go to stderr as
+  `{"moves":…}`, so measure.sh's KPI JSON is unchanged. `--moves-shots DIR` saves screenshots. All 15 pass,
+  locally and on the live site.
+- Published (release world-20261107-2055). Sent Gaspard the key map.
+
+KPIs: walkable 99.2, buildings 100, ground 100, landmarks 25, height 98.98, load 1.99 s, errors 0 (live).
+
+Learned
+- The ground world has no 0.6–1.5 m ledges (buildings are ≥2.5 m and the DTM is smooth), so ledge climb only
+  matters on stepped roofs. The test's `findLedge` searches from the topmost surface, which includes roofs.
+- Landmark collision is still the plain footprint body, so on a landmark roof you stand on the footprint top,
+  not on the detailed roof.
+
+Next
+- Real Safari check (desktop + iOS) of pointer lock, touch buttons and gamepad.
+- Indoor/tunnel walkways (the last 0.8 % walkable), meshopt compression, pitched roofs from LiDAR, textures,
+  trees, river surface. Refine landmark recipes against Commons photos.
