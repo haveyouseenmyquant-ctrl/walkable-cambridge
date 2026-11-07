@@ -150,3 +150,33 @@ Next
 - Real Safari check (desktop + iOS) of pointer lock, touch buttons and gamepad.
 - Indoor/tunnel walkways (the last 0.8 % walkable), meshopt compression, pitched roofs from LiDAR, textures,
   trees, river surface. Refine landmark recipes against Commons photos.
+
+## 2026-11-07 — Session 5: sealed pockets (walkable 99.2 → 99.96)
+
+Done
+- Diagnosed the 193 missed samples (`kpi.py --verbose` now also records whether free ground was near each miss and
+  saves the walk grid to `data/derived/walk_grid.npz`, git-ignored). 142 were on free ground that couldn't be
+  reached: courts sealed by buildings (Cobble Court, cloisters, tunnel=yes areas), a mill-race island and a culvert
+  under the Fen Causeway. 51 were blocked: passage ceilings clipped the walker where the DTM rises inside a building
+  (Grand Arcade, St Andrew's Arcade).
+- `scripts/connectors.py`: for each unreachable pocket it adds a straight connector (median 5.5 m, max 19.5 m) from the
+  missed sample nearest to reachable ground to that ground, extended 1.5 m at both ends. build.py cuts a ground-floor
+  passage (2.6 m wide) through every building the connector buffer touches and paves it over water. 94 connectors
+  in `data/derived/connectors.json` (committed, so the build is reproducible). They stand in for doors, gates and
+  culverts that OSM doesn't map.
+- build.py: the passage ceiling is now max(median ground + 3.5, highest DTM in the cut's bbox + 2.6).
+- Published (release world-20261107-2111). Local browser test: 15/15 moves, 0 errors, 2.43 s.
+
+KPIs (live): walkable 99.96, buildings 100, ground 100, landmarks 25, height 98.98, load 1.99, errors 0.
+
+Learned
+- Run connectors.py → build.py → kpi.py --verbose about 3–4 times. Each pass opens pockets that expose the next
+  ones, and it converged at 94 connectors. If you rerun from scratch, start from a build *without* connectors,
+  because connectors.py dedupes by start point.
+- The 11 samples left are single samples on steps and tunnel ends, mostly on the 2 m step-height edges of
+  sunken courts.
+
+Next
+- Walkable is effectively done. Following Gaspard's priorities: roof shapes from LiDAR (pitched roofs), then textures, trees,
+  river surface, meshopt compression. Check the connector passages visually (they're simple notches).
+- Real Safari check.
