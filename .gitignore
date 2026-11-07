@@ -15,3 +15,6 @@ data/derived/browser_kpi.json
 data/derived/walk_grid.npz
 data/mapillary_token
 data/benchmark/renders/
+tools/mly/
+data/benchmark/photos/
+data/benchmark/renders/

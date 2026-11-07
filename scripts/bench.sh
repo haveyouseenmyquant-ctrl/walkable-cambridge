@@ -9,10 +9,17 @@ B=data/benchmark
 SRC=${1:-site}; [ $# -eq 0 ] && [ -s SITE_URL ] && SRC=$(head -n1 SITE_URL | tr -d '[:space:]')
 HASH=$(.venv/bin/python -I scripts/build_hash.py "$SRC")
 OUT=$B/scores/$HASH.json
-[ -f "$OUT" ] && { cat "$OUT" | head -c 300; echo; exit 0; }
-R=/tmp/wc_renders_$HASH; rm -rf "$R"
-node scripts/photo_render.mjs "$SRC" $B/benchmark.json "$R"
+[ -f "$OUT" ] && [ -f $B/scores/${HASH}_judge.json ] && [ -f $B/scores/${HASH}_quality.json ] && { head -c 300 "$OUT"; echo; exit 0; }
+R=/tmp/wc_renders_$HASH
 mkdir -p $B/scores $B/renders
-.venv/bin/python -I scripts/photo_score.py $B/photos "$R" --out "$OUT"
+if [ ! -f "$OUT" ]; then
+  [ "$(ls "$R" 2>/dev/null | wc -l)" -ge 200 ] || { rm -rf "$R"; node scripts/photo_render.mjs "$SRC" $B/benchmark.json "$R"; }
+  .venv/bin/python -I scripts/photo_score.py $B/photos "$R" --out "$OUT"
+fi
+# judged_realism (50 blind A/B views) and visual_quality (30 views, rubric): Claude vision judge, scripts/judge.py
+[ -d "$R" ] || R=$B/renders/latest
+[ -f $B/scores/${HASH}_judge.json ] || .venv/bin/python -I scripts/judge.py "$HASH" "$R" --only realism
+[ -f $B/scores/${HASH}_quality.json ] || .venv/bin/python -I scripts/judge.py "$HASH" "$R" --only quality
+[ "$R" = $B/renders/latest ] && exit 0
 # keep a small copy of the renders for the journal's side-by-sides (overwritten each build)
 rm -rf $B/renders/latest && mkdir -p $B/renders/latest && cp "$R"/*.png $B/renders/latest/ && rm -rf "$R"

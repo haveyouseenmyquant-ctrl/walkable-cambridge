@@ -267,3 +267,40 @@ Next
 2. Centre ring: plane-fitted roofs (RANSAC facets), facade colour/material per building from photos (Commons/Mapillary,
    excluding the held-out set), ground materials on King's Parade and Market Square, OSM street furniture.
 3. Start the real_facade_pct / roof_match_pct / street_objects_pct measurements so finished_radius_m can be computed.
+
+## 2026-11-07 — Session 8: benchmark frozen, honest baseline
+
+Done
+- Gaspard (23:08) pointed me at my own Gmail inbox for email verification. I signed up for Mapillary (account
+  tobi_walkable_cam; approval a-20261107-230830-9fda), verified it over IMAP, and registered the app "walkable-cambridge"
+  (READ scope) to get a client token (`data/mapillary_token`, git-ignored). Helper scripts are in tools/mly/
+  (git-ignored, the browser profile is there too).
+- Froze the benchmark: `make_benchmark.py` → 200 views from 6,884 candidates (max 629 images per 0.002° cell, so
+  no API truncation). They span 30 m to 1,265 m from GSM, median hfov 68°. `benchmark.json`/`heldout.json` are
+  committed; the photos are git-ignored (27 MB).
+- `scripts/judge.py`: judged_realism (50 fixed views = every 4th benchmark view by distance; blind A/B side-by-side,
+  order from hash(build, id)) and visual_quality (30 fixed views = the 30 benchmark views nearest GSM, rubric of 8
+  criteria, each render judged on its own). Judge: claude-opus-5-5 via `claude -p` (Read tool only, using my own
+  token in ~/.config/aistack-agent/claude-token). Both run from bench.sh and are cached per build hash. measure.sh
+  reports visual_quality too.
+- Baseline for live build c527b00e7e0f9dc5: **photo_match_score 7.9**, **judged_realism 22.7**,
+  **visual_quality 13.56** (lighting 1.8, GI/AO 1.0, materials 0.0, geometry 0.9, vegetation 0.0, atmosphere 1.1,
+  image quality 2.8, artefacts 3.3). Side-by-side: docs/bench_baseline_session8.jpg (photos: Mapillary/cyclestreets,
+  CC-BY-SA 4.0; ids 1003884260147286, 1074009203009353).
+
+Learned
+- DINOv2 CLS cosine between a real photo and a flat-shaded render is close to 0 (range −9 … 35, median 7.8), and
+  only render-vs-render pairs reach ~56. So the metric has lots of headroom and should respond strongly to texture,
+  trees and sky. Any gain is real signal.
+- Rendering 200 views in swiftshader takes about 10 s each, roughly 30 min serially. Two parallel workers (`--only`
+  split) halve that. bench.sh now reuses an existing complete render dir.
+- Don't edit a bash script while it runs (I had to kill bench.sh mid-run after editing it).
+- Some poses put the camera right in front of a lumpy heightfield roof mass (view 1074009203009353). Check the pose
+  and ground height on a few of the worst views before trusting per-view numbers.
+
+Next (centre first)
+1. Biggest expected gains at eye level: trees from OSM + LiDAR canopy (vegetation scores 0, and trees dominate
+   many photos), sky/haze, then per-building facade colour/material and ground materials around GSM. Score each
+   change before and after on the benchmark.
+2. Start measuring street_objects_pct / roof_match_pct / real_facade_pct so that finished_radius_m can be computed.
+3. Parallelise photo_render inside bench.sh (2–3 workers) so that service.sh scores each build in under 15 min.

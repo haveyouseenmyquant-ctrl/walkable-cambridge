@@ -17,10 +17,10 @@ if os.path.exists(p):
     b = json.load(open(p))
     if time.time() - b["ts"] < 3 * 3600:
         out.update(b["result"])
-# photo_match_score / judged_realism: cached per build hash by scripts/bench.sh (benchmark renders + DINOv2)
+# photo_match_score / judged_realism / visual_quality: cached per build hash by scripts/bench.sh (benchmark renders + DINOv2)
 h = os.environ.get("BUILD_HASH", "")
-for k in ("photo_match_score", "judged_realism"):
-    f = "data/benchmark/scores/%s%s.json" % (h, "" if k == "photo_match_score" else "_judge")
+for k, suf in (("photo_match_score", ""), ("judged_realism", "_judge"), ("visual_quality", "_quality")):
+    f = "data/benchmark/scores/%s%s.json" % (h, suf)
     if h and os.path.exists(f):
         out[k] = json.load(open(f))[k]
 print(json.dumps(out))'

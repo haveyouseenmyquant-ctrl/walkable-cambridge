@@ -22,3 +22,14 @@ Scripts: OSM is fetched with the Overpass query above (see JOURNAL.md, session 1
 
 Textures (future): CC0 only (ambientCG, Poly Haven). Photos from Wikimedia Commons/Mapillary only as visual
 references, licence checked and credited per item in this file.
+
+## Held-out benchmark (session 8)
+- 200 Mapillary photos (CC-BY-SA 4.0, contributors credited per photo in `data/benchmark/benchmark.json`),
+  picked once on 2026-11-07 by `scripts/make_benchmark.py` from 6,884 candidates in the study area. Frozen. These
+  images, and any image in the same sequence within 15 m of one (`data/benchmark/heldout.json`), must never be used to
+  build the world. The thumbnails are kept locally only (git-ignored) and are not part of the published site.
+- Mapillary API: free client token for the app "walkable-cambridge" (account tobi_walkable_cam), kept in
+  `data/mapillary_token` (git-ignored).
+- Scoring: DINOv2 ViT-S/14 (facebook/dinov2-small, Apache-2.0), run locally. judged_realism / visual_quality: a Claude
+  vision judge (claude-opus-5-5 via the local `claude` CLI), `scripts/judge.py`; fixed view lists in
+  `data/benchmark/judge_views.json` (50) and `quality_views.json` (30).
