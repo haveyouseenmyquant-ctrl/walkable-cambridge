@@ -36,3 +36,43 @@ Next (session 2)
 - Then session 3: the three.js viewer and a headless Chrome test for load_seconds/site_errors.
 - Disk: only ~6.9 GB free after downloads (data/raw is 2.2 GB). Don't unzip OS Open Roads (2.16 GB); read the needed
   layer straight from the zip, or clip it once and delete the raw file. The "2022" LiDAR composite was actually flown in 2018–2019.
+
+## 2026-11-07 — Session 2: first complete world, viewer, live site
+
+Done
+- `scripts/build.py` (~6 s): 64 tiles of 250 m covering the LiDAR mosaic (world x/y in [-1000, 1000)).
+  - Ground: the DTM on a 2 m grid. Each triangle takes its class from a 1 m OSM class raster: roads buffered by
+    type, footways, steps, grass/parks, squares, water (kind 2, not walkable), under-building. Unmapped land
+    defaults to "paved/courtyard" (5). That default is a judgement call, and it is why ground_coverage reads 100 %.
+  - Buildings: all 3,273 OSM buildings in the extent (3,189 meshed). Each is extruded from its lowest DTM to
+    median DTM + the LiDAR nDSM P95 (min 2.5 m, otherwise OSM height/levels), with a flat roof and solid walls.
+    Node buildings are 8 m boxes. Walkable ways that cross a building's interior get a 2.6 m wide passage cut up to
+    median ground + 3.5 m, with the upper storeys kept above it (241 buildings).
+  - Bridges: walkable ways with bridge=* get a deck interpolated between the DTM at the two ends (402 ways).
+- Viewer (subagent): `site/index.html` + `site/app/*`, three.js r187 vendored. It streams tiles within 400 m and
+  uses the .col files for physics. Also WASD/mouse, touch joystick, minimap, landmark jump list and credits.
+  `scripts/browser_test.mjs` uses puppeteer-core with the installed Chrome.
+- Published: the repo is now public (approved). Pages deploys from Actions: `scripts/publish.sh` uploads
+  `world.tar.gz` as a release asset and dispatches `pages.yml` on main, so the generated binaries stay out of git.
+  The site is live at https://haveyouseenmyquant-ctrl.github.io/walkable-cambridge/ and `SITE_URL` is set.
+- `service.sh` runs the 60 s browser test hourly, because measure.sh must finish within a minute.
+  measure.sh merges that result if it is under 3 h old. kpi.py now downloads remote files in parallel
+  (73 s → 17 s).
+
+KPIs (published site): walkable 99.2, buildings 100, ground 100, height 99.71, landmarks 0, load 1.87–2.47 s, errors 0.
+
+Learned
+- The github-pages environment only deploys from main, so a release event on a tag is rejected. Use workflow_dispatch.
+- Height accuracy is high by construction, since the model uses the same LiDAR P95 as the check. Real roof shapes
+  are the next step for realism, not for this KPI.
+- The remaining walkable misses (193 samples) are indoor arcades (Grand Arcade, St Andrew's), tunnel/cloister
+  ways (layer -1), and upper-level walkways (level 1/2, layer 1). `kpi.py --verbose` writes them to
+  data/derived/walk_misses.json.
+
+Next
+- Visual pass: pitched roofs from LiDAR (roof shape by fitting the DSM), facade textures (CC0), trees, river surface.
+- Landmarks: detailed models plus reference screenshots in landmarks/ (start with King's Chapel, Senate House, Great St Mary's).
+- Indoor/arcade/tunnel ways: add covered walkable volumes so they count.
+- Compress tiles with meshopt (gltfpack, keep node names, -noq so accessor max stays in metres). The 40 MB world
+  is fine for now. Merge per-building draw calls in the viewer if fps is low on laptops.
+- Test in Safari for real (only Chrome has been tested).

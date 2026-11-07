@@ -40,7 +40,12 @@ def log(*a):
         print(*a, file=sys.stderr)
 
 
+_CACHE = {}
+
+
 def fetch(rel, rng=None):
+    if (rel, rng) in _CACHE:
+        return _CACHE.pop((rel, rng))
     if REMOTE:
         req = urllib.request.Request(SRC.rstrip("/") + "/" + rel, headers={"User-Agent": "walkable-cambridge-kpi"})
         if rng:
@@ -184,6 +189,23 @@ def main():
         print(json.dumps(out))
         return
     man = json.loads(mbuf)
+    if REMOTE:  # warm the cache with parallel downloads (same files, same requests as below)
+        from concurrent.futures import ThreadPoolExecutor
+
+        def warm(job):
+            kind, rel = job
+            if kind == "col":
+                _CACHE[(rel, None)] = fetch(rel)
+            else:
+                h = fetch(rel, (0, 19))
+                if h and len(h) >= 20 and h[:4] == b"glTF":
+                    clen = struct.unpack("<I", h[12:16])[0]
+                    _CACHE[(rel, (20, 20 + clen - 1))] = fetch(rel, (20, 20 + clen - 1))
+                _CACHE[(rel, (0, 19))] = h
+        jobs = [("col", t["collision"]) for t in man.get("tiles", []) if t.get("collision")]
+        jobs += [("glb", t["glb"]) for t in man.get("tiles", []) if t.get("glb")]
+        with ThreadPoolExecutor(16) as ex:
+            list(ex.map(warm, jobs))
     e0, n0 = man["origin"]["e0"], man["origin"]["n0"]
 
     # ---------------- collision -> walk grid
