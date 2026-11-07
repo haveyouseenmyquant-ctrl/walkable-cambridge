@@ -285,6 +285,10 @@ def main():
             ok[inb] = RG[j[inb], i[inb]]
             hit |= near & ok
     out["walkable_coverage_pct"] = round(100.0 * S[hit, 2].sum() / S[:, 2].sum(), 2)
+    if VERBOSE:  # diagnostics: missed samples -> data/derived/walk_misses.json (BNG, way id)
+        W_ = np.array([s[2] for s in tg["walk"]["samples"]])
+        json.dump([[float(a), float(b), int(c)] for (a, b, _), c in zip(S[~hit], W_[~hit])],
+                  open(os.path.join(ROOT, "data/derived/walk_misses.json"), "w"))
 
     # ---------------- ground coverage (5 m cells with centre in study area)
     from shapely import vectorized

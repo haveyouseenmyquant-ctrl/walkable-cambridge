@@ -5,3 +5,9 @@ data/testbuild/
 data/derived/lidar_building_stats.json
 __pycache__/
 .DS_Store
+tools/node_modules/
+site/manifest.json
+site/landmarks.json
+site/tiles/
+site/collision/
+data/derived/walk_misses.json

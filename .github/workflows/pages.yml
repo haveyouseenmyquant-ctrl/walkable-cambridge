@@ -1,0 +1,36 @@
+# Deploys the browser build to GitHub Pages: viewer source from site/ in the repo plus the generated
+# world data (manifest, tiles, collision) from the latest release asset world.tar.gz.
+# Keeps large generated binaries out of git history. Triggered by scripts/publish.sh.
+name: pages
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch world data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download --repo "$GITHUB_REPOSITORY" --pattern world.tar.gz --dir /tmp
+          tar -xzf /tmp/world.tar.gz -C site
+          ls -la site
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v4
