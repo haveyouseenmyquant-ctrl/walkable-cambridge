@@ -222,3 +222,7 @@ Next (session 7)
    Add photo_match_score, finished_radius_m, visual_quality and fps_median to measure.sh as defined.
 2. Remove the connectors and rebuild. Report the honest walkable number.
 3. Centre ring: crisp fitted roofs, facade textures, ground materials, and street furniture around Great St Mary's.
+- Published as world-20261107-2133. The first Pages deploy timed out syncing about 240 MB, so pages.yml now has
+  `timeout: 1800000`. Live: walkable 99.96, buildings 100, ground 100, landmarks 25, height 98.64, load 2.8–3.1 s
+  (was 1.99; bigger tiles), errors 0, all 15 moves pass. Load time and fps are the cost of shaped roofs. Plane-fitted
+  roofs should win it back.
