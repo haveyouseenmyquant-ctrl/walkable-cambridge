@@ -336,3 +336,34 @@ Next
 2. Facade/ground textures near GSM (CC0 stone, brick, setts; per-building colour from non-held-out photos). These are probably the biggest
    lever, given DINOv2's preference for texture.
 3. street_objects_pct / roof_match_pct / real_facade_pct measurements for finished_radius_m.
+
+## 2026-11-08 — Session 10: CC0 surface textures (+1.7 on the 50-view check), now default
+
+Done
+- `scripts/fetch_textures.py` downloads 8 CC0 Poly Haven diffuse textures (1k, ~4 MB in total) into `site/tex/`, with their
+  real-world size from Poly Haven's metadata. `site/app/materials.js` applies them in world space (the GLBs need
+  no UVs) through `onBeforeCompile` on the vertex-colour Lambert materials. Walls get gault brick or limestone ashlar
+  (40 % ashlar, chosen per building from a hash of its colour tone), u runs along the wall and v up; roofs get tiles; the ground
+  blends road/pavement/grass/court/earth by the surface class read from the interpolated vertex colour. Each texture
+  is used as detail (texture ÷ its top-mip mean, ground mostly luminance), so the palette stays as it was. `?mat=0` turns it off.
+- 50 judge views, photo_match: **no textures 7.75 → textures 9.42**; textures plus a procedural sash-window grid
+  scored 8.77. The window grid is too regular, so it's opt-in (`?win=1`). Side-by-side: docs/textures_session10.jpg
+  (photo | the session 9 trees+look v2 build | textures; photos Mapillary CC-BY-SA 4.0, ids 519716785698039,
+  788562325143664, 272897831248029). The first row (a brick lane) jumped to 39.9.
+- The build hash (scripts/build_hash.py) now covers index.html, the render-affecting app/*.js and tex/textures.json as well as
+  manifest.json. Before this, a viewer-only change reused the old build's cached score. Old cache entries are orphaned, and service.sh
+  rescores the live build (200-view photo_match, judge, quality) within the hour.
+- GPU 1920×1080: fps_median 60, site_errors 0, all moves pass. Credits page and DATA.md list Poly Haven (CC0).
+- photo_render.mjs: `WC_QUERY` env appends URL params (for A/B runs) and waits for `window.__texReady`.
+
+Learned
+- DINOv2 rewards real material texture strongly. Brick walls in narrow lanes match photos far better than any change
+  to shape or lighting has so far. Regular synthetic structure (window grid, blob trees) is penalised.
+- 6 swiftshader workers in parallel (two A/B configs) take about 12 min for 2×50 views.
+
+Next
+1. Per-building wall material and colour from real (non-held-out) Mapillary/Commons photos via Claude vision, centre
+   first (brick vs ashlar vs render, colour). Real windows from photos instead of a grid.
+2. Retry look v2 and leaf-textured trees on top of the textures (both lost on flat shading; textures may change that).
+3. Normal maps / roughness for the textures (AAA bar), and KTX2 compression. Check load time on phones and in Safari.
+4. street_objects_pct / roof_match_pct / real_facade_pct measurements.
