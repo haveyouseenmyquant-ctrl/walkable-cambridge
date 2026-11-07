@@ -47,7 +47,7 @@ try {
     await page.evaluate((x, y) => window.__player.teleport(x, y), l.x, l.y);
     await page.evaluate((pos, at) => { window.__cam = { pos, at }; }, pos, at);
     await sleep(800);
-    await page.waitForFunction('!window.__p.pendingPlace', { timeout: 30000 }).catch(() => {});
+    await page.waitForFunction('!window.__player.pendingPlace', { timeout: 30000 }).catch(() => {});
     await sleep(2500);
     const out = path.join(ROOT, 'landmarks', l.id + '.png');
     await page.screenshot({ path: out });

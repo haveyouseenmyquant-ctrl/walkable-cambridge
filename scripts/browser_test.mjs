@@ -25,6 +25,8 @@ const MOVES = !(argv.includes('--no-moves') && argv.splice(argv.indexOf('--no-mo
 const HEADFUL = argv.includes('--headful') && argv.splice(argv.indexOf('--headful'), 1);
 const SRC = argv[0] || path.join(ROOT, 'site');
 const LOAD_TIMEOUT = 45000;
+// WC_GPU=1: render on the Mac's GPU (ANGLE Metal) at 1920x1080 and also report fps_median over the walk
+const GPU = !!process.env.WC_GPU;
 const CHROME = process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const log = (...a) => console.error('[browser_test]', ...a);
 
@@ -121,9 +123,9 @@ async function main() {
     url = `http://127.0.0.1:${server.address().port}/`;
   }
   const browser = await puppeteer.launch({
-    executablePath: CHROME, headless: !HEADFUL,
-    args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist', '--window-size=1280,720', '--no-first-run'],
-    defaultViewport: { width: 1280, height: 720 },
+    executablePath: CHROME, headless: !HEADFUL && !GPU,   // headless Chrome throttles rAF to ~15 fps, so GPU runs use a window
+    args: [GPU ? '--use-angle=metal' : '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist', '--enable-gpu', '--disable-background-timer-throttling', '--disable-renderer-backgrounding', '--disable-backgrounding-occluded-windows', GPU ? '--window-size=1920,1080' : '--window-size=1280,720', '--no-first-run'],
+    defaultViewport: GPU ? { width: 1920, height: 1080, deviceScaleFactor: 1 } : { width: 1280, height: 720 },
   });
   const errors = [], T0 = Date.now();
   const err = msg => errors.push(`+${((Date.now() - T0) / 1000).toFixed(1)}s ${msg}`);
@@ -135,7 +137,7 @@ async function main() {
     page.on('requestfailed', r => err(`requestfailed: ${r.url()} ${r.failure()?.errorText}`));
     page.on('response', r => { if (r.status() >= 400) err(`HTTP ${r.status()}: ${r.url()}`); });
 
-    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: LOAD_TIMEOUT });
+    await page.goto(url + (process.env.WC_QUERY || ''), { waitUntil: 'domcontentloaded', timeout: LOAD_TIMEOUT });
     try {
       await page.waitForFunction('window.__walkReady === true', { polling: 50, timeout: LOAD_TIMEOUT });
       out.load_seconds = Math.round(await page.evaluate('window.__walkReadyAt') / 10) / 100;
@@ -146,6 +148,7 @@ async function main() {
     if (out.load_seconds != null && WALK_S > 0) {
       const start = await page.evaluate('window.__player.position');
       let dist = 0, prev = start;
+      await page.evaluate(() => { const f = window.__frames = []; const tick = t => { f.push(t); requestAnimationFrame(tick); }; requestAnimationFrame(tick); });
       await page.keyboard.down('KeyW');
       const t0 = Date.now();
       // walk forward; turn ~90 degrees when blocked, otherwise drift a little; run half the time
@@ -161,6 +164,12 @@ async function main() {
         if (ms) { await page.keyboard.down(turn); await sleep(ms); await page.keyboard.up(turn); }
       }
       await page.keyboard.up('KeyW'); await page.keyboard.up('ShiftLeft');
+      if (GPU) {   // frames per whole second of the walk, median
+        const f = await page.evaluate('window.__frames'), per = {};
+        for (const t of f) { const k = Math.floor((t - f[0]) / 1000); per[k] = (per[k] || 0) + 1; }
+        const c = Object.entries(per).filter(([k]) => +k < Math.floor((f.at(-1) - f[0]) / 1000)).map(([, v]) => v).sort((a, b) => a - b);
+        out.fps_median = c.length ? c[Math.floor(c.length / 2)] : null;
+      }
       const tiles = await page.evaluate('window.__player.loadedTiles');
       log(`walked ${dist.toFixed(1)} m in ${WALK_S}s from (${start.x.toFixed(1)}, ${start.y.toFixed(1)}) to (${prev.x.toFixed(1)}, ${prev.y.toFixed(1)}), ${tiles} tiles loaded`);
     }

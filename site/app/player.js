@@ -3,8 +3,8 @@
 // Broom: free flight with hover, collides with buildings and terrain, lands on roofs.
 import { STEP, BODY_HI } from './collision.js';
 
-const WALK = 2.5, RUN = 6, CROUCH = 1.3, TURN = 1.8, GRAVITY = 9.81, SUBSTEP = 0.15;
-const EYE = 1.6, EYE_CROUCH = 1.0, HI_CROUCH = 1.2;
+const WALK = 1.4, RUN = 6, CROUCH = 1.3, TURN = 1.8, GRAVITY = 9.81, SUBSTEP = 0.15;
+const EYE = 1.65, EYE_CROUCH = 1.0, HI_CROUCH = 1.2;
 const ACCEL_GROUND = 18, ACCEL_AIR = 5;
 const JUMP_V = 4.6, COYOTE = 0.12, JUMP_BUFFER = 0.15;
 const SLIDE_V = 8.5, SLIDE_T = 0.9, SLIDE_FRICTION = 5;

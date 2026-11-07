@@ -102,6 +102,7 @@ export class TileManager {
       } else o.material = isBuilding ? buildingMat : groundMat;
       if (old && old !== o.material) old.dispose?.();
       if (!g.attributes.normal) g.computeVertexNormals();
+      o.castShadow = isBuilding; o.receiveShadow = true;
       o.matrixAutoUpdate = false; o.updateMatrix();
     });
     if (!hasGround) root.add(groundFromCollision(col));

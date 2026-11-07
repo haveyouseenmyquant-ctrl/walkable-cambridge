@@ -13,3 +13,5 @@ site/collision/
 data/derived/walk_misses.json
 data/derived/browser_kpi.json
 data/derived/walk_grid.npz
+data/mapillary_token
+data/benchmark/renders/

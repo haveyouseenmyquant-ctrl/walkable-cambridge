@@ -472,7 +472,8 @@ def main():
           and t.get("surface") not in ("dirt", "earth", "ground", "grass", "gravel", "fine_gravel", "compacted", "unpaved")], S_PAVE)
     burn([ln.buffer(1.0) for ln, t in walk_lines if t["highway"] == "steps"], S_STEPS)
     burn(water, S_WATER)
-    # connector repairs (scripts/connectors.py): unmapped doors/culverts into sealed walkable pockets
+    # connector repairs (scripts/connectors.py), retired in session 7: only real, mapped openings count. The 94
+    # invented connectors are kept in connectors_invented_retired.json for reference; this file no longer exists.
     cpath = os.path.join(ROOT, "data/derived/connectors.json")
     conns = [LineString(c["line"]) for c in json.load(open(cpath))["connectors"]] if os.path.exists(cpath) else []
     conn_bufs = [ln.buffer(PASS_W) for ln in conns]

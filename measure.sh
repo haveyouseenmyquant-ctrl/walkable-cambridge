@@ -8,6 +8,7 @@ PY=.venv/bin/python
 [ -f data/derived/osm_targets.json ] || $PY -I scripts/osm_targets.py >/dev/null 2>&1
 SRC=site
 [ -s SITE_URL ] && SRC=$(head -n1 SITE_URL | tr -d '[:space:]')
+export BUILD_HASH=$($PY -I scripts/build_hash.py "$SRC" 2>/dev/null)
 $PY -I scripts/kpi.py "$SRC" 2>/dev/null | $PY -I -c '
 import json, os, sys, time
 out = json.loads(sys.stdin.read())
@@ -16,4 +17,10 @@ if os.path.exists(p):
     b = json.load(open(p))
     if time.time() - b["ts"] < 3 * 3600:
         out.update(b["result"])
+# photo_match_score / judged_realism: cached per build hash by scripts/bench.sh (benchmark renders + DINOv2)
+h = os.environ.get("BUILD_HASH", "")
+for k in ("photo_match_score", "judged_realism"):
+    f = "data/benchmark/scores/%s%s.json" % (h, "" if k == "photo_match_score" else "_judge")
+    if h and os.path.exists(f):
+        out[k] = json.load(open(f))[k]
 print(json.dumps(out))'

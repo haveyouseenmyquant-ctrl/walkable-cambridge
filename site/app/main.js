@@ -26,8 +26,18 @@ async function main() {
   scene.fog = new THREE.Fog(SKY, 120, 420);
   const camera = new THREE.PerspectiveCamera(70, 1, 0.2, 600);
   scene.add(new THREE.HemisphereLight(0xdfeaf5, 0x6b6450, 1.6));
+  // Sun for Cambridge, mid-June 14:00 BST: azimuth ~200 deg (SSW), elevation ~58 deg. Frame: x east, y up, z south.
+  const SUN_DIR = new THREE.Vector3(-0.181, 0.848, 0.498).normalize();
   const sun = new THREE.DirectionalLight(0xfff1dc, 1.8);
-  sun.position.set(-0.5, 0.8, 0.35); scene.add(sun); // from the south-west-ish, high
+  sun.position.copy(SUN_DIR); scene.add(sun); scene.add(sun.target);
+  // Quality: ?quality=low (default on touch devices) has no shadows; otherwise a 2048 shadow map, 240 m square
+  const quality = new URLSearchParams(location.search).get('quality') || (matchMedia('(pointer: coarse)').matches ? 'low' : 'high');
+  if (quality !== 'low') {
+    renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
+    Object.assign(sun.shadow.camera, { left: -120, right: 120, top: 120, bottom: -120, near: 1, far: 600 });
+    sun.shadow.bias = -0.0005; sun.shadow.normalBias = 0.4;
+  }
 
   const resize = () => {
     renderer.setSize(innerWidth, innerHeight, false);
@@ -75,6 +85,7 @@ async function main() {
     get mode() { return player.mode; },
     get view() { return player.view; },
     get grounded() { return player.grounded; },
+    get pendingPlace() { return !!player.pendingPlace; },
     get crouching() { return player.crouching; },
     get sliding() { return player.sliding; },
     get dashing() { return player.dashing; },
@@ -109,11 +120,16 @@ async function main() {
     streamT -= dt;
     if (streamT <= 0) { tiles.update(player.x, player.y); streamT = 0.25; }
     player.update(dt);
-    const fc = window.__cam;   // debug/screenshot hook: {pos:[x,y,z], at:[x,y,z]} in the collision frame
+    const fc = window.__cam;   // debug/screenshot hook: {pos:[x,y,z], at:[x,y,z], fov?} in the collision frame
+    if (fc && fc.fov && camera.fov !== fc.fov) { camera.fov = fc.fov; camera.updateProjectionMatrix(); }
     if (fc) { camera.position.set(fc.pos[0], fc.pos[2], -fc.pos[1]); camera.lookAt(fc.at[0], fc.at[2], -fc.at[1]); }
     else if (player.view === 3) player.applyCamera3(camera);
     else player.applyCamera(camera);
     avatar.update(player, dt, player.view === 3 && !fc);
+    if (sun.castShadow) {   // shadow box follows the camera, snapped to shadow texels to avoid shimmering
+      const q = 240 / 2048, cx = Math.round(camera.position.x / q) * q, cz = Math.round(camera.position.z / q) * q;
+      sun.target.position.set(cx, 0, cz); sun.position.set(cx, 0, cz).addScaledVector(SUN_DIR, 300); sun.target.updateMatrixWorld();
+    }
     renderer.render(scene, camera);
     if (!ready && !player.pendingPlace && tiles.readyAt(player.x, player.y)) {
       ready = true; window.__walkReadyAt = performance.now(); window.__walkReady = true;
