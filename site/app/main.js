@@ -72,7 +72,9 @@ async function main() {
     streamT -= dt;
     if (streamT <= 0) { tiles.update(player.x, player.y); streamT = 0.25; }
     player.update(dt);
-    player.applyCamera(camera);
+    const fc = window.__cam;   // debug/screenshot hook: {pos:[x,y,z], at:[x,y,z]} in the collision frame
+    if (fc) { camera.position.set(fc.pos[0], fc.pos[2], -fc.pos[1]); camera.lookAt(fc.at[0], fc.at[2], -fc.at[1]); }
+    else player.applyCamera(camera);
     renderer.render(scene, camera);
     if (!ready && !player.pendingPlace && tiles.readyAt(player.x, player.y)) {
       ready = true; window.__walkReadyAt = performance.now(); window.__walkReady = true;

@@ -54,3 +54,9 @@ uint8    surface[ntris]    0 = none/building, 1 = road, 2 = pavement/footway, 3 
 - A 5 m OSM sample point counts if a reachable cell lies within 1.0 m of it (tolerance for OSM centreline vs modelled surface).
 - Ground coverage: a 5 m cell (centre inside the study area) counts if the 0.5 m cell at its centre is covered by a kind 1 or 2 triangle whose surface is not 0 or 255.
 - Building height: modelled top = max POSITION y of the building's mesh (+ node translation y); modelled height = top − median DTM inside the OSM footprint; compared with the 95th percentile of DSM − DTM inside the footprint; within 2 m counts.
+
+## Landmark detail (session 3)
+- `manifest.landmarks[]`: `{id, name, osm_id, detailed, style, features[], screenshot, tile, node, x, y, look_z, size, view}`.
+  Building landmarks keep their `b:<osm_id>` node (render mesh = detailed model); non-building landmarks
+  (bridges) are nodes `lm:<id>`. Collision always uses the plain footprint body, so detail never blocks walkable ways.
+- Reference screenshots: `landmarks/<id>.png`, from `node scripts/landmark_shots.mjs` (viewer `?debug` + `window.__cam`).

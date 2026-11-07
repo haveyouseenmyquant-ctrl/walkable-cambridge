@@ -29,6 +29,7 @@ from shapely.geometry import LineString, MultiPolygon, Point, Polygon, box, mapp
 from shapely.ops import polygonize, unary_union
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(ROOT, "scripts"))
 RAW = os.path.join(ROOT, "data/raw/osm/cambridge_overpass.json")
 OUT = os.path.join(ROOT, sys.argv[sys.argv.index("--out") + 1] if "--out" in sys.argv else "site")
 E0, N0 = 545000.0, 258400.0
@@ -225,6 +226,78 @@ def add_prism(m, poly, z0, z1, color, roof_color, top=True, bottom=False):
             m.tris(np.concatenate([T[:, ::-1], np.full((len(T), 3, 1), z0)], 2), roof_color, 0)
 
 
+def add_prism_local(m, g, z0, z1, color, roof_color):
+    """add_prism for a (Multi)Polygon in the local frame."""
+    from shapely.affinity import translate
+    for p in polys_of(translate(g, E0, N0)):
+        add_prism(m, p, z0, z1, color, roof_color)
+
+
+def build_landmarks(bdata, ways, nodes, DTM, DSM, tf, dtm_at):
+    """Procedural landmark detail (scripts/detail.py). Sets bd['lm'] for buildings; returns extra
+    non-building landmark meshes (bridges) as dicts and the manifest landmark entries."""
+    import detail as D
+    from shapely.affinity import translate
+    lms = json.load(open(os.path.join(ROOT, "landmarks/landmarks.json")))["landmarks"]
+    by_oid = {bd["oid"]: bd for bd in bdata}
+    extra, entries = [], []
+    for l in lms:
+        sp = D.SPECS.get(l["id"])
+        bd = by_oid.get(l["osm_id"])
+        e = dict(id=l["id"], name=l["name"], osm_id=l["osm_id"], detailed=False)
+        if sp is None:
+            entries.append(e); continue
+        solid, deco = Mesh(), Mesh()
+        if bd is not None:
+            g = bd["g"]; dmed, base, top = bd["dmed"], bd["base"], bd["top"]
+        else:
+            kind, i = l["osm_id"].split("/")
+            g = way_area(ways[int(i)], nodes) if kind == "way" and int(i) in ways else None
+            if g is None:
+                entries.append(e); continue
+            c = g.centroid
+            dmed = float(dtm_at([c.x], [c.y])[0]); base = dmed - 0.3; top = dmed + 3
+        gl = translate(g, -E0, -N0)
+        if gl.geom_type != "Polygon":
+            gl = max(gl.geoms, key=lambda q: q.area)
+        ctx = D.Ctx(gl, dmed, base, top, DTM, DSM, tf, E0, N0)
+        ctx.wall = sp["wall"]
+        st = sp["style"]
+        if st == "gothic":
+            res = D.gothic(solid, deco, ctx, sp)
+        elif st == "classical":
+            res = D.classical(solid, deco, ctx, sp)
+        elif st == "brick_hall":
+            res = D.brick_hall(solid, deco, ctx, sp)
+        elif st == "round":
+            res = D.round_church(solid, deco, ctx, sp)
+        elif st == "gate":
+            res = D.gate(solid, deco, ctx, sp)
+        elif st == "gate_tower":
+            gn = nodes.get(443675369)
+            res = D.gate_tower(deco, deco, ctx, sp, None if gn is None else (gn[0] - E0, gn[1] - N0))
+        elif st == "bridge":
+            ends = [ctx.c + ctx.u * s * (ctx.L + 3.0) for s in (-1, 1)]
+            dz = float(max(dtm_at([q[0] + E0 for q in ends], [q[1] + N0 for q in ends]))) + 0.05
+            res = D.bridge(deco, deco, ctx, sp, dz)
+        else:
+            res = None
+        if res is None:
+            entries.append(e); continue
+        feats = [f for f in res["features"] if f]
+        e.update(detailed=True, style=st, features=feats, screenshot=f"landmarks/{l['id']}.png",
+                 x=round(ctx.c[0], 1), y=round(ctx.c[1], 1), look_z=round(dmed, 1),
+                 size=round(float(ctx.L), 1), view=sp.get("front", 150))
+        entries.append(e)
+        lm = dict(solid=solid.arrays(), deco=deco.arrays(), keep_body=st in ("gate_tower",) or bd is None)
+        if bd is not None:
+            bd["lm"] = lm
+        else:
+            extra.append(dict(id=l["id"], cx=ctx.c[0], cy=ctx.c[1], lm=lm))
+    log(sum(e["detailed"] for e in entries), "landmarks detailed")
+    return extra, entries
+
+
 # ---------------------------------------------------------------- main
 def main():
     t0 = time.time()
@@ -384,6 +457,8 @@ def main():
                           tone=rng.uniform(-0.06, 0.06)))
     log("building heights done", sum(b["cut"] is not None for b in bdata), "with passages")
 
+    lm_extra, lm_entries = build_landmarks(bdata, ways, nodes, DTM, DSM, tf, dtm_at)
+
     # ---- spawn: Market Square (Market Hill), nearest walkable way point
     sp_e, sp_n = Transformer.from_crs(4326, 27700, always_xy=True).transform(0.11894, 52.20563)
     best = min(walk_geoms, key=lambda ln: ln.distance(Point(sp_e, sp_n)))
@@ -480,10 +555,22 @@ def main():
                     continue
                 p, nrm, colr, k, s = arr
                 node = "b:" + bd["oid"]
+                col_parts.append((p, k, s))   # collision keeps the plain body (passages, walls)
+                lm = bd.get("lm")
+                if lm:
+                    parts = ([arr] if lm["keep_body"] or bd["cut"] is not None else []) + [a for a in (lm["solid"], lm["deco"]) if a is not None]
+                    p, nrm, colr = (np.concatenate([a[i] for a in parts]) for i in range(3))
                 glb_meshes.append((node, to_gl(p), to_gl(nrm), colr, np.arange(len(p))))
-                col_parts.append((p, k, s))
-                man_b.append({"osm_id": bd["oid"], "tile": tid, "node": node, "detailed": False,
+                man_b.append({"osm_id": bd["oid"], "tile": tid, "node": node, "detailed": bool(lm),
                               "name": bd["t"].get("name"), "height": round(z1 - bd["dmed"], 1)})
+            for ex in lm_extra:
+                if bx0 <= ex["cx"] < bx1 and by0 <= ex["cy"] < by1:
+                    parts = [a for a in (ex["lm"]["solid"], ex["lm"]["deco"]) if a is not None]
+                    p, nrm, colr = (np.concatenate([a[i] for a in parts]) for i in range(3))
+                    glb_meshes.append(("lm:" + ex["id"], to_gl(p), to_gl(nrm), colr, np.arange(len(p))))
+                    for e in lm_entries:
+                        if e["id"] == ex["id"]:
+                            e["tile"], e["node"] = tid, "lm:" + ex["id"]
             # collision: ground (indexed) + everything else (unindexed)
             cv, ct, ck, cs = [V], [gtri], [gkind], [gsurf]
             off = len(V)
@@ -496,21 +583,15 @@ def main():
             tiles.append({"id": tid, "bounds": [bx0, by0, bx1, by1], "glb": f"tiles/{tid}.glb", "collision": f"collision/{tid}.col"})
         log("tile row", ty, "done")
 
-    # landmarks: positions for the jump list (detail comes later)
-    lms = json.load(open(os.path.join(ROOT, "landmarks/landmarks.json")))["landmarks"]
-    pos = {bd["oid"]: bd for bd in bdata}
-    lm_out = []
-    for l in lms:
-        bd = pos.get(l.get("osm_id"))
-        e = dict(id=l["id"], name=l["name"], osm_id=l.get("osm_id"), detailed=False)
-        if bd:
-            e.update(x=round(bd["cx"], 1), y=round(bd["cy"], 1))
-        lm_out.append(e)
-    json.dump({"landmarks": lm_out}, open(os.path.join(OUT, "landmarks.json"), "w"), indent=1)
+    for e in lm_entries:   # landmarks that are buildings: tile/node from the building entry
+        for b in man_b:
+            if b["osm_id"] == e["osm_id"] and "node" not in e:
+                e["tile"], e["node"] = b["tile"], b["node"]
+    json.dump({"landmarks": lm_entries}, open(os.path.join(OUT, "landmarks.json"), "w"), indent=1)
 
     man = {"version": 1, "origin": {"crs": "EPSG:27700", "e0": E0, "n0": N0}, "spawn": spawn,
            "built": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "tiles": tiles, "buildings": man_b,
-           "landmarks": []}
+           "landmarks": lm_entries}
     json.dump(man, open(os.path.join(OUT, "manifest.json"), "w"), separators=(",", ":"))
     log(f"done: {len(tiles)} tiles, {len(man_b)} buildings, spawn {spawn}, {time.time() - t0:.0f}s")
 
