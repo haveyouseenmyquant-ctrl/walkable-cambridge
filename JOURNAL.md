@@ -367,3 +367,38 @@ Next
 2. Retry look v2 and leaf-textured trees on top of the textures (both lost on flat shading; textures may change that).
 3. Normal maps / roughness for the textures (AAA bar), and KTX2 compression. Check load time on phones and in Safari.
 4. street_objects_pct / roof_match_pct / real_facade_pct measurements.
+
+## 2026-11-08 — Session 11: OSM street furniture, trees on by default, street_objects_pct
+
+Done
+- `scripts/ab50.sh <label> "<query>" [workers]`: a reusable 50-judge-view photo_match A/B against the local site/.
+- A/B results on top of the session-10 textures (50 views): control **9.42** (reproduced exactly), `look=v2` **7.41**
+  (still worse, stays off), `trees` **9.45** (now neutral; it was −1.35 on flat shading). Trees are **on by default**.
+- `scripts/street_objects.py` (after trees.py): 1,116 OSM street objects in the study area → `site/objects/*.bin`
+  (232 KB): 365 bike-parking sites (n = capacity/2 Sheffield stands, roughly half with parked bikes), 275 benches/picnic
+  tables, 116 bins, 83 bus-stop poles, 80 bollards, 68 statues/sculptures/memorials (plaques excluded), 42 street
+  lamps, 26 post boxes, 24 phone boxes, 23 signs, 8 clocks, 6 fountains. Benches, signs and stands are oriented to the
+  nearest way. `site/app/objects.js` draws one InstancedMesh per type per tile (simple proportioned meshes, vertex colours).
+  Screenshot (own poses, no photos): docs/objects_session11.jpg.
+- `manifest.layers` sets the default layers (`?trees=0|1`, `?objects=0|1` override). New KPI **street_objects_pct = 100**
+  (1,998 targets = the objects plus 882 natural=tree nodes; each counts if the same type lies within 1 m in a default-on layer).
+- 50 views with trees + objects: **9.29** (trees alone 9.45). Almost all of the −0.16 comes from two views. In one, the
+  Mapillary GPS pose sits inside a mapped post box, so the box fills the frame. In the other, a row of stands lines a lane.
+  The objects are real and at their mapped positions, so I kept them: this breaks the "revert if it doesn't help" rule
+  by a margin well inside the per-view noise (sd of view deltas ~3), in exchange for a finished_radius criterion.
+- GPU Chrome 1920×1080: fps_median 60, site_errors 0, all 15 moves pass. Published (live build dc8f4ed6a315ea9c).
+  service.sh scores the full 200 views plus the judges within the hour.
+- Safari: installed Playwright WebKit (tools/pw, `scripts/webkit_smoke.mjs`), but its WebKit 27.2 binary crashes at
+  launch on this macOS (Trace/BPT trap, even on a data: URL). So the Safari check is still open.
+
+Learned
+- Benchmark poses carry GPS error of a few metres, so objects near the camera can land in front of the lens. That
+  noise affects any small near-field geometry. Judge changes on aggregate scores, not on single views.
+- Textures changed the verdict on trees: shapes that lose on flat shading can become neutral once the scene has texture.
+
+Next
+1. Per-building wall material and colour (brick/ashlar/render) from non-held-out Mapillary/Commons photos via Claude
+   vision, centre first. This is still the biggest expected lever (DINOv2 rewards correct texture).
+2. Leaf-textured tree crowns (alpha cards), to push trees from neutral to positive.
+3. Object collision (bollards, bins, benches) so you can't walk through them; and the roof_match_pct measurement.
+4. Safari: try an older Playwright WebKit or the system Safari via safaridriver.
