@@ -76,3 +76,44 @@ Next
 - Compress tiles with meshopt (gltfpack, keep node names, -noq so accessor max stays in metres). The 40 MB world
   is fine for now. Merge per-building draw calls in the viewer if fps is low on laptops.
 - Test in Safari for real (only Chrome has been tested).
+
+## 2026-11-07 — Session 3: landmark detail (0 → 25)
+
+Done
+- `scripts/detail.py`: procedural landmark models from primitives (prisms, cones, domes, beams, wall panels), with a style
+  recipe per landmark in `SPECS`: gothic (LiDAR-detected tower/spire blob, corner turrets, buttresses with pinnacles,
+  pointed windows, crenellations, gable/lead roofs), classical (pilasters, storeyed windows, cornice, balustrade,
+  pediment, portico columns, dome, cupola/lantern, arcade, curved gables), brick hall, round church (cylinder + cone),
+  Trinity gate tower (4 octagonal turrets at the gate node), Gate of Honour (piers, arch, hex cupola, sundials, obelisks),
+  bridges (arches + spandrels, parapets, stone balls on Clare, covered tracery gallery on the Bridge of Sighs, timber
+  radial/tangent truss on the Mathematical Bridge).
+- build.py: the render mesh of a landmark building is the detailed model. Collision still uses the plain footprint body,
+  so walkable coverage is unchanged by design. Bridges are `lm:<id>` nodes. Manifest landmarks list features + view params.
+- Viewer: `window.__cam` override hook. `scripts/landmark_shots.mjs` writes the 25 reference images to `landmarks/`.
+- Published (release world-20261107-2042, Pages deploy ok).
+
+KPIs (published site): walkable 99.2, buildings 100, ground 100, landmarks 25, height 98.98 (was 99.71), load/errors
+from the hourly service run (last 2.47 s / 0; a local check gave 1.96 s / 0).
+
+Learned
+- Height accuracy fell 0.73 pt because spires, pinnacles and turrets now rise above the footprint's LiDAR P95. That is
+  the KPI working as defined (highest point vs P95), not a bug. Don't hide detail in separate nodes to dodge it.
+- Detail added ~23 MB (tiles 63 → 86 MB, largest 2.3 MB). Load time is unaffected so far. Meshopt compression is still to do.
+- Recipes are generic and driven by the footprint's rotated rectangle and nDSM. Weak spots: the Fitzwilliam portico is
+  small and its facade choice is rough, the Trinity Great Gate shot frames the whole range (tower small), the Mathematical
+  Bridge truss arches over a flat deck, and front bearings are hand-set guesses that should be checked against photos.
+
+Gaspard's request (21:42): full movement + broom for next session
+- On foot: smooth walk/run (Shift), jump (Space) with coyote time + jump buffer, crouch (C/Ctrl) + slide when running,
+  dash (Q or double-tap) with cooldown, ledge climb ≤1.5 m, V toggles 1st/3rd person (needs a player model).
+- Broom (original design, code-built/CC0, no franchise references): B mount/dismount; W/S forward/back, mouse steer
+  and pitch, Space up, C/Ctrl down, Shift boost, hover when idle; collides with buildings, can land on roofs;
+  dismount mid-air = fall; clamp to study area and ≤150 m.
+- Phones: buttons for jump/run/dash/broom. Gamepad if easy. Help screen on H or ?.
+- Headless test exercises every move (site_errors catches breakage). Keep load_seconds, and walkable KPI = walking only.
+- When live: tell Gaspard the key map.
+
+Next
+- Session 4: the movement/broom request above (top priority, per Gaspard).
+- Then: indoor/tunnel walkways (the last 0.8 % walkable), meshopt compression, pitched roofs from LiDAR for all buildings,
+  textures, trees, river. Refine landmark recipes against Commons photos.
