@@ -406,6 +406,11 @@ def main():
           and t.get("surface") not in ("dirt", "earth", "ground", "grass", "gravel", "fine_gravel", "compacted", "unpaved")], S_PAVE)
     burn([ln.buffer(1.0) for ln, t in walk_lines if t["highway"] == "steps"], S_STEPS)
     burn(water, S_WATER)
+    # connector repairs (scripts/connectors.py): unmapped doors/culverts into sealed walkable pockets
+    cpath = os.path.join(ROOT, "data/derived/connectors.json")
+    conns = [LineString(c["line"]) for c in json.load(open(cpath))["connectors"]] if os.path.exists(cpath) else []
+    conn_bufs = [ln.buffer(PASS_W) for ln in conns]
+    burn(conn_bufs, S_PAVE)
     burn([g for _, g, _ in buildings], S_UNDER)
     log("class raster done", np.bincount(cls.ravel(), minlength=10).tolist())
 
@@ -451,9 +456,17 @@ def main():
                 seg = walk_geoms[i].intersection(inner)
                 if seg.length > 0.3:
                     cuts.append(seg.buffer(PASS_W))
+        for cb in conn_bufs:
+            if cb.intersects(g):
+                cuts.append(cb.intersection(g))
         cut = unary_union(cuts) if cuts else None
+        zcut = None
+        if cut is not None and not cut.is_empty:   # passage ceiling clears the highest ground in the cut
+            bx0, by0, bx1, by1 = cut.bounds
+            gx, gy = np.meshgrid(np.arange(bx0, bx1 + 1, 1.0), np.arange(by0, by1 + 1, 1.0))
+            zcut = float(dtm_at(gx.ravel(), gy.ravel()).max())
         c = g.representative_point()
-        bdata.append(dict(oid=oid, g=g, t=t, top=top, base=base, dmed=dmed, cut=cut, cx=c.x - E0, cy=c.y - N0,
+        bdata.append(dict(oid=oid, g=g, t=t, top=top, base=base, dmed=dmed, cut=cut, zcut=zcut, cx=c.x - E0, cy=c.y - N0,
                           tone=rng.uniform(-0.06, 0.06)))
     log("building heights done", sum(b["cut"] is not None for b in bdata), "with passages")
 
@@ -536,7 +549,7 @@ def main():
                 wall = np.clip(np.array([0.78, 0.72, 0.60]) + tone, 0, 1)
                 roof = np.clip(np.array([0.45, 0.40, 0.38]) + tone, 0, 1)
                 g, cut, z0, z1 = bd["g"], bd["cut"], bd["base"], bd["top"]
-                zp = bd["dmed"] + PASS_H
+                zp = max(bd["dmed"] + PASS_H, (bd["zcut"] or -1e9) + 2.6)
                 if cut is None:
                     for p in polys_of(g):
                         add_prism(bm, p, z0, z1, wall, roof)
