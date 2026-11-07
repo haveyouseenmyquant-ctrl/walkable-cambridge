@@ -20,7 +20,9 @@ Scripts: OSM is fetched with the Overpass query above (see JOURNAL.md, session 1
 `scripts/download_lidar_os.py`, mosaicked/clipped with `scripts/mosaic_lidar.py` into `data/lidar/`
 (1 m, EPSG:27700, E 544000–546000, N 257400–259400).
 
-Textures (future): CC0 only (ambientCG, Poly Haven). Photos from Wikimedia Commons/Mapillary only as visual
+Textures (session 10, `scripts/fetch_textures.py` → `site/tex/`, 1k diffuse JPEGs): Poly Haven, CC0 —
+yellow_bricks, white_sandstone_blocks_02, grey_roof_tiles, asphalt_02, pavement_02, sparse_grass,
+cobblestone_floor_08, gravel_floor (authors and URLs in `site/tex/textures.json`). Future textures: CC0 only. Photos from Wikimedia Commons/Mapillary only as visual
 references, licence checked and credited per item in this file.
 
 ## Held-out benchmark (session 8)

@@ -1,11 +1,23 @@
-"""Print the build hash (sha256 of manifest.json, first 16 hex) of a site dir or URL."""
+"""Print the build hash (sha256, first 16 hex) of a site dir or URL: manifest.json plus the viewer files that
+change what is rendered (session 10: viewer-only changes such as materials must get their own score)."""
 import hashlib
 import sys
+import urllib.error
 import urllib.request
 
-src = sys.argv[1]
-if src.startswith("http"):
-    data = urllib.request.urlopen(urllib.request.Request(src.rstrip("/") + "/manifest.json", headers={"User-Agent": "walkable-cambridge-kpi"}), timeout=30).read()
-else:
-    data = open(src.rstrip("/") + "/manifest.json", "rb").read()
-print(hashlib.sha256(data).hexdigest()[:16])
+FILES = ["manifest.json", "index.html", "app/main.js", "app/tiles.js", "app/materials.js", "app/trees.js",
+         "tex/textures.json"]
+src = sys.argv[1].rstrip("/")
+h = hashlib.sha256()
+for f in FILES:
+    try:
+        if src.startswith("http"):
+            data = urllib.request.urlopen(urllib.request.Request(f"{src}/{f}", headers={"User-Agent": "walkable-cambridge-kpi"}), timeout=30).read()
+        else:
+            data = open(f"{src}/{f}", "rb").read()
+    except (FileNotFoundError, urllib.error.HTTPError) as e:
+        if f == "manifest.json":
+            raise
+        data = b""
+    h.update(f.encode() + b"\0" + hashlib.sha256(data).digest())
+print(h.hexdigest()[:16])

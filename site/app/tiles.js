@@ -4,6 +4,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from '../vendor/meshoptimizer/meshopt_decoder.module.js';
 import { parseCol, ColTile } from './collision.js';
 import { makeTrees } from './trees.js';
+import { buildingVcolMat, groundVcolMat } from './materials.js';
 
 const DEBUG = /debug/.test(location.search);
 const Q = new URLSearchParams(location.search);
@@ -106,7 +107,7 @@ export class TileManager {
         const c = g.attributes.color.array, k = isBuilding ? 0.75 : 0.42;
         for (let i = 0; i < c.length; i++) c[i] *= k;
         o.material = vcolMat;
-      } else if (g.attributes.color) o.material = vcolMat;
+      } else if (g.attributes.color) o.material = isBuilding ? buildingVcolMat : groundVcolMat;
       else if (old?.color && old.color.getHex() !== 0xffffff) {
         o.material = new THREE.MeshLambertMaterial({ color: old.color }); o.userData.ownMat = true;
       } else o.material = isBuilding ? buildingMat : groundMat;

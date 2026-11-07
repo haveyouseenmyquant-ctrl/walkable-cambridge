@@ -20,7 +20,7 @@ const [SRC, VIEWS, OUT] = argv;
 const CHROME = process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const EYE = 1.65;
 const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json',
-  '.glb': 'model/gltf-binary', '.svg': 'image/svg+xml', '.png': 'image/png', '.col': 'application/octet-stream' };
+  '.glb': 'model/gltf-binary', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.col': 'application/octet-stream' };
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 let base = SRC, server = null;
@@ -46,8 +46,9 @@ const browser = await puppeteer.launch({
 try {
   const page = await browser.newPage();
   await page.setViewport({ width: WIDTH, height: Math.round(WIDTH * 0.75) });
-  await page.goto(base + (base.includes('?') ? '&' : '?') + 'debug', { waitUntil: 'domcontentloaded' });
+  await page.goto(base + (base.includes('?') ? '&' : '?') + 'debug' + (process.env.WC_QUERY ? '&' + process.env.WC_QUERY : ''), { waitUntil: 'domcontentloaded' });
   await page.waitForFunction('window.__walkReady === true', { timeout: 60000 });
+  await page.waitForFunction('window.__texReady !== false', { timeout: 60000 });
   await page.addStyleTag({ content: 'body *{visibility:hidden!important} #view{visibility:visible!important}' });
   for (const v of views) {
     const h = Math.round(WIDTH * v.h / v.w);
