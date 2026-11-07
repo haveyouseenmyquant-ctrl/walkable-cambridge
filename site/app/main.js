@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import { CollisionWorld } from './collision.js';
 import { TileManager } from './tiles.js';
 import { Player } from './player.js';
+import { Avatar } from './avatar.js';
 import { Minimap, renderTileMap, initLandmarks, mergeLandmarks, initOverlays } from './ui.js';
 
 const BASE = new URL('./', location.href).href;
@@ -46,6 +47,13 @@ async function main() {
   });
 
   player.canPlace = (x, y) => tiles.settled(x, y);
+  const avatar = new Avatar(scene);
+  const modeEl = $('mode');
+  player.onChange = () => {
+    modeEl.textContent = (player.flying ? 'Broom' : 'On foot') + (player.view === 3 ? ' · 3rd person' : '');
+    modeEl.classList.toggle('flying', player.flying);
+  };
+  player.onChange();
   const sp = manifest.spawn;
   player.teleport(sp.x, sp.y, sp.z);
 
@@ -62,7 +70,36 @@ async function main() {
     get position() { return { x: player.x, y: player.y, z: player.z }; },
     get heading() { return player.heading; },
     get loadedTiles() { return tiles.tiles.filter(t => t.state === 'loaded').length; },
+    get z() { return player.z; },
+    get eye() { return player.eye; },
+    get mode() { return player.mode; },
+    get view() { return player.view; },
+    get grounded() { return player.grounded; },
+    get crouching() { return player.crouching; },
+    get sliding() { return player.sliding; },
+    get dashing() { return player.dashing; },
+    get speed() { return player.speed; },
+    get yaw() { return player.yaw; },
+    set pitch(v) { player.pitch = v; },
     teleport: (x, y, z) => player.teleport(x, y, z ?? null),
+    // find a spot within r m with a ledge 0.6-1.5 m high in front (for the scripted test): {x, y, yaw} or null
+    findLedge: (r = 150) => {
+      for (let d = 2; d < r; d += 1.5) for (let a = 0; a < 64; a++) {
+        const x = player.x + d * Math.cos(a / 64 * 6.283), y = player.y + d * Math.sin(a / 64 * 6.283);
+        const top = world.support(x, y, 1e4, true);   // topmost surface: ground or a roof
+        const g = top && world.standAt(x, y, top.z, { roofs: true });
+        if (g == null) continue;
+        for (let b = 0; b < 8; b++) {
+          const fx = Math.cos(b / 8 * 6.283), fy = Math.sin(b / 8 * 6.283);
+          if (world.standAt(x + fx * 0.3, y + fy * 0.3, g, { roofs: true }) != null) continue; // must be blocked ahead
+          const s = world.support(x + fx * 0.6, y + fy * 0.6, g + 1.5, true);
+          if (s && s.kind === 1 && s.z > g + 0.6 && s.z <= g + 1.45 && !world.blocked(x + fx * 0.6, y + fy * 0.6, s.z, 0.3, 0.05, 1.2)
+              && !world.blocked(x, y, g, 0.2, 0.3, s.z - g + 1.0)) return { x, y, z: g, yaw: -Math.atan2(fx, fy) };
+        }
+      }
+      return null;
+    },
+    place: (x, y, z, yaw) => { player.x = x; player.y = y; player.z = z; player.yaw = yaw; player.vx = player.vy = player.vz = 0; },
   };
 
   status('Loading tiles…');
@@ -74,7 +111,9 @@ async function main() {
     player.update(dt);
     const fc = window.__cam;   // debug/screenshot hook: {pos:[x,y,z], at:[x,y,z]} in the collision frame
     if (fc) { camera.position.set(fc.pos[0], fc.pos[2], -fc.pos[1]); camera.lookAt(fc.at[0], fc.at[2], -fc.at[1]); }
+    else if (player.view === 3) player.applyCamera3(camera);
     else player.applyCamera(camera);
+    avatar.update(player, dt, player.view === 3 && !fc);
     renderer.render(scene, camera);
     if (!ready && !player.pendingPlace && tiles.readyAt(player.x, player.y)) {
       ready = true; window.__walkReadyAt = performance.now(); window.__walkReady = true;

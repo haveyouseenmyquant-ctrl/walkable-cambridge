@@ -73,5 +73,12 @@ export function initOverlays() {
     });
   }
   for (const btn of document.querySelectorAll('.overlay .close')) btn.addEventListener('click', () => { btn.closest('.overlay').hidden = true; });
-  addEventListener('keydown', e => { if (e.code === 'Escape') for (const o of document.querySelectorAll('.overlay')) o.hidden = true; });
+  addEventListener('keydown', e => {
+    if (e.code === 'Escape') for (const o of document.querySelectorAll('.overlay')) o.hidden = true;
+    if ((e.code === 'KeyH' || e.key === '?') && !(e.target instanceof HTMLInputElement)) {
+      const el = document.getElementById('controls'), show = el.hidden;
+      for (const o of document.querySelectorAll('.overlay')) o.hidden = true;
+      el.hidden = !show;
+    }
+  });
 }

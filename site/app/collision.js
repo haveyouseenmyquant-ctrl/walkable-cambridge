@@ -92,14 +92,22 @@ export class ColTile {
   }
 
   // Highest kind-1/2 surface at (x, y) with z <= zmax; writes into best {z, kind, surface}.
-  support(x, y, zmax, best) {
+  // With roofs, upward-facing solid triangles (building roofs) count as walkable too (surface 0). Only the
+  // player's own movement uses that; the KPI harness and teleport placement use the plain rules.
+  support(x, y, zmax, best, roofs = false) {
     const c = this.cy(y) * this.nx + this.cx(x);
     for (let k = this.start[c]; k < this.start[c + 1]; k++) {
       const t = this.ids[k], kd = this.kind[t];
-      if (kd === 0 || this.zr[t * 2] > zmax || this.zr[t * 2 + 1] < best.z) continue;
+      if ((kd === 0 && !roofs) || this.zr[t * 2] > zmax || this.zr[t * 2 + 1] < best.z) continue;
+      if (kd === 0 && !this.facesUp(t)) continue;
       const z = this.heightAt(t, x, y);
-      if (z <= zmax && z > best.z) { best.z = z; best.kind = kd; best.surface = this.surface[t]; }
+      if (z <= zmax && z > best.z) { best.z = z; best.kind = kd || 1; best.surface = this.surface[t]; }
     }
+  }
+
+  facesUp(t) {
+    const v = this.verts, a = this.tris[t * 3] * 3, b = this.tris[t * 3 + 1] * 3, c = this.tris[t * 3 + 2] * 3;
+    return (v[b] - v[a]) * (v[c + 1] - v[a + 1]) - (v[b + 1] - v[a + 1]) * (v[c] - v[a]) > 0;
   }
 
   // Does any solid triangle cross the body cylinder at (x, y) between heights zlo and zhi?
@@ -157,21 +165,22 @@ export class CollisionWorld {
   remove(id) { this.tiles.delete(id); }
   covered(x, y) { for (const t of this.tiles.values()) if (t.contains(x, y)) return true; return false; }
   // Highest walkable-or-water surface under (x, y) at or below zmax: {z, kind, surface} or null.
-  support(x, y, zmax) {
+  support(x, y, zmax, roofs = false) {
     const best = { z: -Infinity, kind: -1, surface: 0 };
-    for (const t of this.tiles.values()) if (t.contains(x, y)) t.support(x, y, zmax, best);
+    for (const t of this.tiles.values()) if (t.contains(x, y)) t.support(x, y, zmax, best, roofs);
     return best.kind < 0 ? null : best;
   }
-  blocked(x, y, feet, r = RADIUS) {
-    const lo = feet + STEP + 0.01, hi = feet + BODY_HI;
-    for (const t of this.tiles.values()) if (t.contains(x, y, r) && t.blocked(x, y, lo, hi, r)) return true;
+  // Does a solid triangle cross the body column from feet + lo to feet + hi (default: above a step up to head height)?
+  blocked(x, y, feet, r = RADIUS, lo = STEP + 0.01, hi = BODY_HI) {
+    for (const t of this.tiles.values()) if (t.contains(x, y, r) && t.blocked(x, y, feet + lo, feet + hi, r)) return true;
     return false;
   }
   // Where a player at (x, y) with feet at `feet` would stand, or null if not allowed (no ground, water, wall).
-  standAt(x, y, feet) {
-    const s = this.support(x, y, feet + STEP);
-    if (!s || s.kind !== 1) return null;
-    if (this.blocked(x, y, Math.max(s.z, feet))) return null;
+  // opts: roofs (stand on roofs), water (allow wading out of water), hi (body height, lower when crouching).
+  standAt(x, y, feet, opts = {}) {
+    const s = this.support(x, y, feet + STEP, opts.roofs);
+    if (!s || (s.kind !== 1 && !(opts.water && s.kind === 2))) return null;
+    if (this.blocked(x, y, Math.max(s.z, feet), RADIUS, STEP + 0.01, opts.hi ?? BODY_HI)) return null;
     return s.z;
   }
 }

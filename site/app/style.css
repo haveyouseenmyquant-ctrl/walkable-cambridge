@@ -18,3 +18,12 @@ button:disabled { opacity: .45; cursor: default; }
 #joystick { position: fixed; left: 24px; bottom: 24px; width: 120px; height: 120px; border-radius: 50%; background: rgba(255,255,255,.25); border: 2px solid rgba(255,255,255,.6); touch-action: none; }
 #knob { position: absolute; left: 35px; top: 35px; width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,.75); }
 @media (pointer: coarse) { #help { display: none; } #minimap { width: 120px; height: 120px; } }
+#mode { position: fixed; top: 10px; left: 10px; padding: 4px 10px; background: rgba(0,0,0,.45); color: #fff; border-radius: 4px; font-size: 12px; pointer-events: none; }
+#mode.flying { background: rgba(120,70,20,.7); }
+.keys { border-collapse: collapse; font-size: 13px; }
+.keys td, .keys th { padding: 2px 6px; vertical-align: top; text-align: left; }
+.keys th { padding-top: 8px; }
+.keys td:first-child { white-space: nowrap; font-weight: 600; }
+#touch-buttons { position: fixed; right: 12px; bottom: 150px; display: grid; grid-template-columns: repeat(3, 58px); gap: 8px; touch-action: none; }
+#touch-buttons button { height: 48px; padding: 0; font-size: 12px; background: rgba(255,255,255,.55); user-select: none; -webkit-user-select: none; }
+#touch-buttons button.on { background: rgba(255,210,120,.85); }
