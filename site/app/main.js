@@ -7,7 +7,10 @@ import { Avatar } from './avatar.js';
 import { Minimap, renderTileMap, initLandmarks, mergeLandmarks, initOverlays } from './ui.js';
 
 const BASE = new URL('./', location.href).href;
-const SKY = 0xbcd3e6;
+// ?look=v2: sky dome, AgX tone mapping, plausible albedos (session 9). Off by default: it lowered photo_match on the
+// 50-view check (7.75 -> 7.40), so it stays opt-in until materials/textures make it pay off.
+const LOOK2 = new URLSearchParams(location.search).get('look') === 'v2';
+const SKY = LOOK2 ? 0xccd8e2 : 0xbcd3e6;
 const $ = id => document.getElementById(id);
 const status = msg => { $('status').textContent = msg; };
 
@@ -23,12 +26,26 @@ async function main() {
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(SKY);
-  scene.fog = new THREE.Fog(SKY, 120, 420);
-  const camera = new THREE.PerspectiveCamera(70, 1, 0.2, 600);
-  scene.add(new THREE.HemisphereLight(0xdfeaf5, 0x6b6450, 1.6));
+  scene.fog = LOOK2 ? new THREE.Fog(SKY, 150, 560) : new THREE.Fog(SKY, 120, 420);
+  // sky dome: pale hazy horizon to a soft blue zenith (Cambridge summer afternoon), follows the camera
+  const skyDome = new THREE.Mesh(new THREE.SphereGeometry(580, 32, 16), new THREE.ShaderMaterial({
+    side: THREE.BackSide, depthWrite: false, fog: false,
+    uniforms: { sun: { value: new THREE.Vector3(-0.181, 0.848, 0.498).normalize() } },
+    vertexShader: 'varying vec3 vd; void main(){ vd = normalize(position); gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+    fragmentShader: `uniform vec3 sun; varying vec3 vd;
+      void main(){ float h = max(vd.y, 0.0);
+        vec3 c = mix(vec3(0.80, 0.85, 0.89), vec3(0.42, 0.60, 0.82), pow(h, 0.55));
+        c += vec3(1.0, 0.95, 0.85) * 0.25 * pow(max(dot(vd, sun), 0.0), 12.0);
+        if (vd.y < 0.0) c = vec3(0.80, 0.85, 0.89);
+        gl_FragColor = vec4(c, 1.0); }`,
+  }));
+  skyDome.renderOrder = -1; skyDome.frustumCulled = false; if (LOOK2) scene.add(skyDome);
+  const camera = new THREE.PerspectiveCamera(70, 1, 0.2, LOOK2 ? 1200 : 600);
+  if (LOOK2) { renderer.toneMapping = THREE.AgXToneMapping; renderer.toneMappingExposure = 1.15; }
+  scene.add(LOOK2 ? new THREE.HemisphereLight(0xc4d8ee, 0x5f584c, 0.75) : new THREE.HemisphereLight(0xdfeaf5, 0x6b6450, 1.6));
   // Sun for Cambridge, mid-June 14:00 BST: azimuth ~200 deg (SSW), elevation ~58 deg. Frame: x east, y up, z south.
   const SUN_DIR = new THREE.Vector3(-0.181, 0.848, 0.498).normalize();
-  const sun = new THREE.DirectionalLight(0xfff1dc, 1.8);
+  const sun = new THREE.DirectionalLight(0xfff1dc, LOOK2 ? 2.6 : 1.8);
   sun.position.copy(SUN_DIR); scene.add(sun); scene.add(sun.target);
   // Quality: ?quality=low (default on touch devices) has no shadows; otherwise a 2048 shadow map, 240 m square
   const quality = new URLSearchParams(location.search).get('quality') || (matchMedia('(pointer: coarse)').matches ? 'low' : 'high');
@@ -130,6 +147,7 @@ async function main() {
       const q = 240 / 2048, cx = Math.round(camera.position.x / q) * q, cz = Math.round(camera.position.z / q) * q;
       sun.target.position.set(cx, 0, cz); sun.position.set(cx, 0, cz).addScaledVector(SUN_DIR, 300); sun.target.updateMatrixWorld();
     }
+    skyDome.position.copy(camera.position);
     renderer.render(scene, camera);
     if (!ready && !player.pendingPlace && tiles.readyAt(player.x, player.y)) {
       ready = true; window.__walkReadyAt = performance.now(); window.__walkReady = true;

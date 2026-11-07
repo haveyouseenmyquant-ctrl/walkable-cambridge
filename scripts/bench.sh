@@ -13,7 +13,15 @@ OUT=$B/scores/$HASH.json
 R=/tmp/wc_renders_$HASH
 mkdir -p $B/scores $B/renders
 if [ ! -f "$OUT" ]; then
-  [ "$(ls "$R" 2>/dev/null | wc -l)" -ge 200 ] || { rm -rf "$R"; node scripts/photo_render.mjs "$SRC" $B/benchmark.json "$R"; }
+  if [ "$(ls "$R" 2>/dev/null | wc -l)" -lt 200 ]; then   # 4 parallel swiftshader workers (~8 min total)
+    rm -rf "$R"; W=${BENCH_WORKERS:-4}
+    for k in $(seq 0 $((W - 1))); do
+      IDS=$(.venv/bin/python -I -c "import json,sys; v=json.load(open('$B/benchmark.json')); v=v['views'] if isinstance(v,dict) else v; print(','.join(str(x['id']) for x in v[$k::$W]))")
+      node scripts/photo_render.mjs "$SRC" $B/benchmark.json "$R" --only "$IDS" 2>/dev/null &
+    done
+    wait
+    [ "$(ls "$R" | wc -l)" -ge 200 ] || { echo "renders incomplete" >&2; exit 1; }
+  fi
   .venv/bin/python -I scripts/photo_score.py $B/photos "$R" --out "$OUT"
 fi
 # judged_realism (50 blind A/B views) and visual_quality (30 views, rubric): Claude vision judge, scripts/judge.py

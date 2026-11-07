@@ -3,8 +3,13 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from '../vendor/meshoptimizer/meshopt_decoder.module.js';
 import { parseCol, ColTile } from './collision.js';
+import { makeTrees } from './trees.js';
 
 const DEBUG = /debug/.test(location.search);
+const Q = new URLSearchParams(location.search);
+// ?trees: draw OSM + LiDAR trees (session 9). Off by default: the low-poly crowns lowered photo_match (7.75 -> 6.40 on
+// the 50-view check); they need leaf-textured crowns first.
+const TREES = Q.has('trees'), LOOK2 = Q.get('look') === 'v2';
 const LOAD_R = 400, UNLOAD_R = 550, MAX_JOBS = 4;
 
 // Surface class colours (FORMAT.md) for the collision fallback mesh and the minimap.
@@ -13,7 +18,7 @@ export const SURFACE_COLORS = {
   6: '#a08a66', 7: '#bfb6a6', 8: '#9c8f7c', 9: '#8d877d', 255: '#8a8a80',
 };
 
-const buildingMat = new THREE.MeshLambertMaterial({ color: 0xd9cfbf });
+const buildingMat = new THREE.MeshLambertMaterial({ color: /look=v2/.test(location.search) ? 0xb8ad9c : 0xd9cfbf });
 const groundMat = new THREE.MeshLambertMaterial({ color: 0x8d9a7c });
 const vcolMat = new THREE.MeshLambertMaterial({ color: 0xffffff, vertexColors: true });
 
@@ -56,9 +61,9 @@ export class TileManager {
   async load(t) {
     t.state = 'loading'; const gen = ++t.gen; this.jobs++;
     try {
-      const [gltf, buf] = await Promise.all([
-        this.loader.loadAsync(this.base + t.m.glb),
-        fetch(this.base + t.m.collision).then(r => { if (!r.ok) throw new Error(`${r.status} ${t.m.collision}`); return r.arrayBuffer(); }),
+      const bin = p => fetch(this.base + p).then(r => { if (!r.ok) throw new Error(`${r.status} ${p}`); return r.arrayBuffer(); });
+      const [gltf, buf, tbuf] = await Promise.all([
+        this.loader.loadAsync(this.base + t.m.glb), bin(t.m.collision), TREES && t.m.trees ? bin(t.m.trees) : null,
       ]);
       if (gen !== t.gen) return; // unloaded meanwhile
       const t0 = performance.now();
@@ -66,6 +71,7 @@ export class TileManager {
       t.col = col; this.world.add(t.m.id, col);
       const t1 = performance.now();
       t.group = this.prepare(gltf.scene, col);
+      if (tbuf) t.group.add(makeTrees(tbuf));
       this.scene.add(t.group);
       t.state = 'loaded';
       const t2 = performance.now();
@@ -81,7 +87,7 @@ export class TileManager {
     t.gen++;
     if (t.group) {
       this.scene.remove(t.group);
-      t.group.traverse(o => { if (o.isMesh) { o.geometry.dispose(); if (o.userData.ownMat) o.material.dispose(); } });
+      t.group.traverse(o => { if (o.isInstancedMesh) o.dispose(); else if (o.isMesh) { o.geometry.dispose(); if (o.userData.ownMat) o.material.dispose(); } });
     }
     this.world.remove(t.m.id); this.onUnload?.(t);
     t.group = null; t.col = null; t.state = 'idle';
@@ -96,7 +102,11 @@ export class TileManager {
       const isBuilding = isB(o) || isB(o.parent); // GLTFLoader keeps the raw node name in userData.name
       if (!isBuilding) hasGround = true;
       const g = o.geometry, old = o.material;
-      if (g.attributes.color) o.material = vcolMat;
+      if (g.attributes.color && LOOK2) {   // GLB albedos were tuned for an over-bright rig; scale to plausible values
+        const c = g.attributes.color.array, k = isBuilding ? 0.75 : 0.42;
+        for (let i = 0; i < c.length; i++) c[i] *= k;
+        o.material = vcolMat;
+      } else if (g.attributes.color) o.material = vcolMat;
       else if (old?.color && old.color.getHex() !== 0xffffff) {
         o.material = new THREE.MeshLambertMaterial({ color: old.color }); o.userData.ownMat = true;
       } else o.material = isBuilding ? buildingMat : groundMat;

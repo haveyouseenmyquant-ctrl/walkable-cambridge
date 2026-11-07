@@ -304,3 +304,35 @@ Next (centre first)
    change before and after on the benchmark.
 2. Start measuring street_objects_pct / roof_match_pct / real_facade_pct so that finished_radius_m can be computed.
 3. Parallelise photo_render inside bench.sh (2–3 workers) so that service.sh scores each build in under 15 min.
+
+## 2026-11-07/08 — Session 9: trees + new look tried, both lowered photo_match, kept opt-in
+
+Done
+- `scripts/trees.py` (run after build.py): 7,371 trees = 1,424 from OSM (natural=tree, tree_row every 8 m; height and
+  crown from tags or the CHM) + 6,608 LiDAR tops (CHM = 2023 first-return DSM − DTM > 3 m, outside buildings +3 m and
+  water, crown pixels where first − last return > 0.8 m; a top needs ≥10 px crown and a 5×5 penetration > 3 m, which
+  removes the false "trees" along building eaves in Market St). Per-tile `site/trees/*.bin` (500 KB in total), listed in the manifest.
+  `site/app/trees.js` draws two InstancedMeshes per tile (lumpy 7-blob crowns, trunks), which cast shadows.
+- "Look v2": a gradient sky dome with a sun glow, AgX tone mapping, light intensities rebalanced, and GLB albedos scaled to plausible
+  values (the old rig blew the ground out to near white).
+- bench.sh renders with 4 parallel workers (200 views in about 15 min).
+- Benchmark (full 200, build fb4fd36a = trees + look v2): **photo_match 6.86 vs baseline 7.90**. Ablation on the 50
+  judge views: baseline 7.75, look v2 without trees 7.40, trees with the old look 6.40. Both changes make it worse. Following the
+  revert rule, both are now **opt-in** (`?trees`, `?look=v2`) and the default render is pixel-identical to the
+  baseline. Side-by-side: docs/trees_session9.jpg (photo | baseline | trees; photos Mapillary CC-BY-SA 4.0, ids
+  155280259867837, 215717297387097, 489581222193351, 504212450935825, 204587944591503).
+- GPU fps (1920×1080, M4): 60 both default and `?trees&look=v2`; site_errors 0; all 15 moves pass.
+
+Learned
+- DINOv2 penalises the "low-poly CG" look: the views that lose most are those where real trees exist. Smooth
+  blob crowns next to real foliage score lower than empty grass. Trees only pay off with leaf texture (alpha-tested
+  leaf cards / foliage texture with normal variation, crowns down to the real crown base), not as solid shapes.
+- Whole-image brightness/tone changes move the score by about 0.3. Texture and structure matter far more than exposure.
+- Single-change ablations on the 50 judge views take about 4 min each with 4 workers. Do this for every change.
+
+Next
+1. Textured foliage: CC0 leaf/bark textures (Poly Haven / ambientCG), crowns as clusters of alpha-tested leaf cards,
+   then re-test `?trees` on the 50 views. Turn on by default only if it beats 7.75.
+2. Facade/ground textures near GSM (CC0 stone, brick, setts; per-building colour from non-held-out photos). These are probably the biggest
+   lever, given DINOv2's preference for texture.
+3. street_objects_pct / roof_match_pct / real_facade_pct measurements for finished_radius_m.
