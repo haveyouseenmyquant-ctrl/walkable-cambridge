@@ -595,3 +595,6 @@ Next
 2. Sky: photos have white/overcast or cloudy skies; try a brighter, cloudier sky against the benchmark.
 3. Fix the WebKit smoke test (update Playwright's WebKit build).
 4. Facade quality (reject road/sky pieces), synthetic per-building facades, centre first.
+- measure.sh right after publishing read walkable_coverage_pct 97.03: kpi.py fetched tiles while Pages was still
+  deploying, counted the failures as missing, and the value was cached for the build. Re-measured: 99.38. kpi.py now
+  retries each fetch 3 times and flags `fetch_failures`; measure.sh doesn't cache a flagged result.

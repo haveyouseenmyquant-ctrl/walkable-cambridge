@@ -13,7 +13,7 @@ export BUILD_HASH=$($PY -I scripts/build_hash.py "$SRC" 2>/dev/null)
 KC=data/derived/kpi_cache_$BUILD_HASH.json
 if [ -n "$BUILD_HASH" ] && [ -s "$KC" ]; then cat "$KC"; else
   K=$($PY -I scripts/kpi.py "$SRC" 2>/dev/null); echo "$K"
-  [ -n "$BUILD_HASH" ] && echo "$K" | grep -q walkable_coverage_pct && echo "$K" > "$KC"
+  [ -n "$BUILD_HASH" ] && echo "$K" | grep -q walkable_coverage_pct && ! echo "$K" | grep -q fetch_failures && echo "$K" > "$KC"
 fi | $PY -I -c '
 import json, os, sys, time
 out = json.loads(sys.stdin.read())
@@ -29,4 +29,5 @@ for k, suf in (("photo_match_score", ""), ("judged_realism", "_judge"), ("visual
     f = "data/benchmark/scores/%s%s.json" % (h, suf)
     if h and os.path.exists(f):
         out[k] = json.load(open(f))[k]
+out.pop("fetch_failures", None)
 print(json.dumps(out))'

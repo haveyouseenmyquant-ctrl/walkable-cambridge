@@ -11,6 +11,7 @@ import math
 import os
 import struct
 import sys
+import time
 import urllib.request
 
 import numpy as np
@@ -41,6 +42,7 @@ def log(*a):
 
 
 _CACHE = {}
+FAILED = []  # remote fetches that failed after retries (e.g. Pages mid-deploy): the result is then not cached
 
 
 def fetch(rel, rng=None):
@@ -50,15 +52,19 @@ def fetch(rel, rng=None):
         req = urllib.request.Request(SRC.rstrip("/") + "/" + rel, headers={"User-Agent": "walkable-cambridge-kpi"})
         if rng:
             req.add_header("Range", "bytes=%d-%d" % rng)
-        try:
-            with urllib.request.urlopen(req, timeout=20) as r:
-                data = r.read()
-                if rng and r.status == 200:  # server ignored the range
-                    data = data[rng[0]:rng[1] + 1]
-                return data
-        except Exception as e:
-            log("fetch failed", rel, e)
-            return None
+        for attempt in range(3):
+            try:
+                with urllib.request.urlopen(req, timeout=20) as r:
+                    data = r.read()
+                    if rng and r.status == 200:  # server ignored the range
+                        data = data[rng[0]:rng[1] + 1]
+                    return data
+            except Exception as e:
+                err = e
+                time.sleep(1 + 2 * attempt)
+        log("fetch failed", rel, err)
+        FAILED.append(rel)
+        return None
     p = os.path.join(SRC, rel)
     if not os.path.isfile(p):
         return None
@@ -425,6 +431,8 @@ def main():
                     w = np.hypot(q[:, 1, 0] - q[:, 0, 0], q[:, 1, 1] - q[:, 0, 1])
                     real += float((w * (q[:, 3, 2] - q[:, 0, 2])).sum())
         out["real_facade_pct"] = round(100.0 * min(real, tot) / max(tot, 1.0), 2)
+    if FAILED:
+        out["fetch_failures"] = len(FAILED)
     print(json.dumps(out))
 
 
