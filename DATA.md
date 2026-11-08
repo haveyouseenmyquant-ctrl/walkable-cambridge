@@ -35,6 +35,9 @@ references, licence checked and credited per item in this file.
 - Scoring: DINOv2 ViT-S/14 (facebook/dinov2-small, Apache-2.0), run locally. judged_realism / visual_quality: a Claude
   vision judge (claude-opus-5-5 via the local `claude` CLI), `scripts/judge.py`; fixed view lists in
   `data/benchmark/judge_views.json` (50) and `quality_views.json` (30).
+- Facade photo masks (session 24, `scripts/masks.py`): UperNet ConvNeXt-small semantic segmentation
+  (openmmlab/upernet-convnext-small, MIT licence, trained on ADE20K), run locally, finds people, bikes and vehicles in
+  the facade photos so they are not baked into walls. Only the masks are used; nothing of the model ships.
 
 Photo facades (session 12, `scripts/facades.py` → `site/facades/`, release asset only): wall pieces rectified from
 Mapillary street-level photos (CC-BY-SA 4.0) through their SfM camera poses. The atlases are adaptations and are shared

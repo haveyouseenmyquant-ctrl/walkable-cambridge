@@ -727,3 +727,37 @@ Next
 3. Mask people/bikes in facade photos (a local segmentation model) and pick the cleanest photo per piece.
 4. Footprints built after the LiDAR survey (session 22).
 - Live check: build b45c1234a047bcaa, real_facade_pct 7.6 (measure.sh), walkable 99.39, buildings 100, roof_match 93.03.
+
+## 2026-11-08 — Session 24: people and vehicles masked out of photo facades (photo_match on views ≤ 300 m 30.49 → 30.82)
+
+Done
+- Re-tested the procedural window grid (`?win=1`) at today's lighting on the 25 views ≤ 300 m: **30.24** vs 30.49
+  control. It stays off.
+- New scripts/masks.py: local semantic segmentation (openmmlab/upernet-convnext-small, MIT, ADE20K; MPS needs a
+  576×384 input) marks people, bikes, motorbikes, cars, vans, buses and trucks in all 1,282 cached facade photos
+  (data/raw/mapillary_masks, ~25 photos/min, centre first via data/derived/facade_photo_order.json). Credited in DATA.md.
+- facades.py (`WC_FAC_MASKS`, on by default): each piece keeps up to 4 other candidate cameras; masked pixels are
+  taken from the next photo that sees that spot unmasked, otherwise left transparent so the procedural wall shows.
+  Full bake (radius 500): 9.9 M px refilled, 4.2 % of facade pixels transparent, real_facade 7.6 % unchanged, 399 s.
+- A/B ≤ 300 m (same views as session 23): **30.49 → 30.82**. Honest reading: one view (902886690492404) went
+  17.1 → 54.7 because a wall of huge baked-in parked bikes disappeared. The other 24 lost 1.2 on average (2 better
+  by > 1, 8 worse). The losses are photos with cars and cyclists in them: DINOv2 rewards a smeared bus on the wall
+  when the real photo has a bus. Shipped anyway: the walls are visibly cleaner (no ghost people), and the
+  judged_realism and visual_quality artefact scores should show it. Side-by-side (photo | before | masked):
+  docs/facade_masks_session24.jpg (photos Mapillary CC-BY-SA 4.0, ids 902886690492404, 519716785698039,
+  336962257817391).
+- Local check: load 3.65 s, site_errors 0. Published.
+
+Learned
+- DINOv2 similarity rewards scene content, not correctness: transient objects baked into walls score as
+  "vehicles present". The real fix for those views is moving content: parked cars and bikes from OSM
+  (parking lanes, bicycle_parking capacity) and pedestrians.
+- A view's render can change by 30+ points from a single close facade piece; 25-view A/Bs need per-view reading.
+- The wait-loop Bash call was stopped at the 10-min background limit and took the bake with it; give long jobs their
+  own run_in_background call with a long timeout.
+
+Next
+1. Bikes in the OSM bicycle_parking racks (capacity) and parked cars on mapped parking lanes: real content
+   that DINOv2 and the judge both expect.
+2. Wikimedia Commons photos of central buildings, registered locally for poses (more real facade area).
+3. Synthetic per-building facades for walls with no photo (the generic grid didn't help; needs per-building style).

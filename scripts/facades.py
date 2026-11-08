@@ -45,6 +45,9 @@ COSN = float(os.environ.get("WC_FAC_COSN", "0.12"))   # min cos(angle) between t
 SPLITS = int(os.environ.get("WC_FAC_SPLITS", "3"))    # a piece with no photo is halved up to this many times
 CAM_H = 2.0           # assumed camera height above the DTM (m): most sequences are bike/helmet or car mounted
 ATLAS = 2048
+ALTS = 4              # other cameras tried for pixels the best photo has masked (people, bikes, vehicles)
+MASKS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data/raw/mapillary_masks")
+USE_MASKS = os.environ.get("WC_FAC_MASKS", "1") == "1"
 CACHE = os.path.join(ROOT, "data/raw/mapillary_facade")
 GSM = (0.1183, 52.2052)
 to_bng = Transformer.from_crs(4326, 27700, always_xy=True)
@@ -105,6 +108,17 @@ def fetch(img_id, token):
         data = urllib.request.urlopen(url, timeout=60).read()
         open(p, "wb").write(data)
     return np.asarray(Image.open(p).convert("RGB"), np.float32)
+
+
+def mask_of(img_id):
+    """Transient-object mask (scripts/masks.py) as a bool array, or None if there is none."""
+    p = os.path.join(MASKS, img_id + ".png")
+    return np.asarray(Image.open(p)) > 127 if (USE_MASKS and os.path.exists(p)) else None
+
+
+def sample_mask(m, u, v):
+    mh, mw = m.shape
+    return m[np.clip((v * mh).astype(int), 0, mh - 1), np.clip((u * mw).astype(int), 0, mw - 1)]
 
 
 def main():
@@ -195,7 +209,7 @@ def main():
         hmin = 2.5 if band == 0 else 1.5
         mid = (a + b) / 2
         dist = np.hypot(*(cp - mid).T)
-        best = None
+        best, cands = None, []
         for i in np.where((dist > 4) & (dist < MAXDIST))[0]:
             c = cams[i]
             v = np.array([c["e"], c["n"]]) - mid
@@ -233,9 +247,11 @@ def main():
             du, dv = u[1] - u[0], vv[1] - vv[0]
             area = abs(du * (vv[3] - vv[0]) - dv * (u[3] - u[0])) * c["w"] * c["h"]
             score = min(area, 2e5) * cosn * cosn * hv / h
+            cands.append((score, i))
             if best is None or score > best[0]:
                 best = (score, i, hv)
         pc["cam"] = None if best is None else best[1]
+        pc["alts"] = [i for _, i in sorted(cands, reverse=True) if best is None or i != best[1]][:ALTS]
         if best is None:
             if band == 0 and pc.get("half", 0) < SPLITS and pc["L"] > 2.5:
                 m = (pc["a"] + pc["bb"]) / 2
@@ -268,6 +284,7 @@ def main():
     for f in os.listdir(out_dir):
         os.remove(os.path.join(out_dir, f))
     imgs, meta, man_t, n_photos = {}, [], {}, set()
+    n_alt, n_hole, n_px = [0], [0], [0]
     for tid, lst in sorted(tiles.items()):
         imgs.clear()   # decoded photos are ~40 MB each: keep only this tile's (all of them once filled RAM, swap and the disk)
         lst.sort(key=lambda p: -p["h"])
@@ -296,6 +313,37 @@ def main():
             u, v, _ = project(c, P)
             ih, iw = im.shape[:2]
             rgb = np.stack([map_coordinates(im[..., k], [v * ih - 0.5, u * iw - 0.5], order=1, mode="nearest") for k in range(3)], 1)
+            # people, bikes and vehicles in the photo: take those pixels from the next-best photos, else leave them
+            # transparent (the procedural wall shows through) rather than bake a smeared passer-by into the wall
+            hole = np.zeros(len(P), bool)
+            mk = mask_of(c["id"])
+            if mk is not None:
+                hole = sample_mask(mk, u, v)
+                for j in pc.get("alts", []) if hole.any() else []:
+                    cj = cams[j]
+                    mj = mask_of(cj["id"])
+                    if cj["id"] not in imgs:
+                        try:
+                            imgs[cj["id"]] = fetch(cj["id"], token)
+                        except Exception:  # noqa: BLE001
+                            imgs[cj["id"]] = None
+                    imj = imgs[cj["id"]]
+                    if imj is None or mj is None:
+                        continue
+                    idx = np.where(hole)[0]
+                    uj, vj, zj = project(cj, P[idx])
+                    ok = (zj > 1) & (uj > 0) & (uj < 1) & (vj > 0) & (vj < 1)
+                    ok[ok] = ~sample_mask(mj, uj[ok], vj[ok])
+                    if ok.any():
+                        jh, jw = imj.shape[:2]
+                        for k in range(3):
+                            rgb[idx[ok], k] = map_coordinates(imj[..., k], [vj[ok] * jh - 0.5, uj[ok] * jw - 0.5], order=1, mode="nearest")
+                        hole[idx[ok]] = False
+                        n_alt[0] += int(ok.sum())
+                    if not hole.any():
+                        break
+                n_hole[0] += int(hole.sum()); n_px[0] += len(P)
+            hole = hole.reshape(H, W)
             rgb = np.clip(rgb, 0, 255).reshape(H, W, 3)
             # sky above the real roofline: bright, bluish or grey-white pixels connected to the top edge -> transparent
             r_, g_, b_ = rgb[..., 0], rgb[..., 1], rgb[..., 2]
@@ -308,10 +356,10 @@ def main():
                 continue
             top = int(keep_rows[0])                             # crop all-sky rows off the quad top
             h_new = pc["h"] * (H - top) / H
-            rgb, sky = rgb[top:], sky[top:]
+            rgb, sky, hole = rgb[top:], sky[top:], hole[top:]
             H = H - top
             atlas[y:y + H, x:x + W, :3] = rgb.astype(np.uint8)
-            atlas[y:y + H, x:x + W, 3] = np.where(sky, 0, 255)
+            atlas[y:y + H, x:x + W, 3] = np.where(sky | hole, 0, 255)
             pc["h"] = h_new
             u0, u1, v0, v1 = x / ATLAS, (x + W) / ATLAS, 1 - (y + H) / ATLAS, 1 - y / ATLAS
             o = pc["n"] * 0.04
@@ -357,6 +405,11 @@ def main():
               open(os.path.join(ROOT, "data/derived/facades.json"), "w"))
     log("textured %d pieces, %.1f%% of the study area's street-facing wall area, %d photos, %d atlas pages, %.0fs" % (
         len(meta), 100 * sum(m["area"] for m in meta) / max(tot_area, 1), len(n_photos), sum(len(v) for v in man_t.values()), time.time() - t0))
+    near = {}
+    for m in meta:
+        near[m["photo"]] = min(near.get(m["photo"], 1e9), m["d"])
+    json.dump(sorted(near, key=near.get), open(os.path.join(ROOT, "data/derived/facade_photo_order.json"), "w"))
+    log("masks: %d px filled from other photos, %.1f%% of pixels left transparent" % (n_alt[0], 100 * n_hole[0] / max(n_px[0], 1)))
 
 
 if __name__ == "__main__":
