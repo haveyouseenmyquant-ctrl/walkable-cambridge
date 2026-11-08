@@ -9,7 +9,12 @@ PY=.venv/bin/python
 SRC=site
 [ -s SITE_URL ] && SRC=$(head -n1 SITE_URL | tr -d '[:space:]')
 export BUILD_HASH=$($PY -I scripts/build_hash.py "$SRC" 2>/dev/null)
-$PY -I scripts/kpi.py "$SRC" 2>/dev/null | $PY -I -c '
+# kpi.py reads every tile (~25-50 s); its result depends only on the build, so cache it per build hash.
+KC=data/derived/kpi_cache_$BUILD_HASH.json
+if [ -n "$BUILD_HASH" ] && [ -s "$KC" ]; then cat "$KC"; else
+  K=$($PY -I scripts/kpi.py "$SRC" 2>/dev/null); echo "$K"
+  [ -n "$BUILD_HASH" ] && echo "$K" | grep -q walkable_coverage_pct && echo "$K" > "$KC"
+fi | $PY -I -c '
 import json, os, sys, time
 out = json.loads(sys.stdin.read())
 p = "data/derived/browser_kpi.json"

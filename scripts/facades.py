@@ -38,6 +38,8 @@ RADIUS = float(sys.argv[sys.argv.index("--radius") + 1]) if "--radius" in sys.ar
 STRICT = "--strict" in sys.argv   # also skip every frame of a sequence that holds a benchmark photo
 PX = 40.0             # texture resolution (px per metre)
 MAXPIECE = 6.0       # split long edges into pieces of at most this length (m)
+MAXDIST = 40.0        # farthest camera used for a piece (m)
+BANDS = 3             # vertical bands per wall piece, each from its own photo
 MAXELEV = 50.0        # deg: wall tops seen steeper than this from the camera are stretched/unreliable; cap the textured height
 CAM_H = 2.0           # assumed camera height above the DTM (m): most sequences are bike/helmet or car mounted
 ATLAS = 2048
@@ -180,13 +182,18 @@ def main():
     log(len(cams), "usable non-held-out photos")
     cp = np.array([[c["e"], c["n"]] for c in cams])
 
-    # ---- best photo per piece
-    for pc in pieces:
+    # ---- best photo per piece. A piece with no photo is split into halves (once); the part of a wall above the
+    # best photo's visible band becomes a new piece (an upper band, up to BANDS per wall) and gets its own photo.
+    queue, done = list(pieces), []
+    while queue:
+        pc = queue.pop(0)
         a, b, z0, h = pc["a"] - [B.E0, B.N0], pc["bb"] - [B.E0, B.N0], pc["z0"], pc["h"]
+        band = pc.get("band", 0)
+        hmin = 2.5 if band == 0 else 1.5
         mid = (a + b) / 2
         dist = np.hypot(*(cp - mid).T)
         best = None
-        for i in np.where((dist > 4) & (dist < 35))[0]:
+        for i in np.where((dist > 4) & (dist < MAXDIST))[0]:
             c = cams[i]
             v = np.array([c["e"], c["n"]]) - mid
             cosn = float(v @ pc["n"] / np.linalg.norm(v))
@@ -195,9 +202,9 @@ def main():
             # visible height: the tallest top edge (<= eave) whose corners are in frame; at least 2.5 m (or the eave)
             hv = None
             hcap = c["z"] - z0 + math.tan(math.radians(MAXELEV)) * float(np.linalg.norm(v))
-            if hcap < min(h, 2.5):
+            if hcap < min(h, hmin):
                 continue
-            for hh in np.linspace(min(h, hcap), min(h, 2.5), 8):
+            for hh in np.linspace(min(h, hcap), min(h, hmin), 8):
                 C = np.array([[a[0], a[1], z0], [b[0], b[1], z0], [b[0], b[1], z0 + hh], [a[0], a[1], z0 + hh]])
                 u, vv, zz = project(c, C)
                 if not ((zz < 1).any() or (u < 0.01).any() or (u > 0.99).any() or (vv < 0.01).any() or (vv > 0.99).any()):
@@ -223,8 +230,18 @@ def main():
             if best is None or score > best[0]:
                 best = (score, i, hv)
         pc["cam"] = None if best is None else best[1]
-        if best is not None:
+        if best is None:
+            if band == 0 and not pc.get("half") and pc["L"] > 2.5:
+                m = (pc["a"] + pc["bb"]) / 2
+                for pa, pb in ((pc["a"], m), (m, pc["bb"])):
+                    queue.append(dict(pc, a=pa, bb=pb, L=pc["L"] / 2, half=True))
+                continue
+        else:
+            if best[2] < h - 1.0 and band + 1 < BANDS:
+                queue.append(dict(pc, z0=z0 + best[2], h=h - best[2], band=band + 1))
             pc["h"] = best[2]
+        done.append(pc)
+    pieces = done
     got = [pc for pc in pieces if pc["cam"] is not None]
     log(len(got), "pieces have a photo;", len({pc["cam"] for pc in got}), "photos needed")
 

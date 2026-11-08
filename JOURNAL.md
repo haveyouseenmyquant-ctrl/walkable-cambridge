@@ -473,3 +473,15 @@ Next
 2. Multi-photo median per piece, to remove people and cars (they are visible in the atlases).
 3. Pieces with no photo (narrow lanes, courts): a per-building synthetic facade in the real material.
 4. roof_match_pct measurement, then finished_radius_m.
+
+## 2026-11-08 — Session 14: LiDAR roofs on every building, roof_match_pct, facades to 500 m
+
+(Entry written at the start of session 15 from the session-14 commit; session 14 ended before writing it.)
+
+Done
+- build.py roofs: every footprint with ≥ 6 LiDAR pixels gets the DSM roof itself (no rescaling to the p95 top),
+  meshed as a quadtree from 8 m down to 1 m cells (split while RMS deviation from the cell's two-triangle fit > 0.25 m).
+- New KPI **roof_match_pct** (`scripts/roof_match.py`, rules in FORMAT.md): 10.45 → **23.18** (median RMSE 1.05 m).
+  Cached per build hash. height_accuracy_pct dropped 98.6 → 91 (the roof is no longer stretched to the p95 top).
+- facades.py --radius 500 (RAM fix: keep only one tile's decoded photos). photo_match on the views ≤ 520 m
+  16.60 → **22.22**. real_facade_pct 2.47 → **4.65**. Side-by-side: docs/facades500_roofs_session14.jpg.
