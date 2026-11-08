@@ -402,3 +402,44 @@ Next
 2. Leaf-textured tree crowns (alpha cards), to push trees from neutral to positive.
 3. Object collision (bollards, bins, benches) so you can't walk through them; and the roof_match_pct measurement.
 4. Safari: try an older Playwright WebKit or the system Safari via safaridriver.
+
+## 2026-11-08 — Session 12: real photo facades around Great St Mary's (+10.9 photo_match on the central views)
+
+Done
+- `scripts/facades.py` (run after street_objects.py): street-facing wall pieces (building edges ≤ 6 m long, midpoint
+  within 30 m of a walkable way, ground to LiDAR eave = 20th percentile of the DSM 1.5 m inside the edge). Within 150 m
+  of GSM, each piece gets the best non-held-out Mapillary photo: OpenSfM pose (rotation vector → grid frame with the
+  ~1.7° grid convergence, focal/k1/k2, upside-down poses flipped), camera at DTM + 2 m, wall fully in frame (top may be
+  lowered to what is visible, at least 2.5 m), cos(view, normal) ≥ 0.35, 4–35 m away, and no other footprint on the
+  sight line. Score = projected area × cos² × visible fraction. Rectified at ≤ 40 px/m into one RGBA WebP atlas per
+  tile; sky pixels connected to the top edge are transparent, and all-sky rows are cropped off the quad. 321 pieces
+  from 174 photos, 1.3 MB in 3 tiles. `site/app/facades.js`: unlit quads 4 cm proud of the wall, alpha-tested, layer
+  `facades` on by default (`?facades=0` turns it off).
+- Held-out rule: the frozen one from session 8 (the benchmark ids plus same-sequence frames within 15 m).
+- A/B on the 10 benchmark views within 170 m of GSM (the only ones the layer touches): **off 7.27 → on 18.21**
+  (with the sky mask 18.14). No view got worse; deltas run from 0 to +49. Side-by-side: docs/facades_session12.jpg
+  (photo | off | on; photos Mapillary CC-BY-SA 4.0, ids 365274541579500, 5470402219697715, 2824712737794062).
+- Leakage check: 176 of the 199 facade photos come from sequences that also contain a held-out photo (same day, light
+  and parked cars). With `--strict` (no frame of any held-out sequence; 102 pieces from 49 photos) the score is
+  **12.83**. So at least about half of the gain does not depend on shared capture conditions. Kept the standard rule,
+  which gives more real coverage for walkers; both numbers are reported here.
+- New KPI **real_facade_pct = 1.02** (photo-textured quad area in the build's facades layer ÷ street-facing wall area
+  of the whole study area, as written by facades.py). This is the honest starting number: only the inner ring is textured.
+- Credits page: Mapillary CC-BY-SA with the share-alike note, and `facades/credits.json` (photo id, URL and contributor
+  for each photo). DATA.md updated. publish.sh ships `facades/`, and build_hash covers app/facades.js.
+- GPU Chrome 1920×1080: fps_median 60, site_errors 0, load 0.8 s (local).
+
+Learned
+- DINOv2 strongly rewards real photo content. It wins even where the geometry is off: some pieces come from upward-
+  looking photos and look stretched, and some views have the camera pose a few metres off. The visual win is real
+  (Gate of Honour, King's Chapel tracery, Market St shopfronts are recognisable) but smaller than the score suggests.
+- One benchmark view (365274541579500) is an interior photo inside Great St Mary's. It is frozen, so leave it.
+- Pieces with no photo are mostly short or tall walls in narrow lanes that never fit the frame whole; also courts.
+
+Next
+1. Extend facades outwards ring by ring (radius 150 → 300 m) and run in service.sh. Multi-photo blending (median of
+   2–3 aligned views) to remove people and cars; prefer near-frontal photos; per-piece height from the model's actual
+   wall top instead of the DSM estimate.
+2. Fix the stretched pieces: cap the vertical viewing angle, or texture only the part seen at < 45° elevation.
+3. Measure roof_match_pct, then compute finished_radius_m.
+4. Score the full 200 + judges on the new build (service.sh does this within the hour).

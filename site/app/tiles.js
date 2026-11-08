@@ -5,11 +5,12 @@ import { MeshoptDecoder } from '../vendor/meshoptimizer/meshopt_decoder.module.j
 import { parseCol, ColTile } from './collision.js';
 import { makeTrees } from './trees.js';
 import { makeObjects } from './objects.js';
+import { makeFacades } from './facades.js';
 import { buildingVcolMat, groundVcolMat } from './materials.js';
 
 const DEBUG = /debug/.test(location.search);
 const Q = new URLSearchParams(location.search);
-// Layers: manifest.layers gives the defaults (scripts/street_objects.py), ?trees=0|1 / ?objects=0|1 override.
+// Layers: manifest.layers gives the defaults (scripts/street_objects.py, facades.py), ?trees= / ?objects= / ?facades=0|1 override.
 // Trees lowered photo_match on flat shading (session 9) but were neutral once surfaces were textured (session 11).
 const LOOK2 = Q.get('look') === 'v2';
 const layerOn = (man, k) => Q.has(k) ? Q.get(k) !== '0' : !!man.layers?.[k];
@@ -36,6 +37,7 @@ export class TileManager {
     this.tiles = manifest.tiles.map(m => ({ m, state: 'idle', group: null, col: null, gen: 0 }));
     this.jobs = 0;
     this.trees = layerOn(manifest, 'trees'); this.objects = layerOn(manifest, 'objects');
+    this.facades = layerOn(manifest, 'facades'); this.texLoader = new THREE.TextureLoader();
     this.loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
   }
 
@@ -66,9 +68,10 @@ export class TileManager {
     t.state = 'loading'; const gen = ++t.gen; this.jobs++;
     try {
       const bin = p => fetch(this.base + p).then(r => { if (!r.ok) throw new Error(`${r.status} ${p}`); return r.arrayBuffer(); });
-      const [gltf, buf, tbuf, obuf] = await Promise.all([
+      const [gltf, buf, tbuf, obuf, fac] = await Promise.all([
         this.loader.loadAsync(this.base + t.m.glb), bin(t.m.collision), this.trees && t.m.trees ? bin(t.m.trees) : null,
         this.objects && t.m.objects ? bin(t.m.objects) : null,
+        this.facades && t.m.facades ? Promise.all([bin(t.m.facades), this.texLoader.loadAsync(this.base + t.m.facade_tex)]) : null,
       ]);
       if (gen !== t.gen) return; // unloaded meanwhile
       const t0 = performance.now();
@@ -78,6 +81,7 @@ export class TileManager {
       t.group = this.prepare(gltf.scene, col);
       if (tbuf) t.group.add(makeTrees(tbuf));
       if (obuf) t.group.add(makeObjects(obuf));
+      if (fac) t.group.add(makeFacades(fac[0], fac[1]));
       this.scene.add(t.group);
       t.state = 'loaded';
       const t2 = performance.now();
@@ -93,7 +97,7 @@ export class TileManager {
     t.gen++;
     if (t.group) {
       this.scene.remove(t.group);
-      t.group.traverse(o => { if (o.isInstancedMesh) o.dispose(); else if (o.isMesh) { o.geometry.dispose(); if (o.userData.ownMat) o.material.dispose(); } });
+      t.group.traverse(o => { if (o.isInstancedMesh) o.dispose(); else if (o.isMesh) { o.geometry.dispose(); if (o.userData.ownMat) { o.material.map?.dispose(); o.material.dispose(); } } });
     }
     this.world.remove(t.m.id); this.onUnload?.(t);
     t.group = null; t.col = null; t.state = 'idle';

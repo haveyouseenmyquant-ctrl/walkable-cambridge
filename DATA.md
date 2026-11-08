@@ -35,3 +35,10 @@ references, licence checked and credited per item in this file.
 - Scoring: DINOv2 ViT-S/14 (facebook/dinov2-small, Apache-2.0), run locally. judged_realism / visual_quality: a Claude
   vision judge (claude-opus-5-5 via the local `claude` CLI), `scripts/judge.py`; fixed view lists in
   `data/benchmark/judge_views.json` (50) and `quality_views.json` (30).
+
+Photo facades (session 12, `scripts/facades.py` → `site/facades/`, release asset only): wall pieces rectified from
+Mapillary street-level photos (CC-BY-SA 4.0) through their SfM camera poses. The atlases are adaptations and are shared
+under CC-BY-SA 4.0. Photo ids, URLs and contributors are in `site/facades/credits.json`, which the credits page links to.
+Never used: the 200 held-out benchmark photos, or frames of the same sequence within 15 m of one (heldout.json
+`sequence_near`). `--strict` also skips every frame of a held-out sequence. Downloaded 2048 px thumbnails are cached in
+`data/raw/mapillary_facade/` (git-ignored, ~100 MB).

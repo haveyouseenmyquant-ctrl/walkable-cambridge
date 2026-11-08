@@ -409,6 +409,22 @@ def main():
             elif okd is not None:
                 hit += any(int(objs[i, 2]) == k for i in okd.query_ball_point([E, N], 1.0))
         out["street_objects_pct"] = round(100.0 * hit / max(1, len(st)), 2)
+
+    # ---------------- real facades: area of photo-textured wall quads in the build's default-on facades layer
+    # (scripts/facades.py) / street-facing wall area in the study area (building edges within 30 m of a walkable
+    # way, ground to LiDAR eave; the denominator is written by facades.py to data/derived/facades.json)
+    fp = os.path.join(ROOT, "data/derived/facades.json")
+    if os.path.exists(fp):
+        tot = json.load(open(fp))["area_total"]
+        real = 0.0
+        if man.get("layers", {}).get("facades"):
+            for tile in man.get("tiles", []):
+                b = fetch(tile["facades"]) if tile.get("facades") else None
+                if b:
+                    q = np.frombuffer(b, np.float32).reshape(-1, 4, 5)
+                    w = np.hypot(q[:, 1, 0] - q[:, 0, 0], q[:, 1, 1] - q[:, 0, 1])
+                    real += float((w * (q[:, 3, 2] - q[:, 0, 2])).sum())
+        out["real_facade_pct"] = round(100.0 * min(real, tot) / max(tot, 1.0), 2)
     print(json.dumps(out))
 
 
