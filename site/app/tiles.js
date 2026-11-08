@@ -6,6 +6,7 @@ import { parseCol, ColTile } from './collision.js';
 import { makeTrees } from './trees.js';
 import { makeObjects } from './objects.js';
 import { makeFacades } from './facades.js';
+import { makeMarkings } from './markings.js';
 import { buildingVcolMat, groundVcolMat } from './materials.js';
 
 const DEBUG = /debug/.test(location.search);
@@ -37,6 +38,7 @@ export class TileManager {
     this.tiles = manifest.tiles.map(m => ({ m, state: 'idle', group: null, col: null, gen: 0 }));
     this.jobs = 0;
     this.trees = layerOn(manifest, 'trees'); this.objects = layerOn(manifest, 'objects');
+    this.markings = layerOn(manifest, 'markings');
     this.facades = layerOn(manifest, 'facades'); this.texLoader = new THREE.TextureLoader();
     this.loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
   }
@@ -68,9 +70,9 @@ export class TileManager {
     t.state = 'loading'; const gen = ++t.gen; this.jobs++;
     try {
       const bin = p => fetch(this.base + p).then(r => { if (!r.ok) throw new Error(`${r.status} ${p}`); return r.arrayBuffer(); });
-      const [gltf, buf, tbuf, obuf] = await Promise.all([
+      const [gltf, buf, tbuf, obuf, mbuf] = await Promise.all([
         this.loader.loadAsync(this.base + t.m.glb), bin(t.m.collision), this.trees && t.m.trees ? bin(t.m.trees) : null,
-        this.objects && t.m.objects ? bin(t.m.objects) : null,
+        this.objects && t.m.objects ? bin(t.m.objects) : null, this.markings && t.m.markings ? bin(t.m.markings) : null,
       ]);
       if (gen !== t.gen) return; // unloaded meanwhile
       const t0 = performance.now();
@@ -80,6 +82,7 @@ export class TileManager {
       t.group = this.prepare(gltf.scene, col);
       if (tbuf) t.group.add(makeTrees(tbuf));
       if (obuf) t.group.add(makeObjects(obuf));
+      if (mbuf) t.group.add(makeMarkings(mbuf, col));
       this.scene.add(t.group);
       if (this.facades && t.m.facades) this.loadFacades(t, gen, bin);   // after the tile is walkable: atlases are the bulk of the bytes
       t.state = 'loaded';

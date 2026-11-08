@@ -9,6 +9,7 @@ const Q = new URLSearchParams(location.search);
 // photo_match on the 50-view check (textures alone 9.42, with windows 8.77; no textures 7.75)
 export const MAT = Q.get('mat') !== '0';
 const WIN = Q.get('win') === '1';
+const GK = parseFloat(Q.get('gk') || '1').toFixed(3);   // ground albedo factor
 const SLOTS = ['brick', 'ashlar', 'roof', 'road', 'pave', 'grass', 'court', 'earth'];
 
 window.__texReady = !MAT;
@@ -58,7 +59,7 @@ const groundFrag = `
     dt = mix(vec3(dot(dt, vec3(0.333))), dt, 0.4);   // mostly luminance detail: keep the class colour
     dt = mix(vec3(1.0), dt, min(wsum, 1.0));
   }
-  diffuseColor.rgb *= dt;
+  diffuseColor.rgb *= dt * ${GK};
 `;
 
 const buildingFrag = `

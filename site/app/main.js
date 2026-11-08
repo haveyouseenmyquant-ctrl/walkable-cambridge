@@ -16,6 +16,7 @@ const LOOK2 = new URLSearchParams(location.search).get('look') === 'v2';
 const SKYMODE = new URLSearchParams(location.search).get('sky') || 'white';
 const SKY = LOOK2 ? 0xccd8e2 : SKYMODE === 'blue' ? 0xbcd3e6 : 0xeef1f6;
 const OVERCAST = SKYMODE === 'overcast';
+const LK = parseFloat(new URLSearchParams(location.search).get('light') || '1');   // scales sun + sky light
 const $ = id => document.getElementById(id);
 const status = msg => { $('status').textContent = msg; };
 
@@ -47,10 +48,10 @@ async function main() {
   skyDome.renderOrder = -1; skyDome.frustumCulled = false; if (LOOK2) scene.add(skyDome);
   const camera = new THREE.PerspectiveCamera(70, 1, 0.2, LOOK2 ? 1200 : 600);
   if (LOOK2) { renderer.toneMapping = THREE.AgXToneMapping; renderer.toneMappingExposure = 1.15; }
-  scene.add(LOOK2 ? new THREE.HemisphereLight(0xc4d8ee, 0x5f584c, 0.75) : new THREE.HemisphereLight(0xdfeaf5, 0x6b6450, OVERCAST ? 2.3 : 1.6));
+  scene.add(LOOK2 ? new THREE.HemisphereLight(0xc4d8ee, 0x5f584c, 0.75) : new THREE.HemisphereLight(0xdfeaf5, 0x6b6450, (OVERCAST ? 2.3 : 1.6) * LK));
   // Sun for Cambridge, mid-June 14:00 BST: azimuth ~200 deg (SSW), elevation ~58 deg. Frame: x east, y up, z south.
   const SUN_DIR = new THREE.Vector3(-0.181, 0.848, 0.498).normalize();
-  const sun = new THREE.DirectionalLight(0xfff1dc, LOOK2 ? 2.6 : OVERCAST ? 1.0 : 1.8);
+  const sun = new THREE.DirectionalLight(0xfff1dc, LOOK2 ? 2.6 : (OVERCAST ? 1.0 : 1.8) * LK);
   sun.position.copy(SUN_DIR); scene.add(sun); scene.add(sun.target);
   // Quality: ?quality=low (default on touch devices) has no shadows; otherwise a 2048 shadow map, 240 m square
   const quality = new URLSearchParams(location.search).get('quality') || (matchMedia('(pointer: coarse)').matches ? 'low' : 'high');

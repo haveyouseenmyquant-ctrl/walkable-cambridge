@@ -71,6 +71,11 @@ uint8    surface[ntris]    0 = none/building, 1 = road, 2 = pavement/footway, 3 
   (data/derived/street_object_targets.json). One counts if a record of the same type (tree layer for trees) lies within
   1 m of it in a layer the build draws by default.
 
+## Road markings (session 20)
+- `scripts/markings.py`, run after `facades.py`: `markings/<tile>.bin` float32 `[x0, y0, x1, y1, kind]` segments
+  (kind 0 = white centre dash, 1 = yellow kerb line), rules from OSM highway/oneway/lanes/parking tags (see the
+  script). The viewer drapes them on the tile's collision ground (`site/app/markings.js`); `?markings=0` hides them.
+
 ## Roof match (session 14)
 - roof_match_pct (`scripts/roof_match.py`): per OSM target building, the render mesh (`b:<osm_id>`) is rasterised
   top-down on the 1 m LiDAR grid (highest surface over each cell centre; no surface = DTM) and compared with the EA
