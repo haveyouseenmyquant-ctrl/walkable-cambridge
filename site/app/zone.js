@@ -121,7 +121,7 @@ function makeMat() {
   m.customProgramCacheKey = () => 'wc_zone_mat1';
   return m;
 }
-const zoneMat = makeMat();
+export const zoneMat = makeMat();
 
 export async function loadZone(base, scene) {
   window.__zoneReady = false;

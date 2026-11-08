@@ -70,6 +70,7 @@ try {
     await page.waitForFunction('!window.__player.settled || window.__player.settled(150)', { timeout: 60000 }).catch(() => console.error('[render] tiles not settled', v.id));
     await page.waitForFunction('window.__zoneReady !== false', { timeout: 30000 }).catch(() => console.error('[render] zone not ready', v.id));
     await page.waitForFunction('!(window.__facadesPending > 0)', { timeout: 30000 }).catch(() => {});
+    await page.waitForFunction('!(window.__cityfacPending > 0)', { timeout: 30000 }).catch(() => console.error('[render] city facades pending', v.id));
     await sleep(200);   // a frame with the new atlases
     await page.screenshot({ path: path.join(OUT, `${v.id}.png`) });
     console.error('[render]', v.id, z.toFixed(2));

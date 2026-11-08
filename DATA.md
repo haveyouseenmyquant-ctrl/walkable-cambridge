@@ -44,6 +44,9 @@ West into Senate House Passage…", "King's Parade – View North into Trinity S
 Crescent" (Txllxt TxllxT, CC BY-SA 4.0), "1125528 … St Michael's Court" (Tilman2007, CC BY-SA 4.0);
 `scripts/zone_bespoke_churches.py`: geograph 3803723 St Michael, Trinity Street (N Chadwick, CC BY-SA 2.0), Commons
 St Michael's view east from the churchyard (Txllxt TxllxT, CC BY-SA 4.0), plus the St Edward's photos above.
+`scripts/zone_bespoke_kings.py` (session 35, King's College gatehouse and screen): Commons "King's Parade – View WSW on
+King's College Gatehouse 1828…", "King's Parade – View NW on Neo Gothic Gatehouse 1828…", "King's College – King's
+Parade – View South along Gatehouse & Screen 1828…" (Txllxt TxllxT, CC BY-SA 4.0).
 Market stalls / street furniture (session 34, `scripts/zone_props.py`, `scripts/zone_props_furniture.py`; same terms, licence checked via the Commons API): "Cambridge Market stalls at lunchtime" (Jonosunde, CC BY-SA 4.0), geograph 5652394 "Looking over the market stalls in Cambridge" (Richard Humphrey), 1133717 "Empty market stalls", 703624 "Cambridge Market" and 972242 "A vital part of Cambridge" (Sebastian Ballard), all CC BY-SA 2.0. Used only to read the stall look (white canvas with red/blue/green/yellow stripes down the slope, scalloped hems, scaffold frames, striped counter cloths, red side sheets); no pixels from them are in the world.
 
 ## Held-out benchmark (session 8)

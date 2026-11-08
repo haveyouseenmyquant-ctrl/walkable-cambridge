@@ -8,6 +8,7 @@ import { makeObjects } from './objects.js';
 import { makeFacades } from './facades.js';
 import { makeMarkings } from './markings.js';
 import { buildingVcolMat, groundVcolMat } from './materials.js';
+import { zoneMat } from './zone.js';
 
 const DEBUG = /debug/.test(location.search);
 const Q = new URLSearchParams(location.search);
@@ -16,6 +17,11 @@ const Q = new URLSearchParams(location.search);
 const LOOK2 = Q.get('look') === 'v2';
 const layerOn = (man, k) => Q.has(k) ? Q.get(k) !== '0' : !!man.layers?.[k];
 const LOAD_R = 400, UNLOAD_R = 550, MAX_JOBS = 4;
+// Session 35: city-wide 3D facades (scripts/city_facades.py, site/cityfac/<tile>.glb) stream in within FAC_R of the
+// player (they are the bulk of the triangles); ?cityfac=0 disables them. Low quality: a smaller radius.
+const COARSE = matchMedia('(pointer: coarse)').matches;
+const QUAL = Q.get('quality') || (COARSE ? 'low' : 'high');
+const FAC_R = +(Q.get('facr') || (QUAL === 'low' ? 60 : QUAL === 'medium' ? 120 : 200)), FAC_UNLOAD_R = FAC_R + 80;
 
 // Surface class colours (FORMAT.md) for the collision fallback mesh and the minimap.
 export const SURFACE_COLORS = {
@@ -39,8 +45,42 @@ export class TileManager {
     this.jobs = 0;
     this.trees = layerOn(manifest, 'trees'); this.objects = layerOn(manifest, 'objects');
     this.markings = Q.get('markings') === '1';   // off by default: neutral on the benchmark (session 21)
-    this.facades = layerOn(manifest, 'facades'); this.texLoader = new THREE.TextureLoader();
+    // session 35: photo facades retired (Gaspard, 8 Nov: geometry, not photos on boxes); ?facades=1 brings them back
+    this.facades = Q.get('facades') === '1'; this.texLoader = new THREE.TextureLoader();
     this.loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
+    this.cityfac = null;
+    if (Q.get('cityfac') !== '0') fetch(base + 'cityfac/index.json').then(r => r.ok ? r.json() : null)
+      .then(j => { this.cityfac = j?.tiles || null; }).catch(() => {});
+  }
+
+  // City facade GLB of a tile: own state (t.fac: idle/loading/loaded), independent of the tile itself.
+  updateFacades(x, y) {
+    if (!this.cityfac) return;
+    window.__cityfacPending = window.__cityfacPending || 0;
+    for (const t of this.tiles) {
+      const e = this.cityfac[t.m.id];
+      if (!e) continue;
+      const d = distToBounds(t.m.bounds, x, y);
+      if (d > FAC_UNLOAD_R && t.fac) {
+        t.facGen = (t.facGen || 0) + 1;
+        if (t.fac.isObject3D) { this.scene.remove(t.fac); t.fac.traverse(o => o.isMesh && o.geometry.dispose()); }
+        t.fac = null;
+      } else if (d <= FAC_R && !t.fac) {
+        t.fac = 'loading'; const gen = t.facGen = (t.facGen || 0) + 1;
+        window.__cityfacPending++;
+        this.loader.loadAsync(this.base + e.glb).then(g => {
+          if (gen !== t.facGen) return;
+          const root = g.scene; root.name = 'cityfac:' + t.m.id;
+          root.traverse(o => {
+            if (!o.isMesh) return;
+            o.material?.dispose?.(); o.material = zoneMat;
+            o.castShadow = true; o.receiveShadow = true; o.matrixAutoUpdate = false; o.updateMatrix();
+          });
+          this.scene.add(root); t.fac = root;
+        }).catch(err => { console.warn('city facades failed', t.m.id, err); if (gen === t.facGen) t.fac = 'failed'; })
+          .finally(() => { window.__cityfacPending--; });
+      }
+    }
   }
 
   tileAt(x, y) {
@@ -64,6 +104,7 @@ export class TileManager {
     }
     near.sort((a, b) => a[0] - b[0]);
     for (const [, t] of near) { if (this.jobs >= MAX_JOBS) break; this.load(t); }
+    this.updateFacades(x, y);
   }
 
   async load(t) {
