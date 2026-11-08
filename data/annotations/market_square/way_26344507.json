@@ -1,0 +1,140 @@
+{
+ "osm_id": "way/26344507",
+ "sources": [
+  "mapillary:296497208762822"
+ ],
+ "walls": [
+  {
+   "id": "way/26344507:0",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "stone",
+   "wall_colour": "#a39270",
+   "trim_colour": "#cfc2a0",
+   "cornice_z": 8.3,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.59,
+     "w": 3.2,
+     "z": 2.5,
+     "h": 5.4,
+     "panes": [
+      4,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 7.77,
+     "w": 3.2,
+     "z": 2.5,
+     "h": 5.4,
+     "panes": [
+      4,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 12.96,
+     "w": 3.2,
+     "z": 2.5,
+     "h": 5.4,
+     "panes": [
+      4,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 18.14,
+     "w": 3.2,
+     "z": 2.5,
+     "h": 5.4,
+     "panes": [
+      4,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 23.32,
+     "w": 3.2,
+     "z": 2.5,
+     "h": 5.4,
+     "panes": [
+      4,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "gothic",
+     "x": 18.14,
+     "w": 1.4,
+     "h": 2.6,
+     "surround": "none"
+    }
+   ],
+   "confidence": "medium",
+   "notes": "North aisle: 5 Perpendicular windows between buttresses, embattled parapet; small pointed north door below the 4th window from the east. Clerestory (set back) not part of this wall."
+  },
+  {
+   "id": "way/26344507:1",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "stone",
+   "wall_colour": "#a39270",
+   "trim_colour": "#cfc2a0",
+   "cornice_z": 8.3,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 4.71,
+     "w": 2.6,
+     "z": 2.5,
+     "h": 5.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "North aisle bay beside the tower: one tall Perpendicular window."
+  }
+ ]
+}

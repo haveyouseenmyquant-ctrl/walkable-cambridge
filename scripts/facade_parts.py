@@ -525,3 +525,23 @@ def default_layout(wall):
                                     "x": x, "w": w, "z": sill, "h": h, "panes": [3, 3] if georgian else [1, 2],
                                     "head": "flat", "sill": True})
     return ann
+
+
+def count_on_walls(ops, walls, maxd=2.5):
+    """Assign emitted openings [(kind, wx, wy), ...] (world xy of the opening centre on its skin plane) to the nearest
+    wall of `walls` (perpendicular distance <= maxd, inside the wall's span). Returns {wall id: {kind: n}} for every
+    wall (bespoke modules' ELEMENTS, read by zone_build for facade_geometry_match_pct)."""
+    out = {w["id"]: {k: 0 for k in ("window", "door", "shopfront", "dormer")} for w in walls}
+    for kind, x, y in ops:
+        best, bd = None, maxd
+        for w in walls:
+            p0, p1 = np.asarray(w["p0"], float), np.asarray(w["p1"], float)
+            L = float(np.linalg.norm(p1 - p0))
+            d = (p1 - p0) / L
+            v = np.array([x, y]) - p0
+            a, o = v @ d, abs(v[0] * d[1] - v[1] * d[0])
+            if -0.3 <= a <= L + 0.3 and o <= bd:
+                best, bd = w["id"], o
+        if best is not None:
+            out[best][kind] = out[best].get(kind, 0) + 1
+    return out

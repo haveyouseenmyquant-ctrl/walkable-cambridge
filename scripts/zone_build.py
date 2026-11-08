@@ -107,8 +107,9 @@ PROP_BUILDINGS = {"way/400160677", "way/400160686"}   # food trailers: modelled 
 def duplicate_walls(W, ann):
     """OSM has overlapping footprints (college ways vs street-address ways, e.g. way/137017428:0/1 = 1099847936:5/6),
     which would build two skins on one wall and z-fight. A wall is a duplicate when another building's wall runs along
-    it (midpoints < 1.2 m apart, parallel, same facing); keep the annotated one, then the one with an address, else the one listed first."""
-    drop = set()
+    it (midpoints < 1.2 m apart, parallel, same facing); keep the annotated one, then the one with an address, else the one listed first.
+    Returns {dropped wall id: kept wall id} (the kept wall's skin is the dropped wall's geometry too)."""
+    drop = {}
     mids = [(np.add(w["p0"], w["p1"]) / 2, (np.subtract(w["p1"], w["p0"])) / max(w["length"], 1e-6)) for w in W]
     for i, a in enumerate(W):
         for j in range(i + 1, len(W)):
@@ -120,7 +121,8 @@ def duplicate_walls(W, ann):
                 continue
             def rank(w):   # annotated first, then the street-address way (the per-shop annotations use those)
                 return (w["id"] in ann, "addr:housenumber" in w["tags"])
-            drop.add(a["id"] if rank(b) > rank(a) else b["id"])
+            lo, hi = (a, b) if rank(b) > rank(a) else (b, a)
+            drop[lo["id"]] = hi["id"]
     return drop
 
 
@@ -253,14 +255,14 @@ def main():
         L, H = w["length"], w["eave_z"] - w["ground_z"]
         a = ann.get(w["id"])
         if w["id"] in dup:
-            skipped.append({"id": w["id"], "reason": "duplicate footprint"})
+            skipped.append({"id": w["id"], "reason": "duplicate footprint", "built_as": dup[w["id"]]})
             continue
         if w["tags"].get("building") == "roof" or w["osm_id"] in PROP_BUILDINGS:
             # market stall rows (thin canopies in build.py + zone_props stalls) and trailers: no facade skin
             skipped.append({"id": w["id"], "reason": "stall/trailer"})
             continue
         if w["osm_id"] in bespoke:
-            skipped.append({"id": w["id"], "reason": "bespoke"})
+            skipped.append({"id": w["id"], "reason": "bespoke", "built_as": "bespoke model " + w["osm_id"]})
             continue
         if a is None and w["osm_id"] in landmark:
             # detailed landmark render model (build.py build_landmarks) already has 3D buttresses/piers/windows that a
@@ -319,14 +321,20 @@ def main():
     json.dump({"glb": "zone/" + ZONE + ".glb", "centre": centre, "radius": 140, "hide": HIDE, "stats": stats},
               open(os.path.join(out, "zone.json"), "w"), indent=1)
     os.makedirs(os.path.join(ROOT, "data/derived"), exist_ok=True)
+    built = {r["id"]: r for r in rows}
     json.dump({"zone": ZONE, "built": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "walls": rows,
                "skipped": skipped,
                "bespoke_walls": [{"id": k, "elements": v, "tris": 1} for k, v in sorted(ELEMENTS.items())
                                  if any(w["id"] == k and w["osm_id"] in bespoke for w in W)],
+               # s40: a dropped duplicate is the same physical wall as the kept one, so it carries the kept skin's
+               # emitted openings (zone_kpi compares them with the dropped wall's own annotation)
+               "duplicate_walls": [{"id": d, "duplicate_of": k, "elements": built[k]["elements"], "tris": built[k]["tris"]}
+                                   for d, k in sorted(dup.items()) if k in built],
                "stats": {k: v for k, v in stats.items() if k not in ("walls_unannotated", "walls_skipped")}},
               open(os.path.join(ROOT, "data/derived/facade_geometry.json"), "w"), indent=1)
     s = {k: v for k, v in stats.items() if k not in ("walls_unannotated", "walls_skipped")}
     s["walls_skipped"] = len(skipped)
+    s["skip_reasons"] = {r: sum(x["reason"] == r for x in skipped) for r in dict.fromkeys(x["reason"] for x in skipped)}
     print(f"zone {ZONE}: {len(meshes)} nodes, {s}, {time.time() - t0:.1f}s")
 
 

@@ -178,6 +178,7 @@ async function main() {
     streamT -= dt;
     if (streamT <= 0) { tiles.update(player.x, player.y); streamT = 0.25; }
     player.update(dt);
+    if (window.__game && !window.__explore) window.__game.update(dt);
     const fc = window.__cam;   // debug/screenshot hook: {pos:[x,y,z], at:[x,y,z], fov?} in the collision frame
     if (fc && fc.fov && camera.fov !== fc.fov) { camera.fov = fc.fov; camera.updateProjectionMatrix(); }
     if (fc) { camera.position.set(fc.pos[0], fc.pos[2], -fc.pos[1]); camera.lookAt(fc.at[0], fc.at[2], -fc.at[1]); }
@@ -193,6 +194,17 @@ async function main() {
     if (!ready && !player.pendingPlace && tiles.readyAt(player.x, player.y)) {
       ready = true; window.__walkReadyAt = performance.now(); window.__walkReady = true;
       loadZone(BASE, scene);
+      // game layer (session 40): off in exploration mode (?explore, or G toggles); never loaded for benchmark renders
+      window.__explore = QS.has('explore') || !!window.__cam;
+      const startGame = () => import('./game/index.js').then(m => m.startGame({ scene, camera, player, world }))
+        .then(g => { window.__game = g; }).catch(e => console.warn('[game] not started', e));
+      if (!window.__explore) startGame();
+      addEventListener('keydown', e => {
+        if (e.code !== 'KeyG' || e.target instanceof HTMLInputElement) return;
+        window.__explore = !window.__explore;
+        if (window.__explore) { window.__game?.dispose(); window.__game = null; } else startGame();
+        document.body.classList.toggle('explore', window.__explore);
+      });
       console.log(`[walkable] ready ${(performance.now() / 1000).toFixed(2)}s`);
       status('');
       $('help').hidden = false;

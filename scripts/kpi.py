@@ -368,6 +368,7 @@ def main():
                 if np.isfinite(top):
                     tops[b["osm_id"]] = top + (n.get("translation") or [0, 0, 0])[1]
     out["building_coverage_pct"] = round(100.0 * len(present) / max(1, len(targets)), 2)
+    out["buildings_missing"] = len(targets) - len(present)   # counted into site_errors by measure.sh (session 40)
 
     # ---------------- height accuracy
     stats = lidar_stats(tg["buildings"])

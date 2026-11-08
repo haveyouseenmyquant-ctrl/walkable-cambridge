@@ -1,0 +1,12 @@
+[
+  {"id": "market-north", "name": "Market Hill stalls", "x": -105, "y": 78, "r": 7, "mobs": ["ink_imp", "ink_imp", "wisp"]},
+  {"id": "market-south", "name": "Market Square south", "x": -98, "y": 38, "r": 7, "mobs": ["automaton", "ink_imp"]},
+  {"id": "peas-hill", "name": "Peas Hill", "x": -122, "y": -28, "r": 6, "mobs": ["statue", "wisp"]},
+  {"id": "benet-st", "name": "Bene't Street", "x": -132, "y": -100, "r": 5, "mobs": ["gargoyle", "ink_imp"]},
+  {"id": "kings-parade", "name": "King's Parade", "x": -190, "y": 5, "r": 6, "mobs": ["statue", "gargoyle"]},
+  {"id": "senate-house-hill", "name": "Senate House Hill", "x": -182, "y": 68, "r": 7, "mobs": ["gargoyle", "wisp", "automaton"]},
+  {"id": "trinity-st", "name": "Trinity Street", "x": -195, "y": 175, "r": 6, "mobs": ["automaton", "ink_imp"]},
+  {"id": "market-st", "name": "Market Street", "x": -92, "y": 118, "r": 5, "mobs": ["wisp", "ink_imp"]},
+  {"id": "petty-cury", "name": "Petty Cury", "x": -50, "y": 25, "r": 5, "mobs": ["statue", "ink_imp"]},
+  {"id": "boss-market", "name": "The Bellwarden of Market Hill", "x": -102.9, "y": 57.4, "r": 18, "mobs": ["bellwarden"], "boss": true}
+]

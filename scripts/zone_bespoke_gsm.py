@@ -55,7 +55,9 @@ def L2W(s, t):
 
 
 def P_():
-    return F.Parts(mat="stone", wall_col=STONE)
+    P = F.Parts(mat="stone", wall_col=STONE)
+    P.ops = []          # emitted openings (kind, x, y) in the wall frame, for ELEMENTS
+    return P
 
 
 # ------------------------------------------------------------------ elements (wall frame: x along, y out, z up)
@@ -73,6 +75,7 @@ def window(P, xc, w, zb, zt, y, lights=4, transoms=1, louvre=False):
     """Recessed traceried window (reveals, glass, mullions running up into the head, transom, label mould, sill).
     Returns the opening polygon to cut from the wall face."""
     op = perp_shape(xc, w, zb, zt)
+    P.ops.append(("window", xc, y))
     yg = y - REV
     P.sides_xz(op, yg, y, STONE_D, inward=True, mat="stone")
     P.face_xz(op, yg, LOUVRE if louvre else GLASS, mat="trim" if louvre else "glass")
@@ -108,6 +111,7 @@ def window(P, xc, w, zb, zt, y, lights=4, transoms=1, louvre=False):
 
 def door(P, xc, w, h, y, depth=0.6):
     op = perp_shape(xc, w, 0, h)
+    P.ops.append(("door", xc, y))
     P.sides_xz(op, y - depth, y, STONE_D, inward=True, skip_ground=True, mat="stone")
     P.face_xz(op, y - depth, DOOR, mat="timber")
     for k in range(3):   # moulded orders stepping out
@@ -200,11 +204,13 @@ def elevation(L, H, nb, win_w, zb, zt, lights, butt=True, ext=(SK, SK), extra_ho
 
 
 def frame_world(P, p0, d, name, z0=Z0):
+    n = np.array([d[1], -d[0]])
+    for k, x, y in getattr(P, "ops", []):
+        _OPS.append((k, *(p0 + x * d + y * n)))
     T, N, C = P.arrays()
     if not len(T):
         return None
     M = P.mats()
-    n = np.array([d[1], -d[0]])
     X = p0[0] + T[..., 0] * d[0] + T[..., 1] * n[0]
     Y = p0[1] + T[..., 0] * d[1] + T[..., 1] * n[1]
     W = np.stack([X, Y, z0 + T[..., 2]], -1)
@@ -398,6 +404,7 @@ def porch():
 
 
 def build(walls):
+    _OPS.clear()
     by = {w["id"].split(":")[1]: w for w in walls}
     out = []
 
@@ -411,8 +418,11 @@ def build(walls):
     def L_(k):
         return by[k]["length"] if k in by else 0
     # aisles: north (5 bays + 2 beside the tower), south (4 bays + 2 beside the tower)
-    wall_el("0", elevation(L_("0"), H_AISLE, 5, 3.2, 2.5, 7.9, 4))
-    wall_el("1", elevation(L_("1"), H_AISLE, 2, 2.6, 2.5, 7.9, 3))
+    if "0" in by:
+        P = elevation(L_("0"), H_AISLE, 5, 3.2, 2.5, 7.9, 4)
+        door(P, L_("0") * 3.5 / 5, 1.4, 2.4, SK)   # sits under the window sill (z 2.5); session 40
+        wall_el("0", P)
+    wall_el("1", elevation(L_("1"), H_AISLE, 1, 2.6, 2.5, 7.9, 3))   # one window beside the tower (photo), was 2
     wall_el("9", elevation(L_("9"), H_AISLE, 4, 3.2, 2.5, 7.9, 4))
     wall_el("10", elevation(L_("10"), H_AISLE, 0, 0, 0, 0, 0, butt=False))
     wall_el("4", elevation(L_("4"), H_AISLE, 2, 2.6, 2.5, 7.9, 3))
@@ -448,11 +458,27 @@ def build(walls):
     out += clerestory()
     out += tower()
     out += porch()
+    ELEMENTS.update(F.count_on_walls(_OPS, walls))
     return [o for o in out if o is not None]
 
 
+_OPS = []       # world-xy openings of the last build()
+ELEMENTS = {}   # wall id -> opening counts actually emitted (zone_build reads it for the KPI)
 BUILDS = {OSM: build}
 HIDE_TILE = [OSM]   # the tile body is a plain box up to the clerestory; this model is complete
+
+
+def _count_elements():
+    import json
+    try:
+        W = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..",
+                                        "data/annotations/market_square/walls.json")))["walls"]
+        build([w for w in W if w["osm_id"] == OSM])
+    except Exception as e:   # never break the zone build
+        print("zone_bespoke_gsm: element count failed", repr(e), file=sys.stderr)
+
+
+_count_elements()
 
 if __name__ == "__main__":
     import json

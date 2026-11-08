@@ -36,6 +36,24 @@ try:
     out.update(json.loads(subprocess.run([".venv/bin/python", "-I", "scripts/zone_kpi.py", "site"], capture_output=True, text=True, timeout=30).stdout))
 except Exception:
     pass
+try:
+    out.update(json.loads(subprocess.run([".venv/bin/python", "-I", "scripts/encounter_coverage.py", "site"], capture_output=True, text=True, timeout=20).stdout))
+except Exception:
+    pass
+# session 40 (Gaspard, 8 Nov 2026): building_coverage_pct is retired into site_errors (one error per missing OSM building);
+# photo_match_score, market_square_photo_match and painted_detail_pct are retired.
+miss = out.pop("buildings_missing", None)
+cov = out.pop("building_coverage_pct", None)
+if miss is None and cov is not None:
+    miss = round((100.0 - cov) / 100.0 * 2091)
+if miss is not None and "site_errors" in out:
+    out["site_errors"] = out["site_errors"] + miss
+for k in ("photo_match_score", "market_square_photo_match", "painted_detail_pct"):
+    out.pop(k, None)
+# game KPIs: cached per build hash by scripts/game_kpi.sh (headless combat/item/class tests; run by publish + service.sh)
+gf = "data/benchmark/scores/%s_game.json" % h
+if h and os.path.exists(gf):
+    out.update(json.load(open(gf)))
 out.pop("fetch_failures", None)
 out.pop("real_facade_pct", None)   # retired by Gaspard (8 Nov 2026): photo-baked facades are being replaced by geometry
 print(json.dumps(out))'

@@ -1,0 +1,1515 @@
+{
+ "osm_id": "way/5094872",
+ "sources": [
+  "commons:File:Cambridge Guildhall.jpg",
+  "commons:File:The Guildhall, Market Square - geograph.org.uk - 3901382.jpg",
+  "commons:File:Guildhall - geograph.org.uk - 5711938.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/5094872:10",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.85,
+    9.0,
+    12.6
+   ],
+   "material": "brick",
+   "wall_colour": "#a08a66",
+   "trim_colour": "#d9cba6",
+   "cornice_z": 16.3,
+   "cornice": "classical",
+   "parapet": true,
+   "string_courses": [
+    4.7
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.38,
+     "w": 1.6,
+     "z": 1.15,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.38,
+     "w": 1.6,
+     "z": 5.05,
+     "h": 3.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.38,
+     "w": 1.6,
+     "z": 9.45,
+     "h": 2.4,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.38,
+     "w": 1.6,
+     "z": 13.05,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Market Hill front: 9 window bays (recessed end bays + 7-bay main block), 4 storeys + attic with balustraded panels (not windows), central entrance under the clock bay; Portland-stone rusticated ground storey, long first-floor balcony."
+  },
+  {
+   "id": "way/5094872:12",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.85,
+    9.0,
+    12.6
+   ],
+   "material": "brick",
+   "wall_colour": "#a08a66",
+   "trim_colour": "#d9cba6",
+   "cornice_z": 16.3,
+   "cornice": "classical",
+   "parapet": true,
+   "string_courses": [
+    4.7
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.46,
+     "w": 1.6,
+     "z": 1.15,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.46,
+     "w": 1.75,
+     "z": 5.05,
+     "h": 3.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.46,
+     "w": 1.6,
+     "z": 9.45,
+     "h": 2.4,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.46,
+     "w": 1.6,
+     "z": 13.05,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 7.21,
+     "w": 1.6,
+     "z": 1.15,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 7.21,
+     "w": 1.75,
+     "z": 5.05,
+     "h": 3.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 7.21,
+     "w": 1.6,
+     "z": 9.45,
+     "h": 2.4,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 7.21,
+     "w": 1.6,
+     "z": 13.05,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 11.96,
+     "w": 1.6,
+     "z": 1.15,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 11.96,
+     "w": 1.75,
+     "z": 5.05,
+     "h": 3.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 11.96,
+     "w": 1.6,
+     "z": 9.45,
+     "h": 2.4,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 11.96,
+     "w": 1.6,
+     "z": 13.05,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Market Hill front: 9 window bays (recessed end bays + 7-bay main block), 4 storeys + attic with balustraded panels (not windows), central entrance under the clock bay; Portland-stone rusticated ground storey, long first-floor balcony."
+  },
+  {
+   "id": "way/5094872:16",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.85,
+    9.0,
+    12.6
+   ],
+   "material": "brick",
+   "wall_colour": "#a08a66",
+   "trim_colour": "#d9cba6",
+   "cornice_z": 16.3,
+   "cornice": "classical",
+   "parapet": true,
+   "string_courses": [
+    4.7
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 2.42,
+     "w": 2.2,
+     "h": 3.6,
+     "surround": "pilastered"
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.42,
+     "w": 1.75,
+     "z": 5.05,
+     "h": 3.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.42,
+     "w": 1.6,
+     "z": 9.45,
+     "h": 2.4,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.42,
+     "w": 1.6,
+     "z": 13.05,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Market Hill front: 9 window bays (recessed end bays + 7-bay main block), 4 storeys + attic with balustraded panels (not windows), central entrance under the clock bay; Portland-stone rusticated ground storey, long first-floor balcony."
+  },
+  {
+   "id": "way/5094872:17",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.85,
+    9.0,
+    12.6
+   ],
+   "material": "brick",
+   "wall_colour": "#a08a66",
+   "trim_colour": "#d9cba6",
+   "cornice_z": 16.3,
+   "cornice": "classical",
+   "parapet": true,
+   "string_courses": [
+    4.7
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [],
+   "confidence": "medium",
+   "notes": "Market Hill front: 9 window bays (recessed end bays + 7-bay main block), 4 storeys + attic with balustraded panels (not windows), central entrance under the clock bay; Portland-stone rusticated ground storey, long first-floor balcony."
+  },
+  {
+   "id": "way/5094872:21",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.85,
+    9.0,
+    12.6
+   ],
+   "material": "brick",
+   "wall_colour": "#a08a66",
+   "trim_colour": "#d9cba6",
+   "cornice_z": 16.3,
+   "cornice": "classical",
+   "parapet": true,
+   "string_courses": [
+    4.7
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.01,
+     "w": 1.6,
+     "z": 1.15,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.01,
+     "w": 1.75,
+     "z": 5.05,
+     "h": 3.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.01,
+     "w": 1.6,
+     "z": 9.45,
+     "h": 2.4,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.01,
+     "w": 1.6,
+     "z": 13.05,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.76,
+     "w": 1.6,
+     "z": 1.15,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.76,
+     "w": 1.75,
+     "z": 5.05,
+     "h": 3.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.76,
+     "w": 1.6,
+     "z": 9.45,
+     "h": 2.4,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.76,
+     "w": 1.6,
+     "z": 13.05,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 10.51,
+     "w": 1.6,
+     "z": 1.15,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 10.51,
+     "w": 1.75,
+     "z": 5.05,
+     "h": 3.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 10.51,
+     "w": 1.6,
+     "z": 9.45,
+     "h": 2.4,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 10.51,
+     "w": 1.6,
+     "z": 13.05,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Market Hill front: 9 window bays (recessed end bays + 7-bay main block), 4 storeys + attic with balustraded panels (not windows), central entrance under the clock bay; Portland-stone rusticated ground storey, long first-floor balcony."
+  },
+  {
+   "id": "way/5094872:23",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.85,
+    9.0,
+    12.6
+   ],
+   "material": "brick",
+   "wall_colour": "#a08a66",
+   "trim_colour": "#d9cba6",
+   "cornice_z": 16.3,
+   "cornice": "classical",
+   "parapet": true,
+   "string_courses": [
+    4.7
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.69,
+     "w": 1.6,
+     "z": 1.15,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.69,
+     "w": 1.6,
+     "z": 5.05,
+     "h": 3.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.69,
+     "w": 1.6,
+     "z": 9.45,
+     "h": 2.4,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.69,
+     "w": 1.6,
+     "z": 13.05,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Market Hill front: 9 window bays (recessed end bays + 7-bay main block), 4 storeys + attic with balustraded panels (not windows), central entrance under the clock bay; Portland-stone rusticated ground storey, long first-floor balcony."
+  },
+  {
+   "id": "way/5094872:24",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.85,
+    9.0,
+    12.6
+   ],
+   "material": "brick",
+   "wall_colour": "#a08a66",
+   "trim_colour": "#d9cba6",
+   "cornice_z": 16.3,
+   "cornice": "classical",
+   "parapet": true,
+   "string_courses": [
+    4.7
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.73,
+     "w": 1.6,
+     "z": 1.15,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.73,
+     "w": 1.6,
+     "z": 5.05,
+     "h": 3.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.73,
+     "w": 1.6,
+     "z": 9.45,
+     "h": 2.4,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.73,
+     "w": 1.6,
+     "z": 13.05,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.19,
+     "w": 1.6,
+     "z": 1.15,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.19,
+     "w": 1.6,
+     "z": 5.05,
+     "h": 3.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.19,
+     "w": 1.6,
+     "z": 9.45,
+     "h": 2.4,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.19,
+     "w": 1.6,
+     "z": 13.05,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.66,
+     "w": 1.6,
+     "z": 1.15,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.66,
+     "w": 1.6,
+     "z": 5.05,
+     "h": 3.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.66,
+     "w": 1.6,
+     "z": 9.45,
+     "h": 2.4,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.66,
+     "w": 1.6,
+     "z": 13.05,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.12,
+     "w": 1.6,
+     "z": 1.15,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.12,
+     "w": 1.6,
+     "z": 5.05,
+     "h": 3.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.12,
+     "w": 1.6,
+     "z": 9.45,
+     "h": 2.4,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.12,
+     "w": 1.6,
+     "z": 13.05,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 15.58,
+     "w": 1.6,
+     "z": 1.15,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 15.58,
+     "w": 1.6,
+     "z": 5.05,
+     "h": 3.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 15.58,
+     "w": 1.6,
+     "z": 9.45,
+     "h": 2.4,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 15.58,
+     "w": 1.6,
+     "z": 13.05,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 19.04,
+     "w": 1.6,
+     "z": 1.15,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 19.04,
+     "w": 1.6,
+     "z": 5.05,
+     "h": 3.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 19.04,
+     "w": 1.6,
+     "z": 9.45,
+     "h": 2.4,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 19.04,
+     "w": 1.6,
+     "z": 13.05,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 22.51,
+     "w": 1.6,
+     "z": 1.15,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 22.51,
+     "w": 1.6,
+     "z": 5.05,
+     "h": 3.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 22.51,
+     "w": 1.6,
+     "z": 9.45,
+     "h": 2.4,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 22.51,
+     "w": 1.6,
+     "z": 13.05,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 25.97,
+     "w": 1.6,
+     "z": 1.15,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 25.97,
+     "w": 1.6,
+     "z": 5.05,
+     "h": 3.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 25.97,
+     "w": 1.6,
+     "z": 9.45,
+     "h": 2.4,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 25.97,
+     "w": 1.6,
+     "z": 13.05,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 29.43,
+     "w": 1.6,
+     "z": 1.15,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 29.43,
+     "w": 1.6,
+     "z": 5.05,
+     "h": 3.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 29.43,
+     "w": 1.6,
+     "z": 9.45,
+     "h": 2.4,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 29.43,
+     "w": 1.6,
+     "z": 13.05,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 32.89,
+     "w": 1.6,
+     "z": 1.15,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 32.89,
+     "w": 1.6,
+     "z": 5.05,
+     "h": 3.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 32.89,
+     "w": 1.6,
+     "z": 9.45,
+     "h": 2.4,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 32.89,
+     "w": 1.6,
+     "z": 13.05,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 36.36,
+     "w": 1.6,
+     "z": 1.15,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 36.36,
+     "w": 1.6,
+     "z": 5.05,
+     "h": 3.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 36.36,
+     "w": 1.6,
+     "z": 9.45,
+     "h": 2.4,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 36.36,
+     "w": 1.6,
+     "z": 13.05,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 39.82,
+     "w": 1.6,
+     "z": 1.15,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 39.82,
+     "w": 1.6,
+     "z": 5.05,
+     "h": 3.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 39.82,
+     "w": 1.6,
+     "z": 9.45,
+     "h": 2.4,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 39.82,
+     "w": 1.6,
+     "z": 13.05,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Peas Hill side: about 14 window columns over walls 24+26 (count from the oblique photo, +-1), 4 storeys; ground-storey openings recorded as windows (door positions not resolved)."
+  },
+  {
+   "id": "way/5094872:25",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.85,
+    9.0,
+    12.6
+   ],
+   "material": "brick",
+   "wall_colour": "#a08a66",
+   "trim_colour": "#d9cba6",
+   "cornice_z": 16.3,
+   "cornice": "classical",
+   "parapet": true,
+   "string_courses": [
+    4.7
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [],
+   "confidence": "low",
+   "notes": "Peas Hill side: about 14 window columns over walls 24+26 (count from the oblique photo, +-1), 4 storeys; ground-storey openings recorded as windows (door positions not resolved)."
+  },
+  {
+   "id": "way/5094872:26",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.85,
+    9.0,
+    12.6
+   ],
+   "material": "brick",
+   "wall_colour": "#a08a66",
+   "trim_colour": "#d9cba6",
+   "cornice_z": 16.3,
+   "cornice": "classical",
+   "parapet": true,
+   "string_courses": [
+    4.7
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.04,
+     "w": 1.6,
+     "z": 1.15,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.04,
+     "w": 1.6,
+     "z": 5.05,
+     "h": 3.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.04,
+     "w": 1.6,
+     "z": 9.45,
+     "h": 2.4,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.04,
+     "w": 1.6,
+     "z": 13.05,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.12,
+     "w": 1.6,
+     "z": 1.15,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.12,
+     "w": 1.6,
+     "z": 5.05,
+     "h": 3.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.12,
+     "w": 1.6,
+     "z": 9.45,
+     "h": 2.4,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.12,
+     "w": 1.6,
+     "z": 13.05,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Peas Hill side: about 14 window columns over walls 24+26 (count from the oblique photo, +-1), 4 storeys; ground-storey openings recorded as windows (door positions not resolved)."
+  }
+ ]
+}

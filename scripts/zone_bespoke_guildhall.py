@@ -54,7 +54,12 @@ GW = (1.15, 3.15)    # ground-floor windows
 
 
 def P_():
-    return F.Parts(mat="brick", wall_col=BRICK)
+    P = F.Parts(mat="brick", wall_col=BRICK)
+    P.ops = []          # emitted openings (kind, x, y) in the wall frame, for ELEMENTS
+    return P
+
+
+_OPS = []               # world-xy openings of the last build()
 
 
 # ------------------------------------------------------------------ elements (wall frame: x along, y out, z up)
@@ -63,6 +68,7 @@ def win(P, xc, w, z0, z1, y, cols=3, rows=3, arch=True, hood=False, sill=True, w
     """Window opening at skin plane y: reveals, glass, metal frame + glazing bars, stone architrave/hood/sill.
     Returns the opening polygon (to cut from the skin)."""
     op = box(xc - w / 2, z0, xc + w / 2, z1)
+    P.ops.append(("window", xc, y))
     yg = y - REV
     P.sides_xz(op, yg, y, F.shade(wall, 0.8), inward=True, mat="stone" if wall is STONE else "brick")
     P.face_xz(op, yg, GLASS, mat="glass")
@@ -188,6 +194,7 @@ def section(P, x0, x1, y, bays, front=False, hoods=False, door_x=None, panels=Tr
 def entrance(P, xc, y):
     """Central doorway: deep stone surround, bronze doors, name panel; coat of arms above on the balcony."""
     w, h = 2.2, 3.6
+    P.ops.append(("door", xc, y))
     P.sides_xz(box(xc - w / 2, 0, xc + w / 2, h), y - 0.5, y, STONE_D, inward=True, mat="stone")
     P.face_xz(box(xc - w / 2, 0, xc + w / 2, h), y - 0.5, DOOR, mat="frame")
     for i in range(2):   # door leaves with raised square panels
@@ -257,11 +264,13 @@ def frame_of(p0, p1):
 
 
 def to_world(P, p0, d, name):
+    n = np.array([d[1], -d[0]])
+    for k, x, y in getattr(P, "ops", []):
+        _OPS.append((k, *(p0 + x * d + y * n)))
     T, N, C = P.arrays()
     if not len(T):
         return None
     M = P.mats()
-    n = np.array([d[1], -d[0]])
     X = p0[0] + T[..., 0] * d[0] + T[..., 1] * n[0]
     Y = p0[1] + T[..., 0] * d[1] + T[..., 1] * n[1]
     W = np.stack([X, Y, Z0 + T[..., 2]], -1)
@@ -317,17 +326,33 @@ def build_side(w, nb=None, name="side"):
 
 
 def build(walls):
+    _OPS.clear()
     out = []
     ids = {w["id"]: w for w in walls}
     out.append(build_front(walls))
-    for wid, nb in (("way/5094872:24", 11), ("way/5094872:9", 4), ("way/5094872:8", 7), ("way/5094872:26", 2),
+    for wid, nb in (("way/5094872:24", 12), ("way/5094872:9", 4), ("way/5094872:8", 7), ("way/5094872:26", 2),
                     ("way/5094872:25", 0), ("way/5094872:7", 0)):
         if wid in ids:
             out.append(build_side(ids[wid], nb, wid.split(":")[1]))
+    ELEMENTS.update(F.count_on_walls(_OPS, walls))
     return [o for o in out if o is not None]
 
 
+ELEMENTS = {}   # wall id -> opening counts actually emitted (filled by build(); zone_build reads it for the KPI)
 BUILDS = {OSM: build}
+
+
+def _count_elements():
+    import json
+    try:
+        W = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..",
+                                        "data/annotations/market_square/walls.json")))["walls"]
+        build([w for w in W if w["osm_id"] == OSM])
+    except Exception as e:   # never break the zone build
+        print("zone_bespoke_guildhall: element count failed", repr(e), file=sys.stderr)
+
+
+_count_elements()
 
 if __name__ == "__main__":
     import json
