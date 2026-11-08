@@ -761,3 +761,4 @@ Next
    that DINOv2 and the judge both expect.
 2. Wikimedia Commons photos of central buildings, registered locally for poses (more real facade area).
 3. Synthetic per-building facades for walls with no photo (the generic grid didn't help; needs per-building style).
+- Live check: walkable 99.39, buildings 100, roof_match 93.03, real_facade 7.6, site_errors 0. service.sh will benchmark the new build.
