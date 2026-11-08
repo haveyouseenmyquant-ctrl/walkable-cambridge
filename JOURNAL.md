@@ -694,3 +694,35 @@ Next
 - Live check after publishing: load_seconds 3.98, site_errors 0 (measure.sh first showed 6.69, a cached service.sh
   reading taken while the A/B renders were loading the machine). measure.sh: walkable 99.39, buildings 100,
   roof_match 93.03, fps 60.
+
+## 2026-11-08 — Session 23: photo facades at oblique angles (photo_match on views ≤ 300 m 27.88 → 30.49)
+
+Done
+- Checked the photo supply first: the cached Mapillary list is complete (live API counts match it in four test
+  boxes around GSM), so more Mapillary photos aren't available. Only 342 perspective photos lie within 100 m.
+- facades.py now logs why cameras are rejected (angle 624k, out of frame 309k, occluded 48k candidate pairs) and the
+  textured share by ring. Mapillary cameras look along the street, so most facades are seen at grazing angles.
+- New knobs: `WC_FAC_COSN` (minimum cos of wall-normal vs camera direction; was 0.35) and `WC_FAC_SPLITS` (how many
+  times a piece without a photo is halved; was 1). Dry runs, textured share of street-facing wall within 100 m:
+  0.35/1 25.4 %, 0.2/2 28.9 %, 0.12/3 31.5 %.
+- A/B on the 25 benchmark views ≤ 300 m (current build as control, 27.88): 0.2/2 **29.89** (16 views better,
+  3 worse, worst −2.2), 0.12/3 **30.49**. Shipped 0.12/3 as the default. real_facade_pct 5.7 → 7.6 (facades.py's own
+  count; measure.sh will confirm). Side-by-side (photo | control | 0.2/2): docs/facades_angle_session23.jpg (photos
+  Mapillary CC-BY-SA 4.0, ids 454043642567080, 163625715689245, 490595022302449).
+- Local check: load 1.93 s, site_errors 0. Published.
+- service.sh's benchmark of the session 22 build failed with "renders incomplete" (the A/B runs were loading the machine).
+  It will benchmark this new build instead.
+
+Learned
+- 80 % real facades can't come from Mapillary alone: even within 50 m only ~39 % of street-facing wall is visible
+  in any usable photo. Courts, lanes and the Backs need other photos (Wikimedia Commons, registered by local SfM
+  to get camera poses) or the per-building synthetic facades.
+- Baked-in artefacts are now the visible problem: pedestrians and cyclists in the textures, and close-range
+  smeared pieces (side-by-side row 2, left wall).
+
+Next
+1. Wikimedia Commons photos of central buildings: download CC-licensed ones, register them against Mapillary frames
+   with COLMAP/OpenSfM locally to get poses, then feed them to facades.py. Centre first.
+2. Synthetic per-building facades (storeys, windows, material colour) for walls with no photo.
+3. Mask people/bikes in facade photos (a local segmentation model) and pick the cleanest photo per piece.
+4. Footprints built after the LiDAR survey (session 22).

@@ -41,6 +41,8 @@ MAXPIECE = 6.0       # split long edges into pieces of at most this length (m)
 MAXDIST = 40.0        # farthest camera used for a piece (m)
 BANDS = 3             # vertical bands per wall piece, each from its own photo
 MAXELEV = 50.0        # deg: wall tops seen steeper than this from the camera are stretched/unreliable; cap the textured height
+COSN = float(os.environ.get("WC_FAC_COSN", "0.12"))   # min cos(angle) between the wall normal and the camera direction
+SPLITS = int(os.environ.get("WC_FAC_SPLITS", "3"))    # a piece with no photo is halved up to this many times
 CAM_H = 2.0           # assumed camera height above the DTM (m): most sequences are bike/helmet or car mounted
 ATLAS = 2048
 CACHE = os.path.join(ROOT, "data/raw/mapillary_facade")
@@ -185,6 +187,7 @@ def main():
     # ---- best photo per piece. A piece with no photo is split into halves (once); the part of a wall above the
     # best photo's visible band becomes a new piece (an upper band, up to BANDS per wall) and gets its own photo.
     queue, done = list(pieces), []
+    why = {"angle": 0, "frame": 0, "occluded": 0}
     while queue:
         pc = queue.pop(0)
         a, b, z0, h = pc["a"] - [B.E0, B.N0], pc["bb"] - [B.E0, B.N0], pc["z0"], pc["h"]
@@ -197,7 +200,8 @@ def main():
             c = cams[i]
             v = np.array([c["e"], c["n"]]) - mid
             cosn = float(v @ pc["n"] / np.linalg.norm(v))
-            if cosn < 0.35:
+            if cosn < COSN:
+                why["angle"] += 1
                 continue
             # visible height: the tallest top edge (<= eave) whose corners are in frame; at least 2.5 m (or the eave)
             hv = None
@@ -211,6 +215,7 @@ def main():
                     hv = float(hh)
                     break
             if hv is None:
+                why["frame"] += 1
                 continue
             # occlusion: sight lines to 3 points along the wall foot must not cross another footprint
             ok = True
@@ -223,6 +228,7 @@ def main():
                 if not ok:
                     break
             if not ok:
+                why["occluded"] += 1
                 continue
             du, dv = u[1] - u[0], vv[1] - vv[0]
             area = abs(du * (vv[3] - vv[0]) - dv * (u[3] - u[0])) * c["w"] * c["h"]
@@ -231,10 +237,10 @@ def main():
                 best = (score, i, hv)
         pc["cam"] = None if best is None else best[1]
         if best is None:
-            if band == 0 and not pc.get("half") and pc["L"] > 2.5:
+            if band == 0 and pc.get("half", 0) < SPLITS and pc["L"] > 2.5:
                 m = (pc["a"] + pc["bb"]) / 2
                 for pa, pb in ((pc["a"], m), (m, pc["bb"])):
-                    queue.append(dict(pc, a=pa, bb=pb, L=pc["L"] / 2, half=True))
+                    queue.append(dict(pc, a=pa, bb=pb, L=pc["L"] / 2, half=pc.get("half", 0) + 1))
                 continue
         else:
             if best[2] < h - 1.0 and band + 1 < BANDS:
@@ -243,7 +249,12 @@ def main():
         done.append(pc)
     pieces = done
     got = [pc for pc in pieces if pc["cam"] is not None]
-    log(len(got), "pieces have a photo;", len({pc["cam"] for pc in got}), "photos needed")
+    log(len(got), "pieces have a photo;", len({pc["cam"] for pc in got}), "photos needed; camera rejections", why)
+    for r in (50, 100, 150, 300, 500):
+        a1 = sum(p["L"] * p["h"] for p in got if p["d"] <= r); a0 = sum(a for d, a in all_pieces if d <= r)
+        log("  within %d m: %.1f%% of street-facing wall area has a photo (before sky crop)" % (r, 100 * a1 / max(a0, 1)))
+    if "--dry" in sys.argv:
+        return
 
     # ---- rectify and pack (shelf packing per tile)
     token = open(os.path.join(ROOT, "data/mapillary_token")).read().strip()
