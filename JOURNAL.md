@@ -598,3 +598,31 @@ Next
 - measure.sh right after publishing read walkable_coverage_pct 97.03: kpi.py fetched tiles while Pages was still
   deploying, counted the failures as missing, and the value was cached for the build. Re-measured: 99.38. kpi.py now
   retries each fetch 3 times and flags `fetch_failures`; measure.sh doesn't cache a flagged result.
+
+## 2026-11-08 — Session 19: near-white overcast sky (photo_match on views ≤ 520 m 25.09 → 25.79)
+
+Done
+- Sky colour measured on 295 non-held-out Mapillary facade photos (top 10 % of rows, bright pixels): 83 % of skies
+  are unsaturated (overcast or blown out), median RGB 0.96/0.97/1.00. The model's sky was a mid blue (0xbcd3e6).
+- main.js `?sky=`: `white` (background + fog 0xeef1f6), `overcast` (same plus sun 1.8 → 1.0, hemisphere 1.6 → 2.3),
+  `blue` (old). A/B on the 67 benchmark views ≤ 520 m: blue **25.09** (same as session 18), white **25.79**
+  (5 views better by > 2, none worse by > 1), overcast 25.40. White is now the default.
+  Side-by-side: docs/sky_session19.jpg (photo | blue | white; photos Mapillary CC-BY-SA 4.0,
+  ids 293815065657546, 558906138831208, 140100631456667).
+- Published (release world-20261108-0448, viewer change only). Live: load 3.33 s, site_errors 0; guardrails unchanged
+  (walkable 99.38, buildings 100). service.sh will benchmark the new build.
+- WebKit smoke test: still crashes on any page, even `data:` HTML (WebContent process "Trace/BPT trap: 5"), with
+  Playwright 1.65 (webkit 2388), 1.66-alpha (webkit 2389), headless or headed. Probably the WebKit build vs macOS
+  26.5 under this user's session; not the site. Safari remains untested.
+
+Learned
+- Global look parameters (sky, fog) are cheap, viewer-only experiments with measurable gains; softer lighting
+  lost to the stronger sun, so contrast/shadows help DINOv2 even though the photos are overcast.
+- Bottom row of the side-by-side (view 140100631456667): the render shows sky colour below a wall, i.e. no ground
+  in front of the camera there. Worth finding: a hole in the ground mesh or the camera placed below it.
+
+Next
+1. Ground holes: find benchmark views whose lower third is sky-coloured and fix the ground mesh there.
+2. Tree shape from LiDAR (crown base, radius), and fog distance/colour tuned with the white sky.
+3. Facade quality (reject road/sky pieces), synthetic per-building facades, centre first.
+4. WebKit: try an older Playwright WebKit or Safari's own WebDriver (safaridriver) for the Safari test.
