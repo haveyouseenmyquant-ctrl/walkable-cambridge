@@ -1372,6 +1372,7 @@ Done (4 parallel subagents)
 - **Zone walls**: the 94 "skipped" walls are all legitimate (66 bespoke, 13 duplicate OSM outlines, 15 stalls).
   The KPI is held down by unannotated walls (stall roofs ~9.5 pts, bespoke walls ~15 pts) that have no
   non-held-out reference photos. Fixed the CUP Bookshop conflict from Mapillary 296497208762822: 62.51 → 62.69.
+- Published world-20261108-2214, live hash **400ff2da125adbf4** (verified). Local Chrome: load 3.18 s, site_errors 0.
 - publish.sh: WC_SKIP_GAME_KPI=1 skips the 30-min game tests (service.sh runs them for the new live hash).
 
 Learned
