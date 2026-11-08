@@ -952,3 +952,28 @@ Next
    from build.py; windows only where it says so. A/B on the same 25 views with the window-grid result as reference.
 2. Check the benchmark of the new build (scores/<hash>.json) against b8682's 18.86.
 3. Wikimedia Commons photos of the centre registered locally (install COLMAP via a local build or pycolmap wheel).
+
+## 2026-11-08 — Direction from Gaspard Oliviers (Sun 12:00): modelled geometry, Market Square first, faster
+
+Replaces the previous "Next" list. Follow this in every work session from session 30 on.
+1. **Geometry, not pasted photos.** Recreate buildings and streets as 3D geometry: window reveals, frames, sills,
+   doors, shopfronts, cornices, mouldings, chimneys, dormers, kerbs, stalls, the fountain. Photos are references only
+   (shape, layout, colour). Build a parametric parts library (window/door/shopfront/cornice/dormer/chimney/stall...)
+   and assemble each facade from a per-facade layout annotation (storeys, bay positions, element types) made from
+   non-benchmark photos. Photo-baked facades are to be replaced, not extended. real_facade_pct is removed.
+2. **Market Square first.** Zone = within 90 m of 52.2053°N, 0.1190°E (Market Hill + stalls, fountain, Guildhall,
+   Great St Mary's, frontages on Peas Hill, Market St, Rose Crescent, Petty Cury). Target market_square_realism ≥ 70
+   before working anywhere else.
+3. **Pace.** Fan out parallel subagents each session (one per building or part type), ship visible geometry every
+   session, skip renderer experiments that don't change what you see (no more AO/sky/lighting A/Bs for now).
+New KPIs: market_square_realism (main; 40 held-out photos, blind judge), market_square_photo_match,
+facade_geometry_match_pct, painted_detail_pct (lower is better). The 40 held-out photos must never be used for
+annotation or tuning; annotations come from other Mapillary/Commons photos.
+
+Plan for session 30
+- Check measure.sh/service.sh implement the new KPIs (zone photo set frozen, judge, annotation file format) and get a
+  baseline. Write the facade annotation schema (JSON per facade: wall id, storeys, bays with element type/x/width/
+  sill/head heights, shopfront, cornice line, roof features).
+- Parallel subagents: (a) parts library in the site (instanced, LOD'd window/door/shopfront/cornice/sill meshes),
+  (b) annotations for the square's frontages, split by street, (c) Guildhall, (d) Great St Mary's, (e) market stalls
+  (OSM/photo layout) + fountain + kerbs/bollards. Integrate, check fps/load guardrails, publish.
