@@ -139,6 +139,7 @@ async function main() {
     get view() { return player.view; },
     get grounded() { return player.grounded; },
     get pendingPlace() { return !!player.pendingPlace; },
+    settled(r = 150) { return tiles.settled(player.x, player.y, r); },   // tiles near the player loaded (benchmark renders)
     get crouching() { return player.crouching; },
     get sliding() { return player.sliding; },
     get dashing() { return player.dashing; },

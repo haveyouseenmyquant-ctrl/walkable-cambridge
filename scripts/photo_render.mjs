@@ -66,6 +66,8 @@ try {
     const at = [v.x + Math.sin(hd) * Math.cos(pt) * 10, v.y + Math.cos(hd) * Math.cos(pt) * 10, z + EYE + Math.sin(pt) * 10];
     await page.evaluate((pos, at, fov) => { window.__cam = { pos, at, fov }; }, pos, at, vfov);
     await sleep(1500);   // neighbouring tiles finish streaming
+    // under load a view could be shot before the tiles around it were placed (ground missing, session 28)
+    await page.waitForFunction('!window.__player.settled || window.__player.settled(150)', { timeout: 60000 }).catch(() => console.error('[render] tiles not settled', v.id));
     await page.waitForFunction('!(window.__facadesPending > 0)', { timeout: 30000 }).catch(() => {});
     await sleep(200);   // a frame with the new atlases
     await page.screenshot({ path: path.join(OUT, `${v.id}.png`) });
