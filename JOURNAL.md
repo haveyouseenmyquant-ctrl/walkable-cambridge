@@ -1174,3 +1174,53 @@ Next
 3. Ring-1 bespoke: Corpus Christi (old court front / New Court gate), King's Parade terraces, Old Schools upgrade.
 4. City facade LOD: cheaper far windows (flat recess only) so FAC_R can grow; corner mitres between buildings.
 5. Fix the s35 test poses (snap to walk samples) for future before/after shots.
+
+## 2026-11-08 — Session 36: real paving, St Bene't's, Corpus front, ring-1 annotations, college styles
+
+Scores for 57d276 (session 35, city-wide 3D facades): market_square_realism **28.5** (afce85: 25.9),
+market_square_photo_match 29.5 (25.5), photo_match 18.8 (19.0), judged_realism 26.4 (26.6), visual_quality 24.8
+(27 of 30 views scored).
+New **scripts/ring_report.py** <hash>: the 200-view benchmark grouped in 150 m rings from the square (ring0 < 90 m).
+afce85 → 57d276 photo match: ring1 31.3 → **18.9**, ring2 36.9 → **23.4**, ring4 14.8 → 18.2, ring5 18.2 → 21.5.
+So retiring the photo facades cost DINOv2 similarity near the centre and gained it further out. The worst drops
+look into college courts (Old Schools, Caius/Trinity courts), where the generic baseline drew 5-storey brown "modern"
+brick with plate-glass windows.
+
+Done (4 parallel subagents + my own work)
+- **Ground surfaces** (subagent): new class S_BRICK (10) with herringbone pavior shader; setts and slab patterns
+  redone in materials.js (the slab pattern changes pavement city-wide); OSM area surface tags now count (Market Square
+  is surface=sett); evidence-backed overrides in data/annotations/ground/surfaces.json (Market Street brick
+  carriageway, Market Hill junction, King's Parade east sett strip; non-held-out Mapillary/Commons ids per entry).
+  Collision is byte-identical apart from surface ids. docs/zone_s36_paving_before_after.png.
+- **Bespoke St Bene't's** (scripts/zone_bespoke_benet.py, 16.6k tris, tile body hidden): Saxon tower with
+  long-and-short quoins and baluster belfry openings, nave and clerestory, aisles, porch, chancel. Heights within
+  ~0.3 m of the DSM. docs/zone_s36_benet.png.
+- **Bespoke Corpus New Court street front** (scripts/zone_bespoke_corpus.py, 25k tris): Wilkins gate tower with
+  octagonal turrets, two ranges, end pavilions with oriels, battlements; tile body kept (court side and roof).
+  docs/zone_s36_corpus.png.
+- **Ring-1 annotations** (subagent): city_facades.py builds data/annotations/ring1/way_*.json through the zone's
+  wall_facade path. 24 buildings / 26 walls: King's Parade 1–19, Bene't St 7, Trinity St 3, all from non-held-out
+  Mapillary photos. King's Parade facade_geometry_match is **63.1** (14 of 22 walls). Ring 1 (all city walls < 400 m)
+  is only 1.1 (26 of 1,952).
+- **facade_styles.py** (me): a building inside OSM college/university grounds takes that college's style family
+  (smallest containing polygon; named modern courts and university sites in a COURT table); no random "modern"
+  downgrade for old college ranges within 300 m; college and institutional storeys at 3.9 m. This changes 291 of
+  the 1,952 ring-1 walls (the Old Schools go from modern brick to classical stone, 5 → 4 storeys).
+- Local GPU Chrome: site_errors 0, fps 60, load 0.73 s. Zone 363k tris; cityfac 119 MB raw (3.39 M tris).
+  Published world-20261108-1602, live hash **726ee1a5e9eae0c1** (verified; release not a draft). Nothing was
+  benchmarked in-session: service.sh will score it.
+
+Learned
+- Real paving near the square, from photos: only Market Street has the brick carriageway. Peas Hill really is
+  asphalt with a sett strip, and King's Parade's west lane is asphalt. Don't paint brick everywhere.
+- The 2 m ground grid makes surface boundaries wavy. Kerbs don't exist yet.
+- walls.json heights are wrong for some fronts (4–5 King's Parade 2.6 m, 15 Bene't St 5.3 m), which clips their
+  annotations to the ground floor.
+- Running zone_build/city_facades/build.py concurrently across agents works if each agent owns its files.
+
+Next
+1. Read 726ee1's scores and run ring_report.py 57d27678e9a8ab05 726ee1a5e9eae0c1. Check ring 1–2 photo match recovers.
+2. Kerbs as geometry (granite kerb lines along road/footway edges in the zone and ring 1) + sharper surface edges.
+3. Fix wall heights from the DSM for the 2 clipped annotations; annotate the rest of Trinity St, Sidney St, Market
+   Hill colonnade; per-building colours from Claude vision on non-held-out refs (ring 1).
+4. Bespoke: Old Schools / Cockerell building, Trinity Great Gate, Caius Gate of Honour.
