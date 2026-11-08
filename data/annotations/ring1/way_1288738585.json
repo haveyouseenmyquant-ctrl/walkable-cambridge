@@ -1,0 +1,172 @@
+{
+ "osm_id": "way/1288738585",
+ "sources": [
+  "mapillary:935055160579489",
+  "mapillary:218778726265898"
+ ],
+ "walls": [
+  {
+   "id": "way/1288738585:1",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.0,
+    7.0,
+    9.6
+   ],
+   "material": "brick",
+   "wall_colour": "#9a5a3e",
+   "trim_colour": "#f2efe8",
+   "cornice_z": 11.4,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.0
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.43,
+     "w": 0.95,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.43,
+     "w": 0.95,
+     "z": 7.4,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.43,
+     "w": 0.85,
+     "z": 10.0,
+     "h": 1.2,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.48,
+     "w": 0.95,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.48,
+     "w": 0.95,
+     "z": 7.4,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.48,
+     "w": 0.85,
+     "z": 10.0,
+     "h": 1.2,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.53,
+     "w": 0.95,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.53,
+     "w": 0.95,
+     "z": 7.4,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.53,
+     "w": 0.85,
+     "z": 10.0,
+     "h": 1.2,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 6.65,
+     "z1": 3.8,
+     "fascia_text": "Seasalt",
+     "fascia_colour": "#1d1d1d",
+     "text_colour": "#efe8d6",
+     "door_x": 1.3,
+     "stallriser": 0.5,
+     "awning": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "29 Trinity St: Georgian red/brown brick, 4 storeys, three bays of white sashes with gauged red-brick flat arches; black timber shopfront with a cream canvas awning (photo shows the earlier Coast restaurant; OSM fascia Seasalt)."
+  }
+ ]
+}

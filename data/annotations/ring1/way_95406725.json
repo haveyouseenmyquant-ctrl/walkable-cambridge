@@ -1,0 +1,507 @@
+{
+ "osm_id": "way/95406725",
+ "sources": [
+  "commons:File:Cambridge - Trinity Lane - View East into Senate House Passage.jpg",
+  "commons:File:Senate House Passage - geograph.org.uk - 5893878.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/95406725:4",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    6.0,
+    13.0
+   ],
+   "material": "stone",
+   "wall_colour": "#c9b089",
+   "trim_colour": "#d8c4a0",
+   "cornice_z": 19.0,
+   "cornice": "classical",
+   "parapet": true,
+   "string_courses": [
+    6.0,
+    13.0
+   ],
+   "quoins": false,
+   "pilasters": [
+    4.36,
+    8.72,
+    13.08,
+    17.44,
+    21.8,
+    26.16,
+    30.52,
+    34.88,
+    39.24,
+    43.6
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.18,
+     "w": 1.0,
+     "z": 2.6,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.54,
+     "w": 1.0,
+     "z": 2.6,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 10.9,
+     "w": 1.0,
+     "z": 2.6,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 15.26,
+     "w": 1.0,
+     "z": 2.6,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 19.62,
+     "w": 1.0,
+     "z": 2.6,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 23.98,
+     "w": 1.0,
+     "z": 2.6,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 28.34,
+     "w": 1.0,
+     "z": 2.6,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 32.7,
+     "w": 1.0,
+     "z": 2.6,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 37.06,
+     "w": 1.0,
+     "z": 2.6,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 41.42,
+     "w": 1.0,
+     "z": 2.6,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 45.78,
+     "w": 1.0,
+     "z": 2.6,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.18,
+     "w": 1.8,
+     "z": 7.0,
+     "h": 5.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.54,
+     "w": 1.8,
+     "z": 7.0,
+     "h": 5.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 10.9,
+     "w": 1.8,
+     "z": 7.0,
+     "h": 5.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 15.26,
+     "w": 1.8,
+     "z": 7.0,
+     "h": 5.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 19.62,
+     "w": 1.8,
+     "z": 7.0,
+     "h": 5.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 23.98,
+     "w": 1.8,
+     "z": 7.0,
+     "h": 5.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 28.34,
+     "w": 1.8,
+     "z": 7.0,
+     "h": 5.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 32.7,
+     "w": 1.8,
+     "z": 7.0,
+     "h": 5.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 37.06,
+     "w": 1.8,
+     "z": 7.0,
+     "h": 5.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 41.42,
+     "w": 1.8,
+     "z": 7.0,
+     "h": 5.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 45.78,
+     "w": 1.8,
+     "z": 7.0,
+     "h": 5.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.18,
+     "w": 1.6,
+     "z": 13.8,
+     "h": 3.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.54,
+     "w": 1.6,
+     "z": 13.8,
+     "h": 3.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 10.9,
+     "w": 1.6,
+     "z": 13.8,
+     "h": 3.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 15.26,
+     "w": 1.6,
+     "z": 13.8,
+     "h": 3.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 19.62,
+     "w": 1.6,
+     "z": 13.8,
+     "h": 3.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 23.98,
+     "w": 1.6,
+     "z": 13.8,
+     "h": 3.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 28.34,
+     "w": 1.6,
+     "z": 13.8,
+     "h": 3.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 32.7,
+     "w": 1.6,
+     "z": 13.8,
+     "h": 3.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 37.06,
+     "w": 1.6,
+     "z": 13.8,
+     "h": 3.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 41.42,
+     "w": 1.6,
+     "z": 13.8,
+     "h": 3.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 45.78,
+     "w": 1.6,
+     "z": 13.8,
+     "h": 3.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Cockerell's Building (1837-42, now Caius Library), north front on Senate House Passage: warm sandstone ashlar, heavily rusticated base (~6 m) with small square windows, then deep-set tall rectangular windows between giant pilasters, round-arched upper windows under a heavy classical cornice. Bay count (11) estimated from oblique views down the passage."
+  }
+ ]
+}

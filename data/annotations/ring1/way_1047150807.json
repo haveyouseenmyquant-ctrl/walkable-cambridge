@@ -1,0 +1,186 @@
+{
+ "osm_id": "way/1047150807",
+ "sources": [
+  "mapillary:223002399596400",
+  "mapillary:1174741026292317",
+  "mapillary:1411014675940100"
+ ],
+ "walls": [
+  {
+   "id": "way/1047150807:5",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.4
+   ],
+   "material": "brick",
+   "wall_colour": "#a4553d",
+   "trim_colour": "#ddd2bb",
+   "cornice_z": 8.2,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.4
+   ],
+   "quoins": true,
+   "pilasters": [
+    0.1,
+    26.6
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.0,
+     "w": 1.2,
+     "z": 5.0,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 3.3,
+     "w": 1.2,
+     "z": 5.0,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "bay",
+     "x": 7.4,
+     "w": 2.3,
+     "z": 4.9,
+     "h": 1.8,
+     "panes": [
+      4,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 10.9,
+     "w": 1.0,
+     "z": 5.0,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.7,
+     "w": 1.0,
+     "z": 5.0,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 14.5,
+     "w": 1.0,
+     "z": 5.0,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "bay",
+     "x": 18.8,
+     "w": 2.3,
+     "z": 4.9,
+     "h": 1.8,
+     "panes": [
+      4,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 22.0,
+     "w": 1.2,
+     "z": 5.0,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 24.2,
+     "w": 1.2,
+     "z": 5.0,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 7.4,
+     "w": 2.6,
+     "h": 2.4
+    },
+    {
+     "type": "dormer",
+     "x": 18.8,
+     "w": 2.6,
+     "h": 2.4
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 26.5,
+     "z1": 4.4,
+     "fascia_text": "Next",
+     "fascia_colour": "#ece6bc",
+     "text_colour": "#1a1a1a",
+     "door_x": 13.0,
+     "stallriser": 0.0,
+     "awning": false
+    }
+   ],
+   "confidence": "low",
+   "notes": "13-15 Sidney St (Next): neo-Jacobean red brick upper floor with stone-mullioned windows and stone quoin strips; stone-coped gables with 4-light canted bay windows (two estimated, one seen at x~7.4), plain tiled roof. Ground floor a full-width modern glazed shopfront under a tall pale cream fascia with black lower-case 'next' and a projecting black hanging sign. Northern 15 m seen frontally (223002399596400); southern half extrapolated."
+  }
+ ]
+}

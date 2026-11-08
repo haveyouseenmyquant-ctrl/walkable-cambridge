@@ -192,6 +192,26 @@ def main():
                       ground_z=round(float(gz[j]), 2), eave_z=round(ez[j], 2), height=round(ez[j] - float(gz[j]), 2),
                       dist_centre=round(math.hypot(M[i][0] - sx, M[i][1] - sy), 1)))
 
+    # ---- annotated walls clipped by a low eave (session 37): where the OSM footprint sits in front of the LiDAR facade the
+    # 1-2.5 m inset DSM samples hit the street, so the eave comes out too low and wall_facade clips the annotation. Walk the
+    # DSM inward (median along the wall per inset) and take the first inset height that clears the annotation's top.
+    for w in W:
+        a = ann.get(w["id"])
+        if a is None:
+            continue
+        top = max([e.get("z", 0) + e.get("h", 0) for e in a.get("elements", []) if e.get("type") == "window"]
+                  + [e.get("z1", 0) for e in a.get("elements", [])] + [a.get("cornice_z") or 0, 0])
+        if top <= w["height"]:
+            continue
+        p0 = np.add(w["p0"], [B.E0, B.N0]); d = np.subtract(w["p1"], w["p0"]) / w["length"]; nrm = np.array([d[1], -d[0]])
+        prof = [float(np.median(samp(dsm, DS, np.array([p0 + d * w["length"] * f - nrm * s for f in (0.2, 0.35, 0.5, 0.65, 0.8)]))))
+                - w["ground_z"] for s in (1, 1.5, 2, 2.5, 3, 4, 5, 6)]
+        fit = [h for h in prof if h >= top - 0.2]
+        hn = fit[0] if fit else max(prof)
+        if hn > w["height"] + 0.3:
+            print("eave fix", w["id"], w["height"], "->", round(hn, 2), "annotation top", top, file=sys.stderr)
+            w["height"] = round(hn, 2); w["eave_z"] = round(w["ground_z"] + hn, 2); w["eave_fixed"] = True
+
     # ---- duplicates (overlapping footprints): parallel walls of different buildings with midpoints < 1.2 m apart
     mids = np.array([np.add(w["p0"], w["p1"]) / 2 for w in W])
     dirs = np.array([np.subtract(w["p1"], w["p0"]) / w["length"] for w in W])
@@ -235,6 +255,8 @@ def main():
             lay = F.default_layout(w)
             if w.get("colour_hint"):
                 lay["wall_colour"] = w["colour_hint"]
+            if S is not None:
+                S.apply_override(lay, w["osm_id"])   # photo-read material/colour (data/annotations/colours)
         x0s, x1s = ext[w["id"]]
         P = F.wall_facade(Lw, H, lay, x0s, x1s)
         T, N, C = P.arrays()
@@ -273,7 +295,9 @@ def main():
              "ring1_facade_geometry_match_pct": geometry_match(ring1, ann),
              "kings_parade_walls": len(kp), "kings_parade_walls_annotated": sum(r["annotated"] for r in kp),
              "kings_parade_facade_geometry_match_pct": geometry_match(kp, ann),
-             "colour_hints": sum(1 for r in rows if r["colour_hint"]), "duplicates_dropped": len(drop),
+             "colour_hints": sum(1 for r in rows if r["colour_hint"]),
+             "colour_override_buildings": len({r["osm_id"] for r in rows if S is not None and not r["annotated"]
+                                               and S.colour_override(r["osm_id"])}), "duplicates_dropped": len(drop),
              "tris": sum(v["tris"] for v in index.values()), "facade_area_m2": round(sum(r["area"] for r in rows)),
              "bytes": sum(os.path.getsize(os.path.join(ROOT, "site", v["glb"])) for v in index.values())}
     json.dump({"tiles": index, "stats": stats}, open(os.path.join(OUT, "index.json"), "w"), indent=1)

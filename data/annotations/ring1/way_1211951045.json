@@ -1,0 +1,73 @@
+{
+ "osm_id": "way/1211951045",
+ "sources": [
+  "mapillary:1411014675940100",
+  "mapillary:1174741026292317"
+ ],
+ "walls": [
+  {
+   "id": "way/1211951045:0",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.0,
+    7.3
+   ],
+   "material": "stone",
+   "wall_colour": "#c8b48a",
+   "trim_colour": "#d9c9a2",
+   "cornice_z": 10.2,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.0
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 2.6,
+     "w": 2.6,
+     "z": 4.6,
+     "h": 2.0,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.6,
+     "w": 2.2,
+     "z": 7.9,
+     "h": 1.5,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 5.0,
+     "z1": 3.8,
+     "fascia_text": "MODO",
+     "fascia_colour": "#d8c9a2",
+     "text_colour": "#5a5040",
+     "door_x": 1.0,
+     "stallriser": 0.3,
+     "awning": false
+    }
+   ],
+   "confidence": "low",
+   "notes": "62 Sidney St: buff ashlar neo-Tudor front continuous with the Boots/Sidney St range: stone-mullioned 3-light oriel on corbels at first floor, mullioned window above, gabled parapet. Stone fascia with incised lettering (was 'EAST' in the photos; current OSM POI MODO). Seen obliquely only."
+  }
+ ]
+}

@@ -1,0 +1,129 @@
+{
+ "osm_id": "way/1288648586",
+ "sources": [
+  "mapillary:166355842062342"
+ ],
+ "walls": [
+  {
+   "id": "way/1288648586:7",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.1,
+    7.0,
+    9.6
+   ],
+   "material": "brick",
+   "wall_colour": "#9c4f38",
+   "trim_colour": "#f2efe8",
+   "cornice_z": 11.2,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.1
+   ],
+   "quoins": true,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.03,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.03,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.03,
+     "w": 0.9,
+     "z": 10.0,
+     "h": 1.1,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.89,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.89,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.89,
+     "w": 0.9,
+     "z": 10.0,
+     "h": 1.1,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 6.62,
+     "z1": 4.0,
+     "fascia_text": "Clarendon Fine Art",
+     "fascia_colour": "#f4f4f0",
+     "text_colour": "#2d5a8a",
+     "door_x": 1.2,
+     "stallriser": 0.5,
+     "awning": false
+    }
+   ],
+   "confidence": "low",
+   "notes": "23-24 Trinity St: red brick with white painted stone quoins/window surrounds, white sashes; white-painted shopfront with leaded transom lights, '24' in the fascia (photographed as Brora; OSM fascia Clarendon Fine Art). Upper bays partly cropped in the photo, 2 bays assumed."
+  }
+ ]
+}

@@ -1,0 +1,212 @@
+{
+ "osm_id": "way/166155959",
+ "sources": [
+  "mapillary:556976891953894"
+ ],
+ "walls": [
+  {
+   "id": "way/166155959:8",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.4,
+    7.4
+   ],
+   "material": "stone",
+   "wall_colour": "#c4b28a",
+   "trim_colour": "#a89870",
+   "cornice_z": 10.2,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.4
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 1.87,
+     "w": 2.2,
+     "z": 0.9,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.87,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.87,
+     "w": 1.0,
+     "z": 8.0,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 5.01,
+     "w": 2.2,
+     "z": 0.9,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.01,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.01,
+     "w": 1.0,
+     "z": 8.0,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 8.16,
+     "w": 2.2,
+     "z": 0.9,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.16,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.16,
+     "w": 1.0,
+     "z": 8.0,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 11.3,
+     "w": 2.2,
+     "z": 0.9,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 11.3,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 11.3,
+     "w": 1.0,
+     "z": 8.0,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 12.87,
+     "z1": 4.2,
+     "fascia_text": "Reiss",
+     "fascia_colour": "#c4b28a",
+     "text_colour": "#2a2a2a",
+     "door_x": 1.5,
+     "stallriser": 0.8,
+     "awning": false
+    }
+   ],
+   "confidence": "low",
+   "notes": "26 Trinity St (Reiss): Victorian Gothic ashlar front with a ground-floor arcade of round-arched shop windows between carved stone piers and corbels; 'REISS' lettered in the glazing. Upper floors only partly visible (oblique view, Mapillary 556976891953894); bays and upper windows estimated. Short wall :7 not annotated (unclear in photos)."
+  }
+ ]
+}

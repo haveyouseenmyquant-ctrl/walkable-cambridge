@@ -1,0 +1,328 @@
+{
+ "osm_id": "way/229676053",
+ "sources": [
+  "mapillary:475285070488446",
+  "mapillary:309146717240093"
+ ],
+ "walls": [
+  {
+   "id": "way/229676053:2",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.6,
+    8.5,
+    12.0
+   ],
+   "material": "brick",
+   "wall_colour": "#a5533b",
+   "trim_colour": "#d9c7a3",
+   "cornice_z": 14.8,
+   "cornice": "bracketed",
+   "parapet": true,
+   "string_courses": [
+    4.6,
+    8.5,
+    12.0
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.2,
+    17.0,
+    20.9
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.8,
+     "w": 1.3,
+     "z": 1.0,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.8,
+     "w": 1.2,
+     "z": 5.6,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.8,
+     "w": 1.1,
+     "z": 9.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.4,
+     "w": 1.3,
+     "z": 1.0,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.4,
+     "w": 1.2,
+     "z": 5.6,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.4,
+     "w": 1.1,
+     "z": 9.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.0,
+     "w": 1.3,
+     "z": 1.0,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.0,
+     "w": 1.2,
+     "z": 5.6,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.0,
+     "w": 1.1,
+     "z": 9.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.6,
+     "w": 1.3,
+     "z": 1.0,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.6,
+     "w": 1.2,
+     "z": 5.6,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.6,
+     "w": 1.1,
+     "z": 9.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 12.2,
+     "w": 1.3,
+     "z": 1.0,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 12.2,
+     "w": 1.2,
+     "z": 5.6,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 12.2,
+     "w": 1.1,
+     "z": 9.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 14.8,
+     "w": 1.3,
+     "z": 1.0,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 14.8,
+     "w": 1.2,
+     "z": 5.6,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 14.8,
+     "w": 1.1,
+     "z": 9.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "arched",
+     "x": 18.6,
+     "w": 1.6,
+     "h": 3.6,
+     "surround": "pilastered"
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 18.6,
+     "w": 1.4,
+     "z": 9.0,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 18.6,
+     "w": 1.0,
+     "z": 12.4,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "3 Sidney St, Lloyds Bank (former Foster's Bank, Alfred Waterhouse): red brick banded with buff stone (horizontal stripes), arcade of round-arched ground-floor windows with stone shafts, gabled dormers/pinnacles on top and the clock tower at the south (p1) corner over a big round-arched stone doorway with a carved pediment (door x~18.6). Tower rising above the eave is not modelled. Bay pitch ~2.6 m estimated from the oblique view 475285070488446 (looking north from the Market St end); x runs north->south."
+  }
+ ]
+}

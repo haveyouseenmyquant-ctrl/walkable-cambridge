@@ -1,0 +1,174 @@
+{
+ "osm_id": "relation/3240",
+ "sources": [
+  "mapillary:909797159588321",
+  "mapillary:166355842062342"
+ ],
+ "walls": [
+  {
+   "id": "relation/3240:0",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.8,
+    7.4
+   ],
+   "material": "stone",
+   "wall_colour": "#cdbf9e",
+   "trim_colour": "#b9aa86",
+   "cornice_z": 11.0,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    3.8,
+    7.4
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.12,
+     "w": 1.0,
+     "z": 1.2,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.12,
+     "w": 1.1,
+     "z": 4.6,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.12,
+     "w": 1.0,
+     "z": 8.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 5.35,
+     "w": 1.0,
+     "z": 1.2,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 5.35,
+     "w": 1.1,
+     "z": 4.6,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 5.35,
+     "w": 1.0,
+     "z": 8.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 8.58,
+     "w": 1.0,
+     "z": 1.2,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 8.58,
+     "w": 1.1,
+     "z": 4.6,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 8.58,
+     "w": 1.0,
+     "z": 8.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 9.1,
+     "w": 1.6,
+     "z": 4.2,
+     "h": 2.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Whewell's Court (Trinity College, Salvin 1860s) Trinity St front: Gothic-revival ashlar, mullioned windows with hood moulds, corbelled oriel and a corner turret with green copper cap at the north end, Tudor-arched gateway further south. Bay positions estimated from oblique views; no shops."
+  }
+ ]
+}

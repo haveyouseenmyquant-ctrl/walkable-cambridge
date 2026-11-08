@@ -1,0 +1,625 @@
+{
+ "about": "Session 37 per-building wall material + colour overrides for ring-1 city facades (facade_styles.layout). Colours read by eye (Claude vision) from non-held-out Mapillary photos (not in data/benchmark/*.json, not a same-sequence frame near a held-out photo, daylight only), as in diffuse daylight. material: stone|render|stucco|gault_brick|red_brick|timber|flint|glass; roof is informational. Keys are OSM ids (all street walls of the building).",
+ "buildings": {
+  "relation/9449789": {
+   "material": "gault_brick",
+   "colour": "#b4ab8e",
+   "trim": "#d2bf92",
+   "roof": "slate",
+   "sources": [
+    "768407353820398"
+   ],
+   "note": "New Court back range: grey-yellow gault brick, stone oriel boxes"
+  },
+  "way/1039073567": {
+   "material": "gault_brick",
+   "colour": "#b08a62",
+   "trim": "#ddd4c2",
+   "roof": "slate",
+   "sources": [
+    "557772665612293"
+   ],
+   "note": "Christ's Lane block (NatWest corner): buff-brown brick, cream stone ground floor, mansard"
+  },
+  "way/1047150808": {
+   "material": "red_brick",
+   "colour": "#9a5442",
+   "trim": "#d9ccb0",
+   "roof": "tile",
+   "sources": [
+    "506115907198293"
+   ],
+   "note": "16-17 Sidney St: Edwardian red brick, stone dressings"
+  },
+  "way/1047150809": {
+   "material": "red_brick",
+   "colour": "#8f4c3a",
+   "trim": "#d8caa8",
+   "roof": "slate",
+   "sources": [
+    "506115907198293"
+   ],
+   "note": "18-19 Sidney St: red brick, stone ground floor and dressings"
+  },
+  "way/1095394769": {
+   "material": "red_brick",
+   "colour": "#6e5444",
+   "trim": "#2b2b2b",
+   "roof": "slate",
+   "sources": [
+    "3038401733104798"
+   ],
+   "note": "3 Parson's Court: brown brick, black painted ground"
+  },
+  "way/1095394771": {
+   "material": "render",
+   "colour": "#ebe9e3",
+   "trim": "#2b2b2b",
+   "roof": "slate",
+   "sources": [
+    "3038401733104798"
+   ],
+   "note": "1-2 Wheeler St: white painted brick"
+  },
+  "way/1095395396": {
+   "material": "gault_brick",
+   "colour": "#c2ad84",
+   "trim": "#e2d8c0",
+   "roof": "slate",
+   "sources": [
+    "530047458013421"
+   ],
+   "note": "16 Bene't St: gault brick, arched windows"
+  },
+  "way/1095395397": {
+   "material": "gault_brick",
+   "colour": "#c0b088",
+   "trim": "#e0d9c8",
+   "roof": "slate",
+   "sources": [
+    "465922964705436"
+   ],
+   "note": "15 Bene't Street: gault brick with pale stone surrounds"
+  },
+  "way/1099846442": {
+   "material": "render",
+   "colour": "#efede6",
+   "trim": "#1f2433",
+   "roof": "slate",
+   "sources": [
+    "819218512029304"
+   ],
+   "note": "59 Sidney St: white painted front, navy shopfront"
+  },
+  "way/1206340007": {
+   "material": "red_brick",
+   "colour": "#8a4c3c",
+   "trim": "#6e7880",
+   "roof": "lead",
+   "sources": [
+    "162698125857171"
+   ],
+   "note": "Corn Exchange St modern block: red/brown brick, lead/zinc mansard with dormers"
+  },
+  "way/1222243454": {
+   "material": "gault_brick",
+   "colour": "#c9b894",
+   "trim": "#f0ece2",
+   "roof": "slate",
+   "sources": [
+    "154812726597830"
+   ],
+   "note": "14 King's Parade: gault brick, white pedimented windows"
+  },
+  "way/1222243455": {
+   "material": "timber",
+   "colour": "#ebe8e1",
+   "trim": "#1f1f1f",
+   "roof": "slate",
+   "sources": [
+    "1113235906084204"
+   ],
+   "note": "17 King's Parade: black-and-white mock-Tudor timber front, Caffe Nero, dormers"
+  },
+  "way/1222243456": {
+   "material": "timber",
+   "colour": "#ebe6db",
+   "trim": "#2a2522",
+   "roof": "tile",
+   "sources": [
+    "154812726597830"
+   ],
+   "note": "16 King's Parade: black-and-white timber"
+  },
+  "way/1222243457": {
+   "material": "timber",
+   "colour": "#ece8df",
+   "trim": "#2a2522",
+   "roof": "tile",
+   "sources": [
+    "154812726597830"
+   ],
+   "note": "15 King's Parade: black-and-white half timber, bay windows"
+  },
+  "way/1288648566": {
+   "material": "render",
+   "colour": "#ece7da",
+   "trim": "#f3f1ea",
+   "roof": "slate",
+   "sources": [
+    "198320768637501"
+   ],
+   "note": "49 Sidney St (Edinburgh Woollen Mill): cream painted render"
+  },
+  "way/1288648576": {
+   "material": "render",
+   "colour": "#f1efe9",
+   "trim": "#f6f5f1",
+   "roof": "slate",
+   "sources": [
+    "221072669388047"
+   ],
+   "note": "47 Sidney St (Sainsbury's corner): white render"
+  },
+  "way/1288648579": {
+   "material": "render",
+   "colour": "#ece4cf",
+   "trim": "#f3efe6",
+   "roof": "slate",
+   "sources": [
+    "221072669388047"
+   ],
+   "note": "48 Sidney St: cream render"
+  },
+  "way/1288648584": {
+   "material": "gault_brick",
+   "colour": "#a08b72",
+   "trim": "#f0ece4",
+   "roof": "slate",
+   "sources": [
+    "198320768637501"
+   ],
+   "note": "50-51 Sidney St (Santander): sooted brown-buff brick upper floors, red brick window heads, red fascia"
+  },
+  "way/1288730354": {
+   "material": "render",
+   "colour": "#ebe7dc",
+   "trim": "#f2efe8",
+   "roof": "slate",
+   "sources": [
+    "228098879507600"
+   ],
+   "note": "9 Market St: pale painted upper"
+  },
+  "way/1288730355": {
+   "material": "render",
+   "colour": "#f1f0eb",
+   "trim": "#f6f6f2",
+   "roof": "slate",
+   "sources": [
+    "819218512029304"
+   ],
+   "note": "3-6 Market St: white painted"
+  },
+  "way/1288730363": {
+   "material": "render",
+   "colour": "#e8e5d4",
+   "trim": "#f3f1ea",
+   "roof": "slate",
+   "sources": [
+    "819218512029304"
+   ],
+   "note": "2 Market St (Scribbler): cream painted brick"
+  },
+  "way/131662303": {
+   "material": "red_brick",
+   "colour": "#8c4f3a",
+   "trim": "#c9b48c",
+   "roof": "slate",
+   "sources": [
+    "121744929931233"
+   ],
+   "note": "Old Cavendish Lab, Free School Lane: red brick"
+  },
+  "way/134387864": {
+   "material": "render",
+   "colour": "#ebe8e0",
+   "trim": "#f3f1ec",
+   "roof": "slate",
+   "sources": [
+    "150077440702442"
+   ],
+   "note": "19 King's Parade: white painted render, navy shopfront"
+  },
+  "way/134519860": {
+   "material": "gault_brick",
+   "colour": "#c8b48c",
+   "trim": "#f2efe8",
+   "roof": "slate",
+   "sources": [
+    "814576862802302"
+   ],
+   "note": "9 King's Parade: buff gault brick, white sashes, iron balconettes (Primavera block; attribution +/- one plot)"
+  },
+  "way/134519862": {
+   "material": "render",
+   "colour": "#ece8de",
+   "trim": "#f4f2ec",
+   "roof": "slate",
+   "sources": [
+    "814576862802302"
+   ],
+   "note": "10-11 King's Parade: white/cream painted render"
+  },
+  "way/134519863": {
+   "material": "render",
+   "colour": "#c9d2d4",
+   "trim": "#f2f2ee",
+   "roof": "slate",
+   "sources": [
+    "121744929931233"
+   ],
+   "note": "The Bath House, Bene't St: pale blue-grey painted upper, navy ground floor"
+  },
+  "way/134519866": {
+   "material": "gault_brick",
+   "colour": "#c6b38c",
+   "trim": "#ece6d6",
+   "roof": "slate",
+   "sources": [
+    "121744929931233"
+   ],
+   "note": "Bene't Hostel: yellow gault brick, iron balconies"
+  },
+  "way/134519873": {
+   "material": "render",
+   "colour": "#ece5d3",
+   "trim": "#f4f1ea",
+   "roof": "slate",
+   "sources": [
+    "291159029735217"
+   ],
+   "note": "12 King's Parade: cream painted"
+  },
+  "way/134519982": {
+   "material": "render",
+   "colour": "#ecebe5",
+   "trim": "#e6e2d8",
+   "roof": "slate",
+   "sources": [
+    "465922964705436"
+   ],
+   "note": "Spalding Hostel, Bene't St: white painted render, sage green shopfronts"
+  },
+  "way/134521108": {
+   "material": "red_brick",
+   "colour": "#7f6b58",
+   "trim": "#a9cfc0",
+   "roof": "slate",
+   "sources": [
+    "121744929931233"
+   ],
+   "note": "2 Free School Lane corner: brown-grey stock brick, mint painted shopfront"
+  },
+  "way/135595261": {
+   "material": "red_brick",
+   "colour": "#8a4636",
+   "trim": "#f0ece2",
+   "roof": "slate",
+   "sources": [
+    "779342842765833"
+   ],
+   "note": "red brick block, white sashes (Market Passage)"
+  },
+  "way/135595983": {
+   "material": "red_brick",
+   "colour": "#8d8781",
+   "trim": "#d8d0bf",
+   "roof": "slate",
+   "sources": [
+    "494348351758432"
+   ],
+   "note": "22 Sidney Street (Waterstones): grey-brown brick, cream stone dressings and ground floor"
+  },
+  "way/137152219": {
+   "material": "render",
+   "colour": "#f1efe9",
+   "trim": "#2b2b2b",
+   "roof": "tile",
+   "sources": [
+    "306489237857948"
+   ],
+   "note": "Fisher House, Guildhall St: white render upper, gault ground, clay tile"
+  },
+  "way/139308033": {
+   "material": "stone",
+   "colour": "#d5c4a0",
+   "trim": "#e0d2b2",
+   "roof": "lead",
+   "sources": [
+    "3850941005027528"
+   ],
+   "note": "Clare College Chapel, buff ashlar (attribution moderate)"
+  },
+  "way/147456503": {
+   "material": "red_brick",
+   "colour": "#9c4e3a",
+   "trim": "#d4c09a",
+   "roof": "tile",
+   "sources": [
+    "858364341415407"
+   ],
+   "note": "Hall Court: same red brick + buff stone dressings"
+  },
+  "way/147456510": {
+   "material": "red_brick",
+   "colour": "#8f4b39",
+   "trim": "#cbb68c",
+   "roof": "slate",
+   "sources": [
+    "779342842765833"
+   ],
+   "note": "Kent House: red brick, stone colonnade and stair"
+  },
+  "way/147456514": {
+   "material": "red_brick",
+   "colour": "#9c4e3a",
+   "trim": "#d4c09a",
+   "roof": "tile",
+   "sources": [
+    "858364341415407"
+   ],
+   "note": "Sidney Sussex (Pearson) range: red brick, buff stone bays, balustrades and arcade, Dutch gables"
+  },
+  "way/147456518": {
+   "material": "gault_brick",
+   "colour": "#a89a82",
+   "trim": "#ece8de",
+   "roof": "slate",
+   "sources": [
+    "165143135542450"
+   ],
+   "note": "Montagu House, Sidney St: sooted gault brick"
+  },
+  "way/147456527": {
+   "material": "red_brick",
+   "colour": "#9c4e3a",
+   "trim": "#d4c09a",
+   "roof": "tile",
+   "sources": [
+    "858364341415407"
+   ],
+   "note": "same range as Hall Court (attribution by pose)"
+  },
+  "way/147456529": {
+   "material": "render",
+   "colour": "#c9c2b0",
+   "trim": "#d8d1bf",
+   "roof": "slate",
+   "sources": [
+    "221072669388047"
+   ],
+   "note": "Sidney Sussex street range: grey Roman-cement render, gothic gable"
+  },
+  "way/147456534": {
+   "material": "red_brick",
+   "colour": "#84463a",
+   "trim": "#c9a874",
+   "roof": "tile",
+   "sources": [
+    "553244496064826"
+   ],
+   "note": "South Court (Sussex St side): red brick with stone colonnade, white sashes"
+  },
+  "way/147456536": {
+   "material": "red_brick",
+   "colour": "#8c4a3a",
+   "trim": "#cfae78",
+   "roof": "tile",
+   "sources": [
+    "553244496064826"
+   ],
+   "note": "Sussex House: neo-Georgian red brick, buff stone archway bridge and dressings, white sashes"
+  },
+  "way/147487949": {
+   "material": "stone",
+   "colour": "#d3c4a3",
+   "trim": "#ddd0b3",
+   "roof": "slate",
+   "sources": [
+    "916179375900871"
+   ],
+   "note": "Christ's College St Andrew's St range, buff ashlar, battlemented"
+  },
+  "way/147488007": {
+   "material": "stone",
+   "colour": "#d0c09e",
+   "trim": "#dccfb0",
+   "roof": "slate",
+   "sources": [
+    "916179375900871"
+   ],
+   "note": "Christ's College Library, buff ashlar"
+  },
+  "way/148215565": {
+   "material": "red_brick",
+   "colour": "#7f4537",
+   "trim": "#cbbd9c",
+   "roof": "tile",
+   "sources": [
+    "497620565007675"
+   ],
+   "note": "Tudor red brick range, tall chimneys, stone dressings"
+  },
+  "way/148880396": {
+   "material": "gault_brick",
+   "colour": "#9a8e78",
+   "trim": "#c9b48c",
+   "roof": "slate",
+   "sources": [
+    "347396670530528"
+   ],
+   "note": "sooted gault brick Gothic range with stone dressings, battlements"
+  },
+  "way/151527568": {
+   "material": "stone",
+   "colour": "#cbb68c",
+   "trim": "#d9c9a3",
+   "roof": "slate",
+   "sources": [
+    "530047458013421"
+   ],
+   "note": "10 Peas Hill: buff ashlar, rusticated ground"
+  },
+  "way/157588859": {
+   "material": "red_brick",
+   "colour": "#8c4b3b",
+   "trim": "#cfc2a2",
+   "roof": "tile",
+   "sources": [
+    "497620565007675"
+   ],
+   "note": "Old Lodge: Tudor-style red brick, stone window dressings"
+  },
+  "way/157588863": {
+   "material": "red_brick",
+   "colour": "#8e4c3c",
+   "trim": "#cfc2a2",
+   "roof": "tile",
+   "sources": [
+    "497620565007675"
+   ],
+   "note": "red brick range with stone dressings"
+  },
+  "way/157588871": {
+   "material": "red_brick",
+   "colour": "#806c5c",
+   "trim": "#c8bb9c",
+   "roof": "tile",
+   "sources": [
+    "614471353136652"
+   ],
+   "note": "68 Trumpington St range: brown/grey brick, stone mullions and gabled crenellated parapet; overcast, low confidence on material"
+  },
+  "way/157588876": {
+   "material": "stone",
+   "colour": "#c2aa80",
+   "trim": "#b89f76",
+   "roof": "slate",
+   "sources": [
+    "342344917408828"
+   ],
+   "note": "Dining Hall range: rock-faced buff sandstone Tudor-Gothic, mullioned windows, big arched timber gate (seen overcast)"
+  },
+  "way/164830069": {
+   "material": "stone",
+   "colour": "#cbbd9a",
+   "trim": "#d8ccad",
+   "roof": "slate",
+   "sources": [
+    "614471353136652"
+   ],
+   "note": "Scott's Building (Trumpington St): pale buff stone Gothic gabled front"
+  },
+  "way/164848658": {
+   "material": "stone",
+   "colour": "#d8caa4",
+   "trim": "#e2d6b6",
+   "roof": "slate",
+   "sources": [
+    "942670703197540"
+   ],
+   "note": "Scott's Building: pale buff limestone Gothic Revival, turrets, oriel, slate roof"
+  },
+  "way/165737330": {
+   "material": "stone",
+   "colour": "#c9b08c",
+   "trim": "#d3bc98",
+   "roof": "lead",
+   "sources": [
+    "2901591450087822"
+   ],
+   "note": "Cockerell building, warm sandstone ashlar, Senate House Passage"
+  },
+  "way/165737335": {
+   "material": "gault_brick",
+   "colour": "#b39a6c",
+   "trim": "#c9b48a",
+   "roof": "flat",
+   "sources": [
+    "768407353820398"
+   ],
+   "note": "yellow stock brick block in lane"
+  },
+  "way/165737341": {
+   "material": "gault_brick",
+   "colour": "#b39a6c",
+   "trim": "#c9b48a",
+   "roof": "flat",
+   "sources": [
+    "768407353820398"
+   ],
+   "note": "yellow stock brick wall/block in lane (diffuse estimate)"
+  },
+  "way/229676053": {
+   "material": "stone",
+   "colour": "#cbb68e",
+   "trim": "#c8b088",
+   "roof": "slate",
+   "sources": [
+    "228156478657440"
+   ],
+   "note": "Lloyds Bank, 3 Sidney St: buff Ketton-type ashlar, carved oriel, timber doors"
+  },
+  "way/229680561": {
+   "material": "flint",
+   "colour": "#716b62",
+   "trim": "#cdbf9e",
+   "roof": "slate",
+   "sources": [
+    "228098879507600"
+   ],
+   "note": "Henry Martyn Hall: knapped flint, stone gothic dressings"
+  },
+  "way/274090660": {
+   "material": "gault_brick",
+   "colour": "#b9a580",
+   "trim": "#d6cbb0",
+   "roof": "slate",
+   "sources": [
+    "490320359088033"
+   ],
+   "note": "gault brick wall by Lion Yard"
+  },
+  "way/40937938": {
+   "material": "gault_brick",
+   "colour": "#b39b74",
+   "trim": "#2a2a2a",
+   "roof": "slate",
+   "sources": [
+    "490320359088033"
+   ],
+   "note": "Lion Yard: buff brick, dark glazed shopfronts, slate mansard"
+  },
+  "way/500917458": {
+   "material": "timber",
+   "colour": "#e6e2d8",
+   "trim": "#262626",
+   "roof": "slate",
+   "sources": [
+    "1113235906084204"
+   ],
+   "note": "narrow neighbour of 17 King's Parade, white with black framing (moderate confidence)"
+  },
+  "way/59620751": {
+   "material": "stone",
+   "colour": "#b2a68c",
+   "trim": "#c4b89c",
+   "roof": "lead",
+   "sources": [
+    "269646291611424"
+   ],
+   "note": "St Botolph's church: clunch/rubble with ashlar dressings, battlemented"
+  }
+ }
+}

@@ -13,12 +13,16 @@ The style is inferred per building (deterministic: md5 of osm_id), the layout pe
      house/yes/university/terrace with few dates; ~1.2k carry a college or university operator).
   2. palette(style) -> material, wall and trim colour; colour_hint (if present) snaps the material
      (reddish -> red brick, pale yellow-grey -> gault brick or ashlar, white -> render, dark grey -> glass/render)
-     and drives the wall colour.
+     and drives the wall colour. A photo-read per-building override (data/annotations/colours/*.json, keyed by OSM id)
+     beats both the palette and colour_hint: material, wall and trim colour only (never the layout).
   3. per-style generator: storeys from building:levels or height/3.1, bays 2.8-3.2 m (window count like
      facade_parts.default_layout), shopfront ground floor with the OSM name on the fascia for shops/amenities.
 All elements stay inside 0..length and below the eave; no dormers (the roof is not known per wall).
 """
+import glob
 import hashlib
+import json
+import os
 import re
 
 STYLES = ("chapel", "college_gothic", "college_tudor", "college_classical", "college_modern", "institutional",
@@ -416,6 +420,38 @@ def _has_shop(tags, L, style):
     return b in ("commercial",) and style in ("georgian", "victorian", "vernacular", "modern")
 
 
+_OVR = None
+OVR_MAT = {"gault_brick": "brick", "red_brick": "brick", "brick": "brick", "stone": "stone", "render": "render",
+           "stucco": "stucco", "timber": "timber", "glass": "glass", "flint": "flint"}
+
+
+def colour_override(osm_id):
+    """{material, colour, trim, ...} for a building from data/annotations/colours/*.json (session 37), or None."""
+    global _OVR
+    if _OVR is None:
+        _OVR = {}
+        d = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data/annotations/colours")
+        for f in sorted(glob.glob(os.path.join(d, "*.json"))):
+            try:
+                _OVR.update(json.load(open(f)).get("buildings", {}))
+            except Exception as e:  # a half-written file from a concurrent editor: skip it
+                print("colour override unreadable", f, repr(e))
+    return _OVR.get(osm_id)
+
+
+def apply_override(ann, osm_id):
+    """Set material / wall_colour / trim_colour of an annotation dict from the photo-read override, if any."""
+    o = colour_override(osm_id)
+    if not o:
+        return False
+    if o.get("material") in OVR_MAT:
+        ann["material"] = OVR_MAT[o["material"]]
+    for k, a in (("colour", "wall_colour"), ("trim", "trim_colour")):
+        if re.fullmatch(r"#[0-9a-fA-F]{6}", str(o.get(k, ""))):
+            ann[a] = o[k]
+    return True
+
+
 def layout(wall):
     """Annotation wall dict (SCHEMA.md) for an un-annotated wall."""
     L = float(wall["length"])
@@ -435,6 +471,9 @@ def layout(wall):
     ann = {"id": wid, "style": style, "material": mat, "wall_colour": wc, "trim_colour": tc, "cornice": "none",
            "parapet": False, "string_courses": [], "quoins": False, "pilasters": [], "elements": [],
            "confidence": "low", "notes": "facade_styles.layout: inferred from OSM tags (%s)" % style}
+    if apply_override(ann, oid):
+        mat, wc, tc = ann["material"], ann["wall_colour"], ann["trim_colour"]
+        ann["notes"] += "; material/colour from photo override (data/annotations/colours)"
     if L < 2.0 or H < 2.5 or style == "canopy":
         ann["storeys"], ann["floor_z"] = 1, [0.0]
         return ann

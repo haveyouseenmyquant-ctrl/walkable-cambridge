@@ -17,7 +17,7 @@
    "material": "render",
    "wall_colour": "#ece8de",
    "trim_colour": "#1d1f21",
-   "cornice_z": 5.2,
+   "cornice_z": 6.1,
    "cornice": "none",
    "parapet": true,
    "string_courses": [],
@@ -41,8 +41,8 @@
      "style": "modern",
      "x": 2.3,
      "w": 3.2,
-     "z": 3.8,
-     "h": 1.3,
+     "z": 3.9,
+     "h": 2.0,
      "panes": [
       3,
       1
@@ -55,8 +55,8 @@
      "style": "modern",
      "x": 5.5,
      "w": 1.6,
-     "z": 3.8,
-     "h": 1.3,
+     "z": 3.9,
+     "h": 2.0,
      "panes": [
       2,
       1
@@ -66,7 +66,7 @@
     }
    ],
    "confidence": "low",
-   "notes": "Modern block (BrewDog bar; CAU restaurant in older photos). Black-framed full-height glazing on the ground floor, recessed behind a round black column. A white rendered box projects above it with a wide black-framed window, plus a dark brick bay toward the west next to the railed yard (red-brick piers and an iron gate). In reality the block rises to about 3 storeys. The OSM eave height of 5.3 m covers only the ground floor and the first band, so I annotated only that. The shop name follows the most recent photos (BrewDog signs); the older 465114114745032 / 465922964705436 show CAU."
+   "notes": "Modern block (BrewDog bar; CAU restaurant in older photos). Black-framed full-height glazing on the ground floor, recessed behind a round black column. A white rendered box projects above it with a wide black-framed window, plus a dark brick bay toward the west next to the railed yard (red-brick piers and an iron gate). In reality the block rises to about 3 storeys. The OSM eave height of 5.3 m covers only the ground floor and the first band, so I annotated only that. The shop name follows the most recent photos (BrewDog signs); the older 465114114745032 / 465922964705436 show CAU. Session 37: the white box is one tall storey (window ~3.9-5.9 m, roof ~6.3 m by DSM 1.5-2 m inside the footprint; mapillary 385651662774077); eave raised from 5.3 to the DSM 6.3 m, the taller brick block behind is not part of this wall."
   }
  ]
 }

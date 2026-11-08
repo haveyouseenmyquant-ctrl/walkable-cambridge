@@ -1,0 +1,116 @@
+{
+ "osm_id": "way/1047150808",
+ "sources": [
+  "mapillary:223002399596400",
+  "mapillary:197992828647543"
+ ],
+ "walls": [
+  {
+   "id": "way/1047150808:8",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.2,
+    7.8
+   ],
+   "material": "brick",
+   "wall_colour": "#a8553b",
+   "trim_colour": "#e1d6bf",
+   "cornice_z": 11.0,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.2,
+    7.8
+   ],
+   "quoins": true,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.4,
+     "w": 0.9,
+     "z": 5.0,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "bay",
+     "x": 5.6,
+     "w": 2.8,
+     "z": 4.8,
+     "h": 2.0,
+     "panes": [
+      4,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.4,
+     "w": 0.9,
+     "z": 8.4,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.6,
+     "w": 2.6,
+     "z": 8.3,
+     "h": 1.7,
+     "panes": [
+      4,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.6,
+     "w": 1.2,
+     "z": 11.2,
+     "h": 1.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.1,
+     "x1": 9.5,
+     "z1": 4.2,
+     "fascia_text": "",
+     "fascia_colour": "#2b2f38",
+     "text_colour": "#d6d6d6",
+     "door_x": 7.8,
+     "stallriser": 0.0,
+     "awning": false
+    }
+   ],
+   "confidence": "medium",
+   "notes": "16-17 Sidney St: late-Victorian red brick front with stone quoin strips at both ends, a stone 4-light canted oriel/bay at first floor and a 4-light mullion-and-transom window above under a stone-coped Dutch gable with carved stone panel (gable apex ~13.5 m, small window in gable). Narrow single sash window bay on the north (p0) side. Ground floor: stone-framed shopfront with a dark charcoal fascia (was Austin Reed in the photo; no current OSM POI so fascia_text left blank)."
+  }
+ ]
+}

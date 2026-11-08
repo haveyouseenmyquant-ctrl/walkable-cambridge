@@ -1,0 +1,263 @@
+{
+ "osm_id": "relation/2214089",
+ "sources": [
+  "mapillary:300255014830852"
+ ],
+ "walls": [
+  {
+   "id": "relation/2214089:13",
+   "storeys": 4,
+   "floor_z": [
+    0.0,
+    3.4,
+    6.52,
+    9.45
+   ],
+   "material": "stone",
+   "wall_colour": "#b5a487",
+   "trim_colour": "#c9bba0",
+   "cornice_z": 11.91,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    3.4
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.3,
+    4.7,
+    9.1,
+    13.5,
+    17.9
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.5,
+     "w": 1.4,
+     "z": 1.13,
+     "h": 1.89,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 6.9,
+     "w": 1.4,
+     "z": 1.13,
+     "h": 1.89,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 11.3,
+     "w": 1.4,
+     "z": 1.13,
+     "h": 1.89,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 15.7,
+     "w": 1.4,
+     "z": 1.13,
+     "h": 1.89,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.5,
+     "w": 1.4,
+     "z": 4.06,
+     "h": 1.89,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 6.9,
+     "w": 1.4,
+     "z": 4.06,
+     "h": 1.89,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 11.3,
+     "w": 1.4,
+     "z": 4.06,
+     "h": 1.89,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 15.7,
+     "w": 1.4,
+     "z": 4.06,
+     "h": 1.89,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.5,
+     "w": 1.4,
+     "z": 7.09,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 6.9,
+     "w": 1.4,
+     "z": 7.09,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 11.3,
+     "w": 1.4,
+     "z": 7.09,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 15.7,
+     "w": 1.4,
+     "z": 7.09,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.5,
+     "w": 1.4,
+     "z": 9.93,
+     "h": 1.32,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 6.9,
+     "w": 1.4,
+     "z": 9.93,
+     "h": 1.32,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 11.3,
+     "w": 1.4,
+     "z": 9.93,
+     "h": 1.32,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 15.7,
+     "w": 1.4,
+     "z": 9.93,
+     "h": 1.32,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Whewell's Court (Salvin, 1860s) street range on Sidney Street: grey-buff ashlar Gothic Revival, buttressed bays, two-light mullioned windows with hood moulds, no shops. Only an oblique Mapillary view (300255014830852). walls.json height 6.4 m is far below the ~13 m eave seen in the photo. Session 37: vertical dimensions scaled x0.95 to fit the LiDAR DSM eave (12.1 m)."
+  }
+ ]
+}

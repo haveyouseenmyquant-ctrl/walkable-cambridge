@@ -1,0 +1,219 @@
+{
+ "osm_id": "way/1047150809",
+ "sources": [
+  "mapillary:223002399596400",
+  "mapillary:197992828647543",
+  "mapillary:286589193097603"
+ ],
+ "walls": [
+  {
+   "id": "way/1047150809:3",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.4,
+    8.4,
+    11.8
+   ],
+   "material": "brick",
+   "wall_colour": "#a0553e",
+   "trim_colour": "#ddd0b3",
+   "cornice_z": 14.6,
+   "cornice": "classical",
+   "parapet": true,
+   "string_courses": [
+    4.4,
+    8.4
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.1,
+    11.0
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.5,
+     "w": 1.2,
+     "z": 5.0,
+     "h": 2.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "pediment",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.5,
+     "w": 1.1,
+     "z": 8.9,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.5,
+     "w": 1.0,
+     "z": 12.3,
+     "h": 1.5,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.2,
+     "w": 1.2,
+     "z": 5.0,
+     "h": 2.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.2,
+     "w": 1.1,
+     "z": 8.9,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.2,
+     "w": 1.0,
+     "z": 12.3,
+     "h": 1.5,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.9,
+     "w": 1.2,
+     "z": 5.0,
+     "h": 2.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.9,
+     "w": 1.1,
+     "z": 8.9,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.9,
+     "w": 1.0,
+     "z": 12.3,
+     "h": 1.5,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.6,
+     "w": 1.2,
+     "z": 5.0,
+     "h": 2.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.6,
+     "w": 1.1,
+     "z": 8.9,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.6,
+     "w": 1.0,
+     "z": 12.3,
+     "h": 1.5,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.1,
+     "x1": 11.0,
+     "z1": 4.3,
+     "fascia_text": "",
+     "fascia_colour": "#e6dcc2",
+     "text_colour": "#5a4a32",
+     "door_x": 4.0,
+     "stallriser": 0.0,
+     "awning": false
+    }
+   ],
+   "confidence": "medium",
+   "notes": "18-19 Sidney St: neo-Georgian/Edwardian red brick with heavy stone dressings: stone window architraves with keystones, first-floor window on the north bay has a pedimented stone surround and a wrought-iron balconette, stone band courses and a stone cornice. Cream stone ground-floor surround with signboard fascia (was Jack Wills in the photo; no current OSM POI, fascia_text blank). 4 bays estimated over 11.1 m; 'Sidney Street' nameplate on the north pier."
+  }
+ ]
+}

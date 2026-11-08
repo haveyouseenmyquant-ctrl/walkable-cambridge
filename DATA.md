@@ -62,6 +62,17 @@ B1977.14.1066 - Yale Center for British Art.jpg" (Wilkins' elevation, Yale Cente
 "View of Corpus Christi College from Trumpington Street" (Robert Lamb) and 631710 "The Main Gate, Corpus Christi
 College" (RichTea), both CC BY-SA 2.0; licences checked via the Commons API, used for shape/proportion/colour only, no
 pixels.
+`scripts/zone_bespoke_oldschools.py` (session 37, Old Schools east front by Stephen Wright, way/135762298): Commons
+"Old Schools from Kings Parade, Cambridge, UK - Diliff.jpg" (Diliff, CC BY-SA 3.0) and "Cambridge - King's Parade -
+View WNW on Old Schools 1837 & Senate House 1730.jpg" (Txllxt TxllxT, CC BY-SA 4.0); licences checked via the Commons
+API, used for shape/proportion/colour only (5-bay open rusticated arcade, arched recesses with pedimented windows,
+swag frieze, balustrade with urns), no pixels.
+`scripts/zone_bespoke_greatgate.py` (session 37, Trinity College Great Gate, street face, part of way/151179441):
+Commons "Great Gate, Trinity College, Cambridge (outside).jpg" (Hans Wolff, public domain) and "Cambridge - Trinity
+Street - View West on the Great Gate of Trinity College early 17th century.jpg" (Txllxt TxllxT, CC BY-SA 4.0);
+licences checked via the Commons API, used for shape/proportion/colour only (brick turrets with stone quoins, carriage
+and wicket arches, shield band, Henry VIII niche, panelled battlements), no pixels. The range body under it is the
+OSM footprint with the LiDAR DSM roof (data/lidar/dsm_1m.tif).
 Market stalls / street furniture (session 34, `scripts/zone_props.py`, `scripts/zone_props_furniture.py`; same terms, licence checked via the Commons API): "Cambridge Market stalls at lunchtime" (Jonosunde, CC BY-SA 4.0), geograph 5652394 "Looking over the market stalls in Cambridge" (Richard Humphrey), 1133717 "Empty market stalls", 703624 "Cambridge Market" and 972242 "A vital part of Cambridge" (Sebastian Ballard), all CC BY-SA 2.0. Used only to read the stall look (white canvas with red/blue/green/yellow stripes down the slope, scalloped hems, scaffold frames, striped counter cloths, red side sheets); no pixels from them are in the world.
 
 ## Held-out benchmark (session 8)
@@ -84,3 +95,5 @@ under CC-BY-SA 4.0. Photo ids, URLs and contributors are in `site/facades/credit
 Never used: the 200 held-out benchmark photos, or frames of the same sequence within 15 m of one (heldout.json
 `sequence_near`). `--strict` also skips every frame of a held-out sequence. Downloaded 2048 px thumbnails are cached in
 `data/raw/mapillary_facade/` (git-ignored, ~100 MB).
+
+Ring-1 annotations, session 37 (`data/annotations/ring1/`; same terms, used only to read storeys, bays, shopfronts and colours; no pixels in the world): Commons "St Mary's Street, Cambridge.jpg" (Smb1001, CC BY-SA 4.0), "St Mary's Street. Cambridge - geograph 7416906" (Hugh Venables, CC BY-SA 2.0), "Cambridge - Trinity Lane - View East into Senate House Passage" (Txllxt TxllxT, CC BY-SA 4.0), "Senate House Passage - geograph 5893878" (N Chadwick, CC BY-SA 2.0); plus non-held-out Mapillary images (CC BY-SA 4.0) listed in each annotation's sources. Ring-1 colours (`data/annotations/colours/ring1.json`) were read from non-held-out Mapillary images listed per building.

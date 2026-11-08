@@ -1,0 +1,131 @@
+{
+ "osm_id": "way/1288738591",
+ "sources": [
+  "mapillary:935055160579489",
+  "mapillary:218778726265898",
+  "mapillary:963257781095298"
+ ],
+ "walls": [
+  {
+   "id": "way/1288738591:1",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.0,
+    6.9
+   ],
+   "material": "timber",
+   "wall_colour": "#efece4",
+   "trim_colour": "#1e1b18",
+   "cornice_z": 9.6,
+   "cornice": "none",
+   "parapet": false,
+   "string_courses": [
+    4.0,
+    6.9
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.47,
+     "w": 3.2,
+     "z": 4.4,
+     "h": 1.8,
+     "panes": [
+      6,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.47,
+     "w": 3.0,
+     "z": 7.4,
+     "h": 1.7,
+     "panes": [
+      6,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.47,
+     "w": 1.1,
+     "z": 10.2,
+     "h": 1.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.8,
+     "w": 3.2,
+     "z": 4.4,
+     "h": 1.8,
+     "panes": [
+      6,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.8,
+     "w": 3.0,
+     "z": 7.4,
+     "h": 1.7,
+     "panes": [
+      6,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.8,
+     "w": 1.1,
+     "z": 10.2,
+     "h": 1.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 8.969999999999999,
+     "z1": 3.8,
+     "fascia_text": "Jigsaw",
+     "fascia_colour": "#5a3a22",
+     "text_colour": "#e9dcc0",
+     "door_x": 7.77,
+     "stallriser": 0.5,
+     "awning": false
+    }
+   ],
+   "confidence": "medium",
+   "notes": "27-28 Trinity St: black-and-white Tudor-revival timber frame, two jettied gabled bays facing the street, each with a wide mullioned-and-transomed leaded casement on 1st and 2nd floors and a small gable window; pargetted white infill. Dark-stained wood shopfront (Jigsaw, red oval hanging sign). Gables rise above cornice_z."
+  }
+ ]
+}

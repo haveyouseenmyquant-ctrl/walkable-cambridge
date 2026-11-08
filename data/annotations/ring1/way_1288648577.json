@@ -1,0 +1,214 @@
+{
+ "osm_id": "way/1288648577",
+ "sources": [
+  "mapillary:556976891953894",
+  "mapillary:166355842062342"
+ ],
+ "walls": [
+  {
+   "id": "way/1288648577:8",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.1,
+    6.9,
+    9.3
+   ],
+   "material": "brick",
+   "wall_colour": "#7e4a36",
+   "trim_colour": "#f2efe8",
+   "cornice_z": 11.0,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.1
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.69,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.69,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.69,
+     "w": 0.9,
+     "z": 9.7,
+     "h": 1.1,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.27,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.27,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.27,
+     "w": 0.9,
+     "z": 9.7,
+     "h": 1.1,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.84,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.84,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.84,
+     "w": 0.9,
+     "z": 9.7,
+     "h": 1.1,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.42,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.42,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.42,
+     "w": 0.9,
+     "z": 9.7,
+     "h": 1.1,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 10.91,
+     "z1": 4.0,
+     "fascia_text": "Heffers",
+     "fascia_colour": "#2f3236",
+     "text_colour": "#f2f2f2",
+     "door_x": 9.11,
+     "stallriser": 0.4,
+     "awning": false
+    }
+   ],
+   "confidence": "medium",
+   "notes": "20 Trinity St (Heffers): dark red-brown brick, 4 storeys, white sashes with red rubbed-brick heads; full-width modern dark charcoal shopfront and deep fascia lettered 'heffers' in white, projecting square hanging sign."
+  }
+ ]
+}

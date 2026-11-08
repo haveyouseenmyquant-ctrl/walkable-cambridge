@@ -1,0 +1,214 @@
+{
+ "osm_id": "way/1288738589",
+ "sources": [
+  "mapillary:935055160579489",
+  "mapillary:461137474974794"
+ ],
+ "walls": [
+  {
+   "id": "way/1288738589:1",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.1,
+    7.0,
+    9.4
+   ],
+   "material": "brick",
+   "wall_colour": "#c9b98f",
+   "trim_colour": "#f4f2ec",
+   "cornice_z": 10.9,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.1
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.71,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.71,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.71,
+     "w": 0.9,
+     "z": 9.8,
+     "h": 1.1,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.32,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.32,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.32,
+     "w": 0.9,
+     "z": 9.8,
+     "h": 1.1,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.92,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.92,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.92,
+     "w": 0.9,
+     "z": 9.8,
+     "h": 1.1,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.54,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.54,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.54,
+     "w": 0.9,
+     "z": 9.8,
+     "h": 1.1,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 10.94,
+     "z1": 4.0,
+     "fascia_text": "SageBrown",
+     "fascia_colour": "#f4f2ec",
+     "text_colour": "#1a1a1a",
+     "door_x": 5.62,
+     "stallriser": 0.6,
+     "awning": false
+    }
+   ],
+   "confidence": "medium",
+   "notes": "30-31 Trinity St: buff gault brick, 4 storeys, four bays of white sashes with wrought-iron balconettes on the first floor; painted white shopfront with a row of circular glazing-bar roundels in the transom (photographed as Jaeger; OSM fascia SageBrown)."
+  }
+ ]
+}

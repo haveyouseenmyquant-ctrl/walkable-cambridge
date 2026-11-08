@@ -10645,9 +10645,10 @@
     -82.44
    ],
    "ground_z": 10.34,
-   "eave_z": 12.98,
-   "height": 2.64,
-   "dist_centre": 161.9
+   "eave_z": 23.35,
+   "height": 13.01,
+   "dist_centre": 161.9,
+   "eave_fixed": true
   },
   {
    "id": "way/134519870:4",
@@ -12321,56 +12322,6 @@
    "eave_z": 22.55,
    "height": 13.62,
    "dist_centre": 143.3
-  },
-  {
-   "id": "way/135762298:0",
-   "osm_id": "way/135762298",
-   "tags": {
-    "addr:city": "Cambridge",
-    "addr:postcode": "CB2 1UH",
-    "building": "university",
-    "operator": "University of Cambridge",
-    "ref": "A011",
-    "source": "laser measure ground survey"
-   },
-   "length": 2.05,
-   "p0": [
-    -236.83,
-    40.56
-   ],
-   "p1": [
-    -234.82,
-    40.92
-   ],
-   "ground_z": 9.45,
-   "eave_z": 22.58,
-   "height": 13.13,
-   "dist_centre": 134.0
-  },
-  {
-   "id": "way/135762298:4",
-   "osm_id": "way/135762298",
-   "tags": {
-    "addr:city": "Cambridge",
-    "addr:postcode": "CB2 1UH",
-    "building": "university",
-    "operator": "University of Cambridge",
-    "ref": "A011",
-    "source": "laser measure ground survey"
-   },
-   "length": 2.01,
-   "p0": [
-    -236.75,
-    61.71
-   ],
-   "p1": [
-    -238.75,
-    61.5
-   ],
-   "ground_z": 9.53,
-   "eave_z": 23.57,
-   "height": 14.03,
-   "dist_centre": 134.9
   },
   {
    "id": "way/135762301:1",
@@ -41436,9 +41387,10 @@
     -83.55
    ],
    "ground_z": 10.14,
-   "eave_z": 15.46,
-   "height": 5.32,
-   "dist_centre": 140.8
+   "eave_z": 16.4,
+   "height": 6.26,
+   "dist_centre": 140.8,
+   "eave_fixed": true
   },
   {
    "id": "way/1095395397:8",
@@ -47078,9 +47030,10 @@
     4.69
    ],
    "ground_z": 10.29,
-   "eave_z": 20.0,
-   "height": 9.71,
-   "dist_centre": 62.0
+   "eave_z": 20.55,
+   "height": 10.26,
+   "dist_centre": 62.0,
+   "eave_fixed": true
   },
   {
    "id": "relation/2196957:10",
@@ -47442,9 +47395,10 @@
     323.97
    ],
    "ground_z": 9.67,
-   "eave_z": 16.09,
-   "height": 6.43,
-   "dist_centre": 260.0
+   "eave_z": 21.43,
+   "height": 11.76,
+   "dist_centre": 260.0,
+   "eave_fixed": true
   },
   {
    "id": "relation/2214089:16",

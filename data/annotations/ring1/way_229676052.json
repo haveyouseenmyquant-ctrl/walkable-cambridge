@@ -1,0 +1,358 @@
+{
+ "osm_id": "way/229676052",
+ "sources": [
+  "mapillary:730835867587055",
+  "mapillary:1174741026292317",
+  "mapillary:1411014675940100"
+ ],
+ "walls": [
+  {
+   "id": "way/229676052:0",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.2,
+    7.6
+   ],
+   "material": "brick",
+   "wall_colour": "#a2513a",
+   "trim_colour": "#e9e4d8",
+   "cornice_z": 10.9,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.2,
+    7.6
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.1,
+    34.1
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.6,
+     "w": 1.3,
+     "z": 4.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.6,
+     "w": 1.2,
+     "z": 8.2,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.7,
+     "w": 1.3,
+     "z": 4.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.7,
+     "w": 1.2,
+     "z": 8.2,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.8,
+     "w": 1.3,
+     "z": 4.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.8,
+     "w": 1.2,
+     "z": 8.2,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 10.9,
+     "w": 1.3,
+     "z": 4.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 10.9,
+     "w": 1.2,
+     "z": 8.2,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 14.0,
+     "w": 1.3,
+     "z": 4.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 14.0,
+     "w": 1.2,
+     "z": 8.2,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 17.1,
+     "w": 1.3,
+     "z": 4.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 17.1,
+     "w": 1.2,
+     "z": 8.2,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 20.2,
+     "w": 1.3,
+     "z": 4.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 20.2,
+     "w": 1.2,
+     "z": 8.2,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 23.3,
+     "w": 1.3,
+     "z": 4.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 23.3,
+     "w": 1.2,
+     "z": 8.2,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 26.4,
+     "w": 1.3,
+     "z": 4.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 26.4,
+     "w": 1.2,
+     "z": 8.2,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 29.5,
+     "w": 1.3,
+     "z": 4.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 29.5,
+     "w": 1.2,
+     "z": 8.2,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 32.6,
+     "w": 1.3,
+     "z": 4.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 32.6,
+     "w": 1.2,
+     "z": 8.2,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 34.0,
+     "z1": 4.1,
+     "fascia_text": "Marks & Spencer",
+     "fascia_colour": "#bdbcb6",
+     "text_colour": "#1f3b2c",
+     "door_x": 17.0,
+     "stallriser": 0.0,
+     "awning": false
+    }
+   ],
+   "confidence": "low",
+   "notes": "6-11 Sidney St (M&S): Edwardian red-brick upper floors with white stone window architraves and pilaster strips over a modern full-width shopfront (grey stone/glass, recessed entrance) with 'Marks & Spencer' in dark green letters on a grey fascia band. Bay count (11, ~3.1 m pitch) estimated from oblique views; the street photos suggest a further attic storey above the 11.3 m eave (OSM footprint sits ~4 m behind the street line) which is not modelled."
+  }
+ ]
+}

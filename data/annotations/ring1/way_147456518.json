@@ -1,0 +1,142 @@
+{
+ "osm_id": "way/147456518",
+ "sources": [
+  "mapillary:479591636494777",
+  "mapillary:851960152196637"
+ ],
+ "walls": [
+  {
+   "id": "way/147456518:4",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.6,
+    8.2,
+    11.4
+   ],
+   "material": "brick",
+   "wall_colour": "#8e402c",
+   "trim_colour": "#ddcfb0",
+   "cornice_z": 14.4,
+   "cornice": "bracketed",
+   "parapet": false,
+   "string_courses": [
+    4.6
+   ],
+   "quoins": true,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.4,
+     "w": 1.1,
+     "z": 5.2,
+     "h": 2.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.4,
+     "w": 1.0,
+     "z": 9.0,
+     "h": 1.8,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.0,
+     "w": 1.3,
+     "z": 5.0,
+     "h": 2.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.0,
+     "w": 1.2,
+     "z": 8.8,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "pediment",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.0,
+     "w": 1.1,
+     "z": 12.0,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.4,
+     "w": 0.9,
+     "z": 12.2,
+     "h": 1.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 1.4,
+     "w": 1.2,
+     "h": 1.5
+    },
+    {
+     "type": "dormer",
+     "x": 4.0,
+     "w": 1.3,
+     "h": 1.5
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 5.5,
+     "z1": 4.2,
+     "fascia_text": "Ecco",
+     "fascia_colour": "#e3d6b8",
+     "text_colour": "#4a3f30",
+     "door_x": 3.6,
+     "stallriser": 0.4,
+     "awning": false
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Montagu House (Sidney Sussex College, 1930s neo-Georgian), corner face to Sidney St/Sussex St: deep red brick with banded/rusticated brick corner piers, a stone frontispiece bay (x~4) with stone balcony at second floor and carved college arms in a broken pediment, arched multi-pane sash on the first floor of the other bay, heavy black timber eaves cornice and slate mansard with pedimented dormers above. Stone ground-floor surround with 'MONTAGU HOUSE' incised in the frieze; shop was Costa in the photo, fascia_text from current OSM POI (Ecco, 25) is a guess."
+  }
+ ]
+}
