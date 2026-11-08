@@ -626,3 +626,37 @@ Next
 2. Tree shape from LiDAR (crown base, radius), and fog distance/colour tuned with the white sky.
 3. Facade quality (reject road/sky pieces), synthetic per-building facades, centre first.
 4. WebKit: try an older Playwright WebKit or Safari's own WebDriver (safaridriver) for the Safari test.
+
+## 2026-11-08 — Session 20 (entry written in session 21): road markings layer, not published
+
+- Commit 511dd5d: scripts/markings.py builds an OSM road-markings layer (centre dashes, double yellows) and
+  site/app/markings.js draws it; it also added the `?light=` (scales sun and sky light) and `?gk=` (ground albedo) look params.
+  The session ended before a journal entry or a publish. The A/B results it left in /tmp (67 views ≤ 520 m):
+  markings 25.57 vs 25.79 without them (neutral); markings + light 0.6 26.19.
+- The live build 01b805ec26237475 (session 19 sky) finished its full benchmark: photo_match_score **17.56**
+  (200 views), judged_realism **25.6**, visual_quality **16.79**.
+
+## 2026-11-08 — Session 21: darker lighting (photo_match on views ≤ 520 m 25.79 → 26.80)
+
+Done
+- Finished session 20's A/B on the 67 benchmark views ≤ 520 m (control: session 19, 25.79):
+  markings + light 1.0 **25.57**, markings + light 0.6 **26.19**, no markings + light 0.6 **26.41**,
+  markings + light 0.45 **26.80** (37 views better by > 1, 10 worse).
+- Shipped: light scale 0.45 by default (main.js); road markings off by default (`?markings=1` turns them on).
+  The markings cost ~0.2 at equal light and the 0.45 run with them is still the best. Side-by-side:
+  docs/light_session21.jpg (photo | session 19 | light 0.45 with markings; photos Mapillary CC-BY-SA 4.0,
+  ids 799949717293550, 423020809560124, 204824241221338). New helper: scripts/sidebyside.py.
+- Published (release world-20261108-0624). measure.sh: walkable 99.38, buildings 100, site_errors 0, fps 60.
+  service.sh will benchmark the new build.
+
+Learned
+- The renders were overexposed compared with the overcast photos. Darker is better down to at least 0.45; the
+  minimum isn't found yet. Two A/B runs in parallel (3 workers each) take ~23 min.
+- Side-by-side middle row (view 423020809560124): a tiled pitched roof sits on the road right in front of the
+  camera, at eye level. A building with a wrong base or height, or a roof mesh dropped to the ground: a geometry
+  bug worth finding (search benchmark renders for roof texture in the lower half).
+
+Next
+1. Light 0.3 / 0.35, and `gk` (ground albedo) with it; also tone mapping exposure.
+2. The ground-level roof bug in view 423020809560124 (and any others like it).
+3. Ground holes (sky-coloured lower third), tree shape from LiDAR, facade quality, centre first.
