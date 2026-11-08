@@ -1,0 +1,378 @@
+{
+ "osm_id": "way/1099847939",
+ "sources": [
+  "mapillary 934928010476370",
+  "mapillary 295207078830584",
+  "mapillary 1078821085942013"
+ ],
+ "walls": [
+  {
+   "id": "way/1099847939:5",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.2,
+    7.9
+   ],
+   "material": "brick",
+   "wall_colour": "#85735a",
+   "trim_colour": "#f1efe8",
+   "cornice_z": 11.8,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.2
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 3.0,
+     "z1": 3.9,
+     "fascia_text": "Cambridge University Press Bookshop",
+     "fascia_colour": "#f2f0ea",
+     "text_colour": "#2b3a55",
+     "door_x": 1.65,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 0.85,
+     "w": 0.85,
+     "z": 4.7,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.45,
+     "w": 0.85,
+     "z": 4.7,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 0.85,
+     "w": 0.85,
+     "z": 8.5,
+     "h": 1.8,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.45,
+     "w": 0.85,
+     "z": 8.5,
+     "h": 1.8,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Cambridge University Press Bookshop (OSM node 1762331504), Trinity Street end at the St Mary's Street corner. Mapillary 934928010476370 / 1078821085942013: ground floor white rusticated stucco with one large round-arched glazed shop opening (modelled as a rectangular shopfront), white cornice band at ~4.2 m; above, brown-grey gault brick with two columns of 6/6 sashes with white architrave/cornice hoods and iron flower-box balconettes on the 1st floor, a blue plaque between; plain parapet. The real front looks wider than the 3.3 m OSM segment, so the two window columns are squeezed. Ground-floor stucco not representable (single wall material)."
+  },
+  {
+   "id": "way/1099847939:6",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.2,
+    7.9
+   ],
+   "material": "brick",
+   "wall_colour": "#85735a",
+   "trim_colour": "#f1efe8",
+   "cornice_z": 11.8,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.2
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 2.2,
+     "w": 1.4,
+     "z": 0.5,
+     "h": 3.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.2,
+     "w": 0.9,
+     "z": 4.7,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.2,
+     "w": 0.9,
+     "z": 8.5,
+     "h": 1.8,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 4.55,
+     "w": 1.4,
+     "z": 0.5,
+     "h": 3.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.55,
+     "w": 0.9,
+     "z": 4.7,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.55,
+     "w": 0.9,
+     "z": 8.5,
+     "h": 1.8,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 6.9,
+     "w": 1.4,
+     "z": 0.5,
+     "h": 3.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.9,
+     "w": 0.9,
+     "z": 4.7,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.9,
+     "w": 0.9,
+     "z": 8.5,
+     "h": 1.8,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 9.25,
+     "w": 1.4,
+     "z": 0.5,
+     "h": 3.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.25,
+     "w": 0.9,
+     "z": 4.7,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.25,
+     "w": 0.9,
+     "z": 8.5,
+     "h": 1.8,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 11.6,
+     "w": 1.4,
+     "z": 0.5,
+     "h": 3.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 11.6,
+     "w": 0.9,
+     "z": 4.7,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 11.6,
+     "w": 0.9,
+     "z": 8.5,
+     "h": 1.8,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 13.95,
+     "w": 1.4,
+     "z": 0.5,
+     "h": 3.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 13.95,
+     "w": 0.9,
+     "z": 4.7,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 13.95,
+     "w": 0.9,
+     "z": 8.5,
+     "h": 1.8,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "South face of the CUP Bookshop along St Mary's Street / Market Hill. Mapillary 295207078830584 (looking east along the face) and 934928010476370: white-painted stucco ground floor arcade of round-arched shop windows (modelled as arched windows, ~6 bays after a wide rusticated corner pier), white cornice band, gault brick above with tall sashes on two upper floors (1st-floor ones with iron flower boxes), regular bay rhythm continuing into 27-28 Market Hill. Bay count/positions approximate (strong perspective); ground floor is really white stucco but the wall material is the upper brick."
+  }
+ ]
+}

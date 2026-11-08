@@ -1,9 +1,145 @@
 {
  "osm_id": "way/40937938",
  "sources": [
-  "479058393403230"
+  "479058393403230",
+  "Commons: File:Vacant units - Lion Yard-Petty Cury - geograph.org.uk - 7373033.jpg (Mr Ignavy, CC BY-SA 2.0)",
+  "Commons: File:Petty Cury - geograph.org.uk - 3910870.jpg (N Chadwick, CC BY-SA 2.0)",
+  "Commons: File:Petty Cury - geograph.org.uk - 6025074.jpg (N Chadwick, CC BY-SA 2.0)",
+  "mapillary 463907671363878"
  ],
  "walls": [
+  {
+   "id": "way/40937938:44",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.6
+   ],
+   "material": "brick",
+   "wall_colour": "#b9875a",
+   "trim_colour": "#f1efe8",
+   "cornice_z": 6.2,
+   "cornice": "none",
+   "parapet": false,
+   "string_courses": [
+    3.6
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.1,
+    6.1,
+    12.1,
+    17.3
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 2.6,
+     "w": 3.2,
+     "z": 3.9,
+     "h": 1.9,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 8.6,
+     "w": 3.2,
+     "z": 3.9,
+     "h": 1.9,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 14.6,
+     "w": 3.2,
+     "z": 3.9,
+     "h": 1.9,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.6,
+     "x1": 5.6,
+     "z1": 3.0,
+     "fascia_text": "",
+     "fascia_colour": "#2a2a2a",
+     "text_colour": "#ffffff",
+     "door_x": 3.0,
+     "stallriser": 0.0,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 6.6,
+     "x1": 11.6,
+     "z1": 3.0,
+     "fascia_text": "",
+     "fascia_colour": "#2a2a2a",
+     "text_colour": "#ffffff",
+     "door_x": 9.0,
+     "stallriser": 0.0,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 12.6,
+     "x1": 16.8,
+     "z1": 3.0,
+     "fascia_text": "",
+     "fascia_colour": "#2a2a2a",
+     "text_colour": "#ffffff",
+     "door_x": 14.6,
+     "stallriser": 0.0,
+     "awning": false
+    }
+   ],
+   "confidence": "low",
+   "notes": "Lion Yard (1970s, refaced c.2008) Petty Cury frontage. Geograph 7373033/3910870/6025074: ground-floor shop units recessed behind a colonnade of white-painted concrete piers on red granite plinths (~6 m centres), white concrete fascia band at first-floor level, upper storey in orange-buff brick with projecting dark-bronze framed box windows; hanging blade signs. Pier and bay positions approximate; recessed shopfronts modelled on the wall plane."
+  },
+  {
+   "id": "way/40937938:45",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "render",
+   "wall_colour": "#f1efe8",
+   "trim_colour": "#f1efe8",
+   "cornice_z": 2.9,
+   "cornice": "none",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [
+    0.2,
+    6.2,
+    12.2,
+    18.2,
+    24.2,
+    26.6
+   ],
+   "elements": [],
+   "confidence": "low",
+   "notes": "Low (\u22483 m) Lion Yard segment along Petty Cury: white-painted concrete colonnade/canopy edge of the shopping-centre frontage (see geograph 3910870). Only the white piers are modelled; ~6 m spacing assumed."
+  },
   {
    "id": "way/40937938:48",
    "storeys": 3,

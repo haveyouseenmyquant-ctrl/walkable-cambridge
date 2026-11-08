@@ -100,6 +100,27 @@ def gl_mesh(name, P, nrm, col, mat=None):
 
 
 HIDE = []
+PROP_BUILDINGS = {"way/400160677", "way/400160686"}   # food trailers: modelled by zone_props.py
+
+
+def duplicate_walls(W, ann):
+    """OSM has overlapping footprints (college ways vs street-address ways, e.g. way/137017428:0/1 = 1099847936:5/6),
+    which would build two skins on one wall and z-fight. A wall is a duplicate when another building's wall runs along
+    it (midpoints < 1.2 m apart, parallel, same facing); keep the annotated one, then the one with an address, else the one listed first."""
+    drop = set()
+    mids = [(np.add(w["p0"], w["p1"]) / 2, (np.subtract(w["p1"], w["p0"])) / max(w["length"], 1e-6)) for w in W]
+    for i, a in enumerate(W):
+        for j in range(i + 1, len(W)):
+            b = W[j]
+            if a["osm_id"] == b["osm_id"] or a["id"] in drop or b["id"] in drop:
+                continue
+            (ma, da), (mb, db) = mids[i], mids[j]
+            if np.hypot(*(ma - mb)) > 1.2 or float(da @ db) < 0.95:
+                continue
+            def rank(w):   # annotated first, then the street-address way (the per-shop annotations use those)
+                return (w["id"] in ann, "addr:housenumber" in w["tags"])
+            drop.add(a["id"] if rank(b) > rank(a) else b["id"])
+    return drop
 
 
 def load_bespoke():
@@ -150,11 +171,19 @@ def main():
     man = json.load(open(os.path.join(ROOT, "site/manifest.json")))
     landmark = {l["osm_id"]: l["id"] for l in man.get("landmarks", []) if l.get("detailed") and l.get("osm_id")}
     bespoke = load_bespoke()
+    dup = duplicate_walls(W, ann)
     by_b, rows, skipped = {}, [], []
     tot_area = tot_detail = 0.0
     for w in W:
         L, H = w["length"], w["eave_z"] - w["ground_z"]
         a = ann.get(w["id"])
+        if w["id"] in dup:
+            skipped.append({"id": w["id"], "reason": "duplicate footprint"})
+            continue
+        if w["tags"].get("building") == "roof" or w["osm_id"] in PROP_BUILDINGS:
+            # market stall rows (thin canopies in build.py + zone_props stalls) and trailers: no facade skin
+            skipped.append({"id": w["id"], "reason": "stall/trailer"})
+            continue
         if w["osm_id"] in bespoke:
             skipped.append({"id": w["id"], "reason": "bespoke"})
             continue
@@ -191,14 +220,15 @@ def main():
             nprops += n
         except Exception as e:
             print("bespoke build failed:", oid, repr(e), file=sys.stderr)
-    if os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), "zone_props.py")):
+    here = os.path.dirname(os.path.abspath(__file__))
+    for f in sorted(glob.glob(os.path.join(here, "zone_props*.py"))):   # zone_props.py, zone_props_<topic>.py
         try:
-            zp = importlib.import_module("zone_props")
+            zp = importlib.import_module(os.path.basename(f)[:-3])
             m, n = prop_meshes(zp.build() if hasattr(zp, "build") else [])
             meshes += m
             nprops += n
         except Exception as e:   # props are optional; never break the facade build
-            print("zone_props failed:", repr(e), file=sys.stderr)
+            print("props module failed:", f, repr(e), file=sys.stderr)
     out = os.path.join(ROOT, "site/zone")
     os.makedirs(out, exist_ok=True)
     B.write_glb(os.path.join(out, ZONE + ".glb"), meshes)

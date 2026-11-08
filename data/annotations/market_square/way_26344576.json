@@ -1,9 +1,68 @@
 {
  "osm_id": "way/26344576",
  "sources": [
-  "511369380021521"
+  "511369380021521",
+  "Commons: File:St Edward King and Martyr, Cambridge (exterior).jpg (Magnus Manske, CC BY-SA 3.0)",
+  "Commons: File:Church of St Edward, King and Martyr - geograph.org.uk - 5524920.jpg (N Chadwick, CC BY-SA 2.0)",
+  "Commons: File:Church of St Edward, King and Martyr - geograph.org.uk - 5400643.jpg (N Chadwick, CC BY-SA 2.0)",
+  "Commons: File:Church of St Edward King and Martyr - geograph.org.uk - 4050912.jpg (N Chadwick, CC BY-SA 2.0)",
+  "Commons: File:Church of St Edward King and Martyr (geograph 4050911).jpg (N Chadwick, CC BY-SA 2.0)"
  ],
  "walls": [
+  {
+   "id": "way/26344576:0",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    5.5,
+    8.5,
+    11.0
+   ],
+   "material": "render",
+   "wall_colour": "#c7b48a",
+   "trim_colour": "#b4523a",
+   "cornice_z": 16.0,
+   "cornice": "none",
+   "parapet": true,
+   "string_courses": [
+    5.5,
+    10.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.7,
+     "w": 0.5,
+     "z": 8.0,
+     "h": 0.5,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "arched",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.7,
+     "w": 1.0,
+     "z": 11.6,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "West tower (13th c.): rubble with buff/ochre render, string courses, small oculus at mid height, 2-light pointed louvred belfry opening in each face, red-brick battlemented parapet (geograph 4050912 and Manske photo). Lower west door not visible in any photo, omitted."
+  },
   {
    "id": "way/26344576:3",
    "storeys": 1,
@@ -11,22 +70,106 @@
     0
    ],
    "material": "stone",
-   "wall_colour": "#86705a",
-   "trim_colour": "#b9a78a",
-   "cornice_z": 6.6,
-   "cornice": "simple",
-   "parapet": true,
+   "wall_colour": "#a8946f",
+   "trim_colour": "#d2c19a",
+   "cornice_z": 5.6,
+   "cornice": "none",
+   "parapet": false,
    "string_courses": [],
-   "quoins": false,
+   "quoins": true,
    "pilasters": [],
    "elements": [
     {
      "type": "window",
      "style": "gothic",
-     "x": 5.5,
-     "w": 1.6,
+     "x": 6.5,
+     "w": 2.2,
+     "z": 1.2,
+     "h": 2.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 14.2,
+     "w": 3.2,
+     "z": 2.0,
+     "h": 4.3,
+     "panes": [
+      5,
+      4
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 19.9,
+     "w": 1.5,
+     "z": 1.3,
+     "h": 2.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "gothic",
+     "x": 22.6,
+     "w": 1.1,
+     "h": 2.4,
+     "surround": "none"
+    }
+   ],
+   "confidence": "medium",
+   "notes": "South elevation (street side) seen square-on in Manske's photo: coursed clunch/limestone rubble with ashlar dressings; from west: 3-light Dec traceried window in the aisle, tall 5-light window with rose/flowing tracery in the projecting south-chapel gable (centre ~14 m), smaller 3-light traceried window, pointed doorway at the east end. Replaces earlier low-confidence distant-photo annotation. Gable above eave not modelled."
+  },
+  {
+   "id": "way/26344576:4",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "stone",
+   "wall_colour": "#a8946f",
+   "trim_colour": "#d2c19a",
+   "cornice_z": 5.6,
+   "cornice": "none",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": true,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 3.0,
+     "w": 2.0,
      "z": 1.8,
-     "h": 3.2,
+     "h": 4.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 6.0,
+     "w": 0.9,
+     "z": 1.4,
+     "h": 2.4,
      "panes": [
       2,
       3
@@ -36,35 +179,89 @@
     },
     {
      "type": "window",
-     "style": "gothic",
-     "x": 11.5,
+     "style": "casement",
+     "x": 10.0,
      "w": 1.6,
-     "z": 1.8,
-     "h": 3.2,
+     "z": 1.0,
+     "h": 2.6,
      "panes": [
-      2,
+      3,
       3
      ],
-     "head": "pointed",
+     "head": "flat",
      "sill": true
     },
     {
      "type": "window",
-     "style": "gothic",
-     "x": 17.5,
-     "w": 1.6,
-     "z": 1.8,
-     "h": 3.2,
+     "style": "casement",
+     "x": 15.4,
+     "w": 0.8,
+     "z": 1.2,
+     "h": 1.2,
      "panes": [
       2,
-      3
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "East end facing Peas Hill (geograph 5524920 and 5400643, x=0 at south): south-chapel gable with tall 3-light traceried window, a smaller pointed window by the valley, chancel gable with a large blocked pointed arch containing a square-headed mullioned window, flanking chimney stack, then a low vestry with a small square window. Rubble stone with ashlar quoins; positions estimated from oblique photos."
+  },
+  {
+   "id": "way/26344576:9",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    5.5,
+    8.5,
+    11.0
+   ],
+   "material": "render",
+   "wall_colour": "#c7b48a",
+   "trim_colour": "#b4523a",
+   "cornice_z": 14.6,
+   "cornice": "none",
+   "parapet": true,
+   "string_courses": [
+    5.5,
+    10.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.7,
+     "w": 0.5,
+     "z": 8.0,
+     "h": 0.5,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "arched",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.7,
+     "w": 1.0,
+     "z": 11.4,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
      ],
      "head": "pointed",
      "sill": true
     }
    ],
    "confidence": "low",
-   "notes": "Church seen small in distance (photo 511369380021521); rubble stone with pointed traceried windows; count/spacing approximate. Wall 0 ref (189066929702180) does not show the church."
+   "notes": "North face of the west tower from the churchyard (geograph 4050912): ochre-rendered tower with oculus and 2-light pointed belfry opening, red-brick battlements."
   }
  ]
 }

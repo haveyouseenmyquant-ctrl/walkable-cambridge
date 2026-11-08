@@ -6,7 +6,8 @@
 import * as THREE from 'three';
 
 const SKIP = new URLSearchParams(location.search).get('zone') === '0' ? [] :
-  [[-102.9, 57.4, 100]];   // Market Square zone (52.2053N 0.1190E, 90 m) + 10 m margin, collision frame [x, y, r]
+  [[-102.9, 57.4, 100],   // Market Square zone (52.2053N 0.1190E, 90 m) + 10 m margin, collision frame [x, y, r]
+   [-213.3, 80.3, 20]];   // Senate House (bespoke model, scripts/zone_bespoke_senate.py)
 
 export function makeFacades(buf, tex) {
   const a0 = new Float32Array(buf), keep = [];

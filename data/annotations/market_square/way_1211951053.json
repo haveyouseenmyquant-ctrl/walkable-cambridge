@@ -1,0 +1,102 @@
+{
+ "osm_id": "way/1211951053",
+ "sources": [
+  "Commons: File:Body Shop - Petty Cury - geograph.org.uk - 6497176.jpg (Mr Ignavy, CC BY-SA 2.0)",
+  "Commons: File:Timpson - Petty Cury - geograph.org.uk - 6716291.jpg (Mr Ignavy, CC BY-SA 2.0)"
+ ],
+ "walls": [
+  {
+   "id": "way/1211951053:2",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.8,
+    7.9
+   ],
+   "material": "brick",
+   "wall_colour": "#9c4e37",
+   "trim_colour": "#dcc7a0",
+   "cornice_z": 10.2,
+   "cornice": "classical",
+   "parapet": false,
+   "string_courses": [
+    4.8,
+    7.8
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.4,
+     "w": 1.2,
+     "z": 5.4,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.4,
+     "w": 1.2,
+     "z": 5.4,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.4,
+     "w": 1.1,
+     "z": 8.4,
+     "h": 1.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.4,
+     "w": 1.1,
+     "z": 8.4,
+     "h": 1.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 5.5,
+     "z1": 4.4,
+     "fascia_text": "The Body Shop",
+     "fascia_colour": "#14503a",
+     "text_colour": "#ffffff",
+     "door_x": 2.9,
+     "stallriser": 0.4,
+     "awning": false
+    }
+   ],
+   "confidence": "medium",
+   "notes": "36 Petty Cury (The Body Shop, OSM node 5649477461). Seen square-on in geograph 6497176: red brick, 3 storeys, two bays of 1-over-1 sashes in Bath/Ketton-stone architraves with carved cornice hoods on the 1st floor, stone sill band and moulded stone cornice at the top; dark-green fascia with white lettering, glazed shopfront with central recessed door and red-painted band above fascia. x positions scaled from the photo."
+  }
+ ]
+}

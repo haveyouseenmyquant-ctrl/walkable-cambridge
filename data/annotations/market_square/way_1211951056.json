@@ -1,0 +1,114 @@
+{
+ "osm_id": "way/1211951056",
+ "sources": [
+  "Commons: File:Timpson - Petty Cury - geograph.org.uk - 6716291.jpg (Mr Ignavy, CC BY-SA 2.0)"
+ ],
+ "walls": [
+  {
+   "id": "way/1211951056:6",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.4,
+    7.6
+   ],
+   "material": "stucco",
+   "wall_colour": "#ece8de",
+   "trim_colour": "#f6f4ee",
+   "cornice_z": 10.8,
+   "cornice": "classical",
+   "parapet": false,
+   "string_courses": [
+    4.4
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.75,
+     "w": 0.75,
+     "z": 5.0,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.95,
+     "w": 0.75,
+     "z": 5.0,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.55,
+     "w": 0.6,
+     "z": 8.1,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.35,
+     "w": 0.6,
+     "z": 8.1,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.15,
+     "w": 0.6,
+     "z": 8.1,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 4.5,
+     "z1": 4.0,
+     "fascia_text": "Fone World",
+     "fascia_colour": "#d0262d",
+     "text_colour": "#ffffff",
+     "door_x": 3.6,
+     "stallriser": 0.4,
+     "awning": false
+    }
+   ],
+   "confidence": "medium",
+   "notes": "34 Petty Cury (Fone World, OSM node 2377969459). Geograph 6716291 (oblique): narrow white-painted stucco front, pair of round-arched sashes with hood moulds on 1st floor, arcaded triplet of round-arched lights on 2nd floor, moulded cornice/parapet; red Fone World fascia, glazed shopfront with door on the east side. Positions approximate from an oblique view."
+  }
+ ]
+}

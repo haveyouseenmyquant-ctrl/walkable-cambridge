@@ -1,0 +1,129 @@
+{
+ "osm_id": "way/1211951047",
+ "sources": [
+  "Commons: File:Body Shop - Petty Cury - geograph.org.uk - 6497176.jpg (Mr Ignavy, CC BY-SA 2.0)"
+ ],
+ "walls": [
+  {
+   "id": "way/1211951047:4",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.8,
+    7.9
+   ],
+   "material": "brick",
+   "wall_colour": "#94513b",
+   "trim_colour": "#d9c49a",
+   "cornice_z": 10.0,
+   "cornice": "classical",
+   "parapet": false,
+   "string_courses": [
+    4.8,
+    7.8
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.5,
+     "w": 1.1,
+     "z": 5.4,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "pediment",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.4,
+     "w": 1.1,
+     "z": 5.4,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "pediment",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.3,
+     "w": 1.1,
+     "z": 5.4,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "pediment",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.5,
+     "w": 1.0,
+     "z": 8.3,
+     "h": 1.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.4,
+     "w": 1.0,
+     "z": 8.3,
+     "h": 1.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.3,
+     "w": 1.0,
+     "z": 8.3,
+     "h": 1.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 8.5,
+     "z1": 4.4,
+     "fascia_text": "Trailfinders",
+     "fascia_colour": "#1e1e1e",
+     "text_colour": "#ffffff",
+     "door_x": 4.4,
+     "stallriser": 0.4,
+     "awning": false
+    }
+   ],
+   "confidence": "low",
+   "notes": "37-38 Petty Cury (Trailfinders, OSM node 2377969465). Only the east bay is visible at the left edge of geograph 6497176: red brick with heavy carved stone window surrounds/hoods and a stone balcony-like sill band at 2nd floor, black shopfront below. Bay count (3) and window sizes inferred from the 8.8 m width and the neighbouring Body Shop rhythm."
+  }
+ ]
+}

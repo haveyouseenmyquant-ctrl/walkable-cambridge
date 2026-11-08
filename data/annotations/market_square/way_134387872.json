@@ -1,7 +1,10 @@
 {
  "osm_id": "way/134387872",
  "sources": [
-  "541914280138693"
+  "541914280138693",
+  "mapillary 460876391832878",
+  "mapillary 905995133446806",
+  "mapillary 150077440702442"
  ],
  "walls": [
   {
@@ -96,6 +99,40 @@
    ],
    "confidence": "low",
    "notes": "Red-brick corner shop (visible fascia reads 'Ryder & Amies', not in OSM tags). Only the King's Parade end (x>6) is visible, upper top storey cropped; x=0..6 not annotated. Wall 0 skipped: no usable view."
+  },
+  {
+   "id": "way/134387872:0",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.3,
+    6.0
+   ],
+   "material": "brick",
+   "wall_colour": "#9a4a35",
+   "trim_colour": "#efeae0",
+   "cornice_z": 9.3,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 4.8,
+     "z1": 3.3,
+     "fascia_text": "Ryder & Amies",
+     "fascia_colour": "#2a2622",
+     "text_colour": "#d8c48a",
+     "door_x": 2.5,
+     "stallriser": 0.5,
+     "awning": false
+    }
+   ],
+   "confidence": "medium",
+   "notes": "King's Parade front of the red-brick corner shop. Mapillary 460876391832878/905995133446806 (looking north along King's Parade) show dark-stained timber shopfront with arched glazed bays and gilt fascia lettering 'GENERAL TAILORS' / 'RYDER & AMIES' (OSM name Ryder & Amies). Upper storeys have two columns of recessed BLIND (bricked) window panels on 1st and 2nd floors - not modelled as windows since the builder has no blind-window type, so the wall is left plain red brick above the fascia. Door position within the shopfront not seen clearly (assumed central)."
   }
  ]
 }

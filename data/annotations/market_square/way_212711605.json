@@ -3,7 +3,8 @@
  "sources": [
   "798596987448760",
   "2798949150347432",
-  "Commons: File:15 Market Hill, Cambridge.jpg (Smb1001, CC BY-SA 4.0)"
+  "Commons: File:15 Market Hill, Cambridge.jpg (Smb1001, CC BY-SA 4.0)",
+  "mapillary 543390210382861"
  ],
  "walls": [
   {
@@ -211,6 +212,97 @@
    ],
    "confidence": "low",
    "notes": "White-rendered 1970s block, upper windows in angled projecting frames; ground floor dark green fascia (photo shows Subway, not in OSM tags). Window x positions approximate. Session 31: ground floor is Costa Coffee (OSM 14 Market Hill; red fascia seen right of Franco Manca in Commons 15 Market Hill photo, 2021); top window row lowered to fit under the eave."
+  },
+  {
+   "id": "way/212711605:8",
+   "storeys": 5,
+   "floor_z": [
+    0,
+    4.0,
+    6.6,
+    9.2,
+    11.8
+   ],
+   "material": "render",
+   "wall_colour": "#eceae4",
+   "trim_colour": "#3a3a3a",
+   "cornice_z": 14.0,
+   "cornice": "none",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 6.4,
+     "z1": 3.8,
+     "fascia_colour": "#8b8e91",
+     "text_colour": "#ffffff",
+     "door_x": 1.2,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 3.3,
+     "w": 2.6,
+     "z": 4.8,
+     "h": 1.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 3.3,
+     "w": 2.6,
+     "z": 7.4,
+     "h": 1.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 3.3,
+     "w": 2.6,
+     "z": 10.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 3.3,
+     "w": 2.6,
+     "z": 12.2,
+     "h": 1.4,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Market Street face of the white-rendered 1970s Radcliffe Court block, next to 16 Market Street. Mapillary 543390210382861 shows a recessed full-width grey-framed glazed shopfront under a white rendered overhang (then Dune London; no current shop in OSM, so no fascia text) and one wide modern window per upper floor. Upper window rhythm copied from wall :6; only the 1st floor window clearly seen."
   }
  ]
 }

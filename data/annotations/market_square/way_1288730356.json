@@ -1,0 +1,128 @@
+{
+ "osm_id": "way/1288730356",
+ "sources": [
+  "mapillary 484065959384228",
+  "mapillary 543390210382861"
+ ],
+ "walls": [
+  {
+   "id": "way/1288730356:0",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    3.8,
+    6.8,
+    9.8
+   ],
+   "material": "render",
+   "wall_colour": "#f0eee8",
+   "trim_colour": "#ffffff",
+   "cornice_z": 13.3,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 5.5,
+     "z1": 3.6,
+     "fascia_text": "Héfaure",
+     "fascia_colour": "#6c7176",
+     "text_colour": "#ffffff",
+     "door_x": 1.6,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.6,
+     "w": 0.9,
+     "z": 4.4,
+     "h": 1.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.6,
+     "w": 0.9,
+     "z": 7.4,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.6,
+     "w": 0.85,
+     "z": 10.4,
+     "h": 1.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.1,
+     "w": 0.9,
+     "z": 4.4,
+     "h": 1.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.1,
+     "w": 0.9,
+     "z": 7.4,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.1,
+     "w": 0.85,
+     "z": 10.4,
+     "h": 1.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "16 Market Street (OSM fast_food 'Héfaure', old_name Chopstix). Mapillary 484065959384228 and 543390210382861 (photos show the Chopstix fit-out): white-painted render, slate-grey timber shopfront with grey fascia, entrance at the SW end, white rusticated pier at the NE end; upper floors have plain 1/1 sashes, two columns. Number of storeys (4) inferred from the 13.5 m eave height, upper rows not fully in view."
+  }
+ ]
+}

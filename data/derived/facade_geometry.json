@@ -1,6 +1,6 @@
 {
  "zone": "market_square",
- "built": "2026-11-08T11:58:02Z",
+ "built": "2026-11-08T12:21:53Z",
  "walls": [
   {
    "id": "way/13864058:26",
@@ -247,16 +247,16 @@
   {
    "id": "way/26344576:0",
    "osm_id": "way/26344576",
-   "annotated": false,
+   "annotated": true,
    "length": 7.89,
    "height": 16.65,
    "area": 131.37,
-   "detail_area": 11.14,
+   "detail_area": 5.45,
    "elements": {
-    "cornice": 1,
-    "window": 1
+    "string_course": 2,
+    "window": 2
    },
-   "tris": 199
+   "tris": 327
   },
   {
    "id": "way/26344576:1",
@@ -292,26 +292,27 @@
    "length": 23.85,
    "height": 6.85,
    "area": 163.37,
-   "detail_area": 20.98,
+   "detail_area": 28.75,
    "elements": {
-    "cornice": 1,
+    "door": 1,
+    "quoin": 44,
     "window": 3
    },
-   "tris": 519
+   "tris": 1003
   },
   {
    "id": "way/26344576:4",
    "osm_id": "way/26344576",
-   "annotated": false,
+   "annotated": true,
    "length": 18.21,
    "height": 6.12,
    "area": 111.45,
-   "detail_area": 20.8,
+   "detail_area": 20.32,
    "elements": {
-    "cornice": 1,
+    "quoin": 38,
     "window": 4
    },
-   "tris": 717
+   "tris": 798
   },
   {
    "id": "way/26344576:5",
@@ -372,48 +373,46 @@
   {
    "id": "way/26344576:9",
    "osm_id": "way/26344576",
-   "annotated": false,
+   "annotated": true,
    "length": 5.36,
    "height": 14.99,
    "area": 80.35,
-   "detail_area": 10.38,
+   "detail_area": 4.36,
    "elements": {
-    "cornice": 1,
-    "window": 1
+    "string_course": 2,
+    "window": 2
    },
-   "tris": 199
+   "tris": 327
   },
   {
    "id": "way/40937938:44",
    "osm_id": "way/40937938",
-   "annotated": false,
+   "annotated": true,
    "length": 17.36,
    "height": 6.32,
    "area": 109.72,
-   "detail_area": 72.28,
+   "detail_area": 70.75,
    "elements": {
-    "cornice": 1,
+    "pilaster": 2,
     "shop_door": 3,
     "shopfront": 3,
     "string_course": 1,
-    "window": 6
+    "window": 3
    },
-   "tris": 852
+   "tris": 408
   },
   {
    "id": "way/40937938:45",
    "osm_id": "way/40937938",
-   "annotated": false,
+   "annotated": true,
    "length": 26.8,
    "height": 2.95,
    "area": 79.06,
-   "detail_area": 74.6,
+   "detail_area": 4.58,
    "elements": {
-    "cornice": 1,
-    "shop_door": 4,
-    "shopfront": 4
+    "pilaster": 4
    },
-   "tris": 498
+   "tris": 32
   },
   {
    "id": "way/40937938:46",
@@ -538,48 +537,49 @@
   {
    "id": "way/134387866:3",
    "osm_id": "way/134387866",
-   "annotated": false,
+   "annotated": true,
    "length": 5.44,
    "height": 10.72,
    "area": 58.32,
-   "detail_area": 9.57,
+   "detail_area": 28.2,
    "elements": {
     "cornice": 1,
-    "door": 1,
-    "string_course": 1,
-    "window": 3
+    "shop_door": 1,
+    "shopfront": 1,
+    "window": 6
    },
-   "tris": 236
+   "tris": 1016
   },
   {
    "id": "way/134387870:4",
    "osm_id": "way/134387870",
-   "annotated": false,
+   "annotated": true,
    "length": 4.76,
    "height": 12.65,
    "area": 60.21,
-   "detail_area": 10.0,
+   "detail_area": 26.65,
    "elements": {
     "cornice": 1,
-    "string_course": 1,
-    "window": 4
+    "shop_door": 1,
+    "shopfront": 1,
+    "window": 6
    },
-   "tris": 232
+   "tris": 644
   },
   {
    "id": "way/134387872:0",
    "osm_id": "way/134387872",
-   "annotated": false,
+   "annotated": true,
    "length": 4.95,
    "height": 9.49,
    "area": 46.98,
-   "detail_area": 8.06,
+   "detail_area": 16.48,
    "elements": {
     "cornice": 1,
-    "string_course": 1,
-    "window": 3
+    "shop_door": 1,
+    "shopfront": 1
    },
-   "tris": 184
+   "tris": 132
   },
   {
    "id": "way/134387872:3",
@@ -615,101 +615,6 @@
    "tris": 278
   },
   {
-   "id": "way/137017428:0",
-   "osm_id": "way/137017428",
-   "annotated": true,
-   "length": 15.45,
-   "height": 10.8,
-   "area": 166.86,
-   "detail_area": 8.59,
-   "elements": {
-    "quoin": 70
-   },
-   "tris": 568
-  },
-  {
-   "id": "way/137017428:1",
-   "osm_id": "way/137017428",
-   "annotated": true,
-   "length": 16.04,
-   "height": 11.28,
-   "area": 180.93,
-   "detail_area": 82.21,
-   "elements": {
-    "door": 1,
-    "shop_door": 2,
-    "shopfront": 2,
-    "window": 15
-   },
-   "tris": 1206
-  },
-  {
-   "id": "way/137017428:2",
-   "osm_id": "way/137017428",
-   "annotated": true,
-   "length": 4.96,
-   "height": 11.15,
-   "area": 55.3,
-   "detail_area": 21.85,
-   "elements": {
-    "cornice": 1,
-    "door": 1,
-    "dormer": 1,
-    "string_course": 1,
-    "window": 5
-   },
-   "tris": 495
-  },
-  {
-   "id": "way/137017428:3",
-   "osm_id": "way/137017428",
-   "annotated": true,
-   "length": 5.09,
-   "height": 11.31,
-   "area": 57.57,
-   "detail_area": 29.22,
-   "elements": {
-    "cornice": 1,
-    "shop_door": 1,
-    "shopfront": 1,
-    "string_course": 1,
-    "window": 6
-   },
-   "tris": 632
-  },
-  {
-   "id": "way/137017428:4",
-   "osm_id": "way/137017428",
-   "annotated": true,
-   "length": 5.44,
-   "height": 12.88,
-   "area": 70.07,
-   "detail_area": 24.94,
-   "elements": {
-    "cornice": 1,
-    "shop_door": 1,
-    "shopfront": 1,
-    "string_course": 1,
-    "window": 3
-   },
-   "tris": 375
-  },
-  {
-   "id": "way/137017428:9",
-   "osm_id": "way/137017428",
-   "annotated": false,
-   "length": 2.47,
-   "height": 8.8,
-   "area": 21.74,
-   "detail_area": 6.64,
-   "elements": {
-    "cornice": 1,
-    "string_course": 1,
-    "window": 3
-   },
-   "tris": 184
-  },
-  {
    "id": "way/137017428:10",
    "osm_id": "way/137017428",
    "annotated": false,
@@ -739,120 +644,6 @@
     "window": 1
    },
    "tris": 126
-  },
-  {
-   "id": "way/137017430:1",
-   "osm_id": "way/137017430",
-   "annotated": true,
-   "length": 3.26,
-   "height": 12.05,
-   "area": 39.28,
-   "detail_area": 17.9,
-   "elements": {
-    "cornice": 1,
-    "door": 1,
-    "dormer": 1,
-    "string_course": 1,
-    "window": 5
-   },
-   "tris": 488
-  },
-  {
-   "id": "way/137017430:2",
-   "osm_id": "way/137017430",
-   "annotated": true,
-   "length": 14.92,
-   "height": 12.54,
-   "area": 187.1,
-   "detail_area": 83.93,
-   "elements": {
-    "cornice": 1,
-    "shop_door": 1,
-    "shopfront": 1,
-    "string_course": 1,
-    "window": 12
-   },
-   "tris": 1174
-  },
-  {
-   "id": "way/137017430:3",
-   "osm_id": "way/137017430",
-   "annotated": true,
-   "length": 10.44,
-   "height": 13.64,
-   "area": 142.4,
-   "detail_area": 74.79,
-   "elements": {
-    "cornice": 1,
-    "door": 1,
-    "shop_door": 1,
-    "shopfront": 1,
-    "window": 12
-   },
-   "tris": 1158
-  },
-  {
-   "id": "way/137017430:5",
-   "osm_id": "way/137017430",
-   "annotated": false,
-   "length": 6.82,
-   "height": 13.6,
-   "area": 92.75,
-   "detail_area": 14.74,
-   "elements": {
-    "cornice": 1,
-    "door": 1,
-    "string_course": 1,
-    "window": 5
-   },
-   "tris": 328
-  },
-  {
-   "id": "way/137017430:6",
-   "osm_id": "way/137017430",
-   "annotated": false,
-   "length": 2.51,
-   "height": 10.56,
-   "area": 26.51,
-   "detail_area": 7.01,
-   "elements": {
-    "cornice": 1,
-    "string_course": 1,
-    "window": 3
-   },
-   "tris": 184
-  },
-  {
-   "id": "way/137017430:7",
-   "osm_id": "way/137017430",
-   "annotated": false,
-   "length": 5.04,
-   "height": 11.0,
-   "area": 55.44,
-   "detail_area": 8.15,
-   "elements": {
-    "cornice": 1,
-    "door": 1,
-    "string_course": 1,
-    "window": 2
-   },
-   "tris": 188
-  },
-  {
-   "id": "way/137017430:8",
-   "osm_id": "way/137017430",
-   "annotated": false,
-   "length": 5.83,
-   "height": 9.99,
-   "area": 58.24,
-   "detail_area": 14.21,
-   "elements": {
-    "cornice": 1,
-    "door": 1,
-    "string_course": 1,
-    "window": 5
-   },
-   "tris": 328
   },
   {
    "id": "way/137017433:0",
@@ -1090,18 +881,17 @@
   {
    "id": "way/212711605:8",
    "osm_id": "way/212711605",
-   "annotated": false,
+   "annotated": true,
    "length": 6.68,
    "height": 13.98,
    "area": 93.39,
-   "detail_area": 18.95,
+   "detail_area": 43.59,
    "elements": {
-    "cornice": 1,
-    "door": 1,
-    "string_course": 1,
-    "window": 7
+    "shop_door": 1,
+    "shopfront": 1,
+    "window": 4
    },
-   "tris": 422
+   "tris": 318
   },
   {
    "id": "way/229680560:20",
@@ -1152,175 +942,6 @@
     "window": 5
    },
    "tris": 732
-  },
-  {
-   "id": "way/400160677:0",
-   "osm_id": "way/400160677",
-   "annotated": false,
-   "length": 8.96,
-   "height": 0.02,
-   "area": 0.18,
-   "detail_area": 0.0,
-   "elements": {},
-   "tris": 8
-  },
-  {
-   "id": "way/400160677:1",
-   "osm_id": "way/400160677",
-   "annotated": false,
-   "length": 2.14,
-   "height": -0.01,
-   "area": -0.02,
-   "detail_area": -0.02,
-   "elements": {},
-   "tris": 8
-  },
-  {
-   "id": "way/400160677:3",
-   "osm_id": "way/400160677",
-   "annotated": false,
-   "length": 2.14,
-   "height": -0.02,
-   "area": -0.04,
-   "detail_area": -0.04,
-   "elements": {},
-   "tris": 8
-  },
-  {
-   "id": "way/400160678:0",
-   "osm_id": "way/400160678",
-   "annotated": false,
-   "length": 17.86,
-   "height": 0.09,
-   "area": 1.61,
-   "detail_area": 0.0,
-   "elements": {},
-   "tris": 8
-  },
-  {
-   "id": "way/400160678:3",
-   "osm_id": "way/400160678",
-   "annotated": false,
-   "length": 3.96,
-   "height": 0.06,
-   "area": 0.24,
-   "detail_area": 0.0,
-   "elements": {},
-   "tris": 8
-  },
-  {
-   "id": "way/400160679:0",
-   "osm_id": "way/400160679",
-   "annotated": false,
-   "length": 17.69,
-   "height": 0.74,
-   "area": 13.09,
-   "detail_area": 0.0,
-   "elements": {},
-   "tris": 8
-  },
-  {
-   "id": "way/400160679:1",
-   "osm_id": "way/400160679",
-   "annotated": false,
-   "length": 3.68,
-   "height": -0.08,
-   "area": -0.29,
-   "detail_area": -0.29,
-   "elements": {},
-   "tris": 8
-  },
-  {
-   "id": "way/400160680:0",
-   "osm_id": "way/400160680",
-   "annotated": false,
-   "length": 4.78,
-   "height": 2.32,
-   "area": 11.09,
-   "detail_area": 0.0,
-   "elements": {},
-   "tris": 8
-  },
-  {
-   "id": "way/400160680:5",
-   "osm_id": "way/400160680",
-   "annotated": false,
-   "length": 7.39,
-   "height": 1.8,
-   "area": 13.3,
-   "detail_area": 0.0,
-   "elements": {},
-   "tris": 8
-  },
-  {
-   "id": "way/400160681:1",
-   "osm_id": "way/400160681",
-   "annotated": false,
-   "length": 7.39,
-   "height": 2.23,
-   "area": 16.48,
-   "detail_area": 0.0,
-   "elements": {},
-   "tris": 8
-  },
-  {
-   "id": "way/400160682:5",
-   "osm_id": "way/400160682",
-   "annotated": false,
-   "length": 8.46,
-   "height": 0.62,
-   "area": 5.25,
-   "detail_area": 0.0,
-   "elements": {},
-   "tris": 8
-  },
-  {
-   "id": "way/400160683:1",
-   "osm_id": "way/400160683",
-   "annotated": false,
-   "length": 7.25,
-   "height": 2.08,
-   "area": 15.08,
-   "detail_area": 0.0,
-   "elements": {},
-   "tris": 8
-  },
-  {
-   "id": "way/400160684:1",
-   "osm_id": "way/400160684",
-   "annotated": false,
-   "length": 20.05,
-   "height": 0.03,
-   "area": 0.6,
-   "detail_area": 0.0,
-   "elements": {},
-   "tris": 8
-  },
-  {
-   "id": "way/400160685:1",
-   "osm_id": "way/400160685",
-   "annotated": false,
-   "length": 30.88,
-   "height": 0.01,
-   "area": 0.31,
-   "detail_area": 0.0,
-   "elements": {},
-   "tris": 8
-  },
-  {
-   "id": "way/400160686:1",
-   "osm_id": "way/400160686",
-   "annotated": false,
-   "length": 6.86,
-   "height": 2.62,
-   "area": 17.97,
-   "detail_area": 16.93,
-   "elements": {
-    "cornice": 1,
-    "shop_door": 1,
-    "shopfront": 1
-   },
-   "tris": 144
   },
   {
    "id": "way/1080560696:0",
@@ -1451,33 +1072,34 @@
   {
    "id": "way/1099847939:5",
    "osm_id": "way/1099847939",
-   "annotated": false,
+   "annotated": true,
    "length": 3.26,
    "height": 12.05,
    "area": 39.28,
-   "detail_area": 9.46,
+   "detail_area": 19.48,
    "elements": {
     "cornice": 1,
+    "shop_door": 1,
+    "shopfront": 1,
     "string_course": 1,
     "window": 4
    },
-   "tris": 352
+   "tris": 518
   },
   {
    "id": "way/1099847939:6",
    "osm_id": "way/1099847939",
-   "annotated": false,
+   "annotated": true,
    "length": 14.92,
    "height": 12.54,
    "area": 187.1,
-   "detail_area": 46.46,
+   "detail_area": 56.89,
    "elements": {
     "cornice": 1,
-    "door": 1,
     "string_course": 1,
-    "window": 19
+    "window": 18
    },
-   "tris": 1546
+   "tris": 1938
   },
   {
    "id": "way/1099847940:0",
@@ -1677,18 +1299,18 @@
   {
    "id": "way/1211951044:5",
    "osm_id": "way/1211951044",
-   "annotated": false,
+   "annotated": true,
    "length": 5.47,
    "height": 10.73,
    "area": 58.69,
-   "detail_area": 9.48,
+   "detail_area": 32.41,
    "elements": {
     "cornice": 1,
-    "door": 1,
-    "string_course": 1,
-    "window": 2
+    "shop_door": 1,
+    "shopfront": 1,
+    "window": 6
    },
-   "tris": 350
+   "tris": 418
   },
   {
    "id": "way/1211951046:9",
@@ -1726,34 +1348,36 @@
   {
    "id": "way/1211951047:4",
    "osm_id": "way/1211951047",
-   "annotated": false,
+   "annotated": true,
    "length": 8.8,
    "height": 10.17,
    "area": 89.5,
-   "detail_area": 21.41,
+   "detail_area": 55.77,
    "elements": {
     "cornice": 1,
-    "door": 1,
-    "string_course": 1,
-    "window": 8
+    "shop_door": 1,
+    "shopfront": 1,
+    "string_course": 2,
+    "window": 6
    },
-   "tris": 708
+   "tris": 491
   },
   {
    "id": "way/1211951053:2",
    "osm_id": "way/1211951053",
-   "annotated": false,
+   "annotated": true,
    "length": 5.82,
    "height": 10.59,
    "area": 61.63,
-   "detail_area": 15.46,
+   "detail_area": 36.28,
    "elements": {
     "cornice": 1,
-    "door": 1,
-    "string_course": 1,
-    "window": 5
+    "shop_door": 1,
+    "shopfront": 1,
+    "string_course": 2,
+    "window": 4
    },
-   "tris": 580
+   "tris": 360
   },
   {
    "id": "way/1211951054:7",
@@ -1775,33 +1399,36 @@
   {
    "id": "way/1211951056:6",
    "osm_id": "way/1211951056",
-   "annotated": false,
+   "annotated": true,
    "length": 4.73,
    "height": 11.42,
    "area": 54.02,
-   "detail_area": 9.53,
+   "detail_area": 26.88,
    "elements": {
     "cornice": 1,
+    "shop_door": 1,
+    "shopfront": 1,
     "string_course": 1,
-    "window": 4
+    "window": 5
    },
-   "tris": 232
+   "tris": 888
   },
   {
    "id": "way/1211951057:4",
    "osm_id": "way/1211951057",
-   "annotated": false,
+   "annotated": true,
    "length": 9.8,
    "height": 11.57,
    "area": 113.39,
-   "detail_area": 27.33,
+   "detail_area": 59.51,
    "elements": {
     "cornice": 1,
-    "door": 1,
-    "string_course": 1,
-    "window": 11
+    "dormer": 2,
+    "shop_door": 1,
+    "shopfront": 1,
+    "window": 10
    },
-   "tris": 938
+   "tris": 690
   },
   {
    "id": "way/1222243455:2",
@@ -1838,18 +1465,18 @@
   {
    "id": "way/1288730356:0",
    "osm_id": "way/1288730356",
-   "annotated": false,
+   "annotated": true,
    "length": 5.72,
    "height": 13.54,
    "area": 77.45,
-   "detail_area": 18.53,
+   "detail_area": 30.36,
    "elements": {
     "cornice": 1,
-    "door": 1,
-    "string_course": 1,
-    "window": 7
+    "shop_door": 1,
+    "shopfront": 1,
+    "window": 6
    },
-   "tris": 632
+   "tris": 420
   },
   {
    "id": "way/1288730358:0",
@@ -2021,16 +1648,128 @@
   {
    "id": "way/26344507:16",
    "reason": "bespoke"
+  },
+  {
+   "id": "way/137017428:0",
+   "reason": "duplicate footprint"
+  },
+  {
+   "id": "way/137017428:1",
+   "reason": "duplicate footprint"
+  },
+  {
+   "id": "way/137017428:2",
+   "reason": "duplicate footprint"
+  },
+  {
+   "id": "way/137017428:3",
+   "reason": "duplicate footprint"
+  },
+  {
+   "id": "way/137017428:4",
+   "reason": "duplicate footprint"
+  },
+  {
+   "id": "way/137017428:9",
+   "reason": "duplicate footprint"
+  },
+  {
+   "id": "way/137017430:1",
+   "reason": "duplicate footprint"
+  },
+  {
+   "id": "way/137017430:2",
+   "reason": "duplicate footprint"
+  },
+  {
+   "id": "way/137017430:3",
+   "reason": "duplicate footprint"
+  },
+  {
+   "id": "way/137017430:5",
+   "reason": "duplicate footprint"
+  },
+  {
+   "id": "way/137017430:6",
+   "reason": "duplicate footprint"
+  },
+  {
+   "id": "way/137017430:7",
+   "reason": "duplicate footprint"
+  },
+  {
+   "id": "way/137017430:8",
+   "reason": "duplicate footprint"
+  },
+  {
+   "id": "way/400160677:0",
+   "reason": "stall/trailer"
+  },
+  {
+   "id": "way/400160677:1",
+   "reason": "stall/trailer"
+  },
+  {
+   "id": "way/400160677:3",
+   "reason": "stall/trailer"
+  },
+  {
+   "id": "way/400160678:0",
+   "reason": "stall/trailer"
+  },
+  {
+   "id": "way/400160678:3",
+   "reason": "stall/trailer"
+  },
+  {
+   "id": "way/400160679:0",
+   "reason": "stall/trailer"
+  },
+  {
+   "id": "way/400160679:1",
+   "reason": "stall/trailer"
+  },
+  {
+   "id": "way/400160680:0",
+   "reason": "stall/trailer"
+  },
+  {
+   "id": "way/400160680:5",
+   "reason": "stall/trailer"
+  },
+  {
+   "id": "way/400160681:1",
+   "reason": "stall/trailer"
+  },
+  {
+   "id": "way/400160682:5",
+   "reason": "stall/trailer"
+  },
+  {
+   "id": "way/400160683:1",
+   "reason": "stall/trailer"
+  },
+  {
+   "id": "way/400160684:1",
+   "reason": "stall/trailer"
+  },
+  {
+   "id": "way/400160685:1",
+   "reason": "stall/trailer"
+  },
+  {
+   "id": "way/400160686:1",
+   "reason": "stall/trailer"
   }
  ],
  "stats": {
-  "walls_annotated": 54,
+  "walls_annotated": 63,
   "walls_total": 153,
-  "walls_built": 127,
-  "tris": 118753,
-  "facade_tris": 62907,
-  "prop_tris": 55846,
-  "facade_area_m2": 10270.0,
-  "modelled_detail_area_m2": 3772.7
+  "walls_built": 99,
+  "tris": 198733,
+  "facade_tris": 56675,
+  "prop_tris": 142058,
+  "facade_area_m2": 9020.9,
+  "modelled_detail_area_m2": 3514.2
  }
 }

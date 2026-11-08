@@ -1,0 +1,128 @@
+{
+ "osm_id": "way/134387866",
+ "sources": [
+  "mapillary 150077440702442",
+  "mapillary 905995133446806"
+ ],
+ "walls": [
+  {
+   "id": "way/134387866:3",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    3.6,
+    6.2,
+    8.6
+   ],
+   "material": "brick",
+   "wall_colour": "#9e8d6d",
+   "trim_colour": "#ece8dd",
+   "cornice_z": 10.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 5.2,
+     "z1": 3.5,
+     "fascia_text": "Benets",
+     "fascia_colour": "#26282a",
+     "text_colour": "#e6d6a8",
+     "door_x": 4.3,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.5,
+     "w": 0.9,
+     "z": 4.3,
+     "h": 1.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.5,
+     "w": 0.9,
+     "z": 6.8,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.5,
+     "w": 0.85,
+     "z": 9.1,
+     "h": 1.2,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.9,
+     "w": 0.9,
+     "z": 4.3,
+     "h": 1.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.9,
+     "w": 0.9,
+     "z": 6.8,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.9,
+     "w": 0.85,
+     "z": 9.1,
+     "h": 1.2,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Benets cafe (OSM name), King's Parade front. Mapillary 150077440702442 (from King's College side looking NE) and 905995133446806 show pale weathered gault brick, 4 storeys, 2 window columns per floor of round-arched-head 1/1 sashes with white frames, black timber shopfront with arched glazed bays, gold 'BENETS' fascia and string of lights; entrance at the south (right-hand) end near the shared downpipe. Window x positions estimated from an oblique view."
+  }
+ ]
+}

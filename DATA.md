@@ -25,6 +25,11 @@ yellow_bricks, white_sandstone_blocks_02, grey_roof_tiles, asphalt_02, pavement_
 cobblestone_floor_08, gravel_floor (authors and URLs in `site/tex/textures.json`). Future textures: CC0 only. Photos from Wikimedia Commons/Mapillary only as visual
 references, licence checked and credited per item in this file.
 
+Facade annotation references (session 33, `data/raw/commons_ref/`, git-ignored): 16 Wikimedia Commons / Geograph
+photos (CC BY-SA 2.0/4.0) of Petty Cury, Lion Yard and St Edward King and Martyr, used only as visual references for
+the layout annotations in `data/annotations/market_square/` (file name, licence and author are listed in each
+annotation's `sources`). No pixels from them are in the world.
+
 ## Held-out benchmark (session 8)
 - 200 Mapillary photos (CC-BY-SA 4.0, contributors credited per photo in `data/benchmark/benchmark.json`),
   picked once on 2026-11-07 by `scripts/make_benchmark.py` from 6,884 candidates in the study area. Frozen. These

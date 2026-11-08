@@ -1,0 +1,127 @@
+{
+ "osm_id": "way/1211951044",
+ "sources": [
+  "Commons: File:Timpson - Petty Cury - geograph.org.uk - 6716291.jpg (Mr Ignavy, CC BY-SA 2.0)",
+  "Commons: File:Body Shop - Petty Cury - geograph.org.uk - 6497176.jpg (Mr Ignavy, CC BY-SA 2.0)"
+ ],
+ "walls": [
+  {
+   "id": "way/1211951044:5",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.6,
+    7.7
+   ],
+   "material": "brick",
+   "wall_colour": "#a2513a",
+   "trim_colour": "#e6dcc8",
+   "cornice_z": 10.4,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 0.9,
+     "w": 0.9,
+     "z": 5.2,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.75,
+     "w": 0.9,
+     "z": 5.2,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.6,
+     "w": 0.9,
+     "z": 5.2,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 0.9,
+     "w": 0.9,
+     "z": 8.2,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.75,
+     "w": 0.9,
+     "z": 8.2,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.6,
+     "w": 0.9,
+     "z": 8.2,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 5.2,
+     "z1": 4.2,
+     "fascia_text": "Timpson",
+     "fascia_colour": "#c8102e",
+     "text_colour": "#ffffff",
+     "door_x": 3.6,
+     "stallriser": 0.4,
+     "awning": false
+    }
+   ],
+   "confidence": "medium",
+   "notes": "35 Petty Cury (Timpson, OSM node 5649477462). Geograph 6716291 and right edge of 6497176: plain red brick, three bays of white 1-over-1 sashes on two upper floors with stone sills, simple stone cornice/parapet line; red Timpson fascia with white serif text, glazed shopfront with door right of centre."
+  }
+ ]
+}

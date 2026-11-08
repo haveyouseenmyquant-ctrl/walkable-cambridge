@@ -8,8 +8,8 @@ Walls: data/annotations/market_square/walls.json (street-facing walls within 90 
   mean over [window, door, shopfront, dormer] (storeys not yet counted separately) of min(model, annot) / max(model, annot) (1 if both 0).
   Walls without an annotation count as 0. KPI = length-weighted mean x 100.
 - painted_detail_pct (lower is better): wall area (length x height) whose windows/doors exist only as a photo
-  texture: walls carrying a photo-baked facade quad (site/facades/*.bin) and no modelled facade skin, divided by the
-  total wall area, x 100.
+  texture: walls carrying a photo-baked facade quad (site/facades/*.bin) that the viewer draws (not inside a
+  facades.js SKIP circle) and no modelled facade skin, divided by the total wall area, x 100.
 """
 import glob
 import json
@@ -22,6 +22,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, "site")
 A = os.path.join(ROOT, "data/annotations/market_square")
 TYPES = ("window", "door", "shopfront", "dormer")
+SKIP = [(-102.9, 57.4, 100.0), (-213.3, 80.3, 20.0)]   # keep in step with site/app/facades.js SKIP
 
 
 def main():
@@ -44,6 +45,9 @@ def main():
         q = np.fromfile(f, "<f4").reshape(-1, 4, 5)
         quads.append(q[:, :, :2].astype(float).mean(1))
     Q = np.concatenate(quads) if quads else np.zeros((0, 2))
+    # the viewer does not draw photo quads inside a modelled zone (site/app/facades.js SKIP), so they don't count
+    for x, y, r in SKIP:
+        Q = Q[np.hypot(Q[:, 0] - x, Q[:, 1] - y) > r]
     num = den = painted = area = 0.0
     for w in walls:
         L, H = w["length"], max(w["height"], 0)
