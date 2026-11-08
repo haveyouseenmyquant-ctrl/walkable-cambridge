@@ -124,6 +124,7 @@ export class TileManager {
       if (!o.isMesh) return;
       const isBuilding = isB(o) || isB(o.parent); // GLTFLoader keeps the raw node name in userData.name
       if (!isBuilding) hasGround = true;
+      if (window.__zoneHide?.has(o.userData.name || o.parent?.userData.name)) o.visible = false;   // zone.js bespoke
       const g = o.geometry, old = o.material;
       if (g.attributes.color && LOOK2) {   // GLB albedos were tuned for an over-bright rig; scale to plausible values
         const c = g.attributes.color.array, k = isBuilding ? 0.75 : 0.42;

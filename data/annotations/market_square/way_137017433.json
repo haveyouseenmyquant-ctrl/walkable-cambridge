@@ -1,0 +1,213 @@
+{
+ "osm_id": "way/137017433",
+ "sources": [
+  "mapillary 138292341951529",
+  "Wikidata Q26418526 (listed 1125528, 'North and East ranges of St Michael's Court')"
+ ],
+ "walls": [
+  {
+   "id": "way/137017433:4",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.6,
+    7.4
+   ],
+   "material": "stone",
+   "wall_colour": "#d8d0bd",
+   "trim_colour": "#c9c1ad",
+   "cornice_z": 11.0,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.0,
+     "w": 2.2,
+     "z": 5.2,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.0,
+     "w": 2.2,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.0,
+     "w": 2.2,
+     "z": 5.2,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.0,
+     "w": 2.2,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 10.0,
+     "w": 2.2,
+     "z": 5.2,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 10.0,
+     "w": 2.2,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 14.0,
+     "w": 2.2,
+     "z": 5.2,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 14.0,
+     "w": 2.2,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 18.0,
+     "w": 2.2,
+     "z": 5.2,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 18.0,
+     "w": 2.2,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 22.0,
+     "w": 2.2,
+     "z": 5.2,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 22.0,
+     "w": 2.2,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 23.8,
+     "z1": 4.0,
+     "fascia_text": "",
+     "fascia_colour": "#e6e0d2",
+     "text_colour": "#6b5a4a",
+     "door_x": 12.0,
+     "stallriser": 0.4,
+     "awning": false
+    }
+   ],
+   "confidence": "low",
+   "notes": "Market Hill west-side frontage north of way/13864148: photo shows the Portland stone colonnaded shop arcade and regular multi-pane windows continuing along the whole frontage toward Rose Crescent. Footprint is only 11.2 m tall so 3 floors modelled; 6 bays at ~4 m assumed. Courtyard walls (:0,:21,:22) and short walls :1,:2 not seen; Rose Crescent side (Aston Webb Tudor-Gothic) is outside this list."
+  }
+ ]
+}

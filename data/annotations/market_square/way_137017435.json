@@ -1,0 +1,84 @@
+{
+ "osm_id": "way/137017435",
+ "sources": [
+  "mapillary 3831327076965566 (context only)"
+ ],
+ "walls": [
+  {
+   "id": "way/137017435:4",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "stone",
+   "wall_colour": "#cbbd9c",
+   "trim_colour": "#bfb08e",
+   "cornice_z": 3.58,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [],
+   "confidence": "low",
+   "notes": "Low (~3.6 m) single-storey Caius structure/screen wall beside St Michael's passage; no openings visible in any reference photo, modelled plain ashlar. Walls :2/:3 have ~0 m height in the footprint and are omitted."
+  },
+  {
+   "id": "way/137017435:5",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "stone",
+   "wall_colour": "#cbbd9c",
+   "trim_colour": "#bfb08e",
+   "cornice_z": 3.53,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [],
+   "confidence": "low",
+   "notes": "Low (~3.6 m) single-storey Caius structure/screen wall beside St Michael's passage; no openings visible in any reference photo, modelled plain ashlar. Walls :2/:3 have ~0 m height in the footprint and are omitted."
+  },
+  {
+   "id": "way/137017435:7",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "stone",
+   "wall_colour": "#cbbd9c",
+   "trim_colour": "#bfb08e",
+   "cornice_z": 3.53,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [],
+   "confidence": "low",
+   "notes": "Low (~3.6 m) single-storey Caius structure/screen wall beside St Michael's passage; no openings visible in any reference photo, modelled plain ashlar. Walls :2/:3 have ~0 m height in the footprint and are omitted."
+  },
+  {
+   "id": "way/137017435:8",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "stone",
+   "wall_colour": "#cbbd9c",
+   "trim_colour": "#bfb08e",
+   "cornice_z": 3.65,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [],
+   "confidence": "low",
+   "notes": "Low (~3.6 m) single-storey Caius structure/screen wall beside St Michael's passage; no openings visible in any reference photo, modelled plain ashlar. Walls :2/:3 have ~0 m height in the footprint and are omitted."
+  }
+ ]
+}

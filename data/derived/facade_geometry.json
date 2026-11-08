@@ -1,6 +1,6 @@
 {
  "zone": "market_square",
- "built": "2026-11-08T11:45:39Z",
+ "built": "2026-11-08T11:58:02Z",
  "walls": [
   {
    "id": "way/13864058:26",
@@ -129,18 +129,17 @@
   {
    "id": "way/13864148:7",
    "osm_id": "way/13864148",
-   "annotated": false,
+   "annotated": true,
    "length": 6.24,
    "height": 15.98,
    "area": 99.72,
-   "detail_area": 23.24,
+   "detail_area": 21.07,
    "elements": {
     "cornice": 1,
-    "door": 1,
     "string_course": 1,
-    "window": 9
+    "window": 4
    },
-   "tris": 786
+   "tris": 360
   },
   {
    "id": "way/13864148:8",
@@ -163,80 +162,87 @@
   {
    "id": "way/13864148:9",
    "osm_id": "way/13864148",
-   "annotated": false,
+   "annotated": true,
    "length": 14.35,
    "height": 15.73,
    "area": 225.73,
-   "detail_area": 56.78,
+   "detail_area": 133.87,
    "elements": {
     "cornice": 1,
-    "door": 1,
+    "shop_door": 1,
+    "shopfront": 1,
     "string_course": 1,
-    "window": 24
+    "window": 16
    },
-   "tris": 1928
+   "tris": 1414
   },
   {
    "id": "way/13864148:10",
    "osm_id": "way/13864148",
-   "annotated": false,
+   "annotated": true,
    "length": 6.18,
    "height": 16.86,
    "area": 104.19,
-   "detail_area": 23.0,
+   "detail_area": 61.33,
    "elements": {
     "cornice": 1,
-    "door": 1,
+    "shop_door": 1,
+    "shopfront": 1,
     "string_course": 1,
-    "window": 9
+    "window": 8
    },
-   "tris": 786
+   "tris": 770
   },
   {
    "id": "way/13864148:11",
    "osm_id": "way/13864148",
-   "annotated": false,
+   "annotated": true,
    "length": 3.61,
    "height": 18.22,
    "area": 65.77,
-   "detail_area": 13.77,
+   "detail_area": 31.77,
    "elements": {
     "cornice": 1,
+    "shop_door": 1,
+    "shopfront": 1,
     "string_course": 1,
-    "window": 6
+    "window": 4
    },
-   "tris": 508
+   "tris": 466
   },
   {
    "id": "way/13864148:12",
    "osm_id": "way/13864148",
-   "annotated": false,
+   "annotated": true,
    "length": 2.92,
    "height": 18.42,
    "area": 53.79,
-   "detail_area": 13.58,
+   "detail_area": 28.82,
    "elements": {
     "cornice": 1,
+    "shop_door": 1,
+    "shopfront": 1,
     "string_course": 1,
-    "window": 6
+    "window": 4
    },
-   "tris": 508
+   "tris": 466
   },
   {
    "id": "way/13864148:13",
    "osm_id": "way/13864148",
-   "annotated": false,
+   "annotated": true,
    "length": 14.42,
    "height": 12.27,
    "area": 176.93,
-   "detail_area": 46.25,
+   "detail_area": 99.7,
    "elements": {
     "cornice": 1,
-    "door": 1,
+    "shop_door": 1,
+    "shopfront": 1,
     "string_course": 1,
-    "window": 19
+    "window": 8
    },
-   "tris": 1546
+   "tris": 802
   },
   {
    "id": "way/26344576:0",
@@ -459,44 +465,45 @@
   {
    "id": "way/95406730:3",
    "osm_id": "way/95406730",
-   "annotated": false,
+   "annotated": true,
    "length": 13.25,
    "height": 5.91,
    "area": 78.31,
-   "detail_area": 14.52,
+   "detail_area": 12.6,
    "elements": {
     "cornice": 1,
-    "window": 3
+    "window": 2
    },
-   "tris": 547
+   "tris": 410
   },
   {
    "id": "way/95406730:4",
    "osm_id": "way/95406730",
-   "annotated": false,
+   "annotated": true,
    "length": 12.55,
    "height": 5.94,
    "area": 74.55,
-   "detail_area": 14.53,
+   "detail_area": 12.49,
    "elements": {
     "cornice": 1,
-    "window": 3
+    "window": 2
    },
-   "tris": 546
+   "tris": 410
   },
   {
    "id": "way/95406730:5",
    "osm_id": "way/95406730",
-   "annotated": false,
+   "annotated": true,
    "length": 17.69,
    "height": 8.6,
    "area": 152.13,
-   "detail_area": 34.49,
+   "detail_area": 33.92,
    "elements": {
     "cornice": 1,
-    "window": 4
+    "quoin": 56,
+    "window": 3
    },
-   "tris": 720
+   "tris": 1039
   },
   {
    "id": "way/119881004:6",
@@ -610,81 +617,82 @@
   {
    "id": "way/137017428:0",
    "osm_id": "way/137017428",
-   "annotated": false,
+   "annotated": true,
    "length": 15.45,
    "height": 10.8,
    "area": 166.86,
-   "detail_area": 36.02,
+   "detail_area": 8.59,
    "elements": {
-    "cornice": 1,
-    "door": 1,
-    "string_course": 1,
-    "window": 14
+    "quoin": 70
    },
-   "tris": 744
+   "tris": 568
   },
   {
    "id": "way/137017428:1",
    "osm_id": "way/137017428",
-   "annotated": false,
+   "annotated": true,
    "length": 16.04,
    "height": 11.28,
    "area": 180.93,
-   "detail_area": 44.22,
+   "detail_area": 82.21,
    "elements": {
-    "cornice": 1,
     "door": 1,
-    "string_course": 1,
-    "window": 19
+    "shop_door": 2,
+    "shopfront": 2,
+    "window": 15
    },
-   "tris": 976
+   "tris": 1206
   },
   {
    "id": "way/137017428:2",
    "osm_id": "way/137017428",
-   "annotated": false,
+   "annotated": true,
    "length": 4.96,
    "height": 11.15,
    "area": 55.3,
-   "detail_area": 7.95,
+   "detail_area": 21.85,
    "elements": {
     "cornice": 1,
+    "door": 1,
+    "dormer": 1,
     "string_course": 1,
-    "window": 3
+    "window": 5
    },
-   "tris": 184
+   "tris": 495
   },
   {
    "id": "way/137017428:3",
    "osm_id": "way/137017428",
-   "annotated": false,
+   "annotated": true,
    "length": 5.09,
    "height": 11.31,
    "area": 57.57,
-   "detail_area": 9.98,
+   "detail_area": 29.22,
    "elements": {
     "cornice": 1,
-    "door": 1,
+    "shop_door": 1,
+    "shopfront": 1,
     "string_course": 1,
-    "window": 3
+    "window": 6
    },
-   "tris": 236
+   "tris": 632
   },
   {
    "id": "way/137017428:4",
    "osm_id": "way/137017428",
-   "annotated": false,
+   "annotated": true,
    "length": 5.44,
    "height": 12.88,
    "area": 70.07,
-   "detail_area": 10.57,
+   "detail_area": 24.94,
    "elements": {
     "cornice": 1,
-    "door": 1,
+    "shop_door": 1,
+    "shopfront": 1,
     "string_course": 1,
     "window": 3
    },
-   "tris": 236
+   "tris": 375
   },
   {
    "id": "way/137017428:9",
@@ -752,34 +760,36 @@
   {
    "id": "way/137017430:2",
    "osm_id": "way/137017430",
-   "annotated": false,
+   "annotated": true,
    "length": 14.92,
    "height": 12.54,
    "area": 187.1,
-   "detail_area": 35.79,
+   "detail_area": 83.93,
    "elements": {
     "cornice": 1,
-    "door": 1,
+    "shop_door": 1,
+    "shopfront": 1,
     "string_course": 1,
-    "window": 14
+    "window": 12
    },
-   "tris": 744
+   "tris": 1174
   },
   {
    "id": "way/137017430:3",
    "osm_id": "way/137017430",
-   "annotated": false,
+   "annotated": true,
    "length": 10.44,
    "height": 13.64,
    "area": 142.4,
-   "detail_area": 22.12,
+   "detail_area": 74.79,
    "elements": {
     "cornice": 1,
     "door": 1,
-    "string_course": 1,
-    "window": 8
+    "shop_door": 1,
+    "shopfront": 1,
+    "window": 12
    },
-   "tris": 468
+   "tris": 1158
   },
   {
    "id": "way/137017430:5",
@@ -894,18 +904,19 @@
   {
    "id": "way/137017433:4",
    "osm_id": "way/137017433",
-   "annotated": false,
+   "annotated": true,
    "length": 24.09,
    "height": 11.18,
    "area": 269.33,
-   "detail_area": 57.09,
+   "detail_area": 161.52,
    "elements": {
     "cornice": 1,
-    "door": 1,
+    "shop_door": 1,
+    "shopfront": 1,
     "string_course": 1,
-    "window": 23
+    "window": 12
    },
-   "tris": 1158
+   "tris": 1154
   },
   {
    "id": "way/137017433:21",
@@ -964,35 +975,33 @@
   {
    "id": "way/137017435:4",
    "osm_id": "way/137017435",
-   "annotated": false,
+   "annotated": true,
    "length": 3.5,
    "height": 3.68,
    "area": 12.88,
-   "detail_area": 3.01,
+   "detail_area": 0.88,
    "elements": {
-    "cornice": 1,
-    "window": 1
+    "cornice": 1
    },
-   "tris": 74
+   "tris": 34
   },
   {
    "id": "way/137017435:5",
    "osm_id": "way/137017435",
-   "annotated": false,
+   "annotated": true,
    "length": 5.36,
    "height": 3.63,
    "area": 19.46,
-   "detail_area": 3.7,
+   "detail_area": 1.4,
    "elements": {
-    "cornice": 1,
-    "door": 1
+    "cornice": 1
    },
-   "tris": 78
+   "tris": 34
   },
   {
    "id": "way/137017435:7",
    "osm_id": "way/137017435",
-   "annotated": false,
+   "annotated": true,
    "length": 2.09,
    "height": 3.63,
    "area": 7.59,
@@ -1000,22 +1009,20 @@
    "elements": {
     "cornice": 1
    },
-   "tris": 26
+   "tris": 34
   },
   {
    "id": "way/137017435:8",
    "osm_id": "way/137017435",
-   "annotated": false,
+   "annotated": true,
    "length": 6.59,
    "height": 3.75,
    "area": 24.71,
-   "detail_area": 6.08,
+   "detail_area": 1.65,
    "elements": {
-    "cornice": 1,
-    "door": 1,
-    "window": 1
+    "cornice": 1
    },
-   "tris": 126
+   "tris": 34
   },
   {
    "id": "way/137152223:2",
@@ -1349,34 +1356,31 @@
   {
    "id": "way/1099847936:5",
    "osm_id": "way/1099847936",
-   "annotated": false,
+   "annotated": true,
    "length": 15.45,
    "height": 10.8,
    "area": 166.86,
-   "detail_area": 36.02,
+   "detail_area": 8.59,
    "elements": {
-    "cornice": 1,
-    "door": 1,
-    "string_course": 1,
-    "window": 14
+    "quoin": 70
    },
-   "tris": 744
+   "tris": 568
   },
   {
    "id": "way/1099847936:6",
    "osm_id": "way/1099847936",
-   "annotated": false,
+   "annotated": true,
    "length": 16.04,
    "height": 11.28,
    "area": 180.93,
-   "detail_area": 44.22,
+   "detail_area": 82.21,
    "elements": {
-    "cornice": 1,
     "door": 1,
-    "string_course": 1,
-    "window": 19
+    "shop_door": 2,
+    "shopfront": 2,
+    "window": 15
    },
-   "tris": 976
+   "tris": 1206
   },
   {
    "id": "way/1099847937:0",
@@ -1964,69 +1968,69 @@
   },
   {
    "id": "way/26344507:0",
-   "reason": "landmark:great-st-marys"
+   "reason": "bespoke"
   },
   {
    "id": "way/26344507:1",
-   "reason": "landmark:great-st-marys"
+   "reason": "bespoke"
   },
   {
    "id": "way/26344507:2",
-   "reason": "landmark:great-st-marys"
+   "reason": "bespoke"
   },
   {
    "id": "way/26344507:3",
-   "reason": "landmark:great-st-marys"
+   "reason": "bespoke"
   },
   {
    "id": "way/26344507:4",
-   "reason": "landmark:great-st-marys"
+   "reason": "bespoke"
   },
   {
    "id": "way/26344507:5",
-   "reason": "landmark:great-st-marys"
+   "reason": "bespoke"
   },
   {
    "id": "way/26344507:9",
-   "reason": "landmark:great-st-marys"
+   "reason": "bespoke"
   },
   {
    "id": "way/26344507:10",
-   "reason": "landmark:great-st-marys"
+   "reason": "bespoke"
   },
   {
    "id": "way/26344507:11",
-   "reason": "landmark:great-st-marys"
+   "reason": "bespoke"
   },
   {
    "id": "way/26344507:12",
-   "reason": "landmark:great-st-marys"
+   "reason": "bespoke"
   },
   {
    "id": "way/26344507:13",
-   "reason": "landmark:great-st-marys"
+   "reason": "bespoke"
   },
   {
    "id": "way/26344507:14",
-   "reason": "landmark:great-st-marys"
+   "reason": "bespoke"
   },
   {
    "id": "way/26344507:15",
-   "reason": "landmark:great-st-marys"
+   "reason": "bespoke"
   },
   {
    "id": "way/26344507:16",
-   "reason": "landmark:great-st-marys"
+   "reason": "bespoke"
   }
  ],
  "stats": {
-  "walls_annotated": 31,
+  "walls_annotated": 54,
   "walls_total": 153,
   "walls_built": 127,
-  "tris": 96348,
-  "facade_tris": 62743,
-  "prop_tris": 33605,
+  "tris": 118753,
+  "facade_tris": 62907,
+  "prop_tris": 55846,
   "facade_area_m2": 10270.0,
-  "modelled_detail_area_m2": 3312.3
+  "modelled_detail_area_m2": 3772.7
  }
 }

@@ -99,16 +99,21 @@ def gl_mesh(name, P, nrm, col, mat=None):
     return (name, pos, nr, cl, np.arange(k * 3), np.repeat(np.asarray(mat, np.float32), 3))
 
 
+HIDE = []
+
+
 def load_bespoke():
     """scripts/zone_bespoke_*.py modules: BUILDS = {osm_id: fn(walls_of_building) -> [{"name", "tris", "col"}, ...]}
     (optional "mat": a facade_parts.MATS name/id, or a per-triangle array of them; default plain)
-    (tris: world collision-frame triangles (E, N, z) like zone_props). A bespoke building gets no generic skin."""
+    (tris: world collision-frame triangles (E, N, z) like zone_props). A bespoke building gets no generic skin.
+    Optional HIDE_TILE = [osm_id, ...]: complete bespoke models whose tile body the viewer hides (zone.json "hide")."""
     here = os.path.dirname(os.path.abspath(__file__))
     out = {}
     for f in sorted(glob.glob(os.path.join(here, "zone_bespoke_*.py"))):
         try:
             mod = importlib.import_module(os.path.basename(f)[:-3])
             out.update(getattr(mod, "BUILDS", {}))
+            HIDE.extend(getattr(mod, "HIDE_TILE", []))
         except Exception as e:   # never break the zone build
             print("bespoke module failed:", f, repr(e), file=sys.stderr)
     return out
@@ -205,7 +210,7 @@ def main():
              "walls_skipped": skipped,
              "tris": ntris, "facade_tris": ntris - nprops, "prop_tris": nprops,
              "facade_area_m2": round(tot_area, 1), "modelled_detail_area_m2": round(tot_detail, 1)}
-    json.dump({"glb": "zone/" + ZONE + ".glb", "centre": centre, "radius": 140, "stats": stats},
+    json.dump({"glb": "zone/" + ZONE + ".glb", "centre": centre, "radius": 140, "hide": HIDE, "stats": stats},
               open(os.path.join(out, "zone.json"), "w"), indent=1)
     os.makedirs(os.path.join(ROOT, "data/derived"), exist_ok=True)
     json.dump({"zone": ZONE, "built": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "walls": rows,

@@ -1,7 +1,9 @@
 {
  "osm_id": "way/13864148",
  "sources": [
-  "150365460382983"
+  "150365460382983",
+  "mapillary 3304474719779190",
+  "mapillary 138292341951529"
  ],
  "walls": [
   {
@@ -271,6 +273,893 @@
    ],
    "confidence": "low",
    "notes": "Curved 1930s Portland-stone block; recessed colonnaded ground-floor arcade with glazed shopfronts (photo shows Paperchase; no shop tag in OSM). 3-light metal windows per bay; bay x positions approximate."
+  },
+  {
+   "id": "way/13864148:9",
+   "storeys": 5,
+   "floor_z": [
+    0,
+    4.6,
+    7.4,
+    10.2,
+    13.0
+   ],
+   "material": "stone",
+   "wall_colour": "#d8d0bd",
+   "trim_colour": "#c9c1ad",
+   "cornice_z": 15.5,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.8,
+     "w": 2.2,
+     "z": 5.199999999999999,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.8,
+     "w": 2.2,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.8,
+     "w": 2.2,
+     "z": 10.799999999999999,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.8,
+     "w": 2.2,
+     "z": 13.5,
+     "h": 1.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.4,
+     "w": 2.2,
+     "z": 5.199999999999999,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.4,
+     "w": 2.2,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.4,
+     "w": 2.2,
+     "z": 10.799999999999999,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.4,
+     "w": 2.2,
+     "z": 13.5,
+     "h": 1.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 9.0,
+     "w": 2.2,
+     "z": 5.199999999999999,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 9.0,
+     "w": 2.2,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 9.0,
+     "w": 2.2,
+     "z": 10.799999999999999,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 9.0,
+     "w": 2.2,
+     "z": 13.5,
+     "h": 1.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.6,
+     "w": 2.2,
+     "z": 5.199999999999999,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.6,
+     "w": 2.2,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.6,
+     "w": 2.2,
+     "z": 10.799999999999999,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.6,
+     "w": 2.2,
+     "z": 13.5,
+     "h": 1.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 14.05,
+     "z1": 4.0,
+     "fascia_text": "",
+     "fascia_colour": "#e6e0d2",
+     "text_colour": "#6b5a4a",
+     "door_x": 7.17,
+     "stallriser": 0.4,
+     "awning": false
+    }
+   ],
+   "confidence": "low",
+   "notes": "Continuation of wall :8 along the road between Great St Mary's and the market: same Portland stone, recessed colonnaded shop arcade, 3-light metal windows in 4 bays. Seen at an angle in mapillary 3304474719779190; bay positions assumed equal to wall :8."
+  },
+  {
+   "id": "way/13864148:13",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.6,
+    7.4,
+    10.2
+   ],
+   "material": "stone",
+   "wall_colour": "#d8d0bd",
+   "trim_colour": "#c9c1ad",
+   "cornice_z": 12.1,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.8,
+     "w": 2.2,
+     "z": 5.199999999999999,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.8,
+     "w": 2.2,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.8,
+     "w": 2.2,
+     "z": 10.799999999999999,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.4,
+     "w": 2.2,
+     "z": 5.199999999999999,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.4,
+     "w": 2.2,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.4,
+     "w": 2.2,
+     "z": 10.799999999999999,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 9.0,
+     "w": 2.2,
+     "z": 5.199999999999999,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 9.0,
+     "w": 2.2,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 9.0,
+     "w": 2.2,
+     "z": 10.799999999999999,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.6,
+     "w": 2.2,
+     "z": 5.199999999999999,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.6,
+     "w": 2.2,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.6,
+     "w": 2.2,
+     "z": 10.799999999999999,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 14.12,
+     "z1": 4.0,
+     "fascia_text": "",
+     "fascia_colour": "#e6e0d2",
+     "text_colour": "#6b5a4a",
+     "door_x": 7.21,
+     "stallriser": 0.4,
+     "awning": false
+    }
+   ],
+   "confidence": "low",
+   "notes": "Market Hill (west side) frontage of the 1930s Portland stone range: colonnaded ground-floor shop arcade, regular bays of multi-pane metal casements (mapillary 138292341951529, 3304474719779190). Footprint height only 12.3 m so upper storey(s) clipped to 4 floors; bay x positions approximate."
+  },
+  {
+   "id": "way/13864148:10",
+   "storeys": 5,
+   "floor_z": [
+    0,
+    4.6,
+    7.4,
+    10.2,
+    13.0
+   ],
+   "material": "stone",
+   "wall_colour": "#d8d0bd",
+   "trim_colour": "#c9c1ad",
+   "cornice_z": 15.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.6,
+     "w": 2.2,
+     "z": 5.199999999999999,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.6,
+     "w": 2.2,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.6,
+     "w": 2.2,
+     "z": 10.799999999999999,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.6,
+     "w": 2.2,
+     "z": 13.5,
+     "h": 1.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.6,
+     "w": 2.2,
+     "z": 5.199999999999999,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.6,
+     "w": 2.2,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.6,
+     "w": 2.2,
+     "z": 10.799999999999999,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.6,
+     "w": 2.2,
+     "z": 13.5,
+     "h": 1.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 5.88,
+     "z1": 4.0,
+     "fascia_text": "",
+     "fascia_colour": "#e6e0d2",
+     "text_colour": "#6b5a4a",
+     "door_x": 3.09,
+     "stallriser": 0.4,
+     "awning": false
+    }
+   ],
+   "confidence": "low",
+   "notes": "Curved SE corner of the Portland stone range (polygon segment of the curve); same arcade and window rhythm assumed as walls :9/:13, not individually verified."
+  },
+  {
+   "id": "way/13864148:11",
+   "storeys": 5,
+   "floor_z": [
+    0,
+    4.6,
+    7.4,
+    10.2,
+    13.0
+   ],
+   "material": "stone",
+   "wall_colour": "#d8d0bd",
+   "trim_colour": "#c9c1ad",
+   "cornice_z": 15.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.8,
+     "w": 2.2,
+     "z": 5.199999999999999,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.8,
+     "w": 2.2,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.8,
+     "w": 2.2,
+     "z": 10.799999999999999,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.8,
+     "w": 2.2,
+     "z": 13.5,
+     "h": 1.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 3.31,
+     "z1": 4.0,
+     "fascia_text": "",
+     "fascia_colour": "#e6e0d2",
+     "text_colour": "#6b5a4a",
+     "door_x": 1.8,
+     "stallriser": 0.4,
+     "awning": false
+    }
+   ],
+   "confidence": "low",
+   "notes": "Curved SE corner of the Portland stone range (polygon segment of the curve); same arcade and window rhythm assumed as walls :9/:13, not individually verified."
+  },
+  {
+   "id": "way/13864148:12",
+   "storeys": 5,
+   "floor_z": [
+    0,
+    4.6,
+    7.4,
+    10.2,
+    13.0
+   ],
+   "material": "stone",
+   "wall_colour": "#d8d0bd",
+   "trim_colour": "#c9c1ad",
+   "cornice_z": 15.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.46,
+     "w": 2.2,
+     "z": 5.199999999999999,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.46,
+     "w": 2.2,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.46,
+     "w": 2.2,
+     "z": 10.799999999999999,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.46,
+     "w": 2.2,
+     "z": 13.5,
+     "h": 1.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 2.62,
+     "z1": 4.0,
+     "fascia_text": "",
+     "fascia_colour": "#e6e0d2",
+     "text_colour": "#6b5a4a",
+     "door_x": 1.46,
+     "stallriser": 0.4,
+     "awning": false
+    }
+   ],
+   "confidence": "low",
+   "notes": "Curved SE corner of the Portland stone range (polygon segment of the curve); same arcade and window rhythm assumed as walls :9/:13, not individually verified."
+  },
+  {
+   "id": "way/13864148:7",
+   "storeys": 5,
+   "floor_z": [
+    0,
+    4.6,
+    7.4,
+    10.2,
+    13.0
+   ],
+   "material": "stone",
+   "wall_colour": "#d8d0bd",
+   "trim_colour": "#c9c1ad",
+   "cornice_z": 15.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 3.1,
+     "w": 2.2,
+     "z": 5.199999999999999,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 3.1,
+     "w": 2.2,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 3.1,
+     "w": 2.2,
+     "z": 10.799999999999999,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 3.1,
+     "w": 2.2,
+     "z": 13.5,
+     "h": 1.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "West end of the Portland stone range; single bay assumed from the rhythm of wall :8, not clearly seen."
   }
  ]
 }

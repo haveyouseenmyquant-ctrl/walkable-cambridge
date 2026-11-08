@@ -2,7 +2,9 @@
  "osm_id": "way/137017430",
  "sources": [
   "296497208762822",
-  "1078821085942013"
+  "1078821085942013",
+  "mapillary 1395962697425004",
+  "Commons: File:27-28 Market Hill, Cambridge.jpg (Smb1001, CC BY-SA 4.0)"
  ],
  "walls": [
   {
@@ -98,6 +100,420 @@
    ],
    "confidence": "medium",
    "notes": "Brown stock-brick 3 storeys + slate mansard; white rendered ground floor with wide arched shop entrance; white window surrounds. Photo face looks ~5.5 m wide vs 3.26 m wall: x positions scaled to wall. Other walls not visible (refs are Great St Mary's interiors)."
+  },
+  {
+   "id": "way/137017430:3",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.8,
+    8.2
+   ],
+   "material": "brick",
+   "wall_colour": "#8a7d64",
+   "trim_colour": "#ece8dd",
+   "cornice_z": 11.2,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.5,
+     "w": 1.15,
+     "z": 5.2,
+     "h": 2.2,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.6,
+     "w": 1.15,
+     "z": 5.2,
+     "h": 2.2,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.4,
+     "w": 1.15,
+     "z": 5.2,
+     "h": 2.2,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.75,
+     "w": 1.15,
+     "z": 5.2,
+     "h": 2.2,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.5,
+     "w": 1.15,
+     "z": 8.6,
+     "h": 1.8,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.6,
+     "w": 1.15,
+     "z": 8.6,
+     "h": 1.8,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.4,
+     "w": 1.15,
+     "z": 8.6,
+     "h": 1.8,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.75,
+     "w": 1.15,
+     "z": 8.6,
+     "h": 1.8,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.9,
+     "w": 1.1,
+     "z": 12.0,
+     "h": 1.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 3.8,
+     "w": 1.1,
+     "z": 12.0,
+     "h": 1.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.2,
+     "w": 1.1,
+     "z": 12.0,
+     "h": 1.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.3,
+     "w": 1.1,
+     "z": 12.0,
+     "h": 1.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 0.45,
+     "w": 0.85,
+     "h": 2.6,
+     "surround": "fanlight"
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.95,
+     "x1": 10.24,
+     "z1": 4.6,
+     "fascia_text": "",
+     "fascia_colour": "#d9cb9e",
+     "text_colour": "#2b2b2b",
+     "door_x": 5.0,
+     "stallriser": 0.6,
+     "awning": false
+    }
+   ],
+   "confidence": "high",
+   "notes": "Same footprint as 27-28 Market Hill (way/1099847940:0); copied. Cambridge University Press Bookshop (no.28): weathered gault brick, 4 bays (2+2 either side of a downpipe) x 2 floors of 6/6 sashes with white keystone lintels, white band/parapet, slate mansard with 4 dormers (modelled as windows in the skin above the cornice). Stuccoed ground floor: red panelled door with fanlight at W end, two arched-transom shop windows, central entrance, further window at E end; fascia is blank stucco ('28'). Near-frontal 2022-23 photo. Walls :1-:4 not verified."
+  },
+  {
+   "id": "way/137017430:2",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.4,
+    6.9
+   ],
+   "material": "brick",
+   "wall_colour": "#7a6a50",
+   "trim_colour": "#f3f1ea",
+   "cornice_z": 10.8,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.4
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.5,
+     "w": 1.1,
+     "z": 4.4,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.5,
+     "w": 1.1,
+     "z": 7.6,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.8,
+     "w": 1.1,
+     "z": 4.4,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.8,
+     "w": 1.1,
+     "z": 7.6,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.1,
+     "w": 1.1,
+     "z": 4.4,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.1,
+     "w": 1.1,
+     "z": 7.6,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.4,
+     "w": 1.1,
+     "z": 4.4,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.4,
+     "w": 1.1,
+     "z": 7.6,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 10.7,
+     "w": 1.1,
+     "z": 4.4,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 10.7,
+     "w": 1.1,
+     "z": 7.6,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 13.0,
+     "w": 1.1,
+     "z": 4.4,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 13.0,
+     "w": 1.1,
+     "z": 7.6,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 14.6,
+     "z1": 3.4,
+     "fascia_text": "Cambridge University Press Bookshop",
+     "fascia_colour": "#e9e4d6",
+     "text_colour": "#1f3b2c",
+     "door_x": 0.9,
+     "stallriser": 0.5,
+     "awning": false
+    }
+   ],
+   "confidence": "low",
+   "notes": "1 Trinity Street, south face to Market Hill/St Mary's Street opposite Great St Mary's: continuation of the corner building of wall :1 (stock brick, white rendered ground storey, white-surround sashes; CUP bookshop sign seen at the corner). Only seen obliquely/blurred from the east; bay count (6) and spacing estimated, not measured."
   }
  ]
 }

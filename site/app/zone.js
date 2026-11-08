@@ -146,6 +146,9 @@ export async function loadZone(base, scene) {
     });
     scene.add(root);
     zone.root = root;
+    // complete bespoke buildings (zone.json "hide"): hide their tile body now and in tiles that load later (tiles.js)
+    window.__zoneHide = new Set((zone.hide || []).map(id => 'b:' + id));
+    scene.traverse(o => { if (o.isMesh && window.__zoneHide.has(o.userData.name || o.parent?.userData.name)) o.visible = false; });
     return zone;
   } catch (e) {
     console.warn('zone failed', e);

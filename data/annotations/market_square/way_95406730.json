@@ -1,0 +1,166 @@
+{
+ "osm_id": "way/95406730",
+ "sources": [
+  "Commons: File:St Michael's, Cambridge, England - IMG 0673.JPG (Rept0n1x, CC BY-SA 3.0)"
+ ],
+ "walls": [
+  {
+   "id": "way/95406730:3",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "flint",
+   "wall_colour": "#8b7860",
+   "trim_colour": "#c9b994",
+   "cornice_z": 5.7,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 3.5,
+     "w": 1.6,
+     "z": 1.6,
+     "h": 3.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 9.5,
+     "w": 1.6,
+     "z": 1.6,
+     "h": 3.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "pointed",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Church of St Michael (c.1324, Decorated): south aisle wall to the passage behind 4-6 Trinity St. Coursed clunch/field-stone rubble with pebble flint and pale ashlar dressings as on the photographed west/north sides; traceried pointed windows assumed (this side not photographed). Window x positions guessed."
+  },
+  {
+   "id": "way/95406730:4",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "flint",
+   "wall_colour": "#8b7860",
+   "trim_colour": "#c9b994",
+   "cornice_z": 5.7,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 3.0,
+     "w": 1.6,
+     "z": 1.6,
+     "h": 3.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 9.0,
+     "w": 1.6,
+     "z": 1.6,
+     "h": 3.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "pointed",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Eastern part of the south side (south chapel/chancel aisle); same rubble with ashlar dressings; window positions guessed, side not photographed."
+  },
+  {
+   "id": "way/95406730:5",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "flint",
+   "wall_colour": "#8b7860",
+   "trim_colour": "#c9b994",
+   "cornice_z": 8.4,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": true,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 8.8,
+     "w": 2.6,
+     "z": 2.2,
+     "h": 5.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.6,
+     "w": 1.6,
+     "z": 1.8,
+     "h": 3.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 15.1,
+     "w": 1.6,
+     "z": 1.8,
+     "h": 3.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "pointed",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "East end (chancel with flanking chapels) facing St Michael's Court: rubble with ashlar dressings; large pointed east window centred and smaller aisle windows assumed from the church's Decorated style; not seen in any photo."
+  }
+ ]
+}
