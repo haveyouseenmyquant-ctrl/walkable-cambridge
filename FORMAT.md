@@ -79,4 +79,9 @@ uint8    surface[ntris]    0 = none/building, 1 = road, 2 = pavement/footway, 3 
   reads the cache for the live build.
 - build.py roofs (session 14): every footprint with ≥ 6 LiDAR pixels gets the DSM roof (eave pixels replaced by the
   nearest inner pixel, 3×3 median), meshed as a quadtree from 8 m down to 1 m cells, split where the roof deviates
-  > 0.15 m from the cell's two-triangle fit.
+  > 0.25 m (RMS) from the cell's two-triangle fit.
+- Session 16: the roof is the raw DSM on every footprint pixel (no eave replacement, no 3×3 median: the eroded-pixel
+  spread lifted pitched eaves to inner, higher pixels), the quadtree grid sits on the LiDAR pixel centres (1 m cells
+  carry the DSM values instead of corner averages), and the roof floor is median ground + 1 m (was + 2 m), so low
+  parts of a footprint stay low. roof_match_pct 23.18 → 92.11 (median RMSE 1.05 → 0.21 m). The legacy
+  height_accuracy_pct (model top vs LiDAR p95) drops 91 → 79 because chimneys and spikes are no longer filtered.

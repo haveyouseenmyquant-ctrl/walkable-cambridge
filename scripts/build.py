@@ -269,8 +269,9 @@ def add_lidar_roof(m, poly, z0, zf, color, roof_color, bottom=False):
     shell is closed)."""
     import shapely
     x0, y0, x1, y1 = poly.bounds
-    gx = np.arange(math.floor(x0 / ROOF_CELL) * ROOF_CELL, x1, ROOF_CELL)
-    gy = np.arange(math.floor(y0 / ROOF_CELL) * ROOF_CELL, y1, ROOF_CELL)
+    # grid on LiDAR pixel centres (local k + 0.5): 1 m cells then carry the DSM values exactly, not corner averages
+    gx = np.arange(math.floor((x0 - 0.5) / ROOF_CELL) * ROOF_CELL + 0.5, x1, ROOF_CELL)
+    gy = np.arange(math.floor((y0 - 0.5) / ROOF_CELL) * ROOF_CELL + 0.5, y1, ROOF_CELL)
     X, Y = np.meshgrid(gx, gy)
     X, Y, S = roof_quadtree(X.ravel(), Y.ravel(), np.full(X.size, ROOF_CELL), lambda P: zf(P - [E0, N0]))   # poly is BNG, zf local
     cells = shapely.box(X, Y, X + S, Y + S)
@@ -531,9 +532,9 @@ def main():
                 p95 = float(np.percentile(s[m] - a[m], 95))
                 if m.sum() >= 6:   # roof surface: DSM inside the footprint, spread outward, chimneys filtered
                     mi = binary_erosion(m, iterations=1)   # eave pixels mix roof and street: spread inner pixels out
-                    src = mi if mi.sum() >= 4 else m
+                    src = m  # EXP
                     _, (ii, jj) = distance_transform_edt(~src, return_indices=True)
-                    R = median_filter(s[ii, jj], size=3)
+                    R = s[ii, jj]   # session 16: no 3x3 median, chimneys and ridges stay sharp
                     q10, q90 = np.percentile(R[src], [10, 90])
                     roof = (R, m, (LEFT + c0c + 0.5 - E0, TOP - r0c - 0.5 - N0), q90 - q10 >= 1.5)
         if dmed is None:
@@ -655,7 +656,7 @@ def main():
                 roof = np.clip(np.array([0.45, 0.40, 0.38]) + tone, 0, 1)
                 g, cut, z0, z1 = bd["g"], bd["cut"], bd["base"], bd["top"]
                 zp = max(bd["dmed"] + PASS_H, (bd["zcut"] or -1e9) + 2.6)
-                zf = None if bd.get("lm") else roof_field(bd, max(bd["dmed"] + 2.0, zp + 0.5 if cut is not None else -1e9))
+                zf = None if bd.get("lm") else roof_field(bd, max(bd["dmed"] + 1.0, zp + 0.5 if cut is not None else -1e9))
                 if zf is not None and bd.get("pitched"):
                     roof = np.clip(np.array([0.50, 0.33, 0.28]) + tone, 0, 1)   # pitched: tiled-roof red
                 if zf is not None:
