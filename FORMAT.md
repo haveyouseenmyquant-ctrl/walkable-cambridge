@@ -62,7 +62,10 @@ uint8    surface[ntris]    0 = none/building, 1 = road, 2 = pavement/footway, 3 
 - Reference screenshots: `landmarks/<id>.png`, from `node scripts/landmark_shots.mjs` (viewer `?debug` + `window.__cam`).
 
 ## Trees and street objects (sessions 9, 11)
-- Pipeline order: `build.py` → `trees.py` → `street_objects.py` (both edit manifest.json in place).
+- Pipeline order: `build.py` → `trees.py` → `street_objects.py` → `cars.py` (all edit manifest.json in place).
+- Parked cars (session 25, `scripts/cars.py`): type 13 records appended to the object bins, on OSM parking lanes
+  (`parking:<side>=lane|street_side|half_on_kerb`, older `parking:lane:*`) and `amenity=parking` strips
+  (`parking=lane|street_side|layby`); heading = the car's long axis. Not OSM node targets, so not in street_objects_pct.
 - `trees/<tile>.bin`: float32 `[x, y, z_ground, height, crown_r, seed]`; `objects/<tile>.bin`: float32
   `[x, y, z_ground, type, heading, seed, n]` (types in `scripts/street_objects.py` TYPES; heading = radians of the
   nearest way's direction, the way lies on local +y; n = bike stands for bicycle_parking).

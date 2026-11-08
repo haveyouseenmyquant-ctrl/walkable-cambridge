@@ -56,10 +56,37 @@ const GEOS = {
 const BIKES = [merge(bike(0.42)), merge(bike(-0.42))];
 const mat = new THREE.MeshLambertMaterial({ vertexColors: true });
 
+// Parked cars (type 13, scripts/cars.py): side profile (length along local x, nose at +x) extruded across the width.
+// Body vertex colour is white and tinted per instance (paint); glass, tyres and trim stay dark.
+function prism(pts, width, color, z = 0) {
+  const s = new THREE.Shape(pts.map(([x, y]) => new THREE.Vector2(x, y)));
+  const g = new THREE.ExtrudeGeometry(s, { depth: width, bevelEnabled: false });
+  g.translate(0, 0, z - width / 2);
+  return part(g, color);
+}
+function car(L, H, W, estate) {
+  const h = L / 2, GLASS = 0x1b2128, TYRE = 0x141414, p = [];
+  p.push(prism([[-h, 0.28], [h - 0.05, 0.28], [h, 0.5], [h - 0.1, 0.78], [h - 1.05, 0.9], [-h + 0.15, 0.92], [-h, 0.75]], W, 0xffffff));
+  const r0 = estate ? -h + 0.1 : -h + 0.55, top = H;
+  p.push(prism([[h - 1.1, 0.9], [h - 1.85, top - 0.04], [r0 + 0.12, top - 0.04], [r0, 0.92]], W - 0.14, GLASS));
+  p.push(prism([[h - 1.8, top - 0.06], [h - 1.86, top], [r0 + 0.16, top], [r0 + 0.12, top - 0.06]], W - 0.18, 0xffffff));
+  for (const x of [h - 0.85, -h + 0.75]) for (const z of [-W / 2 + 0.12, W / 2 - 0.12]) {
+    const t = new THREE.CylinderGeometry(0.31, 0.31, 0.2, 12); t.rotateX(Math.PI / 2);
+    p.push(part(t, TYRE, x, 0.31, z));
+  }
+  for (const z of [-W / 2 + 0.25, W / 2 - 0.25]) {
+    p.push(box(0.04, 0.12, 0.3, 0xe8e8e0, h - 0.01, 0.62, z));
+    p.push(box(0.04, 0.12, 0.3, 0x9a1010, -h + 0.01, 0.66, z));
+  }
+  return merge(p);
+}
+const CARS = [car(4.1, 1.45, 1.75, false), car(4.6, 1.48, 1.8, true), car(4.5, 1.68, 1.85, true)];
+const PAINT = [0xf2f2f0, 0xf2f2f0, 0x1a1a1c, 0x1a1a1c, 0x8d9196, 0xb9bcbf, 0x5d6166, 0x24375e, 0x7d1717, 0x2f3d33, 0x9fb3c8, 0x3b3b3e];
+
 export function makeObjects(buf) {
   const a = new Float32Array(buf), n = a.length / 7 | 0;
   const byType = new Map(), add = (k, M) => { if (!byType.has(k)) byType.set(k, []); byType.get(k).push(M.clone()); };
-  const m = new THREE.Matrix4(), r = new THREE.Matrix4();
+  const m = new THREE.Matrix4(), r = new THREE.Matrix4(), paint = [];
   for (let i = 0; i < n; i++) {
     const [x, y, zg, type, head, seed, cnt] = a.subarray(i * 7, i * 7 + 7);
     r.makeRotationY(head);
@@ -72,14 +99,19 @@ export function makeObjects(buf) {
         if (h < 0.55) add('b0', m);
         if (h > 0.3 && h < 0.75) add('b1', m);
       }
+    } else if (type === 13) {
+      m.makeTranslation(x, zg, -y).multiply(r); add('c' + ((seed * 3 | 0) % 3), m);
+      (paint[(seed * 3 | 0) % 3] ||= []).push(PAINT[(seed * 997 | 0) % PAINT.length]);
     } else { m.makeTranslation(x, zg, -y).multiply(r); add(type, m); }
   }
   const g = new THREE.Group(); g.name = 'objects';
   for (const [k, ms] of byType) {
-    const geo = k === 'b0' ? BIKES[0] : k === 'b1' ? BIKES[1] : GEOS[k];
+    const car = typeof k === 'string' && k[0] === 'c' ? +k[1] : -1;
+    const geo = k === 'b0' ? BIKES[0] : k === 'b1' ? BIKES[1] : car >= 0 ? CARS[car] : GEOS[k];
     if (!geo) continue;
     const im = new THREE.InstancedMesh(geo, mat, ms.length);
     ms.forEach((M, i) => im.setMatrixAt(i, M));
+    if (car >= 0) { const c = new THREE.Color(); paint[car].forEach((p, i) => im.setColorAt(i, c.setHex(p))); }
     im.castShadow = true; im.receiveShadow = true; im.computeBoundingSphere(); im.userData.ownMat = false;
     im.matrixAutoUpdate = false; g.add(im);
   }
