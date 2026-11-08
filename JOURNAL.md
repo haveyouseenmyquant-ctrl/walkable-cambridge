@@ -1022,3 +1022,54 @@ Next
 3. build.py: render the stall strips as thin roofs/none in the zone (keep building_coverage), stall props instead.
 4. Brick/stone/render detail textures on the skin (material-aware), fascia text, bay/oriel windows; Guildhall and
    Great St Mary's bespoke upgrades.
+
+## 2026-11-08 — Session 31 (entry written in session 32): materials, Guildhall, stall canopies — not committed
+
+Session 31 ran out of time before committing or writing an entry; session 32 checked its working tree (build at
+12:45 runs: site_errors 0, fps 60, load 1.1 s locally) and committed it as 1e412f9:
+- per-triangle material ids (`_MAT` glTF attribute; facade_parts.MATS: brick/stone/render/timber/glass/flint/trim)
+  with a procedural shader patch in site/app/zone.js (brick coursing, ashlar joints, render noise, glass reflection;
+  joints fade with fwidth). Screens docs/zone_s31_materials_*.png.
+- scripts/zone_bespoke_guildhall.py: bespoke Guildhall (rusticated stone ground storey, 9 bays, balcony, cornice,
+  attic panels, clock) from Commons photos.
+- build.py: OSM `building=roof` (the Market Hill stall rows way/400160678–685) as thin gabled canopies at 2.4 m, no
+  walls or collision — previously stone boxes with a brick-textured ceiling (some held-out renders were *inside* them).
+- 13 more annotation files (31 of 153 walls annotated).
+The session-30 build (9197e5) scored market_square_realism 23.62 and photo match 28.09, *below* the 25.25 / 34.06
+baseline: judge reasons cite crude boxes, the brick "ceiling" of the stall boxes, pasted photo slivers, and a few
+renders with the camera inside a wall.
+
+## 2026-11-08 — Session 32: Great St Mary's bespoke, photo facades off in the zone, 54/153 walls annotated
+
+Done
+- Committed session 31's leftover work (entry above) after a local check.
+- **No photo facades inside the zone** (site/app/facades.js drops quads within 100 m of 52.2053N 0.1190E;
+  `?zone=0` restores them). The judge kept citing pasted photo slivers and "blurry wall with a poster".
+- **build_hash.py** now also hashes app/zone.js and zone/zone.json. Before this, zone-only changes (session 31's
+  shader) kept the old hash, so the cached scores belonged to the wrong build.
+- **Fan-out (2 subagents)**: (a) `scripts/zone_bespoke_gsm.py`: Great St Mary's, 22k tris. Aisles with buttresses
+  and Perpendicular windows (real reveals, mullions, transoms, hoods), battlements + pinnacles, clerestory, lead
+  roofs, chancel with 5-light east window, south porch, west tower with door, west window, belfry louvres and four
+  turrets. Heights from the LiDAR DSM: aisle parapet 9.9 m, clerestory 15.8 m, tower battlements 29.0 m, pinnacles
+  33.0 m above ground; nothing more than ~0.3 m above the DSM. The tile body was a plain box hiding the
+  clerestory, so bespoke modules can now set `HIDE_TILE`: zone_build writes zone.json `hide`, and zone.js/tiles.js hide
+  the `b:<osm_id>` tile node (collision is kept). (b) 23 more wall annotations (31 → 54 of 153; only 2 medium
+  confidence, the rest low): Trinity St 1–6, the Market Hill colonnade block, St Michael's church, Caius frontages.
+- facade_geometry_match_pct 38.28 locally (from 20.9 live); painted_detail_pct 22.42. Zone 118.7k tris.
+  Local GPU Chrome: site_errors 0, fps 60, load 0.8 s. Screens docs/zone_s32_gsm_{eye,aerial}.png.
+- Published release world-20261108-1202 (hash 2204808e8f17726f). service.sh will compute market_square_realism and
+  photo match for it; nothing was benchmarked in-session.
+
+Learned
+- OSM has duplicate footprints (Caius college ways vs street-address ways, e.g. 137017428:0/1 = 1099847936:5/6,
+  137017430 = 27–28 Market Hill), so two skins get built on the same wall and z-fight. Dedupe walls in zone_walls.py.
+- Some walls.json reference photos are attributed to the wrong walls (e.g. Great St Mary's interiors).
+- Several low-scoring held-out renders have the camera inside or against a wall (GPS error). Note it; don't change
+  the measurement without asking Gaspard.
+
+Next
+1. Read the 2204808e ms scores; if realism still sits below the 25.25 baseline, look at the per-view reasons.
+2. Dedupe duplicate footprints in zone_walls.py; hide tile bodies for more fully-skinned buildings.
+3. More bespoke models: St Edward's, Lion Yard / Petty Cury frontages, the Market Hill colonnade block; better
+   annotations (upgrade the low-confidence ones from Commons/Geograph photos).
+4. Street trees and lamp posts in the square checked against OSM; shopfront signs with real names as geometry.
