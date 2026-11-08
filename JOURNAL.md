@@ -1121,3 +1121,56 @@ Next
 3. Bespoke: Market Hill colonnade block, Lion Yard frontage, King's Parade terraces (next ring), Caius gate.
 4. Check the barrier guesses (Corpus steps ways 149032847/149032852/375395069, low walls 95406723/95406726).
 5. Zone GLB size: index/quantize (meshopt) before it grows further.
+
+## 2026-11-08 — Session 34 (entry written in session 35)
+
+Session 34 committed 9c99d5a (bespoke Caius ranges + gate tower, St Edward's and St Michael's churches, detailed
+stalls, OSM street furniture: K6 kiosks, pillar boxes, bins, benches, Sheffield stands with bikes; quantized compact
+zone GLB 25 -> 12 MB) but its publish failed: release world-20261108-1317 stayed a Draft with no asset, so the live
+site stayed on afce85. No journal entry was written. Session 35 deleted the empty draft and published everything.
+afce85 scores (live until session 35): market_square_realism 25.88, market_square_photo_match 25.49, photo_match 19.0,
+judged_realism 26.6, visual_quality 17.12. (scores/353eb5c2…_msjudge.json reads realism 27.25 for an intermediate build.)
+
+## 2026-11-08 — Session 35: city-wide 3D facade baseline, photo facades retired, King's gatehouse + screen
+
+Done (2 subagents + my own work)
+- **scripts/city_facades.py** (Gaspard's direction 2a): every street-facing wall of every OSM building in the world
+  (ways + multipolygons; an edge >= 2 m facing a walk sample 2-25 m out, nothing in between; as zone_walls.py) gets
+  parts-library geometry: **6,820 walls of 1,840 buildings**, 560k m² of facade, 3.62 M triangles, 132 MB of compact
+  quantized GLBs (gzip ~1/5), one per 250 m tile in site/cityfac/ + index.json. Skips the zone walls, bespoke modules,
+  detailed landmarks, stall canopies; 86 duplicate overlapping walls dropped (kd-tree, not the O(n²) zone version).
+  Runs in ~70 s.
+- **scripts/facade_styles.py** (subagent): layout(wall) infers a style from OSM tags + location: college gothic /
+  Tudor brick / classical by college, churches, Georgian historic core within 350 m, Victorian gault/red terraces by
+  street, villas, interwar, modern/glass; shopfronts with fascia_text from OSM name/brand; storeys from levels or
+  H/3.1. 5.8 tris/m² vs 6.7 for default_layout.
+- **colour_hint**: the median (brighter half) colour of each wall's old photo-facade atlas pieces (non-held-out
+  Mapillary) drives the wall colour; 891 walls have one. Photos only give material colour; all detail is geometry.
+- **Viewer** (site/app/tiles.js): city facade GLBs stream per tile within FAC_R = 200 m of the player (medium 120,
+  low 60; ?facr=, ?cityfac=0), with the zone's procedural material shader (zone.js exports zoneMat). **Photo facades
+  are off by default** (?facades=1 brings them back). photo_render.mjs waits for window.__cityfacPending.
+  build_hash includes cityfac/index.json; publish.sh ships cityfac.
+- **Bespoke King's College gatehouse + Wilkins' screen** (subagent, scripts/zone_bespoke_kings.py, way/164708972,
+  38.7k tris, tile body hidden): traceried open arches, crocketed pinnacles, pierced parapet, gate with royal arms,
+  four turrets with spires, lantern with clock; heights fitted to the DSM (lantern cap 31.0 vs DSM 31.7, parapets
+  within 0.5 m). Sources: 3 CC BY-SA 4.0 Commons photos (DATA.md). docs/zone_s35_kings_gate.png.
+- Checks: local GPU Chrome fps 60, site_errors 0, load 0.89 s; swiftshader load 4.0 s local, 5.26 s live.
+  zone facade_geometry_match_pct 45.07 (unchanged: annotations only exist in the zone). Published
+  world-20261108-1344, live hash **57d27678e9a8ab05** (verified). service.sh will score it; nothing benchmarked
+  in-session. Before/after (live afce85 vs new): docs/zone_s35_city_before_after.jpg — King's Parade and Jesus Lane
+  rows show the change; 4 of my 6 test poses landed against walls/courtyards (bad hand-picked coordinates).
+
+Learned
+- Session 34's publish silently left a Draft release: check `gh release list` / the live hash after publishing.
+- Colour hints from the atlases are often too grey (shaded photos); several King's Parade fronts come out grey/red
+  brick where the real ones are pale stone and render.
+- The street-facing test uses only walk samples, so walls along roads without footway samples may be missed.
+
+Next
+1. Read 57d276's market_square_realism and the 200-view benchmark; report photo match per ring (distance groups).
+   If the city-wide geometry lowers photo_match away from the zone vs the photo facades, look at the views.
+2. Better city colours: per-building colour from Claude vision on non-held-out Mapillary refs, ring 1 first;
+   annotate ring-1 walls (King's Parade, Trinity St, Bene't St, Sidney St) like the square.
+3. Ring-1 bespoke: Corpus Christi (old court front / New Court gate), King's Parade terraces, Old Schools upgrade.
+4. City facade LOD: cheaper far windows (flat recess only) so FAC_R can grow; corner mitres between buildings.
+5. Fix the s35 test poses (snap to walk samples) for future before/after shots.
