@@ -226,7 +226,35 @@ def add_prism(m, poly, z0, z1, color, roof_color, top=True, bottom=False):
             m.tris(np.concatenate([T[:, ::-1], np.full((len(T), 3, 1), z0)], 2), roof_color, 0)
 
 
-ROOF_CELL = 3.0       # roof heightfield grid (m)
+ROOF_CELL = 8.0       # roof heightfield: coarsest quadtree cell (m)
+ROOF_MIN = 1.0        # finest cell (the LiDAR pixel)
+ROOF_TOL = 0.25      # split a cell while the roof deviates (RMS) more than this from its two-triangle fit (m)
+
+
+def roof_quadtree(X, Y, S, zf):
+    """Square cells (x, y, size) covering the given ones, split until the heightfield zf is within ROOF_TOL of
+    each cell's two-triangle fit or the cell is ROOF_MIN wide. Flat roofs stay coarse, ridges/hips/towers get 1 m."""
+    done = []
+    while len(X):
+        k = np.maximum(2, np.round(S / ROOF_MIN).astype(int) + 1)
+        kk = int(k.max())
+        u = np.linspace(0, 1, kk)
+        U, V = np.meshgrid(u, u)
+        U, V = U.ravel(), V.ravel()
+        px = X[:, None] + U[None] * S[:, None]; py = Y[:, None] + V[None] * S[:, None]
+        z = zf(np.c_[px.ravel(), py.ravel()]).reshape(len(X), -1)
+        c00, c10, c01, c11 = (zf(np.c_[X + a * S, Y + b * S]) for a, b in ((0, 0), (1, 0), (0, 1), (1, 1)))
+        lower = U[None] >= V[None]      # triangles (00,10,11) and (00,11,01)
+        fit = np.where(lower, c00[:, None] + U[None] * (c10 - c00)[:, None] + V[None] * (c11 - c10)[:, None],
+                       c00[:, None] + V[None] * (c01 - c00)[:, None] + U[None] * (c11 - c01)[:, None])
+        split = (np.sqrt(((z - fit) ** 2).mean(1)) > ROOF_TOL) & (S > ROOF_MIN * 1.5)   # RMS: single noisy pixels do not split
+        done.append(np.c_[X[~split], Y[~split], S[~split]])
+        h = S[split] / 2
+        X = np.concatenate([X[split], X[split] + h, X[split], X[split] + h])
+        Y = np.concatenate([Y[split], Y[split], Y[split] + h, Y[split] + h])
+        S = np.concatenate([h, h, h, h])
+    D = np.concatenate(done)
+    return D[:, 0], D[:, 1], D[:, 2]
 
 
 def _polys(g):
@@ -244,7 +272,8 @@ def add_lidar_roof(m, poly, z0, zf, color, roof_color, bottom=False):
     gx = np.arange(math.floor(x0 / ROOF_CELL) * ROOF_CELL, x1, ROOF_CELL)
     gy = np.arange(math.floor(y0 / ROOF_CELL) * ROOF_CELL, y1, ROOF_CELL)
     X, Y = np.meshgrid(gx, gy)
-    cells = shapely.box(X.ravel(), Y.ravel(), X.ravel() + ROOF_CELL, Y.ravel() + ROOF_CELL)
+    X, Y, S = roof_quadtree(X.ravel(), Y.ravel(), np.full(X.size, ROOF_CELL), lambda P: zf(P - [E0, N0]))   # poly is BNG, zf local
+    cells = shapely.box(X, Y, X + S, Y + S)
     pieces = shapely.intersection(cells[shapely.intersects(cells, poly)], poly)
     T = [triangulate(q) for pc in pieces for q in _polys(pc)]
     T = [t for t in T if len(t)]
@@ -280,15 +309,13 @@ def roof_field(bd, lo):
         return None
     vals = R[bd["roofM"]]
     hi = float(vals.max())
-    top = bd["top"]
     if hi - lo < 1.0:
         return None
     ox, oy = bd["roofO"]   # local coords of pixel (0,0) centre; rows go south
 
-    def zf(P):
+    def zf(P):   # the LiDAR roof itself (session 14: no rescaling to the p95 top; roof_match_pct compares with the DSM)
         z = map_coordinates(R, [oy - P[:, 1], P[:, 0] - ox], order=1, mode="nearest")
-        z = np.maximum(z, lo)
-        return lo + (z - lo) * (top - lo) / (hi - lo)   # peak lands on the building's LiDAR top
+        return np.maximum(z, lo)
     return zf
 
 
@@ -502,13 +529,13 @@ def main():
             if m.sum():
                 dmed, dmin = float(np.median(a[m])), float(a[m].min())
                 p95 = float(np.percentile(s[m] - a[m], 95))
-                if m.sum() >= 20:   # roof surface: DSM inside the footprint, spread outward, chimneys filtered
-                    _, (ii, jj) = distance_transform_edt(~m, return_indices=True)
+                if m.sum() >= 6:   # roof surface: DSM inside the footprint, spread outward, chimneys filtered
+                    mi = binary_erosion(m, iterations=1)   # eave pixels mix roof and street: spread inner pixels out
+                    src = mi if mi.sum() >= 4 else m
+                    _, (ii, jj) = distance_transform_edt(~src, return_indices=True)
                     R = median_filter(s[ii, jj], size=3)
-                    mi = binary_erosion(m, iterations=1)   # judge flatness away from the eave pixels
-                    q10, q90 = np.percentile(R[mi if mi.sum() >= 10 else m], [10, 90])
-                    if q90 - q10 >= 1.5:
-                        roof = (R, m, (LEFT + c0c + 0.5 - E0, TOP - r0c - 0.5 - N0))
+                    q10, q90 = np.percentile(R[src], [10, 90])
+                    roof = (R, m, (LEFT + c0c + 0.5 - E0, TOP - r0c - 0.5 - N0), q90 - q10 >= 1.5)
         if dmed is None:
             c = g.centroid
             dmed = dmin = float(dtm_at([c.x], [c.y])[0])
@@ -544,7 +571,7 @@ def main():
         bdata.append(dict(oid=oid, g=g, t=t, top=top, base=base, dmed=dmed, cut=cut, zcut=zcut, cx=c.x - E0, cy=c.y - N0,
                           tone=rng.uniform(-0.06, 0.06)))
         if roof is not None:
-            bdata[-1].update(roofR=roof[0], roofM=roof[1], roofO=roof[2])
+            bdata[-1].update(roofR=roof[0], roofM=roof[1], roofO=roof[2], pitched=roof[3])
     log("building heights done", sum(b["cut"] is not None for b in bdata), "with passages")
 
     lm_extra, lm_entries = build_landmarks(bdata, ways, nodes, DTM, DSM, tf, dtm_at)
@@ -629,8 +656,9 @@ def main():
                 g, cut, z0, z1 = bd["g"], bd["cut"], bd["base"], bd["top"]
                 zp = max(bd["dmed"] + PASS_H, (bd["zcut"] or -1e9) + 2.6)
                 zf = None if bd.get("lm") else roof_field(bd, max(bd["dmed"] + 2.0, zp + 0.5 if cut is not None else -1e9))
-                if zf is not None:
+                if zf is not None and bd.get("pitched"):
                     roof = np.clip(np.array([0.50, 0.33, 0.28]) + tone, 0, 1)   # pitched: tiled-roof red
+                if zf is not None:
                     n_pitched += 1
                 if cut is None:
                     for p in polys_of(g):

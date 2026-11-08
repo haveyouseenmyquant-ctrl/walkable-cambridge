@@ -18,8 +18,9 @@ if os.path.exists(p):
     if time.time() - b["ts"] < 3 * 3600:
         out.update(b["result"])
 # photo_match_score / judged_realism / visual_quality: cached per build hash by scripts/bench.sh (benchmark renders + DINOv2)
+# roof_match_pct: cached per build hash by scripts/roof_match.py (reads every GLB; run by publish.sh and bench.sh)
 h = os.environ.get("BUILD_HASH", "")
-for k, suf in (("photo_match_score", ""), ("judged_realism", "_judge"), ("visual_quality", "_quality")):
+for k, suf in (("photo_match_score", ""), ("judged_realism", "_judge"), ("visual_quality", "_quality"), ("roof_match_pct", "_roof")):
     f = "data/benchmark/scores/%s%s.json" % (h, suf)
     if h and os.path.exists(f):
         out[k] = json.load(open(f))[k]

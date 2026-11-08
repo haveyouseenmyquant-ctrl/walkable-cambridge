@@ -9,6 +9,8 @@ B=data/benchmark
 SRC=${1:-site}; [ $# -eq 0 ] && [ -s SITE_URL ] && SRC=$(head -n1 SITE_URL | tr -d '[:space:]')
 HASH=$(.venv/bin/python -I scripts/build_hash.py "$SRC")
 OUT=$B/scores/$HASH.json
+# roof_match_pct needs the GLBs on disk: computed from site/ when it is the same build as SRC
+[ -f $B/scores/${HASH}_roof.json ] || { [ "$(.venv/bin/python -I scripts/build_hash.py site)" = "$HASH" ] && .venv/bin/python -I scripts/roof_match.py site || true; }
 [ -f "$OUT" ] && [ -f $B/scores/${HASH}_judge.json ] && [ -f $B/scores/${HASH}_quality.json ] && { head -c 300 "$OUT"; echo; exit 0; }
 R=/tmp/wc_renders_$HASH
 mkdir -p $B/scores $B/renders

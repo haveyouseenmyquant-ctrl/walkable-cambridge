@@ -5,6 +5,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 # the Pages workflow deploys the viewer from git: refuse to publish with uncommitted changes
 git diff --quiet HEAD -- site scripts || { echo "commit first: uncommitted changes in site/ or scripts/"; exit 1; }
+.venv/bin/python -I scripts/roof_match.py site   # roof_match_pct, cached per build hash
 TAG="world-$(date -u +%Y%m%d-%H%M)"
 tar -czf /tmp/world.tar.gz -C site manifest.json landmarks.json tiles collision trees objects facades
 ls -lh /tmp/world.tar.gz

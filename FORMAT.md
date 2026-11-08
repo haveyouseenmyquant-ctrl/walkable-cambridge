@@ -70,3 +70,13 @@ uint8    surface[ntris]    0 = none/building, 1 = road, 2 = pavement/footway, 3 
 - street_objects_pct: targets = OSM nodes of the TYPES in the study area plus `natural=tree` nodes
   (data/derived/street_object_targets.json). One counts if a record of the same type (tree layer for trees) lies within
   1 m of it in a layer the build draws by default.
+
+## Roof match (session 14)
+- roof_match_pct (`scripts/roof_match.py`): per OSM target building, the render mesh (`b:<osm_id>`) is rasterised
+  top-down on the 1 m LiDAR grid (highest surface over each cell centre; no surface = DTM) and compared with the EA
+  DSM on the cells whose centres lie inside the footprint shrunk by 0.5 m (unshrunk if that leaves none). Counts if
+  RMSE ≤ 0.75 m. Cached per build hash as `data/benchmark/scores/<hash>_roof.json` (publish.sh, bench.sh); measure.sh
+  reads the cache for the live build.
+- build.py roofs (session 14): every footprint with ≥ 6 LiDAR pixels gets the DSM roof (eave pixels replaced by the
+  nearest inner pixel, 3×3 median), meshed as a quadtree from 8 m down to 1 m cells, split where the roof deviates
+  > 0.15 m from the cell's two-triangle fit.

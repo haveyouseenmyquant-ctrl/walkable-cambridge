@@ -239,8 +239,9 @@ def main():
     os.makedirs(out_dir, exist_ok=True)
     for f in os.listdir(out_dir):
         os.remove(os.path.join(out_dir, f))
-    imgs, meta, man_t = {}, [], {}
+    imgs, meta, man_t, n_photos = {}, [], {}, set()
     for tid, lst in sorted(tiles.items()):
+        imgs.clear()   # decoded photos are ~40 MB each: keep only this tile's (all of them once filled RAM, swap and the disk)
         lst.sort(key=lambda p: -p["h"])
         pages, cur = [], None
         for pc in lst:
@@ -257,6 +258,7 @@ def main():
                 except Exception as e:  # noqa: BLE001
                     log("fetch failed", c["id"], e); imgs[c["id"]] = None
             im = imgs[c["id"]]
+            n_photos.add(c["id"])
             if im is None:
                 continue
             a, b = pc["a"] - [B.E0, B.N0], pc["bb"] - [B.E0, B.N0]
@@ -326,7 +328,7 @@ def main():
                "photos": sorted({m["photo"] for m in meta}), "textured": meta},
               open(os.path.join(ROOT, "data/derived/facades.json"), "w"))
     log("textured %d pieces, %.1f%% of the study area's street-facing wall area, %d photos, %d atlas pages, %.0fs" % (
-        len(meta), 100 * sum(m["area"] for m in meta) / max(tot_area, 1), len(imgs), sum(len(v) for v in man_t.values()), time.time() - t0))
+        len(meta), 100 * sum(m["area"] for m in meta) / max(tot_area, 1), len(n_photos), sum(len(v) for v in man_t.values()), time.time() - t0))
 
 
 if __name__ == "__main__":
