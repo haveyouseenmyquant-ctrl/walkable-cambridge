@@ -977,3 +977,48 @@ Plan for session 30
 - Parallel subagents: (a) parts library in the site (instanced, LOD'd window/door/shopfront/cornice/sill meshes),
   (b) annotations for the square's frontages, split by street, (c) Guildhall, (d) Great St Mary's, (e) market stalls
   (OSM/photo layout) + fountain + kerbs/bollards. Integrate, check fps/load guardrails, publish.
+
+## 2026-11-08 — Session 30: Market Square set frozen, first modelled facades + stalls (parts library)
+
+Done
+- **Held-out set**: `scripts/make_ms_benchmark.py` froze 40 Mapillary photos with the camera inside the zone
+  (90 m of 52.2053N 0.1190E; 203 candidates, spread over position+heading, 12 sequences, no overlap with the 200).
+  data/benchmark/market_square.json, photos_ms/ (gitignored), heldout_ms.json. facades.py and zone_walls.py exclude it.
+- **KPIs**: `scripts/ms_bench.sh` (renders 40 views → DINOv2 `_ms.json`, blind judge `judge.py --only market` →
+  `_msjudge.json`), run by service.sh and read by measure.sh. `scripts/zone_kpi.py` → facade_geometry_match_pct and
+  painted_detail_pct (in measure.sh). real_facade_pct dropped from measure.sh (retired).
+- **Baseline (live build 6546fa, before geometry)**: market_square_realism **25.25**, market_square_photo_match
+  **34.06**, facade_geometry_match_pct 0, painted_detail_pct 73.4.
+- **Wall list**: `scripts/zone_walls.py` → data/annotations/market_square/walls.json: 153 street-facing walls
+  (53 buildings, 1,352 m), each with up to 5 non-held-out reference photos (72 walls have any).
+- **Fan-out (5 subagents)**: parts library `scripts/facade_parts.py` (skin 0.25 m proud of the tile wall with real
+  openings, reveals, glass, frames + glazing bars, sills, heads, doors, shopfronts with fascia/stallriser/awning,
+  cornices, string courses, quoins, pilasters, dormers; default layout for unannotated walls) +
+  `scripts/zone_build.py` → site/zone/market_square.glb (76k tris) + `site/app/zone.js` (`?zone=0` off);
+  3 annotators → 15 annotation files (18 walls, mostly low confidence); `scripts/zone_props.py`: ~95 market stalls
+  on the OSM stall-row strips (striped gabled canopies, counters, back boards), Hobson's Conduit fountain, 2 trailers.
+  Screens: docs/zone_session30_{north,annotated,closeup}.png.
+- After: facade_geometry_match_pct 12.15, painted_detail_pct 22.4 (from 73.4). manifest.json carries a `zone`
+  entry so the build hash changes. Published release world-20261108-1128 (hash 9197e5fdc5d17b5d). Local check:
+  site_errors 0, load 6.59 s at load average ~50 (zone loads async after spawn). The market KPIs for the new build
+  come from service.sh's next ms_bench run; not measured in-session (40 renders took ~20 min under load).
+
+Learned / honest caveats
+- The reference-photo matching is the bottleneck: annotators found many refs to be Great St Mary's interiors,
+  blurred, or not attributable to a wall; only 18 of 153 walls got annotations. 109 built walls use the *default*
+  layout (bays every 2.8 m), i.e. plausible but unverified windows — that is not "the real layout" yet.
+- facade_geometry_match_pct compares annotation counts with the elements the builder emitted from the same
+  annotation, so for annotated walls it is near 100 by construction; it mainly measures annotation coverage. To
+  make it meaningful, the per-element positions should be checked too.
+- The old OSM `building=roof` stall strips (way/400160678–685) are still extruded by build.py as stone boxes with
+  brick-textured roofs under the new canopies (visible in docs/zone_session30_north.png). Colours on the skins are flat
+  (no brick/stone texture).
+- OSM overlap: way/137017428 / 1099847936 and 137017430 / 1099847940 share walls.
+
+Next
+1. Check the new build's market_square_realism/photo match (scores/9197e5fdc5d17b5d_ms*.json); keep or revert.
+2. Fix the reference photos: test visibility (wall in the frustum, not occluded, camera outside every footprint),
+   then re-run the annotators with 1 building each, more agents; let them also use Wikimedia Commons (licence checked).
+3. build.py: render the stall strips as thin roofs/none in the zone (keep building_coverage), stall props instead.
+4. Brick/stone/render detail textures on the skin (material-aware), fascia text, bay/oriel windows; Guildhall and
+   Great St Mary's bespoke upgrades.
