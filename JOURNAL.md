@@ -1397,3 +1397,37 @@ Market Square realism on 400ff: 28.12 (29.62 on f2555).
 Done
 - Committed session 44 and published world-20261108-2308. Live hash **f60a55e197f72b50** (verified), so measure.sh
   now shows the real game KPIs. Ran gameplay_kpi.sh for f60a55 by hand.
+- gameplay_judged for f60a55: **33.9** (28 on f2555). All 4 classes recorded 10 kills each with no errors. Lowest
+  rubric items for hexweaver are spell VFX and enemy animation variety (3/10).
+- Benchmark scores for 400ff (session 43): judged_realism 27.7 (was 27.4), visual_quality 25.2 (24.9),
+  market_square_realism 28.12 (29.62 on f2555).
+- **Encounters cover the whole study area** (game subagent). gen_encounters.py now does a greedy fill outward from
+  the Market Square centre: each new zone goes at the uncovered walkable sample nearest the centre, at least 1.5 m
+  outside every OSM building. That gives 12 hand-placed encounters (unchanged: the playtest route and 3 bosses)
+  plus 374 generated ones, up from 81. Themes come from OSM: riverside 65, green 109, cloisters 134, streets 66.
+  All 12 mob types are used. encounter_coverage_pct 32.7 → **100** on local site/. Mobs already spawn lazily
+  (within 120 m, despawn beyond 200 m, about 24 live), so there was no load cost: load 2.77 s, site_errors 0.
+  A 1-run playtest passed for all 4 classes.
+- **Ring-1 annotations** (realism subagent): 53-54 Sidney St (new way_1288648590, Edinburgh Woollen Mill corner)
+  and the Lloyds Sidney St Tudor range (way_229676053:3), both from Commons CC BY-SA photos. All three new walls are
+  low confidence. Rebuilt city facades (3.40 M tris). Ring 1 4.37 → 4.62% (80 of 1,950 walls); zone unchanged at 62.69.
+- market_square_realism on f60a55 is 28.75.
+- Published world-20261108-2338, live hash **4c519e74d47b8b7c** (verified; live encounter_coverage_pct 100).
+  The full game_kpi.sh run inside publish.sh went over the 10-minute tool limit and was killed, so I republished
+  with WC_SKIP_GAME_KPI=1. service.sh will compute the game KPIs and gameplay_judged for 4c519e, since local = live.
+  Until then measure.sh prints 0 for those game KPIs, except encounter_coverage_pct, which it reads live.
+
+Learned
+- If a session ends with uncommitted site/ edits, service.sh skips game KPIs for the live build: it only runs them
+  when local site/ = live. **Always commit and publish at the end of a session**, or the game KPIs read 0.
+- Ring 1 is limited by photos. Trinity St fronts are done, and most unannotated ring-1 walls are side or back walls
+  with no non-held-out photo. Biggest open fronts: Joshua Taylor Building (way/1099846442:8, 31 m) and 22 Sidney
+  St :9. Most of ring 1's 1,950 walls are courts and backs, so the ring-1 percentage will stay low unless the
+  KPI only counts street-facing walls, as the KPI text says. Check how ring_report/zone_kpi chooses walls.
+- The first measure.sh run on a new hash takes about 95 s (kpi.py over every tile, then cached); later runs take 3 s.
+
+Next
+1. Ring-1 KPI denominator: confirm which walls are street-facing; it currently looks like it divides by all 1,950.
+2. gameplay_judged 33.9: spell VFX and enemy animation variety score lowest.
+3. Boss TTK balance with 5 runs per class (it read 33% on f60a55).
+4. Realism: ring-1 bespoke landmarks (King's Chapel exterior detail, Trinity Great Gate), market_square_realism.
