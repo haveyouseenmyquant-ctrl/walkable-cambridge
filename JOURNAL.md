@@ -1224,3 +1224,43 @@ Next
 3. Fix wall heights from the DSM for the 2 clipped annotations; annotate the rest of Trinity St, Sidney St, Market
    Hill colonnade; per-building colours from Claude vision on non-held-out refs (ring 1).
 4. Bespoke: Old Schools / Cockerell building, Trinity Great Gate, Caius Gate of Honour.
+
+## 2026-11-08 — Session 37: kerbs, Old Schools + Great Gate, 18 more ring-1 annotations, ring-1 colours
+
+Scores for 726ee1 (session 36): market_square_realism 28.25 (57d276: 28.5), market_square_photo_match 30.04 (29.5).
+The 200-view benchmark for 726ee1 hadn't finished when this session published, so ring_report wasn't run.
+
+Done (4 parallel subagents)
+- **Kerbs** (scripts/zone_props_kerbs.py, auto-picked up by zone_build): 0.30 m pale granite, 0.12 m upstand, dark sett
+  channel, along carriageway outlines in the zone + ring 1 (incl. kerbed pedestrian streets: Trinity, Sidney, Market St,
+  St Mary's St, Peas Hill, St Andrew's, Green St). Flush at crossings / kerb=lowered / Market Square setts, 0.04 m on
+  sett carriageways. 3.4 km raised, 25k tris. Render only; collision unchanged. docs/zone_s37_kerbs.png.
+- **Bespoke Old Schools east front** (zone_bespoke_oldschools.py, way/135762298, 12.5k tris): open 5-bay loggia
+  (the footway runs through it), pedimented arched windows, swag frieze, balustrade with urns (no pediment: photos);
+  DSM fit within ~0.5 m. **Trinity Great Gate** (zone_bespoke_greatgate.py, 10.3k tris): octagonal brick turrets with
+  quoins, carriage + wicket arches, shields, Henry VIII niche, parapet; merlons 16.0 vs DSM 15.8-16.1. The Great Court
+  east range (way/151179441) tile body hides because its tile still carries detail.py's old gate_tower box 6 m in front
+  of the gate; a plain LiDAR stand-in is drawn instead. docs/zone_s37_oldschools.png, docs/zone_s37_greatgate.png.
+- **Ring-1 annotations**: +18 buildings (Trinity St 8, Sidney St 7, Market Hostel, Cockerell, Whewell's), 42 total;
+  city_facades.py eave fix searches deeper inside the footprint in the DSM when an annotation is taller than the wall
+  (4-5 King's Parade 2.6 -> 13.0 m). King's Parade match 63.1 -> 64.4, ring 1 1.1 -> 2.8 (46 of 1,950 walls).
+- **Ring-1 colours**: data/annotations/colours/ring1.json, 62 buildings' material/wall/trim/roof read by eye from
+  non-held-out Mapillary photos with OSM outlines projected on; facade_styles.py applies them over colour_hint
+  (55 buildings in the build).
+- Local GPU Chrome: load 0.78 s, fps 60, site_errors 0. WebKit smoke still crashes at launch (known; also on
+  example.com). Zone 413k tris; cityfac 3.39 M tris. Published world-20261108-1631, live hash **a668b77dc59ccdca**
+  (verified). service.sh scores it.
+
+Learned
+- Concurrent city_facades.py runs clobber each other's tiles; rerun once at the end.
+- Mapillary poses on Trinity St are off by metres; agents placed buildings by visible shop names/house numbers.
+- Several OSM shop names are newer than the photos (Seasalt vs Coast etc.); OSM wins for fascias.
+
+Next
+1. Read a668b7's scores; run ring_report.py 726ee1a5e9eae0c1 a668b77dc59ccdca (ring 1 should rise).
+2. Remove detail.py's trinity-great-gate gate_tower box properly (keep landmarks_detailed counting the bespoke
+   module) so the Great Court range keeps its tile body.
+3. Fascia text as geometry/texture-free lettering; annotate rest of Trinity St (14-19, 32-38), Sidney St 22-54,
+   Market Hill/Rose Crescent sides of Market Hostel; colours for Trinity St.
+4. Sharper ground surface edges (2 m grid) to match the kerb lines.
+5. Bespoke: Caius Gate of Honour, Senate House Passage, Cockerell full building.
