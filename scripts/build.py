@@ -22,10 +22,11 @@ import numpy as np
 import rasterio
 from pyproj import Transformer
 from rasterio.features import geometry_mask, rasterize
+from rasterio.features import shapes as rio_shapes
 from rasterio.windows import from_bounds
-from scipy.ndimage import binary_erosion, binary_opening, distance_transform_edt, map_coordinates, median_filter
+from scipy.ndimage import binary_erosion, binary_opening, distance_transform_edt, label, map_coordinates, median_filter
 from shapely import STRtree
-from shapely.geometry import LineString, MultiPolygon, Point, Polygon, box, mapping
+from shapely.geometry import LineString, MultiPolygon, Point, Polygon, box, mapping, shape
 from shapely.ops import polygonize, unary_union
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -231,6 +232,8 @@ ROOF_MIN = 1.0        # finest cell (the LiDAR pixel)
 # canopy filter threshold (m), 0 = off. Session 17 at 1.0: photo_match 23.52 -> 23.53 (67 views <= 520 m), but
 # roof_match 92.11 -> 84.56, because that KPI compares with the DSM including tree crowns. Off until Gaspard decides.
 CANOPY_PEN = float(os.environ.get("WC_CANOPY_PEN", "0"))
+GROUND_HOLES = os.environ.get("WC_GROUND_HOLES", "1") == "1"
+HOLE_H, HOLE_MIN_PX = 1.5, 16   # nDSM below 1.5 m over >= 16 px (after a 3x3 opening)
 ROOF_TOL = 0.25      # split a cell while the roof deviates (RMS) more than this from its two-triangle fit (m)
 
 
@@ -525,6 +528,7 @@ def main():
     walk_geoms = [ln for ln, _ in walk_lines]
     bdata = []
     rng = np.random.default_rng(1)
+    holes_cut = 0
     for oid, g, t in buildings:
         x0, y0, x1, y1 = g.bounds
         win = from_bounds(x0 - 1, y0 - 1, x1 + 1, y1 + 1, tf).round_offsets().round_lengths()
@@ -549,6 +553,19 @@ def main():
                     R = s[ii, jj]   # session 16: no 3x3 median, chimneys and ridges stay sharp
                     q10, q90 = np.percentile(R[src], [10, 90])
                     roof = (R, m, (LEFT + c0c + 0.5 - E0, TOP - r0c - 0.5 - N0), q90 - q10 >= 1.5)
+                    if GROUND_HOLES:   # session 22: footprint parts where the LiDAR shows ground (building sites,
+                        # courtyards mapped without an inner ring) become open ground, not a roof at ground + 1 m
+                        low = binary_opening(m & (R - a < HOLE_H), np.ones((3, 3), bool))
+                        lab, nl = label(low)
+                        if nl:
+                            sz = np.bincount(lab.ravel())
+                            keep = np.isin(lab, np.nonzero(sz >= HOLE_MIN_PX)[0][1:])
+                            if keep.any():
+                                hp = unary_union([shape(q) for q, v in rio_shapes(keep.astype("u1"), mask=keep, transform=wtf) if v])
+                                g2 = g.difference(hp.buffer(0.01))
+                                if not g2.is_empty and g2.area >= 0.25 * g.area:
+                                    holes_cut += 1
+                                    g = g2
         if dmed is None:
             c = g.centroid
             dmed = dmin = float(dtm_at([c.x], [c.y])[0])
@@ -585,6 +602,7 @@ def main():
                           tone=rng.uniform(-0.06, 0.06)))
         if roof is not None:
             bdata[-1].update(roofR=roof[0], roofM=roof[1], roofO=roof[2], pitched=roof[3])
+    log(holes_cut, "footprints with LiDAR ground holes")
     log("building heights done", sum(b["cut"] is not None for b in bdata), "with passages")
 
     lm_extra, lm_entries = build_landmarks(bdata, ways, nodes, DTM, DSM, tf, dtm_at)

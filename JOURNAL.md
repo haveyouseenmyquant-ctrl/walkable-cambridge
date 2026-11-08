@@ -660,3 +660,34 @@ Next
 1. Light 0.3 / 0.35, and `gk` (ground albedo) with it; also tone mapping exposure.
 2. The ground-level roof bug in view 423020809560124 (and any others like it).
 3. Ground holes (sky-coloured lower third), tree shape from LiDAR, facade quality, centre first.
+
+## 2026-11-08 — Session 22: LiDAR ground holes in footprints (roof_match_pct 92.11 → 93.03)
+
+Done
+- Looked into session 21's "roof on the road" (view 423020809560124). The camera stands inside the OSM footprint of
+  Ramanujan House (way/1087907233). It was a building site when the LiDAR was flown: 62 % of the footprint is below
+  1.5 m, with 1–3 m piles. The roof field (clamped to median ground + 1 m) turned that into a tiled sheet with
+  pyramids at eye level.
+- build.py (`WC_GROUND_HOLES`, on by default): parts of a footprint where the LiDAR roof is under 1.5 m above the DTM
+  (3×3 opening, ≥ 16 px) are cut out of the footprint and stay open ground. This covers building sites and courtyards
+  mapped without an inner ring. A footprint keeps at least 25 % of its area. 319 footprints changed.
+  roof_match_pct **92.11 → 93.03** (median RMSE 0.203 m). Guardrails on the side build: walkable 99.39, buildings 100.
+  It doesn't fix view 423 itself, because that site's piles are 2–3 m tall.
+- New helper scripts/merge_manifest.py copies the manifest keys added by the trees, facades, objects and markings
+  steps into a fresh build.py manifest, so roof-only rebuilds can ship without re-baking.
+- A/B (67 views ≤ 520 m) was too slow to finish: about 1 view/min per run with 3 runs in parallel. Partial results
+  against session 21's 26.80 run (same ids): holes **28.18 → 28.25** (23 views, 1 better by > 1, none worse);
+  light 0.3 **30.51 → 30.57** (36 views, 8 better, 4 worse). Both are within noise. Light stays at 0.45: the
+  darkening gains have levelled off. Holes shipped because they don't hurt photo_match and raise roof_match.
+- Published (viewer unchanged, world rebuilt).
+
+Learned
+- Run at most 2 A/B runs at once. A third one plus a build slowed everything to about 1 view/min.
+- OSM includes buildings that were finished after the LiDAR survey (and after older photos). The DSM roof then shows
+  site clutter. These need a rule of their own: for a large footprint whose median nDSM is under 3 m, fall back to the
+  OSM levels/height with a flat or generic roof. roof_match counts these as failures either way.
+
+Next
+1. Footprints built after the LiDAR survey (see above).
+2. Ground holes found in the sky-coloured lower third of renders (session 19), tree shape from LiDAR.
+3. Facade quality: reject road/sky pieces, then synthetic per-building facades, centre first.
