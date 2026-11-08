@@ -691,3 +691,6 @@ Next
 1. Footprints built after the LiDAR survey (see above).
 2. Ground holes found in the sky-coloured lower third of renders (session 19), tree shape from LiDAR.
 3. Facade quality: reject road/sky pieces, then synthetic per-building facades, centre first.
+- Live check after publishing: load_seconds 3.98, site_errors 0 (measure.sh first showed 6.69, a cached service.sh
+  reading taken while the A/B renders were loading the machine). measure.sh: walkable 99.39, buildings 100,
+  roof_match 93.03, fps 60.
