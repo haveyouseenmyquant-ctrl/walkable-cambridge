@@ -1264,3 +1264,42 @@ Next
    Market Hill/Rose Crescent sides of Market Hostel; colours for Trinity St.
 4. Sharper ground surface edges (2 m grid) to match the kerb lines.
 5. Bespoke: Caius Gate of Honour, Senate House Passage, Cockerell full building.
+
+## 2026-11-08 — Session 38: two-row stall canopies, square lamps, 72 more ring-1 colours, 18 more ring-1 annotations
+
+Scores: a668b7 (session 37) market_square_realism **27.88** (726ee1: 28.25), market_square_photo_match 30.06 (30.04).
+726ee1 full benchmark: photo_match 18.83; ring_report vs 57d276: ring1 18.9 → 20.1, ring2 23.4 → 23.7, others flat.
+What the judge says on 726ee1's Market Square views (counted from its reasons): stalls wrong (16 of 40), railings (13),
+shopfronts (12), viewpoint/framing (10), lamp posts missing (8), grey/brick where real is white render (8+).
+Several of the 1-point views are camera-pose problems: the frozen pose puts the camera inside a wall or in a court
+(e.g. 443229757448400 renders a wall close-up). Not tunable without using the held-out set.
+
+Done (3 parallel subagents)
+- **Stalls** (zone_props.py): photos from the GSM tower (Commons, 2016) show each OSM stall strip ≥ 6 m wide is two
+  back-to-back rows, each with its own low gabled canopy (eave 2.3, ridge ~2.85 m); white canvas with red/yellow/blue/
+  green stripes down the slope, scalloped edges both sides, darker back sheets on half the stalls. build.py's old single
+  wide canopies are hidden (zone_build collects HIDE ids from props modules too). docs/zone_s38_props.png.
+- **Lamps** (zone_props_furniture.py): OSM maps none in the zone; 4 black ~7.5 m columns with twin saucer lanterns at
+  photo-confirmed spots (positions ±3 m or worse). Zone 413k → 432k tris.
+- **Colours**: data/annotations/colours/ring1.json 62 → 134 buildings (Market St, Rose Crescent, Petty Cury, Peas Hill,
+  Green St, Trinity St, Sidney St, Malcolm St…), mostly Commons photos (Mapillary there is night-time or missing).
+  Only 12 went brick → render/stone; many changed red → gault/sooted brick. 116 buildings get overrides in the build.
+- **Ring-1 annotations**: +18 buildings / 20 walls (Trinity St 14-38, Sidney St 47-52, Green St). Ring-1 match
+  2.79 → 3.76 (66 of 1,950 walls); King's Parade 64.4 unchanged; zone 45.07 unchanged.
+- Local GPU Chrome: load 0.87 s, fps 60, site_errors 0, all moves ok. Published world-20261108-1714, live hash
+  **1e4e459f1d7cd9d1** (verified). service.sh scores it.
+
+Learned
+- The colours file never reaches zone walls: the square's own fronts take colours from the zone annotations. The judge's
+  "red brick vs white render" complaints on the square point at data/annotations/market_square wall_colour values.
+- Commons rate-limits (HTTP 429) bulk downloads; agents should pace and cache.
+- facade_parts.dormer() counts its window as a window, so dormer walls score ~0.92 against annotations.
+- Subagents took ~25 min of a 30 min session on photo research; give them narrower targets.
+
+Next
+1. Read 1e4e45's scores (stalls + lamps) vs a668b7.
+2. Audit the zone annotations' wall_colour/material against non-held-out photos (white render fronts on Market Hill
+   and Market St); this is the remaining colour complaint.
+3. Bollards along the square edges and the Market St south footway; Guildhall-front lamps; planted fountain basin.
+4. Stall side panels are flat plain colour boxes: add goods, frames, open fronts.
+5. Ring 1: Sidney St 22-46 (big footprints need splitting by bay), Market Hostel, Rose Crescent; dormer count fix.
