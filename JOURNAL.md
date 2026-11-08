@@ -877,3 +877,41 @@ Next
    actual cause before another roof change.
 2. Wikimedia Commons photos of central buildings registered locally for poses (real facade area, centre first).
 3. Synthetic per-building facades for walls with no photo.
+
+## 2026-11-08 — Session 28: GTAO ambient occlusion tried, kept opt-in (25-view A/B 18.19 → 17.93)
+
+Done
+- First step on the AAA-quality route (visual_quality 16.0, its lowest criteria gi_ao 1.2, geometric_detail 1.1):
+  a post-processing chain in main.js behind `?post=ao`: RenderPass into a 4x MSAA half-float target, three.js
+  GTAOPass, OutputPass. Options: `ao` (intensity), `aor` (radius m, default 2), `aores` (AO buffer scale), `aos`
+  (AO and denoise samples). Vendored the needed r187 addons (postprocessing/, shaders/, math/SimplexNoise).
+- Problems fixed on the way: (1) GTAOPass's own normal pass uses MeshNormalMaterial, which ignores alphaTest, so
+  leaf cards and the transparent parts of facade photos cast dark AO smears into the sky, and the facade quads
+  (no normals) went black. Now the AO reads the main pass's depth texture and reconstructs normals from it: no
+  second scene render, and only drawn pixels occlude. (2) RenderPass draws into composer.renderTarget2, not the
+  target passed in; and RenderTarget.setSize doesn't resize depth textures (GL "attachments not all the same size",
+  blank canvas), so resize() sets the depth image sizes by hand.
+- fps on the Mac's GPU, 1920×1080, while the machine had load average ~65: no post 59, full-res AO 16 samples 36,
+  half-res AO 8 samples 56.
+- A/B on session 27's 25 views (control renders reused, same build): control **18.19**, full-res AO **17.93**,
+  half-res AO **17.78**. The biggest loss (155280259867837, −3.7) is a render glitch: in the AO render the ground
+  is missing (sky below the horizon). Without that view the effect is about −0.1: neutral for DINOv2.
+  Side-by-side docs/ao_session28.jpg (photo | control | AO; photos Mapillary CC-BY-SA 4.0, ids 204587944591503,
+  183228076993113, 155280259867837). Not on by default; the live default render is unchanged.
+- photo_render.mjs: `WC_DEBUG=1` prints page console messages and errors.
+
+Learned
+- At radius 2 m the AO is subtle at eye level: dark corners at wall/ground joints and under trees. DINOv2 doesn't
+  reward it. It may help visual_quality (gi_ao) but that can only be measured with a judge run on the 30 quality
+  views, which I didn't do this session (machine was loaded: 25 views × 2 arms took ~20 min).
+- Benchmark renders can lose the ground (row 3 of the side-by-side). Under heavy load a view can be captured before
+  its ground tile is placed, which adds noise to every A/B and to the published scores. photo_render should check
+  that the ground under the camera is loaded (tiles.settled / a downward ray hit) before taking the shot.
+
+Next
+1. photo_render: wait for the ground tile under the camera, and retry views whose lower third is sky-coloured.
+   Then re-score the live build to see how much of the benchmark is this noise.
+2. Judge visual_quality with `?post=ao&aores=0.5&aos=8` on the 30 quality views (judge.py --only quality with a
+   side hash). If gi_ao/lighting gain and photo_match stays neutral, make it the High preset's default.
+3. Wikimedia Commons photos of central buildings registered locally for poses (real facade area, centre first).
+4. Synthetic per-building facades for walls with no photo: the centre still shows large blank grey walls.
