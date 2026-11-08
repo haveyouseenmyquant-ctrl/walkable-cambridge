@@ -37,11 +37,11 @@ export const CLASSES = {
     name: 'Stormcaller', color: '#7fd4ff', blurb: 'Lightning and wind. Fast, mobile, chains between foes. Wind Dash goes further on a broom.',
     spells: [
       { id: 'spark_lance', name: 'Spark Lance', glyph: 'ϟ', kind: 'beam', type: 'storm', mana: 5, cd: 0.4, dmg: 18, range: 40, chain: 1, color: 0xbfe6ff, sfx: 'lance', look: 'lance' },
-      { id: 'arc_chain', name: 'Arc Chain', glyph: '⚡', kind: 'beam', type: 'storm', mana: 14, cd: 4, dmg: 26, range: 30, chain: 4, chainRange: 8, color: 0x8fb8ff, sfx: 'arc', look: 'arc' },
+      { id: 'arc_chain', name: 'Arc Chain', glyph: '⚡', kind: 'beam', type: 'storm', mana: 14, cd: 4, dmg: 22, range: 30, chain: 4, chainRange: 8, color: 0x8fb8ff, sfx: 'arc', look: 'arc' },
       { id: 'gale_burst', name: 'Gale Burst', glyph: '༄', kind: 'cone', type: 'storm', mana: 12, cd: 6, dmg: 16, range: 10, angle: 0.8, knock: 5, slow: 2, color: 0xd8fff4, sfx: 'gale', look: 'gale' },
       { id: 'wind_dash', name: 'Wind Dash', glyph: '»', kind: 'blink', type: 'storm', mana: 10, cd: 4, dist: 14, broomMult: 1.6, color: 0xc8f0ff, sfx: 'winddash', look: 'winddash' },
       { id: 'static_field', name: 'Static Field', glyph: '⌁', kind: 'zone', type: 'storm', mana: 22, cd: 12, dmg: 12, radius: 5, dur: 4, interval: 0.5, tick: 'field', slow: 1, range: 30, color: 0x66aaff, sfx: 'static', look: 'static' },
-      { id: 'tempest', name: 'Tempest', glyph: '☈', kind: 'zone', type: 'storm', mana: 50, cd: 70, dmg: 45, radius: 12, dur: 5, interval: 0.3, tick: 'strike', follow: true, color: 0xe0f0ff, sfx: 'tempest', look: 'tempest', ult: true },
+      { id: 'tempest', name: 'Tempest', glyph: '☈', kind: 'zone', type: 'storm', mana: 50, cd: 70, dmg: 20, radius: 12, dur: 5, interval: 0.3, tick: 'strike', follow: true, color: 0xe0f0ff, sfx: 'tempest', look: 'tempest', ult: true },
     ],
     talents: [
       [{ name: 'Forked Lance', desc: 'Spark Lance chains to 2 more foes', f: S => { S.spark_lance.chain += 2; } },
@@ -55,12 +55,12 @@ export const CLASSES = {
   warden: {
     name: 'Stone Warden', color: '#c9a66b', blurb: 'Earth and stone. Shields, stuns and roots; outlasts anything.',
     spells: [
-      { id: 'pebble_shot', name: 'Pebble Shot', glyph: '●', kind: 'bolt', type: 'stone', mana: 4, cd: 0.5, dmg: 20, speed: 52, range: 50, splash: 0, grav: 4, color: 0xd8b880, sfx: 'pebble', look: 'pebble' },
+      { id: 'pebble_shot', name: 'Pebble Shot', glyph: '●', kind: 'bolt', type: 'stone', mana: 4, cd: 0.5, dmg: 28, speed: 52, range: 50, splash: 0, grav: 4, color: 0xd8b880, sfx: 'pebble', look: 'pebble' },
       { id: 'granite_skin', name: 'Granite Skin', glyph: '⛨', kind: 'shield', type: 'stone', mana: 18, cd: 12, amount: 40, dur: 8, color: 0xe0c080, sfx: 'granite', look: 'granite' },
-      { id: 'quake_stomp', name: 'Quake Stomp', glyph: '⩩', kind: 'nova', type: 'stone', mana: 18, cd: 8, dmg: 25, radius: 6, stun: 1.2, color: 0xb08850, sfx: 'quake', look: 'quake' },
+      { id: 'quake_stomp', name: 'Quake Stomp', glyph: '⩩', kind: 'nova', type: 'stone', mana: 18, cd: 8, dmg: 35, radius: 6, stun: 1.2, color: 0xb08850, sfx: 'quake', look: 'quake' },
       { id: 'boulder_leap', name: 'Boulder Leap', glyph: '⤴', kind: 'blink', type: 'stone', mana: 14, cd: 7, dist: 10, hop: 7, dmg: 20, radius: 3, stun: 0.8, landing: true, color: 0xc09060, sfx: 'leap', look: 'leap' },
       { id: 'rootbind', name: 'Rootbind Spikes', glyph: '⋀', kind: 'zone', type: 'stone', mana: 20, cd: 10, dmg: 30, radius: 4, dur: 0.01, interval: 1, tick: 'spikes', slow: 4, range: 30, color: 0x9a8a60, sfx: 'spikes', look: 'spikes' },
-      { id: 'monolith', name: 'Monolith Ward', glyph: '▲', kind: 'shield', type: 'stone', mana: 50, cd: 75, amount: 120, dur: 10, dmg: 60, radius: 9, stun: 3, color: 0xffd890, sfx: 'monolith', look: 'monolith', ult: true },
+      { id: 'monolith', name: 'Monolith Ward', glyph: '▲', kind: 'shield', type: 'stone', mana: 50, cd: 75, amount: 120, dur: 10, dmg: 130, radius: 9, stun: 3, color: 0xffd890, sfx: 'monolith', look: 'monolith', ult: true },
     ],
     talents: [
       [{ name: 'Bedrock', desc: 'Granite Skin absorbs 60% more', f: S => { S.granite_skin.amount *= 1.6; } },

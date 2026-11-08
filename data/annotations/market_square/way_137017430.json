@@ -84,22 +84,26 @@
      "sill": true
     },
     {
-     "type": "door",
-     "style": "arched",
-     "x": 1.6,
-     "w": 1.6,
-     "h": 3.0,
-     "surround": "none"
-    },
-    {
      "type": "dormer",
      "x": 1.6,
      "w": 1.0,
      "h": 1.5
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 3.0,
+     "z1": 3.3,
+     "fascia_text": "Cambridge University Press Bookshop",
+     "fascia_colour": "#f2f0ea",
+     "text_colour": "#2b3a55",
+     "door_x": 1.6,
+     "stallriser": 0.3,
+     "awning": false
     }
    ],
    "confidence": "medium",
-   "notes": "Brown stock-brick 3 storeys + slate mansard; white rendered ground floor with wide arched shop entrance; white window surrounds. Photo face looks ~5.5 m wide vs 3.26 m wall: x positions scaled to wall. Other walls not visible (refs are Great St Mary's interiors)."
+   "notes": "Brown stock-brick 3 storeys + slate mansard; white rendered ground floor with wide arched shop entrance; white window surrounds. Photo face looks ~5.5 m wide vs 3.26 m wall: x positions scaled to wall. Other walls not visible (refs are Great St Mary's interiors). s43: the wide arched ground-floor opening is the CUP Bookshop's glazed shop entrance (Mapillary 296497208762822), so it is a shopfront, not a door; now agrees with way/1099847939:5."
   },
   {
    "id": "way/137017430:3",

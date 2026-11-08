@@ -17,27 +17,27 @@ function audio() {
 }
 
 // osc layer: {w: wave, f0, f1, t: duration, g: gain, d: delay}
-function tone(c, o, at) {
+function tone(c, o, at, out = master, pr = 1) {
   const t0 = at + (o.d || 0), osc = c.createOscillator(), g = c.createGain();
   osc.type = o.w || 'sine';
-  osc.frequency.setValueAtTime(o.f0, t0);
-  osc.frequency.exponentialRampToValueAtTime(Math.max(20, o.f1 ?? o.f0), t0 + o.t);
+  osc.frequency.setValueAtTime(o.f0 * pr, t0);
+  osc.frequency.exponentialRampToValueAtTime(Math.max(20, (o.f1 ?? o.f0) * pr), t0 + o.t);
   g.gain.setValueAtTime(0.0001, t0);
   g.gain.exponentialRampToValueAtTime(o.g ?? 0.3, t0 + Math.min(0.02, o.t * 0.2));
   g.gain.exponentialRampToValueAtTime(0.0001, t0 + o.t);
-  osc.connect(g); g.connect(master); osc.start(t0); osc.stop(t0 + o.t + 0.05);
+  osc.connect(g); g.connect(out); osc.start(t0); osc.stop(t0 + o.t + 0.05);
 }
 // noise layer: {type: filter type, f0, f1, q, t, g, d}
-function noise(c, o, at) {
+function noise(c, o, at, out = master, pr = 1) {
   const t0 = at + (o.d || 0), src = c.createBufferSource(), f = c.createBiquadFilter(), g = c.createGain();
   src.buffer = noiseBuf; src.loop = true;
   f.type = o.type || 'lowpass'; f.Q.value = o.q ?? 1;
-  f.frequency.setValueAtTime(o.f0, t0);
-  f.frequency.exponentialRampToValueAtTime(Math.max(30, o.f1 ?? o.f0), t0 + o.t);
+  f.frequency.setValueAtTime(o.f0 * pr, t0);
+  f.frequency.exponentialRampToValueAtTime(Math.max(30, (o.f1 ?? o.f0) * pr), t0 + o.t);
   g.gain.setValueAtTime(0.0001, t0);
   g.gain.exponentialRampToValueAtTime(o.g ?? 0.3, t0 + Math.min(0.03, o.t * 0.2));
   g.gain.exponentialRampToValueAtTime(0.0001, t0 + o.t);
-  src.connect(f); f.connect(g); g.connect(master); src.start(t0, Math.random() * 0.5); src.stop(t0 + o.t + 0.05);
+  src.connect(f); f.connect(g); g.connect(out); src.start(t0, Math.random() * 0.5); src.stop(t0 + o.t + 0.05);
 }
 
 const R = {
@@ -71,6 +71,19 @@ const R = {
   shade:    { o: [{ w: 'sine', f0: 600, f1: 120, t: 0.3, g: 0.2 }], n: [{ type: 'highpass', f0: 1500, t: 0.2, g: 0.2 }] },
   wisp:     { o: [{ w: 'sine', f0: 700, f1: 1400, t: 0.4, g: 0.12 }, { w: 'sine', f0: 1050, f1: 2100, t: 0.4, g: 0.06, d: 0.08 }] },
   bloom:    { o: [{ w: 'sine', f0: 220, f1: 110, t: 1.5, g: 0.25 }, { w: 'sine', f0: 233, f1: 116, t: 1.5, g: 0.2 }, { w: 'triangle', f0: 330, f1: 165, t: 1.5, g: 0.08, d: 0.15 }] },
+  // impacts (one per hit, by damage type; pitch jittered per hit so repeats don't machine-gun)
+  hit_physical: { n: [{ type: 'lowpass', f0: 1400, f1: 200, t: 0.09, g: 0.5 }], o: [{ w: 'triangle', f0: 180, f1: 70, t: 0.08, g: 0.25 }] },
+  hit_fire:  { n: [{ type: 'bandpass', f0: 2200, f1: 500, q: 1.2, t: 0.14, g: 0.45 }], o: [{ w: 'sine', f0: 150, f1: 60, t: 0.1, g: 0.25 }] },
+  hit_storm: { n: [{ type: 'highpass', f0: 3500, f1: 1800, t: 0.08, g: 0.35 }], o: [{ w: 'square', f0: 1300, f1: 250, t: 0.07, g: 0.05 }, { w: 'sine', f0: 160, f1: 70, t: 0.08, g: 0.2 }] },
+  hit_stone: { n: [{ type: 'lowpass', f0: 900, f1: 120, t: 0.12, g: 0.6 }], o: [{ w: 'triangle', f0: 140, f1: 55, t: 0.12, g: 0.35 }] },
+  hit_hex:   { n: [{ type: 'bandpass', f0: 1200, f1: 600, q: 3, t: 0.12, g: 0.35 }], o: [{ w: 'sine', f0: 520, f1: 260, t: 0.12, g: 0.12 }, { w: 'sine', f0: 140, f1: 70, t: 0.09, g: 0.2 }] },
+  crit:      { o: [{ w: 'triangle', f0: 1800, f1: 900, t: 0.16, g: 0.12 }, { w: 'sine', f0: 90, f1: 40, t: 0.22, g: 0.4 }], n: [{ type: 'lowpass', f0: 3000, f1: 150, t: 0.2, g: 0.5 }] },
+  kill:      { o: [{ w: 'sine', f0: 240, f1: 60, t: 0.3, g: 0.3 }], n: [{ type: 'lowpass', f0: 1800, f1: 100, t: 0.3, g: 0.45 }] },
+  // loot: drop chime (pitch/length scaled by rarity in items.js) and pickup sparkle
+  drop:      { o: [{ w: 'sine', f0: 880, t: 0.35, g: 0.12 }, { w: 'sine', f0: 1320, t: 0.45, g: 0.08, d: 0.07 }, { w: 'triangle', f0: 1760, t: 0.5, g: 0.05, d: 0.14 }] },
+  drop_big:  { o: [{ w: 'sine', f0: 660, t: 0.5, g: 0.14 }, { w: 'sine', f0: 990, t: 0.6, g: 0.1, d: 0.08 }, { w: 'sine', f0: 1320, t: 0.7, g: 0.08, d: 0.16 }, { w: 'triangle', f0: 1980, t: 0.8, g: 0.05, d: 0.24 }],
+               n: [{ type: 'highpass', f0: 6000, t: 0.6, g: 0.06 }] },
+  pickup:    { o: [{ w: 'triangle', f0: 700, f1: 1400, t: 0.12, g: 0.15 }, { w: 'sine', f0: 1400, f1: 2100, t: 0.2, g: 0.08, d: 0.06 }] },
   // generic
   hurt:     { o: [{ w: 'square', f0: 200, f1: 90, t: 0.15, g: 0.12 }] },
   nomana:   { o: [{ w: 'triangle', f0: 180, f1: 170, t: 0.12, g: 0.1 }] },
@@ -78,15 +91,23 @@ const R = {
   death:    { o: [{ w: 'sawtooth', f0: 220, f1: 50, t: 1.6, g: 0.15 }] },
 };
 
-let lastAt = {};
-export function play(name, vol = 1) {
+let lastAt = {}, winT = -1, winN = 0, clock = null;
+// throttling clock: the game clock when set (so stepped/accelerated sims throttle like real play), else audio time
+export function setClock(fn) { clock = fn; lastAt = {}; winT = -1; }
+// play(name, vol, pitch): each call gets its own gain node (volume no longer leaks into other playing sounds).
+// Same-name repeats within 30 ms are merged (except hit_*), and at most ~10 sounds start per 60 ms window.
+export function play(name, vol = 1, pitch = 1) {
   const c = audio(); const r = R[name];
   if (!c || !r || c.state !== 'running') return;
-  const now = c.currentTime;
-  if (now - (lastAt[name] ?? -1) < 0.03) return;   // don't stack the same sound within 30 ms
-  lastAt[name] = now;
-  master.gain.value = 0.35 * vol;
-  for (const o of r.o || []) tone(c, o, now);
-  for (const o of r.n || []) noise(c, o, now);
+  const now = c.currentTime, tn = clock ? clock() : now;
+  if (tn < (lastAt[name] ?? -1)) lastAt = {};   // clock went backwards (new game)
+  if (tn - (lastAt[name] ?? -1) < (name.startsWith('hit_') ? 0 : 0.03)) return;
+  if (tn - winT > 0.06 || tn < winT) { winT = tn; winN = 0; }
+  if (++winN > 10) return;
+  lastAt[name] = tn;
+  const out = c.createGain(); out.gain.value = Math.min(2, vol); out.connect(master);
+  for (const o of r.o || []) tone(c, o, now, out, pitch);
+  for (const o of r.n || []) noise(c, o, now, out, pitch);
+  setTimeout(() => out.disconnect(), 3000);
 }
 export function init() { audio(); }

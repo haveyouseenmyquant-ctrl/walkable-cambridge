@@ -19,7 +19,7 @@
    "trim_colour": "#f1efe8",
    "cornice_z": 11.8,
    "cornice": "simple",
-   "parapet": true,
+   "parapet": false,
    "string_courses": [
     4.2
    ],
@@ -93,10 +93,16 @@
      ],
      "head": "flat",
      "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 1.65,
+     "w": 1.0,
+     "h": 1.5
     }
    ],
    "confidence": "medium",
-   "notes": "Cambridge University Press Bookshop (OSM node 1762331504), Trinity Street end at the St Mary's Street corner. Mapillary 934928010476370 / 1078821085942013: ground floor white rusticated stucco with one large round-arched glazed shop opening (modelled as a rectangular shopfront), white cornice band at ~4.2 m; above, brown-grey gault brick with two columns of 6/6 sashes with white architrave/cornice hoods and iron flower-box balconettes on the 1st floor, a blue plaque between; plain parapet. The real front looks wider than the 3.3 m OSM segment, so the two window columns are squeezed. Ground-floor stucco not representable (single wall material)."
+   "notes": "Cambridge University Press Bookshop (OSM node 1762331504), Trinity Street end at the St Mary's Street corner. Mapillary 934928010476370 / 1078821085942013: ground floor white rusticated stucco with one large round-arched glazed shop opening (modelled as a rectangular shopfront), white cornice band at ~4.2 m; above, brown-grey gault brick with two columns of 6/6 sashes with white architrave/cornice hoods and iron flower-box balconettes on the 1st floor, a blue plaque between; plain parapet. The real front looks wider than the 3.3 m OSM segment, so the two window columns are squeezed. Ground-floor stucco not representable (single wall material). s43: Mapillary 296497208762822 shows a slate mansard with one dormer above the cornice (no parapet); dormer added, matches the coincident way/137017430:1 annotation."
   },
   {
    "id": "way/1099847939:6",

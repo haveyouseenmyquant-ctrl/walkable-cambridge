@@ -33,7 +33,30 @@ export function install(game) {
     const t = el('div', 'gh-toast', toasts); t.textContent = text;
     setTimeout(() => t.classList.add('out'), ms); setTimeout(() => t.remove(), ms + 500);
     while (toasts.children.length > 4) toasts.firstChild.remove();
+    return t;
   }
+  // loot toast: item name in its rarity colour with a matching edge glow; higher rarities linger longer
+  const lootBox = el('div', 'gh-loots', root);
+  function loot(name, rarity, color, note = '') {
+    const big = rarity === 'epic' || rarity === 'legendary', ms = big ? 3600 : 2600;
+    const t = el('div', 'gh-loot' + (big ? ' big' : ''), lootBox);
+    t.style.setProperty('--rc', color);
+    el('span', 'gh-loot-r', t).textContent = rarity; el('span', 'gh-loot-n', t).textContent = name;
+    if (note) el('span', 'gh-loot-d', t).textContent = note;
+    setTimeout(() => t.classList.add('out'), ms); setTimeout(() => t.remove(), ms + 500);
+    while (lootBox.children.length > 4) lootBox.firstChild.remove();
+    return t;
+  }
+  const css = el('style', null, document.head);
+  css.textContent = `#game-hud .gh-loots{position:absolute;right:24px;top:34%;display:flex;flex-direction:column;align-items:flex-end;gap:6px;pointer-events:none}
+#game-hud .gh-loot{--rc:#ccc;display:flex;align-items:baseline;gap:8px;padding:6px 14px 6px 12px;background:linear-gradient(90deg,rgba(10,10,16,.55),rgba(10,10,16,.85));border-right:3px solid var(--rc);border-radius:4px 2px 2px 4px;box-shadow:0 0 14px -4px var(--rc);font:600 15px/1.2 system-ui,sans-serif;color:var(--rc);animation:gh-loot-in .28s cubic-bezier(.2,1.4,.4,1);transition:opacity .5s,transform .5s}
+#game-hud .gh-loot.big{font-size:18px;box-shadow:0 0 22px -2px var(--rc);border-right-width:5px}
+#game-hud .gh-loot-r{font:500 10px/1 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.12em;opacity:.8}
+#game-hud .gh-loot-d{font:400 11px/1 system-ui,sans-serif;color:#aab}
+#game-hud .gh-loot.out{opacity:0;transform:translateX(30px)}
+@keyframes gh-loot-in{from{opacity:0;transform:translateX(40px) scale(.9)}to{opacity:1;transform:none}}
+body.explore #game-hud .gh-loots{display:none}`;
+  offs.push(() => css.remove());
 
   // ---- spell bar content
   function fillSpells() {
@@ -53,6 +76,20 @@ export function install(game) {
   const POOL = 40, pool = [], v = new THREE.Vector3();
   for (let i = 0; i < POOL; i++) { const d = el('div', 'gh-num', nums); d.style.display = 'none'; pool.push({ d, t: 0, life: 0, x: 0, y: 0, z: 0, dx: 0 }); }
   let pi = 0;
+  // ---- per-hit feedback: impact flash + sparks at the hit point, an impact sound on every hit, hit-stop on big ones
+  sfx.setClock(() => game.time); offs.push(() => sfx.setClock(null));
+  const SPARK = { fire: 0xff8a30, storm: 0xa8dcff, stone: 0xe0b878, hex: 0xc070ff, physical: 0xfff0d8 };
+  offs.push(game.on('hit', ({ target, amount, crit, type, noProc }) => {
+    if (!target || target === game.player || amount == null || typeof target.hp !== 'number') return;
+    const big = crit || amount >= 0.2 * (target.maxHp || 1e9) || amount >= 60;
+    const p = game.player, dx = p.x - target.x, dy = p.y - target.y, L = Math.hypot(dx, dy) || 1, r = (target.radius ?? 0.5) * 0.9;
+    const h = (target.height ?? 1.6) * 0.55;
+    game.vfx?.impact?.(target.x + dx / L * r, target.y + dy / L * r, (target.z ?? p.z) + h, SPARK[type] ?? SPARK.physical, noProc ? 0.6 : big ? 2 : 1, dx, dy);
+    const pitch = 0.85 + Math.random() * 0.3;
+    sfx.play('hit_' + (SPARK[type] ? type : 'physical'), noProc ? 0.45 : 0.8, pitch);
+    if (big && !noProc) { sfx.play('crit', 0.7, pitch); game.hitStop?.(0.05, 0.08); }
+  }));
+  offs.push(game.on('kill', ({ mob }) => { if (mob) sfx.play('kill', mob.boss ? 1.2 : 0.6, 0.9 + Math.random() * 0.2); }));
   offs.push(game.on('hit', ({ target, amount, crit, type }) => {
     if (!target || target === game.player || amount == null) return;
     const n = pool[pi]; pi = (pi + 1) % POOL;
@@ -162,5 +199,5 @@ export function install(game) {
     dispose() { for (const f of offs) f(); root.remove(); },
   });
 
-  game.hud = { toast, openPick, toggleTalents, respawn, root };
+  game.hud = { toast, loot, openPick, toggleTalents, respawn, root };
 }

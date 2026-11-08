@@ -2,6 +2,7 @@
 // treasure chests around Market Square, an inventory panel (I) and window.__itemTest for scripts/test_items.mjs.
 // Frames: collision x east, y north, z up; three.js position = (x, z, -y).
 import { ITEMS, RARITY, SLOTS } from './itemdefs.js';
+import * as sfx from './sfx.js';
 
 const RARITIES = Object.keys(RARITY);
 // chests: nominal spots in open public space around Market Square / ring 1; snapped at runtime to walkable ground
@@ -21,13 +22,18 @@ export function install(game) {
   const v3 = (x, y, z) => new T.Vector3(x, z, -y);
   const sv = game.save.items ||= { inv: [], eq: {}, chests: [] };
   sv.inv ||= []; sv.eq ||= {}; sv.chests ||= [];
-  const add = (...o) => { const m = { transparent: true, blending: T.AdditiveBlending, depthWrite: false }; return Object.assign(m, ...o); };
+  // glow materials use a "screen"-style blend (src + dst*(1-src)) so stacked glows tint rather than clip to white
+  const add = (...o) => { const m = { transparent: true, blending: T.CustomBlending, blendEquation: T.AddEquation, blendSrc: T.OneFactor, blendDst: T.OneMinusSrcColorFactor, depthWrite: false }; return Object.assign(m, ...o); };
+  const canvasTex = (w, h, draw) => { const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'), w, h); return new T.CanvasTexture(c); };
+  // soft round particle sprite (no hard-edged squares)
+  const softTex = canvasTex(32, 32, (g) => { const r = g.createRadialGradient(16, 16, 0, 16, 16, 15.5);
+    r.addColorStop(0, 'rgba(255,255,255,1)'); r.addColorStop(0.3, 'rgba(255,255,255,0.6)'); r.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = r; g.fillRect(0, 0, 32, 32); });
 
   // ---------------- pooled VFX: particles (one Points), expanding rings, lightning bolts
   const fx = (() => {
     const N = 700, pos = new Float32Array(N * 3).fill(-1e5), col = new Float32Array(N * 3), vel = new Float32Array(N * 3), life = new Float32Array(N), max = new Float32Array(N), base = new Float32Array(N * 3);
     const geo = new T.BufferGeometry(); geo.setAttribute('position', new T.BufferAttribute(pos, 3)); geo.setAttribute('color', new T.BufferAttribute(col, 3));
-    const pts = new T.Points(geo, new T.PointsMaterial(add({ size: 0.22, vertexColors: true, sizeAttenuation: true })));
+    const pts = new T.Points(geo, new T.PointsMaterial(add({ size: 0.34, map: softTex, vertexColors: true, sizeAttenuation: true })));
     pts.frustumCulled = false; pts.renderOrder = 5; game.root.add(pts);
     let next = 0, alive = 0; const c = new T.Color();
     const rings = [], bolts = [];
@@ -54,12 +60,12 @@ export function install(game) {
         if (alive) { let any = 0; for (let i = 0; i < N; i++) { if (life[i] <= 0) continue; any++; life[i] -= dt; const k = i * 3;
           if (life[i] <= 0) { pos[k + 1] = -1e5; col[k] = col[k + 1] = col[k + 2] = 0; continue; }
           pos[k] += vel[k] * dt; pos[k + 1] += vel[k + 1] * dt; pos[k + 2] += vel[k + 2] * dt; vel[k] *= 0.96; vel[k + 1] = vel[k + 1] * 0.96 - 1.2 * dt; vel[k + 2] *= 0.96;
-          const f = life[i] / max[i]; col[k] = base[k] * f; col[k + 1] = base[k + 1] * f; col[k + 2] = base[k + 2] * f; }
+          const f = 0.75 * life[i] / max[i]; col[k] = base[k] * f; col[k + 1] = base[k + 1] * f; col[k + 2] = base[k + 2] * f; }
           geo.attributes.position.needsUpdate = geo.attributes.color.needsUpdate = true; if (!any) alive = 0; }
-        for (const m of rings) if (m.visible) { const u = m.userData; u.t += dt; const f = u.t / u.d; if (f >= 1) { m.visible = false; continue; } m.scale.setScalar(Math.max(0.05, u.r * (0.2 + 0.8 * Math.sqrt(f)))); m.material.opacity = 1 - f; }
+        for (const m of rings) if (m.visible) { const u = m.userData; u.t += dt; const f = u.t / u.d; if (f >= 1) { m.visible = false; continue; } m.scale.setScalar(Math.max(0.05, u.r * (0.2 + 0.8 * Math.sqrt(f)))); m.material.opacity = 0.85 * (1 - f); }
         for (const l of bolts) if (l.visible) { l.userData.t -= dt; l.material.opacity = Math.max(0, l.userData.t / 0.18); if (l.userData.t <= 0) l.visible = false; }
       },
-      dispose() { geo.dispose(); ringGeo.dispose(); },
+      dispose() { geo.dispose(); ringGeo.dispose(); softTex.dispose(); },
     };
   })();
 
@@ -91,7 +97,7 @@ export function install(game) {
     defs: ITEMS, rarities: RARITY, slots: SLOTS, inventory: sv.inv, equipped: sv.eq, S,
     give(id, { quiet = false } = {}) { const d = ITEMS[id]; if (!d) return null;
       if (S.owns(id)) { if (!quiet) toast(`${d.name} (already owned)`); return d; }
-      sv.inv.push(id); if (!quiet) toast(`Found: ${d.name} [${d.rarity}]`);
+      sv.inv.push(id); if (!quiet) { if (game.hud?.loot) game.hud.loot(d.name, d.rarity, RARITY[d.rarity].color, sv.eq[d.slot] ? d.slot : `${d.slot} · equipped`); else toast(`Found: ${d.name} [${d.rarity}]`); }
       if (!sv.eq[d.slot]) items.equip(id); else { game.persist(); render(); } return d; },
     equip(id) { const d = ITEMS[id]; if (!d) return false;
       if (sv.eq[d.slot] === id) return true;
@@ -111,21 +117,54 @@ export function install(game) {
   };
   S.drop = (...a) => items.drop(...a);
 
-  // ---------------- pickups (beam of light + bobbing gem)
+  // ---------------- pickups: rarity-coloured light pillar (height/width by rarity), pulsing ground glow + ring,
+  // bobbing gem with a halo, drop chime. Geometry/textures shared; per-drop materials are freed on pickup.
   const pickups = [];
-  const beamGeo = new T.CylinderGeometry(0.12, 0.3, 6, 10, 1, true); beamGeo.translate(0, 3, 0);
+  const PILLAR = { common: [2.2, 0.1], uncommon: [3.5, 0.13], rare: [6, 0.17], epic: [9, 0.22], legendary: [13, 0.3] };
+  const beamGeo = new T.CylinderGeometry(1, 1, 1, 12, 1, true); beamGeo.translate(0, 0.5, 0);
   const gemGeo = new T.OctahedronGeometry(0.22);
-  function spawnPickup(id, x, y, z) { const d = ITEMS[id]; if (!d) return null; const col = RARITY[d.rarity].hex;
-    const g = new T.Group(); const beam = new T.Mesh(beamGeo, new T.MeshBasicMaterial(add({ color: col, opacity: 0.4, side: T.DoubleSide })));
-    const gem = new T.Mesh(gemGeo, new T.MeshBasicMaterial({ color: col })); g.add(beam, gem); g.position.copy(v3(x, y, z ?? game.pz)); game.root.add(g);
-    const pk = { id, x, y, z: z ?? game.pz, g, gem, beam, t0: S.t }; pickups.push(pk); fx.burst(v3(x, y, pk.z + 0.5), col, 20, 3, 0.7); return pk; }
-  function removePickup(pk) { game.root.remove(pk.g); pk.beam.material.dispose(); pk.gem.material.dispose(); pickups.splice(pickups.indexOf(pk), 1); }
+  const padGeo = new T.CircleGeometry(1, 32); padGeo.rotateX(-Math.PI / 2);
+  const ringGeo2 = new T.RingGeometry(0.82, 1, 40); ringGeo2.rotateX(-Math.PI / 2);
+  // pillar alpha: bright at the base, fading out upwards, with a soft horizontal falloff so it reads as light not a tube
+  const pillarTex = canvasTex(32, 128, (g, w, h) => { const v = g.createLinearGradient(0, h, 0, 0);
+    v.addColorStop(0, 'rgba(255,255,255,1)'); v.addColorStop(0.15, 'rgba(255,255,255,0.75)'); v.addColorStop(0.6, 'rgba(255,255,255,0.25)'); v.addColorStop(1, 'rgba(255,255,255,0)');
+    g.fillStyle = v; g.fillRect(0, 0, w, h); g.globalCompositeOperation = 'destination-in';
+    const hz = g.createLinearGradient(0, 0, w, 0); hz.addColorStop(0, 'rgba(0,0,0,0.35)'); hz.addColorStop(0.5, 'rgba(0,0,0,1)'); hz.addColorStop(1, 'rgba(0,0,0,0.35)');
+    g.fillStyle = hz; g.fillRect(0, 0, w, h); });
+  const padTex = canvasTex(64, 64, (g) => { const r = g.createRadialGradient(32, 32, 0, 32, 32, 31);
+    r.addColorStop(0, 'rgba(255,255,255,0.9)'); r.addColorStop(0.35, 'rgba(255,255,255,0.45)'); r.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = r; g.fillRect(0, 0, 64, 64); });
+  function spawnPickup(id, x, y, z) { const d = ITEMS[id]; if (!d) return null; const col = RARITY[d.rarity].hex, ord = RARITY[d.rarity].order;
+    const [ph, pw] = PILLAR[d.rarity] || PILLAR.common;
+    const g = new T.Group();
+    const beam = new T.Mesh(beamGeo, new T.MeshBasicMaterial(add({ color: col, map: pillarTex, opacity: 0.55, side: T.DoubleSide, fog: false })));
+    beam.scale.set(pw, ph, pw);
+    const core = new T.Mesh(beamGeo, new T.MeshBasicMaterial(add({ color: 0xffffff, map: pillarTex, opacity: 0.18, fog: false })));
+    core.scale.set(pw * 0.3, ph * 0.8, pw * 0.3);
+    const pad = new T.Mesh(padGeo, new T.MeshBasicMaterial(add({ color: col, map: padTex, opacity: 0.7, side: T.DoubleSide })));
+    pad.position.y = 0.04; pad.scale.setScalar(0.9 + 0.2 * ord);
+    const ring = new T.Mesh(ringGeo2, new T.MeshBasicMaterial(add({ color: col, opacity: 0.6, side: T.DoubleSide })));
+    ring.position.y = 0.06;
+    const gem = new T.Mesh(gemGeo, new T.MeshBasicMaterial({ color: col }));
+    const halo = new T.Sprite(new T.SpriteMaterial(add({ color: col, map: padTex, opacity: 0.8 }))); halo.scale.setScalar(0.9 + 0.15 * ord);
+    for (const o of [beam, core, pad, ring, halo]) o.renderOrder = 6;
+    g.add(beam, core, pad, ring, gem, halo); g.position.copy(v3(x, y, z ?? game.pz)); game.root.add(g);
+    const pk = { id, x, y, z: z ?? game.pz, g, gem, beam, core, pad, ring, halo, ord, ph, rs: 0.9 + 0.25 * ord, t0: S.t }; pickups.push(pk);
+    fx.burst(v3(x, y, pk.z + 0.5), col, 16 + 8 * ord, 3 + ord * 0.5, 0.8); fx.ring(x, y, pk.z + 0.05, col, 1.2 + 0.4 * ord, 0.5);
+    sfx.play(ord >= 3 ? 'drop_big' : 'drop', 0.6 + 0.12 * ord, ord >= 3 ? 1 : 0.9 + ord * 0.08);
+    return pk; }
+  function removePickup(pk) { game.root.remove(pk.g); for (const o of [pk.beam, pk.core, pk.pad, pk.ring, pk.gem, pk.halo]) o.material.dispose(); pickups.splice(pickups.indexOf(pk), 1); }
   function updatePickups(dt) { const p = game.player;
     for (let i = pickups.length - 1; i >= 0; i--) { const pk = pickups[i]; const dx = p.x - pk.x, dy = p.y - pk.y, dz = p.z - pk.z, d = Math.hypot(dx, dy);
       if (S.magnet && d < S.magnet && d > 0.01 && Math.abs(dz) < 4) { const s = Math.min(d, 8 * dt) / d; pk.x += dx * s; pk.y += dy * s; pk.z += dz * s; }
-      pk.g.position.set(pk.x, pk.z, -pk.y); pk.gem.position.y = 0.8 + Math.sin((S.t - pk.t0) * 2.5) * 0.15; pk.gem.rotation.y += dt * 2;
-      pk.beam.material.opacity = 0.3 + Math.sin(S.t * 3) * 0.1;
-      if (d < 1.5 && Math.abs(dz) < 2.5 && S.t - pk.t0 > 0.3) { removePickup(pk); const def = items.give(pk.id); fx.burst(v3(p.x, p.y, p.z + 1), RARITY[def.rarity].hex, 30, 3, 0.6); game.emit('pickup', { item: def, id: pk.id }); } } }
+      const age = S.t - pk.t0, grow = Math.min(1, age / 0.35);
+      pk.g.position.set(pk.x, pk.z, -pk.y); pk.gem.position.y = pk.halo.position.y = 0.8 + Math.sin(age * 2.5) * 0.15; pk.gem.rotation.y += dt * 2;
+      pk.beam.scale.y = pk.ph * (1 - (1 - grow) ** 3);
+      pk.beam.material.opacity = 0.45 + Math.sin(S.t * 3 + pk.t0) * 0.1; pk.core.material.opacity = 0.14 + Math.sin(S.t * 5 + pk.t0) * 0.05;
+      pk.pad.material.opacity = 0.55 + Math.sin(S.t * 3 + pk.t0) * 0.15;
+      const rp = (age * 0.8) % 1; pk.ring.scale.setScalar(pk.rs * (0.3 + rp)); pk.ring.material.opacity = 0.65 * (1 - rp);
+      if (pk.ord >= 3 && Math.random() < dt * (pk.ord === 4 ? 10 : 5)) { const a = Math.random() * 6.283; fx.stream(v3(pk.x + Math.cos(a) * 0.5, pk.y + Math.sin(a) * 0.5, pk.z + 0.1), v3(pk.x, pk.y, pk.z + 2.5), RARITY[ITEMS[pk.id].rarity].hex, 1); }
+      if (d < 1.5 && Math.abs(dz) < 2.5 && S.t - pk.t0 > 0.3) { removePickup(pk); const def = items.give(pk.id); const c = RARITY[def.rarity].hex;
+        fx.burst(v3(p.x, p.y, p.z + 1), c, 30, 3, 0.6); fx.ring(p.x, p.y, p.z + 0.05, c, 1.5, 0.4); sfx.play('pickup', 0.8, 1 + 0.06 * pk.ord); game.emit('pickup', { item: def, id: pk.id }); } } }
 
   const offLoot = game.on('kill', e => { const m = e.mob; if (!m || m.noLoot) return; const loot = m.type?.loot;
     const rolls = Array.isArray(loot) ? loot : [{ rarity: 'common', chance: 0.4 }];
@@ -233,5 +272,5 @@ export function install(game) {
   window.__itemIds = () => Object.keys(ITEMS).filter(k => ITEMS[k].test);
 
   game.add({ dispose() { offLoot(); offTick(); removeEventListener('keydown', onKey); panel.remove(); style.remove();
-    for (const s of Object.keys(active)) for (const off of active[s].offs) { try { off(); } catch {} } fx.dispose(); beamGeo.dispose(); gemGeo.dispose(); delete window.__itemTest; } });
+    for (const s of Object.keys(active)) for (const off of active[s].offs) { try { off(); } catch {} } fx.dispose(); beamGeo.dispose(); gemGeo.dispose(); padGeo.dispose(); ringGeo2.dispose(); pillarTex.dispose(); padTex.dispose(); for (const pk of [...pickups]) removePickup(pk); delete window.__itemTest; } });
 }

@@ -1342,3 +1342,45 @@ Next
 3. Bene't St remainder (Eagle side walls, 15 Bene't St, Bene't Hostel), 6 St Edward's Passage, Sidney St split by
    bay; photos are cached in /tmp/cref/dl (may not survive).
 4. Peas Hill zone annotations; stall end back-sheets lower or gapped; Petty Cury colour check.
+
+## 2026-11-08 — Sessions 40–42 (entry written in session 43; those sessions left no journal entry)
+
+From the commits: session 40 added the wizard game layer (site/app/game: 4 classes, mobs + the Bellwarden boss on
+Market Hill, effect items, chests at real places, encounters, HUD, exploration toggle). Session 42 published it, wired
+scripts/game_kpi.sh into publish.sh and service.sh (per live hash), added gameplay_judged (scripts/gameplay_clip.mjs
++ gameplay_judge.py), the route bot (scripts/playtest.mjs) and 93 ring encounters. Live f2555c7eb46db8a5:
+playable_classes 3, mob_types 11, bosses 1 (3 defined), equipment_effects 44, encounter_coverage_pct 32.7,
+playtest_pass_pct 85, boss TTK spread 65%, gameplay_judged 28 (judge: blocky enemies, no telegraph decals, no loot
+beams/toasts, sparse hit feedback, boss blows out white on hit).
+
+## 2026-11-08 — Session 43: telegraph decals, loot pillars + toasts, hit feedback, class balance, zone annotation fix
+
+Scores: live f2555 (session 42) market_square_realism **29.62** (28.8 before). Game KPIs on f2555: playable_classes 3,
+mob_types 11, bosses 1, equipment_effects 44, encounter_coverage_pct 32.7, playtest_pass_pct 85, gameplay_judged 28.
+
+Done (4 parallel subagents)
+- **Mobs** (mobs.js): every wind-up now draws a red ground decal (dim fill, pulsing outline, growing fill; rails for
+  line attacks), bolt telegraphs red; hit flash tints toward warm off-white at 0.5 (bosses 0.35) instead of pure white.
+  12 regular types + 3 bosses are already defined; the combat test could not confirm any because the machine was at load
+  ~66 (service's 200-view benchmark render + agents' Chromes) → 0.5 fps → every type timed out. Not a code failure.
+- **Loot/feedback** (items/hud/vfx/sfx/core): rarity-coloured light pillars + ground glow rings on drops, pickup toast
+  in rarity colour, impact flash + sparks per hit, per-damage-type hit sounds, 50 ms hit-stop on crits/big hits,
+  screen-style blending so stacked glows don't clip to white, round particles. test_items 44/44.
+- **Classes**: baseline 2-run playtest: 4/4 classes pass on their own, hexweaver 1/2 (softlock "no route progress"),
+  boss TTK storm 3.9 s vs warden 13.5 s. Nerfed Tempest 45→20/tick, Arc Chain 26→22; buffed Pebble 20→28,
+  Quake 25→35, Monolith 60→130. Not re-measured. playtest.mjs: richer softlock messages; waits poll on a timer.
+- **Zone walls**: the 94 "skipped" walls are all legitimate (66 bespoke, 13 duplicate OSM outlines, 15 stalls).
+  The KPI is held down by unannotated walls (stall roofs ~9.5 pts, bespoke walls ~15 pts) that have no
+  non-held-out reference photos. Fixed the CUP Bookshop conflict from Mapillary 296497208762822: 62.51 → 62.69.
+- publish.sh: WC_SKIP_GAME_KPI=1 skips the 30-min game tests (service.sh runs them for the new live hash).
+
+Learned
+- Game tests time out when the service benchmark render runs alongside them: the game clock caps dt at 0.1 s, so at
+  0.5 fps it barely moves. Test limits should be in game time, not wall time, or service should run them alone.
+- Next annotation work needs fresh Commons/Mapillary photos for Guildhall :8/:9, GSM, St Edward's, Spalding Hostel.
+
+Next
+1. Read the service's game KPIs for the new hash; if mob_types still times out, make test_mobs limits game-time based.
+2. Hexweaver softlock: use the new message; probably no line of sight with single-target darts.
+3. Re-run gameplay_judged; replace the blocky mob primitives with better procedural models (judge's main complaint).
+4. Photo-sourced annotations for unannotated zone walls; ring-1 work.

@@ -122,7 +122,7 @@ function installBot(route, runIdx) {
     if (bot.stuckT > 2) {
       const moved = bot.lastPos ? Math.hypot(P.x - bot.lastPos.x, P.y - bot.lastPos.y) : 9;
       bot.lastPos = { x: P.x, y: P.y }; bot.stuckT = 0;
-      if (moved < 0.5) { bot.replans++; P.keys.add('Space'); setGoal(G.x, G.y, G.tol); if (bot.replans > 8) bot.fail = 'softlock: no route progress'; }
+      if (moved < 0.5) { bot.replans++; P.keys.add('Space'); setGoal(G.x, G.y, G.tol); if (bot.replans > 8) bot.fail = `softlock: no route progress (leg ${bot.leg} ${route[bot.leg]}, at ${P.x.toFixed(1)},${P.y.toFixed(1)},${P.z.toFixed(1)}, goal ${G.x.toFixed(1)},${G.y.toFixed(1)}, path ${bot.path?.length ?? 0}, engaged ${[...bot.engaged.keys()].map(m => m.type.id).join('/') || 'none'})`; }
       else bot.replans = 0;
     }
     return false;
@@ -228,9 +228,12 @@ let pageErrorsTotal = 0;
 try {
   const ctx0 = await browser.createBrowserContext();
   const probe = await ctx0.newPage();
+  probe.on('pageerror', e => log('probe pageerror:', String(e.message || e).slice(0, 300)));
+  probe.on('console', m => { if (m.type() === 'error') log('probe console error:', m.text().slice(0, 300)); });
   await probe.goto(URL0, { waitUntil: 'domcontentloaded' });
   await probe.waitForFunction('window.__walkReady === true', { timeout: 120000 });
-  await probe.waitForFunction('window.__game && window.__game.caster && window.__game.mobSystem && window.__game.items', { timeout: 30000 });
+  await probe.waitForFunction('window.__game && window.__game.caster && window.__game.mobSystem && window.__game.items', { timeout: 30000, polling: 250 })
+    .catch(async e => { log('probe state:', await probe.evaluate(() => JSON.stringify({ game: !!window.__game, caster: !!window.__game?.caster, mobs: !!window.__game?.mobSystem, items: !!window.__game?.items, err: window.__gameError ? String(window.__gameError) : null }))); throw e; });
   const classData = await probe.evaluate(() => Object.fromEntries(Object.entries(window.__game.caster.classes).map(([id, c]) => [id, {
     spells: c.spells.length, movement: c.spells.some(s => s.kind === 'blink'), ultimate: c.spells.some(s => s.ult),
     talentChoices: (c.talents || []).reduce((n, t) => n + t.length, 0), talentTiers: (c.talents || []).length }])));
@@ -251,7 +254,7 @@ try {
         await page.evaluate(() => { try { localStorage.clear(); } catch {} });
         await page.goto(URL0, { waitUntil: 'domcontentloaded' });
         await page.waitForFunction('window.__walkReady === true', { timeout: 120000 });
-        await page.waitForFunction('window.__game && window.__game.caster && window.__game.mobSystem && window.__game.items', { timeout: 120000 });
+        await page.waitForFunction('window.__game && window.__game.caster && window.__game.mobSystem && window.__game.items', { timeout: 120000, polling: 250 });
         await page.evaluate(c => { const g = window.__game; g.caster.setClass(c); g.save.cls = c; g.persist(); g.paused = false; }, cls);
         // wait for the tiles along the route to stream in around the start
         await page.evaluate(() => window.__player.teleport(-108.1, 93.97));

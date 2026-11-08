@@ -80,8 +80,18 @@ export class Game {
 
   add(system) { this.systems.push(system); return system; }
 
+  // --- hit-stop: briefly dip the game timescale (crits / big hits). Real-time duration; re-triggers are rate-limited
+  // so a burst of crits cannot stall combat.
+  hitStop(dur = 0.05, scale = 0.1) {
+    const now = performance.now() / 1000;
+    if (now - (this._hsAt ?? -1) < 0.22) return;
+    this._hsAt = now; this.hitStopLeft = Math.max(this.hitStopLeft || 0, dur); this.hitStopScale = scale;
+  }
+
   update(dt) {
-    dt = Math.min(dt, 0.1); this.time += dt;
+    dt = Math.min(dt, 0.1);
+    if (this.hitStopLeft > 0) { const raw = dt; this.hitStopLeft -= raw; dt = raw * (this.hitStopScale ?? 0.1); }
+    this.time += dt;
     const s = this.stats, p = this.player;
     s.mana = Math.min(s.maxMana, s.mana + s.manaRegen * dt);
     if (s.hp > 0) s.hp = Math.min(s.maxHp, s.hp + s.hpRegen * dt);

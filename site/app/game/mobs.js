@@ -40,6 +40,7 @@ const BASE = {
   wingMat: new THREE.MeshStandardMaterial({ color: 0x6f6c66, roughness: 1, flatShading: true, side: THREE.DoubleSide }),
 };
 const decalMat = (c) => new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: 0.5, depthWrite: false, side: THREE.DoubleSide, polygonOffset: true, polygonOffsetFactor: -4 });
+const HIT_TINT = new THREE.Color(0xffd8b0);
 const boltMats = {};
 const boltMat = c => boltMats[c] ||= new THREE.MeshBasicMaterial({ color: c });
 
@@ -523,21 +524,32 @@ class MobSystem {
   }
 
   // --- telegraphs: ground decals (ring / filled disc that grows, or a strip)
+  // session 43: every wind-up telegraph is a clear red ground decal (bright outline + dim area + growing fill),
+  // drawn over the ground (depthTest off, high renderOrder) so it can't be hidden in the terrain mesh
   decal(kind, x, y, z, color, a) {
-    const mat = decalMat(color);
-    const grp = new THREE.Group(); grp.position.set(x, z + 0.06, -y); this.root.add(grp);
+    const mat = decalMat(0xff2010), edgeMat = decalMat(0xff3020), areaMat = decalMat(0xb00000);
+    for (const m of [mat, edgeMat, areaMat]) m.depthTest = false;
+    edgeMat.opacity = 0.9; areaMat.opacity = 0.18;
+    const grp = new THREE.Group(); grp.position.set(x, z + 0.08, -y); grp.renderOrder = 20; this.root.add(grp);
+    const add = (geo, m, order) => { const o = new THREE.Mesh(geo, m); o.renderOrder = order; grp.add(o); return o; };
     if (kind === 'ring') {
-      const edge = new THREE.Mesh(G.ring, mat); edge.scale.setScalar(a.r); grp.add(edge);
-      const fill = new THREE.Mesh(G.disc, mat); fill.scale.setScalar(0.01); grp.add(fill);
-      return { grp, mat, fill, r: a.r, kind };
+      add(G.disc, areaMat, 20).scale.setScalar(a.r);
+      add(G.ring, edgeMat, 22).scale.setScalar(a.r);
+      const fill = add(G.disc, mat, 21); fill.scale.setScalar(0.01);
+      return { grp, mat, edgeMat, areaMat, fill, r: a.r, kind };
     }
-    const strip = new THREE.Mesh(G.rect, mat); strip.scale.set(a.w, 1, a.len); grp.add(strip);
-    const fill = new THREE.Mesh(G.rect, mat); fill.scale.set(a.w * 0.9, 1, 0.01); grp.add(fill);
+    add(G.rect, areaMat, 20).scale.set(a.w, 1, a.len);
+    const e = 0.12;   // outline: two side rails + end bar
+    add(G.rect, edgeMat, 22).scale.set(e, 1, a.len); grp.children.at(-1).position.x = -a.w / 2;
+    add(G.rect, edgeMat, 22).scale.set(e, 1, a.len); grp.children.at(-1).position.x = a.w / 2;
+    add(G.rect, edgeMat, 22).scale.set(a.w, 1, e); grp.children.at(-1).position.z = a.len - e;
+    const fill = add(G.rect, mat, 21); fill.scale.set(a.w * 0.9, 1, 0.01);
     grp.rotation.y = a.yaw;
-    return { grp, mat, fill, len: a.len, w: a.w, kind };
+    return { grp, mat, edgeMat, areaMat, fill, len: a.len, w: a.w, kind };
   }
   setDecal(d, f) {   // f = wind-up progress 0..1
-    d.mat.opacity = 0.25 + 0.45 * f;
+    d.mat.opacity = 0.35 + 0.4 * f;
+    if (d.edgeMat) d.edgeMat.opacity = 0.65 + 0.35 * Math.abs(Math.sin(f * Math.PI * (2 + 4 * f)));   // pulses faster near the strike
     if (d.kind === 'ring') d.fill.scale.setScalar(Math.max(0.01, d.r * f));
     else d.fill.scale.set(d.w * 0.9, 1, Math.max(0.01, d.len * f));
   }
@@ -552,7 +564,7 @@ class MobSystem {
       return true;
     } });
   }
-  killDecal(d) { this.root.remove(d.grp); d.mat.dispose(); }
+  killDecal(d) { this.root.remove(d.grp); d.mat.dispose(); d.edgeMat?.dispose(); d.areaMat?.dispose(); }
   clearTelegraph(mob) { for (const d of mob.telegraph || []) this.killDecal(d); mob.telegraph = null; }
 
   // --- per-frame
@@ -603,7 +615,8 @@ class MobSystem {
     mob.flashT = Math.max(0, mob.flashT - dt);
     const glow = mob.state === 'windup' ? 0.4 + 0.6 * Math.min(1, 1 - mob.stateT / mob.windupEff) : 0;
     mob.mats.forEach((c, i) => {
-      if (mob.flashT > 0) { c.emissive.setRGB(1, 1, 1); c.emissiveIntensity = 1.2; }
+      // session 43: hit flash is a capped warm tint over the material's own colour, not a pure-white blowout
+      if (mob.flashT > 0) { c.emissive.copy(c.color).lerp(HIT_TINT, 0.5); c.emissiveIntensity = mob.boss ? 0.35 : 0.5; }
       else if (glow > 0) { c.emissive.setHex(T.color); c.emissiveIntensity = glow * (0.6 + 0.4 * Math.sin(mob.t * 30)); }
       else { c.emissive.copy(mob.baseEmissive[i].c); c.emissiveIntensity = mob.baseEmissive[i].i; }
     });

@@ -7,7 +7,8 @@ cd "$(dirname "$0")/.."
 git diff --quiet HEAD -- site scripts || { echo "commit first: uncommitted changes in site/ or scripts/"; exit 1; }
 .venv/bin/python -I scripts/roof_match.py site   # roof_match_pct, cached per build hash
 # game KPIs (mob/item/class tests + route bot), cached per build hash as data/benchmark/scores/<hash>_game.json
-scripts/game_kpi.sh || echo "game_kpi.sh failed (service.sh retries for the live hash)"
+# WC_SKIP_GAME_KPI=1: leave it to service.sh (runs it for every new live hash) when a session is short of time
+[ -n "${WC_SKIP_GAME_KPI:-}" ] || scripts/game_kpi.sh || echo "game_kpi.sh failed (service.sh retries for the live hash)"
 TAG="world-$(date -u +%Y%m%d-%H%M)"
 tar -czf /tmp/world.tar.gz -C site manifest.json landmarks.json tiles collision trees objects facades markings zone cityfac
 ls -lh /tmp/world.tar.gz
