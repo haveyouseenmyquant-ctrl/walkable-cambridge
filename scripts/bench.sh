@@ -27,6 +27,8 @@ if [ ! -f "$OUT" ]; then
     wait
   done
   [ "$(ls "$R" | wc -l)" -ge 200 ] || { echo "renders incomplete ($(ls "$R" | wc -l)/200)" >&2; exit 1; }
+  # session 44: the live build can change while rendering (a publish mid-run); never cache mixed renders
+  [ "$(.venv/bin/python -I scripts/build_hash.py "$SRC")" = "$HASH" ] || { rm -rf "$R"; echo "build changed during render" >&2; exit 1; }
   .venv/bin/python -I scripts/photo_score.py $B/photos "$R" --out "$OUT"
 fi
 # judged_realism (50 blind A/B views) and visual_quality (30 views, rubric): Claude vision judge, scripts/judge.py
