@@ -1,0 +1,131 @@
+diff --git a/scripts/build.py b/scripts/build.py
+index f047920..9fb1bd2 100644
+--- a/scripts/build.py
++++ b/scripts/build.py
+@@ -23,7 +23,7 @@ import rasterio
+ from pyproj import Transformer
+ from rasterio.features import geometry_mask, rasterize
+ from rasterio.windows import from_bounds
+-from scipy.ndimage import binary_erosion, distance_transform_edt, map_coordinates, median_filter
++from scipy.ndimage import binary_erosion, binary_opening, distance_transform_edt, map_coordinates, median_filter
+ from shapely import STRtree
+ from shapely.geometry import LineString, MultiPolygon, Point, Polygon, box, mapping
+ from shapely.ops import polygonize, unary_union
+@@ -51,6 +51,12 @@ COLORS = {S_ROAD: (0.32, 0.32, 0.34), S_PAVE: (0.62, 0.60, 0.56), S_GRASS: (0.33
+ GRASS = {"grass", "meadow", "recreation_ground", "village_green", "park", "garden", "pitch", "common",
+          "grassland", "scrub", "wood", "forest", "cemetery", "allotments", "playground", "golf_course",
+          "heath", "orchard", "nature_reserve"}
++SURF_CLASS = {"asphalt": S_ROAD, "tarmac": S_ROAD, "chipseal": S_ROAD,
++              "sett": S_COURT, "cobblestone": S_COURT, "unhewn_cobblestone": S_COURT, "cobblestone:flattened": S_COURT,
++              "paving_stones": S_PAVE, "paved": S_PAVE, "concrete": S_PAVE, "concrete:plates": S_PAVE, "stone": S_PAVE,
++              "gravel": S_EARTH, "fine_gravel": S_EARTH, "compacted": S_EARTH, "dirt": S_EARTH, "ground": S_EARTH,
++              "unpaved": S_EARTH, "grass": S_GRASS}
++GROUND_DEFAULT = S_PAVE
+ PAVED = {"square", "parking", "marketplace", "pedestrian", "plaza"}
+ 
+ 
+@@ -228,6 +234,7 @@ def add_prism(m, poly, z0, z1, color, roof_color, top=True, bottom=False):
+ 
+ ROOF_CELL = 8.0       # roof heightfield: coarsest quadtree cell (m)
+ ROOF_MIN = 1.0        # finest cell (the LiDAR pixel)
++CANOPY_PEN = float(os.environ.get("WC_CANOPY_PEN", "0"))   # m; 0 = off (session 17: neutral on photo_match, roof_match 92.11 -> 84.56)
+ ROOF_TOL = 0.25      # split a cell while the roof deviates (RMS) more than this from its two-triangle fit (m)
+ 
+ 
+@@ -420,7 +427,7 @@ def main():
+             if t.get("area") == "yes" or t.get("area:highway"):
+                 g = way_area(w, nodes)
+                 if g is not None:
+-                    paved.append(g)
++                    paved.append((g, t))
+         g = None
+         if "building" in t and t["building"] != "no":
+             g = way_area(w, nodes)
+@@ -442,7 +449,7 @@ def main():
+         elif t.get("place") == "square" or t.get("amenity") in PAVED:
+             g = way_area(w, nodes)
+             if g is not None:
+-                paved.append(g)
++                paved.append((g, t))
+     for r in rels:
+         t = r.get("tags", {})
+         if t.get("type") not in ("multipolygon", "building", None):
+@@ -462,7 +469,7 @@ def main():
+         elif t.get("place") == "square" or t.get("amenity") in PAVED or t.get("highway") == "pedestrian":
+             g = rel_area(r, ways, nodes)
+             if g is not None:
+-                paved.append(g)
++                paved.append((g, t))
+     for n in pnodes:
+         t = n["tags"]
+         if "building" in t and t["building"] != "no":
+@@ -477,26 +484,40 @@ def main():
+     DSM = dsm_r.read(1).astype("f8")
+     tf = dtm_r.transform
+     LEFT, TOP = tf.c, tf.f
++    # tree canopy over roofs (session 17): the laser passes through foliage, so first return - last return > CANOPY_PEN
++    # (NLP 2023, same grid) in blobs of at least 3x3 m. Single-pixel lines (eaves, wall tops) are opened away.
++    F23 = rasterio.open(os.path.join(ROOT, "data/lidar/nlp2023_first_return_dsm_1m.tif")).read(1).astype("f8")
++    L23 = rasterio.open(os.path.join(ROOT, "data/lidar/nlp2023_dsm_1m.tif")).read(1).astype("f8")
++    CANOPY = binary_opening((F23 > -100) & (L23 > -100) & (F23 - L23 > CANOPY_PEN), np.ones((3, 3), bool)) if CANOPY_PEN else np.zeros(DTM.shape, bool)
++    del F23, L23
+ 
+     def dtm_at(E, N):
+         return map_coordinates(DTM, [TOP - np.asarray(N) - 0.5, np.asarray(E) - LEFT - 0.5], order=1, mode="nearest")
+ 
+     # ---- surface class raster (1 m, same grid as the DTM); later layers win
+     shp = DTM.shape
+-    cls = np.full(shp, S_COURT, np.uint8)   # default: paved urban ground (yards, forecourts)
++    # session 17: ground material from the OSM surface tag. Before, all unmapped ground and every square/car park was
++    # S_COURT (drawn as cobbles), so tarmac roads, yards and verges showed cobbles. Cobbles now only where OSM says so.
++    cls = np.full(shp, GROUND_DEFAULT, np.uint8)   # default: paved urban ground (yards, forecourts)
+ 
+     def burn(geoms, val):
+         geoms = [mapping(g) for g in geoms if g is not None and not g.is_empty]
+         if geoms:
+             rasterize([(g, val) for g in geoms], out=cls, transform=tf, all_touched=False)
+ 
++    def by_surface(items, default):
++        """Burn (geometry, tags) items, each with the class of its surface tag (or default), in a fixed order."""
++        for val in (S_ROAD, S_PAVE, S_EARTH, S_GRASS, S_COURT):
++            burn([g for g, t in items if SURF_CLASS.get(t.get("surface"), default) == val], val)
++
+     burn(grass, S_GRASS)
+-    burn(paved, S_COURT)
+-    burn([ln.buffer(ROAD_HALF[t["highway"]]) for ln, t in road_lines if t["highway"] in ROAD_HALF and t["highway"] not in ("pedestrian", "track")], S_ROAD)
+-    burn([ln.buffer(ROAD_HALF[t["highway"]]) for ln, t in road_lines if t["highway"] in ("pedestrian",)], S_PAVE)
++    by_surface([(g, t) for g, t in paved], S_PAVE)
++    by_surface([(g, t) for g, t in paved if t.get("amenity") in ("parking",) and "surface" not in t], S_ROAD)
++    by_surface([(ln.buffer(ROAD_HALF[t["highway"]]), t) for ln, t in road_lines if t["highway"] in ROAD_HALF and t["highway"] not in ("pedestrian", "track")], S_ROAD)
++    by_surface([(ln.buffer(ROAD_HALF[t["highway"]]), t) for ln, t in road_lines if t["highway"] in ("pedestrian",)], S_PAVE)
+     burn([ln.buffer(1.0) for ln, t in walk_lines if t["highway"] in ("footway", "cycleway", "path", "track")
+           and t.get("surface") in ("dirt", "earth", "ground", "grass", "gravel", "fine_gravel", "compacted", "unpaved")], S_EARTH)
+-    burn([ln.buffer(1.0) for ln, t in walk_lines if t["highway"] in ("footway", "cycleway", "path")
++    by_surface([(ln.buffer(1.0), t) for ln, t in walk_lines if t["highway"] in ("footway", "cycleway", "path")
+           and t.get("surface") not in ("dirt", "earth", "ground", "grass", "gravel", "fine_gravel", "compacted", "unpaved")], S_PAVE)
+     burn([ln.buffer(1.0) for ln, t in walk_lines if t["highway"] == "steps"], S_STEPS)
+     burn(water, S_WATER)
+@@ -522,17 +543,18 @@ def main():
+         r1, c1 = min(r0 + int(win.height), shp[0]), min(c0 + int(win.width), shp[1])
+         dmed = dmin = p95 = roof = None
+         if r1 > r0c and c1 > c0c:
+-            a = DTM[r0c:r1, c0c:c1]; s = DSM[r0c:r1, c0c:c1]
++            a = DTM[r0c:r1, c0c:c1]; s = DSM[r0c:r1, c0c:c1]; cn = CANOPY[r0c:r1, c0c:c1]
+             wtf = rasterio.transform.from_origin(LEFT + c0c, TOP - r0c, 1, 1)
+             m = geometry_mask([mapping(g)], a.shape, wtf, invert=True)
+             if m.sum() == 0:
+                 m = geometry_mask([mapping(g)], a.shape, wtf, invert=True, all_touched=True)
+             if m.sum():
+                 dmed, dmin = float(np.median(a[m])), float(a[m].min())
+-                p95 = float(np.percentile(s[m] - a[m], 95))
+-                if m.sum() >= 6:   # roof surface: DSM inside the footprint, spread outward, chimneys filtered
+-                    mi = binary_erosion(m, iterations=1)   # eave pixels mix roof and street: spread inner pixels out
+-                    src = m  # EXP
++                src = m & ~cn   # roof pixels not under tree canopy
++                if src.sum() < max(6, 0.3 * m.sum()):
++                    src = m     # mostly under trees (or a tree-shaped roof): keep the DSM as it is
++                p95 = float(np.percentile(s[src] - a[src], 95))
++                if m.sum() >= 6:   # roof surface: DSM inside the footprint, canopy pixels filled from the nearest roof pixel
+                     _, (ii, jj) = distance_transform_edt(~src, return_indices=True)
+                     R = s[ii, jj]   # session 16: no 3x3 median, chimneys and ridges stay sharp
+                     q10, q90 = np.percentile(R[src], [10, 90])

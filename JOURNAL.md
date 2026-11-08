@@ -532,3 +532,40 @@ Next
 2. Facade coverage in the inner ring (real_facade_pct is 5.7 overall): synthetic per-building facades where there is
    no photo, centre first.
 3. finished_radius_m: roof_match now passes everywhere; facades and judged_realism are the blockers.
+
+## 2026-11-08 — Session 17: canopy-over-roof filter and OSM ground surfaces, both neutral, not shipped
+
+Done
+- Canopy filter in build.py (`WC_CANOPY_PEN`, off by default): canopy = NLP 2023 first return − last return > 1 m,
+  opened with a 3×3 m kernel (drops eave lines). Inside a footprint those pixels are filled from the nearest
+  non-canopy roof pixel. Checked by eye on 8 affected buildings (top-down DSM with the mask): every blob is a real
+  tree crown over the footprint.
+  - roof_match_pct 92.11 → **84.56** (156 buildings fail, none gain): the KPI compares with the DSM, which includes
+    the crowns. photo_match on the 67 views ≤ 520 m: **23.52 → 23.53** (3 views moved > 1). Session 16's "red spikes"
+    view (214764576744027) did not change, so those spikes are not canopy-in-footprint.
+  - Kept the code with the filter off (the GLBs come out byte-identical to the live build). Asked Gaspard (tell-owner)
+    whether roof_match may leave out foliage pixels.
+- Ground materials from the OSM `surface` tag: the default ground and every square/car park were class S_COURT, which
+  draws the cobblestone texture. Changed so only mapped sett/cobblestone gets cobbles (3,261 m²), asphalt goes to tarmac,
+  gravel to gravel, the default to paving. photo_match on the same 67 views: **23.52 → 23.40** (2 better > 1, 8 worse > 1).
+  Not shipped; the diff is in docs/experiments/session17_canopy_and_ground.patch. Side-by-side:
+  docs/ground_session17.jpg (photo | live | surfaces; photos Mapillary CC-BY-SA 4.0, ids 250189876888232, 577055006604384).
+- Live site unchanged (build c46db5cb1e141ed6). service.sh was benchmarking it during the session.
+
+Learned
+- The tarmac texture smears into a flat grey at grazing angles, and DINOv2 scores it below the busy cobble texture
+  even where the real path is tarmac (bottom row of the side-by-side). The `pave` texture (pavement_02) also looks
+  like setts at eye level. Before ground surfaces can win, the ground textures themselves need fixing: anisotropic
+  sampling, a real UK tarmac with aggregate and patching, York-stone flags. That's a texture job, not a classification job.
+- In view 250189876888232 the camera looks into a photo-facade quad that shows the whole street: a facade piece placed
+  where the real view is open road. Facade pieces that contain mostly road or sky should be rejected.
+- Benchmark A/B noise: the 67-view mean moves about ±0.1 between runs with no change in the world. Per-view moves
+  under ~2 points are noise.
+
+Next
+1. Facade quality: reject pieces whose photo content is mostly road, cars or sky (segmentation or a simple check
+   for the colour of the lower band), then fill the gaps with per-building synthetic facades, centre first.
+2. Ground textures: sharper tarmac (anisotropy 16, a higher-detail asset), York stone flags for `pave`; then re-try
+   the surface patch on top.
+3. Wait for Gaspard on the canopy question; if yes, change roof_match (pixels with first − last return > 1 m excluded)
+   and switch the filter on.

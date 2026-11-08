@@ -23,7 +23,7 @@ import rasterio
 from pyproj import Transformer
 from rasterio.features import geometry_mask, rasterize
 from rasterio.windows import from_bounds
-from scipy.ndimage import binary_erosion, distance_transform_edt, map_coordinates, median_filter
+from scipy.ndimage import binary_erosion, binary_opening, distance_transform_edt, map_coordinates, median_filter
 from shapely import STRtree
 from shapely.geometry import LineString, MultiPolygon, Point, Polygon, box, mapping
 from shapely.ops import polygonize, unary_union
@@ -228,6 +228,9 @@ def add_prism(m, poly, z0, z1, color, roof_color, top=True, bottom=False):
 
 ROOF_CELL = 8.0       # roof heightfield: coarsest quadtree cell (m)
 ROOF_MIN = 1.0        # finest cell (the LiDAR pixel)
+# canopy filter threshold (m), 0 = off. Session 17 at 1.0: photo_match 23.52 -> 23.53 (67 views <= 520 m), but
+# roof_match 92.11 -> 84.56, because that KPI compares with the DSM including tree crowns. Off until Gaspard decides.
+CANOPY_PEN = float(os.environ.get("WC_CANOPY_PEN", "0"))
 ROOF_TOL = 0.25      # split a cell while the roof deviates (RMS) more than this from its two-triangle fit (m)
 
 
@@ -477,6 +480,14 @@ def main():
     DSM = dsm_r.read(1).astype("f8")
     tf = dtm_r.transform
     LEFT, TOP = tf.c, tf.f
+    # tree canopy over roofs (session 17, off by default): the laser passes through foliage, so first return - last
+    # return > CANOPY_PEN (NLP 2023, same grid) in blobs of at least 3x3 m; single-pixel lines (eaves) are opened away.
+    CANOPY = np.zeros(DTM.shape, bool)
+    if CANOPY_PEN:
+        F23 = rasterio.open(os.path.join(ROOT, "data/lidar/nlp2023_first_return_dsm_1m.tif")).read(1).astype("f8")
+        L23 = rasterio.open(os.path.join(ROOT, "data/lidar/nlp2023_dsm_1m.tif")).read(1).astype("f8")
+        CANOPY = binary_opening((F23 > -100) & (L23 > -100) & (F23 - L23 > CANOPY_PEN), np.ones((3, 3), bool))
+        del F23, L23
 
     def dtm_at(E, N):
         return map_coordinates(DTM, [TOP - np.asarray(N) - 0.5, np.asarray(E) - LEFT - 0.5], order=1, mode="nearest")
@@ -522,17 +533,18 @@ def main():
         r1, c1 = min(r0 + int(win.height), shp[0]), min(c0 + int(win.width), shp[1])
         dmed = dmin = p95 = roof = None
         if r1 > r0c and c1 > c0c:
-            a = DTM[r0c:r1, c0c:c1]; s = DSM[r0c:r1, c0c:c1]
+            a = DTM[r0c:r1, c0c:c1]; s = DSM[r0c:r1, c0c:c1]; cn = CANOPY[r0c:r1, c0c:c1]
             wtf = rasterio.transform.from_origin(LEFT + c0c, TOP - r0c, 1, 1)
             m = geometry_mask([mapping(g)], a.shape, wtf, invert=True)
             if m.sum() == 0:
                 m = geometry_mask([mapping(g)], a.shape, wtf, invert=True, all_touched=True)
             if m.sum():
                 dmed, dmin = float(np.median(a[m])), float(a[m].min())
-                p95 = float(np.percentile(s[m] - a[m], 95))
-                if m.sum() >= 6:   # roof surface: DSM inside the footprint, spread outward, chimneys filtered
-                    mi = binary_erosion(m, iterations=1)   # eave pixels mix roof and street: spread inner pixels out
-                    src = m  # EXP
+                src = m & ~cn   # roof pixels not under tree canopy (all of m when the filter is off)
+                if src.sum() < max(6, 0.3 * m.sum()):
+                    src = m     # mostly under trees: keep the DSM as it is
+                p95 = float(np.percentile(s[src] - a[src], 95))
+                if m.sum() >= 6:   # roof surface: DSM inside the footprint, canopy pixels filled from the nearest roof pixel
                     _, (ii, jj) = distance_transform_edt(~src, return_indices=True)
                     R = s[ii, jj]   # session 16: no 3x3 median, chimneys and ridges stay sharp
                     q10, q90 = np.percentile(R[src], [10, 90])
