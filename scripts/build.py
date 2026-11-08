@@ -354,6 +354,78 @@ def add_lidar_roof(m, poly, z0, zf, color, roof_color, bottom=False):
     return True
 
 
+# session 27 A/B (25 views): 18.19 -> 17.92 with planes; off by default
+ROOF_PLANES = os.environ.get("WC_ROOF_PLANES", "0") == "1"
+PLANE_TOL, PLANE_MAX, PLANE_OUT = 0.25, 8, 0.5   # RANSAC inlier band, planes per roof, residual beyond which a pixel keeps the DSM (m)
+PLANE_EDGE = float(os.environ.get("WC_PLANE_EDGE", "1.0"))   # unexplained edge pixels further off their plane keep the DSM (m)
+PLANE_MIN_SHARE = 0.5   # planes must explain at least this share of the footprint pixels
+PLANE_STATS = []
+
+
+def roof_planes(R, m, rng):
+    """Session 27: snap the roof heightfield to planes, so ridges, hips and eaves run straight instead of following
+    the 1 m pixels. Sequential RANSAC finds up to PLANE_MAX planes z = a*col - b*row + c in the footprint's pixels.
+    Pixels a plane explains within PLANE_OUT take its value; unexplained interior pixels (chimneys, towers, spires)
+    keep the DSM; unexplained edge pixels (1 m pixels mixing eave and street) and the pixels outside the footprint take
+    the plane of the nearest explained pixel, unless the DSM is more than PLANE_EDGE off it. Returns the new R, or
+    None if the planes explain less than PLANE_MIN_SHARE of the roof."""
+    mi = binary_erosion(m, np.ones((3, 3), bool))   # interior; the rest of m is the edge ring
+    ii, jj = np.nonzero(m)
+    P = np.c_[jj, -ii, np.ones(len(ii))].astype(float)
+    z = R[ii, jj].astype(float)
+    n = len(z)
+    if n < 12:
+        return None
+    left = np.ones(n, bool)
+    cand = []
+    for _ in range(PLANE_MAX):
+        idx = np.nonzero(left)[0]
+        if len(idx) < max(6, 0.03 * n):
+            break
+        S = rng.choice(idx, (200, 3))
+        A = P[S]   # 200 x 3 x 3
+        ok = np.abs(np.linalg.det(A)) > 1e-6
+        if not ok.any():
+            break
+        Wc = np.linalg.solve(A[ok], z[S[ok]][..., None])[..., 0]
+        Wc = Wc[np.hypot(Wc[:, 0], Wc[:, 1]) <= 2.0]   # steeper than ~63 degrees: not a roof face
+        if not len(Wc):
+            break
+        cnt = (np.abs(P[idx] @ Wc.T - z[idx, None]) < PLANE_TOL).sum(0)
+        b = int(cnt.argmax())
+        if cnt[b] < max(6, 0.03 * n):
+            break
+        inl = idx[np.abs(P[idx] @ Wc[b] - z[idx]) < PLANE_TOL]
+        w = np.linalg.lstsq(P[inl], z[inl], rcond=None)[0]
+        cand.append(w)
+        left[np.abs(P @ w - z) < PLANE_TOL] = False
+    if not cand:
+        return None
+    W = np.array(cand)
+    res = np.abs(P @ W.T - z[:, None])
+    lab = res.argmin(1)
+    good = res[np.arange(n), lab] <= PLANE_OUT
+    PLANE_STATS.append((n, len(W), good.mean(), -1, -1))
+    if good.mean() < PLANE_MIN_SHARE:
+        return None
+    L = np.full(R.shape, -1)
+    L[ii[good], jj[good]] = lab[good]
+    _, (ni, nj) = distance_transform_edt(L < 0, return_indices=True)
+    Lf = L[ni, nj]   # nearest planar pixel's plane, everywhere
+    I, J = np.indices(R.shape)
+    out = (W[Lf, 0] * J - W[Lf, 1] * I + W[Lf, 2]).astype(R.dtype)
+    keep = np.zeros(R.shape, bool)
+    bad = ~good & mi[ii, jj]   # unexplained interior pixels keep the DSM; unexplained edge pixels (mixed with the
+    keep[ii[bad], jj[bad]] = True   # street) take the nearest plane, unless they are more than PLANE_EDGE off it
+    keep |= m & ~keep & (L < 0) & (np.abs(out - R) > PLANE_EDGE)   # (a wall top beside a lower roof, a misregistered footprint)
+    out[keep] = R[keep]
+    _, (oi, oj) = distance_transform_edt(~m, return_indices=True)
+    near_keep = ~m & keep[oi, oj]   # outside pixels next to kept pixels follow them (bilinear sampling at the edge)
+    out[near_keep] = out[oi, oj][near_keep]
+    PLANE_STATS[-1] = PLANE_STATS[-1][:3] + (float(np.sqrt(((out - R)[mi] ** 2).mean())), float(np.sqrt(((out - R)[m] ** 2).mean())))
+    return out
+
+
 def roof_field(bd, lo):
     """Height function for a building's LiDAR roof, or None if the roof is (nearly) flat."""
     R = bd.get("roofR")
@@ -590,6 +662,7 @@ def main():
     bdata = []
     rng = np.random.default_rng(1)
     holes_cut = 0
+    rng_planes, n_planes = np.random.default_rng(27), 0
     for oid, g, t in buildings:
         x0, y0, x1, y1 = g.bounds
         win = from_bounds(x0 - 1, y0 - 1, x1 + 1, y1 + 1, tf).round_offsets().round_lengths()
@@ -663,7 +736,15 @@ def main():
                           tone=rng.uniform(-0.06, 0.06)))
         if roof is not None:
             bdata[-1].update(roofR=roof[0], roofM=roof[1], roofO=roof[2], pitched=roof[3])
+            if ROOF_PLANES and roof[3]:
+                Rp = roof_planes(roof[0], roof[1], rng_planes)
+                if Rp is not None:
+                    bdata[-1]["roofR"] = Rp
+                    n_planes += 1
     log(holes_cut, "footprints with LiDAR ground holes")
+    log(n_planes, "pitched roofs fitted with planes")
+    if os.environ.get("WC_PLANE_STATS"):
+        np.save("/tmp/plane_stats.npy", np.array(PLANE_STATS)); sys.exit(0)
     log("building heights done", sum(b["cut"] is not None for b in bdata), "with passages")
 
     lm_extra, lm_entries = build_landmarks(bdata, ways, nodes, DTM, DSM, tf, dtm_at)

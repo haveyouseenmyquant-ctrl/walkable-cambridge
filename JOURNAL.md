@@ -844,3 +844,36 @@ Next
 2. Wikimedia Commons photos of central buildings registered locally for poses (real facade area, centre first).
 3. Synthetic per-building facades for walls with no photo.
 4. Check the benchmark score of b8682f1eb62dea45 at the start of next session (data/benchmark/scores).
+
+## 2026-11-08 — Session 27: plane-fitted roofs tried and not shipped (25-view A/B 18.19 → 17.92)
+
+Done
+- Benchmark of the live build b8682f1eb62dea45 completed (service.sh, resumed renders worked): **photo_match 18.86**,
+  judged_realism 26.2, visual_quality 16.04. It is the first complete score since session 22's build (c527…); the
+  builds in between have none.
+- build.py `roof_planes()` (`WC_ROOF_PLANES`, **off by default**): sequential RANSAC (up to 8 planes, ±0.25 m band)
+  on each pitched roof's DSM pixels; explained pixels snap to their plane, unexplained interior pixels (chimneys,
+  towers) keep the DSM, unexplained edge pixels take the nearest plane unless the DSM is > 1 m off it (`WC_PLANE_EDGE`).
+  3,098 of 3,120 LiDAR roofs fit (median 90 % of pixels explained, interior RMSE 0.12 m). roof_match 93.03 → 92.98.
+- Dead ends on the way, all measured with roof_match on side builds: the lower envelope (min) of planes fits only
+  ~1 % of roofs (most aren't simple gables/hips); snapping every edge pixel to its plane drops roof_match to 65.5
+  (wall tops beside lower roofs were pulled down by up to 8 m).
+- A/B on 25 views (every 8th benchmark view, both arms rendered locally): control **18.19**, planes **17.92**
+  (6 better by > 0.5, 9 worse). Biggest loss: the Mathematical Bridge view (18.8 → 11.0): the stepped wall top beside
+  the bridge became one flat plane that fills the sky. Side-by-side docs/roof_planes_session27.jpg (photo | before |
+  planes; photos Mapillary CC-BY-SA 4.0, ids 506961850425011, 155280259867837, 754779088538115). Not shipped, so the live build is
+  unchanged (b8682f1eb62dea45).
+
+Learned
+- The "jagged red mountains" in outer views are not the eave sawtooth: row 1 of the side-by-side shows the distant
+  terraces equally jagged with plane roofs. Likely causes: each narrow terrace house is fitted separately and the
+  roofs meet with steps, and the walls stop at the lowest roof edge so the roof reads as a saw blade against the sky.
+  Next time look at a top-down/oblique render of one terrace before changing the fit.
+- My Python string-replace edits can fail silently when the target text has changed; check the diff after each one
+  (two side builds this session were identical because of it).
+
+Next
+1. Inspect one jagged terrace (e.g. the row in view 754779088538115's background) from an oblique camera and find the
+   actual cause before another roof change.
+2. Wikimedia Commons photos of central buildings registered locally for poses (real facade area, centre first).
+3. Synthetic per-building facades for walls with no photo.
