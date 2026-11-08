@@ -915,3 +915,40 @@ Next
    side hash). If gi_ao/lighting gain and photo_match stays neutral, make it the High preset's default.
 3. Wikimedia Commons photos of central buildings registered locally for poses (real facade area, centre first).
 4. Synthetic per-building facades for walls with no photo: the centre still shows large blank grey walls.
+
+## 2026-11-08 — Session 29: more Mapillary photos for the facades (real_facade 7.6 → 7.84); window grid re-tested
+
+Done
+- Found that the Mapillary graph API under-returns images for large bbox queries: one 0.0005° cell near King's
+  Parade gave 24 images, the list had 5. `scripts/mapillary_densify.py` re-lists the study area in 0.0005° cells
+  (1,581 queries, 2 min; 0.00025° and 0.000125° cells returned the same set in a spot check). Gain overall was small:
+  10,905 → 11,095 images (82 of the new ones at 200–300 m from GSM). The old list is in mapillary_list.json.bak.
+- Facade re-bake (radius 500, masks.py for the 465 new photos, then bake again): 3,106 pieces from 1,230 photos (was
+  3,009 / 1,172), **real_facade_pct 7.6 → 7.84**. No A/B was run for this (the change only adds or swaps
+  photos on a few walls); the full benchmark of the new build comes from service.sh.
+- Benchmark renders: `window.__player.settled(r)` (main.js) and photo_render.mjs waits for all tiles within 150 m
+  before the shot, which fixes the "ground missing" captures seen in session 28. Checked on 155280259867837 (the view
+  that lost its ground last session): the ground is there.
+- Re-tested the procedural window grid `?win=1` (off since session 10) on session 27's 25 views, with control renders
+  reused: **18.42 → 18.43** on 24 views (one render missing). That is neutral, but single views move a lot:
+  12 better by > 0.5 and 10 worse (+7.3 … −9.9). Real windows (a terraced street) gain, while the Mathematical
+  Bridge and plain college walls lose. Side-by-side docs/windows_session29.jpg (photo | control | windows; photos
+  Mapillary CC-BY-SA 4.0, ids 1866916603482573, 215717297387097, 754779088538115). Stays opt-in.
+- Guardrails on the new build (local, machine loaded): walkable 99.39, buildings 100, street_objects 100, site_errors
+  0, load 5.69 s locally (load average ~20; the live measurement decides). Published (release world-20261108-1053).
+
+Learned
+- Photo coverage is the limit for real facades, not the API listing: only 29 % of street-facing wall within 100 m
+  of GSM has a usable Mapillary view. Further gains in the centre need other photos (Wikimedia Commons, registered
+  locally; COLMAP is not installed) or synthetic per-building facades.
+- A uniform window grid is right for some buildings and wrong for others. A synthetic facade has to be per building
+  (storeys from the LiDAR eave, window bays from the wall length, none on college boundary walls and churches) to
+  keep the gains without the losses.
+- The bottom row of the windows side-by-side shows the "saw-tooth" terrace tops again: the triangular wall-coloured
+  spikes above the eaves on Regent Street/Hills Road terraces.
+
+Next
+1. Per-building synthetic facades: a per-vertex attribute (storey count, bay width, has-shop from OSM, wall type)
+   from build.py; windows only where it says so. A/B on the same 25 views with the window-grid result as reference.
+2. Check the benchmark of the new build (scores/<hash>.json) against b8682's 18.86.
+3. Wikimedia Commons photos of the centre registered locally (install COLMAP via a local build or pycolmap wheel).

@@ -8,7 +8,7 @@ a, b, out = sys.argv[1:4]
 rows = int(sys.argv[4]) if len(sys.argv) > 4 else 3
 pa = json.load(open('/tmp/wc_ab_%s.json' % a))['per_view']
 pb = json.load(open('/tmp/wc_ab_%s.json' % b))['per_view']
-d = sorted(pa, key=lambda k: pb[k] - pa[k])
+d = sorted([k for k in pa if k in pb], key=lambda k: pb[k] - pa[k])
 ids = d[::-1][:rows - 1] + d[:1]   # biggest gains, then the biggest loss
 W, H = 480, 360
 sheet = Image.new('RGB', (3 * W, rows * H))
