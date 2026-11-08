@@ -1,0 +1,67 @@
+{
+ "gameplay_judged": 33.9,
+ "n": 4,
+ "model": "claude-opus-5-5",
+ "hash": "f60a55e197f72b50",
+ "classes": {
+  "hexweaver": {
+   "score": 3.43,
+   "readability_telegraphs": 4.0,
+   "spell_vfx": 3.0,
+   "enemy_animation_variety": 3.0,
+   "hit_feedback": 4.0,
+   "ui_hud_clarity": 5.0,
+   "loot_excitement": 2.0,
+   "polished_arpg_feel": 3.0,
+   "overall": 3
+  },
+  "pyromancer": {
+   "score": 3.29,
+   "readability_telegraphs": 3.0,
+   "spell_vfx": 3.0,
+   "enemy_animation_variety": 3.0,
+   "hit_feedback": 3.0,
+   "ui_hud_clarity": 5.0,
+   "loot_excitement": 3.0,
+   "polished_arpg_feel": 3.0,
+   "overall": 3
+  },
+  "stormcaller": {
+   "score": 3.14,
+   "readability_telegraphs": 4.0,
+   "spell_vfx": 3.0,
+   "enemy_animation_variety": 3.0,
+   "hit_feedback": 3.0,
+   "ui_hud_clarity": 5.0,
+   "loot_excitement": 1.0,
+   "polished_arpg_feel": 3.0,
+   "overall": 3
+  },
+  "warden": {
+   "score": 3.71,
+   "readability_telegraphs": 3.0,
+   "spell_vfx": 4.0,
+   "enemy_animation_variety": 3.0,
+   "hit_feedback": 4.0,
+   "ui_hud_clarity": 5.0,
+   "loot_excitement": 4.0,
+   "polished_arpg_feel": 3.0,
+   "overall": 3.5
+  }
+ },
+ "by_criterion": {
+  "readability_telegraphs": 3.5,
+  "spell_vfx": 3.25,
+  "enemy_animation_variety": 3.0,
+  "hit_feedback": 3.5,
+  "ui_hud_clarity": 5.0,
+  "loot_excitement": 2.5,
+  "polished_arpg_feel": 3.0
+ },
+ "reasons": {
+  "hexweaver": "The best parts are the red ground telegraphs, the visible boss stagger, coloured crit numbers, a readable spell bar with cooldown timers, and a minimap. The spell effects are mostly flat untextured blobs and cones, and the enemies are simple primitive models. Half the clip is empty wandering through bland streets, and none of the 8 drops shows a visible beam, rarity colour or pickup toast.",
+  "pyromancer": "The HUD is clear: health, mana and XP bars, a six-slot spell bar with cooldown numbers, a minimap, and a level-up toast. The bell boss looks distinctive and there's a damage-taken vignette. But the spells are flat translucent orange spheres that cover the view, there are few floating damage numbers and no visible ground telegraphs, and about half the frames show empty streets with no fighting. The green beam is the only sign of loot, with no rarity colours or pickup toasts, and the low-poly flat-shaded scenery is far from commercial polish.",
+  "stormcaller": "The boss fight is the high point: the bell boss has a large red ground telegraph and a red arc warning, and the HUD gives clear HP and mana bars, a 6-slot spell bar with cooldown numbers, and a minimap. Elsewhere the spell effects are small, simple glows and beams, few enemies are visible other than the boss and flat yellow blobs, and the damage numbers are plain with only one crit ('35!') shown. Loot has no visible beams, rarity colours or toasts on screen, and half the clip is empty street, so it feels like a prototype rather than a polished ARPG.",
+  "warden": "The strengths are a clean HUD with HP and mana bars, a spell bar with cooldown numbers and a minimap, plus loud green and magenta loot beams and yellow crit numbers in frames 2\u20134. The big problems are that enemies are rarely on screen (the second half of the clip is empty streets), there are no visible attack telegraphs or ground markers, and the spell effects are simple primitive cones, rings and blobs. The bell boss looks distinctive, but other enemies appear only as small placeholder-like shapes, and there is little sign of hit-stop or knockback."
+ }
+}

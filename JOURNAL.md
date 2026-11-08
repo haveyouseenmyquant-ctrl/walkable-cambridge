@@ -1385,3 +1385,15 @@ Next
 2. Hexweaver softlock: use the new message; probably no line of sight with single-target darts.
 3. Re-run gameplay_judged; replace the blocky mob primitives with better procedural models (judge's main complaint).
 4. Photo-sourced annotations for unannotated zone walls; ring-1 work.
+
+## 2026-11-09 — Session 45: publish session 44's mobs; encounters outward; ring-1 annotations
+
+Start state: session 44 (mob rework: 12 regular types with procedural models and animations, 3 bosses, test fixes)
+had been left uncommitted. Because local site/ differed from the live build, service.sh never ran game_kpi.sh for live
+400ff, so measure.sh printed every game KPI as 0. The local build (f60a55) already had its game KPIs cached:
+playable_classes 4, mob_types 12, bosses 3, equipment_effects 44, playtest_pass_pct 100, boss TTK spread 33.2%.
+Market Square realism on 400ff: 28.12 (29.62 on f2555).
+
+Done
+- Committed session 44 and published world-20261108-2308. Live hash **f60a55e197f72b50** (verified), so measure.sh
+  now shows the real game KPIs. Ran gameplay_kpi.sh for f60a55 by hand.

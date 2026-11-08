@@ -44161,9 +44161,10 @@
     211.18
    ],
    "ground_z": 8.69,
-   "eave_z": 15.47,
-   "height": 6.78,
-   "dist_centre": 172.0
+   "eave_z": 19.39,
+   "height": 10.7,
+   "dist_centre": 172.0,
+   "eave_fixed": true
   },
   {
    "id": "way/1288648591:3",
