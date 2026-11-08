@@ -120,6 +120,115 @@ const MODELS = {
     p.legR = pivot(p.body, 0.25, 0.65, 0); mesh(G.cyl, m('iron'), 0.18, 0.65, 0.18, 0, -0.33, 0, p.legR);
     return { group: g, parts: p };
   },
+  // --- session 41 regulars (original Cambridge wizard folklore)
+  river_wraith(m) {   // a drowned shape of Cam water: hooded, tapering to a point, river-weed trailing from its sleeves
+    const g = new THREE.Group(), p = {};
+    p.body = pivot(g, 0, 0, 0);
+    p.robe = mesh(G.cone, m('water'), 0.95, 1.9, 0.95, 0, -0.15, 0, p.body); p.robe.rotation.x = Math.PI;
+    p.head = pivot(p.body, 0, 0.95, 0);
+    mesh(G.ico, m('water'), 0.62, 0.7, 0.62, 0, 0, 0, p.head);
+    mesh(G.box, BASE.ink, 0.36, 0.3, 0.1, 0, -0.02, 0.26, p.head);                      // hollow under the hood
+    mesh(G.box, BASE.eyeBlue, 0.07, 0.05, 0.04, -0.08, 0.02, 0.32, p.head); mesh(G.box, BASE.eyeBlue, 0.07, 0.05, 0.04, 0.08, 0.02, 0.32, p.head);
+    p.armL = pivot(p.body, -0.4, 0.6, 0); mesh(G.box, m('water'), 0.16, 0.8, 0.16, 0, -0.38, 0, p.armL);
+    p.armR = pivot(p.body, 0.4, 0.6, 0); mesh(G.box, m('water'), 0.16, 0.8, 0.16, 0, -0.38, 0, p.armR);
+    p.weedL = mesh(G.cone, m('moss'), 0.08, 0.7, 0.08, 0, -1.0, 0, p.armL); p.weedL.rotation.x = Math.PI;
+    p.weedR = mesh(G.cone, m('moss'), 0.08, 0.7, 0.08, 0, -1.0, 0, p.armR); p.weedR.rotation.x = Math.PI;
+    return { group: g, parts: p };
+  },
+  bog_hag(m) {   // a hunched fen-hag in a moss shawl, leaning on a crook that carries a marsh lantern
+    const g = new THREE.Group(), p = {};
+    p.body = pivot(g, 0, 0, 0);
+    p.torso = pivot(p.body, 0, 0.1, 0);
+    mesh(G.cone, m('moss'), 1.1, 1.4, 1.0, 0, 0.7, 0, p.torso);                          // shawl / skirts
+    p.head = pivot(p.torso, 0, 1.4, 0.25);
+    mesh(G.ico, m('bone'), 0.45, 0.45, 0.45, 0, 0, 0, p.head);
+    mesh(G.cone, m('bone'), 0.09, 0.3, 0.09, 0, -0.05, 0.25, p.head).rotation.x = 1.9;   // long nose
+    mesh(G.cone, m('moss'), 0.6, 0.45, 0.6, 0, 0.2, -0.05, p.head);                       // hood
+    mesh(G.box, BASE.bogglow, 0.07, 0.05, 0.04, -0.1, 0.05, 0.2, p.head); mesh(G.box, BASE.bogglow, 0.07, 0.05, 0.04, 0.1, 0.05, 0.2, p.head);
+    p.armR = pivot(p.torso, 0.45, 1.05, 0.1);
+    mesh(G.box, m('moss'), 0.16, 0.55, 0.16, 0, -0.25, 0, p.armR);
+    p.crook = pivot(p.armR, 0, -0.5, 0.15);
+    mesh(G.cyl, m('rope'), 0.07, 2.3, 0.07, 0, 0.6, 0, p.crook);
+    p.lantern = mesh(G.oct, m('bogglow'), 0.28, 0.4, 0.28, 0, 1.85, 0.2, p.crook);
+    p.armL = pivot(p.torso, -0.45, 1.05, 0.1); mesh(G.box, m('moss'), 0.16, 0.55, 0.16, 0, -0.25, 0, p.armL);
+    return { group: g, parts: p };
+  },
+  punt_revenant(m) {   // a gaunt drowned punter in a rotting boater, still carrying his pole
+    const g = new THREE.Group(), p = {};
+    p.body = pivot(g, 0, 0, 0);
+    p.legL = pivot(p.body, -0.16, 1.0, 0); mesh(G.box, m('soot'), 0.16, 1.0, 0.16, 0, -0.5, 0, p.legL);
+    p.legR = pivot(p.body, 0.16, 1.0, 0); mesh(G.box, m('soot'), 0.16, 1.0, 0.16, 0, -0.5, 0, p.legR);
+    p.torso = pivot(p.body, 0, 1.0, 0);
+    mesh(G.box, m('parchment'), 0.55, 0.85, 0.3, 0, 0.45, 0, p.torso);                    // blazer gone pale
+    mesh(G.box, m('bone'), 0.12, 0.4, 0.12, 0, 0.95, 0, p.torso);                         // neck
+    p.head = mesh(G.ico, m('bone'), 0.38, 0.44, 0.38, 0, 1.25, 0, p.torso);
+    mesh(G.cyl, m('rope'), 0.62, 0.04, 0.62, 0, 1.45, 0, p.torso); mesh(G.cyl, m('rope'), 0.36, 0.14, 0.36, 0, 1.52, 0, p.torso);   // boater
+    mesh(G.box, BASE.eyeBlue, 0.06, 0.05, 0.04, -0.08, 1.27, 0.18, p.torso); mesh(G.box, BASE.eyeBlue, 0.06, 0.05, 0.04, 0.08, 1.27, 0.18, p.torso);
+    p.armL = pivot(p.torso, -0.34, 0.8, 0); mesh(G.box, m('bone'), 0.1, 0.75, 0.1, 0, -0.36, 0, p.armL);
+    p.armR = pivot(p.torso, 0.34, 0.8, 0); mesh(G.box, m('bone'), 0.1, 0.75, 0.1, 0, -0.36, 0, p.armR);
+    p.pole = pivot(p.torso, 0.1, 0.25, 0.3);
+    mesh(G.cyl, m('rope'), 0.07, 4.4, 0.07, 0, 0, 0, p.pole).rotation.x = Math.PI / 2;    // pole lies along +Z
+    mesh(G.box, m('iron'), 0.12, 0.12, 0.3, 0, 0, 2.3, p.pole);                           // iron shoe
+    return { group: g, parts: p };
+  },
+  bell_bats(m) {   // a frayed bell-rope sally with a swarm of belfry bats wheeling round it
+    const g = new THREE.Group(), p = {};
+    p.body = pivot(g, 0, 0, 0);
+    p.rope = mesh(G.cyl, m('rope'), 0.06, 1.4, 0.06, 0, 0.2, 0, p.body);
+    p.sally = mesh(G.cyl, m('heraldRed'), 0.2, 0.45, 0.2, 0, -0.35, 0, p.body);          // striped woollen grip
+    p.bats = [];
+    for (let i = 0; i < 5; i++) {
+      const b = pivot(p.body, 0, 0, 0);
+      mesh(G.ico, m('soot'), 0.2, 0.18, 0.26, 0, 0, 0, b);
+      mesh(G.box, BASE.eye, 0.04, 0.03, 0.03, 0, 0.03, 0.12, b);
+      b.wl = pivot(b, -0.06, 0, 0); mesh(G.wing, BASE.wingMat, -0.32, 0.32, 0.32, 0, 0, 0, b.wl);
+      b.wr = pivot(b, 0.06, 0, 0); mesh(G.wing, BASE.wingMat, 0.32, 0.32, 0.32, 0, 0, 0, b.wr);
+      p.bats.push(b);
+    }
+    return { group: g, parts: p };
+  },
+  soot_sprite(m) {   // a puff of chimney soot with ember eyes, wearing a chimney pot for a hat
+    const g = new THREE.Group(), p = {};
+    p.body = pivot(g, 0, 0, 0);
+    p.blob = mesh(G.ico1, m('soot'), 0.6, 0.6, 0.6, 0, 0, 0, p.body);
+    p.pot = mesh(G.cyl, m('heraldRed'), 0.22, 0.32, 0.22, 0, 0.38, 0, p.body);
+    p.eyes = [mesh(G.box, m('ember'), 0.09, 0.09, 0.04, -0.11, 0.05, 0.28, p.body), mesh(G.box, m('ember'), 0.09, 0.09, 0.04, 0.11, 0.05, 0.28, p.body)];
+    p.puffs = [];
+    for (let i = 0; i < 3; i++) p.puffs.push(mesh(G.ico, BASE.smoke, 0.25, 0.25, 0.25, 0, 0, 0, p.body));
+    return { group: g, parts: p };
+  },
+  crest_griffin(m) {   // a college-crest griffin climbed down off its gatehouse: gilt stone, eagle head, lion haunches
+    const g = new THREE.Group(), p = {};
+    p.body = pivot(g, 0, 0.85, 0);
+    mesh(G.box, m('brass'), 0.6, 0.55, 1.2, 0, 0, 0, p.body);
+    mesh(G.box, m('heraldRed'), 0.66, 0.6, 0.12, 0, 0.05, 0.55, p.body);                  // crest shield on the breast
+    p.head = pivot(p.body, 0, 0.45, 0.6);
+    mesh(G.ico, m('brass'), 0.42, 0.42, 0.5, 0, 0, 0, p.head);
+    mesh(G.cone, m('darkstone'), 0.14, 0.32, 0.14, 0, -0.04, 0.3, p.head).rotation.x = 1.9;   // beak
+    mesh(G.box, BASE.eye, 0.06, 0.05, 0.04, -0.12, 0.06, 0.2, p.head); mesh(G.box, BASE.eye, 0.06, 0.05, 0.04, 0.12, 0.06, 0.2, p.head);
+    p.wl = pivot(p.body, -0.25, 0.25, 0.1); mesh(G.wing, BASE.wingMat, -1.0, 1.0, 1.0, 0, 0, 0, p.wl);
+    p.wr = pivot(p.body, 0.25, 0.25, 0.1); mesh(G.wing, BASE.wingMat, 1.0, 1.0, 1.0, 0, 0, 0, p.wr);
+    p.legs = [[-0.22, 0.45], [0.22, 0.45], [-0.22, -0.45], [0.22, -0.45]].map(([x, z]) => { const l = pivot(p.body, x, -0.2, z); mesh(G.box, m('darkstone'), 0.16, 0.65, 0.18, 0, -0.32, 0, l); return l; });
+    p.tail = pivot(p.body, 0, 0.1, -0.6); mesh(G.cone, m('brass'), 0.1, 0.8, 0.1, 0, 0.35, -0.15, p.tail).rotation.x = -0.6;
+    return { group: g, parts: p };
+  },
+  bicycle_golem(m) {   // an abandoned college bicycle grown over with moss until it got up and rode off by itself
+    const g = new THREE.Group(), p = {};
+    p.body = pivot(g, 0, 0, 0);
+    p.wheels = [0.6, -0.6].map(z => { const w = pivot(p.body, 0, 0.5, z); mesh(G.torus, m('iron'), 0.95, 0.95, 0.95, 0, 0, 0, w).rotation.y = Math.PI / 2; mesh(G.box, m('brass'), 0.04, 0.9, 0.05, 0, 0, 0, w); return w; });
+    p.frame = pivot(p.body, 0, 0.5, 0);
+    mesh(G.box, m('brass'), 0.06, 0.06, 1.2, 0, 0.35, 0, p.frame);
+    mesh(G.box, m('brass'), 0.06, 0.6, 0.06, 0, 0.25, 0.55, p.frame);                     // fork
+    p.bars = pivot(p.frame, 0, 0.6, 0.55); mesh(G.box, m('iron'), 0.7, 0.06, 0.06, 0, 0, 0, p.bars);
+    p.bell = mesh(G.ico, m('brass'), 0.12, 0.1, 0.12, 0.25, 0.06, 0, p.bars);
+    p.rider = pivot(p.frame, 0, 0.55, -0.2);
+    mesh(G.ico1, m('moss'), 0.85, 0.95, 0.8, 0, 0.35, 0, p.rider);
+    mesh(G.box, BASE.bogglow, 0.08, 0.06, 0.04, -0.13, 0.5, 0.37, p.rider); mesh(G.box, BASE.bogglow, 0.08, 0.06, 0.04, 0.13, 0.5, 0.37, p.rider);
+    p.armL = pivot(p.rider, -0.35, 0.5, 0.1); mesh(G.box, m('moss'), 0.14, 0.14, 0.7, 0, 0, 0.3, p.armL);
+    p.armR = pivot(p.rider, 0.35, 0.5, 0.1); mesh(G.box, m('moss'), 0.14, 0.14, 0.7, 0, 0, 0.3, p.armR);
+    p.basket = mesh(G.box, m('rope'), 0.4, 0.3, 0.3, 0, 0.75, 0.8, p.frame);
+    return { group: g, parts: p };
+  },
   bellwarden(m) {   // boss: a bronze bell for a body, carried on stone-and-iron legs, with clapper arms and a lantern crown
     const g = new THREE.Group(), p = {};
     p.body = pivot(g, 0, 0, 0);
@@ -136,8 +245,65 @@ const MODELS = {
     p.lantern = mesh(G.oct, BASE.eye, 0.5, 0.7, 0.5, 0, 3.3, 0, p.torso);
     return { group: g, parts: p };
   },
+  chimekeeper(m) {   // boss: a walking clock-tower — robed stone shaft, a clock face for a head, hand-bells, a brass pendulum
+    const g = new THREE.Group(), p = {};
+    p.body = pivot(g, 0, 0, 0);
+    p.robe = pivot(p.body, 0, 0, 0);
+    mesh(G.cone, m('darkstone'), 2.6, 2.8, 2.6, 0, 1.4, 0, p.robe);                  // flared stone skirt
+    mesh(G.torus, m('copper'), 2.2, 2.2, 2.2, 0, 0.25, 0, p.robe).rotation.x = Math.PI / 2;   // hem band
+    p.torso = pivot(p.body, 0, 2.4, 0);
+    mesh(G.box, m('stone'), 1.7, 2.4, 1.3, 0, 1.2, 0, p.torso);                        // tower shaft
+    for (const [x, z] of [[-0.65, -0.45], [0.65, -0.45], [-0.65, 0.45], [0.65, 0.45]]) mesh(G.box, m('stone'), 0.38, 0.4, 0.38, x, 2.6, z, p.torso);   // battlements
+    p.face = mesh(G.cyl, m('marble'), 1.35, 0.14, 1.35, 0, 1.35, 0.66, p.torso); p.face.rotation.x = Math.PI / 2;
+    mesh(G.torus, m('brass'), 1.4, 1.4, 1.0, 0, 1.35, 0.7, p.torso);                  // face rim
+    p.minute = pivot(p.torso, 0, 1.35, 0.76); mesh(G.box, m('iron'), 0.09, 0.62, 0.04, 0, 0.29, 0, p.minute);
+    p.hour = pivot(p.torso, 0, 1.35, 0.78); mesh(G.box, m('iron'), 0.13, 0.4, 0.04, 0, 0.18, 0, p.hour);
+    p.eye = mesh(G.ico, m('eyeglow'), 0.16, 0.16, 0.16, 0, 1.35, 0.8, p.torso);
+    p.spire = pivot(p.torso, 0, 2.8, 0);
+    mesh(G.cone, m('copper'), 1.1, 1.8, 1.1, 0, 0.9, 0, p.spire);
+    p.bell = mesh(G.bell, m('brass'), 0.45, 0.45, 0.45, 0, 0.1, 0, p.spire);
+    p.armL = pivot(p.torso, -1.05, 2.0, 0); mesh(G.box, m('darkstone'), 0.38, 1.6, 0.38, 0, -0.8, 0, p.armL); mesh(G.bell, m('brass'), 0.55, 0.55, 0.55, 0, -1.85, 0, p.armL);
+    p.armR = pivot(p.torso, 1.05, 2.0, 0); mesh(G.box, m('darkstone'), 0.38, 1.6, 0.38, 0, -0.8, 0, p.armR); mesh(G.bell, m('brass'), 0.55, 0.55, 0.55, 0, -1.85, 0, p.armR);
+    p.pend = pivot(p.torso, 0, 0.5, 0.75); mesh(G.cyl, m('iron'), 0.06, 1.5, 0.06, 0, -0.75, 0, p.pend); mesh(G.ico, m('brass'), 0.55, 0.55, 0.2, 0, -1.55, 0, p.pend);
+    return { group: g, parts: p };
+  },
+  gatehouse_lion(m) {   // boss: a crowned heraldic stone lion off a college gatehouse; gilds itself in its second phase
+    const g = new THREE.Group(), p = {}, hide = m('stone');
+    p.hide = hide;
+    p.body = pivot(g, 0, 0, 0);
+    p.torso = pivot(p.body, 0, 1.6, 0);
+    mesh(G.box, hide, 1.5, 1.3, 3.0, 0, 0, 0, p.torso);
+    mesh(G.ico1, hide, 2.0, 2.0, 1.6, 0, 0.35, 1.3, p.torso);                          // mane
+    p.head = pivot(p.torso, 0, 0.55, 2.0);
+    mesh(G.box, hide, 0.95, 0.9, 0.9, 0, 0, 0, p.head);
+    mesh(G.box, hide, 0.6, 0.45, 0.5, 0, -0.15, 0.6, p.head);                           // snout
+    p.jaw = pivot(p.head, 0, -0.38, 0.3); mesh(G.box, m('darkstone'), 0.55, 0.15, 0.6, 0, 0, 0.3, p.jaw);
+    mesh(G.box, m('eyeglow'), 0.14, 0.08, 0.05, -0.24, 0.15, 0.46, p.head); p.eye = mesh(G.box, m('eyeglow'), 0.14, 0.08, 0.05, 0.24, 0.15, 0.46, p.head);
+    mesh(G.cone, hide, 0.22, 0.3, 0.2, -0.38, 0.5, -0.1, p.head); mesh(G.cone, hide, 0.22, 0.3, 0.2, 0.38, 0.5, -0.1, p.head);   // ears
+    p.crown = pivot(p.head, 0, 0.6, 0);
+    mesh(G.cyl, m('brass'), 0.65, 0.22, 0.65, 0, 0, 0, p.crown);
+    for (let i = 0; i < 5; i++) { const a = i / 5 * TAU; mesh(G.cone, m('brass'), 0.12, 0.25, 0.12, Math.cos(a) * 0.28, 0.22, Math.sin(a) * 0.28, p.crown); }
+    mesh(G.box, m('heraldRed'), 0.9, 0.9, 0.08, 0, -0.25, 1.62, p.torso);               // chest shield (a red field with three brass roses)
+    for (const [x, y] of [[-0.2, -0.1], [0.2, -0.1], [0, -0.42]]) mesh(G.ico, m('brass'), 0.18, 0.18, 0.08, x, y, 1.68, p.torso);
+    p.legs = [[-0.55, 1.1], [0.55, 1.1], [-0.55, -1.1], [0.55, -1.1]].map(([x, z]) => {
+      const l = pivot(p.torso, x, -0.4, z); mesh(G.box, hide, 0.45, 1.2, 0.5, 0, -0.6, 0, l); mesh(G.box, m('darkstone'), 0.55, 0.22, 0.65, 0, -1.15, 0.08, l); return l;
+    });
+    p.tail = pivot(p.torso, 0, 0.4, -1.5); mesh(G.cyl, hide, 0.12, 1.6, 0.12, 0, 0.8, 0, p.tail); mesh(G.ico, hide, 0.4, 0.4, 0.4, 0, 1.65, 0, p.tail);
+    return { group: g, parts: p };
+  },
 };
 BASE.eyeglow = new THREE.MeshStandardMaterial({ color: 0xffc060, emissive: 0xff7a00, emissiveIntensity: 2.5 });
+Object.assign(BASE, {   // session 41 regular-mob materials
+  water: new THREE.MeshStandardMaterial({ color: 0x4f8f8a, emissive: 0x1d5a5a, emissiveIntensity: 0.6, roughness: 0.3, transparent: true, opacity: 0.78, flatShading: true }),
+  moss: new THREE.MeshStandardMaterial({ color: 0x4d6b2e, roughness: 1, flatShading: true }),
+  bone: new THREE.MeshStandardMaterial({ color: 0xcfc6a8, roughness: 0.9, flatShading: true }),
+  soot: new THREE.MeshStandardMaterial({ color: 0x24221f, roughness: 1, flatShading: true }),
+  rope: new THREE.MeshStandardMaterial({ color: 0x8a6a40, roughness: 1, flatShading: true }),
+  heraldRed: new THREE.MeshStandardMaterial({ color: 0x9a2a26, roughness: 0.8, flatShading: true }),
+  bogglow: new THREE.MeshStandardMaterial({ color: 0xb8ff80, emissive: 0x60ff40, emissiveIntensity: 2 }),
+  ember: new THREE.MeshStandardMaterial({ color: 0xffa040, emissive: 0xff5010, emissiveIntensity: 2.2 }),
+  smoke: new THREE.MeshStandardMaterial({ color: 0x55524d, roughness: 1, transparent: true, opacity: 0.55, flatShading: true }),
+});
 
 // ---------- attack definitions
 // kinds: ring (circle around the mob or a target point), line (strip from the mob towards the aim), bolt (projectile),
@@ -167,6 +333,37 @@ export const MOB_TYPES = [
       loot: [{ rarity: 'common', chance: 0.6 }, { rarity: 'uncommon', chance: 0.3 }, { rarity: 'rare', chance: 0.1 }],
       attacks: [A({ name: 'Wound-Spring Charge', kind: 'charge', range: 12, minRange: 3, len: 13, w: 1.6, windup: 1.0, cd: 5, dmg: 18, speed: 16 }),
                 A({ name: 'Gear Whirl', kind: 'ring', range: 2.6, r: 2.8, windup: 0.7, cd: 2.5, dmg: 10 })] }),
+  // session 41 regulars; deathColor = second burst on death (splash / soot cloud / moss clods ...)
+  D({ id: 'river_wraith', name: 'Cam Wraith', hp: 55, speed: 3.4, radius: 0.5, xp: 20, flying: true, hover: 1.1, keepAway: 4, color: 0x40d0c0, deathColor: 0x2a6a80,
+      loot: [{ rarity: 'common', chance: 0.55 }, { rarity: 'uncommon', chance: 0.28 }, { rarity: 'rare', chance: 0.07 }],
+      attacks: [A({ name: 'Undertow', kind: 'line', range: 6, len: 7, w: 1.6, windup: 0.85, cd: 3, dmg: 12 }),
+                A({ name: 'Drowning Mist', kind: 'bolt', range: 13, minRange: 2, windup: 0.7, cd: 2.4, dmg: 9, speed: 12, color: 0x40c0b0 })] }),
+  D({ id: 'bog_hag', name: 'Fen Lantern-Hag', hp: 80, speed: 2.4, radius: 0.55, xp: 24, keepAway: 5, color: 0x80ff50, deathColor: 0x4d6b2e,
+      loot: [{ rarity: 'common', chance: 0.6 }, { rarity: 'uncommon', chance: 0.32 }, { rarity: 'rare', chance: 0.09 }],
+      attacks: [A({ name: 'Will-Lantern', kind: 'bolt', range: 13, minRange: 2.5, windup: 0.8, cd: 2.6, dmg: 10, speed: 11, color: 0x90ff60 }),
+                A({ name: 'Sucking Mire', kind: 'ring', range: 3.2, r: 3.2, windup: 1.1, cd: 4, dmg: 14 })] }),
+  D({ id: 'punt_revenant', name: 'Punt-Pole Revenant', hp: 85, speed: 3.0, radius: 0.5, xp: 24, color: 0x9fe8ff, deathColor: 0xcfc6a8,
+      loot: [{ rarity: 'common', chance: 0.6 }, { rarity: 'uncommon', chance: 0.3 }, { rarity: 'rare', chance: 0.08 }],
+      attacks: [A({ name: 'Pole Thrust', kind: 'line', range: 4.5, len: 5, w: 1.0, windup: 0.7, cd: 2.2, dmg: 13 }),
+                A({ name: 'Pole Sweep', kind: 'ring', range: 3.2, r: 3.6, windup: 1.0, cd: 4, dmg: 11 }),
+                A({ name: 'Pole Vault', kind: 'leap', range: 11, minRange: 4, r: 2.6, windup: 1.0, cd: 6, dmg: 16, recover: 0.8 })] }),
+  D({ id: 'bell_bats', name: 'Bell-Rope Bat Swarm', hp: 45, speed: 4.6, radius: 0.7, xp: 16, flying: true, hover: 2.4, color: 0xffb040, deathColor: 0x24221f,
+      loot: [{ rarity: 'common', chance: 0.5 }, { rarity: 'uncommon', chance: 0.2 }, { rarity: 'rare', chance: 0.05 }],
+      attacks: [A({ name: 'Swarm Dive', kind: 'charge', range: 10, minRange: 2, len: 11, w: 2.2, windup: 0.8, cd: 3.5, dmg: 10, speed: 15 }),
+                A({ name: 'Shrill Peal', kind: 'ring', range: 3, r: 3, windup: 0.6, cd: 2.5, dmg: 8 })] }),
+  D({ id: 'soot_sprite', name: 'Chimney-Soot Sprite', hp: 30, speed: 5.0, radius: 0.35, xp: 12, flying: true, hover: 0.7, scale: 0.85, color: 0xff6020, deathColor: 0x24221f,
+      loot: [{ rarity: 'common', chance: 0.45 }, { rarity: 'uncommon', chance: 0.15 }],
+      attacks: [A({ name: 'Cinder Spit', kind: 'bolt', range: 10, minRange: 2.5, windup: 0.5, cd: 2, dmg: 6, speed: 12, color: 0xff6020 }),
+                A({ name: 'Soot Burst', kind: 'ring', range: 2.2, r: 2.4, windup: 0.5, cd: 2, dmg: 7 }),
+                A({ name: 'Ember Scatter', kind: 'nova', range: 9, n: 6, windup: 0.9, cd: 6, dmg: 5, speed: 9, color: 0xff8030 })] }),
+  D({ id: 'crest_griffin', name: 'Gatehouse Crest Griffin', hp: 120, speed: 3.8, radius: 0.7, xp: 32, color: 0xffd040, knockResist: 0.5, deathColor: 0x9a2a26,
+      loot: [{ rarity: 'common', chance: 0.65 }, { rarity: 'uncommon', chance: 0.38 }, { rarity: 'rare', chance: 0.12 }, { rarity: 'epic', chance: 0.02 }],
+      attacks: [A({ name: 'Rending Talons', kind: 'line', range: 2.6, len: 3, w: 2, windup: 0.55, cd: 1.8, dmg: 12, recover: 0.4 }),
+                A({ name: 'Heraldic Pounce', kind: 'leap', range: 10, minRange: 3.5, r: 2.4, windup: 0.9, cd: 5, dmg: 18, recover: 0.8 })] }),
+  D({ id: 'bicycle_golem', name: 'Mossbound Bicycle-Golem', hp: 110, speed: 3.4, radius: 0.65, xp: 28, color: 0xc0ff60, knockResist: 0.5, deathColor: 0x4d6b2e,
+      loot: [{ rarity: 'common', chance: 0.65 }, { rarity: 'uncommon', chance: 0.32 }, { rarity: 'rare', chance: 0.1 }],
+      attacks: [A({ name: 'Freewheel Charge', kind: 'charge', range: 13, minRange: 3, len: 14, w: 1.6, windup: 1.0, cd: 4.5, dmg: 16, speed: 17 }),
+                A({ name: 'Chain Lash', kind: 'line', range: 3, len: 3.5, w: 2.6, windup: 0.7, cd: 2.4, dmg: 11 })] }),
   D({ id: 'bellwarden', name: 'The Bellwarden of Market Hill', boss: true, hp: 900, speed: 2.4, radius: 1.6, xp: 400, scale: 1, aggro: 16, leash: 34,
       color: 0xffa020, knockResist: 1,
       loot: [{ rarity: 'uncommon', chance: 1 }, { rarity: 'rare', chance: 0.8 }, { rarity: 'epic', chance: 0.4 }, { rarity: 'legendary', chance: 0.12 }],
@@ -180,6 +377,34 @@ export const MOB_TYPES = [
                 A({ id: 'peal', name: 'Peal of Shards', kind: 'nova', range: 18, n: 10, windup: 1.2, cd: 6, dmg: 12, speed: 12 }),
                 A({ id: 'leap', name: 'Belfry Drop', kind: 'leap', range: 16, minRange: 6, r: 4.5, windup: 1.3, cd: 8, dmg: 30, recover: 1.2 }),
                 A({ id: 'cascade', name: 'Change-Ringing Cascade', kind: 'cascade', range: 22, n: 4, r: 2.6, windup: 1.1, cd: 7, dmg: 18 })] }),
+  D({ id: 'chimekeeper', name: "The Chime-keeper of St Mary's", boss: true, hp: 1100, speed: 2.2, radius: 1.5, xp: 480, aggro: 16, leash: 32,
+      color: 0xffd060, knockResist: 1, deathDur: 2.2,
+      loot: [{ rarity: 'uncommon', chance: 1 }, { rarity: 'rare', chance: 1 }, { rarity: 'epic', chance: 0.5 }, { rarity: 'legendary', chance: 0.15 }],
+      phases: [   // I: the quarters; II: the hour strikes (hands race, pendulum swings free); III: curfew (face burns red)
+        { at: 1.0, attacks: ['quarter', 'minute', 'tick'] },
+        { at: 0.6, attacks: ['hour', 'pendulum', 'minute', 'tick'], speed: 1.15 },
+        { at: 0.3, attacks: ['curfew', 'peal', 'hour', 'pendulum', 'quarter'], speed: 1.35, windup: 0.8, cd: 0.75, enrage: true },
+      ],
+      attacks: [A({ id: 'quarter', name: 'Quarter Chime', kind: 'ring', range: 4.5, r: 5, windup: 1.2, cd: 3.5, dmg: 22, recover: 0.7 }),
+                A({ id: 'minute', name: 'Minute-Hand Sweep', kind: 'line', range: 7, len: 8, w: 2.6, windup: 0.9, cd: 3, dmg: 18 }),
+                A({ id: 'tick', name: 'Tick Bolt', kind: 'bolt', range: 16, minRange: 4, windup: 0.6, cd: 2, dmg: 10, speed: 14, color: 0xffe0a0 }),
+                A({ id: 'hour', name: 'Striking the Hour', kind: 'cascade', range: 22, n: 5, r: 2.4, windup: 1.2, cd: 6, dmg: 18 }),
+                A({ id: 'pendulum', name: 'Pendulum Swing', kind: 'charge', range: 14, minRange: 4, len: 14, w: 2.4, windup: 1.0, cd: 6, dmg: 24, speed: 15 }),
+                A({ id: 'peal', name: 'Great Peal', kind: 'nova', range: 18, n: 12, windup: 1.1, cd: 7, dmg: 12, speed: 11, color: 0xffe0a0 }),
+                A({ id: 'curfew', name: 'Curfew Bell', kind: 'ring', range: 8, r: 9, windup: 1.8, cd: 9, dmg: 34, recover: 1.2 })] }),
+  D({ id: 'gatehouse_lion', name: "The Gatehouse Lion of King's", boss: true, hp: 1000, speed: 3.6, radius: 1.6, xp: 450, aggro: 17, leash: 34,
+      color: 0xffc040, knockResist: 1, deathDur: 2.0,
+      loot: [{ rarity: 'rare', chance: 1 }, { rarity: 'rare', chance: 0.6 }, { rarity: 'epic', chance: 0.5 }, { rarity: 'legendary', chance: 0.18 }],
+      phases: [   // I: stone lion (maul, roar, pounce); II: gilded rampant (rush, gilt shower, portcullis fall)
+        { at: 1.0, attacks: ['maul', 'roar', 'pounce'] },
+        { at: 0.5, attacks: ['maul', 'rush', 'gilt', 'portcullis'], speed: 1.4, windup: 0.8, cd: 0.7, enrage: true },
+      ],
+      attacks: [A({ id: 'maul', name: 'Heraldic Maul', kind: 'line', range: 4, len: 4.5, w: 3, windup: 0.7, cd: 2.2, dmg: 20 }),
+                A({ id: 'roar', name: 'Rampant Roar', kind: 'ring', range: 6, r: 6.5, windup: 1.3, cd: 6, dmg: 16, recover: 0.8 }),
+                A({ id: 'pounce', name: 'Pounce from the Plinth', kind: 'leap', range: 14, minRange: 5, r: 3.5, windup: 1.1, cd: 6, dmg: 26, recover: 1 }),
+                A({ id: 'rush', name: 'Gilded Rush', kind: 'charge', range: 16, minRange: 3, len: 16, w: 2.6, windup: 0.9, cd: 5, dmg: 28, speed: 20 }),
+                A({ id: 'gilt', name: 'Shower of Gilt', kind: 'nova', range: 16, n: 14, windup: 1.0, cd: 6, dmg: 11, speed: 13, color: 0xffd040 }),
+                A({ id: 'portcullis', name: 'Portcullis Fall', kind: 'cascade', range: 20, n: 6, r: 2.2, windup: 1.2, cd: 7, dmg: 20 })] }),
 ];
 const TYPE = Object.fromEntries(MOB_TYPES.map(t => [t.id, t]));
 
@@ -260,6 +485,7 @@ class MobSystem {
       if (ph > mob.phase) {
         mob.phase = ph; this.clearTelegraph(mob); mob.state = 'stagger'; mob.stateT = 1.2;
         this.burst(mob.x, mob.y, mob.z + 3, mob.type.color, 18, 6);
+        this.shockwave(mob.x, mob.y, mob.groundZ ?? mob.z, mob.type.color, mob.type.phases[ph].enrage ? 14 : 10, 0.8);
         g.emit('bossPhase', { mob, phase: ph, enrage: !!mob.type.phases[ph].enrage });
       }
     }
@@ -269,6 +495,8 @@ class MobSystem {
     this.clearTelegraph(mob);
     mob.state = 'dead'; mob.deathT = 0;
     this.burst(mob.x, mob.y, mob.z + 1 * mob.type.scale * (mob.boss ? 2.5 : 1), mob.type.color, mob.boss ? 40 : 16, mob.boss ? 9 : 5, mob.mats[0]?.color);
+    if (mob.boss) { this.shockwave(mob.x, mob.y, mob.groundZ ?? mob.z, mob.type.color, 16, 1.1); this.shockwave(mob.x, mob.y, mob.groundZ ?? mob.z, 0xffffff, 9, 0.7); }
+    if (mob.type.deathColor) this.burst(mob.x, mob.y, mob.z + 0.5 * mob.type.scale, mob.type.deathColor, 10, 2.5);
     const es = mob.encounter && this.encounterState.get(mob.encounter);
     if (es && es.mobs.every(m => m.dead)) { es.clearedAt = this.game.time; }
   }
@@ -313,6 +541,17 @@ class MobSystem {
     if (d.kind === 'ring') d.fill.scale.setScalar(Math.max(0.01, d.r * f));
     else d.fill.scale.set(d.w * 0.9, 1, Math.max(0.01, d.len * f));
   }
+  // expanding ground ring (boss phase change / death)
+  shockwave(x, y, z, color, maxR, dur) {
+    const mat = decalMat(color), o = new THREE.Mesh(G.ring, mat); o.position.set(x, z + 0.08, -y); o.scale.setScalar(0.1); this.root.add(o);
+    let t = 0;
+    this.fx.push({ update: (dt) => {
+      t += dt; const f = Math.min(1, t / dur);
+      o.scale.setScalar(0.1 + maxR * (1 - (1 - f) * (1 - f))); mat.opacity = 0.8 * (1 - f);
+      if (f >= 1) { this.root.remove(o); mat.dispose(); return false; }
+      return true;
+    } });
+  }
   killDecal(d) { this.root.remove(d.grp); d.mat.dispose(); }
   clearTelegraph(mob) { for (const d of mob.telegraph || []) this.killDecal(d); mob.telegraph = null; }
 
@@ -352,10 +591,12 @@ class MobSystem {
     const g = this.game, T = mob.type, P = mob.parts;
     mob.t += dt;
     if (mob.state === 'dead') {   // dissolve: sink, shrink, then remove
-      mob.deathT += dt; const f = Math.min(1, mob.deathT / 0.9);
+      const dur = T.deathDur ?? 0.9;
+      mob.deathT += dt; let f = Math.min(1, mob.deathT / dur);
+      if (T.deathDur) { this.animateDeath(mob, Math.min(1, f / 0.6)); f = Math.max(0, (f - 0.55) / 0.45); }   // pose first, then dissolve
       mob.group.scale.setScalar(T.scale * (1 - f * 0.9)); mob.group.position.y = mob.z - f * 0.5 * T.scale;
       for (const c of mob.mats) { c.transparent = true; c.opacity = 1 - f; }
-      if (mob.deathT > 1.0) this.remove(mob);
+      if (mob.deathT > dur + 0.1) this.remove(mob);
       return;
     }
     // flash + glow
@@ -590,6 +831,87 @@ class MobSystem {
         P.head.rotation.y = Math.sin(t * 0.8) * 0.4;
         break;
       }
+      // session 41 regulars; hr = hit-recoil 0..1 (rocks the body back while the white flash shows)
+      case 'river_wraith': {
+        const hr = mob.flashT / 0.14, k = mob.attack?.kind;
+        P.body.rotation.x = -hr * 0.5 + (moving ? 0.25 : 0);
+        P.robe.rotation.z = Math.sin(t * 2.2) * 0.12;
+        P.weedL.rotation.z = Math.sin(t * 3) * 0.4; P.weedR.rotation.z = -Math.sin(t * 3.3) * 0.4;
+        const reach = st === 'windup' ? (k === 'line' ? -1.6 * wf : -0.8 * wf) : st === 'recover' ? -1.2 : Math.sin(t * 1.5) * 0.15;
+        P.armL.rotation.x = P.armR.rotation.x = reach;
+        P.armL.rotation.z = k === 'line' && st === 'windup' ? -0.6 * wf : 0; P.armR.rotation.z = -P.armL.rotation.z;
+        P.head.rotation.x = st === 'windup' ? -0.3 * wf : Math.sin(t * 0.9) * 0.1;
+        break;
+      }
+      case 'bog_hag': {
+        const hr = mob.flashT / 0.14, k = mob.attack?.kind;
+        P.torso.rotation.x = 0.35 - hr * 0.4 + (moving ? Math.abs(walk) * 0.1 : 0);
+        P.torso.rotation.z = walk * 0.12;
+        P.head.rotation.y = Math.sin(t * 0.7) * 0.5;
+        P.crook.rotation.x = st === 'windup' && k === 'bolt' ? -1.2 * wf : st === 'windup' ? 0 : -0.15 + walk * 0.2;
+        P.armR.rotation.x = st === 'windup' && k === 'ring' ? -2.2 * wf : st === 'recover' && k === 'ring' ? 0.3 : 0;
+        P.armL.rotation.x = st === 'windup' && k === 'ring' ? -2.2 * wf : -walk * 0.3;
+        P.lantern.rotation.y = t * 1.5;
+        P.lantern.scale.setScalar(0.3 + 0.04 * Math.sin(t * 7) + (st === 'windup' ? 0.15 * wf : 0));
+        break;
+      }
+      case 'punt_revenant': {
+        const hr = mob.flashT / 0.14, k = mob.attack?.kind;
+        P.legL.rotation.x = walk * 0.6; P.legR.rotation.x = -walk * 0.6;
+        P.armL.rotation.x = -walk * 0.4;
+        P.torso.rotation.x = -hr * 0.35; P.torso.rotation.y = 0; P.pole.rotation.x = 0.35; P.pole.position.z = 0.3;
+        if (st === 'windup' && k === 'line') { P.pole.position.z = 0.3 - 0.8 * wf; P.pole.rotation.x = 0.1; P.torso.rotation.y = -0.4 * wf; }
+        else if (st === 'recover' && k === 'line') { P.pole.position.z = 1.1; P.pole.rotation.x = 0.1; }
+        else if (k === 'ring' && (st === 'windup' || st === 'recover')) { P.pole.rotation.x = 1.3; P.torso.rotation.y = st === 'windup' ? -1.2 * wf : 1.6; }
+        else if (k === 'leap' && (st === 'windup' || st === 'active')) { P.pole.rotation.x = st === 'active' ? -0.6 : 1.4 * wf; P.legL.rotation.x = P.legR.rotation.x = st === 'windup' ? -0.5 * wf : 0.5; }
+        P.head.rotation.z = Math.sin(t * 1.1) * 0.15;
+        break;
+      }
+      case 'bell_bats': {
+        const hr = mob.flashT / 0.14, tight = st === 'windup' ? 1 - 0.6 * wf : st === 'active' ? 0.35 : 1;
+        P.bats.forEach((b, i) => {
+          const a = t * (st === 'windup' ? 5 : 2.6) + i * TAU / 5, r = (0.9 + 0.25 * Math.sin(t * 2 + i)) * tight + hr * 0.6;
+          b.position.set(Math.cos(a) * r, Math.sin(t * 3 + i * 1.7) * 0.35, Math.sin(a) * r);
+          b.rotation.y = -a; const f = Math.sin(t * 24 + i) * 0.8; b.wl.rotation.z = f; b.wr.rotation.z = -f;
+        });
+        P.rope.rotation.z = Math.sin(t * 1.7) * 0.25 + (st === 'windup' ? Math.sin(t * 30) * 0.2 * wf : 0);
+        P.sally.position.x = -Math.sin(P.rope.rotation.z) * 0.55;
+        break;
+      }
+      case 'soot_sprite': {
+        const hr = mob.flashT / 0.14, k = mob.attack?.kind;
+        const sq = st === 'windup' ? wf : 0;
+        P.blob.scale.set(0.6 * (1 + sq * 0.35 + hr * 0.2), 0.6 * (1 - sq * 0.25 - hr * 0.2), 0.6 * (1 + sq * 0.35 + hr * 0.2));
+        P.body.rotation.y = st === 'windup' && k === 'nova' ? wf * 8 : 0;
+        P.pot.position.y = 0.38 + Math.abs(Math.sin(t * 6)) * 0.08 + sq * 0.15;
+        P.puffs.forEach((o, i) => { const a = t * 1.8 + i * TAU / 3, r = 0.55 + sq * 0.4; o.position.set(Math.cos(a) * r, 0.1 + Math.sin(t * 2.5 + i) * 0.2, Math.sin(a) * r); });
+        for (const e of P.eyes) e.material.emissiveIntensity = st === 'windup' ? 2 + 3 * wf : 2;
+        break;
+      }
+      case 'crest_griffin': {
+        const hr = mob.flashT / 0.14, k = mob.attack?.kind, gait = moving ? Math.sin(t * 10) : 0;
+        P.legs.forEach((l, i) => { l.rotation.x = gait * 0.6 * (i === 0 || i === 3 ? 1 : -1); });
+        P.wl.rotation.z = 0.25 + (st === 'windup' ? 1.1 * wf : st === 'active' ? Math.sin(t * 18) * 0.6 : Math.sin(t * 1.3) * 0.08); P.wr.rotation.z = -P.wl.rotation.z;
+        P.body.rotation.x = -hr * 0.3 + (st === 'windup' ? (k === 'leap' ? 0.35 * wf : -0.5 * wf) : st === 'active' ? -0.3 : st === 'recover' && k === 'line' ? 0.3 : 0);
+        P.head.rotation.x = st === 'windup' && k === 'line' ? -0.5 * wf : Math.sin(t * 1.4) * 0.12;
+        if (st === 'windup' && k === 'line') { P.legs[0].rotation.x = -1.8 * wf; P.legs[1].rotation.x = -1.8 * wf; }
+        P.tail.rotation.y = Math.sin(t * 2.2) * 0.5;
+        break;
+      }
+      case 'bicycle_golem': {
+        const hr = mob.flashT / 0.14, k = mob.attack?.kind;
+        const spin = st === 'active' ? 30 : st === 'windup' && k === 'charge' ? 18 * wf : moving ? mob.type.speed * 2.4 : 0;
+        for (const w of P.wheels) w.rotation.x += dt * spin;
+        P.frame.rotation.z = Math.sin(t * 3) * 0.04 * (moving ? 1 : 0.3) - hr * 0.2;
+        P.frame.rotation.x = st === 'windup' && k === 'charge' ? -0.15 * wf : st === 'active' ? 0.12 : 0;
+        P.rider.rotation.x = st === 'active' ? 0.5 : st === 'windup' && k === 'charge' ? 0.4 * wf : -hr * 0.4;
+        P.bars.rotation.y = Math.sin(t * 1.6) * 0.12;
+        P.bell.rotation.y = t * (st === 'windup' ? 20 : 1);
+        if (st === 'windup' && k === 'line') { P.armR.rotation.y = -1.6 * wf; P.armR.rotation.x = -0.6 * wf; P.rider.rotation.y = 0.6 * wf; }
+        else if (st === 'recover' && k === 'line') { P.armR.rotation.y = 0.9; P.rider.rotation.y = -0.5; }
+        else { P.armR.rotation.y = P.armR.rotation.x = 0; P.rider.rotation.y = 0; }
+        break;
+      }
       case 'bellwarden': {
         const enr = mob.type.phases[mob.phase].enrage;
         P.legL.rotation.x = walk * 0.35; P.legR.rotation.x = -walk * 0.35;
@@ -607,6 +929,72 @@ class MobSystem {
         P.eye.material.emissive.setHex(enr ? 0xff2000 : 0xff7a00);
         break;
       }
+      case 'chimekeeper': {
+        const ph = mob.phase, k = mob.attack?.kind, hitK = mob.flashT / 0.14;
+        P.minute.rotation.z = -t * [0.5, 3, 9][ph]; P.hour.rotation.z = -t * [0.04, 0.25, 0.75][ph];
+        P.pend.rotation.z = Math.sin(t * (ph ? 4 : 2)) * (ph ? 0.7 : 0.35);
+        P.pend.rotation.x = 0;
+        P.body.position.y = moving ? Math.abs(walk) * 0.12 : Math.sin(t * 1.5) * 0.04;
+        P.robe.rotation.z = walk * 0.05; P.torso.rotation.z = Math.sin(t * 0.9) * 0.03 - walk * 0.04;
+        P.torso.rotation.x = -0.25 * hitK; P.torso.rotation.y = 0;
+        P.armL.rotation.set(walk * 0.3, 0, -0.12); P.armR.rotation.set(-walk * 0.3, 0, 0.12);
+        P.bell.rotation.z = Math.sin(t * (ph === 2 ? 9 : 2)) * (ph === 2 ? 0.5 : 0.15);
+        if (st === 'windup') {
+          if (k === 'ring') { P.armL.rotation.z = -2.7 * wf; P.armR.rotation.z = 2.7 * wf; P.bell.rotation.z = Math.sin(t * 20) * 0.6 * wf; }
+          else if (k === 'line') { P.torso.rotation.y = -1.1 * wf; P.armR.rotation.x = -1.6 * wf; }
+          else if (k === 'cascade') { P.armL.rotation.x = P.armR.rotation.x = -2.4 * wf; P.hour.rotation.z = -t * 20; }
+          else if (k === 'charge') { P.pend.rotation.x = 1.3 * wf; P.torso.rotation.x = 0.25 * wf; }
+          else if (k === 'nova') { P.torso.rotation.y = wf * TAU; P.armL.rotation.z = -1.5 * wf; P.armR.rotation.z = 1.5 * wf; }
+          else if (k === 'bolt') { P.armR.rotation.x = -1.4 * wf; }
+        } else if (st === 'active') { P.pend.rotation.x = -1.2; P.torso.rotation.x = 0.3; }
+        else if (st === 'recover' && k === 'line') { P.torso.rotation.y = 0.6; }
+        if (st === 'stagger') { P.torso.rotation.x = Math.sin(t * 25) * 0.12; P.minute.rotation.z = -t * 30; }
+        if (mob.flashT <= 0) { P.face.material.emissive.setHex([0x000000, 0x806020, 0xc02000][ph]); P.face.material.emissiveIntensity = ph ? 0.6 + 0.3 * Math.sin(t * 6) : 0; }
+        P.eye.material.emissive.setHex(ph === 2 ? 0xff2000 : 0xff9a20);
+        break;
+      }
+      case 'gatehouse_lion': {
+        const gilt = mob.phase > 0, k = mob.attack?.kind, hitK = mob.flashT / 0.14;
+        if (P.gilded !== gilt) {   // phase II: the stone gilds itself
+          P.gilded = gilt; P.hide.color.setHex(gilt ? 0xd8a83a : 0x8d8a80); P.hide.metalness = gilt ? 0.85 : 0; P.hide.roughness = gilt ? 0.3 : 0.95;
+        }
+        const gait = moving ? Math.sin(t * (mob.type.speed * (gilt ? 3.4 : 2.6))) : 0;
+        const [fl, fr, bl, br] = P.legs;
+        fl.rotation.x = br.rotation.x = gait * 0.6; fr.rotation.x = bl.rotation.x = -gait * 0.6;
+        P.body.position.y = moving ? Math.abs(gait) * 0.12 : 0; P.body.rotation.z = 0;
+        P.torso.rotation.x = 0; P.torso.scale.set(1, 1 + Math.sin(t * 2) * 0.02, 1);
+        P.head.rotation.set(Math.sin(t * 0.7) * 0.08, Math.sin(t * 0.5) * 0.3, hitK * 0.35);
+        P.jaw.rotation.x = 0.1 + Math.max(0, Math.sin(t * 0.6)) * 0.15;
+        P.tail.rotation.x = -0.9 + Math.sin(t * 1.3) * 0.15; P.tail.rotation.z = Math.sin(t * (gilt ? 5 : 2)) * 0.4;
+        if (st === 'windup') {
+          if (k === 'line') { fr.rotation.x = -1.9 * wf; P.torso.rotation.x = -0.2 * wf; P.jaw.rotation.x = 0.5 * wf; }
+          else if (k === 'ring') { P.torso.rotation.x = -0.35 * wf; P.head.rotation.x = -0.6 * wf; P.jaw.rotation.x = 0.9 * wf; }
+          else if (k === 'leap' || k === 'charge') { P.body.position.y = -0.45 * wf; for (const l of P.legs) l.rotation.x = 0; P.head.rotation.x = 0.3 * wf; P.tail.rotation.x = -0.3; }
+          else if (k === 'nova' || k === 'cascade') { P.torso.rotation.x = -0.75 * wf; fl.rotation.x = fr.rotation.x = -1.4 * wf; P.body.position.y = 0.4 * wf; P.jaw.rotation.x = 0.6 * wf; }
+        } else if (st === 'active') {
+          const gal = Math.sin(t * 22); fl.rotation.x = fr.rotation.x = gal * 0.9; bl.rotation.x = br.rotation.x = -gal * 0.9;
+          if (k === 'leap') { fl.rotation.x = fr.rotation.x = -1.2; bl.rotation.x = br.rotation.x = 1.0; }
+          P.jaw.rotation.x = 0.7;
+        } else if (st === 'recover') { if (k === 'line') fr.rotation.x = 0.3; if (k === 'nova' || k === 'cascade') P.torso.rotation.x = 0.1; }
+        if (st === 'stagger') { P.torso.rotation.x = -0.5; P.jaw.rotation.x = 0.9; P.head.rotation.z = Math.sin(t * 25) * 0.15; }
+        P.eye.material.emissive.setHex(gilt ? 0xff3000 : 0xff8a00);
+        break;
+      }
+    }
+  }
+
+  // boss death poses (f 0..1, before the dissolve)
+  animateDeath(mob, f) {
+    const P = mob.parts, t = mob.t;
+    if (mob.type.id === 'chimekeeper') {   // the hands race, the tower tips forward onto its face
+      P.minute.rotation.z = -t * 40; P.hour.rotation.z = -t * 12; P.pend.rotation.z = Math.sin(t * 30) * (1 - f);
+      P.body.rotation.x = f * f * 1.35; P.armL.rotation.z = -1.2 * f; P.armR.rotation.z = 1.2 * f;
+      P.spire.rotation.z = f * 0.6;
+    } else if (mob.type.id === 'gatehouse_lion') {   // rears, then topples onto its side
+      const up = Math.min(1, f * 2.5), down = Math.max(0, (f - 0.4) / 0.6);
+      P.torso.rotation.x = -0.6 * up * (1 - down); P.jaw.rotation.x = 0.9;
+      P.body.rotation.z = down * 1.45; P.body.position.y = down * 0.6;
+      for (const l of P.legs) l.rotation.x = 0.4 * down; P.tail.rotation.x = -0.2 * down;
     }
   }
 

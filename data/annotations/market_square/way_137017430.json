@@ -316,28 +316,42 @@
    "storeys": 3,
    "floor_z": [
     0,
-    3.4,
-    6.9
+    4.2,
+    7.9
    ],
    "material": "brick",
-   "wall_colour": "#7a6a50",
-   "trim_colour": "#f3f1ea",
-   "cornice_z": 10.8,
+   "wall_colour": "#85735a",
+   "trim_colour": "#f1efe8",
+   "cornice_z": 11.8,
    "cornice": "simple",
-   "parapet": false,
+   "parapet": true,
    "string_courses": [
-    3.4
+    4.2
    ],
    "quoins": false,
    "pilasters": [],
    "elements": [
     {
      "type": "window",
+     "style": "modern",
+     "x": 2.2,
+     "w": 1.4,
+     "z": 0.5,
+     "h": 3.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": false
+    },
+    {
+     "type": "window",
      "style": "sash_georgian",
-     "x": 1.5,
-     "w": 1.1,
-     "z": 4.4,
-     "h": 2.1,
+     "x": 2.2,
+     "w": 0.9,
+     "z": 4.7,
+     "h": 2.0,
      "panes": [
       3,
       4
@@ -348,24 +362,38 @@
     {
      "type": "window",
      "style": "sash_georgian",
-     "x": 1.5,
-     "w": 1.1,
-     "z": 7.6,
-     "h": 1.7,
+     "x": 2.2,
+     "w": 0.9,
+     "z": 8.5,
+     "h": 1.8,
      "panes": [
       3,
-      3
+      4
      ],
      "head": "flat",
      "sill": true
     },
     {
      "type": "window",
+     "style": "modern",
+     "x": 4.55,
+     "w": 1.4,
+     "z": 0.5,
+     "h": 3.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": false
+    },
+    {
+     "type": "window",
      "style": "sash_georgian",
-     "x": 3.8,
-     "w": 1.1,
-     "z": 4.4,
-     "h": 2.1,
+     "x": 4.55,
+     "w": 0.9,
+     "z": 4.7,
+     "h": 2.0,
      "panes": [
       3,
       4
@@ -376,24 +404,38 @@
     {
      "type": "window",
      "style": "sash_georgian",
-     "x": 3.8,
-     "w": 1.1,
-     "z": 7.6,
-     "h": 1.7,
+     "x": 4.55,
+     "w": 0.9,
+     "z": 8.5,
+     "h": 1.8,
      "panes": [
       3,
-      3
+      4
      ],
      "head": "flat",
      "sill": true
     },
     {
      "type": "window",
+     "style": "modern",
+     "x": 6.9,
+     "w": 1.4,
+     "z": 0.5,
+     "h": 3.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": false
+    },
+    {
+     "type": "window",
      "style": "sash_georgian",
-     "x": 6.1,
-     "w": 1.1,
-     "z": 4.4,
-     "h": 2.1,
+     "x": 6.9,
+     "w": 0.9,
+     "z": 4.7,
+     "h": 2.0,
      "panes": [
       3,
       4
@@ -404,24 +446,38 @@
     {
      "type": "window",
      "style": "sash_georgian",
-     "x": 6.1,
-     "w": 1.1,
-     "z": 7.6,
-     "h": 1.7,
+     "x": 6.9,
+     "w": 0.9,
+     "z": 8.5,
+     "h": 1.8,
      "panes": [
       3,
-      3
+      4
      ],
      "head": "flat",
      "sill": true
     },
     {
      "type": "window",
+     "style": "modern",
+     "x": 9.25,
+     "w": 1.4,
+     "z": 0.5,
+     "h": 3.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": false
+    },
+    {
+     "type": "window",
      "style": "sash_georgian",
-     "x": 8.4,
-     "w": 1.1,
-     "z": 4.4,
-     "h": 2.1,
+     "x": 9.25,
+     "w": 0.9,
+     "z": 4.7,
+     "h": 2.0,
      "panes": [
       3,
       4
@@ -432,24 +488,38 @@
     {
      "type": "window",
      "style": "sash_georgian",
-     "x": 8.4,
-     "w": 1.1,
-     "z": 7.6,
-     "h": 1.7,
+     "x": 9.25,
+     "w": 0.9,
+     "z": 8.5,
+     "h": 1.8,
      "panes": [
       3,
-      3
+      4
      ],
      "head": "flat",
      "sill": true
     },
     {
      "type": "window",
+     "style": "modern",
+     "x": 11.6,
+     "w": 1.4,
+     "z": 0.5,
+     "h": 3.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": false
+    },
+    {
+     "type": "window",
      "style": "sash_georgian",
-     "x": 10.7,
-     "w": 1.1,
-     "z": 4.4,
-     "h": 2.1,
+     "x": 11.6,
+     "w": 0.9,
+     "z": 4.7,
+     "h": 2.0,
      "panes": [
       3,
       4
@@ -460,24 +530,38 @@
     {
      "type": "window",
      "style": "sash_georgian",
-     "x": 10.7,
-     "w": 1.1,
-     "z": 7.6,
-     "h": 1.7,
+     "x": 11.6,
+     "w": 0.9,
+     "z": 8.5,
+     "h": 1.8,
      "panes": [
       3,
-      3
+      4
      ],
      "head": "flat",
      "sill": true
     },
     {
      "type": "window",
+     "style": "modern",
+     "x": 13.95,
+     "w": 1.4,
+     "z": 0.5,
+     "h": 3.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": false
+    },
+    {
+     "type": "window",
      "style": "sash_georgian",
-     "x": 13.0,
-     "w": 1.1,
-     "z": 4.4,
-     "h": 2.1,
+     "x": 13.95,
+     "w": 0.9,
+     "z": 4.7,
+     "h": 2.0,
      "panes": [
       3,
       4
@@ -488,32 +572,20 @@
     {
      "type": "window",
      "style": "sash_georgian",
-     "x": 13.0,
-     "w": 1.1,
-     "z": 7.6,
-     "h": 1.7,
+     "x": 13.95,
+     "w": 0.9,
+     "z": 8.5,
+     "h": 1.8,
      "panes": [
       3,
-      3
+      4
      ],
      "head": "flat",
      "sill": true
-    },
-    {
-     "type": "shopfront",
-     "x0": 0.3,
-     "x1": 14.6,
-     "z1": 3.4,
-     "fascia_text": "Cambridge University Press Bookshop",
-     "fascia_colour": "#e9e4d6",
-     "text_colour": "#1f3b2c",
-     "door_x": 0.9,
-     "stallriser": 0.5,
-     "awning": false
     }
    ],
-   "confidence": "low",
-   "notes": "1 Trinity Street, south face to Market Hill/St Mary's Street opposite Great St Mary's: continuation of the corner building of wall :1 (stock brick, white rendered ground storey, white-surround sashes; CUP bookshop sign seen at the corner). Only seen obliquely/blurred from the east; bay count (6) and spacing estimated, not measured."
+   "confidence": "medium",
+   "notes": "Same physical wall as way/1099847939:6 (coincident OSM footprint; that wall's skin is built). Harmonised with its medium-confidence annotation (Mapillary 295207078830584 / 934928010476370, a direct view along the face); the earlier low-confidence oblique estimate here had 6 bays x 2 floors + shopfront. South face of the CUP Bookshop along St Mary's Street / Market Hill. Mapillary 295207078830584 (looking east along the face) and 934928010476370: white-painted stucco ground floor arcade of round-arched shop windows (modelled as arched windows, ~6 bays after a wide rusticated corner pier), white cornice band, gault brick above with tall sashes on two upper floors (1st-floor ones with iron flower boxes), regular bay rhythm continuing into 27-28 Market Hill. Bay count/positions approximate (strong perspective); ground floor is really white stucco but the wall material is the upper brick."
   }
  ]
 }

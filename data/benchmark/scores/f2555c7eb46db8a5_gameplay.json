@@ -1,0 +1,67 @@
+{
+ "gameplay_judged": 28.0,
+ "n": 4,
+ "model": "claude-opus-5-5",
+ "hash": "52475ce05ab90595",
+ "classes": {
+  "hexweaver": {
+   "score": 2.29,
+   "readability_telegraphs": 2.0,
+   "spell_vfx": 3.0,
+   "enemy_animation_variety": 1.0,
+   "hit_feedback": 3.0,
+   "ui_hud_clarity": 4.0,
+   "loot_excitement": 1.0,
+   "polished_arpg_feel": 2.0,
+   "overall": 2
+  },
+  "pyromancer": {
+   "score": 3.14,
+   "readability_telegraphs": 3.0,
+   "spell_vfx": 4.0,
+   "enemy_animation_variety": 2.0,
+   "hit_feedback": 3.0,
+   "ui_hud_clarity": 5.0,
+   "loot_excitement": 2.0,
+   "polished_arpg_feel": 3.0,
+   "overall": 3
+  },
+  "stormcaller": {
+   "score": 2.93,
+   "readability_telegraphs": 3.0,
+   "spell_vfx": 2.5,
+   "enemy_animation_variety": 2.0,
+   "hit_feedback": 3.0,
+   "ui_hud_clarity": 4.5,
+   "loot_excitement": 3.0,
+   "polished_arpg_feel": 2.5,
+   "overall": 2.5
+  },
+  "warden": {
+   "score": 2.86,
+   "readability_telegraphs": 3.0,
+   "spell_vfx": 3.0,
+   "enemy_animation_variety": 2.0,
+   "hit_feedback": 3.0,
+   "ui_hud_clarity": 5.0,
+   "loot_excitement": 2.0,
+   "polished_arpg_feel": 2.0,
+   "overall": 3
+  }
+ },
+ "by_criterion": {
+  "readability_telegraphs": 2.75,
+  "spell_vfx": 3.12,
+  "enemy_animation_variety": 1.75,
+  "hit_feedback": 3.0,
+  "ui_hud_clarity": 4.62,
+  "loot_excitement": 2.0,
+  "polished_arpg_feel": 2.38
+ },
+ "reasons": {
+  "hexweaver": "The HUD works: it has HP, mana and XP bars, a 6-slot spell bar with cooldown numbers, and a minimap, and the purple and green spell glows plus floating damage numbers give some feedback. Combat is hard to read, though. The boss is a huge untextured orange block that blows out to a pure white silhouette when hit, and its windup shows no visible telegraph or ground marker. Half the frames have no enemies in them, and none of the 11 drops shows a beam, rarity colour or toast, while 47 sound voices across 93 hits suggests thin audio.",
+  "pyromancer": "The HUD works: labelled health and mana bars, a numbered spell bar with cooldown timers, a minimap and readable damage numbers. The fire effects (glowing bolts, a bright fireburst flash) are the strongest visuals, but they often wash out the screen and hide the targets. Enemies are blocky primitives with no visible wind-up or ground markers, and hits produce only sparse feedback (37 sound voices for 70 hits, no visible hit-stop or flashes). None of the 9 loot drops shows a beam, rarity glow or pickup toast, and the second half of the clip is empty streets.",
+  "stormcaller": "The HUD works: there are clear HP, mana and XP bars, a numbered spell bar with cooldown timers, and a minimap. The boss gets a big red ground telegraph, and damage numbers appear during fights. The weak points are blocky primitive enemies, spell effects that are mostly flat glows and white squares, and a plain green loot beam with no visible rarity styling. Half the clip has no enemies at all, and only 26 sounds play for 55 hits, so combat feels thin and unfinished.",
+  "warden": "Strengths: the HUD has clear HP/mana/XP bars, a numbered spell bar with cooldown timers and a minimap, and the boss fight shows orange and red ground markers with crit numbers like 39!. Weaknesses: the boss is a flat, untextured white silhouette that fills the screen and hides the action. Enemies are crude low-poly blocks, the spell effects are small glows, the damage numbers are small and faint, and loot shows up only as dull boxes and one green beam, with no visible rarity colours or toasts. Only 35 sound voices played for 72 casts and 55 hits."
+ }
+}

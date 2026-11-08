@@ -1,12 +1,1117 @@
 [
-  {"id": "market-north", "name": "Market Hill stalls", "x": -105, "y": 78, "r": 7, "mobs": ["ink_imp", "ink_imp", "wisp"]},
-  {"id": "market-south", "name": "Market Square south", "x": -98, "y": 38, "r": 7, "mobs": ["automaton", "ink_imp"]},
-  {"id": "peas-hill", "name": "Peas Hill", "x": -122, "y": -28, "r": 6, "mobs": ["statue", "wisp"]},
-  {"id": "benet-st", "name": "Bene't Street", "x": -132, "y": -100, "r": 5, "mobs": ["gargoyle", "ink_imp"]},
-  {"id": "kings-parade", "name": "King's Parade", "x": -190, "y": 5, "r": 6, "mobs": ["statue", "gargoyle"]},
-  {"id": "senate-house-hill", "name": "Senate House Hill", "x": -182, "y": 68, "r": 7, "mobs": ["gargoyle", "wisp", "automaton"]},
-  {"id": "trinity-st", "name": "Trinity Street", "x": -195, "y": 175, "r": 6, "mobs": ["automaton", "ink_imp"]},
-  {"id": "market-st", "name": "Market Street", "x": -92, "y": 118, "r": 5, "mobs": ["wisp", "ink_imp"]},
-  {"id": "petty-cury", "name": "Petty Cury", "x": -50, "y": 25, "r": 5, "mobs": ["statue", "ink_imp"]},
-  {"id": "boss-market", "name": "The Bellwarden of Market Hill", "x": -102.9, "y": 57.4, "r": 18, "mobs": ["bellwarden"], "boss": true}
+{
+"id": "market-north",
+"name": "Market Hill stalls",
+"x": -105,
+"y": 78,
+"r": 7,
+"mobs": [
+"ink_imp",
+"ink_imp",
+"wisp"
+]
+},
+{
+"id": "market-south",
+"name": "Market Square south",
+"x": -98,
+"y": 38,
+"r": 7,
+"mobs": [
+"automaton",
+"ink_imp",
+"bell_bats"
+]
+},
+{
+"id": "peas-hill",
+"name": "Peas Hill",
+"x": -122,
+"y": -28,
+"r": 6,
+"mobs": [
+"statue",
+"wisp",
+"soot_sprite"
+]
+},
+{
+"id": "benet-st",
+"name": "Bene't Street",
+"x": -132,
+"y": -100,
+"r": 5,
+"mobs": [
+"gargoyle",
+"ink_imp",
+"soot_sprite"
+]
+},
+{
+"id": "kings-parade",
+"name": "King's Parade",
+"x": -190,
+"y": 5,
+"r": 6,
+"mobs": [
+"statue",
+"gargoyle",
+"crest_griffin"
+]
+},
+{
+"id": "senate-house-hill",
+"name": "Senate House Hill",
+"x": -182,
+"y": 68,
+"r": 7,
+"mobs": [
+"gargoyle",
+"wisp",
+"automaton",
+"punt_revenant"
+]
+},
+{
+"id": "trinity-st",
+"name": "Trinity Street",
+"x": -195,
+"y": 175,
+"r": 6,
+"mobs": [
+"automaton",
+"ink_imp",
+"bicycle_golem",
+"river_wraith"
+]
+},
+{
+"id": "market-st",
+"name": "Market Street",
+"x": -92,
+"y": 118,
+"r": 5,
+"mobs": [
+"wisp",
+"ink_imp",
+"bog_hag"
+]
+},
+{
+"id": "petty-cury",
+"name": "Petty Cury",
+"x": -50,
+"y": 25,
+"r": 5,
+"mobs": [
+"statue",
+"ink_imp",
+"bicycle_golem"
+]
+},
+{
+"id": "boss-market",
+"name": "The Bellwarden of Market Hill",
+"x": -102.9,
+"y": 57.4,
+"r": 18,
+"mobs": [
+"bellwarden"
+],
+"boss": true
+},
+{
+"id": "boss-gsm",
+"name": "The Chime-keeper of St Mary's",
+"x": -176,
+"y": 50,
+"r": 16,
+"mobs": [
+"chimekeeper"
+],
+"boss": true
+},
+{
+"id": "boss-kings-gate",
+"name": "The Gatehouse Lion of King's",
+"x": -197,
+"y": -22,
+"r": 16,
+"mobs": [
+"gatehouse_lion"
+],
+"boss": true
+},
+{
+"id": "gen-000",
+"name": "Ring 1",
+"x": 1.4,
+"y": 114.7,
+"r": 5,
+"mobs": [
+"gargoyle",
+"ink_imp"
+],
+"gen": true
+},
+{
+"id": "gen-001",
+"name": "Ring 1",
+"x": -14.3,
+"y": -53.4,
+"r": 5,
+"mobs": [
+"automaton",
+"soot_sprite"
+],
+"gen": true
+},
+{
+"id": "gen-002",
+"name": "Ring 2",
+"x": -26.2,
+"y": 186.6,
+"r": 5,
+"mobs": [
+"statue",
+"bell_bats"
+],
+"gen": true
+},
+{
+"id": "gen-003",
+"name": "Ring 2",
+"x": -104.8,
+"y": 212.6,
+"r": 5,
+"mobs": [
+"ink_imp",
+"crest_griffin"
+],
+"gen": true
+},
+{
+"id": "gen-004",
+"name": "Ring 2",
+"x": 47.2,
+"y": 2.2,
+"r": 5,
+"mobs": [
+"bicycle_golem",
+"wisp"
+],
+"gen": true
+},
+{
+"id": "gen-005",
+"name": "Ring 2",
+"x": -262.8,
+"y": 85.4,
+"r": 5,
+"mobs": [
+"soot_sprite",
+"gargoyle"
+],
+"gen": true
+},
+{
+"id": "gen-006",
+"name": "Ring 2",
+"x": 77.3,
+"y": 66.7,
+"r": 5,
+"mobs": [
+"crest_griffin",
+"automaton"
+],
+"gen": true
+},
+{
+"id": "gen-007",
+"name": "Ring 2",
+"x": -296.1,
+"y": 17.2,
+"r": 5,
+"mobs": [
+"bell_bats",
+"ink_imp"
+],
+"gen": true
+},
+{
+"id": "gen-008",
+"name": "Ring 2",
+"x": -52.6,
+"y": -140.7,
+"r": 5,
+"mobs": [
+"gargoyle",
+"ink_imp"
+],
+"gen": true
+},
+{
+"id": "gen-009",
+"name": "Ring 2",
+"x": 65.0,
+"y": 197.5,
+"r": 5,
+"mobs": [
+"automaton",
+"soot_sprite"
+],
+"gen": true
+},
+{
+"id": "gen-010",
+"name": "Ring 2",
+"x": -174.6,
+"y": 268.7,
+"r": 5,
+"mobs": [
+"statue",
+"bell_bats"
+],
+"gen": true
+},
+{
+"id": "gen-011",
+"name": "Ring 2",
+"x": -258.1,
+"y": -95.4,
+"r": 5,
+"mobs": [
+"ink_imp",
+"crest_griffin"
+],
+"gen": true
+},
+{
+"id": "gen-012",
+"name": "Ring 2",
+"x": -195.7,
+"y": -141.8,
+"r": 5,
+"mobs": [
+"bicycle_golem",
+"wisp"
+],
+"gen": true
+},
+{
+"id": "gen-013",
+"name": "Ring 2",
+"x": 67.1,
+"y": -92.9,
+"r": 5,
+"mobs": [
+"soot_sprite",
+"gargoyle"
+],
+"gen": true
+},
+{
+"id": "gen-014",
+"name": "Ring 2",
+"x": -289.8,
+"y": 189.6,
+"r": 5,
+"mobs": [
+"crest_griffin",
+"automaton"
+],
+"gen": true
+},
+{
+"id": "gen-015",
+"name": "Ring 2",
+"x": -47.2,
+"y": 280.1,
+"r": 5,
+"mobs": [
+"bell_bats",
+"ink_imp"
+],
+"gen": true
+},
+{
+"id": "gen-016",
+"name": "Ring 2",
+"x": 23.2,
+"y": -158.4,
+"r": 5,
+"mobs": [
+"gargoyle",
+"ink_imp"
+],
+"gen": true
+},
+{
+"id": "gen-017",
+"name": "Ring 2",
+"x": 33.7,
+"y": 268.3,
+"r": 5,
+"mobs": [
+"automaton",
+"soot_sprite"
+],
+"gen": true
+},
+{
+"id": "gen-018",
+"name": "Ring 2",
+"x": -347.8,
+"y": 126.7,
+"r": 5,
+"mobs": [
+"river_wraith",
+"punt_revenant"
+],
+"gen": true
+},
+{
+"id": "gen-019",
+"name": "Ring 2",
+"x": -134.8,
+"y": -192.4,
+"r": 5,
+"mobs": [
+"ink_imp",
+"crest_griffin"
+],
+"gen": true
+},
+{
+"id": "gen-020",
+"name": "Ring 2",
+"x": 143.8,
+"y": 39.2,
+"r": 5,
+"mobs": [
+"bicycle_golem",
+"wisp"
+],
+"gen": true
+},
+{
+"id": "gen-021",
+"name": "Ring 2",
+"x": -319.9,
+"y": -70.9,
+"r": 5,
+"mobs": [
+"soot_sprite",
+"gargoyle"
+],
+"gen": true
+},
+{
+"id": "gen-022",
+"name": "Ring 2",
+"x": -378.0,
+"y": 57.0,
+"r": 5,
+"mobs": [
+"river_wraith",
+"punt_revenant"
+],
+"gen": true
+},
+{
+"id": "gen-023",
+"name": "Ring 2",
+"x": 148.0,
+"y": 162.8,
+"r": 5,
+"mobs": [
+"bell_bats",
+"ink_imp"
+],
+"gen": true
+},
+{
+"id": "gen-024",
+"name": "Ring 2",
+"x": -260.2,
+"y": 279.6,
+"r": 5,
+"mobs": [
+"gargoyle",
+"ink_imp"
+],
+"gen": true
+},
+{
+"id": "gen-025",
+"name": "Ring 2",
+"x": -112.5,
+"y": 330.0,
+"r": 5,
+"mobs": [
+"automaton",
+"soot_sprite"
+],
+"gen": true
+},
+{
+"id": "gen-026",
+"name": "Ring 2",
+"x": 154.0,
+"y": -56.8,
+"r": 5,
+"mobs": [
+"statue",
+"bell_bats"
+],
+"gen": true
+},
+{
+"id": "gen-027",
+"name": "Ring 3",
+"x": -55.9,
+"y": -244.6,
+"r": 5,
+"mobs": [
+"ink_imp",
+"crest_griffin"
+],
+"gen": true
+},
+{
+"id": "gen-028",
+"name": "Ring 3",
+"x": -304.7,
+"y": -177.6,
+"r": 5,
+"mobs": [
+"bicycle_golem",
+"wisp"
+],
+"gen": true
+},
+{
+"id": "gen-029",
+"name": "Ring 3",
+"x": 201.7,
+"y": 118.6,
+"r": 5,
+"mobs": [
+"soot_sprite",
+"gargoyle"
+],
+"gen": true
+},
+{
+"id": "gen-030",
+"name": "Ring 3",
+"x": -241.2,
+"y": -221.7,
+"r": 5,
+"mobs": [
+"crest_griffin",
+"automaton"
+],
+"gen": true
+},
+{
+"id": "gen-031",
+"name": "Ring 3",
+"x": 122.5,
+"y": 268.1,
+"r": 5,
+"mobs": [
+"bell_bats",
+"ink_imp"
+],
+"gen": true
+},
+{
+"id": "gen-032",
+"name": "Ring 3",
+"x": -345.3,
+"y": 256.9,
+"r": 5,
+"mobs": [
+"river_wraith",
+"wisp"
+],
+"gen": true
+},
+{
+"id": "gen-033",
+"name": "Ring 3",
+"x": -193.3,
+"y": 347.4,
+"r": 5,
+"mobs": [
+"automaton",
+"soot_sprite"
+],
+"gen": true
+},
+{
+"id": "gen-034",
+"name": "Ring 3",
+"x": -24.6,
+"y": 370.4,
+"r": 5,
+"mobs": [
+"statue",
+"bell_bats"
+],
+"gen": true
+},
+{
+"id": "gen-035",
+"name": "Ring 3",
+"x": 85.5,
+"y": -183.2,
+"r": 5,
+"mobs": [
+"ink_imp",
+"crest_griffin"
+],
+"gen": true
+},
+{
+"id": "gen-036",
+"name": "Ring 3",
+"x": -419.0,
+"y": -15.5,
+"r": 5,
+"mobs": [
+"river_wraith",
+"wisp"
+],
+"gen": true
+},
+{
+"id": "gen-037",
+"name": "Ring 3",
+"x": -406.3,
+"y": 194.5,
+"r": 5,
+"mobs": [
+"punt_revenant",
+"bog_hag"
+],
+"gen": true
+},
+{
+"id": "gen-038",
+"name": "Ring 3",
+"x": 31.7,
+"y": -247.7,
+"r": 5,
+"mobs": [
+"crest_griffin",
+"automaton"
+],
+"gen": true
+},
+{
+"id": "gen-039",
+"name": "Ring 3",
+"x": -191.7,
+"y": -272.0,
+"r": 5,
+"mobs": [
+"bell_bats",
+"ink_imp"
+],
+"gen": true
+},
+{
+"id": "gen-040",
+"name": "Ring 3",
+"x": -443.0,
+"y": 112.6,
+"r": 5,
+"mobs": [
+"river_wraith",
+"wisp"
+],
+"gen": true
+},
+{
+"id": "gen-041",
+"name": "Ring 3",
+"x": -387.1,
+"y": -135.4,
+"r": 5,
+"mobs": [
+"punt_revenant",
+"bog_hag"
+],
+"gen": true
+},
+{
+"id": "gen-042",
+"name": "Ring 3",
+"x": 225.7,
+"y": -23.2,
+"r": 5,
+"mobs": [
+"statue",
+"bell_bats"
+],
+"gen": true
+},
+{
+"id": "gen-043",
+"name": "Ring 3",
+"x": 193.8,
+"y": 242.2,
+"r": 5,
+"mobs": [
+"ink_imp",
+"crest_griffin"
+],
+"gen": true
+},
+{
+"id": "gen-044",
+"name": "Ring 3",
+"x": -109.8,
+"y": -295.4,
+"r": 5,
+"mobs": [
+"bicycle_golem",
+"wisp"
+],
+"gen": true
+},
+{
+"id": "gen-045",
+"name": "Ring 3",
+"x": 172.3,
+"y": -145.5,
+"r": 5,
+"mobs": [
+"soot_sprite",
+"gargoyle"
+],
+"gen": true
+},
+{
+"id": "gen-046",
+"name": "Ring 3",
+"x": 97.3,
+"y": 352.8,
+"r": 5,
+"mobs": [
+"crest_griffin",
+"automaton"
+],
+"gen": true
+},
+{
+"id": "gen-047",
+"name": "Ring 3",
+"x": -260.7,
+"y": 374.8,
+"r": 5,
+"mobs": [
+"bell_bats",
+"ink_imp"
+],
+"gen": true
+},
+{
+"id": "gen-048",
+"name": "Ring 3",
+"x": -130.8,
+"y": 421.9,
+"r": 5,
+"mobs": [
+"gargoyle",
+"ink_imp"
+],
+"gen": true
+},
+{
+"id": "gen-049",
+"name": "Ring 3",
+"x": 229.9,
+"y": 186.0,
+"r": 5,
+"mobs": [
+"automaton",
+"soot_sprite"
+],
+"gen": true
+},
+{
+"id": "gen-050",
+"name": "Ring 3",
+"x": 250.8,
+"y": -89.1,
+"r": 5,
+"mobs": [
+"statue",
+"bell_bats"
+],
+"gen": true
+},
+{
+"id": "gen-051",
+"name": "Ring 3",
+"x": 280.7,
+"y": 71.1,
+"r": 5,
+"mobs": [
+"ink_imp",
+"crest_griffin"
+],
+"gen": true
+},
+{
+"id": "gen-052",
+"name": "Ring 3",
+"x": -312.6,
+"y": -272.5,
+"r": 5,
+"mobs": [
+"bicycle_golem",
+"wisp"
+],
+"gen": true
+},
+{
+"id": "gen-053",
+"name": "Ring 3",
+"x": 0.3,
+"y": -312.6,
+"r": 5,
+"mobs": [
+"soot_sprite",
+"gargoyle"
+],
+"gen": true
+},
+{
+"id": "gen-054",
+"name": "Ring 3",
+"x": -352.3,
+"y": 359.4,
+"r": 5,
+"mobs": [
+"river_wraith",
+"punt_revenant"
+],
+"gen": true
+},
+{
+"id": "gen-055",
+"name": "Ring 3",
+"x": 187.9,
+"y": 319.3,
+"r": 5,
+"mobs": [
+"bell_bats",
+"ink_imp"
+],
+"gen": true
+},
+{
+"id": "gen-056",
+"name": "Ring 3",
+"x": 139.3,
+"y": -265.1,
+"r": 5,
+"mobs": [
+"gargoyle",
+"ink_imp"
+],
+"gen": true
+},
+{
+"id": "gen-057",
+"name": "Ring 3",
+"x": -420.3,
+"y": 260.6,
+"r": 5,
+"mobs": [
+"punt_revenant",
+"bog_hag"
+],
+"gen": true
+},
+{
+"id": "gen-058",
+"name": "Ring 3",
+"x": -483.9,
+"y": 9.0,
+"r": 5,
+"mobs": [
+"river_wraith",
+"punt_revenant"
+],
+"gen": true
+},
+{
+"id": "gen-059",
+"name": "Ring 3",
+"x": 29.3,
+"y": 428.4,
+"r": 5,
+"mobs": [
+"ink_imp",
+"crest_griffin"
+],
+"gen": true
+},
+{
+"id": "gen-060",
+"name": "Ring 3",
+"x": -52.7,
+"y": 460.5,
+"r": 5,
+"mobs": [
+"bicycle_golem",
+"wisp"
+],
+"gen": true
+},
+{
+"id": "gen-061",
+"name": "Ring 3",
+"x": -476.9,
+"y": 200.0,
+"r": 5,
+"mobs": [
+"punt_revenant",
+"bog_hag"
+],
+"gen": true
+},
+{
+"id": "gen-062",
+"name": "Ring 3",
+"x": -382.0,
+"y": -237.0,
+"r": 5,
+"mobs": [
+"river_wraith",
+"punt_revenant"
+],
+"gen": true
+},
+{
+"id": "gen-063",
+"name": "Ring 3",
+"x": -222.8,
+"y": 453.4,
+"r": 5,
+"mobs": [
+"bell_bats",
+"ink_imp"
+],
+"gen": true
+},
+{
+"id": "gen-064",
+"name": "Ring 3",
+"x": -480.2,
+"y": -132.6,
+"r": 5,
+"mobs": [
+"river_wraith",
+"wisp"
+],
+"gen": true
+},
+{
+"id": "gen-065",
+"name": "Ring 3",
+"x": -154.9,
+"y": -355.9,
+"r": 5,
+"mobs": [
+"automaton",
+"soot_sprite"
+],
+"gen": true
+},
+{
+"id": "gen-066",
+"name": "Ring 3",
+"x": 68.6,
+"y": -302.0,
+"r": 5,
+"mobs": [
+"statue",
+"bell_bats"
+],
+"gen": true
+},
+{
+"id": "gen-067",
+"name": "Ring 3",
+"x": -282.2,
+"y": -334.5,
+"r": 5,
+"mobs": [
+"ink_imp",
+"crest_griffin"
+],
+"gen": true
+},
+{
+"id": "gen-068",
+"name": "Ring 3",
+"x": 242.0,
+"y": -181.8,
+"r": 5,
+"mobs": [
+"bicycle_golem",
+"wisp"
+],
+"gen": true
+},
+{
+"id": "gen-069",
+"name": "Ring 3",
+"x": -85.2,
+"y": -358.2,
+"r": 5,
+"mobs": [
+"soot_sprite",
+"gargoyle"
+],
+"gen": true
+},
+{
+"id": "gen-070",
+"name": "Ring 3",
+"x": -533.9,
+"y": 93.8,
+"r": 5,
+"mobs": [
+"river_wraith",
+"punt_revenant"
+],
+"gen": true
+},
+{
+"id": "gen-071",
+"name": "Ring 3",
+"x": 314.2,
+"y": -32.4,
+"r": 5,
+"mobs": [
+"bell_bats",
+"ink_imp"
+],
+"gen": true
+},
+{
+"id": "gen-072",
+"name": "Ring 3",
+"x": 320.2,
+"y": 169.5,
+"r": 5,
+"mobs": [
+"gargoyle",
+"ink_imp"
+],
+"gen": true
+},
+{
+"id": "gen-073",
+"name": "Ring 3",
+"x": 265.5,
+"y": 276.9,
+"r": 5,
+"mobs": [
+"automaton",
+"soot_sprite"
+],
+"gen": true
+},
+{
+"id": "gen-074",
+"name": "Ring 3",
+"x": 156.0,
+"y": 416.1,
+"r": 5,
+"mobs": [
+"statue",
+"bell_bats"
+],
+"gen": true
+},
+{
+"id": "gen-075",
+"name": "Ring 3",
+"x": 202.5,
+"y": -243.9,
+"r": 5,
+"mobs": [
+"ink_imp",
+"crest_griffin"
+],
+"gen": true
+},
+{
+"id": "gen-076",
+"name": "Ring 3",
+"x": -152.8,
+"y": 502.6,
+"r": 5,
+"mobs": [
+"bicycle_golem",
+"wisp"
+],
+"gen": true
+},
+{
+"id": "gen-077",
+"name": "Ring 3",
+"x": -480.9,
+"y": 287.1,
+"r": 5,
+"mobs": [
+"punt_revenant",
+"bog_hag"
+],
+"gen": true
+},
+{
+"id": "gen-078",
+"name": "Ring 3",
+"x": 293.3,
+"y": -140.5,
+"r": 5,
+"mobs": [
+"crest_griffin",
+"automaton"
+],
+"gen": true
+},
+{
+"id": "gen-079",
+"name": "Ring 3",
+"x": -420.1,
+"y": 375.5,
+"r": 5,
+"mobs": [
+"bog_hag",
+"wisp"
+],
+"gen": true
+},
+{
+"id": "gen-080",
+"name": "Ring 3",
+"x": -353.1,
+"y": 428.6,
+"r": 5,
+"mobs": [
+"river_wraith",
+"wisp"
+],
+"gen": true
+}
 ]

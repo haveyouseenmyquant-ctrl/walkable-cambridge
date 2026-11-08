@@ -147,7 +147,7 @@ async function main() {
     if (out.load_seconds != null && MOVES) out.moves = await testMoves(page);
     if (out.load_seconds != null && WALK_S > 0) {
       const start = await page.evaluate('window.__player.position');
-      let dist = 0, prev = start;
+      let dist = 0, prev = start, maxMobs = 0;
       await page.evaluate(() => { const f = window.__frames = []; const tick = t => { f.push(t); requestAnimationFrame(tick); }; requestAnimationFrame(tick); });
       await page.keyboard.down('KeyW');
       const t0 = Date.now();
@@ -159,6 +159,9 @@ async function main() {
         dist += moved; prev = p;
         if (Date.now() - t0 >= WALK_S * 1000) break;
         await page.keyboard[i % 4 < 2 ? 'down' : 'up']('ShiftLeft');
+        // session 41: the walk is also a fight (game layer on): cast the class's spells in turn, count live mobs
+        await page.keyboard.press('Digit' + (1 + i % 6));
+        maxMobs = Math.max(maxMobs, await page.evaluate('window.__game?.mobs?.length || 0'));
         const turn = (i % 3 === 2) ? 'ArrowRight' : 'ArrowLeft';
         const ms = moved < 1.5 ? 900 : (i % 2 ? 200 : 0);
         if (ms) { await page.keyboard.down(turn); await sleep(ms); await page.keyboard.up(turn); }
@@ -171,7 +174,7 @@ async function main() {
         out.fps_median = c.length ? c[Math.floor(c.length / 2)] : null;
       }
       const tiles = await page.evaluate('window.__player.loadedTiles');
-      log(`walked ${dist.toFixed(1)} m in ${WALK_S}s from (${start.x.toFixed(1)}, ${start.y.toFixed(1)}) to (${prev.x.toFixed(1)}, ${prev.y.toFixed(1)}), ${tiles} tiles loaded`);
+      log(`walked ${dist.toFixed(1)} m in ${WALK_S}s from (${start.x.toFixed(1)}, ${start.y.toFixed(1)}) to (${prev.x.toFixed(1)}, ${prev.y.toFixed(1)}), ${tiles} tiles loaded, up to ${maxMobs} live mobs`);
     }
   } finally {
     await browser.close();

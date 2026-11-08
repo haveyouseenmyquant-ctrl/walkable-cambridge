@@ -1,12 +1,14 @@
 """Print the build hash (sha256, first 16 hex) of a site dir or URL: manifest.json plus the viewer files that
-change what is rendered (session 10: viewer-only changes such as materials must get their own score; session 32: + the zone loader and zone.json)."""
+change what is rendered (session 10: viewer-only changes such as materials must get their own score; session 32: + the zone loader and zone.json; session 42: + app/game/*)."""
 import hashlib
 import sys
 import urllib.error
 import urllib.request
 
 FILES = ["manifest.json", "index.html", "app/main.js", "app/tiles.js", "app/materials.js", "app/trees.js", "app/objects.js", "app/facades.js", "app/zone.js", "zone/zone.json", "cityfac/index.json",
-         "tex/textures.json"]
+         "tex/textures.json",
+         # session 42: the game layer, so game KPI caches (<hash>_game.json, _gameplay.json) follow game changes
+         "app/game/classes.js", "app/game/core.js", "app/game/encounters.json", "app/game/hud.js", "app/game/index.js", "app/game/itemdefs.js", "app/game/items.js", "app/game/mobs.js", "app/game/sfx.js", "app/game/vfx.js"]
 src = sys.argv[1].rstrip("/")
 h = hashlib.sha256()
 for f in FILES:

@@ -8,6 +8,7 @@ PY=.venv/bin/python
 [ -f data/derived/osm_targets.json ] || $PY -I scripts/osm_targets.py >/dev/null 2>&1
 SRC=site
 [ -s SITE_URL ] && SRC=$(head -n1 SITE_URL | tr -d '[:space:]')
+export SRC
 export BUILD_HASH=$($PY -I scripts/build_hash.py "$SRC" 2>/dev/null)
 # kpi.py reads every tile (~25-50 s); its result depends only on the build, so cache it per build hash.
 KC=data/derived/kpi_cache_$BUILD_HASH.json
@@ -37,7 +38,7 @@ try:
 except Exception:
     pass
 try:
-    out.update(json.loads(subprocess.run([".venv/bin/python", "-I", "scripts/encounter_coverage.py", "site"], capture_output=True, text=True, timeout=20).stdout))
+    out.update(json.loads(subprocess.run([".venv/bin/python", "-I", "scripts/encounter_coverage.py", os.environ.get("SRC", "site")], capture_output=True, text=True, timeout=20).stdout))
 except Exception:
     pass
 # session 40 (Gaspard, 8 Nov 2026): building_coverage_pct is retired into site_errors (one error per missing OSM building);
@@ -54,6 +55,15 @@ for k in ("photo_match_score", "market_square_photo_match", "painted_detail_pct"
 gf = "data/benchmark/scores/%s_game.json" % h
 if h and os.path.exists(gf):
     out.update(json.load(open(gf)))
+# Gaspard (8 Nov 2026): always print all six game KPIs for the live build, 0 when not measured yet;
+# gameplay_judged is cached per build by scripts/gameplay_kpi.sh (service.sh)
+gp = "data/benchmark/scores/%s_gameplay.json" % h
+if h and os.path.exists(gp):
+    out["gameplay_judged"] = json.load(open(gp))["gameplay_judged"]
+for k in ("playable_classes", "mob_types", "equipment_effects", "encounter_coverage_pct", "playtest_pass_pct", "gameplay_judged"):
+    out.setdefault(k, 0)
+for k in ("ground_coverage_pct", "height_accuracy_pct", "landmarks_detailed", "building_coverage_pct"):
+    out.pop(k, None)
 out.pop("fetch_failures", None)
 out.pop("real_facade_pct", None)   # retired by Gaspard (8 Nov 2026): photo-baked facades are being replaced by geometry
 print(json.dumps(out))'

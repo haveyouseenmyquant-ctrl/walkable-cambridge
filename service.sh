@@ -12,6 +12,13 @@ while true; do
   [ -s SITE_URL ] && SRC=$(head -n1 SITE_URL | tr -d '[:space:]')
   # session 31: the Market Square benchmark (main KPI) first, every 10 min check for a new live build;
   # the browser checks hourly, then the 200-view benchmark
+  # session 42 (Gaspard): game KPIs + gameplay_judged for each new live hash. The tests run on local site/, which
+  # equals the live build after publish.sh; only run when the hashes agree so the cache is keyed to the live build.
+  LH=$(.venv/bin/python -I scripts/build_hash.py "$SRC" 2>/dev/null); SH=$(.venv/bin/python -I scripts/build_hash.py site 2>/dev/null)
+  if [ -n "$LH" ] && [ "$LH" = "$SH" ]; then
+    [ -s data/benchmark/scores/${LH}_game.json ] || scripts/game_kpi.sh 2>&1 | tail -n1
+    [ -x scripts/gameplay_kpi.sh ] && [ ! -s data/benchmark/scores/${LH}_gameplay.json ] && scripts/gameplay_kpi.sh 2>&1 | tail -n1
+  fi
   [ -f data/benchmark/market_square.json ] && scripts/ms_bench.sh "$SRC" 2>&1 | tail -n2
   if [ $(( $(date +%s) - LAST )) -lt 3300 ]; then
     [ -f data/benchmark/benchmark.json ] && scripts/bench.sh "$SRC" 2>&1 | tail -n2

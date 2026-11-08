@@ -1,7 +1,8 @@
 {
  "osm_id": "way/26344507",
  "sources": [
-  "mapillary:296497208762822"
+  "mapillary:296497208762822",
+  "mapillary:905995133446806"
  ],
  "walls": [
   {
@@ -135,6 +136,154 @@
    ],
    "confidence": "medium",
    "notes": "North aisle bay beside the tower: one tall Perpendicular window."
+  },
+  {
+   "id": "way/26344507:9",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "stone",
+   "wall_colour": "#a39270",
+   "trim_colour": "#cfc2a0",
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "cornice_z": 8.3,
+   "cornice": "simple",
+   "parapet": true,
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.68,
+     "w": 3.0,
+     "z": 2.5,
+     "h": 5.2,
+     "panes": [
+      4,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 8.05,
+     "w": 3.0,
+     "z": 2.5,
+     "h": 5.2,
+     "panes": [
+      4,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 13.41,
+     "w": 3.0,
+     "z": 2.5,
+     "h": 5.2,
+     "panes": [
+      4,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 18.78,
+     "w": 3.0,
+     "z": 2.5,
+     "h": 5.2,
+     "panes": [
+      4,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "South aisle east of the south porch, seen obliquely from King's Parade (Mapillary 905995133446806, looking north): embattled parapet over large Perpendicular windows between buttresses, same rhythm as the north aisle (wall :0, ~5.2 m bays). 4 bays assumed over the 21.5 m; positions spaced evenly, not measured."
+  },
+  {
+   "id": "way/26344507:3",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    9.0,
+    17.0
+   ],
+   "material": "stone",
+   "wall_colour": "#a39270",
+   "trim_colour": "#cfc2a0",
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "cornice_z": 23.5,
+   "cornice": "simple",
+   "parapet": true,
+   "elements": [
+    {
+     "type": "door",
+     "style": "gothic",
+     "x": 5.2,
+     "w": 2.0,
+     "h": 3.6,
+     "surround": "none"
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 5.2,
+     "w": 3.4,
+     "z": 4.6,
+     "h": 7.0,
+     "panes": [
+      4,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 5.2,
+     "w": 1.0,
+     "z": 13.5,
+     "h": 2.2,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 5.2,
+     "w": 2.4,
+     "z": 18.5,
+     "h": 3.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "West face of the tower, seen obliquely from King's Parade (Mapillary 905995133446806): pointed west doorway (hidden by people, from its position under the window), tall Perpendicular great west window, a small lancet on the middle stage and a two-light belfry window under the battlements and octagonal corner turrets. Sizes/heights estimated from the oblique view."
   }
  ]
 }

@@ -192,5 +192,134 @@ const U = {
       if ((cd -= dt) > 0) return; cd = 0.3; for (const m of g.mobs) { if (m.dead || Math.hypot(m.x - p.x, m.y - p.y) > 2.5 || Math.abs((m.z ?? p.z) - p.z) > 4) continue; c.S.fx.bolt(c.S.pp(0.6), c.S.mp(m), 0xffa040); g.damageMob(m, 12, { type: 'fire', crit: false, noProc: true }); } }); },
     test(t) { const p = t.game.player; p.mode = 'broom'; const m = t.mob(1, 0); t.ticks(8); return [m.hp < m.maxHp, `hp ${m.hp}`]; } },
 };
+// ---------------- session 41: 15 more effect items (fills the thinnest slot/rarity cells first)
+const toward = (m, p, k) => { const dx = m.x - p.x, dy = m.y - p.y, d = Math.hypot(dx, dy) || 1; return { x: dx / d * k, y: dy / d * k }; };
+const U2 = {
+  // wands
+  wand_skimstone: { name: 'Granta Skimming-Stone Wand', slot: 'wand', rarity: 'uncommon', stats: { power: 0.05 },
+    desc: '25% chance on hit for the bolt to skip on to another foe within 7 m (50% damage).',
+    fx(c) { c.on('hit', e => { if (!isHit(c, e) || !c.S.proc(0.25)) return; const g = c.game, a = e.target; let b = null, bd = 7;
+      for (const m of g.mobs) { if (m.dead || m === a) continue; const d = Math.hypot(m.x - a.x, m.y - a.y); if (d < bd) { bd = d; b = m; } } if (!b) return;
+      c.S.fx.bolt(c.S.mp(a, 0.6), c.S.mp(b, 0.6), 0xa8e0ff); c.S.fx.burst(c.S.mp(b, 0.6), 0xd0f0ff, 14, 2.5, 0.4); c.S.fx.ring(b.x, b.y, (b.z ?? g.pz) + 0.1, 0xa8e0ff, 1.2, 0.35);
+      g.damageMob(b, Math.max(1, e.amount * 0.5 / (g.stats.power || 1)), { type: e.type, crit: false, noProc: true }); }); },
+    test(t) { const a = t.mob(3, 0), b = t.mob(6, 1); t.force(); t.hit(a, 20); return [b.hp < b.maxHp, `ricochet target hp ${b.hp}`]; } },
+  wand_fenditch: { name: 'Fen Ditch Frostbrand', slot: 'wand', rarity: 'epic', stats: { power: 0.09 },
+    desc: 'Hits chill foes (slowed 2 s). Every 3rd hit on a chilled foe freezes it solid for 1.2 s.',
+    fx(c) { const n = new WeakMap(); c.on('hit', e => { if (!isHit(c, e)) return; const g = c.game, m = e.target; const chilled = m.slowUntil > g.time;
+      m.slowUntil = g.time + 2; c.S.fx.burst(c.S.mp(m, 0.8), 0xbfeaff, 8, 1.5, 0.5);
+      const k = chilled ? (n.get(m) || 0) + 1 : 0; n.set(m, k >= 2 ? 0 : k);
+      if (k >= 2) { m.stunUntil = g.time + 1.2; c.S.fx.ring(m.x, m.y, (m.z ?? g.pz) + 0.1, 0xe0f8ff, 1.4, 0.6); c.S.fx.burst(c.S.mp(m, 1), 0xe8fcff, 40, 3.5, 0.9); } }); },
+    test(t) { const m = t.mob(3, 0); t.hit(m, 5); t.hit(m, 5); t.hit(m, 5); return [m.slowUntil > t.game.time && m.stunUntil > t.game.time, `slowUntil ${m.slowUntil.toFixed(1)} stunUntil ${m.stunUntil?.toFixed(1)}`]; } },
+
+  // hats
+  hat_boater: { name: "Punter's Straw Boater", slot: 'hat', rarity: 'common', stats: { maxHp: 5 },
+    desc: 'Kills grant +15% spell power for 4 s.',
+    fx(c) { let on = false, until = 0; const g = c.game; const set = v => { if (v === on) return; g.stats.power += v ? 0.15 : -0.15; on = v; };
+      c.on('kill', () => { set(true); until = c.S.t + 4; c.S.fx.burst(c.S.pp(1.9), 0xffe27a, 16, 1.6, 0.7); c.S.fx.ring(g.px, g.py, g.pz + 1.9, 0xffe27a, 0.7, 0.4); });
+      c.on('tick', ({ dt }) => { if (!on) return; if (c.S.t > until) set(false); else if (Math.random() < dt * 10) c.S.fx.burst(c.S.pp(1.8), 0xffe27a, 1, 0.5, 0.5); });
+      c.cleanup(() => set(false)); },
+    test(t) { const p0 = t.game.stats.power; t.game.emit('kill', { mob: t.mob(3, 0) }); const p1 = t.game.stats.power; t.ticks(45); const p2 = t.game.stats.power;
+      return [p1 > p0 && Math.abs(p2 - p0) < 1e-9, `power ${p0.toFixed(2)} -> ${p1.toFixed(2)} -> ${p2.toFixed(2)}`]; } },
+  hat_corpusclock: { name: 'Corpus Clock Cowl', slot: 'hat', rarity: 'epic', stats: { cdr: 0.05, maxMana: 15 },
+    desc: 'Dropping below 35% health stops the clock: foes within 15 m are frozen for 1.5 s, then slowed for 4 s (30 s cooldown).',
+    fx(c) { let ready = 0; c.on('playerHit', () => { const g = c.game; if (g.stats.hp > g.stats.maxHp * 0.35 || g.stats.hp <= 0 || c.S.t < ready) return; ready = c.S.t + 30; const p = g.player;
+      c.S.fx.ring(p.x, p.y, p.z + 1, 0xffd27a, 15, 1.2); c.S.fx.ring(p.x, p.y, p.z + 0.1, 0xc8a050, 8, 0.9); c.S.fx.burst(c.S.pp(1.2), 0xffe0a0, 50, 5, 1.2);
+      for (const m of g.mobsNear(p.x, p.y, 15)) { m.stunUntil = g.time + 1.5; m.slowUntil = g.time + 5.5; c.S.fx.burst(c.S.mp(m, 1.2), 0xffd27a, 10, 1, 1.5); }
+      g.hud?.toast?.('Time slows...'); }); },
+    test(t) { const m = t.mob(10, 0); t.game.stats.hp = t.game.stats.maxHp * 0.2; t.game.emit('playerHit', { amount: 5 }); return [m.stunUntil > t.game.time && m.slowUntil > t.game.time + 4, `stunUntil ${m.stunUntil} slowUntil ${m.slowUntil}`]; } },
+
+  // robes
+  robe_fieldcoat: { name: 'Sedgwick Field Coat', slot: 'robe', rarity: 'rare', stats: { maxHp: 10 },
+    desc: 'Stand still for 1.5 s to dig in: +30 armour (stone aura) until you move.',
+    fx(c) { const g = c.game; let still = 0, on = false; const set = v => { if (v === on) return; g.stats.armor += v ? 30 : -30; on = v;
+        if (v) { c.S.fx.ring(g.px, g.py, g.pz + 0.05, 0xb89a6a, 1.6, 0.5); c.S.fx.burst(c.S.pp(0.2), 0xc8aa78, 24, 2, 0.6); } };
+      c.on('tick', ({ dt }) => { const p = g.player; const moving = Math.hypot(p.vx || 0, p.vy || 0) > 0.3 || p.flying || !p.grounded;
+        if (moving) { still = 0; set(false); return; } still += dt; if (still >= 1.5) set(true); if (on && Math.random() < dt * 6) c.S.fx.burst(c.S.pp(0.1), 0xb89a6a, 1, 0.6, 0.6); });
+      c.cleanup(() => set(false)); },
+    test(t) { const p = t.game.player, a0 = t.game.stats.armor; p.vx = p.vy = 0; p.grounded = true; if (p.mode === 'broom') p.mode = 'walk'; t.ticks(20); const a1 = t.game.stats.armor; p.vx = 5; t.ticks(1);
+      return [a1 >= a0 + 30 && t.game.stats.armor === a0, `armor ${a0} -> ${a1} -> ${t.game.stats.armor}`]; } },
+  robe_midsummer: { name: 'Midsummer Fair Mantle', slot: 'robe', rarity: 'legendary', stats: { maxHp: 25, armor: 6 },
+    desc: 'Each blow you take stokes an ember (max 5). At 5 embers you erupt: 35 fire damage within 5 m and +20 shield.',
+    fx(c) { let n = 0; c.on('playerHit', () => { const g = c.game, p = g.player; n++; c.S.fx.burst(c.S.pp(1 + n * 0.15), 0xff7a20, 4 + n * 3, 1.2, 0.6); if (n < 5) return; n = 0;
+      c.S.fx.ring(p.x, p.y, p.z + 0.1, 0xff5a10, 5, 0.6); c.S.fx.ring(p.x, p.y, p.z + 1, 0xffb040, 3.5, 0.5); c.S.fx.burst(c.S.pp(0.8), 0xff8a2a, 70, 7, 0.9);
+      g.shield = Math.min(60, (g.shield || 0) + 20); c.S.aoe(p.x, p.y, 5, 35, 'fire'); }); },
+    test(t) { const m = t.mob(3, 0); t.game.shield = 0; for (let i = 0; i < 5; i++) t.game.emit('playerHit', { amount: 2 }); return [m.hp < m.maxHp && t.game.shield >= 20, `hp ${m.hp} shield ${t.game.shield}`]; } },
+
+  // boots
+  boots_millpond: { name: 'Mill Pond Waders', slot: 'boots', rarity: 'common', stats: { armor: 3 },
+    desc: 'Dashing throws up a splash that knocks foes within 2.5 m back 2 m.',
+    fx(c) { c.on('dash', () => { const g = c.game, p = g.player; c.S.fx.ring(p.x, p.y, p.z + 0.05, 0x6ab8ff, 2.5, 0.4); c.S.fx.burst(c.S.pp(0.2), 0x9fd4ff, 30, 4, 0.6);
+      for (const m of g.mobsNear(p.x, p.y, 2.5)) { const k = toward(m, p, 2), nx = m.x + k.x, ny = m.y + k.y; const z = g.groundAt(nx, ny, (m.z ?? p.z) + 1);
+        if (z != null && Math.abs(z - (m.z ?? p.z)) < 1) { m.x = nx; m.y = ny; m.z = z; } c.S.fx.burst(c.S.mp(m, 0.3), 0x9fd4ff, 10, 2, 0.5); } }); },
+    test(t) { const m = t.mob(1.5, 0), x0 = m.x; t.game.emit('dash', {}); return [m.x > x0 + 1.5, `pushed ${(m.x - x0).toFixed(2)} m`]; } },
+  boots_parkers: { name: "Parker's Piece Sprint Spikes", slot: 'boots', rarity: 'rare', stats: { speedMult: 0.06 },
+    desc: 'Dashing trails a lightning wake: 14 storm damage where you start and where you end the dash.',
+    fx(c) { c.on('dash', () => { const g = c.game, p = g.player, x0 = p.x, y0 = p.y, z0 = p.z;
+      const zap = (x, y, z) => { c.S.fx.ring(x, y, z + 0.05, 0xbfe8ff, 2, 0.35); c.S.fx.burst({ x, y: z + 0.5, z: -y }, 0xd0f0ff, 16, 3, 0.4); c.S.aoe(x, y, 2, 14, 'storm'); };
+      zap(x0, y0, z0); c.S.after(0.25, () => { c.S.fx.bolt({ x: x0, y: z0 + 0.4, z: -y0 }, c.S.pp(0.4), 0xbfe8ff); zap(p.x, p.y, p.z); }); }); },
+    test(t) { const m = t.mob(1, 0); t.game.emit('dash', {}); const h1 = m.hp; t.ticks(4); return [h1 < m.maxHp && m.hp < h1, `hp ${m.maxHp} -> ${h1} -> ${m.hp}`]; } },
+
+  // rings
+  ring_tollgate: { name: 'Tollgate Penny Ring', slot: 'ring', rarity: 'common', stats: { manaRegen: 0.5 },
+    desc: 'Every 5th hit collects a toll: +15 storm damage with a coppery spark.',
+    fx(c) { let n = 0; c.on('hit', e => { if (!isHit(c, e) || ++n < 5) return; n = 0; const m = e.target;
+      c.S.fx.bolt(c.S.mp(m, 2.6), c.S.mp(m, 0.8), 0xe0a060); c.S.fx.burst(c.S.mp(m, 1), 0xe0a060, 18, 2.5, 0.5);
+      c.game.damageMob(m, 15 / (c.game.stats.power || 1), { type: 'storm', crit: false, noProc: true }); }); },
+    test(t) { const m = t.mob(3, 0); for (let i = 0; i < 4; i++) t.hit(m, 5); const h4 = m.hp; t.hit(m, 5); return [h4 === m.maxHp && m.hp < m.maxHp, `hp after 4 ${h4}, after 5 ${m.hp}`]; } },
+  ring_cornexchange: { name: 'Corn Exchange Signet', slot: 'ring', rarity: 'rare', stats: { maxHp: 8 },
+    desc: 'Kills have a 35% chance to free a soul mote that seeks you, restoring 10 health and 10 mana.',
+    fx(c) { const motes = []; const g = c.game;
+      c.on('kill', e => { const m = e.mob; if (!m || !c.S.proc(0.35)) return; motes.push({ x: m.x, y: m.y, z: (m.z ?? g.pz) + 1, v: 2 }); c.S.fx.burst(c.S.mp(m, 1), 0xc0a0ff, 20, 2, 0.6); });
+      c.on('tick', ({ dt }) => { for (let i = motes.length - 1; i >= 0; i--) { const o = motes[i], p = g.player; const dx = p.x - o.x, dy = p.y - o.y, dz = p.z + 1 - o.z, d = Math.hypot(dx, dy, dz);
+        o.v = Math.min(14, o.v + dt * 16); const s = Math.min(1, o.v * dt / (d || 1)); o.x += dx * s; o.y += dy * s; o.z += dz * s;
+        c.S.fx.burst({ x: o.x, y: o.z, z: -o.y }, 0xc0a0ff, 2, 0.3, 0.4);
+        if (d < 0.6) { motes.splice(i, 1); g.heal(10); g.stats.mana = Math.min(g.stats.maxMana, g.stats.mana + 10); c.S.fx.burst(c.S.pp(1), 0xd8c0ff, 24, 2, 0.6); } } });
+      c.cleanup(() => { motes.length = 0; }); },
+    test(t) { const g = t.game; g.stats.hp = 40; g.stats.mana = 0; t.force(); g.emit('kill', { mob: t.mob(5, 0) }); t.ticks(25); return [g.stats.hp >= 50 && g.stats.mana >= 10, `hp ${g.stats.hp} mana ${g.stats.mana.toFixed(0)}`]; } },
+
+  // amulets
+  amu_mathbridge: { name: 'Mathematical Bridge Charm', slot: 'amulet', rarity: 'uncommon', stats: { maxMana: 10 },
+    desc: 'Balances the load: 30% of damage taken is drawn from your mana instead of your health.',
+    fx(c) { c.on('playerHit', e => { const g = c.game, s = g.stats; if (!(e.amount > 0) || s.hp <= 0) return; const take = Math.min(s.mana, e.amount * 0.3); if (take <= 0) return;
+      s.mana -= take; g.heal(take); c.S.fx.stream(c.S.pp(1.6), c.S.pp(0.9), 0x5a8cff, 10); c.S.fx.ring(g.px, g.py, g.pz + 1, 0x5a8cff, 0.9, 0.3); }); },
+    test(t) { const g = t.game; g.stats.hp = 80; g.stats.mana = 50; g.shield = 0; g.invulnUntil = 0; const d = g.damagePlayer(20, 'test');
+      return [g.stats.mana < 50 && g.stats.hp > 80 - d, `took ${d}: hp ${g.stats.hp.toFixed(1)} mana ${g.stats.mana.toFixed(1)}`]; } },
+  amu_roundchurch: { name: 'Round Church Lantern', slot: 'amulet', rarity: 'epic', stats: { armor: 4, maxHp: 10 },
+    desc: 'When struck, the lantern looses 3 seeking spirit flames at foes within 10 m (10 damage each, 2 s cooldown).',
+    fx(c) { let ready = 0; c.on('playerHit', () => { const g = c.game; if (c.S.t < ready) return; const near = g.mobsNear(g.px, g.py, 10); if (!near.length) return; ready = c.S.t + 2;
+      near.sort((a, b) => Math.hypot(a.x - g.px, a.y - g.py) - Math.hypot(b.x - g.px, b.y - g.py));
+      for (let i = 0; i < 3; i++) { const m = near[i % near.length]; c.S.after(i * 0.15, () => { if (m.dead) return; c.S.fx.stream(c.S.pp(1.4), c.S.mp(m), 0xffc860, 10);
+        c.S.fx.bolt(c.S.pp(1.4), c.S.mp(m), 0xffd890); c.S.fx.burst(c.S.mp(m), 0xffb040, 12, 2, 0.5); g.damageMob(m, 10 / (g.stats.power || 1), { type: 'fire', crit: false, noProc: true }); }); } }); },
+    test(t) { const m = t.mob(0.8, 0); t.game.emit('playerHit', { amount: 5 }); t.ticks(5); return [m.hp <= m.maxHp - 10, `hp ${m.hp}`]; } },
+
+  // brooms
+  broom_jesusgreen: { name: 'Jesus Green Twig-Broom', slot: 'broom', rarity: 'common', stats: { maxHp: 5 },
+    desc: 'Touching down after a flight grants a 15-point shield (5 s cooldown).',
+    fx(c) { const g = c.game; let flew = false, ready = 0;
+      const touch = () => { if (!flew || c.S.t < ready) return; const p = g.player; if (p.flying) return; flew = false; ready = c.S.t + 5;
+        g.shield = Math.min(40, (g.shield || 0) + 15); c.S.fx.ring(p.x, p.y, p.z + 0.05, 0x7ac8ff, 2, 0.5); c.S.fx.burst(c.S.pp(0.5), 0x9fe0ff, 26, 2.5, 0.6); };
+      c.on('tick', () => { const p = g.player; if (p.flying) flew = true; else if (flew && p.grounded) touch(); });
+      c.on('land', touch); },
+    test(t) { const g = t.game, p = g.player; g.shield = 0; p.mode = 'broom'; t.ticks(1); p.mode = 'walk'; p.grounded = true; t.ticks(1); return [g.shield >= 15, `shield ${g.shield}`]; } },
+  broom_coefen: { name: 'Coe Fen Glider', slot: 'broom', rarity: 'rare', stats: { manaRegen: 1 },
+    desc: 'While flying you drink the fen air: +5 mana and +2 health per second.',
+    fx(c) { c.on('tick', ({ dt }) => { const g = c.game, p = g.player; if (!p.flying) return; g.stats.mana = Math.min(g.stats.maxMana, g.stats.mana + 5 * dt); g.heal(2 * dt);
+      if (Math.random() < dt * 12) c.S.fx.stream(c.S.pp(-0.2), c.S.pp(1), 0x6ae0c0, 1); }); },
+    test(t) { const g = t.game, p = g.player; p.mode = 'broom'; g.stats.mana = 0; g.stats.hp = 50; t.ticks(10); return [g.stats.mana >= 4.9 && g.stats.hp > 51, `mana ${g.stats.mana.toFixed(1)} hp ${g.stats.hp.toFixed(1)}`]; } },
+  broom_skyrider: { name: 'Midsummer Common Skyrider', slot: 'broom', rarity: 'legendary', stats: { speedMult: 0.08, power: 0.05 },
+    desc: 'While flying, drops a fire-bomb on the nearest foe within 18 m every 1.5 s (25 fire damage in 3 m, leaves burning ground).',
+    fx(c) { let cd = 0; const bombs = [];
+      c.on('tick', ({ dt }) => { const g = c.game, p = g.player;
+        for (let i = bombs.length - 1; i >= 0; i--) { const b = bombs[i]; b.t += dt; const k = Math.min(1, b.t / 0.5);
+          const x = b.x0 + (b.x1 - b.x0) * k, y = b.y0 + (b.y1 - b.y0) * k, z = b.z0 + (b.z1 - b.z0) * k + Math.sin(k * Math.PI) * 1.5;
+          c.S.fx.burst({ x, y: z, z: -y }, 0xff8a2a, 3, 0.4, 0.4);
+          if (k >= 1) { bombs.splice(i, 1); c.S.fx.ring(b.x1, b.y1, b.z1 + 0.1, 0xff5a10, 3, 0.5); c.S.fx.burst({ x: b.x1, y: b.z1 + 0.5, z: -b.y1 }, 0xffa040, 50, 6, 0.8);
+            c.S.aoe(b.x1, b.y1, 3, 25, 'fire'); c.S.zone(b.x1, b.y1, b.z1, 2, 2, 8, 0xff5a10); } }
+        if (!p.flying || (cd -= dt) > 0) return; const m = g.nearestMob(p.x, p.y, 18); if (!m) return; cd = 1.5;
+        bombs.push({ t: 0, x0: p.x, y0: p.y, z0: p.z, x1: m.x, y1: m.y, z1: m.z ?? p.z }); });
+      c.cleanup(() => { bombs.length = 0; }); },
+    test(t) { const p = t.game.player; p.mode = 'broom'; const m = t.mob(6, 0); t.ticks(8); return [m.hp <= m.maxHp - 25, `hp ${m.hp}`]; } },
+};
+Object.assign(U, U2);
 Object.assign(defs, U);
 export const ITEMS = defs;

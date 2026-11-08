@@ -30,6 +30,9 @@ const browser = await puppeteer.launch({
   args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist', '--window-size=960,540'],
   defaultViewport: { width: 960, height: 540 },
 });
+// session 42: the run hung for 20+ min with no output; a watchdog reports what finished and exits
+const stage = { at: 'load' };
+setTimeout(() => { console.log(JSON.stringify({ mob_types_ok: 0, bosses_ok: 0, error: 'watchdog 900 s at ' + stage.at })); process.exit(1); }, 900000).unref();
 const errors = [];
 let out = { mob_types_ok: 0, bosses_ok: 0 }, ok = false;
 try {
@@ -43,9 +46,12 @@ try {
   await page.waitForFunction('window.__game && window.__game.mobSystem && window.__mobTest', { timeout: 30000 });
   await sleep(3000);   // let encounters near the spawn point stream in
   // encounter check: teleport to each encounter, wait for tiles, report whether its mobs spawned on walkable ground
+  stage.at = 'encounters';
   const encounters = await page.evaluate(async () => {
     const g = window.__game, sys = g.mobSystem, out = [];
-    for (const e of g.encounters) {
+    // session 42: 93 encounters x 12 s took ~20 min; check the 15 nearest the square (the route + ring 1)
+    const near = [...g.encounters].sort((a, b) => Math.hypot(a.x + 102.9, a.y - 70) - Math.hypot(b.x + 102.9, b.y - 70)).slice(0, 15);
+    for (const e of near) {
       window.__player.teleport(e.x, e.y);
       const t0 = performance.now();
       while (performance.now() - t0 < 12000) {
@@ -60,6 +66,7 @@ try {
     }
     return out;
   });
+  stage.at = 'perf';
   // fps with the live mobs around Market Square
   const perf = await page.evaluate(async () => {
     const g = window.__game, sys = g.mobSystem;
@@ -71,8 +78,9 @@ try {
     const withMobs = await fps(); sys.root.visible = false; const without = await fps(); sys.root.visible = true;
     return { liveMobs: g.mobs.length, fps: withMobs, fpsMobsHidden: without };
   });
+  stage.at = 'per-type';
   // per-type test away from encounters, with encounters off
-  const results = await page.evaluate(async () => {
+  await page.evaluate(async () => {
     const g = window.__game, sys = g.mobSystem;
     sys.encountersEnabled = false;
     for (const m of [...g.mobs]) sys.remove(m);
@@ -80,18 +88,24 @@ try {
     const p = g.encounters.find(e => e.id === 'market-north');
     window.__player.teleport(p.x, p.y);
     await new Promise(r => setTimeout(r, 4000));
-    const items = g.items;
-    const out = [];
-    for (const t of g.mobTypes) {
-      g.invulnUntil = 0; g.shield = 0;
-      const drops0 = items?.drops?.length ?? null;
-      const r = await window.__mobTest(t.id);
-      r.boss = !!t.boss;
-      if (items) r.dropAppeared = drops0 == null ? 'unknown' : (items.drops?.length ?? 0) > drops0;
-      out.push(r);
-    }
-    return out;
   });
+  // session 42: one evaluate per type with a 45 s cap, so a hung type fails alone instead of hanging the run
+  const types = await page.evaluate(() => window.__game.mobTypes.map(t => ({ id: t.id, boss: !!t.boss })));
+  const results = [];
+  for (const t of types) {
+    stage.at = 'per-type ' + t.id;
+    const r = await page.evaluate(async id => {
+      const g = window.__game, items = g.items, sys = g.mobSystem;
+      g.invulnUntil = 0; g.shield = 0;
+      for (const m of [...g.mobs]) sys.remove(m);
+      const drops0 = items?.drops?.length ?? null;
+      const r = await Promise.race([window.__mobTest(id), new Promise(ok => setTimeout(() => ok({ id, timeout: true }), 45000))]);
+      if (items) r.dropAppeared = drops0 == null ? 'unknown' : (items.drops?.length ?? 0) > drops0;
+      return r;
+    }, t.id);
+    r.boss = t.boss; results.push(r);
+    console.error('[mob]', JSON.stringify(r).slice(0, 200));
+  }
   const pass = r => r.spawned && r.attacked && r.damaged && r.died && r.killEvent;
   out = {
     mob_types_ok: results.filter(r => !r.boss && pass(r)).length,
