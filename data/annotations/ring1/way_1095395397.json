@@ -1,0 +1,72 @@
+{
+ "osm_id": "way/1095395397",
+ "sources": [
+  "mapillary:385651662774077",
+  "mapillary:305183324532769",
+  "mapillary:465114114745032",
+  "mapillary:465922964705436"
+ ],
+ "walls": [
+  {
+   "id": "way/1095395397:7",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.6
+   ],
+   "material": "render",
+   "wall_colour": "#ece8de",
+   "trim_colour": "#1d1f21",
+   "cornice_z": 5.2,
+   "cornice": "none",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 4.4,
+     "z1": 3.4,
+     "fascia_text": "BrewDog",
+     "fascia_colour": "#1d1f21",
+     "text_colour": "#5fb7d6",
+     "door_x": 2.4,
+     "stallriser": 0.0,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 2.3,
+     "w": 3.2,
+     "z": 3.8,
+     "h": 1.3,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 5.5,
+     "w": 1.6,
+     "z": 3.8,
+     "h": 1.3,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Modern block (BrewDog bar; CAU restaurant in older photos). Black-framed full-height glazing on the ground floor, recessed behind a round black column. A white rendered box projects above it with a wide black-framed window, plus a dark brick bay toward the west next to the railed yard (red-brick piers and an iron gate). In reality the block rises to about 3 storeys. The OSM eave height of 5.3 m covers only the ground floor and the first band, so I annotated only that. The shop name follows the most recent photos (BrewDog signs); the older 465114114745032 / 465922964705436 show CAU."
+  }
+ ]
+}

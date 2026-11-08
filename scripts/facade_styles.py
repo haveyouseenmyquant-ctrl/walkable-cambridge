@@ -79,6 +79,48 @@ COLLEGE = {   # operator / name key -> college style family
     "murray edwards": "college_modern", "lucy cavendish": "college_modern", "clare hall": "college_modern",
     "st edmund's": "college_modern", "wolfson": "college_modern", "anglia ruskin": "modern",
 }
+# named courts and university sites (OSM amenity=university grounds), checked before COLLEGE: modern courts of old
+# colleges, and the central university sites (session 36)
+COURT = {"blue boar court": "college_modern", "burrell's field": "college_modern", "cripps court": "college_modern",
+         "harvey court": "college_modern", "wolfson court": "college_modern", "cosin court": "college_modern",
+         "castle court": "college_modern", "the old schools": "college_classical", "cambridge union": "institutional",
+         "new museums site": "institutional", "downing site": "institutional", "scroope terrace": "georgian",
+         "silver street & mill lane": "institutional", "centre for mathematical": "college_modern",
+         "department of engineering": "institutional", "sidgwick site": "college_modern", "cambridge west": "modern"}
+_GROUNDS = None
+
+
+def grounds_name(wall):
+    """Name of the OSM college / university grounds (amenity=college|university way) containing the wall's midpoint,
+    '' if none (the smallest containing polygon wins: courts lie inside their college)."""
+    global _GROUNDS
+    if not wall or "p0" not in wall:
+        return ""
+    if _GROUNDS is None:
+        import json
+        import os
+        from pyproj import Transformer
+        from shapely.geometry import Point, Polygon
+        from shapely.strtree import STRtree
+        import build as B
+        els = json.load(open(B.RAW))["elements"]
+        tr = Transformer.from_crs(4326, 27700, always_xy=True)
+        nd = {e["id"]: (e["lon"], e["lat"]) for e in els if e["type"] == "node"}
+        polys, names = [], []
+        for e in els:
+            t = e.get("tags", {})
+            if e["type"] == "way" and t.get("amenity") in ("college", "university") and len(e["nodes"]) >= 4:
+                ll = [nd[n] for n in e["nodes"] if n in nd]
+                E, N = tr.transform([q[0] for q in ll], [q[1] for q in ll])
+                pg = Polygon([(x - B.E0, y - B.N0) for x, y in zip(E, N)]).buffer(0)
+                if pg.area > 50:
+                    polys.append(pg)
+                    names.append(t.get("name", ""))
+        _GROUNDS = (STRtree(polys), polys, names, Point)
+    tree, polys, names, Point = _GROUNDS
+    q = Point((wall["p0"][0] + wall["p1"][0]) / 2, (wall["p0"][1] + wall["p1"][1]) / 2)
+    hits = [i for i in tree.query(q.buffer(1.0)) if polys[i].distance(q) < 1.0]
+    return names[min(hits, key=lambda i: polys[i].area)] if hits else ""
 # streets: historic core (Georgian/older fronts, mixed with shops), Georgian/Regency gault terraces,
 # Victorian/Edwardian terrace suburbs (Mill Road, Romsey, De Freville, Chesterton), Edwardian villas (west Cambridge),
 # post-war estates. Matched case-insensitively against addr:street.
@@ -195,6 +237,9 @@ def _is_college(tags):
 
 def _college_family(tags):
     s = (str(tags.get("operator", "")) + " | " + str(tags.get("name", ""))).lower()
+    for k, v in COURT.items():
+        if k in s:
+            return v
     for k, v in COLLEGE.items():
         if k in s:
             return v
@@ -242,6 +287,9 @@ def classify(tags, wall=None):
 
     if st in MODERN_ST:
         return "modern"
+    gname = grounds_name(wall) if _college_family(tags) is None else ""
+    if gname and b in ("yes", "university", "college", "dormitory", "residential", "house", "apartments", "school"):
+        tags = dict(tags, operator=(str(tags.get("operator", "")) + " | " + gname).strip(" |"))
     if _is_college(tags):
         fam = _college_family(tags)
         op = str(tags.get("operator", "")).lower()
@@ -251,7 +299,7 @@ def classify(tags, wall=None):
                 return "modern"
             return "institutional" if r < 55 else "modern"
         fam = fam or "college_gothic"
-        if fam in ("college_gothic", "college_tudor", "college_classical") and r < 18:
+        if fam in ("college_gothic", "college_tudor", "college_classical") and r < 18 and (dist is None or dist > 300):
             fam = "college_modern" if r < 9 else "institutional"   # every old college has some 19th/20th c. ranges
         return fam
 
@@ -320,8 +368,9 @@ def _storeys(H, tags, style):
     lo = 2.6 if style not in ("georgian", "college_classical", "institutional", "glass") else 2.9
     if lv and lv >= 1 and lo <= H / round(lv) <= 5.0:
         n = int(round(lv))
-    else:
-        n = max(1, round(H / 3.1))
+    else:   # old college ranges and public buildings have taller storeys than houses (session 36)
+        n = max(1, round(H / (3.9 if style in ("college_gothic", "college_tudor", "college_classical", "institutional")
+                              else 3.1)))
     return max(1, min(n, int(H / 2.5) or 1))
 
 

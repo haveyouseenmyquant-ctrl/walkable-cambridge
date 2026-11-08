@@ -1,0 +1,92 @@
+{
+ "osm_id": "way/134521110",
+ "sources": [
+  "mapillary:947320552689987",
+  "mapillary:1507491859582009",
+  "mapillary:2768685243444214",
+  "mapillary:963817707761284",
+  "mapillary:1071741023309521",
+  "mapillary:1918587431638681"
+ ],
+ "walls": [
+  {
+   "id": "way/134521110:3",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.1,
+    6.2
+   ],
+   "material": "render",
+   "wall_colour": "#ece8de",
+   "trim_colour": "#2b2b2b",
+   "cornice_z": 9.0,
+   "cornice": "none",
+   "parapet": false,
+   "string_courses": [
+    3.1,
+    6.2
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 8.5,
+     "z1": 3.0,
+     "fascia_text": "Smokeworks",
+     "fascia_colour": "#2e2c2a",
+     "text_colour": "#f0ede6",
+     "door_x": 2.9,
+     "stallriser": 0.6,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.9,
+     "w": 0.85,
+     "z": 3.9,
+     "h": 1.6,
+     "panes": [
+      2,
+      6
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.9,
+     "w": 0.85,
+     "z": 6.9,
+     "h": 1.5,
+     "panes": [
+      2,
+      6
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.9,
+     "w": 0.7,
+     "z": 9.1,
+     "h": 1.1,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "13 Bene't St (listed, Q26419228), at the corner of Free School Lane. Timber-framed house, white render with black-painted trim, jettied at the 1st and 2nd floors. The steep tiled gable faces Bene't St. Ground floor is a charcoal-painted restaurant front (Smokeworks, named on a hanging vertical banner, not on a fascia): a large multi-pane window, a central door, then a larger multi-pane window to the west corner post, with a white panel below. Upper floors have one small-paned sash per floor in a single column, slightly east of centre. A third sash sits in the gable. The rest of the gable wall is blank. Free School Lane nameplate at the corner."
+  }
+ ]
+}

@@ -1,0 +1,112 @@
+{
+ "osm_id": "way/1288644220",
+ "sources": [
+  "mapillary:274161827742448",
+  "mapillary:256224142867800",
+  "mapillary:484666925913106",
+  "mapillary:963005101178076",
+  "mapillary:138527544920136"
+ ],
+ "walls": [
+  {
+   "id": "way/1288644220:3",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.2,
+    8.2
+   ],
+   "material": "brick",
+   "wall_colour": "#cdbf9c",
+   "trim_colour": "#d9cfb8",
+   "cornice_z": 12.6,
+   "cornice": "bracketed",
+   "parapet": false,
+   "string_courses": [
+    4.2
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.5,
+     "x1": 4.6,
+     "z1": 3.6,
+     "fascia_text": "White Stuff",
+     "fascia_colour": "#1f4a3a",
+     "text_colour": "#efe9dc",
+     "door_x": 4.0,
+     "stallriser": 0.7,
+     "awning": false
+    },
+    {
+     "type": "door",
+     "style": "gothic",
+     "x": 5.6,
+     "w": 1.1,
+     "h": 3.0,
+     "surround": "pilastered"
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 2.0,
+     "w": 1.6,
+     "z": 4.6,
+     "h": 2.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 4.8,
+     "w": 0.8,
+     "z": 4.8,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.0,
+     "w": 0.7,
+     "z": 8.6,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 4.8,
+     "w": 0.7,
+     "z": 8.6,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Victorian Gothic front of yellow gault brick with Ketton-stone dressings (White Stuff: green hanging sign and vertical green banner). Ground floor of tall pointed-arch openings on clustered stone shafts with carved capitals (shop windows plus a pointed-arch entrance at the south end next to Whistles); first floor has a corbelled stone oriel with traceried parapet and lancet lights; pointed lancet sashes above; corbel-table eaves. CAVEAT: the gothic building looks about 10 m wide (it also includes a rounded corner oriel/turret with a conical slate roof at its north end), but this OSM wall is only 6.5 m and there is a 4.5 m gap to wall 13, so the north corner bay probably belongs to the unmapped 11-12; I annotated only the southern bays, so element positions are rough."
+  }
+ ]
+}

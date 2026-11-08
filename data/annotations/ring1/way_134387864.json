@@ -1,0 +1,113 @@
+{
+ "osm_id": "way/134387864",
+ "sources": [
+  "mapillary:2587423534894786",
+  "mapillary:150077440702442",
+  "mapillary:189066929702180",
+  "mapillary:1623377594530281"
+ ],
+ "walls": [
+  {
+   "id": "way/134387864:3",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.0,
+    6.9
+   ],
+   "material": "render",
+   "wall_colour": "#efede5",
+   "trim_colour": "#f7f6f1",
+   "cornice_z": 9.9,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.15,
+     "x1": 4.75,
+     "z1": 3.9,
+     "fascia_text": "Parade",
+     "fascia_colour": "#1f2d5c",
+     "text_colour": "#f2f2f2",
+     "door_x": 0.6,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.4,
+     "w": 1.0,
+     "z": 4.6,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.4,
+     "w": 1.05,
+     "z": 4.6,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.4,
+     "w": 0.95,
+     "z": 7.4,
+     "h": 1.75,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.4,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.75,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 1.4,
+     "w": 0.9,
+     "h": 1.2
+    },
+    {
+     "type": "dormer",
+     "x": 3.4,
+     "w": 0.9,
+     "h": 1.2
+    }
+   ],
+   "confidence": "medium",
+   "notes": "19 King's Parade (Parade gift shop). Plain white-rendered front, two sash windows per upper floor with plain architraves/sills, a round commemorative plaque between the 1st-floor windows (~z 6), simple eaves and two dormers in the roof. Royal-blue/navy shopfront with 'PARADE' lettering and a recessed door at the north end."
+  }
+ ]
+}

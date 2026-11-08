@@ -1,0 +1,164 @@
+{
+ "osm_id": "way/1222243454",
+ "sources": [
+  "mapillary:151039637271921",
+  "mapillary:941935166581309",
+  "mapillary:237815608100302",
+  "mapillary:627522395314925"
+ ],
+ "walls": [
+  {
+   "id": "way/1222243454:0",
+   "storeys": 5,
+   "floor_z": [
+    0,
+    4.4,
+    7.9,
+    10.9,
+    13.6
+   ],
+   "material": "brick",
+   "wall_colour": "#8c6e52",
+   "trim_colour": "#f0ede4",
+   "cornice_z": 16.4,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.4
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.1,
+    5.35
+   ],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 5.3,
+     "z1": 4.1,
+     "fascia_text": "Byard Art",
+     "fascia_colour": "#bfc1bd",
+     "text_colour": "#f4f3ee",
+     "door_x": 4.5,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.4,
+     "w": 1.05,
+     "z": 5.0,
+     "h": 2.3,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.0,
+     "w": 1.05,
+     "z": 5.0,
+     "h": 2.3,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.4,
+     "w": 1.0,
+     "z": 8.4,
+     "h": 1.95,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.0,
+     "w": 1.0,
+     "z": 8.4,
+     "h": 1.95,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.4,
+     "w": 0.95,
+     "z": 11.3,
+     "h": 1.65,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.0,
+     "w": 0.95,
+     "z": 11.3,
+     "h": 1.65,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.4,
+     "w": 0.9,
+     "z": 14.0,
+     "h": 1.35,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.0,
+     "w": 0.9,
+     "z": 14.0,
+     "h": 1.35,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "14 King's Parade (byard art gallery). Georgian brown/buff stock-brick front, 5 levels (OSM 5 matches the 4 rows of upper windows), two bays: two white 6-over-6 sashes per floor diminishing upwards, flat heads with red gauged-brick arches and red brick dressings/bands linking the window heads (not modelled separately). Pale-grey painted shopfront with pilasters and 'byard art' lettering, 'Art Gallery' hanging sign. Top parapet/cornice only seen obliquely. Window x positions estimated through strong perspective."
+  }
+ ]
+}

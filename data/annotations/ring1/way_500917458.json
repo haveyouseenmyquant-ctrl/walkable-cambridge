@@ -1,0 +1,96 @@
+{
+ "osm_id": "way/500917458",
+ "sources": [
+  "mapillary:975083473300699",
+  "mapillary:2587423534894786",
+  "mapillary:1623377594530281",
+  "mapillary:189066929702180"
+ ],
+ "walls": [
+  {
+   "id": "way/500917458:1",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.7,
+    6.6
+   ],
+   "material": "timber",
+   "wall_colour": "#efeee8",
+   "trim_colour": "#1e1e1e",
+   "cornice_z": 9.6,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.7,
+    6.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 4.9,
+     "z1": 3.4,
+     "fascia_text": "University of Cambridge Museums",
+     "fascia_colour": "#1d2333",
+     "text_colour": "#f0f0f0",
+     "door_x": 4.2,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 1.5,
+     "w": 1.9,
+     "z": 4.2,
+     "h": 1.8,
+     "panes": [
+      4,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 3.2,
+     "w": 0.45,
+     "z": 4.2,
+     "h": 1.8,
+     "panes": [
+      1,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 1.5,
+     "w": 1.9,
+     "z": 7.2,
+     "h": 1.5,
+     "panes": [
+      4,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 3.8,
+     "w": 0.9,
+     "h": 1.1
+    }
+   ],
+   "confidence": "low",
+   "notes": "18 King's Parade (no addr in OSM building; OSM shop node 18 = University of Cambridge Museums Shop). Ornate mock-Tudor timber front: leaded diamond-lattice canted oriels on the 1st and 2nd floors in the northern ~3 m, carved/moulded plaster panels under the oriels, a narrow leaded light beside the 1st-floor oriel, and in the southern part a jettied box with X-braced (St Andrew's cross) timbering and a carved plaster panel at its base rising into an X-braced gable; dormer above. Dark navy shopfront 'MUSEUMS' with University crest. Layout read from oblique views only."
+  }
+ ]
+}

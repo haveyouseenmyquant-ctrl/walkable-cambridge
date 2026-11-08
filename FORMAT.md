@@ -42,12 +42,25 @@ uint8    kind[ntris]       0 = solid (walls, building shells; blocks the player)
                            2 = non-walkable surface (water etc; counts as ground surface, not walkable)
 uint8    surface[ntris]    0 = none/building, 1 = road, 2 = pavement/footway, 3 = grass/green,
                            4 = water, 5 = courtyard/paved area, 6 = earth/track, 7 = steps,
-                           8 = bridge deck, 9 = ground under a building,
+                           8 = bridge deck, 9 = ground under a building, 10 = clay brick paviors (herringbone),
                            255 = placeholder (does NOT count for ground coverage)
 ```
 Surface classes since session 26 (build.py): carriageways follow their OSM `surface` (asphalt = 1, paving stones = 2,
 sett/cobblestone = 5) and width (`width` tag, else the class default + 1 m per side with on-road parking); roads
 with `sidewalk=*` (untagged urban roads too) get a 2 m footway (2) each side; squares and parking areas are 2.
+Session 36: `surface=bricks|brick|clay` = 10; squares, marketplaces and pedestrian areas follow their `surface` tag
+(sett = 5, bricks = 10, asphalt = 1, else 2; the Market Square relation is sett). Surface ids only change rendering
+(materials.js draws 2 as offset 600 x 900 mm slabs, 5 as granite setts, 10 as 45° herringbone 200 x 100 mm paviors,
+procedurally in world space); collision geometry and `kind` don't depend on them. In the GLB vertex colours class 10
+is the key colour (0.62, 0.60, 0.80), not a real albedo.
+
+### Ground surface overrides (`data/annotations/ground/surfaces.json`, session 36)
+Photo-checked surfaces burned by build.py after the OSM road/footway classes (before steps, water and
+under-building). `features[]`: `surface` (brick | sett | paving_stones | asphalt) plus one of
+`osm: "way/<id>"` (buffered by `half_width` m, or with `side: left|right` relative to node order, one side by `width`
+m; `area: true` uses the closed way's polygon), `osm: "relation/<id>"` (multipolygon area), `line: [[x, y], ...]`
+(world frame, buffered like a way) or `polygon: [[x, y], ...]`. `sources` lists the evidence (Mapillary ids,
+Commons file names; never benchmark photos). `WC_GROUND_OVR=0` disables the layer.
 
 ## Walkability rules used by the harness
 - Ground grid 0.5 m. Each cell takes the highest walkable (kind 1, normal tilt <= 50°) surface under it.

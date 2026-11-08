@@ -1,0 +1,232 @@
+{
+ "osm_id": "way/134519862",
+ "sources": [
+  "mapillary:814576862802302",
+  "mapillary:515985076257669",
+  "mapillary:209228070730959",
+  "mapillary:163673209011803"
+ ],
+ "walls": [
+  {
+   "id": "way/134519862:4",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    3.8,
+    6.9,
+    9.6
+   ],
+   "material": "brick",
+   "wall_colour": "#cdbf9c",
+   "trim_colour": "#efeadf",
+   "cornice_z": 11.9,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    3.8
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.1,
+    4.7,
+    9.45
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.3,
+     "w": 1.1,
+     "z": 4.1,
+     "h": 2.2,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.5,
+     "w": 1.1,
+     "z": 4.1,
+     "h": 2.2,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.0,
+     "w": 1.1,
+     "z": 4.1,
+     "h": 2.2,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.2,
+     "w": 1.1,
+     "z": 4.1,
+     "h": 2.2,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.3,
+     "w": 1.05,
+     "z": 7.2,
+     "h": 1.7,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.5,
+     "w": 1.05,
+     "z": 7.2,
+     "h": 1.7,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.0,
+     "w": 1.05,
+     "z": 7.2,
+     "h": 1.7,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.2,
+     "w": 1.05,
+     "z": 7.2,
+     "h": 1.7,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.3,
+     "w": 0.95,
+     "z": 9.9,
+     "h": 1.3,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.5,
+     "w": 0.95,
+     "z": 9.9,
+     "h": 1.3,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.0,
+     "w": 0.95,
+     "z": 9.9,
+     "h": 1.3,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.2,
+     "w": 0.95,
+     "z": 9.9,
+     "h": 1.3,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 4.6,
+     "z1": 3.5,
+     "fascia_text": "Fudge Kitchen",
+     "fascia_colour": "#1f3a2c",
+     "text_colour": "#d9c48a",
+     "door_x": 3.6,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 4.8,
+     "x1": 9.4,
+     "z1": 3.5,
+     "fascia_text": "Primavera",
+     "fascia_colour": "#ece9e2",
+     "text_colour": "#8a4a2a",
+     "door_x": 8.8,
+     "stallriser": 0.5,
+     "awning": false
+    }
+   ],
+   "confidence": "medium",
+   "notes": "10-11 King's Parade: gault-brick four-storey pair, wrought-iron balconettes on the tall first-floor sashes (both houses), hanging 'Upstairs Gallery' sign. Ground floor: no. 11 (north, x=0 end, next to the white no. 12) dark green 'Fudge Kitchen' shopfront; no. 10 (south) 'PRIMAVERA' contemporary craft gallery, white-painted frame with large plate glass and brown letters on the fascia (Mapillary 814576862802302, 515985076257669). Two bays per house estimated."
+  }
+ ]
+}

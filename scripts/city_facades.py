@@ -7,8 +7,9 @@ Walls: OSM building edges >= 2 m that face a walkable way (as scripts/zone_walls
 a point 2-25 m out along the outward normal, no other footprint in between). Skipped: walls the zone build already
 covers (data/annotations/market_square/walls.json), bespoke buildings (scripts/zone_bespoke_*.py BUILDS), detailed
 landmark models (manifest landmarks), market stall canopies (building=roof) and duplicate overlapping footprints.
-Per wall the layout comes from scripts/facade_styles.py layout(wall) (style from OSM tags), else
-facade_parts.default_layout. colour_hint: the median colour of the wall's rectified photo pieces in the old photo
+Per wall the layout is the wall's annotation if one exists (data/annotations/ring1/way_<id>.json, same schema and the
+same facade_parts.wall_facade code path as the zone; session 36), else scripts/facade_styles.py layout(wall) (style
+from OSM tags), else facade_parts.default_layout. colour_hint: the median colour of the wall's rectified photo pieces in the old photo
 facade atlases (site/facades, non-held-out Mapillary): photos give only the material colour, all detail is geometry.
 Writes
   site/cityfac/<tile id>.glb    one node per building "f:<osm_id>", compact quantized GLB like the zone
@@ -44,6 +45,25 @@ except Exception as e:   # optional
 ROOT = B.ROOT
 OUT = os.path.join(ROOT, "site/cityfac")
 SQUARE = (0.1190, 52.2053)
+ANN_DIRS = [os.path.join(ROOT, "data/annotations/ring1")]
+RING1_R = 400.0   # ring 1: city walls (outside the zone) within this many metres of the square
+TYPES = ("window", "door", "shopfront", "dormer")
+
+
+def geometry_match(rows, ann):
+    """zone_kpi.py's facade_geometry_match_pct over these rows: per wall, mean over TYPES of min/max(annotated, emitted)
+    counts (1 if both 0); unannotated walls score 0; length-weighted, x 100."""
+    num = den = 0.0
+    for r in rows:
+        a = ann.get(r["id"])
+        sc = 0.0
+        if a is not None:
+            ac = {t: sum(1 for e in a.get("elements", []) if e.get("type") == t) for t in TYPES}
+            mc = r["elements"]
+            sc = float(np.mean([1.0 if ac[t] == mc.get(t, 0) == 0 else min(ac[t], mc.get(t, 0)) / max(ac[t], mc.get(t, 0))
+                                for t in TYPES]))
+        num += sc * r["length"]; den += r["length"]
+    return round(100 * num / max(den, 1e-9), 2)
 
 
 def buildings(nodes, ways, rels):
@@ -124,6 +144,7 @@ def main():
     man = json.load(open(os.path.join(ROOT, "site/manifest.json")))
     landmark = {l["osm_id"] for l in man.get("landmarks", []) if l.get("detailed") and l.get("osm_id")}
     skip_b = bespoke | landmark | Z.PROP_BUILDINGS
+    ann = Z.load_annotations([d for d in ANN_DIRS if os.path.isdir(d)])
 
     # ---- candidate edges
     E = []   # (bi, k, a, b)
@@ -179,7 +200,9 @@ def main():
         a, b = W[i], W[j]
         if a["osm_id"] == b["osm_id"] or float(dirs[i] @ dirs[j]) < 0.95 or i in drop or j in drop:
             continue
-        drop.add(i if ("addr:housenumber" in b["tags"]) > ("addr:housenumber" in a["tags"]) else j)
+        # keep the annotated wall, then the one with an address (as zone_build.duplicate_walls)
+        ra = (a["id"] in ann, "addr:housenumber" in a["tags"]); rb = (b["id"] in ann, "addr:housenumber" in b["tags"])
+        drop.add(i if rb > ra else j)
     W = [w for i, w in enumerate(W) if i not in drop]
 
     # ---- colour hints from the photo facade atlases
@@ -192,13 +215,18 @@ def main():
             if idx:
                 w["colour_hint"] = hexc(np.median(pcol[idx], 0))
 
+    # ring-1 wall list for annotators (data/annotations/ring1/walls.json, the frame annotations refer to)
+    os.makedirs(ANN_DIRS[0], exist_ok=True)
+    json.dump({"centre": list(SQUARE), "radius": RING1_R,
+               "walls": [{k: v for k, v in w.items() if k != "colour_hint"} for w in W if w["dist_centre"] <= RING1_R]},
+              open(os.path.join(ANN_DIRS[0], "walls.json"), "w"), indent=1)
     ext = Z.corner_extents(W)
     by_tile, rows = {}, []
     nstyle = 0
     for w in W:
         Lw, H = w["length"], w["eave_z"] - w["ground_z"]
-        lay = None
-        if S is not None:
+        lay = ann.get(w["id"])
+        if lay is None and S is not None:
             try:
                 lay = S.layout(w); nstyle += 1
             except Exception as e:
@@ -223,7 +251,8 @@ def main():
         rows.append({"id": w["id"], "osm_id": w["osm_id"], "dist_centre": w["dist_centre"], "length": Lw,
                      "height": round(H, 2), "area": round(area, 2), "detail_area": round(min(P.detail_area, area), 2),
                      "elements": dict(sorted(P.counts.items())), "tris": int(len(Pw)), "tile": tid,
-                     "colour_hint": w.get("colour_hint")})
+                     "colour_hint": w.get("colour_hint"), "annotated": w["id"] in ann,
+                     "street": w["tags"].get("addr:street")})
     os.makedirs(OUT, exist_ok=True)
     for f in os.listdir(OUT):
         if f.endswith(".glb"):
@@ -233,7 +262,17 @@ def main():
         meshes = [Z.gl_mesh("f:" + oid, *(np.concatenate(x) for x in zip(*parts))) for oid, parts in bb.items()]
         Z.write_compact_glb(os.path.join(OUT, tid + ".glb"), meshes)
         index[tid] = {"glb": "cityfac/%s.glb" % tid, "tris": int(sum(len(m[4]) // 3 for m in meshes))}
+    ring1 = [r for r in rows if r["dist_centre"] <= RING1_R]
+    kp = [r for r in ring1 if r["street"] == "King's Parade"]
+    built = {r["id"] for r in rows}
     stats = {"walls": len(rows), "buildings": len({r["osm_id"] for r in rows}), "styled": nstyle,
+             "annotations": len(ann), "walls_annotated": sum(r["annotated"] for r in rows),
+             "buildings_annotated": len({r["osm_id"] for r in rows if r["annotated"]}),
+             "annotations_unmatched": sorted(k for k in ann if k not in built),
+             "ring1_walls": len(ring1), "ring1_walls_annotated": sum(r["annotated"] for r in ring1),
+             "ring1_facade_geometry_match_pct": geometry_match(ring1, ann),
+             "kings_parade_walls": len(kp), "kings_parade_walls_annotated": sum(r["annotated"] for r in kp),
+             "kings_parade_facade_geometry_match_pct": geometry_match(kp, ann),
              "colour_hints": sum(1 for r in rows if r["colour_hint"]), "duplicates_dropped": len(drop),
              "tris": sum(v["tris"] for v in index.values()), "facade_area_m2": round(sum(r["area"] for r in rows)),
              "bytes": sum(os.path.getsize(os.path.join(ROOT, "site", v["glb"])) for v in index.values())}

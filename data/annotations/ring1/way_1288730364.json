@@ -1,0 +1,157 @@
+{
+ "osm_id": "way/1288730364",
+ "sources": [
+  "mapillary:952996672184960",
+  "mapillary:460794571846485",
+  "mapillary:130365975776565",
+  "mapillary:138527544920136"
+ ],
+ "walls": [
+  {
+   "id": "way/1288730364:0",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.0,
+    7.4
+   ],
+   "material": "brick",
+   "wall_colour": "#9c8562",
+   "trim_colour": "#f2f0ea",
+   "cornice_z": 10.9,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.15,
+     "x1": 7.35,
+     "z1": 3.8,
+     "fascia_text": "Whistles",
+     "fascia_colour": "#f2f0ea",
+     "text_colour": "#2a2a2a",
+     "door_x": 4.05,
+     "stallriser": 0.45,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.4,
+     "w": 0.95,
+     "z": 4.4,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.3,
+     "w": 0.95,
+     "z": 4.4,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.0,
+     "w": 0.95,
+     "z": 4.4,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.6,
+     "w": 0.95,
+     "z": 4.4,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.4,
+     "w": 0.95,
+     "z": 7.8,
+     "h": 1.8,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.3,
+     "w": 0.95,
+     "z": 7.8,
+     "h": 1.8,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.0,
+     "w": 0.95,
+     "z": 7.8,
+     "h": 1.8,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.6,
+     "w": 0.95,
+     "z": 7.8,
+     "h": 1.8,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "9 Trinity Street, Whistles (sign + fascia lettering in photos). Plain Georgian front of brown/buff stock brick, three storeys: painted white timber shopfront with pilasters (wide display window at north end, glazed door in 2nd bay, two narrower windows south), moulded white cornice over fascia; four white-framed 6/6 sashes on each upper floor in plain openings, simple cornice and parapet at top (roof line only partly seen). x=0 is the north end (next to the gothic yellow-brick building), x=7.51 abuts the stone St Michael's Court (Caius) to the south. Window x positions estimated through perspective; brick colour corrected for shade."
+  }
+ ]
+}

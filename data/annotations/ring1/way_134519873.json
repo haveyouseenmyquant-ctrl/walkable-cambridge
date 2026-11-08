@@ -1,0 +1,163 @@
+{
+ "osm_id": "way/134519873",
+ "sources": [
+  "mapillary:291159029735217",
+  "mapillary:2039815249527792",
+  "mapillary:515985076257669",
+  "mapillary:163673209011803"
+ ],
+ "walls": [
+  {
+   "id": "way/134519873:0",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.7,
+    7.0
+   ],
+   "material": "render",
+   "wall_colour": "#efe9da",
+   "trim_colour": "#f7f5ef",
+   "cornice_z": 10.8,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.8,
+     "w": 1.2,
+     "z": 4.3,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.2,
+     "w": 1.1,
+     "z": 4.3,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.6,
+     "w": 1.4,
+     "z": 4.3,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.8,
+     "w": 1.1,
+     "z": 7.5,
+     "h": 1.7,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.2,
+     "w": 1.1,
+     "z": 7.5,
+     "h": 1.7,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.6,
+     "w": 1.1,
+     "z": 7.5,
+     "h": 1.7,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 4.6,
+     "z1": 3.4,
+     "fascia_text": "Camera & Optics Centre",
+     "fascia_colour": "#c8202a",
+     "text_colour": "#ffffff",
+     "door_x": 2.6,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 5.15,
+     "w": 0.95,
+     "h": 2.4,
+     "surround": "fanlight"
+    },
+    {
+     "type": "shopfront",
+     "x0": 5.75,
+     "x1": 10.2,
+     "z1": 3.4,
+     "fascia_text": "King's News",
+     "fascia_colour": "#efe6c8",
+     "text_colour": "#2a2a2a",
+     "door_x": 6.4,
+     "stallriser": 0.5,
+     "awning": true
+    },
+    {
+     "type": "dormer",
+     "x": 1.8,
+     "w": 1.0,
+     "h": 1.3
+    },
+    {
+     "type": "dormer",
+     "x": 5.2,
+     "w": 1.0,
+     "h": 1.3
+    }
+   ],
+   "confidence": "medium",
+   "notes": "12 King's Parade (south corner of St Edward's Passage): cream-white painted/rendered three-storey house with steep tiled roof and two gabled dormers, 6/6 sashes in three bays (south first-floor window wider). Ground floor: north (x=0) red-framed 'Camera & Optics Centre' shop (Canon/Nikon; earlier photos show 'Campkins Future Vision' on the same red fascia), white panelled door with fanlight numbered '12 B C D', and 'KING'S News' souvenir/newsagent front with cream fascia and a red/white scalloped valance (Mapillary 291159029735217, 2039815249527792, 163673209011803). Dormer count: 2 seen; a third near the south end may be hidden by perspective."
+  }
+ ]
+}

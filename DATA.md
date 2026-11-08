@@ -38,6 +38,11 @@ CC BY-SA 4.0), geograph 6095002 (John Sutton); Market Street: "Market Street, Ca
 (Magnus Manske, CC BY-SA 3.0), geograph 4171681/4350410 (Hugh Venables); "St Edward's Passage, Cambridge, looking
 toward Peas Hill (cropped)" (CC BY 1.0) and "3-4 St Edward's Passage" (Smb1001, CC BY-SA 4.0). Geograph photos are
 CC BY-SA 2.0.
+Ring-1 facade annotations (session 36, `data/annotations/ring1/`, used by `scripts/city_facades.py`): King's Parade
+1-19, Bene't Street (3, 8 The Eagle, 9, 13, 15, Bene't Hostel, Bread & Meat) and Trinity Street 9, 10, 13, made from
+64 non-held-out Mapillary photos (CC BY-SA 4.0, already in `data/raw/mapillary_facade/` and `mapillary_ref/`,
+https://www.mapillary.com/app/?pKey=<id>; ids listed in each annotation's `sources`). Visual references only; no
+pixels from them are in the world. No new Commons downloads.
 Bespoke models (session 34, references for shape/proportion/colour only, credited in the module docstrings):
 `scripts/zone_bespoke_caius.py`: Commons "Trinity Street – View SSW along Gonville & Caius…", "King's Parade – View
 West into Senate House Passage…", "King's Parade – View North into Trinity Street…", "Market Hill – View NNW into Rose
@@ -47,6 +52,16 @@ St Michael's view east from the churchyard (Txllxt TxllxT, CC BY-SA 4.0), plus t
 `scripts/zone_bespoke_kings.py` (session 35, King's College gatehouse and screen): Commons "King's Parade – View WSW on
 King's College Gatehouse 1828…", "King's Parade – View NW on Neo Gothic Gatehouse 1828…", "King's College – King's
 Parade – View South along Gatehouse & Screen 1828…" (Txllxt TxllxT, CC BY-SA 4.0).
+`scripts/zone_bespoke_benet.py` (session 36, St Bene't's Church, way/134521042): Commons "1126252 I CHURCH OF ST
+BENE'T, BENE'T STREET Cambridge 20260523 0001.jpg", "… 0002.jpg", "… 0003.jpg" (Tilman2007, CC BY-SA 4.0) and
+"Church in Cambridge.jpg" (Christopher, flickr 47038415@N00, CC BY 2.0); licences checked via the Commons API, used for
+shape/proportion/colour only (belfry pair with baluster shaft, sound-holes, quoins, aisle gable, porch), no pixels.
+`scripts/zone_bespoke_corpus.py` (session 36, Corpus Christi New Court, Trumpington Street front, way/148880379):
+Commons "William Wilkins - Elevation for the West Front of the New Quadrangle of Corpus Christi College, Cambridge -
+B1977.14.1066 - Yale Center for British Art.jpg" (Wilkins' elevation, Yale Center for British Art, CC0), geograph 7017873
+"View of Corpus Christi College from Trumpington Street" (Robert Lamb) and 631710 "The Main Gate, Corpus Christi
+College" (RichTea), both CC BY-SA 2.0; licences checked via the Commons API, used for shape/proportion/colour only, no
+pixels.
 Market stalls / street furniture (session 34, `scripts/zone_props.py`, `scripts/zone_props_furniture.py`; same terms, licence checked via the Commons API): "Cambridge Market stalls at lunchtime" (Jonosunde, CC BY-SA 4.0), geograph 5652394 "Looking over the market stalls in Cambridge" (Richard Humphrey), 1133717 "Empty market stalls", 703624 "Cambridge Market" and 972242 "A vital part of Cambridge" (Sebastian Ballard), all CC BY-SA 2.0. Used only to read the stall look (white canvas with red/blue/green/yellow stripes down the slope, scalloped hems, scaffold frames, striped counter cloths, red side sheets); no pixels from them are in the world.
 
 ## Held-out benchmark (session 8)

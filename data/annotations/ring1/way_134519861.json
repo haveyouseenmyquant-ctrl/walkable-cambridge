@@ -1,0 +1,176 @@
+{
+ "osm_id": "way/134519861",
+ "sources": [
+  "mapillary:105998904896303",
+  "mapillary:549404016239190",
+  "mapillary:209228070730959"
+ ],
+ "walls": [
+  {
+   "id": "way/134519861:3",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    3.7,
+    6.6,
+    9.1
+   ],
+   "material": "brick",
+   "wall_colour": "#cdbf9c",
+   "trim_colour": "#efeadf",
+   "cornice_z": 11.0,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    3.7
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.15,
+    8.15
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.5,
+     "w": 1.1,
+     "z": 4.1,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.15,
+     "w": 1.1,
+     "z": 4.1,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.8,
+     "w": 1.1,
+     "z": 4.1,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.5,
+     "w": 1.0,
+     "z": 7.0,
+     "h": 1.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.15,
+     "w": 1.0,
+     "z": 7.0,
+     "h": 1.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.8,
+     "w": 1.0,
+     "z": 7.0,
+     "h": 1.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.5,
+     "w": 0.9,
+     "z": 9.4,
+     "h": 1.2,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.15,
+     "w": 0.9,
+     "z": 9.4,
+     "h": 1.2,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.8,
+     "w": 0.9,
+     "z": 9.4,
+     "h": 1.2,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 8.1,
+     "z1": 3.6,
+     "fascia_text": "The Lawson Gallery",
+     "fascia_colour": "#1e2733",
+     "text_colour": "#e8e4d6",
+     "door_x": 4.1,
+     "stallriser": 0.45,
+     "awning": false
+    }
+   ],
+   "confidence": "medium",
+   "notes": "7-8 King's Parade: gault-brick four-storey pair over a long dark navy-black timber shopfront 'THE LAWSON GALLERY 7&8 / PICTURE FRAMERS' with large display windows (Mapillary 105998904896303, 549404016239190). Large 6/6 first-floor sashes, smaller upper ones. Three bays per floor estimated from oblique views."
+  }
+ ]
+}

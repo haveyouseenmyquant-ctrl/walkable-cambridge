@@ -1,0 +1,109 @@
+{
+ "osm_id": "way/134519866",
+ "sources": [
+  "mapillary:880669155829952",
+  "mapillary:963817707761284",
+  "mapillary:1918587431638681",
+  "mapillary:121744929931233"
+ ],
+ "walls": [
+  {
+   "id": "way/134519866:8",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.7,
+    7.2
+   ],
+   "material": "render",
+   "wall_colour": "#ddd3bf",
+   "trim_colour": "#f3f1ea",
+   "cornice_z": 11.2,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 4.6,
+     "z1": 3.3,
+     "fascia_text": "cambridge contemporary crafts",
+     "fascia_colour": "#8fa3ad",
+     "text_colour": "#f2f2ee",
+     "door_x": null,
+     "stallriser": 0.6,
+     "awning": false
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 5.15,
+     "w": 0.85,
+     "h": 2.6,
+     "surround": "none"
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.6,
+     "w": 1.05,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.6,
+     "w": 1.0,
+     "z": 7.7,
+     "h": 1.7,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.1,
+     "w": 1.05,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.1,
+     "w": 1.0,
+     "z": 7.7,
+     "h": 1.7,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Street front of Corpus's Bene't Hostel block (5 Bene't St): buff/cream render, two sash bays per upper floor. Blue-grey painted timber shopfront ('cambridge contemporary crafts' in lower-case lettering on the fascia) with a projecting moulded cornice and multi-pane display windows. There is a recessed doorway with a white door at the east end. I am not sure the 2nd-floor windows match the 1st-floor ones exactly: they were only partly in frame."
+  }
+ ]
+}

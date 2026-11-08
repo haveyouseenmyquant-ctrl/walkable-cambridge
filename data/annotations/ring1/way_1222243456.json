@@ -1,0 +1,107 @@
+{
+ "osm_id": "way/1222243456",
+ "sources": [
+  "mapillary:148334197258295",
+  "mapillary:372170300814498",
+  "mapillary:975083473300699",
+  "mapillary:195748322364738"
+ ],
+ "walls": [
+  {
+   "id": "way/1222243456:1",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.9,
+    6.8
+   ],
+   "material": "timber",
+   "wall_colour": "#efeee8",
+   "trim_colour": "#1e1e1e",
+   "cornice_z": 10.0,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.9,
+    6.8
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.1,
+    6.3
+   ],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 6.2,
+     "z1": 3.6,
+     "fascia_text": "Troon",
+     "fascia_colour": "#1b1b1b",
+     "text_colour": "#e8e8e8",
+     "door_x": 0.8,
+     "stallriser": 0.4,
+     "awning": true
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 1.6,
+     "w": 2.2,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      4,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 4.6,
+     "w": 2.4,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      4,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.6,
+     "w": 2.0,
+     "z": 7.3,
+     "h": 1.7,
+     "panes": [
+      4,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.6,
+     "w": 2.0,
+     "z": 7.3,
+     "h": 1.7,
+     "panes": [
+      4,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "16 King's Parade (Troon). Mock-Tudor black-and-white timber front (black studs/posts with carved bracket heads, white render panels), upper floors jettied. 1st floor: projecting multi-light bay windows (sash lights with side returns) - one clearly seen at the south end, a second at the north end; 2nd floor: paired multi-pane windows above them. Black shopfront with 'TROON' lettering and a cream retractable awning; a brown timber side door/panel at the north end next to Caffe Nero. Exact bay split and roof/dormers not seen clearly; window count 2 per floor is a best reading of oblique photos."
+  }
+ ]
+}

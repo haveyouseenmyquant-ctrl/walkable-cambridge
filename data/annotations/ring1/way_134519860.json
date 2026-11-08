@@ -1,0 +1,142 @@
+{
+ "osm_id": "way/134519860",
+ "sources": [
+  "mapillary:209228070730959",
+  "mapillary:549404016239190",
+  "mapillary:105998904896303"
+ ],
+ "walls": [
+  {
+   "id": "way/134519860:7",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    3.6,
+    6.5,
+    9.0
+   ],
+   "material": "brick",
+   "wall_colour": "#cdbf9c",
+   "trim_colour": "#efeadf",
+   "cornice_z": 11.0,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    3.6
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.1,
+    6.3
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.7,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.7,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.7,
+     "w": 1.0,
+     "z": 6.9,
+     "h": 1.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.7,
+     "w": 1.0,
+     "z": 6.9,
+     "h": 1.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.7,
+     "w": 0.9,
+     "z": 9.3,
+     "h": 1.2,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.7,
+     "w": 0.9,
+     "z": 9.3,
+     "h": 1.2,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 5.0,
+     "z1": 3.4,
+     "fascia_text": "Mr Simms Olde Sweet Shoppe",
+     "fascia_colour": "#1c1a18",
+     "text_colour": "#d8c07a",
+     "door_x": 2.6,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "door",
+     "style": "glazed",
+     "x": 5.7,
+     "w": 0.9,
+     "h": 2.4,
+     "surround": "none"
+    }
+   ],
+   "confidence": "low",
+   "notes": "9 King's Parade: gault brick, 4 storeys, wrought-iron balconettes at first floor. Black shopfront 'Mr Simms Olde Sweet Shoppe' with gold lettering and a hanging sign; at the south end a narrow door under the 'Rainbow Cafe' hanging sign (the cafe is in the basement, 9a). Views only oblique (Mapillary 209228070730959, 549404016239190). Two bays per floor estimated for a 6.4 m frontage."
+  }
+ ]
+}

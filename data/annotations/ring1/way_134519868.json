@@ -1,0 +1,232 @@
+{
+ "osm_id": "way/134519868",
+ "sources": [
+  "mapillary:489690272157801",
+  "mapillary:315938406563003",
+  "mapillary:139568524815020"
+ ],
+ "walls": [
+  {
+   "id": "way/134519868:5",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    3.5,
+    6.3,
+    8.9
+   ],
+   "material": "brick",
+   "wall_colour": "#cdbf9c",
+   "trim_colour": "#efeadf",
+   "cornice_z": 11.3,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    3.5
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.1,
+    4.3,
+    8.55
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.1,
+     "w": 1.0,
+     "z": 3.9,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.2,
+     "w": 1.0,
+     "z": 3.9,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.4,
+     "w": 1.0,
+     "z": 3.9,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.5,
+     "w": 1.0,
+     "z": 3.9,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.1,
+     "w": 1.0,
+     "z": 6.7,
+     "h": 1.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.2,
+     "w": 1.0,
+     "z": 6.7,
+     "h": 1.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.4,
+     "w": 1.0,
+     "z": 6.7,
+     "h": 1.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.5,
+     "w": 1.0,
+     "z": 6.7,
+     "h": 1.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.1,
+     "w": 0.9,
+     "z": 9.2,
+     "h": 1.2,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.2,
+     "w": 0.9,
+     "z": 9.2,
+     "h": 1.2,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.4,
+     "w": 0.9,
+     "z": 9.2,
+     "h": 1.2,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.5,
+     "w": 0.9,
+     "z": 9.2,
+     "h": 1.2,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 4.2,
+     "z1": 3.3,
+     "fascia_text": null,
+     "fascia_colour": "#1f4f9a",
+     "text_colour": "#f1ead6",
+     "door_x": 0.9,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 4.4,
+     "x1": 8.45,
+     "z1": 3.3,
+     "fascia_text": "Bora at the Copper Kettle",
+     "fascia_colour": "#f1ede4",
+     "text_colour": "#8a2a24",
+     "door_x": 7.6,
+     "stallriser": 0.5,
+     "awning": true
+    }
+   ],
+   "confidence": "low",
+   "assumed_height": 11.5,
+   "notes": "WALL HEIGHT PROBLEM: walls.json gives height 2.64 m (eave_z 12.98) for this wall, but the photos show 4 and 5 King's Parade as a full-height four-storey gault-brick terrace pair level with no. 6 (12.95 m) - the OSM/LiDAR height is wrong; this annotation assumes an eave of ~11.5 m (floor_z/cornice_z use that). If the build clips to 2.64 m only the shopfronts survive. From Mapillary 489690272157801 (looking south, grazing): no. 5 (north half, x=0 end) has a bright blue fascia shopfront with a painted-number '5' fascia board (name not legible - left null); no. 4 (south half) is the Copper Kettle cafe, white fascia with red lettering 'BORA at THE COPPER KETTLE' and a red/white striped awning, copper-kettle hanging sign. Upper floors: two 6/6 sash bays per house, wrought-iron balconettes at first floor. Bay positions estimated."
+  }
+ ]
+}

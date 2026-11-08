@@ -1,0 +1,151 @@
+{
+ "osm_id": "way/1036521057",
+ "sources": [
+  "mapillary:941935166581309",
+  "mapillary:2039815249527792",
+  "mapillary:291159029735217",
+  "mapillary:846715379526459",
+  "mapillary:237815608100302"
+ ],
+ "walls": [
+  {
+   "id": "way/1036521057:0",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.5,
+    9.3,
+    13.2
+   ],
+   "material": "brick",
+   "wall_colour": "#96503c",
+   "trim_colour": "#d6c7a3",
+   "cornice_z": 14.1,
+   "cornice": "bracketed",
+   "parapet": false,
+   "string_courses": [
+    4.5,
+    9.7
+   ],
+   "quoins": true,
+   "pilasters": [
+    0.1,
+    5.2
+   ],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.15,
+     "x1": 5.15,
+     "z1": 4.2,
+     "fascia_text": "King's College Visitor Centre",
+     "fascia_colour": "#2f3337",
+     "text_colour": "#f2f0ea",
+     "door_x": 4.5,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 0.9,
+     "w": 0.95,
+     "z": 4.95,
+     "h": 2.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.95,
+     "w": 0.95,
+     "z": 4.95,
+     "h": 2.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.0,
+     "w": 0.95,
+     "z": 4.95,
+     "h": 2.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 0.9,
+     "w": 0.9,
+     "z": 9.9,
+     "h": 2.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.95,
+     "w": 0.9,
+     "z": 9.9,
+     "h": 2.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.0,
+     "w": 0.9,
+     "z": 9.9,
+     "h": 2.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.95,
+     "w": 0.85,
+     "z": 13.6,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "13 King's Parade (King's College Visitor Centre). Late-Victorian red brick front with Bath/Ketton-type stone quoin strips at both edges and stone window surrounds/mullions. Street-facing gable with fretted timber bargeboards and finial over the northern ~3.6 m (window triple); the southern ~1.5 m is plain brick under a bracketed eaves/corbel course (cornice_z = bracket line, gable apex rises above wall height). 1st and 2nd floors: triple of tall sashes in a stone frame, each standing on a bracketed stone ledge with iron railing (string_courses). Single sash in the gable. Ground: dark-grey fascia 'King's College Visitor Centre' with stone piers; dark entrance bay at the south end. Vertical scale fitted to walls.json height (photos suggest slightly taller storeys). Pane pattern not resolvable (assumed 1-over-1)."
+  }
+ ]
+}

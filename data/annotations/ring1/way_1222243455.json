@@ -1,0 +1,151 @@
+{
+ "osm_id": "way/1222243455",
+ "sources": [
+  "mapillary:975083473300699",
+  "mapillary:148334197258295",
+  "mapillary:1113235906084204",
+  "mapillary:195748322364738",
+  "mapillary:189066929702180"
+ ],
+ "walls": [
+  {
+   "id": "way/1222243455:0",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.8,
+    6.7
+   ],
+   "material": "timber",
+   "wall_colour": "#efeee8",
+   "trim_colour": "#1e1e1e",
+   "cornice_z": 9.7,
+   "cornice": "bracketed",
+   "parapet": false,
+   "string_courses": [
+    3.8,
+    6.7
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 6.0,
+     "z1": 3.6,
+     "fascia_text": "Caffè Nero",
+     "fascia_colour": "#1f2b3e",
+     "text_colour": "#f2f2f2",
+     "door_x": 3.3,
+     "stallriser": 0.3,
+     "awning": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.1,
+     "w": 0.9,
+     "z": 4.3,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 3.1,
+     "w": 0.9,
+     "z": 4.3,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.1,
+     "w": 0.95,
+     "z": 4.3,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.1,
+     "w": 0.85,
+     "z": 7.2,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 3.1,
+     "w": 0.85,
+     "z": 7.2,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.1,
+     "w": 0.9,
+     "z": 7.2,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 1.1,
+     "w": 0.9,
+     "h": 1.2
+    },
+    {
+     "type": "dormer",
+     "x": 3.1,
+     "w": 0.9,
+     "h": 1.2
+    },
+    {
+     "type": "dormer",
+     "x": 5.1,
+     "w": 0.9,
+     "h": 1.2
+    }
+   ],
+   "confidence": "medium",
+   "notes": "17 King's Parade (Caffe Nero). Mock-Tudor black-and-white timber front, jettied 1st and 2nd floors on carved brackets, three multi-pane windows per floor in black frames, a pierced/fretted decorative eaves board (cornice 'bracketed') and three small gabled dormers on the tiled roof. Light-blue Caffe Nero awning with navy lettering, navy fascia 'THE ITALIAN COFFEE Co' below, green moulded beam above the shopfront; hanging blue Caffe Nero sign at the north edge."
+  }
+ ]
+}

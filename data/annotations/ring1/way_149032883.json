@@ -1,0 +1,117 @@
+{
+ "osm_id": "way/149032883",
+ "sources": [
+  "mapillary:183415996971817",
+  "mapillary:121744929931233",
+  "mapillary:385651662774077",
+  "mapillary:963817707761284",
+  "mapillary:465114114745032"
+ ],
+ "walls": [
+  {
+   "id": "way/149032883:1",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.2
+   ],
+   "material": "render",
+   "wall_colour": "#dde2de",
+   "trim_colour": "#eef0ec",
+   "cornice_z": 9.3,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.0
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 10.5,
+     "z1": 3.8,
+     "fascia_text": "The Bath House",
+     "fascia_colour": "#2f3d4f",
+     "text_colour": "#b8703f",
+     "door_x": 4.3,
+     "stallriser": 0.9,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.8,
+     "w": 2.0,
+     "z": 0.9,
+     "h": 2.2,
+     "panes": [
+      6,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.4,
+     "w": 2.4,
+     "z": 0.9,
+     "h": 2.2,
+     "panes": [
+      6,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.4,
+     "w": 0.9,
+     "z": 5.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.9,
+     "w": 2.2,
+     "z": 5.0,
+     "h": 2.0,
+     "panes": [
+      6,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.2,
+     "w": 0.9,
+     "z": 5.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "The Bath House pub (Greene King). Ground floor is a navy-painted pub front (#2f3d4f) with pale pilasters. West to east: a wide multi-pane sash window, a green 'Food served daily' board, a door in a pilastered surround, then a wide 3-light sash window. The east end has a cellar hatch. 'THE BATH HOUSE' is in copper letters on the pale render band above. The hanging sign is on an iron bracket, with a lantern. The upper floor is pale grey-green render (jettied/overhanging), with a single sash at the west, a wide 3-light sash centre-east, and another sash toward the east. I could only see the upper floor obliquely and partly cut off, so the window count is uncertain. Only 2 storeys are visible under the roof, so I scaled them to the 9.8 m OSM eave height."
+  }
+ ]
+}

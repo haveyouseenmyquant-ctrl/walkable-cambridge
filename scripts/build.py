@@ -46,16 +46,23 @@ ROAD_HALF = {"primary": 4.5, "secondary": 4.0, "tertiary": 3.5, "unclassified": 
              "living_street": 2.5, "service": 2.0, "pedestrian": 3.0, "track": 1.5}
 # surface classes (FORMAT.md)
 S_ROAD, S_PAVE, S_GRASS, S_WATER, S_COURT, S_EARTH, S_STEPS, S_BRIDGE, S_UNDER = 1, 2, 3, 4, 5, 6, 7, 8, 9
+S_BRICK = 10          # clay brick paviors (herringbone), session 36
 COLORS = {S_ROAD: (0.32, 0.32, 0.34), S_PAVE: (0.62, 0.60, 0.56), S_GRASS: (0.33, 0.52, 0.24),
           S_WATER: (0.22, 0.36, 0.42), S_COURT: (0.66, 0.62, 0.55), S_EARTH: (0.50, 0.42, 0.31),
-          S_STEPS: (0.60, 0.58, 0.54), S_BRIDGE: (0.55, 0.50, 0.45), S_UNDER: (0.5, 0.5, 0.5)}
+          S_STEPS: (0.60, 0.58, 0.54), S_BRIDGE: (0.55, 0.50, 0.45), S_UNDER: (0.5, 0.5, 0.5),
+          S_BRICK: (0.62, 0.60, 0.80)}   # S_BRICK's colour is only a key for materials.js (it draws the brick),
+                                         # chosen so blends with pavement/road don't pass near another class
+# ground surface overrides from photo evidence (session 36), applied on top of the OSM surface tags
+GROUND_OVR = os.path.join(ROOT, "data/annotations/ground/surfaces.json")
+OVR_CLASS = {"brick": S_BRICK, "sett": S_COURT, "paving_stones": S_PAVE, "asphalt": S_ROAD}
 GRASS = {"grass", "meadow", "recreation_ground", "village_green", "park", "garden", "pitch", "common",
          "grassland", "scrub", "wood", "forest", "cemetery", "allotments", "playground", "golf_course",
          "heath", "orchard", "nature_reserve"}
 PAVED = {"square", "parking", "marketplace", "pedestrian", "plaza"}
 PARK_ON_ROAD = {"lane", "street_side", "on_street", "half_on_kerb", "parallel", "diagonal", "perpendicular"}
 SETT = {"sett", "cobblestone", "unhewn_cobblestone", "cobblestone:flattened"}
-SLABS = {"paving_stones", "paved", "concrete:plates", "bricks", "stone"}
+SLABS = {"paving_stones", "paved", "concrete:plates", "stone"}
+BRICKS = {"bricks", "brick", "clay"}
 UNPAVED = {"dirt", "earth", "ground", "grass", "gravel", "fine_gravel", "compacted", "unpaved"}
 SIDEWALK_W = 2.0      # modelled footway width beside a road with sidewalk=* (m)
 SIDEWALK_HW = {"primary", "secondary", "tertiary", "unclassified", "residential"}
@@ -95,9 +102,63 @@ def road_class(t):
     sf = t.get("surface")
     if sf in SETT:
         return S_COURT
+    if sf in BRICKS:
+        return S_BRICK
     if sf in SLABS or (sf is None and t.get("highway") == "pedestrian"):
         return S_PAVE
     return S_ROAD
+
+
+def area_class(t):
+    """Surface class of a paved area (square, marketplace, pedestrian area): its OSM surface tag, else pavement."""
+    sf = t.get("surface")
+    if sf in SETT:
+        return S_COURT
+    if sf in BRICKS:
+        return S_BRICK
+    if sf == "asphalt":
+        return S_ROAD
+    return S_PAVE
+
+
+def ground_overrides(ways, rels, nodes):
+    """{class: [polygons]} from data/annotations/ground/surfaces.json (FORMAT.md): photo-checked surfaces that
+    replace the OSM-derived class. Each feature is an OSM way (buffered by half_width, or one side of it by width
+    with side=left|right), an OSM area (way or relation, whole polygon), or a world-frame line/polygon."""
+    out = {}
+    if not os.path.exists(GROUND_OVR) or os.environ.get("WC_GROUND_OVR", "1") != "1":
+        return out
+    for f in json.load(open(GROUND_OVR))["features"]:
+        cl = OVR_CLASS[f["surface"]]
+        g = None
+        if "osm" in f:
+            kind, oid = f["osm"].split("/")
+            if kind == "relation":
+                r = next((r for r in rels if r["id"] == int(oid)), None)
+                g = rel_area(r, ways, nodes) if r else None
+            elif int(oid) in ways:
+                w = ways[int(oid)]
+                if f.get("area"):
+                    g = way_area(w, nodes)
+                else:
+                    c = coords(w, nodes)
+                    g = LineString(c) if c else None
+        elif "line" in f:
+            g = LineString([(x + E0, y + N0) for x, y in f["line"]])
+        elif "polygon" in f:
+            g = Polygon([(x + E0, y + N0) for x, y in f["polygon"]])
+        if g is None:
+            log("ground override: missing", f.get("osm") or f.get("id"))
+            continue
+        if g.geom_type == "LineString":
+            if f.get("side") in ("left", "right"):
+                w = float(f["width"])
+                g = g.buffer(w if f["side"] == "left" else -w, cap_style=2, single_sided=True)
+            else:
+                g = g.buffer(float(f.get("half_width", 2.0)), cap_style=2)
+        out.setdefault(cl, []).append(g)
+    log("ground overrides", {k: len(v) for k, v in out.items()})
+    return out
 
 
 def log(*a):
@@ -622,7 +683,7 @@ def main():
             if t.get("area") == "yes" or t.get("area:highway"):
                 g = way_area(w, nodes)
                 if g is not None:
-                    paved.append(g)
+                    paved.append((g, area_class(t)))
         g = None
         if "building" in t and t["building"] != "no":
             g = way_area(w, nodes)
@@ -644,7 +705,7 @@ def main():
         elif t.get("place") == "square" or t.get("amenity") in PAVED:
             g = way_area(w, nodes)
             if g is not None:
-                paved.append(g)
+                paved.append((g, area_class(t)))
     for r in rels:
         t = r.get("tags", {})
         if t.get("type") not in ("multipolygon", "building", None):
@@ -664,7 +725,7 @@ def main():
         elif t.get("place") == "square" or t.get("amenity") in PAVED or t.get("highway") == "pedestrian":
             g = rel_area(r, ways, nodes)
             if g is not None:
-                paved.append(g)
+                paved.append((g, area_class(t)))
     for n in pnodes:
         t = n["tags"]
         if "building" in t and t["building"] != "no":
@@ -715,7 +776,8 @@ def main():
             sw.append(ln.buffer(h if v == "left" else -h, cap_style=2, single_sided=True))
     burn(sw, S_PAVE)
     burn(grass, S_GRASS)
-    burn(paved, S_PAVE)
+    for cl in (S_PAVE, S_ROAD, S_COURT, S_BRICK):   # squares/pedestrian areas follow their surface tag (session 36)
+        burn([g for g, c in paved if c == cl], cl)
     for cl in (S_ROAD, S_PAVE, S_COURT):
         burn([ln.buffer(road_half(t)) for ln, t in road_lines if t["highway"] in ROAD_HALF and t["highway"] != "track"
               and t.get("area") != "yes" and road_class(t) == cl], cl)
@@ -724,6 +786,8 @@ def main():
     for cl in (S_ROAD, S_PAVE, S_COURT):
         burn([ln.buffer(1.0) for ln, t in walk_lines if t["highway"] in ("footway", "cycleway", "path")
               and t.get("surface") not in UNPAVED and (road_class(t) if t.get("surface") else S_PAVE) == cl], cl)
+    for cl, geoms in ground_overrides(ways, rels, nodes).items():
+        burn(geoms, cl)
     burn([ln.buffer(1.0) for ln, t in walk_lines if t["highway"] == "steps"], S_STEPS)
     burn(water, S_WATER)
     # connector repairs (scripts/connectors.py), retired in session 7: only real, mapped openings count. The 94
@@ -733,7 +797,7 @@ def main():
     conn_bufs = [ln.buffer(PASS_W) for ln in conns]
     burn(conn_bufs, S_PAVE)
     burn([g for _, g, t in buildings if t.get("building") != "roof"], S_UNDER)   # open ground under roofs
-    log("class raster done", np.bincount(cls.ravel(), minlength=10).tolist())
+    log("class raster done", np.bincount(cls.ravel(), minlength=11).tolist())
 
     # ---- building heights and passages
     tree = STRtree([ln for ln, _ in walk_lines])

@@ -1,0 +1,303 @@
+{
+ "osm_id": "way/149032866",
+ "sources": [
+  "mapillary:2877572389148713",
+  "mapillary:1376630249383982",
+  "mapillary:1413781345638944",
+  "mapillary:994546311082944",
+  "mapillary:511955679838928",
+  "mapillary:167304821960251",
+  "mapillary:310004843999322",
+  "mapillary:3069542083334601"
+ ],
+ "walls": [
+  {
+   "id": "way/149032866:23",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.2,
+    7.9
+   ],
+   "material": "stucco",
+   "wall_colour": "#e8e1cf",
+   "trim_colour": "#f3f0e8",
+   "cornice_z": 11.2,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.2
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 0.9,
+     "w": 1.1,
+     "z": 0.8,
+     "h": 2.5,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.6,
+     "w": 1.1,
+     "z": 0.8,
+     "h": 2.5,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 4.35,
+     "w": 1.1,
+     "h": 3.0,
+     "surround": "pilastered"
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.1,
+     "w": 1.1,
+     "z": 0.8,
+     "h": 2.5,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.85,
+     "w": 1.1,
+     "z": 0.8,
+     "h": 2.5,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 0.9,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 2.1,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 0.9,
+     "w": 0.95,
+     "z": 8.3,
+     "h": 1.9,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.6,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 2.1,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.6,
+     "w": 0.95,
+     "z": 8.3,
+     "h": 1.9,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.35,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 2.1,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.35,
+     "w": 0.95,
+     "z": 8.3,
+     "h": 1.9,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.1,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 2.1,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.1,
+     "w": 0.95,
+     "z": 8.3,
+     "h": 1.9,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.85,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 2.1,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.85,
+     "w": 0.95,
+     "z": 8.3,
+     "h": 1.9,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "The Eagle pub, Bene't St front. Ground floor is channelled buff ashlar (#cdb88f). The two upper storeys are smooth cream-painted stucco under a plain parapet. Ground floor, west to east: sash window (stained-glass lower panel), red 'Our History' board, sash window, main door in a stone pilastered surround with 'EAGLE' lettered frieze (green Greene King plaque and small plaques beside it), sash window, blue DNA plaque, sash window. Five window bays on the 1st and 2nd floors, aligned over the ground bays. Hanging Eagle sign on an iron bracket and lanterns. Bay spacing comes from oblique photos."
+  },
+  {
+   "id": "way/149032866:24",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.2,
+    7.9
+   ],
+   "material": "stucco",
+   "wall_colour": "#e8e1cf",
+   "trim_colour": "#f3f0e8",
+   "cornice_z": 10.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.2
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 1.1,
+     "w": 2.0,
+     "h": 3.4,
+     "surround": "none"
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.1,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 2.1,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.1,
+     "w": 0.95,
+     "z": 8.3,
+     "h": 1.9,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "East end of the Eagle front: a tall rectangular carriage opening to the courtyard. It has dark red doors and a painted 'THE EAGLE' panel inside, and a 'McCrum Lecture Theatre' sign. The 'door' element stands for this opening. One window bay above, on each upper floor. I assume this 2.2 m segment is the archway."
+  }
+ ]
+}

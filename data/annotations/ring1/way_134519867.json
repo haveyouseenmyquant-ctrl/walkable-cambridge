@@ -1,0 +1,156 @@
+{
+ "osm_id": "way/134519867",
+ "sources": [
+  "mapillary:4351646494872132",
+  "mapillary:206488121041459",
+  "mapillary:474692660535556",
+  "mapillary:1597137930479111",
+  "mapillary:1376630249383982"
+ ],
+ "walls": [
+  {
+   "id": "way/134519867:5",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.0,
+    7.6
+   ],
+   "material": "stone",
+   "wall_colour": "#d6c49c",
+   "trim_colour": "#efebe1",
+   "cornice_z": 10.9,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.0
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 1.3,
+     "w": 1.0,
+     "h": 2.9,
+     "surround": "fanlight"
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.6,
+     "w": 1.0,
+     "z": 0.7,
+     "h": 2.3,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.6,
+     "w": 1.0,
+     "z": 0.7,
+     "h": 2.3,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.6,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 2.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.6,
+     "w": 0.95,
+     "z": 8.1,
+     "h": 1.7,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.6,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 2.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.6,
+     "w": 0.95,
+     "z": 8.1,
+     "h": 1.7,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.6,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 2.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.6,
+     "w": 0.95,
+     "z": 8.1,
+     "h": 1.7,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "9 Bene't St (listed, Q26419226), the frontage between the Cambridge Chop House (painted brick, 1 King's Parade) and The Eagle. Warm buff ashlar on all three floors, plain parapet. I only saw it at very oblique angles (photos taken along the pavement). Three upper window bays per floor; some second-floor windows have small wrought-iron balconettes. Ground floor: a tall white door with a fanlight at the west end, then two tall sash openings. A hanging barber sign ('PH, premium cutting') is on this front, but there is no fascia or shopfront. The x positions are estimates."
+  }
+ ]
+}

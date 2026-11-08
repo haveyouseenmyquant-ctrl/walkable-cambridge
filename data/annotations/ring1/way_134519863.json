@@ -1,0 +1,103 @@
+{
+ "osm_id": "way/134519863",
+ "sources": [
+  "mapillary:121744929931233",
+  "mapillary:1918587431638681",
+  "mapillary:963817707761284",
+  "mapillary:2768685243444214"
+ ],
+ "walls": [
+  {
+   "id": "way/134519863:5",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.6,
+    6.6
+   ],
+   "material": "brick",
+   "wall_colour": "#cdbf9c",
+   "trim_colour": "#f1eee6",
+   "cornice_z": 9.5,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    3.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 7.0,
+     "z1": 3.3,
+     "fascia_text": "Bread & Meat",
+     "fascia_colour": "#1f2124",
+     "text_colour": "#e8e2d2",
+     "door_x": 6.3,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.0,
+     "w": 1.0,
+     "z": 4.1,
+     "h": 1.8,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.0,
+     "w": 0.95,
+     "z": 7.1,
+     "h": 1.6,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.2,
+     "w": 1.0,
+     "z": 4.1,
+     "h": 1.8,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.2,
+     "w": 0.95,
+     "z": 7.1,
+     "h": 1.6,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Narrow gault-brick house with a black-painted shopfront ('Bread & Meat': fascia with festoon bulbs, large plate glazing). The entrance at the east end (next to the Bath House) is up steps behind an ornate black iron gate. Two sash windows per upper floor, with decorative wrought-iron balconettes on the 1st floor (and on the 2nd)."
+  }
+ ]
+}

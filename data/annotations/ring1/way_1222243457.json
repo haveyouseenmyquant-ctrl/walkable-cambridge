@@ -1,0 +1,133 @@
+{
+ "osm_id": "way/1222243457",
+ "sources": [
+  "mapillary:154812726597830",
+  "mapillary:627522395314925",
+  "mapillary:237815608100302",
+  "mapillary:195748322364738"
+ ],
+ "walls": [
+  {
+   "id": "way/1222243457:0",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.3,
+    7.9,
+    11.2
+   ],
+   "material": "brick",
+   "wall_colour": "#c4ab7c",
+   "trim_colour": "#ece8de",
+   "cornice_z": 14.8,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.3,
+    11.0
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 5.2,
+     "z1": 4.1,
+     "fascia_text": "Fitzbillies",
+     "fascia_colour": "#1d1d1d",
+     "text_colour": "#f2f2f2",
+     "door_x": 4.6,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.35,
+     "w": 1.1,
+     "z": 4.75,
+     "h": 2.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "pediment",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.85,
+     "w": 1.1,
+     "z": 4.75,
+     "h": 2.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "pediment",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.35,
+     "w": 1.05,
+     "z": 8.3,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.85,
+     "w": 1.05,
+     "z": 8.3,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.35,
+     "w": 0.95,
+     "z": 11.6,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.85,
+     "w": 0.95,
+     "z": 11.6,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "15 King's Parade. Yellow stock/gault brick (weathered buff) with white stucco dressings: 1st-floor 6-over-6 sashes with architraves and triangular pediments on consoles, 2nd-floor sashes with architraves, smaller 3rd-floor sashes; every window has a cast-iron balconette on brackets. Moulded band with end consoles below the 3rd floor (string course 11.0). Black shopfront with round-arched glazing heads and dentil cornice. Photos (2016-2021) show the 'NOA NOA' clothes shop; fascia_text uses the current OSM name Fitzbillies (colours from the photos, branding of the new tenant not seen). Large white cylindrical rainwater pipe/hopper at the south edge."
+  }
+ ]
+}

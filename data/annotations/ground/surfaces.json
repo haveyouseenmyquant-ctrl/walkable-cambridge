@@ -1,0 +1,43 @@
+{
+  "about": "Session 36: ground surfaces checked against non-held-out photos, applied by scripts/build.py on top of the OSM surface tags (FORMAT.md, 'Ground surface overrides'). surface: brick | sett | paving_stones | asphalt. osm way: buffered by half_width (m) or, with side=left|right (relative to the way's node order), one side by width. line/polygon: world frame (BNG minus 545000, 258400). Sources: Mapillary ids (data/raw/mapillary_ref, CC BY-SA 4.0) and Wikimedia Commons file names (data/raw/commons_ref, licences in DATA.md). Not from data/benchmark.",
+  "features": [
+    {
+      "id": "market_street_brick",
+      "osm": "way/169385438",
+      "surface": "brick",
+      "half_width": 2.3,
+      "osm_says": "paving_stones",
+      "seen": "Carriageway of dark red/plum clay paviors laid herringbone, ~4.5 m wide between grey granite kerbs with a slot-drain channel; buff stone/concrete slab footways either side.",
+      "sources": ["mapillary:918215512073749", "mapillary:484065959384228", "mapillary:2802021553394282", "mapillary:795230574437603", "mapillary:295737195855594", "mapillary:298738958864117", "commons:Market_Street,_Cambridge.jpg", "commons:Market_Street,_Cambridge_-_geograph.org.uk_-_4171681.jpg"]
+    },
+    {
+      "id": "market_hill_ne_junction_brick",
+      "osm": "way/1039414784",
+      "surface": "brick",
+      "half_width": 2.3,
+      "osm_says": "asphalt",
+      "seen": "The herringbone brick of Market Street runs on to the Market Hill junction by the stalls (far end of the view).",
+      "confidence": "medium (seen at ~40 m distance)",
+      "sources": ["mapillary:918215512073749"]
+    },
+    {
+      "id": "kings_parade_east_setts",
+      "line": [[-192.0, -27.0], [-184.0, 33.0]],
+      "side": "right",
+      "width": 2.6,
+      "surface": "sett",
+      "osm_says": "asphalt (way/3993048)",
+      "seen": "The east (shop-side) half of King's Parade, the parking/loading strip, is grey granite setts with a two-sett channel at the kerb; the west traffic lane is asphalt with LOOK markings. Only the northern 60 m (Senate House Hill to St Edward's Passage) is covered by the photo; the rest of the way is left as OSM.",
+      "sources": ["mapillary:189066929702180", "mapillary:541914280138693"]
+    }
+  ],
+  "osm_fixes_in_build": "Market Square (relation/8117433, surface=sett, Grade II listed cobbles) used to be burned as pavement because areas ignored their surface tag; build.py now honours it (area_class). Evidence: commons Cambridge_Market_stalls_at_lunchtime.jpg (granite setts between the stall rows).",
+  "checked_unchanged": {
+    "Petty Cury": "large buff/grey slabs across the full width with darker bands: OSM paving_stones is right (commons Half_Marathon_runners_in_Petty_Cury_..._6414097, Petty_Cury_-_geograph.org.uk_-_4350366).",
+    "Peas Hill": "carriageway dark, looks asphalt with double yellow lines and a sett strip at the kerb; slab footways (commons Cambridge_-_Peas_Hill_-_View_NNW_towards_St_Edward_King_and_Martyr_Church.jpg). Left as OSM.",
+    "St Edward's Passage": "York stone flags with a sett gutter (commons St_Edward's_Passage,_Cambridge,_looking_toward_Peas_Hill_(cropped).jpg): pavement.",
+    "Senate House Hill": "setts, already OSM sett (mapillary 541914280138693).",
+    "Corn Exchange St / Wheeler St": "asphalt (mapillary 1373625636348222, 313982040097449).",
+    "Rose Crescent, Market Hill loop, Sidney Street": "no clear non-held-out photo of the surface; left as OSM."
+  }
+}

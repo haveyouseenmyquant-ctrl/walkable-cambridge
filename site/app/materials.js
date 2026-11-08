@@ -39,8 +39,65 @@ vec3 detail(sampler2D t, vec2 uv) {   // texture divided by its mean (top mip): 
 float h21(vec3 c) { return fract(sin(dot(c, vec3(12.9898, 78.233, 37.719))) * 43758.5453); }
 `;
 
+// Session 36: procedural paving (world space, no textures; cheap enough for phones): herringbone clay paviors
+// (class 10, Market Street), granite setts in stretcher courses (class 5, the Market Square, King's Parade) and
+// rectangular slabs for pavements (class 2). Patterns fade to their mean colour once a unit is under ~2 px.
+const pavingFns = `
+float h12(vec2 p) { vec3 p3 = fract(vec3(p.xyx) * 0.1031); p3 += dot(p3, p3.yzx + 33.33); return fract((p3.x + p3.y) * p3.z); }
+float vnoise(vec2 p) { vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f);
+  return mix(mix(h12(i), h12(i + vec2(1, 0)), f.x), mix(h12(i + vec2(0, 1)), h12(i + vec2(1, 1)), f.x), f.y); }
+vec3 lumDetail(vec3 d) { return mix(vec3(dot(d, vec3(0.333))), d, 0.4); }
+float joint(float e, float jw, float px) { return 1.0 - smoothstep(jw - 0.5 * px, jw + 0.5 * px, e); }
+// 90-degree herringbone of 200 x 100 mm paviors, laid at 45 degrees; linear albedo
+vec3 brickPave(vec2 gp, float px) {
+  vec2 p = mat2(0.7071, 0.7071, -0.7071, 0.7071) * gp / 0.1;   // units of one brick width
+  vec2 c = floor(p);
+  float d = mod(c.x - c.y, 4.0);
+  vec2 o = d < 0.5 ? c : d < 1.5 ? c - vec2(1, 0) : d < 2.5 ? c - vec2(0, 1) : c;
+  vec2 sz = d < 1.5 ? vec2(2, 1) : vec2(1, 2);
+  vec2 l = p - o; vec2 e2 = min(l, sz - l); float e = min(e2.x, e2.y) * 0.1;
+  float r = h12(o + sz * 7.0), r2 = h12(o * 1.7 + 3.1);
+  vec3 col = mix(vec3(0.21, 0.09, 0.08), vec3(0.27, 0.115, 0.09), r);
+  col = mix(col, vec3(0.16, 0.075, 0.075), step(0.93, r2));            // a few dark plum bricks
+  col *= 0.85 + 0.3 * vnoise(gp * 0.4);                                 // large-scale staining
+  vec3 mean = vec3(0.225, 0.095, 0.083);
+  col = mix(col, vec3(0.20, 0.17, 0.14), joint(e, 0.005, px) * 0.8);   // sand joints
+  return mix(col, mean * (0.85 + 0.3 * vnoise(gp * 0.4)), smoothstep(0.03, 0.08, px));
+}
+// granite setts ~100 x 140-200 mm in courses with random offsets; returns linear albedo
+vec3 settPave(vec2 gp, float px) {
+  float row = floor(gp.y / 0.11);
+  float L = 0.14 + 0.06 * h12(vec2(row, 7.0));
+  float x = gp.x / L + h12(vec2(row, 1.0));
+  vec2 id = vec2(floor(x), row);
+  float lx = fract(x) * L, ly = fract(gp.y / 0.11) * 0.11;
+  float e = min(min(lx, L - lx), min(ly, 0.11 - ly));
+  float r = h12(id), r2 = h12(id + 17.0);
+  vec3 col = vec3(0.20, 0.195, 0.19) * (0.7 + 0.6 * r);
+  col = mix(col, vec3(0.27, 0.20, 0.18), step(0.8, r2) * 0.6);         // pinkish granite
+  col *= 0.8 + 0.2 * smoothstep(0.0, 0.025, e);                         // domed tops
+  col *= 0.85 + 0.3 * vnoise(gp * 0.5);
+  col = mix(col, vec3(0.07, 0.065, 0.06), joint(e, 0.006, px) * 0.85);
+  return mix(col, vec3(0.19, 0.18, 0.17) * (0.85 + 0.3 * vnoise(gp * 0.5)), smoothstep(0.03, 0.09, px));
+}
+// rectangular slabs 600 x 900 mm in offset courses; returns a multiplier on the class colour
+vec3 slabPave(vec2 gp, float px) {
+  float row = floor(gp.y / 0.6);
+  float x = gp.x / 0.9 + 0.5 * mod(row, 2.0) + 0.2 * h12(vec2(row, 3.0));
+  vec2 id = vec2(floor(x), row);
+  float lx = fract(x) * 0.9, ly = fract(gp.y / 0.6) * 0.6;
+  float e = min(min(lx, 0.9 - lx), min(ly, 0.6 - ly));
+  float r = h12(id), st = vnoise(gp * 0.35);
+  vec3 m = vec3(1.0, 0.97, 0.90) * (0.86 + 0.2 * r) * (0.88 + 0.24 * st);
+  m = mix(m, vec3(0.9, 0.88, 0.84), step(0.9, h12(id + 5.0)) * 0.5);   // odd greyer replacement slab
+  m *= 1.0 - 0.4 * joint(e, 0.005, px);
+  return mix(m, vec3(1.0, 0.97, 0.90) * 0.96 * (0.88 + 0.24 * st), smoothstep(0.15, 0.4, px));
+}
+`;
+
 const groundFrag = `
   vec2 gp = vec2(vWP.x, -vWP.z);
+  float px = length(fwidth(gp));   // metres per pixel
   // surface class weights from the interpolated vertex colour (build.py COLORS)
   vec3 c = vColor.rgb;
   float wr = exp(-dot(c - vec3(0.32, 0.32, 0.34), c - vec3(0.32, 0.32, 0.34)) * 200.0);
@@ -50,16 +107,20 @@ const groundFrag = `
   float wc = exp(-dot(c - vec3(0.66, 0.62, 0.55), c - vec3(0.66, 0.62, 0.55)) * 200.0);
   float we = exp(-dot(c - vec3(0.50, 0.42, 0.31), c - vec3(0.50, 0.42, 0.31)) * 200.0)
            + exp(-dot(c - vec3(0.55, 0.50, 0.45), c - vec3(0.55, 0.50, 0.45)) * 200.0);
-  float wsum = wr + wp + wg + wc + we;
-  vec3 dt = vec3(1.0);
+  float wb = exp(-dot(c - vec3(0.62, 0.60, 0.80), c - vec3(0.62, 0.60, 0.80)) * 200.0);   // key colour only (see build.py)
+  float wsum = wr + wp + wg + wc + we + wb;
   if (wsum > 0.02) {
-    dt = (wr * detail(t_road, gp / ${sizes.road}) + wp * detail(t_pave, gp / ${sizes.pave})
-        + wg * detail(t_grass, gp / ${sizes.grass}) + wc * detail(t_court, gp / ${sizes.court})
-        + we * detail(t_earth, gp / ${sizes.earth})) / wsum;
-    dt = mix(vec3(dot(dt, vec3(0.333))), dt, 0.4);   // mostly luminance detail: keep the class colour
-    dt = mix(vec3(1.0), dt, min(wsum, 1.0));
+    vec3 base = diffuseColor.rgb, acc = vec3(0.0);
+    if (wr > 0.01) acc += wr * base * lumDetail(detail(t_road, gp / ${sizes.road}));
+    if (wg > 0.01) acc += wg * base * lumDetail(detail(t_grass, gp / ${sizes.grass}));
+    if (we > 0.01) acc += we * base * lumDetail(detail(t_earth, gp / ${sizes.earth}));
+    if (wp > 0.01) acc += wp * base * slabPave(gp, px);
+    if (wc > 0.01) acc += wc * settPave(gp, px) * 1.05;
+    if (wb > 0.01) acc += wb * brickPave(gp, px) * 1.4;
+    vec3 col = acc / wsum;
+    diffuseColor.rgb = mix(base, col, min(wsum * 8.0, 1.0));
   }
-  diffuseColor.rgb *= dt * ${GK};
+  diffuseColor.rgb *= ${GK};
 `;
 
 const buildingFrag = `
@@ -95,7 +156,7 @@ function patch(mat, kind) {
       .replace('#include <worldpos_vertex>', `#include <worldpos_vertex>
         vWP = (modelMatrix * vec4(transformed, 1.0)).xyz; vWN = normalize(mat3(modelMatrix) * objectNormal);`);
     sh.fragmentShader = sh.fragmentShader
-      .replace('#include <common>', '#include <common>\n' + common)
+      .replace('#include <common>', '#include <common>\n' + common + (kind === 'b' ? '' : pavingFns))
       .replace('#include <color_fragment>', '#include <color_fragment>\n' + (kind === 'b' ? buildingFrag : groundFrag));
   };
   mat.customProgramCacheKey = () => 'wc_' + kind;

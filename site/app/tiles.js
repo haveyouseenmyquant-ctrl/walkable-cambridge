@@ -26,7 +26,7 @@ const FAC_R = +(Q.get('facr') || (QUAL === 'low' ? 60 : QUAL === 'medium' ? 120 
 // Surface class colours (FORMAT.md) for the collision fallback mesh and the minimap.
 export const SURFACE_COLORS = {
   0: '#9a958c', 1: '#5d5f63', 2: '#b9b2a6', 3: '#6f9a55', 4: '#4f7fa8', 5: '#c8bca6',
-  6: '#a08a66', 7: '#bfb6a6', 8: '#9c8f7c', 9: '#8d877d', 255: '#8a8a80',
+  6: '#a08a66', 7: '#bfb6a6', 8: '#9c8f7c', 9: '#8d877d', 10: '#8a5048', 255: '#8a8a80',
 };
 
 const buildingMat = new THREE.MeshLambertMaterial({ color: /look=v2/.test(location.search) ? 0xb8ad9c : 0xd9cfbf });
