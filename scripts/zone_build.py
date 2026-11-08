@@ -96,6 +96,35 @@ def gl_mesh(name, P, nrm, col):
     return (name, pos, nr, cl, np.arange(k * 3))
 
 
+def load_bespoke():
+    """scripts/zone_bespoke_*.py modules: BUILDS = {osm_id: fn(walls_of_building) -> [{"name", "tris", "col"}, ...]}
+    (tris: world collision-frame triangles (E, N, z) like zone_props). A bespoke building gets no generic skin."""
+    here = os.path.dirname(os.path.abspath(__file__))
+    out = {}
+    for f in sorted(glob.glob(os.path.join(here, "zone_bespoke_*.py"))):
+        try:
+            mod = importlib.import_module(os.path.basename(f)[:-3])
+            out.update(getattr(mod, "BUILDS", {}))
+        except Exception as e:   # never break the zone build
+            print("bespoke module failed:", f, repr(e), file=sys.stderr)
+    return out
+
+
+def prop_meshes(items):
+    meshes, n = [], 0
+    for pr in items:
+        T = np.asarray(pr["tris"], float).reshape(-1, 3, 3)
+        if not len(T):
+            continue
+        g = np.cross(T[:, 1] - T[:, 0], T[:, 2] - T[:, 0])
+        ln = np.linalg.norm(g, axis=1)
+        ok = ln > 1e-9
+        col = np.broadcast_to(np.asarray(pr["col"], float), (len(T), 3))[ok]
+        meshes.append(gl_mesh(pr["name"], T[ok], g[ok] / ln[ok, None], col))
+        n += int(ok.sum())
+    return meshes, n
+
+
 def main():
     t0 = time.time()
     args = sys.argv[1:]
@@ -105,11 +134,15 @@ def main():
     ext = corner_extents(W)
     man = json.load(open(os.path.join(ROOT, "site/manifest.json")))
     landmark = {l["osm_id"]: l["id"] for l in man.get("landmarks", []) if l.get("detailed") and l.get("osm_id")}
+    bespoke = load_bespoke()
     by_b, rows, skipped = {}, [], []
     tot_area = tot_detail = 0.0
     for w in W:
         L, H = w["length"], w["eave_z"] - w["ground_z"]
         a = ann.get(w["id"])
+        if w["osm_id"] in bespoke:
+            skipped.append({"id": w["id"], "reason": "bespoke"})
+            continue
         if a is None and w["osm_id"] in landmark:
             # detailed landmark render model (build.py build_landmarks) already has 3D buttresses/piers/windows that a
             # generic skin would clash with; only annotated walls of landmarks get a skin
@@ -135,6 +168,13 @@ def main():
     for oid, parts in by_b.items():
         meshes.append(gl_mesh("f:" + oid, *(np.concatenate(x) for x in zip(*parts))))
     nprops = 0
+    for oid, fn in bespoke.items():
+        try:
+            m, n = prop_meshes(fn([w for w in W if w["osm_id"] == oid]))
+            meshes += m
+            nprops += n
+        except Exception as e:
+            print("bespoke build failed:", oid, repr(e), file=sys.stderr)
     if os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), "zone_props.py")):
         try:
             zp = importlib.import_module("zone_props")
