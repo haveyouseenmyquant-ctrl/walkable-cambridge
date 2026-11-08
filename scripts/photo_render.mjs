@@ -37,8 +37,10 @@ if (!/^https?:/.test(SRC)) {
   await new Promise(ok => server.listen(0, '127.0.0.1', ok));
   base = `http://127.0.0.1:${server.address().port}/`;
 }
-const views = JSON.parse(fs.readFileSync(VIEWS)).filter(v => !ONLY || ONLY.includes(String(v.id)));
 fs.mkdirSync(OUT, { recursive: true });
+// views already rendered in OUT are skipped (a crashed worker can be re-run for the rest)
+const views = JSON.parse(fs.readFileSync(VIEWS)).filter(v => (!ONLY || ONLY.includes(String(v.id)))
+  && !fs.existsSync(path.join(OUT, `${v.id}.png`)));
 const browser = await puppeteer.launch({
   executablePath: CHROME, headless: true,
   args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'],

@@ -45,6 +45,9 @@ uint8    surface[ntris]    0 = none/building, 1 = road, 2 = pavement/footway, 3 
                            8 = bridge deck, 9 = ground under a building,
                            255 = placeholder (does NOT count for ground coverage)
 ```
+Surface classes since session 26 (build.py): carriageways follow their OSM `surface` (asphalt = 1, paving stones = 2,
+sett/cobblestone = 5) and width (`width` tag, else the class default + 1 m per side with on-road parking); roads
+with `sidewalk=*` (untagged urban roads too) get a 2 m footway (2) each side; squares and parking areas are 2.
 
 ## Walkability rules used by the harness
 - Ground grid 0.5 m. Each cell takes the highest walkable (kind 1, normal tilt <= 50°) surface under it.

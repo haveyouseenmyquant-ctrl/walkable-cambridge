@@ -53,6 +53,51 @@ GRASS = {"grass", "meadow", "recreation_ground", "village_green", "park", "garde
          "grassland", "scrub", "wood", "forest", "cemetery", "allotments", "playground", "golf_course",
          "heath", "orchard", "nature_reserve"}
 PAVED = {"square", "parking", "marketplace", "pedestrian", "plaza"}
+PARK_ON_ROAD = {"lane", "street_side", "on_street", "half_on_kerb", "parallel", "diagonal", "perpendicular"}
+SETT = {"sett", "cobblestone", "unhewn_cobblestone", "cobblestone:flattened"}
+SLABS = {"paving_stones", "paved", "concrete:plates", "bricks", "stone"}
+UNPAVED = {"dirt", "earth", "ground", "grass", "gravel", "fine_gravel", "compacted", "unpaved"}
+SIDEWALK_W = 2.0      # modelled footway width beside a road with sidewalk=* (m)
+SIDEWALK_HW = {"primary", "secondary", "tertiary", "unclassified", "residential"}
+
+
+def _num(v):
+    try:
+        return float(str(v).replace("m", "").strip())
+    except (TypeError, ValueError):
+        return None
+
+
+def parked_sides(t):
+    """How many sides of a road have on-road parking (OSM parking:<side>=*, older parking:lane:<side>=*)."""
+    n = 0
+    for side in ("left", "right"):
+        v = (t.get(f"parking:{side}") or t.get("parking:both") or t.get(f"parking:lane:{side}")
+             or t.get("parking:lane:both"))
+        n += v in PARK_ON_ROAD
+    return n
+
+
+def road_half(t):
+    """Half width of the modelled carriageway (m): OSM width if mapped, else the class default plus ~1 m for each
+    side with on-road parking (sessions <= 25 used the class default alone, which is narrower than real streets)."""
+    hw = t.get("highway")
+    if hw not in ROAD_HALF:
+        return None
+    w = _num(t.get("width"))
+    if w and 3.0 <= w <= 24.0 and hw not in ("pedestrian", "track"):
+        return w / 2
+    return ROAD_HALF[hw] + (parked_sides(t) if os.environ.get("WC_ROAD_PARK", "1") == "1" else 0)
+
+
+def road_class(t):
+    """Surface class of a carriageway from its OSM surface tag."""
+    sf = t.get("surface")
+    if sf in SETT:
+        return S_COURT
+    if sf in SLABS or (sf is None and t.get("highway") == "pedestrian"):
+        return S_PAVE
+    return S_ROAD
 
 
 def log(*a):
@@ -497,21 +542,37 @@ def main():
 
     # ---- surface class raster (1 m, same grid as the DTM); later layers win
     shp = DTM.shape
-    cls = np.full(shp, S_COURT, np.uint8)   # default: paved urban ground (yards, forecourts)
+    cls = np.full(shp, int(os.environ.get("WC_GROUND_DEFAULT", S_COURT)), np.uint8)   # default: unmapped urban ground (yards, forecourts)
 
     def burn(geoms, val):
         geoms = [mapping(g) for g in geoms if g is not None and not g.is_empty]
         if geoms:
             rasterize([(g, val) for g in geoms], out=cls, transform=tf, all_touched=False)
 
+    # footways beside roads tagged sidewalk=both|left|right|yes (or untagged urban roads); separately mapped
+    # footways (sidewalk=separate) are burned with the walk lines below
+    sw = []
+    for ln, t in road_lines:
+        hw = t.get("highway")
+        if hw not in SIDEWALK_HW or t.get("area") == "yes":
+            continue
+        v = t.get("sidewalk", t.get("sidewalk:both", "both" if os.environ.get("WC_SIDEWALK_DEFAULT", "1") == "1" else "no"))
+        h = road_half(t) + SIDEWALK_W
+        if v in ("both", "yes"):
+            sw.append(ln.buffer(h, cap_style=2))
+        elif v in ("left", "right"):
+            sw.append(ln.buffer(h if v == "left" else -h, cap_style=2, single_sided=True))
+    burn(sw, S_PAVE)
     burn(grass, S_GRASS)
-    burn(paved, S_COURT)
-    burn([ln.buffer(ROAD_HALF[t["highway"]]) for ln, t in road_lines if t["highway"] in ROAD_HALF and t["highway"] not in ("pedestrian", "track")], S_ROAD)
-    burn([ln.buffer(ROAD_HALF[t["highway"]]) for ln, t in road_lines if t["highway"] in ("pedestrian",)], S_PAVE)
+    burn(paved, S_PAVE)
+    for cl in (S_ROAD, S_PAVE, S_COURT):
+        burn([ln.buffer(road_half(t)) for ln, t in road_lines if t["highway"] in ROAD_HALF and t["highway"] != "track"
+              and t.get("area") != "yes" and road_class(t) == cl], cl)
     burn([ln.buffer(1.0) for ln, t in walk_lines if t["highway"] in ("footway", "cycleway", "path", "track")
-          and t.get("surface") in ("dirt", "earth", "ground", "grass", "gravel", "fine_gravel", "compacted", "unpaved")], S_EARTH)
-    burn([ln.buffer(1.0) for ln, t in walk_lines if t["highway"] in ("footway", "cycleway", "path")
-          and t.get("surface") not in ("dirt", "earth", "ground", "grass", "gravel", "fine_gravel", "compacted", "unpaved")], S_PAVE)
+          and t.get("surface") in UNPAVED], S_EARTH)
+    for cl in (S_ROAD, S_PAVE, S_COURT):
+        burn([ln.buffer(1.0) for ln, t in walk_lines if t["highway"] in ("footway", "cycleway", "path")
+              and t.get("surface") not in UNPAVED and (road_class(t) if t.get("surface") else S_PAVE) == cl], cl)
     burn([ln.buffer(1.0) for ln, t in walk_lines if t["highway"] == "steps"], S_STEPS)
     burn(water, S_WATER)
     # connector repairs (scripts/connectors.py), retired in session 7: only real, mapped openings count. The 94

@@ -8,7 +8,7 @@ Sources:
   diagonal|perpendicular), side in left/right/both, orientation from parking:<side>:orientation;
 - amenity=parking areas tagged parking=lane|street_side|layby (cars along the long axis of the area);
 - with --lots also parking=surface areas (rows of perpendicular bays), off by default.
-Cars stand in a row along the kerb, centre max(ROAD_HALF - 1, 3.75) m from the way for parallel bays (a car's
+Cars stand in a row along the kerb, centre max(road_half - 1.2, 3.75) m from the way for parallel bays (a car's
 half-length more for diagonal/perpendicular), every 6 m (parallel), 2.6 m
 (perpendicular) or 3 m (diagonal), with occupancy --occ, never within 8 m of a road junction.
 Output: appended to <out>/objects/<tile>.bin as type 13 records [x, y, z_ground, 13, heading, seed, 1] (heading =
@@ -77,16 +77,16 @@ def main():
         c = [nodes[n] for n in w["nodes"] if n in nodes]
         if len(c) < 2:
             continue
-        half = B.ROAD_HALF[t["highway"]]
+        half = B.road_half(t)
         for side in ("left", "right"):
             sp = side_spec(t, side)
             if not sp:
                 continue
             orient, shift = sp
-            # car centre from the way's centreline: the modelled carriageway (ROAD_HALF) is narrower than a real
-            # street with parking, so at least one 2.75 m traffic lane + half a car stands between them
+            # car centre from the way's centreline: just inside the kerb of the modelled carriageway (build.py
+            # road_half, widened for parked sides since session 26), with at least one 2.75 m traffic lane beside it
             depth = 1.0 if orient == "parallel" else (2.3 if orient == "perpendicular" else 1.9)
-            off = max(half - depth, LANE) + depth + shift   # depth: half the car across the row
+            off = max(half - depth - 0.2, LANE + depth) + shift   # depth: half the car across the row
             ln = LineString(c).parallel_offset(off, side, join_style=2)
             for g in getattr(ln, "geoms", [ln]):
                 g = g.difference(jz)

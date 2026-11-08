@@ -6,7 +6,7 @@ The viewer (site/app/markings.js) drapes them on the ground mesh using the colli
 Rules (a simplification of UK practice in central Cambridge):
 - centre line (4 m dash, 5 m gap, TSRGD diagram 1004 style) on two-way primary/secondary/tertiary/unclassified roads
   and on residential roads tagged lanes >= 2;
-- double yellow lines 0.3 m inside each edge of the modelled carriageway (build.py ROAD_HALF) on primary to
+- double yellow lines 0.3 m inside each edge of the modelled carriageway (build.py road_half) on primary to
   residential roads, unless OSM says parking:*=lane/street_side or the road is a bus/access-only street;
 - no markings within 7 m of a junction (a node shared with another road), so lines don't cross at junctions.
 Run after build.py, street_objects.py and facades.py (it only adds keys to the manifest).
@@ -51,7 +51,7 @@ def main():
         centre = not oneway and (hw in CENTRE or lanes >= 2) and lanes != 1
         parking = any(v in ("lane", "street_side", "on_street", "half_on_kerb") for k, v in t.items() if k.startswith("parking"))
         yellow = not parking and t.get("access", "yes") not in ("no", "private", "destination")
-        half = B.ROAD_HALF[hw] - 0.3
+        half = B.road_half(t) - 0.3
         for p in parts:
             if centre:
                 d = 0.0
