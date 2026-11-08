@@ -419,8 +419,8 @@ def main():
         real = 0.0
         if man.get("layers", {}).get("facades"):
             for tile in man.get("tiles", []):
-                b = fetch(tile["facades"]) if tile.get("facades") else None
-                if b:
+                fl = tile.get("facades") or []
+                for b in (fetch(f) for f in ([fl] if isinstance(fl, str) else fl)):
                     q = np.frombuffer(b, np.float32).reshape(-1, 4, 5)
                     w = np.hypot(q[:, 1, 0] - q[:, 0, 0], q[:, 1, 1] - q[:, 0, 1])
                     real += float((w * (q[:, 3, 2] - q[:, 0, 2])).sum())

@@ -71,7 +71,7 @@ export class TileManager {
       const [gltf, buf, tbuf, obuf, fac] = await Promise.all([
         this.loader.loadAsync(this.base + t.m.glb), bin(t.m.collision), this.trees && t.m.trees ? bin(t.m.trees) : null,
         this.objects && t.m.objects ? bin(t.m.objects) : null,
-        this.facades && t.m.facades ? Promise.all([bin(t.m.facades), this.texLoader.loadAsync(this.base + t.m.facade_tex)]) : null,
+        this.facades && t.m.facades ? Promise.all([t.m.facades].flat().map((f, k) => Promise.all([bin(f), this.texLoader.loadAsync(this.base + [t.m.facade_tex].flat()[k])]))) : null,
       ]);
       if (gen !== t.gen) return; // unloaded meanwhile
       const t0 = performance.now();
@@ -81,7 +81,7 @@ export class TileManager {
       t.group = this.prepare(gltf.scene, col);
       if (tbuf) t.group.add(makeTrees(tbuf));
       if (obuf) t.group.add(makeObjects(obuf));
-      if (fac) t.group.add(makeFacades(fac[0], fac[1]));
+      if (fac) for (const [fb, ft] of fac) t.group.add(makeFacades(fb, ft));   // one mesh per atlas page
       this.scene.add(t.group);
       t.state = 'loaded';
       const t2 = performance.now();

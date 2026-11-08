@@ -443,3 +443,33 @@ Next
 2. Fix the stretched pieces: cap the vertical viewing angle, or texture only the part seen at < 45° elevation.
 3. Measure roof_match_pct, then compute finished_radius_m.
 4. Score the full 200 + judges on the new build (service.sh does this within the hour).
+
+## 2026-11-08 — Session 13: photo facades out to 300 m (+7.6 photo_match on the 26 views within 320 m)
+
+Done
+- `scripts/facades.py --radius 300`: 772 textured wall pieces (was 321) from 433 non-held-out Mapillary photos, 6.5 MB.
+  Atlases are now paged: each tile gets as many 2048² WebP pages as it needs at a fixed 40 px/m. Before, the resolution
+  dropped as a tile filled. Manifest `facades`/`facade_tex` are now lists, one entry per page. tiles.js draws one mesh
+  per page, and kpi.py sums all pages.
+- Elevation cap: a piece is textured only up to the height where the wall top is seen at ≤ 50° above the horizon from
+  the camera. This removes the stretched pieces from photos that look steeply upward.
+- `scripts/abring.sh <label> <site|url> <max_dist> [workers] [query]`: A/B on the benchmark views within a radius.
+- A/B on the 26 benchmark views within 320 m of GSM, live session-12 build vs new: **17.17 → 24.80**
+  (≤ 150 m: 23.63 → 29.09; 150–320 m: 14.30 → 22.89). 3 views got slightly worse (max −2.3), 9 unchanged, the rest
+  better by up to +47. Side-by-side: docs/facades300_session13.jpg (photo | session 12 | session 13; photos Mapillary
+  CC-BY-SA 4.0, ids 163559995673306, 745004922853288, 865188314039724).
+- real_facade_pct 1.02 → **2.47**. GPU Chrome 1920×1080: fps_median 60, site_errors 0, load 1.7 s (local).
+- Published. Mistake: publish.sh pushed HEAD before I had committed the tiles.js change, so for a few minutes the live
+  viewer was out of step with the new manifest. I committed and redeployed straight away.
+
+Learned
+- The facade gain carries outward: views 150–320 m out gained more (+8.6) than the inner ring did in session 12.
+  Views inside 150 m also gained, because walls further out are now visible down the street.
+- publish.sh should refuse to run with uncommitted viewer changes (todo).
+
+Next
+1. Radius 300 → 500 m in service.sh (each ring about 5 min plus photo downloads). Watch the disk: photo cache is
+   about 100 MB per 300 photos; delete it after baking.
+2. Multi-photo median per piece, to remove people and cars (they are visible in the atlases).
+3. Pieces with no photo (narrow lanes, courts): a per-building synthetic facade in the real material.
+4. roof_match_pct measurement, then finished_radius_m.

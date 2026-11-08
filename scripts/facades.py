@@ -38,6 +38,7 @@ RADIUS = float(sys.argv[sys.argv.index("--radius") + 1]) if "--radius" in sys.ar
 STRICT = "--strict" in sys.argv   # also skip every frame of a sequence that holds a benchmark photo
 PX = 40.0             # texture resolution (px per metre)
 MAXPIECE = 6.0       # split long edges into pieces of at most this length (m)
+MAXELEV = 50.0        # deg: wall tops seen steeper than this from the camera are stretched/unreliable; cap the textured height
 CAM_H = 2.0           # assumed camera height above the DTM (m): most sequences are bike/helmet or car mounted
 ATLAS = 2048
 CACHE = os.path.join(ROOT, "data/raw/mapillary_facade")
@@ -193,7 +194,10 @@ def main():
                 continue
             # visible height: the tallest top edge (<= eave) whose corners are in frame; at least 2.5 m (or the eave)
             hv = None
-            for hh in np.linspace(h, min(h, 2.5), 8):
+            hcap = c["z"] - z0 + math.tan(math.radians(MAXELEV)) * float(np.linalg.norm(v))
+            if hcap < min(h, 2.5):
+                continue
+            for hh in np.linspace(min(h, hcap), min(h, 2.5), 8):
                 C = np.array([[a[0], a[1], z0], [b[0], b[1], z0], [b[0], b[1], z0 + hh], [a[0], a[1], z0 + hh]])
                 u, vv, zz = project(c, C)
                 if not ((zz < 1).any() or (u < 0.01).any() or (u > 0.99).any() or (vv < 0.01).any() or (vv > 0.99).any()):
@@ -238,17 +242,15 @@ def main():
     imgs, meta, man_t = {}, [], {}
     for tid, lst in sorted(tiles.items()):
         lst.sort(key=lambda p: -p["h"])
-        px = min(PX, math.sqrt(0.55 * ATLAS * ATLAS / sum(p["L"] * p["h"] for p in lst)))
-        atlas = np.zeros((ATLAS, ATLAS, 4), np.uint8)
-        x = y = shelf = 0
-        recs = []
+        pages, cur = [], None
         for pc in lst:
+            W = int(min(ATLAS, max(8, round(pc["L"] * PX)))); H = int(min(ATLAS // 2, max(8, round(pc["h"] * PX))))
+            if cur is not None and cur["x"] + W > ATLAS:          # next shelf
+                cur["x"], cur["y"], cur["shelf"] = 0, cur["y"] + cur["shelf"] + 2, 0
+            if cur is None or cur["y"] + H > ATLAS:                # next page
+                cur = dict(atlas=np.zeros((ATLAS, ATLAS, 4), np.uint8), x=0, y=0, shelf=0, recs=[]); pages.append(cur)
+            x, y, atlas, recs = cur["x"], cur["y"], cur["atlas"], cur["recs"]
             c = cams[pc["cam"]]
-            W = int(min(ATLAS, max(8, round(pc["L"] * px)))); H = int(min(ATLAS // 2, max(8, round(pc["h"] * px))))
-            if x + W > ATLAS:
-                x, y, shelf = 0, y + shelf + 2, 0
-            if y + H > ATLAS:
-                log("atlas full", tid); break
             if c["id"] not in imgs:
                 try:
                     imgs[c["id"]] = fetch(c["id"], token)
@@ -287,17 +289,22 @@ def main():
             recs += [a[0] + o[0], a[1] + o[1], z0, u0, v0, b[0] + o[0], b[1] + o[1], z0, u1, v0,
                      b[0] + o[0], b[1] + o[1], z1, u1, v1, a[0] + o[0], a[1] + o[1], z1, u0, v1]
             meta.append(dict(b=pc["b"], d=round(pc["d"], 1), area=round(pc["L"] * pc["h"], 2), photo=c["id"], tile=tid))
-            x += W + 2; shelf = max(shelf, H)
-        if recs:
-            used = min(ATLAS, y + shelf + 2)
+            cur["x"] = x + W + 2; cur["shelf"] = max(cur["shelf"], H)
+        out = []
+        for k, pg in enumerate(pages):
+            if not pg["recs"]:
+                continue
+            used = min(ATLAS, pg["y"] + pg["shelf"] + 2)
             hpx = 1 << max(8, int(math.ceil(math.log2(used))))
-            arr = atlas[:hpx]
             # v was computed for a full-height atlas; rescale to the cropped one
-            r = np.asarray(recs, np.float32).reshape(-1, 5)
+            r = np.asarray(pg["recs"], np.float32).reshape(-1, 5)
             r[:, 4] = 1 - (1 - r[:, 4]) * ATLAS / hpx
-            Image.fromarray(arr, "RGBA").save(os.path.join(out_dir, tid + ".webp"), quality=82, method=5)
-            r.tofile(os.path.join(out_dir, tid + ".bin"))
-            man_t[tid] = len(r) // 4
+            name = "%s_%d" % (tid, k)
+            Image.fromarray(pg["atlas"][:hpx], "RGBA").save(os.path.join(out_dir, name + ".webp"), quality=82, method=5)
+            r.tofile(os.path.join(out_dir, name + ".bin"))
+            out.append(("facades/%s.bin" % name, "facades/%s.webp" % name, len(r) // 4))
+        if out:
+            man_t[tid] = out
     # attribution (CC-BY-SA 4.0): every photo used, with its Mapillary contributor
     L = {x["id"]: x for x in json.load(open(os.path.join(ROOT, "data/raw/mapillary_list.json")))}
     used = sorted({m["photo"] for m in meta})
@@ -311,14 +318,15 @@ def main():
         for k in ("facades", "facade_tex", "nfacades"):
             tile.pop(k, None)
         if tile["id"] in man_t:
-            tile["facades"], tile["facade_tex"], tile["nfacades"] = "facades/%s.bin" % tile["id"], "facades/%s.webp" % tile["id"], man_t[tile["id"]]
+            o = man_t[tile["id"]]   # one entry per atlas page
+            tile["facades"], tile["facade_tex"], tile["nfacades"] = [x[0] for x in o], [x[1] for x in o], sum(x[2] for x in o)
     man.setdefault("layers", {})["facades"] = True
     json.dump(man, open(man_path, "w"), separators=(",", ":"))
     json.dump({"radius": RADIUS, "area_total": round(tot_area, 1), "all_pieces": all_pieces,
                "photos": sorted({m["photo"] for m in meta}), "textured": meta},
               open(os.path.join(ROOT, "data/derived/facades.json"), "w"))
-    log("textured %d pieces, %.1f%% of the study area's street-facing wall area, %d photos, %d tiles, %.0fs" % (
-        len(meta), 100 * sum(m["area"] for m in meta) / max(tot_area, 1), len(imgs), len(man_t), time.time() - t0))
+    log("textured %d pieces, %.1f%% of the study area's street-facing wall area, %d photos, %d atlas pages, %.0fs" % (
+        len(meta), 100 * sum(m["area"] for m in meta) / max(tot_area, 1), len(imgs), sum(len(v) for v in man_t.values()), time.time() - t0))
 
 
 if __name__ == "__main__":
