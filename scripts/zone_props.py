@@ -29,18 +29,21 @@ E0, N0 = 545000.0, 258400.0
 DTM = os.path.join(ROOT, "data/lidar/dtm_1m.tif")
 
 STALL_ROOFS = list(range(400160678, 400160686))
+HIDE_TILE = [f"way/{w}" for w in STALL_ROOFS]   # zone_build: viewer hides the tile's single wide canopy slab
 TRAILERS = {400160677: "Trailer of Life", 400160686: "Frank's Burgers"}
 FOUNTAIN_FALLBACK = (-96.3, 65.2)
 
 WHITE = (0.92, 0.92, 0.89)
 STRIPES = [(0.80, 0.14, 0.16), (0.12, 0.48, 0.30), (0.14, 0.30, 0.68), (0.94, 0.72, 0.14)]   # red, green, blue, yellow
-STRIPE_W = 0.62      # canvas stripe width along the row (m)
+STRIPE_W = 0.52      # canvas stripe width along the row (m; GSM tower views: ~6 stripes per 3 m bay)
+EAVE = 2.3           # canopy eave above the strip's median ground (m)
+RISE = 0.55          # eave -> ridge rise of each back-to-back canopy (m)
 BAY = 3.0            # stall bay pitch along the row (m)
 FRAME = (0.58, 0.60, 0.61)   # galvanised scaffold tube
 CLOTHS = [(0.12, 0.45, 0.28), (0.12, 0.45, 0.28), (0.10, 0.10, 0.11), (0.85, 0.85, 0.82), (0.55, 0.12, 0.14),
           (0.16, 0.22, 0.45), (0.45, 0.62, 0.30)]
-SHEETS = [(0.62, 0.14, 0.17), (0.62, 0.14, 0.17), (0.16, 0.22, 0.45), (0.88, 0.88, 0.85), (0.12, 0.40, 0.25),
-          (0.25, 0.25, 0.27)]
+SHEETS = [(0.16, 0.24, 0.19), (0.14, 0.17, 0.28), (0.28, 0.28, 0.29), (0.80, 0.80, 0.77), (0.40, 0.12, 0.13),
+          (0.16, 0.24, 0.19)]   # s38: darker tarps (photos: dark green / navy / grey backs, few bright ones)
 CRATE = (0.55, 0.42, 0.28)
 GOODS = [(0.80, 0.20, 0.12), (0.92, 0.62, 0.15), (0.35, 0.55, 0.20), (0.85, 0.75, 0.45), (0.55, 0.30, 0.45),
          (0.75, 0.68, 0.55), (0.30, 0.35, 0.55), (0.90, 0.85, 0.70)]
@@ -145,90 +148,63 @@ def strip_frame(gB):
 
 
 def stall_strip(m, B, g, gB, centre, seed, base=None):
-    """One OSM building=roof stall row (way/400160678..685): a continuous gabled canvas canopy wrapped around the
-    tile's canopy slab (build.add_canopy), galvanised frame, and stalls (table with cloth, goods crates, back and
-    side sheets) on a ~3 m bay pitch, back to back when the strip is >= 6 m wide."""
-    from shapely.geometry import Point, Polygon
+    """One OSM building=roof stall row (way/400160678..685). Session 38 (GSM tower views, Commons "View from Great St
+    Mary's Cambridge - 02/03/09", 2016): a strip >= 6 m wide is two back-to-back rows of stalls, each with its OWN
+    shallow gabled canvas canopy (ridge along the row, eave ~2.3 m, ridge ~2.85 m), not one wide gable; narrow strips
+    have one. White canvas with ~0.5 m stripes down the slope cycling red / yellow / blue / green with white between,
+    a valance with scalloped hem on the long eaves. The tile's single wide canopy slab (build.py add_canopy) is hidden
+    by the viewer (HIDE_TILE), so this canopy is the only one drawn. Galvanised frame; stalls on a ~3 m pitch."""
+    from shapely.geometry import Point
     rng = np.random.default_rng(1000 + seed)
     o, ax, nr, L, W = strip_frame(gB)
     zb = strip_base(gB, g.a, g.ds) if base is None else base
-    ze = zb + B.CANOPY_EAVE
-    parts_f = B.canopy_parts(gB, True)
+    ze = zb + EAVE
+    if W >= 6.0:
+        spans = [(0.05, W / 2 - 0.08), (W / 2 + 0.08, W - 0.05)]
+    else:
+        spans = [(0.05, W - 0.05)]
 
     def hgt(P):
-        """Canopy height above the eave at local points: the slope part nearest each point (B.canopy_height takes
-        the max over every part's plane, which reads the ridge height everywhere)."""
-        Q = np.asarray(P, float).reshape(-1, 2) + [E0, N0]
-        if not parts_f:
-            return np.zeros(len(Q))
-        from shapely.geometry import Point as _P
-        d = np.array([[pt.distance(_P(*q)) for q in Q] for pt, _ in parts_f])
-        vals = np.array([f(Q) for _, f in parts_f])
-        return np.clip(vals[d.argmin(0), np.arange(len(Q))], 0, None)
-    off = B.CANOPY_T / 2 + 0.04          # canvas sits 4 cm off the tile slab, top and bottom
+        """Canopy rise above the eave at local points (nearest canopy's gable)."""
+        P = np.asarray(P, float).reshape(-1, 2)
+        t = (P - o) @ nr
+        out = np.zeros(len(P))
+        for i, tt in enumerate(t):
+            a0, a1 = min(spans, key=lambda sp: 0 if sp[0] <= tt <= sp[1] else min(abs(tt - sp[0]), abs(tt - sp[1])))
+            hw = (a1 - a0) / 2
+            out[i] = RISE * max(0.0, 1 - abs(np.clip(tt, a0, a1) - (a0 + hw)) / hw)
+        return out
+    off = 0.0
     cols = [STRIPES[i] for i in rng.permutation(len(STRIPES))]
-    loc = lambda q: q + [E0, N0]  # noqa: E731
-    # --- canopy: bands across the ridge, colour / white alternating (Commons: "Cambridge Market stalls at lunchtime")
     nb = max(1, int(round(L / STRIPE_W)))
     sw = L / nb
-    for part, f in B.canopy_parts(gB, True):
+    P3 = lambda s_, t_, z_: np.array([*(o + ax * s_ + nr * t_), z_])  # noqa: E731
+    for a0, a1 in spans:
+        tm = (a0 + a1) / 2
+        e0, e1 = a0 - 0.05, a1 + 0.05                      # canvas overhangs the frame 5 cm
         for k in range(nb):
-            band = Polygon([loc(o + ax * sw * k - nr), loc(o + ax * sw * (k + 1) - nr),
-                            loc(o + ax * sw * (k + 1) + nr * (W + 1)), loc(o + ax * sw * k + nr * (W + 1))])
             col = cols[(k // 2) % len(cols)] if k % 2 else WHITE
-            for p in B.polys_of(part.intersection(band)):
-                T = B.triangulate(p)
-                if not len(T):
-                    continue
-                h = f(T.reshape(-1, 2) + [E0, N0]).reshape(-1, 3, 1) + ze
-                for tri in np.concatenate([T, h + off], 2):
-                    m.tri(*tri, col)
-                for tri in np.concatenate([T, h - off], 2)[:, ::-1]:
-                    m.tri(*tri, col)
-    # --- valance along the long eave edges: a 0.28 m flap, outer face + inner face 2 cm inside (no coincident faces)
-    for part, _ in B.canopy_parts(gB, True):
-        for p in B.polys_of(part):
-            ring = np.asarray((p if p.exterior.is_ccw else Polygon(p.exterior.coords[::-1])).exterior.coords) - [E0, N0]
-            for a, b in zip(ring[:-1], ring[1:]):
-                d = b - a
-                ln = np.linalg.norm(d)
-                if ln >= 0.3 and abs(np.dot(d / ln, nr)) > 0.95:
-                    # gable / notch edge across the row: a canvas band hiding the tile slab's textured edge
-                    outn = np.array([d[1], -d[0]]) / ln
-                    k = int(min(max(np.dot((a + b) / 2 - o, ax), 0), L - 1e-3) // sw)
-                    col = cols[(k // 2) % len(cols)] if k % 2 else WHITE
-                    nseg = max(1, int(np.ceil(ln / 0.4)))
-                    Ps = [a + d * j / nseg + outn * 0.03 for j in range(nseg + 1)]
-                    hs = hgt([a + d * j / nseg - outn * 0.05 for j in range(nseg + 1)])   # sampled just inside
-                    for j in range(nseg):
-                        p0, p1, h0, h1 = Ps[j], Ps[j + 1], hs[j], hs[j + 1]
-                        m.quad([*p0, ze + h0 - off - 0.12], [*p1, ze + h1 - off - 0.12], [*p1, ze + h1 + off + 0.03],
-                               [*p0, ze + h0 + off + 0.03], col, two=True)
-                    continue
-                if ln < 0.3 or abs(np.dot(d / ln, ax)) < 0.95 or hgt([(a + b) / 2])[0] > 0.05:
-                    continue
-                outn = np.array([d[1], -d[0]]) / ln
-                s0, s1 = sorted((np.dot(a - o, ax), np.dot(b - o, ax)))
-                cuts = [s0] + [sw * k for k in range(int(s0 // sw) + 1, int(np.ceil(s1 / sw)))] + [s1]
-                for u0, u1 in zip(cuts[:-1], cuts[1:]):
-                    k = int(((u0 + u1) / 2) // sw)
-                    col = cols[(k // 2) % len(cols)] if k % 2 else WHITE
-                    t = np.dot(a - o, nr)
-                    P0, P1 = o + ax * u0 + nr * t, o + ax * u1 + nr * t
-                    if np.dot(np.cross([*ax, 0], [*outn, 0]), [0, 0, 1]) > 0:
-                        P0, P1 = P1, P0
-                    zt, zl = ze + off, ze - 0.22
-                    m.quad([*P0, zl], [*P1, zl], [*P1, zt], [*P0, zt], col)
-                    Q0, Q1 = P0 - outn * 0.02, P1 - outn * 0.02
-                    m.quad([*Q1, zl], [*Q0, zl], [*Q0, zt - 2 * off], [*Q1, zt - 2 * off], col)
-                    # scalloped hem: half-round tongues below the flap, ~0.3 m wide, both faces
-                    nsc = max(1, int(round(np.linalg.norm(P1 - P0) / 0.3)))
-                    for j in range(nsc):
-                        A_, B_ = P0 + (P1 - P0) * j / nsc, P0 + (P1 - P0) * (j + 1) / nsc
-                        arc = [A_ + (B_ - A_) * f for f in (0.0, 0.25, 0.75, 1.0)]
-                        dz = [0.0, 0.075, 0.075, 0.0]
-                        for a_, b_, da, db in zip(arc[:-1], arc[1:], dz[:-1], dz[1:]):
-                            m.quad([*a_, zl - da], [*b_, zl - db], [*b_, zl], [*a_, zl], col, two=True)
+            s0, s1 = sw * k, sw * (k + 1)
+            for ta, tb in ((e0, tm), (tm, e1)):            # two slopes, both faces
+                za = ze + (RISE * (1 - abs(ta - tm) / (tm - a0)) if ta == tm else -0.02)
+                zb_ = ze + (RISE * (1 - abs(tb - tm) / (tm - a0)) if tb == tm else -0.02)
+                m.quad(P3(s0, ta, za), P3(s1, ta, za), P3(s1, tb, zb_), P3(s0, tb, zb_), col, two=True)
+            # valance flaps + scalloped hem on both long eaves
+            for te in (e0, e1):
+                zl = ze - 0.24
+                m.quad(P3(s0, te, zl), P3(s1, te, zl), P3(s1, te, ze - 0.02), P3(s0, te, ze - 0.02), col, two=True)
+                nsc = max(1, int(round(sw / 0.3)))
+                for j in range(nsc):
+                    u0, u1 = s0 + sw * j / nsc, s0 + sw * (j + 1) / nsc
+                    arc = [u0 + (u1 - u0) * f for f in (0.0, 0.25, 0.75, 1.0)]
+                    dz = [0.0, 0.07, 0.07, 0.0]
+                    for ua, ub, da, db in zip(arc[:-1], arc[1:], dz[:-1], dz[1:]):
+                        m.quad(P3(ua, te, zl - da), P3(ub, te, zl - db), P3(ub, te, zl), P3(ua, te, zl), col, two=True)
+        # gable end triangles (white canvas)
+        for s_ in (0.0, L):
+            m.tri(P3(s_, e0, ze - 0.02), P3(s_, e1, ze - 0.02), P3(s_, tm, ze + RISE), WHITE)
+            m.tri(P3(s_, e0, ze - 0.02), P3(s_, tm, ze + RISE), P3(s_, e1, ze - 0.02), WHITE)
+    loc = lambda q: q + [E0, N0]  # noqa: E731
     # --- bays, frame and stalls
     nst = max(1, int(round(L / BAY)))
     bw = L / nst
@@ -239,7 +215,7 @@ def stall_strip(m, B, g, gB, centre, seed, base=None):
     # posts on the two eave lines and the ridge line at every bay boundary
     for i in range(nst + 1):
         s = min(max(bw * i, 0.12), L - 0.12)
-        for t in (0.15, W / 2, W - 0.15):
+        for t in [x for sp in spans for x in (sp[0] + 0.1, sp[1] - 0.1)]:
             q = o + ax * s + nr * t
             if not inn(q, 0.1):
                 continue
@@ -248,7 +224,7 @@ def stall_strip(m, B, g, gB, centre, seed, base=None):
             m.box(np.array([*(q - ax * 0.03 - nr * 0.03), z0]), A3 * 0.06, N3 * 0.06, up * (zt - z0), FRAME)
     # eave rails (one per bay, both eave lines) and ridge rail
     for i in range(nst):
-        for t in (0.15, W / 2, W - 0.15):
+        for t in [x for sp in spans for x in (sp[0] + 0.1, (sp[0] + sp[1]) / 2, sp[1] - 0.1)]:
             q0, q1 = o + ax * bw * i + nr * t, o + ax * bw * (i + 1) + nr * t
             if inn((q0 + q1) / 2, 0.1):
                 zr = ze + hgt([(q0 + q1) / 2])[0] - off - 0.06
@@ -323,7 +299,7 @@ def stall(m, g, c, ax, front, depth, width, rng, ze, hgt, off):
         s0 = rng.uniform(-hw + 0.2, hw - 0.7)
         m.box(P(s0, -hd + 0.25, 0), A3 * 0.5, F3 * 0.35, up * (0.3 * (k + 1)), CRATE, top=GOODS[rng.integers(len(GOODS))])
     # back sheet: thin board/sheet at the back of the bay, up to the canopy underside
-    if rng.random() < 0.75:
+    if rng.random() < 0.5:
         sc = SHEETS[rng.integers(len(SHEETS))]
         q = c - front * (hd - 0.04)
         zt = ze + hgt([q])[0] - off - 0.02

@@ -299,6 +299,7 @@ def main():
     for f in sorted(glob.glob(os.path.join(here, "zone_props*.py"))):   # zone_props.py, zone_props_<topic>.py
         try:
             zp = importlib.import_module(os.path.basename(f)[:-3])
+            HIDE.extend(getattr(zp, "HIDE_TILE", []))   # s38: stall rows draw their own canopies
             m, n = prop_meshes(zp.build() if hasattr(zp, "build") else [])
             meshes += m
             nprops += n

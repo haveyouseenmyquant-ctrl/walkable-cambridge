@@ -1,0 +1,185 @@
+{
+ "osm_id": "way/1288648581",
+ "sources": [
+  "commons:File:16 And 16A, Trinity Street.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1288648581:7",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.3,
+    7.6,
+    10.4
+   ],
+   "material": "brick",
+   "wall_colour": "#8f8571",
+   "trim_colour": "#f4f2ec",
+   "cornice_z": 10.3,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.3
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.12,
+     "w": 1.0,
+     "z": 4.7,
+     "h": 2.3,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.76,
+     "w": 1.0,
+     "z": 4.7,
+     "h": 2.3,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.76,
+     "w": 1.0,
+     "z": 4.7,
+     "h": 2.3,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.99,
+     "w": 1.0,
+     "z": 4.7,
+     "h": 2.3,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.12,
+     "w": 0.95,
+     "z": 7.9,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.76,
+     "w": 0.95,
+     "z": 7.9,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.76,
+     "w": 0.95,
+     "z": 7.9,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.99,
+     "w": 0.95,
+     "z": 7.9,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.5,
+     "w": 0.9,
+     "z": 10.7,
+     "h": 1.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.7,
+     "w": 1.0,
+     "z": 10.7,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 8.0,
+     "z1": 4.2,
+     "fascia_text": "The Ivy",
+     "fascia_colour": "#f2f0ea",
+     "text_colour": "#2a2a2a",
+     "stallriser": 0.5,
+     "awning": false,
+     "door_x": 4.4
+    }
+   ],
+   "confidence": "high",
+   "notes": "16 Trinity St: grey-buff stock brick with stone window surrounds, wrought-iron window guards; 4 storeys, four bays on the first and second floors, two attic windows under twin shaped gables; white classical shopfront with consoles, dentil cornice and ring-pattern transom lights (Jaeger in photo; OSM: The Ivy)."
+  }
+ ]
+}

@@ -1,0 +1,144 @@
+{
+ "osm_id": "way/1288738595",
+ "sources": [
+  "commons:File:33 And 34, Trinity Street.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1288738595:1",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.1,
+    7.3
+   ],
+   "material": "brick",
+   "wall_colour": "#a24f38",
+   "trim_colour": "#f2efe8",
+   "cornice_z": 10.0,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.8,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 1.9,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.2,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 1.9,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.6,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 1.9,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.8,
+     "w": 1.0,
+     "z": 7.6,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.2,
+     "w": 1.0,
+     "z": 7.6,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.6,
+     "w": 1.0,
+     "z": 7.6,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 8.2,
+     "z1": 3.8,
+     "fascia_text": "Jacks on Trinity",
+     "fascia_colour": "#b3242b",
+     "text_colour": "#f4f1ea",
+     "stallriser": 0.5,
+     "awning": false,
+     "door_x": 4.0
+    },
+    {
+     "type": "dormer",
+     "x": 1.8,
+     "w": 1.0,
+     "h": 1.3
+    },
+    {
+     "type": "dormer",
+     "x": 4.2,
+     "w": 1.0,
+     "h": 1.3
+    },
+    {
+     "type": "dormer",
+     "x": 6.6,
+     "w": 1.0,
+     "h": 1.3
+    }
+   ],
+   "confidence": "high",
+   "notes": "33-34 Trinity St: Georgian red brick, 3 bays of 6-over-6 sashes with gauged flat arches, white eaves cornice, three dormers; white shopfront with red fascia (Jacks on Trinity) and central recessed door."
+  }
+ ]
+}

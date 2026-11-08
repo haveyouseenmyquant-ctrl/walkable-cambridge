@@ -44084,9 +44084,10 @@
     202.35
    ],
    "ground_z": 9.5,
-   "eave_z": 16.69,
-   "height": 7.19,
-   "dist_centre": 156.1
+   "eave_z": 19.63,
+   "height": 10.13,
+   "dist_centre": 156.1,
+   "eave_fixed": true
   },
   {
    "id": "way/1288648587:8",

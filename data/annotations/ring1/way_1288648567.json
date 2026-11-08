@@ -1,0 +1,178 @@
+{
+ "osm_id": "way/1288648567",
+ "sources": [
+  "commons:File:Lakeland - Sidney Street - geograph.org.uk - 6499365.jpg",
+  "commons:File:Sidney Street - geograph.org.uk - 5156084.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1288648567:6",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.3,
+    7.6,
+    10.6
+   ],
+   "material": "brick",
+   "wall_colour": "#b8ab8c",
+   "trim_colour": "#f2efe8",
+   "cornice_z": 13.0,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.0,
+     "w": 1.1,
+     "z": 4.6,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.0,
+     "w": 1.1,
+     "z": 4.6,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 10.0,
+     "w": 1.1,
+     "z": 4.6,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.0,
+     "w": 1.05,
+     "z": 7.9,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.0,
+     "w": 1.05,
+     "z": 7.9,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 10.0,
+     "w": 1.05,
+     "z": 7.9,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.0,
+     "w": 1.0,
+     "z": 10.9,
+     "h": 1.4,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.0,
+     "w": 1.0,
+     "z": 10.9,
+     "h": 1.4,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 10.0,
+     "w": 1.0,
+     "z": 10.9,
+     "h": 1.4,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 8.6,
+     "z1": 4.0,
+     "fascia_text": "Lakeland",
+     "fascia_colour": "#d8d4c8",
+     "text_colour": "#3a4a6a",
+     "stallriser": 0.5,
+     "awning": false,
+     "door_x": 6.0
+    },
+    {
+     "type": "door",
+     "style": "glazed",
+     "x": 10.3,
+     "w": 1.2,
+     "h": 2.8,
+     "surround": "none"
+    }
+   ],
+   "confidence": "medium",
+   "notes": "52 Sidney St: gault brick, 4 storeys, 3 bays of white sashes, cornice; stone-coloured Lakeland fascia over the shop windows, separate blue-grey glazed entrance at the north end."
+  }
+ ]
+}

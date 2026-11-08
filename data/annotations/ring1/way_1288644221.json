@@ -1,0 +1,223 @@
+{
+ "osm_id": "way/1288644221",
+ "sources": [
+  "commons:File:Marvin's - Green Street - geograph.org.uk - 8218664.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1288644221:8",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.0,
+    7.2
+   ],
+   "material": "brick",
+   "wall_colour": "#6e6457",
+   "trim_colour": "#f4f0e6",
+   "cornice_z": 10.8,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.0,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.4,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.2,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.6,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 11.0,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.0,
+     "w": 1.0,
+     "z": 7.5,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.4,
+     "w": 1.0,
+     "z": 7.5,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.2,
+     "w": 1.0,
+     "z": 7.5,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.6,
+     "w": 1.0,
+     "z": 7.5,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 11.0,
+     "w": 1.0,
+     "z": 7.5,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 3.6,
+     "z1": 3.9,
+     "fascia_text": "Marvin's",
+     "fascia_colour": "#d01f26",
+     "text_colour": "#ffffff",
+     "stallriser": 0.5,
+     "awning": false,
+     "door_x": 0.6
+    },
+    {
+     "type": "shopfront",
+     "x0": 4.2,
+     "x1": 8.5,
+     "z1": 3.9,
+     "fascia_text": "Wex Photo Video",
+     "fascia_colour": "#141414",
+     "text_colour": "#ffffff",
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "dormer",
+     "x": 1.0,
+     "w": 1.0,
+     "h": 1.4
+    },
+    {
+     "type": "dormer",
+     "x": 3.4,
+     "w": 1.0,
+     "h": 1.4
+    },
+    {
+     "type": "dormer",
+     "x": 6.2,
+     "w": 1.0,
+     "h": 1.4
+    },
+    {
+     "type": "dormer",
+     "x": 8.6,
+     "w": 1.0,
+     "h": 1.4
+    },
+    {
+     "type": "dormer",
+     "x": 11.0,
+     "w": 1.0,
+     "h": 1.4
+    }
+   ],
+   "confidence": "low",
+   "notes": "11-12 Green St: dark grey-brown stock brick, curved bow at the west corner, 2-over-2 sashes in white surrounds with iron guards, slate mansard with dormers and a conical turret roof over the bow; red Marvin's sandwich-shop front (12) at the corner, black Wex Photo Video front (11). Bays east of the second unit are estimated from an oblique view."
+  }
+ ]
+}

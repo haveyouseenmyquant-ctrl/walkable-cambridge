@@ -1,0 +1,127 @@
+{
+ "osm_id": "way/1288738587",
+ "sources": [
+  "commons:File:38 Trinity Street, Cambridge.jpg",
+  "commons:File:Sweaty Betty - Trinity Street - geograph.org.uk - 5293041.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1288738587:1",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.0,
+    7.0
+   ],
+   "material": "brick",
+   "wall_colour": "#7a3f2e",
+   "trim_colour": "#f2efe8",
+   "cornice_z": 10.8,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.86,
+     "w": 1.0,
+     "z": 4.3,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.6,
+     "w": 1.0,
+     "z": 4.3,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.16,
+     "w": 1.0,
+     "z": 4.3,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.86,
+     "w": 0.95,
+     "z": 7.3,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.6,
+     "w": 0.95,
+     "z": 7.3,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.16,
+     "w": 0.95,
+     "z": 7.3,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 6.0,
+     "z1": 4.0,
+     "fascia_text": "Sweaty Betty",
+     "fascia_colour": "#f2f0ea",
+     "text_colour": "#2a2a2a",
+     "stallriser": 0.5,
+     "awning": false,
+     "door_x": 3.6
+    }
+   ],
+   "confidence": "high",
+   "notes": "38 Trinity St (corner of Trinity Lane): Georgian red-brown brick, 3 bays of white sashes with rubbed-brick flat arches and iron window guards, plain parapet with stone coping; white painted shopfront with leaded transom lights and central recessed door (OSM: Sweaty Betty)."
+  }
+ ]
+}

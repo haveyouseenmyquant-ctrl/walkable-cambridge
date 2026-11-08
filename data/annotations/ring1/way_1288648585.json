@@ -1,0 +1,110 @@
+{
+ "osm_id": "way/1288648585",
+ "sources": [
+  "commons:File:Revitalised 'ghost sign' - geograph.org.uk - 8212133.jpg",
+  "commons:File:Green Street, Cambridge - geograph.org.uk - 7416912.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1288648585:4",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.6,
+    6.8
+   ],
+   "material": "brick",
+   "wall_colour": "#4a4440",
+   "trim_colour": "#f4f2ec",
+   "cornice": "none",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.6,
+     "w": 1.4,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      4,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.6,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 1.7,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.6,
+     "w": 1.4,
+     "z": 7.2,
+     "h": 1.6,
+     "panes": [
+      4,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.6,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.4,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 1.8,
+     "w": 2.6,
+     "h": 3.0,
+     "surround": "none"
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 4.6,
+     "w": 1.5,
+     "h": 3.0,
+     "surround": "none"
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 7.6,
+     "w": 1.0,
+     "h": 2.8,
+     "surround": "none"
+    }
+   ],
+   "confidence": "medium",
+   "notes": "30-31 Green St (Stoakley & Son ghost sign, placed by the Oska shop at 29 to its west): dark stock brick, two bays of white sashes; ground floor is an open carriage way, black timber double doors and a passage under a black timber beam. Painted sign not modelled."
+  }
+ ]
+}

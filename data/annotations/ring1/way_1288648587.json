@@ -1,0 +1,186 @@
+{
+ "osm_id": "way/1288648587",
+ "sources": [
+  "commons:File:14 Trinity Street, Cambridge.JPG",
+  "commons:File:Jigsaw, Trinity Street, Cambridge - geograph.org.uk - 7782902.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1288648587:7",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.3,
+    6.9
+   ],
+   "material": "timber",
+   "wall_colour": "#ece8df",
+   "trim_colour": "#1d1d1d",
+   "cornice_z": 9.4,
+   "cornice": "bracketed",
+   "parapet": false,
+   "string_courses": [
+    4.3,
+    6.9
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.8,
+     "w": 2.6,
+     "z": 4.5,
+     "h": 1.9,
+     "panes": [
+      6,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.8,
+     "w": 2.4,
+     "z": 7.1,
+     "h": 1.7,
+     "panes": [
+      6,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 4.35,
+     "z1": 4.0,
+     "fascia_text": "Free People",
+     "fascia_colour": "#5a3a22",
+     "text_colour": "#d9b98a",
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "dormer",
+     "x": 2.9,
+     "w": 1.2,
+     "h": 1.3
+    }
+   ],
+   "confidence": "medium",
+   "notes": "14 Trinity St, north half: Victorian mock-Tudor black-and-white front with pargeted white panels, jettied first and second floors with wide leaded casement bays, twin gables with finials (dormer stands in for the north gable window); carved dark oak shopfront with arched lights (Jigsaw in photos; fascia from OSM: Free People). OSM splits the front at 4.4 m; walls.json height 7.2 m is low (DSM eave fix expected)."
+  },
+  {
+   "id": "way/1288648587:8",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.3,
+    6.9
+   ],
+   "material": "timber",
+   "wall_colour": "#ece8df",
+   "trim_colour": "#1d1d1d",
+   "cornice_z": 9.4,
+   "cornice": "bracketed",
+   "parapet": false,
+   "string_courses": [
+    4.3,
+    6.9
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 0.45,
+     "w": 0.5,
+     "z": 4.6,
+     "h": 1.6,
+     "panes": [
+      1,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 0.45,
+     "w": 0.5,
+     "z": 7.2,
+     "h": 1.5,
+     "panes": [
+      1,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 3.0,
+     "w": 2.6,
+     "z": 4.5,
+     "h": 1.9,
+     "panes": [
+      6,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 3.0,
+     "w": 2.4,
+     "z": 7.1,
+     "h": 1.7,
+     "panes": [
+      6,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.1,
+     "x1": 3.9,
+     "z1": 4.0,
+     "fascia_text": "Free People",
+     "fascia_colour": "#5a3a22",
+     "text_colour": "#d9b98a",
+     "stallriser": 0.5,
+     "awning": false,
+     "door_x": 0.6
+    },
+    {
+     "type": "door",
+     "style": "glazed",
+     "x": 4.45,
+     "w": 0.9,
+     "h": 2.6,
+     "surround": "none"
+    },
+    {
+     "type": "dormer",
+     "x": 3.0,
+     "w": 1.2,
+     "h": 1.3
+    }
+   ],
+   "confidence": "medium",
+   "notes": "14 Trinity St, south half: second jettied casement bay and gable; recessed shop door near the centre of the front; separate glazed door at the south end to 14a ('2648' bar, OSM)."
+  }
+ ]
+}

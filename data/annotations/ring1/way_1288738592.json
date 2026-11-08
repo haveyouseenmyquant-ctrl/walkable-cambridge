@@ -1,0 +1,320 @@
+{
+ "osm_id": "way/1288738592",
+ "sources": [
+  "commons:File:35-37, Trinity Street.jpg",
+  "commons:File:Up^Running, Trinity Street - geograph.org.uk - 5163558.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1288738592:2",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.3,
+    7.6
+   ],
+   "material": "brick",
+   "wall_colour": "#a0503a",
+   "trim_colour": "#e7dcc2",
+   "cornice_z": 10.9,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.3
+   ],
+   "quoins": true,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.18,
+     "w": 1.0,
+     "z": 4.7,
+     "h": 2.1,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 3.53,
+     "w": 1.0,
+     "z": 4.7,
+     "h": 2.1,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.88,
+     "w": 1.0,
+     "z": 4.7,
+     "h": 2.1,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.23,
+     "w": 1.0,
+     "z": 4.7,
+     "h": 2.1,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 10.58,
+     "w": 1.0,
+     "z": 4.7,
+     "h": 2.1,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.93,
+     "w": 1.0,
+     "z": 4.7,
+     "h": 2.1,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 15.28,
+     "w": 1.0,
+     "z": 4.7,
+     "h": 2.1,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.18,
+     "w": 1.0,
+     "z": 8.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 3.53,
+     "w": 1.0,
+     "z": 8.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.88,
+     "w": 1.0,
+     "z": 8.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.23,
+     "w": 1.0,
+     "z": 8.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 10.58,
+     "w": 1.0,
+     "z": 8.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.93,
+     "w": 1.0,
+     "z": 8.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 15.28,
+     "w": 1.0,
+     "z": 8.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 4.4,
+     "z1": 3.9,
+     "fascia_text": "Rohan",
+     "fascia_colour": "#3a4045",
+     "text_colour": "#f2f2f2",
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 5.0,
+     "w": 1.0,
+     "h": 2.6,
+     "surround": "fanlight"
+    },
+    {
+     "type": "shopfront",
+     "x0": 5.6,
+     "x1": 9.8,
+     "z1": 3.9,
+     "fascia_text": "Up & Running",
+     "fascia_colour": "#f4f4f2",
+     "text_colour": "#1b1b1b",
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 10.4,
+     "w": 1.0,
+     "h": 2.6,
+     "surround": "fanlight"
+    },
+    {
+     "type": "shopfront",
+     "x0": 11.1,
+     "x1": 16.1,
+     "z1": 3.9,
+     "fascia_text": "Aesop",
+     "fascia_colour": "#f2f0ea",
+     "text_colour": "#2a2a2a",
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "dormer",
+     "x": 1.18,
+     "w": 1.0,
+     "h": 1.5
+    },
+    {
+     "type": "dormer",
+     "x": 3.5300000000000002,
+     "w": 1.0,
+     "h": 1.5
+    },
+    {
+     "type": "dormer",
+     "x": 5.88,
+     "w": 1.0,
+     "h": 1.5
+    },
+    {
+     "type": "dormer",
+     "x": 8.23,
+     "w": 1.0,
+     "h": 1.5
+    },
+    {
+     "type": "dormer",
+     "x": 10.58,
+     "w": 1.0,
+     "h": 1.5
+    },
+    {
+     "type": "dormer",
+     "x": 12.93,
+     "w": 1.0,
+     "h": 1.5
+    },
+    {
+     "type": "dormer",
+     "x": 15.280000000000001,
+     "w": 1.0,
+     "h": 1.5
+    }
+   ],
+   "confidence": "low",
+   "notes": "35-37 Trinity St: Victorian red brick with stone quoins and window surrounds, blue-brick diaper lozenges, iron window guards; gabled stone-coped dormers with carved panels. Three shopfronts (south to north): dark grey Rohan (37), white Up & Running (36), arched white doorway '36', white shopfront (Comptoir des Cotonniers in photo; OSM 35: Aesop). Bay count read as 7 from oblique views; positions evenly spaced."
+  }
+ ]
+}

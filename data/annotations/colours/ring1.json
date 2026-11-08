@@ -1,5 +1,5 @@
 {
- "about": "Session 37 per-building wall material + colour overrides for ring-1 city facades (facade_styles.layout). Colours read by eye (Claude vision) from non-held-out Mapillary photos (not in data/benchmark/*.json, not a same-sequence frame near a held-out photo, daylight only), as in diffuse daylight. material: stone|render|stucco|gault_brick|red_brick|timber|flint|glass; roof is informational. Keys are OSM ids (all street walls of the building).",
+ "about": "Session 37 per-building wall material + colour overrides for ring-1 city facades (facade_styles.layout). Colours read by eye (Claude vision) from non-held-out Mapillary photos (not in data/benchmark/*.json, not a same-sequence frame near a held-out photo, daylight only), as in diffuse daylight. material: stone|render|stucco|gault_brick|red_brick|timber|flint|glass; roof is informational. Keys are OSM ids (all street walls of the building). Session 38 additions also use Wikimedia Commons photos (CC BY / CC BY-SA; sources prefixed 'commons:File:'), identified by house number / shop name.",
  "buildings": {
   "relation/9449789": {
    "material": "gault_brick",
@@ -10,6 +10,171 @@
     "768407353820398"
    ],
    "note": "New Court back range: grey-yellow gault brick, stone oriel boxes"
+  },
+  "way/100322362": {
+   "material": "gault_brick",
+   "colour": "#7b7264",
+   "trim": "#f0ede6",
+   "roof": "slate",
+   "sources": [
+    "269964348157815",
+    "5549168501822560"
+   ],
+   "note": "16 Malcolm St: 1840s terrace, sooted grey-brown gault brick, white sashes, black railings (both sides of the street seen in one view)"
+  },
+  "way/100322363": {
+   "material": "gault_brick",
+   "colour": "#7b7264",
+   "trim": "#f0ede6",
+   "roof": "slate",
+   "sources": [
+    "269964348157815",
+    "5549168501822560"
+   ],
+   "note": "18 Malcolm St: 1840s terrace, sooted grey-brown gault brick, white sashes, black railings (both sides of the street seen in one view)"
+  },
+  "way/100322364": {
+   "material": "gault_brick",
+   "colour": "#7b7264",
+   "trim": "#f0ede6",
+   "roof": "slate",
+   "sources": [
+    "269964348157815",
+    "5549168501822560"
+   ],
+   "note": "17 Malcolm St: 1840s terrace, sooted grey-brown gault brick, white sashes, black railings (both sides of the street seen in one view)"
+  },
+  "way/100322366": {
+   "material": "gault_brick",
+   "colour": "#7b7264",
+   "trim": "#f0ede6",
+   "roof": "slate",
+   "sources": [
+    "269964348157815",
+    "5549168501822560"
+   ],
+   "note": "21 Malcolm St: 1840s terrace, sooted grey-brown gault brick, white sashes, black railings (both sides of the street seen in one view)"
+  },
+  "way/100322368": {
+   "material": "gault_brick",
+   "colour": "#7b7264",
+   "trim": "#f0ede6",
+   "roof": "slate",
+   "sources": [
+    "269964348157815",
+    "5549168501822560"
+   ],
+   "note": "20 Malcolm St: 1840s terrace, sooted grey-brown gault brick, white sashes, black railings (both sides of the street seen in one view)"
+  },
+  "way/100322369": {
+   "material": "gault_brick",
+   "colour": "#7b7264",
+   "trim": "#f0ede6",
+   "roof": "slate",
+   "sources": [
+    "269964348157815",
+    "5549168501822560"
+   ],
+   "note": "22 Malcolm St: 1840s terrace, sooted grey-brown gault brick, white sashes, black railings (both sides of the street seen in one view)"
+  },
+  "way/100322370": {
+   "material": "gault_brick",
+   "colour": "#7b7264",
+   "trim": "#f0ede6",
+   "roof": "slate",
+   "sources": [
+    "269964348157815",
+    "5549168501822560"
+   ],
+   "note": "23 Malcolm St: 1840s terrace, sooted grey-brown gault brick, white sashes, black railings (both sides of the street seen in one view)"
+  },
+  "way/100322371": {
+   "material": "gault_brick",
+   "colour": "#7b7264",
+   "trim": "#f0ede6",
+   "roof": "slate",
+   "sources": [
+    "269964348157815",
+    "5549168501822560"
+   ],
+   "note": "24 Malcolm St: 1840s terrace, sooted grey-brown gault brick, white sashes, black railings (both sides of the street seen in one view)"
+  },
+  "way/100322372": {
+   "material": "gault_brick",
+   "colour": "#7b7264",
+   "trim": "#f0ede6",
+   "roof": "slate",
+   "sources": [
+    "269964348157815",
+    "5549168501822560"
+   ],
+   "note": "19 Malcolm St: 1840s terrace, sooted grey-brown gault brick, white sashes, black railings (both sides of the street seen in one view)"
+  },
+  "way/100322378": {
+   "material": "gault_brick",
+   "colour": "#7b7264",
+   "trim": "#f0ede6",
+   "roof": "slate",
+   "sources": [
+    "269964348157815",
+    "5549168501822560"
+   ],
+   "note": "6 Malcolm St: 1840s terrace, sooted grey-brown gault brick, white sashes, black railings (both sides of the street seen in one view)"
+  },
+  "way/100322389": {
+   "material": "gault_brick",
+   "colour": "#7b7264",
+   "trim": "#f0ede6",
+   "roof": "slate",
+   "sources": [
+    "269964348157815",
+    "5549168501822560"
+   ],
+   "note": "7 Malcolm St: 1840s terrace, sooted grey-brown gault brick, white sashes, black railings (both sides of the street seen in one view)"
+  },
+  "way/100322391": {
+   "material": "gault_brick",
+   "colour": "#7b7264",
+   "trim": "#f0ede6",
+   "roof": "slate",
+   "sources": [
+    "269964348157815",
+    "5549168501822560"
+   ],
+   "note": "11 Malcolm St: 1840s terrace, sooted grey-brown gault brick, white sashes, black railings (both sides of the street seen in one view)"
+  },
+  "way/100322394": {
+   "material": "gault_brick",
+   "colour": "#7b7264",
+   "trim": "#f0ede6",
+   "roof": "slate",
+   "sources": [
+    "269964348157815",
+    "5549168501822560"
+   ],
+   "note": "10 Malcolm St: 1840s terrace, sooted grey-brown gault brick, white sashes, black railings (both sides of the street seen in one view)"
+  },
+  "way/100322395": {
+   "material": "gault_brick",
+   "colour": "#7b7264",
+   "trim": "#f0ede6",
+   "roof": "slate",
+   "sources": [
+    "269964348157815",
+    "5549168501822560"
+   ],
+   "note": "9 Malcolm St: 1840s terrace, sooted grey-brown gault brick, white sashes, black railings (both sides of the street seen in one view)"
+  },
+  "way/100322397": {
+   "material": "gault_brick",
+   "colour": "#7b7264",
+   "trim": "#f0ede6",
+   "roof": "slate",
+   "sources": [
+    "269964348157815",
+    "5549168501822560"
+   ],
+   "note": "8 Malcolm St: 1840s terrace, sooted grey-brown gault brick, white sashes, black railings (both sides of the street seen in one view)"
   },
   "way/1039073567": {
    "material": "gault_brick",
@@ -61,6 +226,17 @@
    ],
    "note": "1-2 Wheeler St: white painted brick"
   },
+  "way/1095394773": {
+   "material": "render",
+   "colour": "#efede7",
+   "trim": "#4a4a3c",
+   "roof": "slate",
+   "sources": [
+    "commons:File:11 Peas Hill",
+    " Cambridge.jpg"
+   ],
+   "note": "11 Peas Hill (Pho): white painted render, jettied first floor on brackets, dark olive shopfront"
+  },
   "way/1095395396": {
    "material": "gault_brick",
    "colour": "#c2ad84",
@@ -91,6 +267,31 @@
    ],
    "note": "59 Sidney St: white painted front, navy shopfront"
   },
+  "way/1099846444": {
+   "material": "render",
+   "colour": "#41464f",
+   "trim": "#c9a54e",
+   "roof": "slate",
+   "sources": [
+    "commons:File:Town and Gown theatre",
+    " Market Passage",
+    " Cambridge.jpg"
+   ],
+   "note": "6-8 Market Passage (Town and Gown): brick painted dark charcoal-blue, balustraded parapet, gilt capitals"
+  },
+  "way/1206340006": {
+   "material": "render",
+   "colour": "#eeece6",
+   "trim": "#2a2a2c",
+   "roof": "tile",
+   "sources": [
+    "306489237857948",
+    "commons:File:Fisher House",
+    " Guildhall Street",
+    " Cambridge.jpg"
+   ],
+   "note": "south half of Fisher House: jettied white-rendered upper floor, buff gault brick ground floor, tile roof with dormers"
+  },
   "way/1206340007": {
    "material": "red_brick",
    "colour": "#8a4c3c",
@@ -100,6 +301,57 @@
     "162698125857171"
    ],
    "note": "Corn Exchange St modern block: red/brown brick, lead/zinc mansard with dormers"
+  },
+  "way/1211951041": {
+   "material": "red_brick",
+   "colour": "#95503f",
+   "trim": "#ece8de",
+   "roof": "slate",
+   "sources": [
+    "commons:File:Petty Cury - geograph.org.uk - 5562718.jpg"
+   ],
+   "note": "24 Petty Cury (Whittard): red brick, white bay windows and dormer hoods, navy shopfront"
+  },
+  "way/1211951042": {
+   "material": "render",
+   "colour": "#d8d4ca",
+   "trim": "#3a3d40",
+   "roof": "flat",
+   "sources": [
+    "commons:File:Petty Cury - geograph.org.uk - 5897664.jpg"
+   ],
+   "note": "30-31 Petty Cury (Superdry, Lion Yard): pale grey concrete arcade piers and fascias, glazed upper bands, buff brick above"
+  },
+  "way/1211951043": {
+   "material": "red_brick",
+   "colour": "#7c6955",
+   "trim": "#1f4fa0",
+   "roof": "slate",
+   "sources": [
+    "commons:File:Boots",
+    " Petty Cury - geograph.org.uk - 5231641.jpg"
+   ],
+   "note": "25-27 Petty Cury (Nationwide): brown textured brick with relief panel, blue ground floor"
+  },
+  "way/1211951051": {
+   "material": "render",
+   "colour": "#e9e7e1",
+   "trim": "#7d8590",
+   "roof": "slate",
+   "sources": [
+    "2182342171917775"
+   ],
+   "note": "23 Market St: white painted stucco upper floors with tall windows, grey-blue shopfront"
+  },
+  "way/1211951052": {
+   "material": "stone",
+   "colour": "#d4c7a4",
+   "trim": "#e2d8be",
+   "roof": "slate",
+   "sources": [
+    "commons:File:Petty Cury - geograph.org.uk - 5562718.jpg"
+   ],
+   "note": "23 Petty Cury: pale buff ashlar Tudor-Gothic front with steep gables and mullioned windows"
   },
   "way/1222243454": {
    "material": "gault_brick",
@@ -141,6 +393,95 @@
    ],
    "note": "15 King's Parade: black-and-white half timber, bay windows"
   },
+  "way/1288644217": {
+   "material": "gault_brick",
+   "colour": "#6e6457",
+   "trim": "#f2efe8",
+   "roof": "slate",
+   "sources": [
+    "commons:File:25",
+    " Green Street.jpg"
+   ],
+   "note": "25 Green St: heavily sooted gault brick (dark grey-brown), white sashes, stone parapet band"
+  },
+  "way/1288644218": {
+   "material": "render",
+   "colour": "#ebe5da",
+   "trim": "#f2f0ea",
+   "roof": "tile",
+   "sources": [
+    "commons:File:23",
+    " Green Street.jpg"
+   ],
+   "note": "23 Green St: cream-white painted render, white shopfront, old tile roof with dormer"
+  },
+  "way/1288644219": {
+   "material": "gault_brick",
+   "colour": "#8d7f66",
+   "trim": "#f2efe8",
+   "roof": "slate",
+   "sources": [
+    "commons:File:3-7",
+    " Green Street.jpg"
+   ],
+   "note": "3-5 Green St: sooted buff gault brick terrace, white sashes, painted shopfronts"
+  },
+  "way/1288644221": {
+   "material": "gault_brick",
+   "colour": "#7f7462",
+   "trim": "#f2efe8",
+   "roof": "slate",
+   "sources": [
+    "commons:File:Marvin's - Green Street - geograph.org.uk - 8218664.jpg",
+    "commons:File:10",
+    " Green Street.jpg"
+   ],
+   "note": "11-12 Green St (Marvin's corner, Wex): sooted gault brick, canted corner, white sashes, slate mansard with dormers, red shopfront"
+  },
+  "way/1288644222": {
+   "material": "gault_brick",
+   "colour": "#857760",
+   "trim": "#f2efe8",
+   "roof": "slate",
+   "sources": [
+    "commons:File:3-7",
+    " Green Street.jpg"
+   ],
+   "note": "6-7 Green St (Harriet Kelsall): sooted gault brick, white sashes, dark grey shopfront"
+  },
+  "way/1288644223": {
+   "material": "red_brick",
+   "colour": "#9b5743",
+   "trim": "#f0ede6",
+   "roof": "slate",
+   "sources": [
+    "commons:File:10",
+    " Green Street.jpg"
+   ],
+   "note": "8-10 Green St (Catesby's/Gin Lab): orange-red brick, gauged red arches, white sashes, dormers"
+  },
+  "way/1288644224": {
+   "material": "gault_brick",
+   "colour": "#6b6154",
+   "trim": "#f2efe8",
+   "roof": "slate",
+   "sources": [
+    "commons:File:26 And 27",
+    " Green Street.jpg"
+   ],
+   "note": "26-27 Green St: sooted dark gault brick, 4 storeys, white sashes, round-arched doors"
+  },
+  "way/1288644225": {
+   "material": "render",
+   "colour": "#cfdc8f",
+   "trim": "#f0ecd6",
+   "roof": "slate",
+   "sources": [
+    "commons:File:24",
+    " Green Street.jpg"
+   ],
+   "note": "24 Green St (Lotus Thai): lime-green painted render/stucco upper floors, cream surrounds, bright green ground floor"
+  },
   "way/1288648566": {
    "material": "render",
    "colour": "#ece7da",
@@ -150,6 +491,70 @@
     "198320768637501"
    ],
    "note": "49 Sidney St (Edinburgh Woollen Mill): cream painted render"
+  },
+  "way/1288648567": {
+   "material": "gault_brick",
+   "colour": "#9e8e74",
+   "trim": "#f0ede6",
+   "roof": "slate",
+   "sources": [
+    "165143135542450",
+    "commons:File:Lakeland - Sidney Street - geograph.org.uk - 6499365.jpg"
+   ],
+   "note": "52 Sidney St (Lakeland): buff gault brick terrace, white sashes, grey shopfront"
+  },
+  "way/1288648569": {
+   "material": "gault_brick",
+   "colour": "#aaa08c",
+   "trim": "#2a2d2c",
+   "roof": "slate",
+   "sources": [
+    "commons:File:Yori BBQ - Green Street - geograph.org.uk - 8212136.jpg"
+   ],
+   "note": "38-39 Green St (Yori): pale grey-buff gault brick, wide modern windows, black ground floor (dusk photo)"
+  },
+  "way/1288648570": {
+   "material": "gault_brick",
+   "colour": "#a8916f",
+   "trim": "#efe9dc",
+   "roof": "slate",
+   "sources": [
+    "commons:File:Cafe au Chocolat",
+    " Green Street - geograph.org.uk - 7416908.jpg"
+   ],
+   "note": "14-17 Green St (Cafe au Chocolat): clean buff gault brick, stepped brick cornice, shopfronts"
+  },
+  "way/1288648572": {
+   "material": "gault_brick",
+   "colour": "#6d6457",
+   "trim": "#f2efe8",
+   "roof": "slate",
+   "sources": [
+    "commons:File:Cafe au Chocolat",
+    " Green Street - geograph.org.uk - 7416908.jpg"
+   ],
+   "note": "29 Green St: sooted dark gault brick like 28, white sashes"
+  },
+  "way/1288648573": {
+   "material": "red_brick",
+   "colour": "#654c41",
+   "trim": "#b4593c",
+   "roof": "slate",
+   "sources": [
+    "commons:File:19",
+    " Trinity Street.jpg"
+   ],
+   "note": "19 Trinity St (Toast): dark plum-brown brick with orange rubbed-brick pilasters and window dressings, segmental dormers"
+  },
+  "way/1288648575": {
+   "material": "render",
+   "colour": "#ece9e2",
+   "trim": "#f4f2ec",
+   "roof": "slate",
+   "sources": [
+    "commons:File:Yori BBQ - Green Street - geograph.org.uk - 8212136.jpg"
+   ],
+   "note": "40 Green St: white painted brick"
   },
   "way/1288648576": {
    "material": "render",
@@ -161,6 +566,16 @@
    ],
    "note": "47 Sidney St (Sainsbury's corner): white render"
   },
+  "way/1288648578": {
+   "material": "gault_brick",
+   "colour": "#615a4f",
+   "trim": "#f2efe8",
+   "roof": "slate",
+   "sources": [
+    "commons:File:Iolla - Eyewear - geograph.org.uk - 8218662.jpg"
+   ],
+   "note": "36 Green St (iOLLA): sooted dark grey gault brick, white sashes, navy shopfronts"
+  },
   "way/1288648579": {
    "material": "render",
    "colour": "#ece4cf",
@@ -171,6 +586,38 @@
    ],
    "note": "48 Sidney St: cream render"
   },
+  "way/1288648580": {
+   "material": "gault_brick",
+   "colour": "#6a6052",
+   "trim": "#f2efe8",
+   "roof": "slate",
+   "sources": [
+    "commons:File:Yori BBQ - Green Street - geograph.org.uk - 8212136.jpg"
+   ],
+   "note": "37 Green St: dark sooted brick, white sashes (dusk photo)"
+  },
+  "way/1288648581": {
+   "material": "gault_brick",
+   "colour": "#7f7260",
+   "trim": "#f2efe8",
+   "roof": "tile",
+   "sources": [
+    "commons:File:16 And 16A",
+    " Trinity Street.jpg"
+   ],
+   "note": "16 Trinity St: sooted brown-grey brick, Dutch gables, white sashes, white painted shopfront"
+  },
+  "way/1288648582": {
+   "material": "red_brick",
+   "colour": "#94513d",
+   "trim": "#f2efe8",
+   "roof": "slate",
+   "sources": [
+    "commons:File:15",
+    " Trinity Street.jpg"
+   ],
+   "note": "15 Trinity St: Georgian red brick, rubbed brick arches, white sashes, stone plinth"
+  },
   "way/1288648584": {
    "material": "gault_brick",
    "colour": "#a08b72",
@@ -180,6 +627,50 @@
     "198320768637501"
    ],
    "note": "50-51 Sidney St (Santander): sooted brown-buff brick upper floors, red brick window heads, red fascia"
+  },
+  "way/1288648587": {
+   "material": "timber",
+   "colour": "#eceae3",
+   "trim": "#2b2623",
+   "roof": "tile",
+   "sources": [
+    "commons:File:14 Trinity Street",
+    " Cambridge.JPG"
+   ],
+   "note": "14 Trinity St: jettied timber-framed front, white pargetted plaster panels between black timbers, gables"
+  },
+  "way/1288648590": {
+   "material": "gault_brick",
+   "colour": "#a08f73",
+   "trim": "#f0ede6",
+   "roof": "slate",
+   "sources": [
+    "165143135542450"
+   ],
+   "note": "53-54 Sidney St (Ryman): buff gault brick, white sashes, red fascia"
+  },
+  "way/1288648592": {
+   "material": "gault_brick",
+   "colour": "#6f6658",
+   "trim": "#f2efe8",
+   "roof": "slate",
+   "sources": [
+    "commons:File:Knoops - Green Street - geograph.org.uk - 7725454.jpg",
+    "commons:File:Cafe au Chocolat",
+    " Green Street - geograph.org.uk - 7416908.jpg"
+   ],
+   "note": "28 Green St (Knoops corner): sooted grey-brown gault brick, white sashes, black painted ground floor"
+  },
+  "way/1288730353": {
+   "material": "gault_brick",
+   "colour": "#ab9b7c",
+   "trim": "#d8cfba",
+   "roof": "slate",
+   "sources": [
+    "commons:File:1-11 Rose Crescent",
+    " Cambridge.jpg"
+   ],
+   "note": "1-11 Rose Crescent: curved terrace in buff gault brick, white sashes, painted timber shopfronts"
   },
   "way/1288730354": {
    "material": "render",
@@ -201,6 +692,29 @@
    ],
    "note": "3-6 Market St: white painted"
   },
+  "way/1288730358": {
+   "material": "gault_brick",
+   "colour": "#b0a07f",
+   "trim": "#e6dcc6",
+   "roof": "slate",
+   "sources": [
+    "commons:File:Taco Bell",
+    " Market Street",
+    " Cambridge - geograph.org.uk - 7393555.jpg",
+    "commons:File:Cambridge - Market Passage - geograph.org.uk - 6888585.jpg"
+   ],
+   "note": "10-15 Market St block (Taco Bell/Caffe Nero, Market Passage side): yellow-buff gault brick with tall round-arched windows (red brick arch infill), black/grey painted shopfronts"
+  },
+  "way/1288730361": {
+   "material": "render",
+   "colour": "#e9e6df",
+   "trim": "#e9e6df",
+   "roof": "slate",
+   "sources": [
+    "260501719142089"
+   ],
+   "note": "8 Market St: white painted render/stucco front"
+  },
   "way/1288730363": {
    "material": "render",
    "colour": "#e8e5d4",
@@ -210,6 +724,91 @@
     "819218512029304"
    ],
    "note": "2 Market St (Scribbler): cream painted brick"
+  },
+  "way/1288738586": {
+   "material": "red_brick",
+   "colour": "#985a45",
+   "trim": "#f2efe8",
+   "roof": "slate",
+   "sources": [
+    "commons:File:32",
+    " Trinity Street.jpg"
+   ],
+   "note": "32 Trinity St (Arthur Shepherd/Monsoon): Georgian orange-red brick, arched first-floor windows, white cornice, dormers"
+  },
+  "way/1288738587": {
+   "material": "red_brick",
+   "colour": "#85503f",
+   "trim": "#f0ede6",
+   "roof": "slate",
+   "sources": [
+    "commons:File:38 Trinity Street",
+    " Cambridge.jpg"
+   ],
+   "note": "38 Trinity St (Sweaty Betty): brown-red brick, orange rubbed arches, white painted shopfront"
+  },
+  "way/1288738590": {
+   "material": "render",
+   "colour": "#ecebe6",
+   "trim": "#f4f3ef",
+   "roof": "slate",
+   "sources": [
+    "2914421418841118"
+   ],
+   "note": "71 Bridge St (Lilac Rose): white painted render, white shopfront"
+  },
+  "way/1288738592": {
+   "material": "red_brick",
+   "colour": "#924f3c",
+   "trim": "#cdb88f",
+   "roof": "slate",
+   "sources": [
+    "commons:File:35-37",
+    " Trinity Street.jpg"
+   ],
+   "note": "35-37 Trinity St: Victorian red brick with blue diaper pattern, buff stone window surrounds and shaped gablets, white shopfronts"
+  },
+  "way/1288738594": {
+   "material": "render",
+   "colour": "#ebe8e1",
+   "trim": "#1d5fb0",
+   "roof": "slate",
+   "sources": [
+    "4696594083709033",
+    "605238130566544"
+   ],
+   "note": "63-66 Bridge St (Hockney Gallery, Crepeaffaire): white painted render upper floors, bright blue painted ground floor"
+  },
+  "way/1288738595": {
+   "material": "red_brick",
+   "colour": "#96553f",
+   "trim": "#f2efe8",
+   "roof": "slate",
+   "sources": [
+    "commons:File:33 And 34",
+    " Trinity Street.jpg"
+   ],
+   "note": "33-34 Trinity St (Jacks): red brick, rubbed brick arches, white cornice and sashes, white shopfront"
+  },
+  "way/1288738597": {
+   "material": "red_brick",
+   "colour": "#8b4a3a",
+   "trim": "#cbbd9c",
+   "roof": "slate",
+   "sources": [
+    "605238130566544"
+   ],
+   "note": "67 Bridge St: red brick with stone Gothic arched window surrounds"
+  },
+  "way/1288738599": {
+   "material": "render",
+   "colour": "#dcdad3",
+   "trim": "#f2f1ec",
+   "roof": "slate",
+   "sources": [
+    "3114280612136267"
+   ],
+   "note": "68 Bridge St (Petrus): pale grey-white painted render, white shutters"
   },
   "way/131662303": {
    "material": "red_brick",
@@ -301,6 +900,17 @@
    ],
    "note": "2 Free School Lane corner: brown-grey stock brick, mint painted shopfront"
   },
+  "way/134521109": {
+   "material": "render",
+   "colour": "#ebe3cd",
+   "trim": "#2f2c2a",
+   "roof": "tile",
+   "sources": [
+    "commons:File:3 Free School Lane",
+    " Cambridge.jpg"
+   ],
+   "note": "3 Free School Lane: jettied timber-framed house under cream render, dark window frames, gabled"
+  },
   "way/135595261": {
    "material": "red_brick",
    "colour": "#8a4636",
@@ -310,6 +920,16 @@
     "779342842765833"
    ],
    "note": "red brick block, white sashes (Market Passage)"
+  },
+  "way/135595981": {
+   "material": "stone",
+   "colour": "#c5b898",
+   "trim": "#d6cbb0",
+   "roof": "slate",
+   "sources": [
+    "1390580201307612"
+   ],
+   "note": "St Andrew the Great: buff limestone ashlar, Perpendicular Gothic windows"
   },
   "way/135595983": {
    "material": "red_brick",
@@ -331,6 +951,30 @@
    ],
    "note": "Fisher House, Guildhall St: white render upper, gault ground, clay tile"
   },
+  "way/137152220": {
+   "material": "render",
+   "colour": "#eeece6",
+   "trim": "#2a2a2c",
+   "roof": "tile",
+   "sources": [
+    "commons:File:Fisher House",
+    " Guildhall Street",
+    " Cambridge.jpg",
+    "commons:File:Guildhall Street",
+    " Cambridge.jpg"
+   ],
+   "note": "Fisher House: jettied white-rendered upper floor with black fascia, buff gault brick ground floor, old tile roof with dormers"
+  },
+  "way/13864475": {
+   "material": "render",
+   "colour": "#e9e8e3",
+   "trim": "#5a5d60",
+   "roof": "flat",
+   "sources": [
+    "1105815146605891"
+   ],
+   "note": "Sidney St 36-45 (Sainsbury's, Blue Boar Court street range): white painted render/stucco, plate-glass shopfronts"
+  },
   "way/139308033": {
    "material": "stone",
    "colour": "#d5c4a0",
@@ -340,6 +984,17 @@
     "3850941005027528"
    ],
    "note": "Clare College Chapel, buff ashlar (attribution moderate)"
+  },
+  "way/1410529029": {
+   "material": "render",
+   "colour": "#f0eee9",
+   "trim": "#7f8a72",
+   "roof": "tile",
+   "sources": [
+    "commons:File:4 And 5",
+    " Peas Hill.jpg"
+   ],
+   "note": "4-5 Peas Hill (BrewBoard): white render, oriel, old plain-tile roof with dormers, sage-green shopfront"
   },
   "way/147456503": {
    "material": "red_brick",
@@ -380,6 +1035,16 @@
     "165143135542450"
    ],
    "note": "Montagu House, Sidney St: sooted gault brick"
+  },
+  "way/147456522": {
+   "material": "stucco",
+   "colour": "#cbbd9c",
+   "trim": "#d9cfb6",
+   "roof": "slate",
+   "sources": [
+    "1105815146605891"
+   ],
+   "note": "Sidney Sussex College street range: buff cement render (Wyatville), Gothic windows, brick boundary wall"
   },
   "way/147456527": {
    "material": "red_brick",
@@ -460,6 +1125,16 @@
     "347396670530528"
    ],
    "note": "sooted gault brick Gothic range with stone dressings, battlements"
+  },
+  "way/148880401": {
+   "material": "stone",
+   "colour": "#c2b493",
+   "trim": "#d2c6a8",
+   "roof": "slate",
+   "sources": [
+    "379546056717468"
+   ],
+   "note": "Taylor Library (Corpus, Bene't St/Trumpington St corner): weathered buff ashlar, tall arched windows, Gothic hood moulds"
   },
   "way/151527568": {
    "material": "stone",
@@ -561,6 +1236,28 @@
    ],
    "note": "yellow stock brick wall/block in lane (diffuse estimate)"
   },
+  "way/166139209": {
+   "material": "red_brick",
+   "colour": "#6f5547",
+   "trim": "#f0eee8",
+   "roof": "slate",
+   "sources": [
+    "1105815146605891"
+   ],
+   "note": "Sidney St, north of Sainsbury's: brown brick 4 storeys, white sashes, white painted ground floor"
+  },
+  "way/169842585": {
+   "material": "flint",
+   "colour": "#5d554b",
+   "trim": "#ebe8e0",
+   "roof": "slate",
+   "sources": [
+    "commons:File:Corpus Christi Playroom",
+    " St Edward's Passage",
+    " Cambridge.jpg"
+   ],
+   "note": "10 St Edward's Passage (Corpus Playroom): dark grey knapped/rubble upper walls with white sash surrounds; white painted Gothic stucco ground floor with arched openings"
+  },
   "way/229676053": {
    "material": "stone",
    "colour": "#cbb68e",
@@ -581,6 +1278,16 @@
    ],
    "note": "Henry Martyn Hall: knapped flint, stone gothic dressings"
   },
+  "way/263621279": {
+   "material": "red_brick",
+   "colour": "#934e3b",
+   "trim": "#c9b48c",
+   "roof": "tile",
+   "sources": [
+    "294588435449890"
+   ],
+   "note": "Old Divinity School, St John's St: red brick with buff stone dressings, oriels and turrets"
+  },
   "way/274090660": {
    "material": "gault_brick",
    "colour": "#b9a580",
@@ -591,6 +1298,16 @@
    ],
    "note": "gault brick wall by Lion Yard"
   },
+  "way/40900608": {
+   "material": "red_brick",
+   "colour": "#7e4f3e",
+   "trim": "#c6b28c",
+   "roof": "slate",
+   "sources": [
+    "172817718050818"
+   ],
+   "note": "Sedgwick Building, Downing St: brown-red brick with buff stone arches, bands and dressings"
+  },
   "way/40937938": {
    "material": "gault_brick",
    "colour": "#b39b74",
@@ -600,6 +1317,26 @@
     "490320359088033"
    ],
    "note": "Lion Yard: buff brick, dark glazed shopfronts, slate mansard"
+  },
+  "way/40937939": {
+   "material": "glass",
+   "colour": "#56646b",
+   "trim": "#3a3d40",
+   "roof": "flat",
+   "sources": [
+    "316038143232136"
+   ],
+   "note": "John Lewis, Downing St: dark green-grey glass curtain wall"
+  },
+  "way/40939407": {
+   "material": "gault_brick",
+   "colour": "#c6b07e",
+   "trim": "#e4dccb",
+   "roof": "flat",
+   "sources": [
+    "172817718050818"
+   ],
+   "note": "Hilton Cambridge City Centre, Downing St: yellow-buff brick with pale stone arched ground floor"
   },
   "way/500917458": {
    "material": "timber",
@@ -620,6 +1357,46 @@
     "269646291611424"
    ],
    "note": "St Botolph's church: clunch/rubble with ashlar dressings, battlemented"
+  },
+  "way/93900090": {
+   "material": "gault_brick",
+   "colour": "#b09a79",
+   "trim": "#2f3a45",
+   "roof": "slate",
+   "sources": [
+    "716668745720802"
+   ],
+   "note": "Cambridge Brew House (King St corner): modern buff brick"
+  },
+  "way/965378225": {
+   "material": "render",
+   "colour": "#e8e4d9",
+   "trim": "#2f3640",
+   "roof": "slate",
+   "sources": [
+    "2914421418841118"
+   ],
+   "note": "3-6 Bridge St (Mountain Warehouse, Revital): cream-white painted stucco with round-arched upper windows, dark fascias"
+  },
+  "way/965378226": {
+   "material": "render",
+   "colour": "#ecebe6",
+   "trim": "#f3f2ee",
+   "roof": "slate",
+   "sources": [
+    "188724556430350"
+   ],
+   "note": "72-73 Bridge St (Pure Source, Serena): white painted render, white shopfronts"
+  },
+  "way/965378228": {
+   "material": "render",
+   "colour": "#ece5e2",
+   "trim": "#f3f2ee",
+   "roof": "slate",
+   "sources": [
+    "163494509027324"
+   ],
+   "note": "Bridge St east side near Jesus Lane: very pale pink-white painted render, white sashes"
   }
  }
 }

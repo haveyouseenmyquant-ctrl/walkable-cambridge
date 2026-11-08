@@ -1,0 +1,198 @@
+{
+ "osm_id": "way/1288648576",
+ "sources": [
+  "commons:File:Vacant unit - Sidney Street - geograph.org.uk - 7366420.jpg",
+  "commons:File:-2021-09-01 Shops on Sidney Street, Cambridge, Cambridgeshire.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1288648576:1",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.7,
+    6.6
+   ],
+   "material": "render",
+   "wall_colour": "#e9dcb6",
+   "trim_colour": "#f6f3ec",
+   "cornice_z": 9.4,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.8,
+     "w": 1.0,
+     "z": 4.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.8,
+     "w": 1.0,
+     "z": 7.0,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 4.0,
+     "z1": 3.6,
+     "fascia_text": "The Edinburgh Woollen Mill",
+     "fascia_colour": "#6b1a22",
+     "text_colour": "#f3e9d0",
+     "stallriser": 0.5,
+     "awning": false,
+     "door_x": 2.0
+    },
+    {
+     "type": "dormer",
+     "x": 1.8,
+     "w": 1.0,
+     "h": 1.3
+    }
+   ],
+   "confidence": "medium",
+   "notes": "47 Sidney St, Sidney Street face of the corner building: cream-painted, 3 storeys + mansard; Edinburgh Woollen Mill shopfront with arched central entrance and black granite pilasters."
+  },
+  {
+   "id": "way/1288648576:3",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.7,
+    6.6
+   ],
+   "material": "render",
+   "wall_colour": "#e9dcb6",
+   "trim_colour": "#f6f3ec",
+   "cornice_z": 9.4,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.2,
+     "w": 0.9,
+     "z": 4.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.2,
+     "w": 1.0,
+     "z": 4.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.2,
+     "w": 1.0,
+     "z": 4.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.2,
+     "w": 0.9,
+     "z": 7.0,
+     "h": 1.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.2,
+     "w": 1.0,
+     "z": 7.0,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 9.5,
+     "z1": 3.6,
+     "fascia_text": "The Edinburgh Woollen Mill",
+     "fascia_colour": "#6b1a22",
+     "text_colour": "#f3e9d0",
+     "stallriser": 0.5,
+     "awning": false,
+     "door_x": 0.9
+    },
+    {
+     "type": "shopfront",
+     "x0": 9.8,
+     "x1": 14.2,
+     "z1": 3.6,
+     "fascia_text": "",
+     "fascia_colour": "#7a1f25",
+     "text_colour": "#f3e9d0",
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "dormer",
+     "x": 1.2,
+     "w": 1.0,
+     "h": 1.3
+    }
+   ],
+   "confidence": "low",
+   "notes": "47 Sidney St, Green Street face: curved corner, cream render, sashes and one blind panel; EWM maroon shopfront wraps the corner, a second maroon-fascia shop further west (name unread)."
+  }
+ ]
+}

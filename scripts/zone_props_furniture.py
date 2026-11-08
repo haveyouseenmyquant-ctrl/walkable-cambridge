@@ -267,6 +267,35 @@ def street_lamp(m):
     m.cyl(0, 0, 4.75, 4.90, 0.03, 0.0, n=4, col=IRON, cap=False)           # finial
 
 
+# Session 38: the square's lamps are not in OSM. Type from photos (Commons/geograph, CC BY-SA 2.0/4.0: geograph
+# 5509393, 5524917, 5617767, 6453814, 7414782, 7790439/40, 8005736, 6052227, 6242734, "Market Hill Cambridge UK";
+# Mapillary 138292341951529 (2021), 3304474719779190 (2015), 918215512073749 (2017), 652094232632931 (2021)):
+# black tapered column ~7.5 m, a short cross-arm at the top carrying two grey saucer luminaires (one on some).
+# Positions: medium confidence (+-3 m), from the Mapillary pose + bearing of the column in 138292341951529 (west
+# edge) and ground-plane back-projection of column bases in Commons "View from Great St Mary's Cambridge - 03"
+# (The wub, CC BY-SA 4.0) through a camera fitted to the OSM stall-row ends; each also seen in >= 1 street photo.
+PHOTO_LAMPS = [   # (x, y collision frame, heads)
+    (-121.0, 83.0, 2),    # west edge of the square, north part (Mapillary 138292341951529; c66 geograph 6052227)
+    (-86.0, 104.0, 2),    # north side, east of the Trailer of Life (Market Hill north footway; geograph 5617767, 8005736)
+    (-71.0, 66.0, 2),     # east side of the square, kerb line (geograph 5509393, 5711954)
+    (-66.0, 38.0, 1),     # south-east corner, Petty Cury entrance (geograph 5032491 / 7790439)
+]
+
+
+def twin_lamp(m, heads):
+    m.cyl(0, 0, 0.0, 0.35, 0.16, 0.14, n=10, col=IRON)                    # base shoe
+    m.cyl(0, 0, 0.35, 7.3, 0.10, 0.06, n=10, col=IRON, cap=False)          # tapered column
+    m.cyl(0, 0, 7.3, 7.45, 0.07, n=8, col=IRON)
+    arms = [-1, 1] if heads == 2 else [1]
+    for sg in arms:
+        m.tube((0, 0, 7.38), (sg * 0.55, 0, 7.5), 0.035, IRON, n=4)
+        m.tube((sg * 0.55, 0, 7.5), (sg * 0.75, 0, 7.48), 0.035, IRON, n=4)
+        m.cyl(sg * 0.75, 0, 7.30, 7.36, 0.24, 0.27, n=12, col=(0.95, 0.93, 0.85), cap=False)   # diffuser
+        m.cyl(sg * 0.75, 0, 7.36, 7.40, 0.29, n=12, col=(0.55, 0.57, 0.58), cap=False)          # rim
+        m.dome(sg * 0.75, 0, 7.40, 0.29, 0.10, n=12, rings=2, col=(0.55, 0.57, 0.58))           # saucer hood
+        m.cyl(sg * 0.75, 0, 7.30, 7.30, 0.0, 0.24, n=12, col=(0.95, 0.93, 0.85), cap=False)     # lit underside
+
+
 # ---------------------------------------------------------------- build
 def build(verbose=False):
     import json
@@ -288,11 +317,11 @@ def build(verbose=False):
     tree = STRtree(lines)
     g = Ground()
     out, counts, tris = [], {}, {}
-    objs = S.objects_in_area()
+    objs = S.objects_in_area() + [(x + E0, y + N0, 101, {"heads": h}) for x, y, h in PHOTO_LAMPS]
     kiosks = [(E, N) for E, N, k, _ in objs if k == 7]
     for E, N, k, t in objs:
         x, y = E - E0, N - N0
-        if k not in KINDS or (x - ZONE_C[0]) ** 2 + (y - ZONE_C[1]) ** 2 >= ZONE_R ** 2:
+        if (k not in KINDS and k != 101) or (x - ZONE_C[0]) ** 2 + (y - ZONE_C[1]) ** 2 >= ZONE_R ** 2:
             continue
         p = Point(E, N)
         ln = lines[int(tree.nearest(p))]
@@ -315,7 +344,7 @@ def build(verbose=False):
                 h = r + round((h - r) / (math.pi / 2)) * math.pi / 2
         m = Mesh()
         m.frame(x, y, g(x, y), h)
-        name = S.TYPES[k][0]
+        name = "street_lamp_photo" if k == 101 else S.TYPES[k][0]
         if k == 6:
             post_box(m, t.get("post_box:apertures") == "2")
         elif k == 7:
@@ -328,6 +357,8 @@ def build(verbose=False):
             bollard(m, t.get("bollard") == "rising" or t.get("barrier") == "rising_kerb")
         elif k == 1:
             street_lamp(m)
+        elif k == 101:
+            twin_lamp(m, t["heads"])
         elif k == 5:
             try:
                 n = int(t.get("capacity", "4")) // 2

@@ -1,0 +1,155 @@
+{
+ "osm_id": "way/1288648573",
+ "sources": [
+  "commons:File:19, Trinity Street.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1288648573:0",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.2,
+    7.7
+   ],
+   "material": "brick",
+   "wall_colour": "#5e4038",
+   "trim_colour": "#f2efe8",
+   "cornice_z": 10.4,
+   "cornice": "classical",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [
+    0.9,
+    6.7
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.1,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.0,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.75,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.1,
+     "w": 0.95,
+     "z": 8.0,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.0,
+     "w": 0.95,
+     "z": 8.0,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.75,
+     "w": 0.95,
+     "z": 8.0,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.4,
+     "x1": 4.7,
+     "z1": 4.2,
+     "fascia_text": "Toast",
+     "fascia_colour": "#2b2d30",
+     "text_colour": "#f0f0f0",
+     "stallriser": 0.5,
+     "awning": false,
+     "door_x": 2.4
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 6.1,
+     "w": 1.9,
+     "h": 3.3,
+     "surround": "none"
+    },
+    {
+     "type": "dormer",
+     "x": 2.35,
+     "w": 1.2,
+     "h": 1.2
+    },
+    {
+     "type": "dormer",
+     "x": 3.85,
+     "w": 1.2,
+     "h": 1.2
+    },
+    {
+     "type": "dormer",
+     "x": 5.3,
+     "w": 1.2,
+     "h": 1.2
+    }
+   ],
+   "confidence": "high",
+   "notes": "19 Trinity St: dark purple-brown brick with rubbed red brick giant pilaster strips (Ionic capitals) and window architraves, pediment over the central first-floor window, carved frieze and cornice; three segmental-headed dormers in a shaped parapet. Ground floor: Toast shopfront (arched timber glazing) and a granite-framed passage to Heffers on the south side."
+  }
+ ]
+}

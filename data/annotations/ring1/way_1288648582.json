@@ -1,0 +1,137 @@
+{
+ "osm_id": "way/1288648582",
+ "sources": [
+  "commons:File:15, Trinity Street.jpg",
+  "commons:File:Jigsaw, Trinity Street, Cambridge - geograph.org.uk - 7782902.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1288648582:0",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    5.0,
+    8.3
+   ],
+   "material": "brick",
+   "wall_colour": "#9a4a33",
+   "trim_colour": "#f2efe8",
+   "cornice_z": 10.7,
+   "cornice": "classical",
+   "parapet": false,
+   "string_courses": [
+    8.3
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.67,
+     "w": 1.1,
+     "z": 5.9,
+     "h": 1.8,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.33,
+     "w": 1.1,
+     "z": 5.9,
+     "h": 1.8,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.14,
+     "w": 1.1,
+     "z": 5.9,
+     "h": 1.8,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.67,
+     "w": 1.05,
+     "z": 8.8,
+     "h": 1.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.33,
+     "w": 1.05,
+     "z": 8.8,
+     "h": 1.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.14,
+     "w": 1.05,
+     "z": 8.8,
+     "h": 1.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "glazed",
+     "x": 0.75,
+     "w": 0.9,
+     "h": 2.7,
+     "surround": "fanlight"
+    },
+    {
+     "type": "shopfront",
+     "x0": 1.9,
+     "x1": 6.4,
+     "z1": 4.8,
+     "fascia_text": "Trinity",
+     "fascia_colour": "#1e1e1e",
+     "text_colour": "#f0ead8",
+     "stallriser": 0.5,
+     "awning": false,
+     "door_x": 4.2
+    }
+   ],
+   "confidence": "high",
+   "notes": "15 Trinity St: Georgian red brick, 3 bays, rubbed-brick flat arches, 6-over-6 sashes, dentilled brick cornice, mansard set back. Black-painted entrance with gothic-traceried door hood at the north end; black shopfront with gothic arched glazing heads (Coast fish restaurant in photo; OSM name Trinity)."
+  }
+ ]
+}

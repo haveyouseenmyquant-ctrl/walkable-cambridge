@@ -1,0 +1,257 @@
+{
+ "judged_realism": 27.1,
+ "n": 50,
+ "model": "claude-opus-5-5",
+ "per_view": {
+  "188216173137774": {
+   "score": 1,
+   "reason": "A is a downward close-up of a bronze tactile city model on paving, while B is a rendered street view with a tower and buildings. The only thing they share is stone paving.",
+   "render_side": "B"
+  },
+  "788562325143664": {
+   "score": 2,
+   "reason": "Both are urban streets with old masonry buildings, but the layouts don't match: A shows a curved stone corner building at a junction, while B shows a straight canyon street with brick walls on both sides and different materials, details and lighting.",
+   "render_side": "B"
+  },
+  "745004922853288": {
+   "score": 1.5,
+   "reason": "A looks steeply up at an ornate Gothic sandstone tower against the sky, while B is a level, simple render of a brick wall and paving; the only thing they share is pointed-arch windows.",
+   "render_side": "B"
+  },
+  "268422968357948": {
+   "score": 2,
+   "reason": "Both show a narrow street between stone walls, but B is a crude render with a big red pillar in front and no matching curve, chapel, yellow lines or building layout.",
+   "render_side": "B"
+  },
+  "519716785698039": {
+   "score": 4,
+   "reason": "Both show a narrow lane between walls, but the sides don't match: A has a windowed building on the left and a stone wall on the right, while B has the brick wall on the left and a building on the right, and B also has cyclists and people that A lacks.",
+   "render_side": "A"
+  },
+  "626066128357691": {
+   "score": 4,
+   "reason": "Both show a similar street with Gothic college buildings and a distant tower, but A is a low-detail grey render with a different viewpoint and building arrangement, and it lacks B's people, post box, shops, bikes and colours.",
+   "render_side": "A"
+  },
+  "490595022302449": {
+   "score": 3,
+   "reason": "Both are narrow lanes with a stone wall on the left and red-brick buildings on the right. But A's layout, open plaza and building at the end don't match B's tree, scaffolding, railings, car and people.",
+   "render_side": "A"
+  },
+  "1195719307561700": {
+   "score": 3,
+   "reason": "Both show a corner building with a street running off to the right toward castellated college buildings and a spire, but B's plain grey block has none of A's red brick, bay windows, shopfront, people or cyclists, and its framing and scale are different.",
+   "render_side": "B"
+  },
+  "4036442906446115": {
+   "score": 1,
+   "reason": "A shows an open lawn with trees and a distant brick building, while B is a close-up of a stone bridge arch with punts and people, so only the trees and the general riverside setting match.",
+   "render_side": "A"
+  },
+  "151966616869113": {
+   "score": 2,
+   "reason": "Both show a path running straight ahead with trees beside it, but A is a blurry fenced lane at night under streetlights while B is a daytime rendered park avenue with no fences and different lighting and materials.",
+   "render_side": "B"
+  },
+  "754779088538115": {
+   "score": 3,
+   "reason": "Both show a wooden bridge over a river beside a brick building with trees on the left, but B's bridge is a crude blocky shape seen from a different angle, its building has a different design, and it has no punts or people.",
+   "render_side": "B"
+  },
+  "423020809560124": {
+   "score": 3,
+   "reason": "Both show a row of terraced houses across an open road, but B has a large roof in the foreground, deciduous trees where A has a conifer, and none of A's cyclists, car or scaffolding.",
+   "render_side": "B"
+  },
+  "204587944591503": {
+   "score": 4,
+   "reason": "Both show a paved street with trees on the left and terraced shops on the right, but the layout differs: B has a brick wall, people, a phone box and strong backlighting, and A has none of these.",
+   "render_side": "A"
+  },
+  "463268731411191": {
+   "score": 3,
+   "reason": "Both show a street lined with pitched-roof terraced buildings on the right, but B lacks A's shopfronts, dormers, road markings and parked cars, and its materials, colours and lighting differ a lot.",
+   "render_side": "B"
+  },
+  "865267397391772": {
+   "score": 3,
+   "reason": "Both show a road lined with trees and a bench, but A is an empty tree-lined avenue, while B has road markings, a traffic light, cars, a coach, a pedestrian and a different layout.",
+   "render_side": "A"
+  },
+  "475452193554561": {
+   "score": 4,
+   "reason": "Both show a long red-brick building receding to the right, but A has a lawn and tree where B has a railing, wall, pavement and road, and the rooflines and gables don't match.",
+   "render_side": "A"
+  },
+  "272897831248029": {
+   "score": 3,
+   "reason": "Both show a road lined with trees, but B has no vehicles, lamp post, fence or lane markings, includes a brick building, and its road layout and perspective differ from A.",
+   "render_side": "B"
+  },
+  "166878285339798": {
+   "score": 2,
+   "reason": "Both show a paved forecourt in front of a multi-storey building, but B is missing A's arched entrance, columns, steps, brick texture and plants, and its massing and roof are different.",
+   "render_side": "B"
+  },
+  "499449844540496": {
+   "score": 3,
+   "reason": "Both show a straight street lined on the right by a terrace of houses with trees ahead, but B has no wall, parked cars, people or railings, uses flat grey materials, and is framed differently on the left.",
+   "render_side": "B"
+  },
+  "804540183517315": {
+   "score": 4,
+   "reason": "Both show the same street layout, with tall buildings on the left, a terraced row on the right and a tree in the distance, but B is a crude render with broken, mis-scaled left buildings and no fence, road markings, vehicles or signs.",
+   "render_side": "B"
+  },
+  "489581222193351": {
+   "score": 2,
+   "reason": "Both look like a tree-lined path through a park, but B is a dark, blurry night shot lit by a street lamp, while A is a daytime render with no visible lamp, so the details and lighting barely match.",
+   "render_side": "A"
+  },
+  "772896090091264": {
+   "score": 3,
+   "reason": "The general layout matches, with a straight road, terraced brick houses on the left and trees on the right, but B is missing the parked cars, sign, hedges, pavement and people, and has leafy trees, a grey sky and a lawn where A has bare winter trees and a clear blue sky.",
+   "render_side": "B"
+  },
+  "812167710181454": {
+   "score": 3,
+   "reason": "Both show a park on the left and a row of buildings on the right, but B is missing the fence, the cyclists and the yellow lines, has leafy trees where A's are bare, has plain grey facades instead of ornate brick ones, and its road layout and camera tilt differ.",
+   "render_side": "B"
+  },
+  "148109080652839": {
+   "score": 2,
+   "reason": "Both show a street with trees, parked cars and brick buildings, but A is a narrow lane with buildings close on the right, while B is a wide open plaza with a different building layout, viewpoint and street details.",
+   "render_side": "B"
+  },
+  "155280259867837": {
+   "score": 3,
+   "reason": "Both are open park scenes with trees on the left and open sky on the right, but A shows mown lawn with patches instead of B's tall-grass meadow and gravel path.",
+   "render_side": "A"
+  },
+  "834694420479393": {
+   "score": 2,
+   "reason": "A is a daytime render of an open green with buildings and a paved path, while B is a night photo of a tree-lined road with streetlights, so they share only generic street and tree elements and the layout doesn't match.",
+   "render_side": "A"
+  },
+  "506961850425011": {
+   "score": 2,
+   "reason": "Both show a tree, some grass and a row of terraced houses, but B is a render taken from the grass looking across, while A is taken from a pavement with parked cars, so the layout, viewpoint and street details don't match.",
+   "render_side": "B"
+  },
+  "269039248238662": {
+   "score": 3,
+   "reason": "Both show a building on the left and trees on the right along a road, but B lacks the scaffolding, cyclists, people, signs and yellow lines, and its building facade and road layout differ noticeably.",
+   "render_side": "B"
+  },
+  "1866916603482573": {
+   "score": 3,
+   "reason": "Both show a straight street lined with buildings and bicycles on the left, but the facades, shopfront colours, scaffolding, road markings and car don't match, and A is a low-detail render.",
+   "render_side": "A"
+  },
+  "486834615898269": {
+   "score": 4,
+   "reason": "Both show a terraced brick street frontage receding to the right with trees far off, but B is a plain render: no shopfronts, road markings, cars or street lights, the facades are flattened, the ground is blank, and the perspective is slightly different.",
+   "render_side": "B"
+  },
+  "465367698087024": {
+   "score": 1,
+   "reason": "A is a residential street at night with parked cars and people, while B is a daytime render of grass, a wall and trees, so only the general idea of a street with trees is shared.",
+   "render_side": "B"
+  },
+  "916233679161705": {
+   "score": 4,
+   "reason": "Both show a straight street lined with terraced houses on both sides, but A has no front gardens, cars, hedges or telegraph pole and no road markings, its buildings sit at different distances and are coloured differently, and its lighting is flat.",
+   "render_side": "A"
+  },
+  "480053723333136": {
+   "score": 2,
+   "reason": "Both show greenery with buildings on the left, but A is a narrow path through tall grass with a fence and brick wall, while B is an open lawn beside tall multi-storey buildings with a different layout.",
+   "render_side": "B"
+  },
+  "518241685847497": {
+   "score": 2,
+   "reason": "Both are UK brick streets, but the layouts don't match: A shows an open plaza facing a long terrace, while B is a narrow, tilted street with a large brick wall on the left.",
+   "render_side": "A"
+  },
+  "183228076993113": {
+   "score": 3,
+   "reason": "Both are tree-lined park scenes with a path, grass and benches, but the path position, tree layout, foliage season, lamp post and people differ substantially.",
+   "render_side": "A"
+  },
+  "327117068787517": {
+   "score": 3,
+   "reason": "Both show a tree-lined road receding to a vanishing point, but B has leafy trees and no cyclist, car, wall, lamp posts or road markings, and its materials and lighting differ.",
+   "render_side": "B"
+  },
+  "467289971165026": {
+   "score": 3,
+   "reason": "Both show a road lined with trees on both sides, but B is a bare render with a wide paved area and none of A's lane markings, fences, lamp posts, vehicles, grass verges or overcast lighting.",
+   "render_side": "B"
+  },
+  "190501116255449": {
+   "score": 3,
+   "reason": "Both show trees on parkland grass, but A has no central path, trunks block the view, the canopy is dense and green instead of bare winter branches, and the tree layout and lighting don't match.",
+   "render_side": "A"
+  },
+  "1080822665741386": {
+   "score": 3,
+   "reason": "Both show a road junction with a low terraced row of houses on the right and trees behind, but A is a plain synthetic render: it has no lamp posts, car, traffic island, chimneys or slate roofs, the facade and roofline are wrong, and the sky and lighting differ.",
+   "render_side": "A"
+  },
+  "2974107816168874": {
+   "score": 2,
+   "reason": "Both show a street lined with buildings, but A is a crude render whose road layout, building shapes, details, colours and lighting don't match B's curving street, sidewalk, yellow lines and blue sky.",
+   "render_side": "A"
+  },
+  "215717297387097": {
+   "score": 3,
+   "reason": "Both show a park with trees, grass and a brick block of flats behind, but B's trees are in full leaf rather than bare winter trees, the paths and the big nearby trunk don't line up, and the leaf litter, cyclist and car are missing.",
+   "render_side": "B"
+  },
+  "467329501232437": {
+   "score": 3,
+   "reason": "Both show a tree-lined street going straight ahead with buildings on the right, but B has a wide plaza-like road with no lane markings, different pale buildings instead of red-brick gabled houses, no traffic lights or railings, and a flat grey sky.",
+   "render_side": "B"
+  },
+  "1785827424959164": {
+   "score": 2,
+   "reason": "Both show a narrow urban street with brick buildings, but A is a crude render that a close-up wall blocks, with a different layout, colours and none of B's street details.",
+   "render_side": "A"
+  },
+  "130926185696716": {
+   "score": 2,
+   "reason": "Both show streets lined with buildings, but the layout, building placement, materials, road markings and cars don't match: A is a sparse, untextured render of an open square, while B is a narrow real street with parked cars.",
+   "render_side": "A"
+  },
+  "830748237795217": {
+   "score": 4,
+   "reason": "Both show a paved park path between grass lawns with a row of trees and buildings behind, but A is a simple render with leafy trees, plain grey and brick blocks and no cars or people, while B has bare trees, detailed terraced buildings, parked cars, pedestrians and a different path layout.",
+   "render_side": "A"
+  },
+  "504212450935825": {
+   "score": 3,
+   "reason": "Both show a straight street lined with trees, but B is missing A's red cycle lane, wall, pedestrians, cars and traffic lights, and its trees, layout and lighting differ.",
+   "render_side": "B"
+  },
+  "310856253750956": {
+   "score": 2,
+   "reason": "Both are urban streets with buildings on the right, but the buildings, materials, left-side structures, vehicles, bikes and lighting all differ.",
+   "render_side": "A"
+  },
+  "515609326476201": {
+   "score": 2,
+   "reason": "Both show parked cars on a residential street, but the layout, camera position, buildings, vegetation and lighting are very different: A has the cars on the left, bare trees and hedges, while B has a large close-up car and brick buildings.",
+   "render_side": "B"
+  },
+  "2862029840792457": {
+   "score": 3,
+   "reason": "Both show a straight street lined with houses on both sides, but A is a crude render: the facades are different and it has no street lamps, signs, vehicles, people or road markings, and the road and building positions don't match B.",
+   "render_side": "A"
+  },
+  "134414572010311": {
+   "score": 3,
+   "reason": "Both show a riverside path with water on the left, grass and trees on the right and buildings in the distance, but B's layout, path, buildings, bridge, fence and cyclist don't match A, and B's textures look synthetic.",
+   "render_side": "B"
+  }
+ }
+}

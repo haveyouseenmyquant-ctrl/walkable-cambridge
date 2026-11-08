@@ -1,0 +1,96 @@
+{
+ "osm_id": "way/1288648578",
+ "sources": [
+  "commons:File:Iolla - Eyewear - geograph.org.uk - 8218662.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1288648578:6",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.9,
+    6.9
+   ],
+   "material": "brick",
+   "wall_colour": "#6a655c",
+   "trim_colour": "#f4f2ec",
+   "cornice": "none",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.6,
+     "w": 1.2,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.6,
+     "w": 1.2,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.6,
+     "w": 1.1,
+     "z": 7.2,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.6,
+     "w": 1.1,
+     "z": 7.2,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 7.0,
+     "z1": 3.8,
+     "fascia_text": "iOLLA",
+     "fascia_colour": "#1d2a36",
+     "text_colour": "#ffffff",
+     "stallriser": 0.5,
+     "awning": false
+    }
+   ],
+   "confidence": "low",
+   "notes": "36 Green St: stock brick, big navy 'Eyewear' shopfront with orange glazing bars (OSM: iOLLA). Only the first-floor window at x~2.6 is visible; the second bay and second-floor windows are assumed."
+  }
+ ]
+}
