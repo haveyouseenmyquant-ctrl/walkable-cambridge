@@ -569,3 +569,29 @@ Next
    the surface patch on top.
 3. Wait for Gaspard on the canopy question; if yes, change roof_match (pixels with first − last return > 1 m excluded)
    and switch the filter on.
+
+## 2026-11-08 — Session 18: leaf-card foliage (photo_match on views ≤ 520 m 23.52 → 25.09)
+
+Done
+- Live session-16 build (c46db5cb1e141ed6) finished its full benchmark during the session: photo_match_score
+  **14.90** (200 views), judged_realism **25.2**, visual_quality **17.02** (vegetation 0.5/10, the lowest criterion).
+- trees.js: each crown is now a darker blob core (84 % size) wrapped in 56 alpha-tested leaf cards with a leaf-cluster
+  texture drawn once on a canvas (no new asset; alphaToCoverage with MSAA). `?foliage=0` gives the old blobs.
+- A/B on the 67 benchmark views ≤ 520 m (same build, local): **23.52 → 25.09**; 20 views better by > 1, 9 worse
+  (−10.1 to +22.5). Side-by-side: docs/foliage_session18.jpg (photo | before | after; photos Mapillary CC-BY-SA 4.0,
+  ids 214764576744027, 289425219597328, 577055006604384).
+- GPU Chrome 1920×1080 locally: fps_median 60, site_errors 0. Published (release world-20261108-0400).
+- scripts/webkit_smoke.mjs crashes when WebKit launches ("Target page, context or browser has been closed"),
+  with or without this change: a Playwright WebKit vs macOS problem, not the site. Not fixed.
+
+Learned
+- Vegetation was the cheapest big win so far: one viewer file, no rebake. The view that lost 10 points
+  (289425219597328) is the one where a near crown now fills the top-left of the frame; crowns right at the camera
+  are probably too big or too low (the crown base is 22–34 % of tree height).
+
+Next
+1. Tree shape from LiDAR: crown base height and radius per tree from the canopy (first return − DTM profile),
+   and real species-ish forms (columnar limes vs spreading planes); trunk branches visible under the crown.
+2. Sky: photos have white/overcast or cloudy skies; try a brighter, cloudier sky against the benchmark.
+3. Fix the WebKit smoke test (update Playwright's WebKit build).
+4. Facade quality (reject road/sky pieces), synthetic per-building facades, centre first.
