@@ -1,0 +1,5265 @@
+{
+ "centre": [
+  0.119,
+  52.2053
+ ],
+ "radius": 90.0,
+ "walls": [
+  {
+   "id": "way/5094872:7",
+   "osm_id": "way/5094872",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3QJ",
+    "addr:street": "Market Square",
+    "building": "public",
+    "building:levels": "4",
+    "name": "The Guildhall",
+    "operator": "Cambridge City Council",
+    "ref:university_of_cambridge": "yes",
+    "roof:levels": "0",
+    "wikidata": "Q5025431",
+    "wikimedia_commons": "Category:Cambridge Guildhall",
+    "wikipedia": "en:Cambridge Guildhall"
+   },
+   "length": 2.51,
+   "p0": [
+    -49.69,
+    -16.06
+   ],
+   "p1": [
+    -49.34,
+    -13.58
+   ],
+   "ground_z": 9.33,
+   "eave_z": 15.63,
+   "height": 6.3,
+   "dist_centre": 89.8,
+   "refs": [
+    "482154119872521",
+    "2985563621681449",
+    "820671718537044",
+    "313982040097449",
+    "162698125857171"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/482154119872521.jpg",
+    "data/raw/mapillary_facade/2985563621681449.jpg",
+    "data/raw/mapillary_ref/820671718537044.jpg",
+    "data/raw/mapillary_ref/313982040097449.jpg",
+    "data/raw/mapillary_facade/162698125857171.jpg"
+   ]
+  },
+  {
+   "id": "way/5094872:8",
+   "osm_id": "way/5094872",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3QJ",
+    "addr:street": "Market Square",
+    "building": "public",
+    "building:levels": "4",
+    "name": "The Guildhall",
+    "operator": "Cambridge City Council",
+    "ref:university_of_cambridge": "yes",
+    "roof:levels": "0",
+    "wikidata": "Q5025431",
+    "wikimedia_commons": "Category:Cambridge Guildhall",
+    "wikipedia": "en:Cambridge Guildhall"
+   },
+   "length": 27.53,
+   "p0": [
+    -49.34,
+    -13.58
+   ],
+   "p1": [
+    -59.27,
+    12.1
+   ],
+   "ground_z": 9.36,
+   "eave_z": 13.22,
+   "height": 3.86,
+   "dist_centre": 75.7,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/5094872:9",
+   "osm_id": "way/5094872",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3QJ",
+    "addr:street": "Market Square",
+    "building": "public",
+    "building:levels": "4",
+    "name": "The Guildhall",
+    "operator": "Cambridge City Council",
+    "ref:university_of_cambridge": "yes",
+    "roof:levels": "0",
+    "wikidata": "Q5025431",
+    "wikimedia_commons": "Category:Cambridge Guildhall",
+    "wikipedia": "en:Cambridge Guildhall"
+   },
+   "length": 15.01,
+   "p0": [
+    -59.27,
+    12.1
+   ],
+   "p1": [
+    -64.52,
+    26.16
+   ],
+   "ground_z": 9.42,
+   "eave_z": 26.62,
+   "height": 17.21,
+   "dist_centre": 56.1,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/5094872:10",
+   "osm_id": "way/5094872",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3QJ",
+    "addr:street": "Market Square",
+    "building": "public",
+    "building:levels": "4",
+    "name": "The Guildhall",
+    "operator": "Cambridge City Council",
+    "ref:university_of_cambridge": "yes",
+    "roof:levels": "0",
+    "wikidata": "Q5025431",
+    "wikimedia_commons": "Category:Cambridge Guildhall",
+    "wikipedia": "en:Cambridge Guildhall"
+   },
+   "length": 5.05,
+   "p0": [
+    -64.52,
+    26.16
+   ],
+   "p1": [
+    -69.53,
+    25.49
+   ],
+   "ground_z": 9.52,
+   "eave_z": 24.6,
+   "height": 15.07,
+   "dist_centre": 47.8,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/5094872:12",
+   "osm_id": "way/5094872",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3QJ",
+    "addr:street": "Market Square",
+    "building": "public",
+    "building:levels": "4",
+    "name": "The Guildhall",
+    "operator": "Cambridge City Council",
+    "ref:university_of_cambridge": "yes",
+    "roof:levels": "0",
+    "wikidata": "Q5025431",
+    "wikimedia_commons": "Category:Cambridge Guildhall",
+    "wikipedia": "en:Cambridge Guildhall"
+   },
+   "length": 12.95,
+   "p0": [
+    -69.71,
+    27.13
+   ],
+   "p1": [
+    -82.55,
+    25.49
+   ],
+   "ground_z": 9.64,
+   "eave_z": 27.1,
+   "height": 17.46,
+   "dist_centre": 41.0,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/5094872:16",
+   "osm_id": "way/5094872",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3QJ",
+    "addr:street": "Market Square",
+    "building": "public",
+    "building:levels": "4",
+    "name": "The Guildhall",
+    "operator": "Cambridge City Council",
+    "ref:university_of_cambridge": "yes",
+    "roof:levels": "0",
+    "wikidata": "Q5025431",
+    "wikimedia_commons": "Category:Cambridge Guildhall",
+    "wikipedia": "en:Cambridge Guildhall"
+   },
+   "length": 2.37,
+   "p0": [
+    -84.01,
+    26.31
+   ],
+   "p1": [
+    -86.37,
+    26.03
+   ],
+   "ground_z": 9.75,
+   "eave_z": 21.46,
+   "height": 11.72,
+   "dist_centre": 35.9,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/5094872:17",
+   "osm_id": "way/5094872",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3QJ",
+    "addr:street": "Market Square",
+    "building": "public",
+    "building:levels": "4",
+    "name": "The Guildhall",
+    "operator": "Cambridge City Council",
+    "ref:university_of_cambridge": "yes",
+    "roof:levels": "0",
+    "wikidata": "Q5025431",
+    "wikimedia_commons": "Category:Cambridge Guildhall",
+    "wikipedia": "en:Cambridge Guildhall"
+   },
+   "length": 2.61,
+   "p0": [
+    -86.37,
+    26.03
+   ],
+   "p1": [
+    -88.93,
+    25.53
+   ],
+   "ground_z": 9.75,
+   "eave_z": 14.98,
+   "height": 5.23,
+   "dist_centre": 35.1,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/5094872:21",
+   "osm_id": "way/5094872",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3QJ",
+    "addr:street": "Market Square",
+    "building": "public",
+    "building:levels": "4",
+    "name": "The Guildhall",
+    "operator": "Cambridge City Council",
+    "ref:university_of_cambridge": "yes",
+    "roof:levels": "0",
+    "wikidata": "Q5025431",
+    "wikimedia_commons": "Category:Cambridge Guildhall",
+    "wikipedia": "en:Cambridge Guildhall"
+   },
+   "length": 12.94,
+   "p0": [
+    -89.99,
+    24.57
+   ],
+   "p1": [
+    -102.81,
+    22.86
+   ],
+   "ground_z": 9.84,
+   "eave_z": 27.38,
+   "height": 17.54,
+   "dist_centre": 34.3,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/5094872:23",
+   "osm_id": "way/5094872",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3QJ",
+    "addr:street": "Market Square",
+    "building": "public",
+    "building:levels": "4",
+    "name": "The Guildhall",
+    "operator": "Cambridge City Council",
+    "ref:university_of_cambridge": "yes",
+    "roof:levels": "0",
+    "wikidata": "Q5025431",
+    "wikimedia_commons": "Category:Cambridge Guildhall",
+    "wikipedia": "en:Cambridge Guildhall"
+   },
+   "length": 5.48,
+   "p0": [
+    -102.7,
+    21.67
+   ],
+   "p1": [
+    -108.12,
+    20.85
+   ],
+   "ground_z": 9.98,
+   "eave_z": 27.85,
+   "height": 17.87,
+   "dist_centre": 36.2,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/5094872:24",
+   "osm_id": "way/5094872",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3QJ",
+    "addr:street": "Market Square",
+    "building": "public",
+    "building:levels": "4",
+    "name": "The Guildhall",
+    "operator": "Cambridge City Council",
+    "ref:university_of_cambridge": "yes",
+    "roof:levels": "0",
+    "wikidata": "Q5025431",
+    "wikimedia_commons": "Category:Cambridge Guildhall",
+    "wikipedia": "en:Cambridge Guildhall"
+   },
+   "length": 41.55,
+   "p0": [
+    -108.12,
+    20.85
+   ],
+   "p1": [
+    -102.96,
+    -20.38
+   ],
+   "ground_z": 10.09,
+   "eave_z": 30.48,
+   "height": 20.39,
+   "dist_centre": 57.2,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/5094872:25",
+   "osm_id": "way/5094872",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3QJ",
+    "addr:street": "Market Square",
+    "building": "public",
+    "building:levels": "4",
+    "name": "The Guildhall",
+    "operator": "Cambridge City Council",
+    "ref:university_of_cambridge": "yes",
+    "roof:levels": "0",
+    "wikidata": "Q5025431",
+    "wikimedia_commons": "Category:Cambridge Guildhall",
+    "wikipedia": "en:Cambridge Guildhall"
+   },
+   "length": 3.12,
+   "p0": [
+    -102.96,
+    -20.38
+   ],
+   "p1": [
+    -102.6,
+    -23.47
+   ],
+   "ground_z": 9.82,
+   "eave_z": 26.75,
+   "height": 16.93,
+   "dist_centre": 79.3,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/5094872:26",
+   "osm_id": "way/5094872",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3QJ",
+    "addr:street": "Market Square",
+    "building": "public",
+    "building:levels": "4",
+    "name": "The Guildhall",
+    "operator": "Cambridge City Council",
+    "ref:university_of_cambridge": "yes",
+    "roof:levels": "0",
+    "wikidata": "Q5025431",
+    "wikimedia_commons": "Category:Cambridge Guildhall",
+    "wikipedia": "en:Cambridge Guildhall"
+   },
+   "length": 8.16,
+   "p0": [
+    -102.6,
+    -23.47
+   ],
+   "p1": [
+    -101.74,
+    -31.59
+   ],
+   "ground_z": 9.87,
+   "eave_z": 26.83,
+   "height": 16.95,
+   "dist_centre": 84.9,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/13864058:26",
+   "osm_id": "way/13864058",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "nohousenumber": "yes",
+    "operator": "Gonville & Caius College (University of Cambridge)",
+    "ref": "CAI010",
+    "roof:levels": "1",
+    "roof:shape": "gambrel",
+    "wheelchair": "yes"
+   },
+   "length": 2.21,
+   "p0": [
+    -182.45,
+    94.07
+   ],
+   "p1": [
+    -180.36,
+    94.78
+   ],
+   "ground_z": 9.72,
+   "eave_z": 24.1,
+   "height": 14.39,
+   "dist_centre": 86.8,
+   "refs": [
+    "664472238266303",
+    "388165332285036",
+    "3820815898039287",
+    "327898408702941"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/664472238266303.jpg",
+    "data/raw/mapillary_ref/388165332285036.jpg",
+    "data/raw/mapillary_facade/3820815898039287.jpg",
+    "data/raw/mapillary_ref/327898408702941.jpg"
+   ]
+  },
+  {
+   "id": "way/13864058:27",
+   "osm_id": "way/13864058",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "nohousenumber": "yes",
+    "operator": "Gonville & Caius College (University of Cambridge)",
+    "ref": "CAI010",
+    "roof:levels": "1",
+    "roof:shape": "gambrel",
+    "wheelchair": "yes"
+   },
+   "length": 2.88,
+   "p0": [
+    -180.36,
+    94.78
+   ],
+   "p1": [
+    -178.5,
+    96.98
+   ],
+   "ground_z": 9.65,
+   "eave_z": 23.42,
+   "height": 13.77,
+   "dist_centre": 85.7,
+   "refs": [
+    "388165332285036",
+    "582381189402070",
+    "327898408702941"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_ref/388165332285036.jpg",
+    "data/raw/mapillary_ref/582381189402070.jpg",
+    "data/raw/mapillary_ref/327898408702941.jpg"
+   ]
+  },
+  {
+   "id": "way/13864058:28",
+   "osm_id": "way/13864058",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "nohousenumber": "yes",
+    "operator": "Gonville & Caius College (University of Cambridge)",
+    "ref": "CAI010",
+    "roof:levels": "1",
+    "roof:shape": "gambrel",
+    "wheelchair": "yes"
+   },
+   "length": 14.16,
+   "p0": [
+    -178.5,
+    96.98
+   ],
+   "p1": [
+    -176.24,
+    110.96
+   ],
+   "ground_z": 9.71,
+   "eave_z": 23.54,
+   "height": 13.83,
+   "dist_centre": 87.8,
+   "refs": [
+    "3818552014925396",
+    "158330012801652",
+    "1118444955303989",
+    "286056723156767"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_ref/3818552014925396.jpg",
+    "data/raw/mapillary_ref/158330012801652.jpg",
+    "data/raw/mapillary_ref/1118444955303989.jpg",
+    "data/raw/mapillary_ref/286056723156767.jpg"
+   ]
+  },
+  {
+   "id": "way/13864148:1",
+   "osm_id": "way/13864148",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL012"
+   },
+   "length": 5.25,
+   "p0": [
+    -118.88,
+    112.47
+   ],
+   "p1": [
+    -123.92,
+    110.97
+   ],
+   "ground_z": 9.28,
+   "eave_z": 23.35,
+   "height": 14.07,
+   "dist_centre": 57.4,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/13864148:2",
+   "osm_id": "way/13864148",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL012"
+   },
+   "length": 8.85,
+   "p0": [
+    -123.92,
+    110.97
+   ],
+   "p1": [
+    -119.82,
+    103.13
+   ],
+   "ground_z": 9.01,
+   "eave_z": 23.54,
+   "height": 14.53,
+   "dist_centre": 53.2,
+   "refs": [
+    "138292341951529"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/138292341951529.jpg"
+   ]
+  },
+  {
+   "id": "way/13864148:4",
+   "osm_id": "way/13864148",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL012"
+   },
+   "length": 13.81,
+   "p0": [
+    -119.42,
+    101.92
+   ],
+   "p1": [
+    -131.96,
+    96.15
+   ],
+   "ground_z": 9.06,
+   "eave_z": 24.79,
+   "height": 15.72,
+   "dist_centre": 47.5,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/13864148:5",
+   "osm_id": "way/13864148",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL012"
+   },
+   "length": 2.41,
+   "p0": [
+    -131.96,
+    96.15
+   ],
+   "p1": [
+    -134.35,
+    95.84
+   ],
+   "ground_z": 9.14,
+   "eave_z": 24.8,
+   "height": 15.66,
+   "dist_centre": 49.1,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/13864148:6",
+   "osm_id": "way/13864148",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL012"
+   },
+   "length": 10.25,
+   "p0": [
+    -134.35,
+    95.84
+   ],
+   "p1": [
+    -144.24,
+    93.15
+   ],
+   "ground_z": 9.25,
+   "eave_z": 25.33,
+   "height": 16.08,
+   "dist_centre": 52.0,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/13864148:7",
+   "osm_id": "way/13864148",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL012"
+   },
+   "length": 6.24,
+   "p0": [
+    -144.24,
+    93.15
+   ],
+   "p1": [
+    -141.85,
+    87.39
+   ],
+   "ground_z": 9.32,
+   "eave_z": 25.3,
+   "height": 15.98,
+   "dist_centre": 51.9,
+   "refs": [
+    "1395962697425004",
+    "196427945630290",
+    "582381189402070",
+    "652094232632931",
+    "327898408702941"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/1395962697425004.jpg",
+    "data/raw/mapillary_ref/196427945630290.jpg",
+    "data/raw/mapillary_ref/582381189402070.jpg",
+    "data/raw/mapillary_ref/652094232632931.jpg",
+    "data/raw/mapillary_ref/327898408702941.jpg"
+   ]
+  },
+  {
+   "id": "way/13864148:8",
+   "osm_id": "way/13864148",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL012"
+   },
+   "length": 15.07,
+   "p0": [
+    -141.85,
+    87.39
+   ],
+   "p1": [
+    -127.35,
+    91.47
+   ],
+   "ground_z": 9.17,
+   "eave_z": 24.93,
+   "height": 15.76,
+   "dist_centre": 45.1,
+   "refs": [
+    "150365460382983",
+    "652094232632931"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/150365460382983.jpg",
+    "data/raw/mapillary_ref/652094232632931.jpg"
+   ]
+  },
+  {
+   "id": "way/13864148:9",
+   "osm_id": "way/13864148",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL012"
+   },
+   "length": 14.35,
+   "p0": [
+    -127.35,
+    91.47
+   ],
+   "p1": [
+    -114.25,
+    97.35
+   ],
+   "ground_z": 9.09,
+   "eave_z": 24.82,
+   "height": 15.73,
+   "dist_centre": 41.1,
+   "refs": [
+    "3304474719779190"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/3304474719779190.jpg"
+   ]
+  },
+  {
+   "id": "way/13864148:10",
+   "osm_id": "way/13864148",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL012"
+   },
+   "length": 6.18,
+   "p0": [
+    -114.25,
+    97.35
+   ],
+   "p1": [
+    -108.93,
+    100.49
+   ],
+   "ground_z": 9.06,
+   "eave_z": 25.92,
+   "height": 16.86,
+   "dist_centre": 42.5,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/13864148:11",
+   "osm_id": "way/13864148",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL012"
+   },
+   "length": 3.61,
+   "p0": [
+    -108.93,
+    100.49
+   ],
+   "p1": [
+    -105.78,
+    102.26
+   ],
+   "ground_z": 9.08,
+   "eave_z": 27.3,
+   "height": 18.22,
+   "dist_centre": 44.2,
+   "refs": [
+    "1114292965734083"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/1114292965734083.jpg"
+   ]
+  },
+  {
+   "id": "way/13864148:12",
+   "osm_id": "way/13864148",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL012"
+   },
+   "length": 2.92,
+   "p0": [
+    -105.78,
+    102.26
+   ],
+   "p1": [
+    -103.36,
+    103.9
+   ],
+   "ground_z": 9.04,
+   "eave_z": 27.46,
+   "height": 18.42,
+   "dist_centre": 45.8,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/13864148:13",
+   "osm_id": "way/13864148",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL012"
+   },
+   "length": 14.42,
+   "p0": [
+    -103.36,
+    103.9
+   ],
+   "p1": [
+    -109.02,
+    117.16
+   ],
+   "ground_z": 9.2,
+   "eave_z": 21.47,
+   "height": 12.27,
+   "dist_centre": 53.3,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/26344507:0",
+   "osm_id": "way/26344507",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3PQ",
+    "addr:street": "Senate House Hill",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "contact:facebook": "greatstmarys",
+    "contact:instagram": "greatstmarys",
+    "contact:twitter": "greatstmarys",
+    "denomination": "anglican",
+    "email": "office@gsm.cam.ac.uk",
+    "name": "Great Saint Mary, The University Church",
+    "name:zh": "\u5723\u739b\u4e3d\u5927\u6559\u5802",
+    "operator": "Church of England",
+    "phone": "+44 1223 747273",
+    "ref:dove": "13748",
+    "ref:university_of_cambridge": "K026",
+    "religion": "christian",
+    "source": "Bing/laser measure",
+    "tourism": "attraction",
+    "website": "https://www.greatstmarys.org/",
+    "wheelchair": "yes",
+    "wikidata": "Q3585454",
+    "wikimedia_commons": "Category:Church of St Mary the Great, Cambridge",
+    "wikipedia": "en:Church of St Mary the Great, Cambridge"
+   },
+   "length": 25.91,
+   "p0": [
+    -137.62,
+    72.75
+   ],
+   "p1": [
+    -163.44,
+    70.56
+   ],
+   "ground_z": 9.55,
+   "eave_z": 18.89,
+   "height": 9.34,
+   "dist_centre": 49.7,
+   "refs": [
+    "296497208762822",
+    "1078821085942013",
+    "1395962697425004",
+    "316245116582746",
+    "252329336621673"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/296497208762822.jpg",
+    "data/raw/mapillary_facade/1078821085942013.jpg",
+    "data/raw/mapillary_facade/1395962697425004.jpg",
+    "data/raw/mapillary_ref/316245116582746.jpg",
+    "data/raw/mapillary_ref/252329336621673.jpg"
+   ]
+  },
+  {
+   "id": "way/26344507:1",
+   "osm_id": "way/26344507",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3PQ",
+    "addr:street": "Senate House Hill",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "contact:facebook": "greatstmarys",
+    "contact:instagram": "greatstmarys",
+    "contact:twitter": "greatstmarys",
+    "denomination": "anglican",
+    "email": "office@gsm.cam.ac.uk",
+    "name": "Great Saint Mary, The University Church",
+    "name:zh": "\u5723\u739b\u4e3d\u5927\u6559\u5802",
+    "operator": "Church of England",
+    "phone": "+44 1223 747273",
+    "ref:dove": "13748",
+    "ref:university_of_cambridge": "K026",
+    "religion": "christian",
+    "source": "Bing/laser measure",
+    "tourism": "attraction",
+    "website": "https://www.greatstmarys.org/",
+    "wheelchair": "yes",
+    "wikidata": "Q3585454",
+    "wikimedia_commons": "Category:Church of St Mary the Great, Cambridge",
+    "wikipedia": "en:Church of St Mary the Great, Cambridge"
+   },
+   "length": 9.43,
+   "p0": [
+    -163.44,
+    70.56
+   ],
+   "p1": [
+    -172.84,
+    69.76
+   ],
+   "ground_z": 9.63,
+   "eave_z": 18.87,
+   "height": 9.24,
+   "dist_centre": 66.5,
+   "refs": [
+    "296497208762822",
+    "862206667692846",
+    "316245116582746",
+    "252329336621673",
+    "504827830566716"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/296497208762822.jpg",
+    "data/raw/mapillary_ref/862206667692846.jpg",
+    "data/raw/mapillary_ref/316245116582746.jpg",
+    "data/raw/mapillary_ref/252329336621673.jpg",
+    "data/raw/mapillary_facade/504827830566716.jpg"
+   ]
+  },
+  {
+   "id": "way/26344507:2",
+   "osm_id": "way/26344507",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3PQ",
+    "addr:street": "Senate House Hill",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "contact:facebook": "greatstmarys",
+    "contact:instagram": "greatstmarys",
+    "contact:twitter": "greatstmarys",
+    "denomination": "anglican",
+    "email": "office@gsm.cam.ac.uk",
+    "name": "Great Saint Mary, The University Church",
+    "name:zh": "\u5723\u739b\u4e3d\u5927\u6559\u5802",
+    "operator": "Church of England",
+    "phone": "+44 1223 747273",
+    "ref:dove": "13748",
+    "ref:university_of_cambridge": "K026",
+    "religion": "christian",
+    "source": "Bing/laser measure",
+    "tourism": "attraction",
+    "website": "https://www.greatstmarys.org/",
+    "wheelchair": "yes",
+    "wikidata": "Q3585454",
+    "wikimedia_commons": "Category:Church of St Mary the Great, Cambridge",
+    "wikipedia": "en:Church of St Mary the Great, Cambridge"
+   },
+   "length": 11.36,
+   "p0": [
+    -172.84,
+    69.76
+   ],
+   "p1": [
+    -171.71,
+    58.45
+   ],
+   "ground_z": 9.51,
+   "eave_z": 19.25,
+   "height": 9.74,
+   "dist_centre": 69.7,
+   "refs": [
+    "462530034831850",
+    "862206667692846",
+    "130127345800012",
+    "130557359058289",
+    "772048406785180"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/462530034831850.jpg",
+    "data/raw/mapillary_ref/862206667692846.jpg",
+    "data/raw/mapillary_ref/130127345800012.jpg",
+    "data/raw/mapillary_ref/130557359058289.jpg",
+    "data/raw/mapillary_ref/772048406785180.jpg"
+   ]
+  },
+  {
+   "id": "way/26344507:3",
+   "osm_id": "way/26344507",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3PQ",
+    "addr:street": "Senate House Hill",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "contact:facebook": "greatstmarys",
+    "contact:instagram": "greatstmarys",
+    "contact:twitter": "greatstmarys",
+    "denomination": "anglican",
+    "email": "office@gsm.cam.ac.uk",
+    "name": "Great Saint Mary, The University Church",
+    "name:zh": "\u5723\u739b\u4e3d\u5927\u6559\u5802",
+    "operator": "Church of England",
+    "phone": "+44 1223 747273",
+    "ref:dove": "13748",
+    "ref:university_of_cambridge": "K026",
+    "religion": "christian",
+    "source": "Bing/laser measure",
+    "tourism": "attraction",
+    "website": "https://www.greatstmarys.org/",
+    "wheelchair": "yes",
+    "wikidata": "Q3585454",
+    "wikimedia_commons": "Category:Church of St Mary the Great, Cambridge",
+    "wikipedia": "en:Church of St Mary the Great, Cambridge"
+   },
+   "length": 10.4,
+   "p0": [
+    -171.71,
+    58.45
+   ],
+   "p1": [
+    -170.68,
+    48.11
+   ],
+   "ground_z": 9.55,
+   "eave_z": 34.15,
+   "height": 24.6,
+   "dist_centre": 68.4,
+   "refs": [
+    "229791575582466",
+    "125743003265809",
+    "363671928396949"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_ref/229791575582466.jpg",
+    "data/raw/mapillary_facade/125743003265809.jpg",
+    "data/raw/mapillary_facade/363671928396949.jpg"
+   ]
+  },
+  {
+   "id": "way/26344507:4",
+   "osm_id": "way/26344507",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3PQ",
+    "addr:street": "Senate House Hill",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "contact:facebook": "greatstmarys",
+    "contact:instagram": "greatstmarys",
+    "contact:twitter": "greatstmarys",
+    "denomination": "anglican",
+    "email": "office@gsm.cam.ac.uk",
+    "name": "Great Saint Mary, The University Church",
+    "name:zh": "\u5723\u739b\u4e3d\u5927\u6559\u5802",
+    "operator": "Church of England",
+    "phone": "+44 1223 747273",
+    "ref:dove": "13748",
+    "ref:university_of_cambridge": "K026",
+    "religion": "christian",
+    "source": "Bing/laser measure",
+    "tourism": "attraction",
+    "website": "https://www.greatstmarys.org/",
+    "wheelchair": "yes",
+    "wikidata": "Q3585454",
+    "wikimedia_commons": "Category:Church of St Mary the Great, Cambridge",
+    "wikipedia": "en:Church of St Mary the Great, Cambridge"
+   },
+   "length": 8.29,
+   "p0": [
+    -170.68,
+    48.11
+   ],
+   "p1": [
+    -162.43,
+    48.96
+   ],
+   "ground_z": 9.55,
+   "eave_z": 19.41,
+   "height": 9.86,
+   "dist_centre": 64.3,
+   "refs": [
+    "199445311992558",
+    "905995133446806",
+    "229791575582466",
+    "125743003265809"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/199445311992558.jpg",
+    "data/raw/mapillary_facade/905995133446806.jpg",
+    "data/raw/mapillary_ref/229791575582466.jpg",
+    "data/raw/mapillary_facade/125743003265809.jpg"
+   ]
+  },
+  {
+   "id": "way/26344507:5",
+   "osm_id": "way/26344507",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3PQ",
+    "addr:street": "Senate House Hill",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "contact:facebook": "greatstmarys",
+    "contact:instagram": "greatstmarys",
+    "contact:twitter": "greatstmarys",
+    "denomination": "anglican",
+    "email": "office@gsm.cam.ac.uk",
+    "name": "Great Saint Mary, The University Church",
+    "name:zh": "\u5723\u739b\u4e3d\u5927\u6559\u5802",
+    "operator": "Church of England",
+    "phone": "+44 1223 747273",
+    "ref:dove": "13748",
+    "ref:university_of_cambridge": "K026",
+    "religion": "christian",
+    "source": "Bing/laser measure",
+    "tourism": "attraction",
+    "website": "https://www.greatstmarys.org/",
+    "wheelchair": "yes",
+    "wikidata": "Q3585454",
+    "wikimedia_commons": "Category:Church of St Mary the Great, Cambridge",
+    "wikipedia": "en:Church of St Mary the Great, Cambridge"
+   },
+   "length": 2.84,
+   "p0": [
+    -162.43,
+    48.96
+   ],
+   "p1": [
+    -162.13,
+    46.13
+   ],
+   "ground_z": 9.55,
+   "eave_z": 18.54,
+   "height": 8.99,
+   "dist_centre": 60.2,
+   "refs": [
+    "2946615528928482",
+    "199445311992558",
+    "150077440702442",
+    "905995133446806",
+    "363671928396949"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/2946615528928482.jpg",
+    "data/raw/mapillary_facade/199445311992558.jpg",
+    "data/raw/mapillary_facade/150077440702442.jpg",
+    "data/raw/mapillary_facade/905995133446806.jpg",
+    "data/raw/mapillary_facade/363671928396949.jpg"
+   ]
+  },
+  {
+   "id": "way/26344507:9",
+   "osm_id": "way/26344507",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3PQ",
+    "addr:street": "Senate House Hill",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "contact:facebook": "greatstmarys",
+    "contact:instagram": "greatstmarys",
+    "contact:twitter": "greatstmarys",
+    "denomination": "anglican",
+    "email": "office@gsm.cam.ac.uk",
+    "name": "Great Saint Mary, The University Church",
+    "name:zh": "\u5723\u739b\u4e3d\u5927\u6559\u5802",
+    "operator": "Church of England",
+    "phone": "+44 1223 747273",
+    "ref:dove": "13748",
+    "ref:university_of_cambridge": "K026",
+    "religion": "christian",
+    "source": "Bing/laser measure",
+    "tourism": "attraction",
+    "website": "https://www.greatstmarys.org/",
+    "wheelchair": "yes",
+    "wikidata": "Q3585454",
+    "wikimedia_commons": "Category:Church of St Mary the Great, Cambridge",
+    "wikipedia": "en:Church of St Mary the Great, Cambridge"
+   },
+   "length": 21.46,
+   "p0": [
+    -159.01,
+    49.32
+   ],
+   "p1": [
+    -137.66,
+    51.53
+   ],
+   "ground_z": 9.62,
+   "eave_z": 19.56,
+   "height": 9.94,
+   "dist_centre": 46.0,
+   "refs": [
+    "199445311992558",
+    "905995133446806"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/199445311992558.jpg",
+    "data/raw/mapillary_facade/905995133446806.jpg"
+   ]
+  },
+  {
+   "id": "way/26344507:10",
+   "osm_id": "way/26344507",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3PQ",
+    "addr:street": "Senate House Hill",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "contact:facebook": "greatstmarys",
+    "contact:instagram": "greatstmarys",
+    "contact:twitter": "greatstmarys",
+    "denomination": "anglican",
+    "email": "office@gsm.cam.ac.uk",
+    "name": "Great Saint Mary, The University Church",
+    "name:zh": "\u5723\u739b\u4e3d\u5927\u6559\u5802",
+    "operator": "Church of England",
+    "phone": "+44 1223 747273",
+    "ref:dove": "13748",
+    "ref:university_of_cambridge": "K026",
+    "religion": "christian",
+    "source": "Bing/laser measure",
+    "tourism": "attraction",
+    "website": "https://www.greatstmarys.org/",
+    "wheelchair": "yes",
+    "wikidata": "Q3585454",
+    "wikimedia_commons": "Category:Church of St Mary the Great, Cambridge",
+    "wikipedia": "en:Church of St Mary the Great, Cambridge"
+   },
+   "length": 2.42,
+   "p0": [
+    -137.66,
+    51.53
+   ],
+   "p1": [
+    -135.25,
+    51.78
+   ],
+   "ground_z": 9.59,
+   "eave_z": 19.47,
+   "height": 9.88,
+   "dist_centre": 34.0,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/26344507:11",
+   "osm_id": "way/26344507",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3PQ",
+    "addr:street": "Senate House Hill",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "contact:facebook": "greatstmarys",
+    "contact:instagram": "greatstmarys",
+    "contact:twitter": "greatstmarys",
+    "denomination": "anglican",
+    "email": "office@gsm.cam.ac.uk",
+    "name": "Great Saint Mary, The University Church",
+    "name:zh": "\u5723\u739b\u4e3d\u5927\u6559\u5802",
+    "operator": "Church of England",
+    "phone": "+44 1223 747273",
+    "ref:dove": "13748",
+    "ref:university_of_cambridge": "K026",
+    "religion": "christian",
+    "source": "Bing/laser measure",
+    "tourism": "attraction",
+    "website": "https://www.greatstmarys.org/",
+    "wheelchair": "yes",
+    "wikidata": "Q3585454",
+    "wikimedia_commons": "Category:Church of St Mary the Great, Cambridge",
+    "wikipedia": "en:Church of St Mary the Great, Cambridge"
+   },
+   "length": 6.39,
+   "p0": [
+    -135.25,
+    51.78
+   ],
+   "p1": [
+    -135.92,
+    58.14
+   ],
+   "ground_z": 9.47,
+   "eave_z": 19.71,
+   "height": 10.24,
+   "dist_centre": 32.8,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/26344507:12",
+   "osm_id": "way/26344507",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3PQ",
+    "addr:street": "Senate House Hill",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "contact:facebook": "greatstmarys",
+    "contact:instagram": "greatstmarys",
+    "contact:twitter": "greatstmarys",
+    "denomination": "anglican",
+    "email": "office@gsm.cam.ac.uk",
+    "name": "Great Saint Mary, The University Church",
+    "name:zh": "\u5723\u739b\u4e3d\u5927\u6559\u5802",
+    "operator": "Church of England",
+    "phone": "+44 1223 747273",
+    "ref:dove": "13748",
+    "ref:university_of_cambridge": "K026",
+    "religion": "christian",
+    "source": "Bing/laser measure",
+    "tourism": "attraction",
+    "website": "https://www.greatstmarys.org/",
+    "wheelchair": "yes",
+    "wikidata": "Q3585454",
+    "wikimedia_commons": "Category:Church of St Mary the Great, Cambridge",
+    "wikipedia": "en:Church of St Mary the Great, Cambridge"
+   },
+   "length": 6.07,
+   "p0": [
+    -135.92,
+    58.14
+   ],
+   "p1": [
+    -129.89,
+    58.81
+   ],
+   "ground_z": 9.49,
+   "eave_z": 20.89,
+   "height": 11.41,
+   "dist_centre": 30.0,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/26344507:13",
+   "osm_id": "way/26344507",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3PQ",
+    "addr:street": "Senate House Hill",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "contact:facebook": "greatstmarys",
+    "contact:instagram": "greatstmarys",
+    "contact:twitter": "greatstmarys",
+    "denomination": "anglican",
+    "email": "office@gsm.cam.ac.uk",
+    "name": "Great Saint Mary, The University Church",
+    "name:zh": "\u5723\u739b\u4e3d\u5927\u6559\u5802",
+    "operator": "Church of England",
+    "phone": "+44 1223 747273",
+    "ref:dove": "13748",
+    "ref:university_of_cambridge": "K026",
+    "religion": "christian",
+    "source": "Bing/laser measure",
+    "tourism": "attraction",
+    "website": "https://www.greatstmarys.org/",
+    "wheelchair": "yes",
+    "wikidata": "Q3585454",
+    "wikimedia_commons": "Category:Church of St Mary the Great, Cambridge",
+    "wikipedia": "en:Church of St Mary the Great, Cambridge"
+   },
+   "length": 3.81,
+   "p0": [
+    -129.89,
+    58.81
+   ],
+   "p1": [
+    -130.28,
+    62.6
+   ],
+   "ground_z": 8.95,
+   "eave_z": 20.92,
+   "height": 11.97,
+   "dist_centre": 27.4,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/26344507:14",
+   "osm_id": "way/26344507",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3PQ",
+    "addr:street": "Senate House Hill",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "contact:facebook": "greatstmarys",
+    "contact:instagram": "greatstmarys",
+    "contact:twitter": "greatstmarys",
+    "denomination": "anglican",
+    "email": "office@gsm.cam.ac.uk",
+    "name": "Great Saint Mary, The University Church",
+    "name:zh": "\u5723\u739b\u4e3d\u5927\u6559\u5802",
+    "operator": "Church of England",
+    "phone": "+44 1223 747273",
+    "ref:dove": "13748",
+    "ref:university_of_cambridge": "K026",
+    "religion": "christian",
+    "source": "Bing/laser measure",
+    "tourism": "attraction",
+    "website": "https://www.greatstmarys.org/",
+    "wheelchair": "yes",
+    "wikidata": "Q3585454",
+    "wikimedia_commons": "Category:Church of St Mary the Great, Cambridge",
+    "wikipedia": "en:Church of St Mary the Great, Cambridge"
+   },
+   "length": 3.82,
+   "p0": [
+    -130.28,
+    62.6
+   ],
+   "p1": [
+    -130.67,
+    66.4
+   ],
+   "ground_z": 8.86,
+   "eave_z": 20.71,
+   "height": 11.85,
+   "dist_centre": 28.5,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/26344507:15",
+   "osm_id": "way/26344507",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3PQ",
+    "addr:street": "Senate House Hill",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "contact:facebook": "greatstmarys",
+    "contact:instagram": "greatstmarys",
+    "contact:twitter": "greatstmarys",
+    "denomination": "anglican",
+    "email": "office@gsm.cam.ac.uk",
+    "name": "Great Saint Mary, The University Church",
+    "name:zh": "\u5723\u739b\u4e3d\u5927\u6559\u5802",
+    "operator": "Church of England",
+    "phone": "+44 1223 747273",
+    "ref:dove": "13748",
+    "ref:university_of_cambridge": "K026",
+    "religion": "christian",
+    "source": "Bing/laser measure",
+    "tourism": "attraction",
+    "website": "https://www.greatstmarys.org/",
+    "wheelchair": "yes",
+    "wikidata": "Q3585454",
+    "wikimedia_commons": "Category:Church of St Mary the Great, Cambridge",
+    "wikipedia": "en:Church of St Mary the Great, Cambridge"
+   },
+   "length": 6.3,
+   "p0": [
+    -130.67,
+    66.4
+   ],
+   "p1": [
+    -136.93,
+    65.74
+   ],
+   "ground_z": 9.78,
+   "eave_z": 20.65,
+   "height": 10.87,
+   "dist_centre": 32.1,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/26344507:16",
+   "osm_id": "way/26344507",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3PQ",
+    "addr:street": "Senate House Hill",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "contact:facebook": "greatstmarys",
+    "contact:instagram": "greatstmarys",
+    "contact:twitter": "greatstmarys",
+    "denomination": "anglican",
+    "email": "office@gsm.cam.ac.uk",
+    "name": "Great Saint Mary, The University Church",
+    "name:zh": "\u5723\u739b\u4e3d\u5927\u6559\u5802",
+    "operator": "Church of England",
+    "phone": "+44 1223 747273",
+    "ref:dove": "13748",
+    "ref:university_of_cambridge": "K026",
+    "religion": "christian",
+    "source": "Bing/laser measure",
+    "tourism": "attraction",
+    "website": "https://www.greatstmarys.org/",
+    "wheelchair": "yes",
+    "wikidata": "Q3585454",
+    "wikimedia_commons": "Category:Church of St Mary the Great, Cambridge",
+    "wikipedia": "en:Church of St Mary the Great, Cambridge"
+   },
+   "length": 7.05,
+   "p0": [
+    -136.93,
+    65.74
+   ],
+   "p1": [
+    -137.62,
+    72.75
+   ],
+   "ground_z": 9.48,
+   "eave_z": 18.98,
+   "height": 9.5,
+   "dist_centre": 36.4,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/26344576:0",
+   "osm_id": "way/26344576",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3PP",
+    "addr:street": "Peas Hill",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "check_date": "2025-12-27",
+    "denomination": "anglican",
+    "name": "St Edward King and Martyr",
+    "ref:dove": "13803",
+    "religion": "christian",
+    "source": "yahoo",
+    "wikidata": "Q7593020",
+    "wikimedia_commons": "Category:St Edward King and Martyr, Cambridge",
+    "wikipedia": "en:St Edward King and Martyr, Cambridge"
+   },
+   "length": 7.89,
+   "p0": [
+    -146.66,
+    -12.55
+   ],
+   "p1": [
+    -146.14,
+    -20.43
+   ],
+   "ground_z": 10.31,
+   "eave_z": 26.96,
+   "height": 16.65,
+   "dist_centre": 85.7,
+   "refs": [
+    "189066929702180"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_ref/189066929702180.jpg"
+   ]
+  },
+  {
+   "id": "way/26344576:1",
+   "osm_id": "way/26344576",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3PP",
+    "addr:street": "Peas Hill",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "check_date": "2025-12-27",
+    "denomination": "anglican",
+    "name": "St Edward King and Martyr",
+    "ref:dove": "13803",
+    "religion": "christian",
+    "source": "yahoo",
+    "wikidata": "Q7593020",
+    "wikimedia_commons": "Category:St Edward King and Martyr, Cambridge",
+    "wikipedia": "en:St Edward King and Martyr, Cambridge"
+   },
+   "length": 2.74,
+   "p0": [
+    -146.14,
+    -20.43
+   ],
+   "p1": [
+    -143.4,
+    -20.25
+   ],
+   "ground_z": 10.39,
+   "eave_z": 23.27,
+   "height": 12.88,
+   "dist_centre": 88.3,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/26344576:2",
+   "osm_id": "way/26344576",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3PP",
+    "addr:street": "Peas Hill",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "check_date": "2025-12-27",
+    "denomination": "anglican",
+    "name": "St Edward King and Martyr",
+    "ref:dove": "13803",
+    "religion": "christian",
+    "source": "yahoo",
+    "wikidata": "Q7593020",
+    "wikimedia_commons": "Category:St Edward King and Martyr, Cambridge",
+    "wikipedia": "en:St Edward King and Martyr, Cambridge"
+   },
+   "length": 2.05,
+   "p0": [
+    -143.4,
+    -20.25
+   ],
+   "p1": [
+    -143.26,
+    -22.29
+   ],
+   "ground_z": 10.39,
+   "eave_z": 21.46,
+   "height": 11.07,
+   "dist_centre": 88.4,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/26344576:3",
+   "osm_id": "way/26344576",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3PP",
+    "addr:street": "Peas Hill",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "check_date": "2025-12-27",
+    "denomination": "anglican",
+    "name": "St Edward King and Martyr",
+    "ref:dove": "13803",
+    "religion": "christian",
+    "source": "yahoo",
+    "wikidata": "Q7593020",
+    "wikimedia_commons": "Category:St Edward King and Martyr, Cambridge",
+    "wikipedia": "en:St Edward King and Martyr, Cambridge"
+   },
+   "length": 23.85,
+   "p0": [
+    -143.26,
+    -22.29
+   ],
+   "p1": [
+    -119.46,
+    -20.69
+   ],
+   "ground_z": 10.05,
+   "eave_z": 16.9,
+   "height": 6.85,
+   "dist_centre": 83.8,
+   "refs": [
+    "511369380021521"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/511369380021521.jpg"
+   ]
+  },
+  {
+   "id": "way/26344576:4",
+   "osm_id": "way/26344576",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3PP",
+    "addr:street": "Peas Hill",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "check_date": "2025-12-27",
+    "denomination": "anglican",
+    "name": "St Edward King and Martyr",
+    "ref:dove": "13803",
+    "religion": "christian",
+    "source": "yahoo",
+    "wikidata": "Q7593020",
+    "wikimedia_commons": "Category:St Edward King and Martyr, Cambridge",
+    "wikipedia": "en:St Edward King and Martyr, Cambridge"
+   },
+   "length": 18.21,
+   "p0": [
+    -119.46,
+    -20.69
+   ],
+   "p1": [
+    -120.68,
+    -2.52
+   ],
+   "ground_z": 10.27,
+   "eave_z": 16.39,
+   "height": 6.11,
+   "dist_centre": 71.1,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/26344576:5",
+   "osm_id": "way/26344576",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3PP",
+    "addr:street": "Peas Hill",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "check_date": "2025-12-27",
+    "denomination": "anglican",
+    "name": "St Edward King and Martyr",
+    "ref:dove": "13803",
+    "religion": "christian",
+    "source": "yahoo",
+    "wikidata": "Q7593020",
+    "wikimedia_commons": "Category:St Edward King and Martyr, Cambridge",
+    "wikipedia": "en:St Edward King and Martyr, Cambridge"
+   },
+   "length": 9.3,
+   "p0": [
+    -120.68,
+    -2.52
+   ],
+   "p1": [
+    -129.96,
+    -3.15
+   ],
+   "ground_z": 10.09,
+   "eave_z": 16.65,
+   "height": 6.56,
+   "dist_centre": 64.2,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/26344576:6",
+   "osm_id": "way/26344576",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3PP",
+    "addr:street": "Peas Hill",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "check_date": "2025-12-27",
+    "denomination": "anglican",
+    "name": "St Edward King and Martyr",
+    "ref:dove": "13803",
+    "religion": "christian",
+    "source": "yahoo",
+    "wikidata": "Q7593020",
+    "wikimedia_commons": "Category:St Edward King and Martyr, Cambridge",
+    "wikipedia": "en:St Edward King and Martyr, Cambridge"
+   },
+   "length": 5.63,
+   "p0": [
+    -129.96,
+    -3.15
+   ],
+   "p1": [
+    -129.59,
+    -8.77
+   ],
+   "ground_z": 10.05,
+   "eave_z": 15.89,
+   "height": 5.84,
+   "dist_centre": 68.8,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/26344576:7",
+   "osm_id": "way/26344576",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3PP",
+    "addr:street": "Peas Hill",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "check_date": "2025-12-27",
+    "denomination": "anglican",
+    "name": "St Edward King and Martyr",
+    "ref:dove": "13803",
+    "religion": "christian",
+    "source": "yahoo",
+    "wikidata": "Q7593020",
+    "wikimedia_commons": "Category:St Edward King and Martyr, Cambridge",
+    "wikipedia": "en:St Edward King and Martyr, Cambridge"
+   },
+   "length": 11.93,
+   "p0": [
+    -129.59,
+    -8.77
+   ],
+   "p1": [
+    -141.49,
+    -9.56
+   ],
+   "ground_z": 10.0,
+   "eave_z": 16.19,
+   "height": 6.19,
+   "dist_centre": 74.1,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/26344576:8",
+   "osm_id": "way/26344576",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3PP",
+    "addr:street": "Peas Hill",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "check_date": "2025-12-27",
+    "denomination": "anglican",
+    "name": "St Edward King and Martyr",
+    "ref:dove": "13803",
+    "religion": "christian",
+    "source": "yahoo",
+    "wikidata": "Q7593020",
+    "wikimedia_commons": "Category:St Edward King and Martyr, Cambridge",
+    "wikipedia": "en:St Edward King and Martyr, Cambridge"
+   },
+   "length": 2.64,
+   "p0": [
+    -141.49,
+    -9.56
+   ],
+   "p1": [
+    -141.31,
+    -12.19
+   ],
+   "ground_z": 10.2,
+   "eave_z": 16.16,
+   "height": 5.96,
+   "dist_centre": 78.3,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/26344576:9",
+   "osm_id": "way/26344576",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3PP",
+    "addr:street": "Peas Hill",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "check_date": "2025-12-27",
+    "denomination": "anglican",
+    "name": "St Edward King and Martyr",
+    "ref:dove": "13803",
+    "religion": "christian",
+    "source": "yahoo",
+    "wikidata": "Q7593020",
+    "wikimedia_commons": "Category:St Edward King and Martyr, Cambridge",
+    "wikipedia": "en:St Edward King and Martyr, Cambridge"
+   },
+   "length": 5.36,
+   "p0": [
+    -141.31,
+    -12.19
+   ],
+   "p1": [
+    -146.66,
+    -12.55
+   ],
+   "ground_z": 10.3,
+   "eave_z": 25.29,
+   "height": 14.99,
+   "dist_centre": 80.9,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/40937938:44",
+   "osm_id": "way/40937938",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3NA",
+    "addr:street": "Staint Tibbs Row",
+    "building": "retail",
+    "contact:email": "info@lionyard.co.uk",
+    "contact:phone": "+44 1223 656730",
+    "contact:website": "https://www.thelionyard.co.uk/",
+    "name": "Lion Yard",
+    "opening_hours": "Mo,Tu,Th,Fr,Sa 09:00-18:00; We 09:00-19:00; Su 11:00-17:00",
+    "shop": "mall",
+    "toilets": "yes",
+    "wikidata": "Q6555457",
+    "wikimedia_commons": "Category:Lion Yard, Cambridge",
+    "wikipedia": "en:Lion Yard"
+   },
+   "length": 17.36,
+   "p0": [
+    -11.19,
+    41.99
+   ],
+   "p1": [
+    -27.77,
+    36.83
+   ],
+   "ground_z": 9.24,
+   "eave_z": 15.56,
+   "height": 6.32,
+   "dist_centre": 85.3,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/40937938:45",
+   "osm_id": "way/40937938",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3NA",
+    "addr:street": "Staint Tibbs Row",
+    "building": "retail",
+    "contact:email": "info@lionyard.co.uk",
+    "contact:phone": "+44 1223 656730",
+    "contact:website": "https://www.thelionyard.co.uk/",
+    "name": "Lion Yard",
+    "opening_hours": "Mo,Tu,Th,Fr,Sa 09:00-18:00; We 09:00-19:00; Su 11:00-17:00",
+    "shop": "mall",
+    "toilets": "yes",
+    "wikidata": "Q6555457",
+    "wikimedia_commons": "Category:Lion Yard, Cambridge",
+    "wikipedia": "en:Lion Yard"
+   },
+   "length": 26.8,
+   "p0": [
+    -27.77,
+    36.83
+   ],
+   "p1": [
+    -53.36,
+    28.87
+   ],
+   "ground_z": 9.47,
+   "eave_z": 12.42,
+   "height": 2.95,
+   "dist_centre": 67.0,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/40937938:46",
+   "osm_id": "way/40937938",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3NA",
+    "addr:street": "Staint Tibbs Row",
+    "building": "retail",
+    "contact:email": "info@lionyard.co.uk",
+    "contact:phone": "+44 1223 656730",
+    "contact:website": "https://www.thelionyard.co.uk/",
+    "name": "Lion Yard",
+    "opening_hours": "Mo,Tu,Th,Fr,Sa 09:00-18:00; We 09:00-19:00; Su 11:00-17:00",
+    "shop": "mall",
+    "toilets": "yes",
+    "wikidata": "Q6555457",
+    "wikimedia_commons": "Category:Lion Yard, Cambridge",
+    "wikipedia": "en:Lion Yard"
+   },
+   "length": 7.59,
+   "p0": [
+    -53.36,
+    28.87
+   ],
+   "p1": [
+    -54.33,
+    21.34
+   ],
+   "ground_z": 9.48,
+   "eave_z": 20.07,
+   "height": 10.58,
+   "dist_centre": 58.7,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/40937938:47",
+   "osm_id": "way/40937938",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3NA",
+    "addr:street": "Staint Tibbs Row",
+    "building": "retail",
+    "contact:email": "info@lionyard.co.uk",
+    "contact:phone": "+44 1223 656730",
+    "contact:website": "https://www.thelionyard.co.uk/",
+    "name": "Lion Yard",
+    "opening_hours": "Mo,Tu,Th,Fr,Sa 09:00-18:00; We 09:00-19:00; Su 11:00-17:00",
+    "shop": "mall",
+    "toilets": "yes",
+    "wikidata": "Q6555457",
+    "wikimedia_commons": "Category:Lion Yard, Cambridge",
+    "wikipedia": "en:Lion Yard"
+   },
+   "length": 18.63,
+   "p0": [
+    -54.33,
+    21.34
+   ],
+   "p1": [
+    -46.61,
+    4.39
+   ],
+   "ground_z": 9.41,
+   "eave_z": 20.05,
+   "height": 10.64,
+   "dist_centre": 68.8,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/40937938:48",
+   "osm_id": "way/40937938",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:postcode": "CB2 3NA",
+    "addr:street": "Staint Tibbs Row",
+    "building": "retail",
+    "contact:email": "info@lionyard.co.uk",
+    "contact:phone": "+44 1223 656730",
+    "contact:website": "https://www.thelionyard.co.uk/",
+    "name": "Lion Yard",
+    "opening_hours": "Mo,Tu,Th,Fr,Sa 09:00-18:00; We 09:00-19:00; Su 11:00-17:00",
+    "shop": "mall",
+    "toilets": "yes",
+    "wikidata": "Q6555457",
+    "wikimedia_commons": "Category:Lion Yard, Cambridge",
+    "wikipedia": "en:Lion Yard"
+   },
+   "length": 2.01,
+   "p0": [
+    -46.61,
+    4.39
+   ],
+   "p1": [
+    -44.76,
+    5.16
+   ],
+   "ground_z": 9.41,
+   "eave_z": 20.06,
+   "height": 10.65,
+   "dist_centre": 77.7,
+   "refs": [
+    "479058393403230",
+    "4038831659543196",
+    "2985563621681449",
+    "820671718537044",
+    "306489237857948"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/479058393403230.jpg",
+    "data/raw/mapillary_facade/4038831659543196.jpg",
+    "data/raw/mapillary_facade/2985563621681449.jpg",
+    "data/raw/mapillary_ref/820671718537044.jpg",
+    "data/raw/mapillary_facade/306489237857948.jpg"
+   ]
+  },
+  {
+   "id": "way/95406730:3",
+   "osm_id": "way/95406730",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:postcode": "CB2 1SU",
+    "addr:street": "Trinity Street",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "check_date": "2025-08-26",
+    "denomination": "anglican",
+    "name": "St Michael",
+    "religion": "christian",
+    "wheelchair": "yes",
+    "wikidata": "Q17527392",
+    "wikimedia_commons": "Category:St Michael's Church, Cambridge"
+   },
+   "length": 13.25,
+   "p0": [
+    -160.54,
+    125.33
+   ],
+   "p1": [
+    -147.33,
+    124.37
+   ],
+   "ground_z": 9.66,
+   "eave_z": 15.57,
+   "height": 5.91,
+   "dist_centre": 84.6,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/95406730:4",
+   "osm_id": "way/95406730",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:postcode": "CB2 1SU",
+    "addr:street": "Trinity Street",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "check_date": "2025-08-26",
+    "denomination": "anglican",
+    "name": "St Michael",
+    "religion": "christian",
+    "wheelchair": "yes",
+    "wikidata": "Q17527392",
+    "wikimedia_commons": "Category:St Michael's Church, Cambridge"
+   },
+   "length": 12.55,
+   "p0": [
+    -147.33,
+    124.37
+   ],
+   "p1": [
+    -134.79,
+    123.76
+   ],
+   "ground_z": 9.53,
+   "eave_z": 15.47,
+   "height": 5.94,
+   "dist_centre": 76.8,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/95406730:5",
+   "osm_id": "way/95406730",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:postcode": "CB2 1SU",
+    "addr:street": "Trinity Street",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "check_date": "2025-08-26",
+    "denomination": "anglican",
+    "name": "St Michael",
+    "religion": "christian",
+    "wheelchair": "yes",
+    "wikidata": "Q17527392",
+    "wikimedia_commons": "Category:St Michael's Church, Cambridge"
+   },
+   "length": 17.69,
+   "p0": [
+    -134.79,
+    123.76
+   ],
+   "p1": [
+    -133.25,
+    141.38
+   ],
+   "ground_z": 9.61,
+   "eave_z": 18.21,
+   "height": 8.6,
+   "dist_centre": 81.4,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/119881004:6",
+   "osm_id": "way/119881004",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:housenumber": "2",
+    "addr:postcode": "CB2 3PQ",
+    "addr:street": "St Mary's Passage",
+    "building": "house"
+   },
+   "length": 3.11,
+   "p0": [
+    -156.75,
+    29.96
+   ],
+   "p1": [
+    -159.77,
+    29.21
+   ],
+   "ground_z": 9.74,
+   "eave_z": 21.87,
+   "height": 12.13,
+   "dist_centre": 61.9,
+   "refs": [
+    "302224751350928",
+    "478968810016603",
+    "474286150479030",
+    "541914280138693"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_ref/302224751350928.jpg",
+    "data/raw/mapillary_ref/478968810016603.jpg",
+    "data/raw/mapillary_ref/474286150479030.jpg",
+    "data/raw/mapillary_ref/541914280138693.jpg"
+   ]
+  },
+  {
+   "id": "way/119881004:7",
+   "osm_id": "way/119881004",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:housenumber": "2",
+    "addr:postcode": "CB2 3PQ",
+    "addr:street": "St Mary's Passage",
+    "building": "house"
+   },
+   "length": 3.71,
+   "p0": [
+    -159.77,
+    29.21
+   ],
+   "p1": [
+    -163.37,
+    28.33
+   ],
+   "ground_z": 9.77,
+   "eave_z": 17.92,
+   "height": 8.15,
+   "dist_centre": 65.3,
+   "refs": [
+    "302224751350928",
+    "478968810016603",
+    "474286150479030",
+    "897066927520543",
+    "541914280138693"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_ref/302224751350928.jpg",
+    "data/raw/mapillary_ref/478968810016603.jpg",
+    "data/raw/mapillary_ref/474286150479030.jpg",
+    "data/raw/mapillary_ref/897066927520543.jpg",
+    "data/raw/mapillary_ref/541914280138693.jpg"
+   ]
+  },
+  {
+   "id": "way/134387866:3",
+   "osm_id": "way/134387866",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:housenumber": "21",
+    "addr:postcode": "CB2 1SP",
+    "addr:street": "King's Parade",
+    "building": "retail",
+    "building:levels": "4",
+    "roof:levels": "0",
+    "wikidata": "Q26419156"
+   },
+   "length": 5.44,
+   "p0": [
+    -181.01,
+    23.08
+   ],
+   "p1": [
+    -181.61,
+    17.67
+   ],
+   "ground_z": 9.87,
+   "eave_z": 20.59,
+   "height": 10.73,
+   "dist_centre": 86.7,
+   "refs": [
+    "4055949291154356"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/4055949291154356.jpg"
+   ]
+  },
+  {
+   "id": "way/134387870:4",
+   "osm_id": "way/134387870",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:housenumber": "20",
+    "addr:postcode": "CB2 1SP",
+    "addr:street": "King's Parade",
+    "building": "retail",
+    "building:levels": "4",
+    "roof:levels": "0",
+    "wikidata": "Q26419156"
+   },
+   "length": 4.76,
+   "p0": [
+    -181.61,
+    17.67
+   ],
+   "p1": [
+    -181.99,
+    12.93
+   ],
+   "ground_z": 9.91,
+   "eave_z": 22.56,
+   "height": 12.65,
+   "dist_centre": 89.4,
+   "refs": [
+    "2946615528928482",
+    "4055949291154356"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/2946615528928482.jpg",
+    "data/raw/mapillary_facade/4055949291154356.jpg"
+   ]
+  },
+  {
+   "id": "way/134387872:0",
+   "osm_id": "way/134387872",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:housenumber": "22",
+    "addr:postcode": "CB2 1SP",
+    "addr:street": "King's Parade",
+    "building": "retail",
+    "building:levels": "3",
+    "roof:levels": "0",
+    "wikidata": "Q26392475"
+   },
+   "length": 4.95,
+   "p0": [
+    -180.86,
+    28.02
+   ],
+   "p1": [
+    -181.01,
+    23.08
+   ],
+   "ground_z": 9.78,
+   "eave_z": 19.27,
+   "height": 9.49,
+   "dist_centre": 84.3,
+   "refs": [
+    "905995133446806"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/905995133446806.jpg"
+   ]
+  },
+  {
+   "id": "way/134387872:3",
+   "osm_id": "way/134387872",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:housenumber": "22",
+    "addr:postcode": "CB2 1SP",
+    "addr:street": "King's Parade",
+    "building": "retail",
+    "building:levels": "3",
+    "roof:levels": "0",
+    "wikidata": "Q26392475"
+   },
+   "length": 10.98,
+   "p0": [
+    -169.88,
+    27.88
+   ],
+   "p1": [
+    -180.86,
+    28.02
+   ],
+   "ground_z": 9.74,
+   "eave_z": 20.5,
+   "height": 10.76,
+   "dist_centre": 78.2,
+   "refs": [
+    "897066927520543",
+    "302224751350928",
+    "282771983321746",
+    "474286150479030",
+    "478968810016603"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_ref/897066927520543.jpg",
+    "data/raw/mapillary_ref/302224751350928.jpg",
+    "data/raw/mapillary_ref/282771983321746.jpg",
+    "data/raw/mapillary_ref/474286150479030.jpg",
+    "data/raw/mapillary_ref/478968810016603.jpg"
+   ]
+  },
+  {
+   "id": "way/134387879:0",
+   "osm_id": "way/134387879",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:housenumber": "1",
+    "addr:postcode": "CB2 3PQ",
+    "addr:street": "St Mary's Passage",
+    "building": "house",
+    "wikidata": "Q26419068"
+   },
+   "length": 6.53,
+   "p0": [
+    -163.37,
+    28.33
+   ],
+   "p1": [
+    -169.88,
+    27.88
+   ],
+   "ground_z": 9.76,
+   "eave_z": 16.5,
+   "height": 6.74,
+   "dist_centre": 70.1,
+   "refs": [
+    "302224751350928",
+    "897066927520543",
+    "478968810016603",
+    "474286150479030",
+    "541914280138693"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_ref/302224751350928.jpg",
+    "data/raw/mapillary_ref/897066927520543.jpg",
+    "data/raw/mapillary_ref/478968810016603.jpg",
+    "data/raw/mapillary_ref/474286150479030.jpg",
+    "data/raw/mapillary_ref/541914280138693.jpg"
+   ]
+  },
+  {
+   "id": "way/137017428:0",
+   "osm_id": "way/137017428",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL010"
+   },
+   "length": 15.45,
+   "p0": [
+    -154.1,
+    119.08
+   ],
+   "p1": [
+    -169.55,
+    119.22
+   ],
+   "ground_z": 9.07,
+   "eave_z": 19.87,
+   "height": 10.8,
+   "dist_centre": 85.4,
+   "refs": [
+    "504543033912780",
+    "467984694458697",
+    "1776939362475817",
+    "456591105621742",
+    "3831327076965566"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/504543033912780.jpg",
+    "data/raw/mapillary_facade/467984694458697.jpg",
+    "data/raw/mapillary_ref/1776939362475817.jpg",
+    "data/raw/mapillary_ref/456591105621742.jpg",
+    "data/raw/mapillary_ref/3831327076965566.jpg"
+   ]
+  },
+  {
+   "id": "way/137017428:1",
+   "osm_id": "way/137017428",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL010"
+   },
+   "length": 16.04,
+   "p0": [
+    -169.55,
+    119.22
+   ],
+   "p1": [
+    -171.27,
+    103.28
+   ],
+   "ground_z": 9.73,
+   "eave_z": 21.01,
+   "height": 11.28,
+   "dist_centre": 86.4,
+   "refs": [
+    "1090785804763201",
+    "507030773643078",
+    "2788878518108339",
+    "3696455640481909",
+    "908860169660130"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_ref/1090785804763201.jpg",
+    "data/raw/mapillary_facade/507030773643078.jpg",
+    "data/raw/mapillary_ref/2788878518108339.jpg",
+    "data/raw/mapillary_ref/3696455640481909.jpg",
+    "data/raw/mapillary_ref/908860169660130.jpg"
+   ]
+  },
+  {
+   "id": "way/137017428:2",
+   "osm_id": "way/137017428",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL010"
+   },
+   "length": 4.96,
+   "p0": [
+    -171.27,
+    103.28
+   ],
+   "p1": [
+    -172.08,
+    98.38
+   ],
+   "ground_z": 9.68,
+   "eave_z": 20.83,
+   "height": 11.15,
+   "dist_centre": 81.4,
+   "refs": [
+    "2897708863821043",
+    "1078821085942013",
+    "504827830566716",
+    "862206667692846",
+    "774062979969132"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_ref/2897708863821043.jpg",
+    "data/raw/mapillary_facade/1078821085942013.jpg",
+    "data/raw/mapillary_facade/504827830566716.jpg",
+    "data/raw/mapillary_ref/862206667692846.jpg",
+    "data/raw/mapillary_ref/774062979969132.jpg"
+   ]
+  },
+  {
+   "id": "way/137017428:3",
+   "osm_id": "way/137017428",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL010"
+   },
+   "length": 5.09,
+   "p0": [
+    -172.08,
+    98.38
+   ],
+   "p1": [
+    -172.69,
+    93.33
+   ],
+   "ground_z": 9.7,
+   "eave_z": 21.01,
+   "height": 11.31,
+   "dist_centre": 79.4,
+   "refs": [
+    "1078821085942013",
+    "147305984014231",
+    "504827830566716",
+    "862206667692846",
+    "1181002685669503"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/1078821085942013.jpg",
+    "data/raw/mapillary_ref/147305984014231.jpg",
+    "data/raw/mapillary_facade/504827830566716.jpg",
+    "data/raw/mapillary_ref/862206667692846.jpg",
+    "data/raw/mapillary_ref/1181002685669503.jpg"
+   ]
+  },
+  {
+   "id": "way/137017428:4",
+   "osm_id": "way/137017428",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL010"
+   },
+   "length": 5.44,
+   "p0": [
+    -172.69,
+    93.33
+   ],
+   "p1": [
+    -171.97,
+    87.94
+   ],
+   "ground_z": 9.66,
+   "eave_z": 22.54,
+   "height": 12.88,
+   "dist_centre": 77.0,
+   "refs": [
+    "1078821085942013",
+    "3820815898039287",
+    "504827830566716",
+    "862206667692846",
+    "296497208762822"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/1078821085942013.jpg",
+    "data/raw/mapillary_facade/3820815898039287.jpg",
+    "data/raw/mapillary_facade/504827830566716.jpg",
+    "data/raw/mapillary_ref/862206667692846.jpg",
+    "data/raw/mapillary_facade/296497208762822.jpg"
+   ]
+  },
+  {
+   "id": "way/137017428:9",
+   "osm_id": "way/137017428",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL010"
+   },
+   "length": 2.47,
+   "p0": [
+    -159.42,
+    95.62
+   ],
+   "p1": [
+    -159.6,
+    98.09
+   ],
+   "ground_z": 9.93,
+   "eave_z": 18.73,
+   "height": 8.8,
+   "dist_centre": 69.0,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/137017428:10",
+   "osm_id": "way/137017428",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL010"
+   },
+   "length": 7.68,
+   "p0": [
+    -159.6,
+    98.09
+   ],
+   "p1": [
+    -151.98,
+    98.97
+   ],
+   "ground_z": 9.77,
+   "eave_z": 18.88,
+   "height": 9.11,
+   "dist_centre": 67.0,
+   "refs": [
+    "1395962697425004",
+    "327898408702941",
+    "388165332285036"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/1395962697425004.jpg",
+    "data/raw/mapillary_ref/327898408702941.jpg",
+    "data/raw/mapillary_ref/388165332285036.jpg"
+   ]
+  },
+  {
+   "id": "way/137017428:11",
+   "osm_id": "way/137017428",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL010"
+   },
+   "length": 7.94,
+   "p0": [
+    -151.98,
+    98.97
+   ],
+   "p1": [
+    -152.84,
+    106.86
+   ],
+   "ground_z": 9.6,
+   "eave_z": 12.96,
+   "height": 3.36,
+   "dist_centre": 67.3,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/137017430:1",
+   "osm_id": "way/137017430",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL011",
+    "roof:levels": "1"
+   },
+   "length": 3.26,
+   "p0": [
+    -171.94,
+    87.12
+   ],
+   "p1": [
+    -171.46,
+    83.89
+   ],
+   "ground_z": 9.63,
+   "eave_z": 21.68,
+   "height": 12.05,
+   "dist_centre": 74.3,
+   "refs": [
+    "296497208762822",
+    "504827830566716",
+    "862206667692846",
+    "1078821085942013",
+    "3820815898039287"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/296497208762822.jpg",
+    "data/raw/mapillary_facade/504827830566716.jpg",
+    "data/raw/mapillary_ref/862206667692846.jpg",
+    "data/raw/mapillary_facade/1078821085942013.jpg",
+    "data/raw/mapillary_facade/3820815898039287.jpg"
+   ]
+  },
+  {
+   "id": "way/137017430:2",
+   "osm_id": "way/137017430",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL011",
+    "roof:levels": "1"
+   },
+   "length": 14.92,
+   "p0": [
+    -171.46,
+    83.89
+   ],
+   "p1": [
+    -156.63,
+    85.57
+   ],
+   "ground_z": 9.58,
+   "eave_z": 22.12,
+   "height": 12.53,
+   "dist_centre": 67.0,
+   "refs": [
+    "327898408702941",
+    "1395962697425004",
+    "582381189402070",
+    "196427945630290",
+    "158330012801652"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_ref/327898408702941.jpg",
+    "data/raw/mapillary_facade/1395962697425004.jpg",
+    "data/raw/mapillary_ref/582381189402070.jpg",
+    "data/raw/mapillary_ref/196427945630290.jpg",
+    "data/raw/mapillary_ref/158330012801652.jpg"
+   ]
+  },
+  {
+   "id": "way/137017430:3",
+   "osm_id": "way/137017430",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL011",
+    "roof:levels": "1"
+   },
+   "length": 10.44,
+   "p0": [
+    -156.63,
+    85.57
+   ],
+   "p1": [
+    -146.26,
+    86.75
+   ],
+   "ground_z": 9.42,
+   "eave_z": 23.06,
+   "height": 13.65,
+   "dist_centre": 56.4,
+   "refs": [
+    "327898408702941",
+    "582381189402070",
+    "196427945630290",
+    "158330012801652",
+    "1118444955303989"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_ref/327898408702941.jpg",
+    "data/raw/mapillary_ref/582381189402070.jpg",
+    "data/raw/mapillary_ref/196427945630290.jpg",
+    "data/raw/mapillary_ref/158330012801652.jpg",
+    "data/raw/mapillary_ref/1118444955303989.jpg"
+   ]
+  },
+  {
+   "id": "way/137017430:5",
+   "osm_id": "way/137017430",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL011",
+    "roof:levels": "1"
+   },
+   "length": 6.82,
+   "p0": [
+    -145.96,
+    86.26
+   ],
+   "p1": [
+    -147.9,
+    92.8
+   ],
+   "ground_z": 9.33,
+   "eave_z": 22.93,
+   "height": 13.6,
+   "dist_centre": 54.5,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/137017430:6",
+   "osm_id": "way/137017430",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL011",
+    "roof:levels": "1"
+   },
+   "length": 2.51,
+   "p0": [
+    -147.9,
+    92.8
+   ],
+   "p1": [
+    -148.62,
+    95.2
+   ],
+   "ground_z": 9.37,
+   "eave_z": 19.93,
+   "height": 10.56,
+   "dist_centre": 58.3,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/137017430:7",
+   "osm_id": "way/137017430",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL011",
+    "roof:levels": "1"
+   },
+   "length": 5.04,
+   "p0": [
+    -148.62,
+    95.2
+   ],
+   "p1": [
+    -153.43,
+    93.7
+   ],
+   "ground_z": 9.58,
+   "eave_z": 20.58,
+   "height": 11.0,
+   "dist_centre": 60.8,
+   "refs": [
+    "2788878518108339",
+    "138010701576161"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_ref/2788878518108339.jpg",
+    "data/raw/mapillary_ref/138010701576161.jpg"
+   ]
+  },
+  {
+   "id": "way/137017430:8",
+   "osm_id": "way/137017430",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL011",
+    "roof:levels": "1"
+   },
+   "length": 5.83,
+   "p0": [
+    -153.43,
+    93.7
+   ],
+   "p1": [
+    -159.23,
+    93.12
+   ],
+   "ground_z": 9.82,
+   "eave_z": 19.81,
+   "height": 9.99,
+   "dist_centre": 64.5,
+   "refs": [
+    "3818552014925396",
+    "2788878518108339",
+    "138010701576161",
+    "1090785804763201",
+    "2897708863821043"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_ref/3818552014925396.jpg",
+    "data/raw/mapillary_ref/2788878518108339.jpg",
+    "data/raw/mapillary_ref/138010701576161.jpg",
+    "data/raw/mapillary_ref/1090785804763201.jpg",
+    "data/raw/mapillary_ref/2897708863821043.jpg"
+   ]
+  },
+  {
+   "id": "way/137017433:0",
+   "osm_id": "way/137017433",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL013",
+    "roof:levels": "1",
+    "wikidata": "Q26418526"
+   },
+   "length": 8.82,
+   "p0": [
+    -125.42,
+    127.94
+   ],
+   "p1": [
+    -122.14,
+    119.75
+   ],
+   "ground_z": 9.56,
+   "eave_z": 20.27,
+   "height": 10.71,
+   "dist_centre": 69.7,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/137017433:1",
+   "osm_id": "way/137017433",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL013",
+    "roof:levels": "1",
+    "wikidata": "Q26418526"
+   },
+   "length": 5.01,
+   "p0": [
+    -122.14,
+    119.75
+   ],
+   "p1": [
+    -120.29,
+    115.1
+   ],
+   "ground_z": 9.19,
+   "eave_z": 22.34,
+   "height": 13.14,
+   "dist_centre": 62.8,
+   "refs": [
+    "138292341951529"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/138292341951529.jpg"
+   ]
+  },
+  {
+   "id": "way/137017433:2",
+   "osm_id": "way/137017433",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL013",
+    "roof:levels": "1",
+    "wikidata": "Q26418526"
+   },
+   "length": 2.98,
+   "p0": [
+    -120.29,
+    115.1
+   ],
+   "p1": [
+    -118.88,
+    112.47
+   ],
+   "ground_z": 9.28,
+   "eave_z": 25.02,
+   "height": 15.74,
+   "dist_centre": 58.8,
+   "refs": [
+    "138292341951529"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/138292341951529.jpg"
+   ]
+  },
+  {
+   "id": "way/137017433:4",
+   "osm_id": "way/137017433",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL013",
+    "roof:levels": "1",
+    "wikidata": "Q26418526"
+   },
+   "length": 24.09,
+   "p0": [
+    -109.02,
+    117.16
+   ],
+   "p1": [
+    -116.15,
+    140.17
+   ],
+   "ground_z": 9.47,
+   "eave_z": 20.65,
+   "height": 11.18,
+   "dist_centre": 72.0,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/137017433:21",
+   "osm_id": "way/137017433",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL013",
+    "roof:levels": "1",
+    "wikidata": "Q26418526"
+   },
+   "length": 8.46,
+   "p0": [
+    -132.35,
+    145.53
+   ],
+   "p1": [
+    -129.36,
+    137.62
+   ],
+   "ground_z": 9.56,
+   "eave_z": 19.89,
+   "height": 10.34,
+   "dist_centre": 88.7,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/137017433:22",
+   "osm_id": "way/137017433",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL013",
+    "roof:levels": "1",
+    "wikidata": "Q26418526"
+   },
+   "length": 10.45,
+   "p0": [
+    -129.36,
+    137.62
+   ],
+   "p1": [
+    -125.42,
+    127.94
+   ],
+   "ground_z": 9.59,
+   "eave_z": 20.32,
+   "height": 10.74,
+   "dist_centre": 79.3,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/137017435:2",
+   "osm_id": "way/137017435",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL014"
+   },
+   "length": 7.7,
+   "p0": [
+    -152.84,
+    106.86
+   ],
+   "p1": [
+    -145.45,
+    108.99
+   ],
+   "ground_z": 9.58,
+   "eave_z": 9.59,
+   "height": 0.01,
+   "dist_centre": 68.5,
+   "refs": [
+    "1395962697425004"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/1395962697425004.jpg"
+   ]
+  },
+  {
+   "id": "way/137017435:3",
+   "osm_id": "way/137017435",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL014"
+   },
+   "length": 4.31,
+   "p0": [
+    -145.45,
+    108.99
+   ],
+   "p1": [
+    -146.59,
+    113.14
+   ],
+   "ground_z": 9.46,
+   "eave_z": 9.57,
+   "height": 0.11,
+   "dist_centre": 68.9,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/137017435:4",
+   "osm_id": "way/137017435",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL014"
+   },
+   "length": 3.5,
+   "p0": [
+    -146.59,
+    113.14
+   ],
+   "p1": [
+    -143.17,
+    113.88
+   ],
+   "ground_z": 9.51,
+   "eave_z": 13.19,
+   "height": 3.68,
+   "dist_centre": 70.1,
+   "refs": [
+    "1395962697425004",
+    "388165332285036"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/1395962697425004.jpg",
+    "data/raw/mapillary_ref/388165332285036.jpg"
+   ]
+  },
+  {
+   "id": "way/137017435:5",
+   "osm_id": "way/137017435",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL014"
+   },
+   "length": 5.36,
+   "p0": [
+    -143.17,
+    113.88
+   ],
+   "p1": [
+    -144.18,
+    119.15
+   ],
+   "ground_z": 9.53,
+   "eave_z": 13.16,
+   "height": 3.63,
+   "dist_centre": 71.8,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/137017435:7",
+   "osm_id": "way/137017435",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL014"
+   },
+   "length": 2.09,
+   "p0": [
+    -145.42,
+    119.15
+   ],
+   "p1": [
+    -147.51,
+    119.14
+   ],
+   "ground_z": 9.52,
+   "eave_z": 13.15,
+   "height": 3.63,
+   "dist_centre": 75.6,
+   "refs": [
+    "456591105621742",
+    "467984694458697",
+    "218579616734358",
+    "1776939362475817",
+    "488190105938733"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_ref/456591105621742.jpg",
+    "data/raw/mapillary_facade/467984694458697.jpg",
+    "data/raw/mapillary_ref/218579616734358.jpg",
+    "data/raw/mapillary_ref/1776939362475817.jpg",
+    "data/raw/mapillary_ref/488190105938733.jpg"
+   ]
+  },
+  {
+   "id": "way/137017435:8",
+   "osm_id": "way/137017435",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL014"
+   },
+   "length": 6.59,
+   "p0": [
+    -147.51,
+    119.14
+   ],
+   "p1": [
+    -154.1,
+    119.08
+   ],
+   "ground_z": 9.44,
+   "eave_z": 13.19,
+   "height": 3.75,
+   "dist_centre": 78.2,
+   "refs": [
+    "467984694458697",
+    "456591105621742",
+    "1776939362475817",
+    "218579616734358",
+    "488190105938733"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/467984694458697.jpg",
+    "data/raw/mapillary_ref/456591105621742.jpg",
+    "data/raw/mapillary_ref/1776939362475817.jpg",
+    "data/raw/mapillary_ref/218579616734358.jpg",
+    "data/raw/mapillary_ref/488190105938733.jpg"
+   ]
+  },
+  {
+   "id": "way/137152223:2",
+   "osm_id": "way/137152223",
+   "tags": {
+    "building": "office",
+    "source": "bing"
+   },
+   "length": 9.56,
+   "p0": [
+    -40.24,
+    7.08
+   ],
+   "p1": [
+    -37.0,
+    -1.92
+   ],
+   "ground_z": 9.56,
+   "eave_z": 17.76,
+   "height": 8.2,
+   "dist_centre": 84.5,
+   "refs": [
+    "4038831659543196",
+    "479058393403230",
+    "306489237857948",
+    "1373625636348222",
+    "738114823524885"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/4038831659543196.jpg",
+    "data/raw/mapillary_facade/479058393403230.jpg",
+    "data/raw/mapillary_facade/306489237857948.jpg",
+    "data/raw/mapillary_ref/1373625636348222.jpg",
+    "data/raw/mapillary_facade/738114823524885.jpg"
+   ]
+  },
+  {
+   "id": "way/164853890:6",
+   "osm_id": "way/164853890",
+   "tags": {
+    "building": "university",
+    "name": "Spalding Hostel (King's College)",
+    "operator": "King's College (University of Cambridge)",
+    "ref": "KINGS/MARKET010"
+   },
+   "length": 11.36,
+   "p0": [
+    -116.56,
+    -27.35
+   ],
+   "p1": [
+    -127.89,
+    -28.22
+   ],
+   "ground_z": 9.93,
+   "eave_z": 20.23,
+   "height": 10.3,
+   "dist_centre": 87.3,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/164853890:7",
+   "osm_id": "way/164853890",
+   "tags": {
+    "building": "university",
+    "name": "Spalding Hostel (King's College)",
+    "operator": "King's College (University of Cambridge)",
+    "ref": "KINGS/MARKET010"
+   },
+   "length": 3.55,
+   "p0": [
+    -127.89,
+    -28.22
+   ],
+   "p1": [
+    -131.42,
+    -28.51
+   ],
+   "ground_z": 10.04,
+   "eave_z": 23.48,
+   "height": 13.44,
+   "dist_centre": 89.8,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/212711605:6",
+   "osm_id": "way/212711605",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:postcode": "CB2 3LR",
+    "addr:street": "Rose Crescent",
+    "building": "yes",
+    "landuse": "residential",
+    "name": "Radcliffe Court",
+    "note": "rooftop flats"
+   },
+   "length": 12.35,
+   "p0": [
+    -92.96,
+    112.27
+   ],
+   "p1": [
+    -82.06,
+    118.06
+   ],
+   "ground_z": 9.06,
+   "eave_z": 23.3,
+   "height": 14.24,
+   "dist_centre": 59.8,
+   "refs": [
+    "798596987448760",
+    "2798949150347432"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/798596987448760.jpg",
+    "data/raw/mapillary_facade/2798949150347432.jpg"
+   ]
+  },
+  {
+   "id": "way/212711605:8",
+   "osm_id": "way/212711605",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:postcode": "CB2 3LR",
+    "addr:street": "Rose Crescent",
+    "building": "yes",
+    "landuse": "residential",
+    "name": "Radcliffe Court",
+    "note": "rooftop flats"
+   },
+   "length": 6.68,
+   "p0": [
+    -82.56,
+    119.51
+   ],
+   "p1": [
+    -76.6,
+    122.52
+   ],
+   "ground_z": 8.99,
+   "eave_z": 22.97,
+   "height": 13.99,
+   "dist_centre": 67.8,
+   "refs": [
+    "644178576432021"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/644178576432021.jpg"
+   ]
+  },
+  {
+   "id": "way/229680560:20",
+   "osm_id": "way/229680560",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:housenumber": "6-11",
+    "addr:postcode": "CB2 3NJ",
+    "addr:street": "Market Hill",
+    "brand": "Marks & Spencer",
+    "brand:short": "M&S",
+    "brand:wikidata": "Q714491",
+    "building": "retail",
+    "check_date": "2026-10-25",
+    "check_date:opening_hours": "2026-10-25",
+    "fhrs:id": "1473325",
+    "fixme": "food hall mapped separately",
+    "level": "0",
+    "name": "Marks & Spencer",
+    "note": "The address for this store on the M&S website seems to be incorrect. The FSA have the address as 6-11 Market Hill - and from looking at the shops around this seems correct.",
+    "opening_hours": "Mo-Sa 08:00-19:00; Su 11:00-17:00",
+    "shop": "department_store",
+    "toilets": "yes",
+    "website": "https://www.marksandspencer.com/stores/cambridge-sat-3450",
+    "wheelchair": "yes",
+    "wikidata": "Q17527473",
+    "wikimedia_commons": "Category:5 Market Hill, Cambridge"
+   },
+   "length": 14.39,
+   "p0": [
+    -75.23,
+    103.28
+   ],
+   "p1": [
+    -71.58,
+    89.36
+   ],
+   "ground_z": 9.04,
+   "eave_z": 22.37,
+   "height": 13.34,
+   "dist_centre": 48.9,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/229680560:21",
+   "osm_id": "way/229680560",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:housenumber": "6-11",
+    "addr:postcode": "CB2 3NJ",
+    "addr:street": "Market Hill",
+    "brand": "Marks & Spencer",
+    "brand:short": "M&S",
+    "brand:wikidata": "Q714491",
+    "building": "retail",
+    "check_date": "2026-10-25",
+    "check_date:opening_hours": "2026-10-25",
+    "fhrs:id": "1473325",
+    "fixme": "food hall mapped separately",
+    "level": "0",
+    "name": "Marks & Spencer",
+    "note": "The address for this store on the M&S website seems to be incorrect. The FSA have the address as 6-11 Market Hill - and from looking at the shops around this seems correct.",
+    "opening_hours": "Mo-Sa 08:00-19:00; Su 11:00-17:00",
+    "shop": "department_store",
+    "toilets": "yes",
+    "website": "https://www.marksandspencer.com/stores/cambridge-sat-3450",
+    "wheelchair": "yes",
+    "wikidata": "Q17527473",
+    "wikimedia_commons": "Category:5 Market Hill, Cambridge"
+   },
+   "length": 8.83,
+   "p0": [
+    -71.58,
+    89.36
+   ],
+   "p1": [
+    -70.06,
+    80.66
+   ],
+   "ground_z": 9.16,
+   "eave_z": 22.42,
+   "height": 13.26,
+   "dist_centre": 42.4,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/229680560:22",
+   "osm_id": "way/229680560",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "addr:housenumber": "6-11",
+    "addr:postcode": "CB2 3NJ",
+    "addr:street": "Market Hill",
+    "brand": "Marks & Spencer",
+    "brand:short": "M&S",
+    "brand:wikidata": "Q714491",
+    "building": "retail",
+    "check_date": "2026-10-25",
+    "check_date:opening_hours": "2026-10-25",
+    "fhrs:id": "1473325",
+    "fixme": "food hall mapped separately",
+    "level": "0",
+    "name": "Marks & Spencer",
+    "note": "The address for this store on the M&S website seems to be incorrect. The FSA have the address as 6-11 Market Hill - and from looking at the shops around this seems correct.",
+    "opening_hours": "Mo-Sa 08:00-19:00; Su 11:00-17:00",
+    "shop": "department_store",
+    "toilets": "yes",
+    "website": "https://www.marksandspencer.com/stores/cambridge-sat-3450",
+    "wheelchair": "yes",
+    "wikidata": "Q17527473",
+    "wikimedia_commons": "Category:5 Market Hill, Cambridge"
+   },
+   "length": 5.8,
+   "p0": [
+    -70.06,
+    80.66
+   ],
+   "p1": [
+    -68.76,
+    75.01
+   ],
+   "ground_z": 9.18,
+   "eave_z": 22.48,
+   "height": 13.29,
+   "dist_centre": 39.3,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/400160677:0",
+   "osm_id": "way/400160677",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:postcode": "CB2 3NZ",
+    "addr:street": "Market Square",
+    "amenity": "fast_food",
+    "building": "yes",
+    "cuisine": "burger",
+    "delivery": "no",
+    "drive_through": "no",
+    "loc_name": "Van of Life",
+    "name": "Trailer of Life",
+    "opening_hours": "Mo-Su 19:00-03:00",
+    "preferred_by_colleges": "King's",
+    "street_vendor": "yes",
+    "takeaway": "only"
+   },
+   "length": 8.96,
+   "p0": [
+    -88.24,
+    103.21
+   ],
+   "p1": [
+    -96.18,
+    99.07
+   ],
+   "ground_z": 9.09,
+   "eave_z": 9.11,
+   "height": 0.02,
+   "dist_centre": 45.1,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/400160677:1",
+   "osm_id": "way/400160677",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:postcode": "CB2 3NZ",
+    "addr:street": "Market Square",
+    "amenity": "fast_food",
+    "building": "yes",
+    "cuisine": "burger",
+    "delivery": "no",
+    "drive_through": "no",
+    "loc_name": "Van of Life",
+    "name": "Trailer of Life",
+    "opening_hours": "Mo-Su 19:00-03:00",
+    "preferred_by_colleges": "King's",
+    "street_vendor": "yes",
+    "takeaway": "only"
+   },
+   "length": 2.14,
+   "p0": [
+    -96.18,
+    99.07
+   ],
+   "p1": [
+    -95.18,
+    97.18
+   ],
+   "ground_z": 9.12,
+   "eave_z": 9.11,
+   "height": -0.01,
+   "dist_centre": 41.4,
+   "refs": [
+    "153927726666858",
+    "1114292965734083",
+    "3304474719779190"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/153927726666858.jpg",
+    "data/raw/mapillary_facade/1114292965734083.jpg",
+    "data/raw/mapillary_facade/3304474719779190.jpg"
+   ]
+  },
+  {
+   "id": "way/400160677:3",
+   "osm_id": "way/400160677",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:postcode": "CB2 3NZ",
+    "addr:street": "Market Square",
+    "amenity": "fast_food",
+    "building": "yes",
+    "cuisine": "burger",
+    "delivery": "no",
+    "drive_through": "no",
+    "loc_name": "Van of Life",
+    "name": "Trailer of Life",
+    "opening_hours": "Mo-Su 19:00-03:00",
+    "preferred_by_colleges": "King's",
+    "street_vendor": "yes",
+    "takeaway": "only"
+   },
+   "length": 2.14,
+   "p0": [
+    -87.24,
+    101.32
+   ],
+   "p1": [
+    -88.24,
+    103.21
+   ],
+   "ground_z": 9.12,
+   "eave_z": 9.1,
+   "height": -0.02,
+   "dist_centre": 47.4,
+   "refs": [
+    "918215512073749"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_ref/918215512073749.jpg"
+   ]
+  },
+  {
+   "id": "way/400160678:0",
+   "osm_id": "way/400160678",
+   "tags": {
+    "building": "roof",
+    "layer": "1"
+   },
+   "length": 17.86,
+   "p0": [
+    -115.74,
+    82.57
+   ],
+   "p1": [
+    -113.2,
+    64.89
+   ],
+   "ground_z": 9.43,
+   "eave_z": 9.52,
+   "height": 0.09,
+   "dist_centre": 20.0,
+   "refs": [
+    "150365460382983",
+    "138292341951529"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/150365460382983.jpg",
+    "data/raw/mapillary_facade/138292341951529.jpg"
+   ]
+  },
+  {
+   "id": "way/400160678:3",
+   "osm_id": "way/400160678",
+   "tags": {
+    "building": "roof",
+    "layer": "1"
+   },
+   "length": 3.96,
+   "p0": [
+    -111.82,
+    83.13
+   ],
+   "p1": [
+    -115.74,
+    82.57
+   ],
+   "ground_z": 9.27,
+   "eave_z": 9.33,
+   "height": 0.06,
+   "dist_centre": 27.7,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/400160679:0",
+   "osm_id": "way/400160679",
+   "tags": {
+    "building": "roof",
+    "layer": "1"
+   },
+   "length": 17.69,
+   "p0": [
+    -110.94,
+    56.72
+   ],
+   "p1": [
+    -108.24,
+    39.24
+   ],
+   "ground_z": 9.74,
+   "eave_z": 10.48,
+   "height": 0.74,
+   "dist_centre": 11.5,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/400160679:1",
+   "osm_id": "way/400160679",
+   "tags": {
+    "building": "roof",
+    "layer": "1"
+   },
+   "length": 3.68,
+   "p0": [
+    -108.24,
+    39.24
+   ],
+   "p1": [
+    -104.57,
+    39.53
+   ],
+   "ground_z": 9.82,
+   "eave_z": 9.74,
+   "height": -0.08,
+   "dist_centre": 18.3,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/400160680:0",
+   "osm_id": "way/400160680",
+   "tags": {
+    "building": "roof",
+    "layer": "1"
+   },
+   "length": 4.78,
+   "p0": [
+    -109.28,
+    87.69
+   ],
+   "p1": [
+    -108.59,
+    82.96
+   ],
+   "ground_z": 9.25,
+   "eave_z": 11.57,
+   "height": 2.33,
+   "dist_centre": 28.6,
+   "refs": [
+    "3304474719779190",
+    "138292341951529"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/3304474719779190.jpg",
+    "data/raw/mapillary_facade/138292341951529.jpg"
+   ]
+  },
+  {
+   "id": "way/400160680:5",
+   "osm_id": "way/400160680",
+   "tags": {
+    "building": "roof",
+    "layer": "1"
+   },
+   "length": 7.39,
+   "p0": [
+    -101.98,
+    88.83
+   ],
+   "p1": [
+    -109.28,
+    87.69
+   ],
+   "ground_z": 9.17,
+   "eave_z": 10.97,
+   "height": 1.8,
+   "dist_centre": 31.0,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/400160681:1",
+   "osm_id": "way/400160681",
+   "tags": {
+    "building": "roof",
+    "layer": "1"
+   },
+   "length": 7.39,
+   "p0": [
+    -101.61,
+    38.85
+   ],
+   "p1": [
+    -94.3,
+    40.0
+   ],
+   "ground_z": 9.75,
+   "eave_z": 11.98,
+   "height": 2.23,
+   "dist_centre": 18.6,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/400160682:5",
+   "osm_id": "way/400160682",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:street": "Market Hill",
+    "building": "roof",
+    "layer": "1"
+   },
+   "length": 8.46,
+   "p0": [
+    -92.98,
+    93.68
+   ],
+   "p1": [
+    -101.35,
+    92.47
+   ],
+   "ground_z": 9.11,
+   "eave_z": 9.73,
+   "height": 0.61,
+   "dist_centre": 36.2,
+   "refs": [
+    "153927726666858"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/153927726666858.jpg"
+   ]
+  },
+  {
+   "id": "way/400160683:1",
+   "osm_id": "way/400160683",
+   "tags": {
+    "building": "roof",
+    "layer": "1"
+   },
+   "length": 7.25,
+   "p0": [
+    -92.46,
+    40.49
+   ],
+   "p1": [
+    -85.3,
+    41.63
+   ],
+   "ground_z": 9.6,
+   "eave_z": 11.68,
+   "height": 2.08,
+   "dist_centre": 21.5,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/400160684:1",
+   "osm_id": "way/400160684",
+   "tags": {
+    "building": "roof",
+    "layer": "1"
+   },
+   "length": 20.05,
+   "p0": [
+    -75.56,
+    44.23
+   ],
+   "p1": [
+    -78.78,
+    64.02
+   ],
+   "ground_z": 9.31,
+   "eave_z": 9.34,
+   "height": 0.03,
+   "dist_centre": 25.9,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/400160685:1",
+   "osm_id": "way/400160685",
+   "tags": {
+    "building": "roof",
+    "layer": "1"
+   },
+   "length": 30.88,
+   "p0": [
+    -79.4,
+    67.17
+   ],
+   "p1": [
+    -83.72,
+    97.75
+   ],
+   "ground_z": 9.11,
+   "eave_z": 9.12,
+   "height": 0.01,
+   "dist_centre": 32.9,
+   "refs": [
+    "918215512073749",
+    "484065959384228"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_ref/918215512073749.jpg",
+    "data/raw/mapillary_ref/484065959384228.jpg"
+   ]
+  },
+  {
+   "id": "way/400160686:1",
+   "osm_id": "way/400160686",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:postcode": "CB2 3NZ",
+    "amenity": "fast_food",
+    "building": "yes",
+    "cuisine": "burger",
+    "delivery": "no",
+    "drive_through": "no",
+    "fhrs:id": "1473582",
+    "loc_name": "Van of Death",
+    "name": "Frank's Burgers",
+    "note:loc_name": "Local name is reference to Van of Life on other side of square",
+    "opening_hours": "Mo-Su 19:00-03:00",
+    "street_vendor": "yes",
+    "takeaway": "only"
+   },
+   "length": 6.86,
+   "p0": [
+    -83.98,
+    40.58
+   ],
+   "p1": [
+    -77.17,
+    41.45
+   ],
+   "ground_z": 9.56,
+   "eave_z": 12.18,
+   "height": 2.62,
+   "dist_centre": 27.7,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/1080560696:0",
+   "osm_id": "way/1080560696",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:housenumber": "3",
+    "addr:postcode": "CB2 3PQ",
+    "addr:street": "St Mary's Passage",
+    "building": "house",
+    "wikidata": "Q98175669"
+   },
+   "length": 4.39,
+   "p0": [
+    -152.45,
+    30.84
+   ],
+   "p1": [
+    -156.75,
+    29.96
+   ],
+   "ground_z": 9.78,
+   "eave_z": 16.66,
+   "height": 6.88,
+   "dist_centre": 58.3,
+   "refs": [
+    "302224751350928",
+    "478968810016603",
+    "541914280138693"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_ref/302224751350928.jpg",
+    "data/raw/mapillary_ref/478968810016603.jpg",
+    "data/raw/mapillary_ref/541914280138693.jpg"
+   ]
+  },
+  {
+   "id": "way/1080560696:2",
+   "osm_id": "way/1080560696",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:housenumber": "3",
+    "addr:postcode": "CB2 3PQ",
+    "addr:street": "St Mary's Passage",
+    "building": "house",
+    "wikidata": "Q98175669"
+   },
+   "length": 4.49,
+   "p0": [
+    -155.6,
+    20.04
+   ],
+   "p1": [
+    -151.13,
+    20.45
+   ],
+   "ground_z": 10.11,
+   "eave_z": 19.64,
+   "height": 9.53,
+   "dist_centre": 62.6,
+   "refs": [
+    "148334197258295"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/148334197258295.jpg"
+   ]
+  },
+  {
+   "id": "way/1099847936:5",
+   "osm_id": "way/1099847936",
+   "tags": {
+    "addr:housenumber": "4-6",
+    "addr:postcode": "CB2 1SZ",
+    "addr:street": "Trinity Street",
+    "building": "yes",
+    "wikidata": "Q26558663"
+   },
+   "length": 15.45,
+   "p0": [
+    -154.1,
+    119.08
+   ],
+   "p1": [
+    -169.55,
+    119.22
+   ],
+   "ground_z": 9.07,
+   "eave_z": 19.87,
+   "height": 10.8,
+   "dist_centre": 85.4,
+   "refs": [
+    "504543033912780",
+    "467984694458697",
+    "1776939362475817",
+    "456591105621742",
+    "3831327076965566"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/504543033912780.jpg",
+    "data/raw/mapillary_facade/467984694458697.jpg",
+    "data/raw/mapillary_ref/1776939362475817.jpg",
+    "data/raw/mapillary_ref/456591105621742.jpg",
+    "data/raw/mapillary_ref/3831327076965566.jpg"
+   ]
+  },
+  {
+   "id": "way/1099847936:6",
+   "osm_id": "way/1099847936",
+   "tags": {
+    "addr:housenumber": "4-6",
+    "addr:postcode": "CB2 1SZ",
+    "addr:street": "Trinity Street",
+    "building": "yes",
+    "wikidata": "Q26558663"
+   },
+   "length": 16.04,
+   "p0": [
+    -169.55,
+    119.22
+   ],
+   "p1": [
+    -171.27,
+    103.28
+   ],
+   "ground_z": 9.73,
+   "eave_z": 21.01,
+   "height": 11.28,
+   "dist_centre": 86.4,
+   "refs": [
+    "1090785804763201",
+    "507030773643078",
+    "2788878518108339",
+    "3696455640481909",
+    "908860169660130"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_ref/1090785804763201.jpg",
+    "data/raw/mapillary_facade/507030773643078.jpg",
+    "data/raw/mapillary_ref/2788878518108339.jpg",
+    "data/raw/mapillary_ref/3696455640481909.jpg",
+    "data/raw/mapillary_ref/908860169660130.jpg"
+   ]
+  },
+  {
+   "id": "way/1099847937:0",
+   "osm_id": "way/1099847937",
+   "tags": {
+    "addr:housenumber": "2",
+    "addr:postcode": "CB2 1SZ",
+    "addr:street": "Trinity Street",
+    "building": "yes",
+    "wikidata": "Q26419047"
+   },
+   "length": 5.09,
+   "p0": [
+    -172.08,
+    98.38
+   ],
+   "p1": [
+    -172.69,
+    93.33
+   ],
+   "ground_z": 9.7,
+   "eave_z": 21.01,
+   "height": 11.31,
+   "dist_centre": 79.4,
+   "refs": [
+    "1078821085942013",
+    "147305984014231",
+    "504827830566716",
+    "862206667692846",
+    "1181002685669503"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/1078821085942013.jpg",
+    "data/raw/mapillary_ref/147305984014231.jpg",
+    "data/raw/mapillary_facade/504827830566716.jpg",
+    "data/raw/mapillary_ref/862206667692846.jpg",
+    "data/raw/mapillary_ref/1181002685669503.jpg"
+   ]
+  },
+  {
+   "id": "way/1099847937:1",
+   "osm_id": "way/1099847937",
+   "tags": {
+    "addr:housenumber": "2",
+    "addr:postcode": "CB2 1SZ",
+    "addr:street": "Trinity Street",
+    "building": "yes",
+    "wikidata": "Q26419047"
+   },
+   "length": 5.44,
+   "p0": [
+    -172.69,
+    93.33
+   ],
+   "p1": [
+    -171.97,
+    87.94
+   ],
+   "ground_z": 9.66,
+   "eave_z": 22.54,
+   "height": 12.88,
+   "dist_centre": 77.0,
+   "refs": [
+    "1078821085942013",
+    "3820815898039287",
+    "504827830566716",
+    "862206667692846",
+    "296497208762822"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/1078821085942013.jpg",
+    "data/raw/mapillary_facade/3820815898039287.jpg",
+    "data/raw/mapillary_facade/504827830566716.jpg",
+    "data/raw/mapillary_ref/862206667692846.jpg",
+    "data/raw/mapillary_facade/296497208762822.jpg"
+   ]
+  },
+  {
+   "id": "way/1099847937:5",
+   "osm_id": "way/1099847937",
+   "tags": {
+    "addr:housenumber": "2",
+    "addr:postcode": "CB2 1SZ",
+    "addr:street": "Trinity Street",
+    "building": "yes",
+    "wikidata": "Q26419047"
+   },
+   "length": 3.81,
+   "p0": [
+    -159.4,
+    94.29
+   ],
+   "p1": [
+    -159.6,
+    98.09
+   ],
+   "ground_z": 9.93,
+   "eave_z": 17.2,
+   "height": 7.27,
+   "dist_centre": 68.6,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/1099847938:0",
+   "osm_id": "way/1099847938",
+   "tags": {
+    "addr:housenumber": "3",
+    "addr:postcode": "CB2 1SZ",
+    "addr:street": "Trinity Street",
+    "building": "yes",
+    "wikidata": "Q26616764"
+   },
+   "length": 4.96,
+   "p0": [
+    -171.27,
+    103.28
+   ],
+   "p1": [
+    -172.08,
+    98.38
+   ],
+   "ground_z": 9.68,
+   "eave_z": 20.83,
+   "height": 11.15,
+   "dist_centre": 81.4,
+   "refs": [
+    "2897708863821043",
+    "1078821085942013",
+    "504827830566716",
+    "862206667692846",
+    "774062979969132"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_ref/2897708863821043.jpg",
+    "data/raw/mapillary_facade/1078821085942013.jpg",
+    "data/raw/mapillary_facade/504827830566716.jpg",
+    "data/raw/mapillary_ref/862206667692846.jpg",
+    "data/raw/mapillary_ref/774062979969132.jpg"
+   ]
+  },
+  {
+   "id": "way/1099847939:5",
+   "osm_id": "way/1099847939",
+   "tags": {
+    "addr:housenumber": "1",
+    "addr:postcode": "CB2 1SZ",
+    "addr:street": "Trinity Street",
+    "building": "yes",
+    "wikidata": "Q26616763"
+   },
+   "length": 3.26,
+   "p0": [
+    -171.94,
+    87.12
+   ],
+   "p1": [
+    -171.46,
+    83.89
+   ],
+   "ground_z": 9.63,
+   "eave_z": 21.68,
+   "height": 12.05,
+   "dist_centre": 74.3,
+   "refs": [
+    "296497208762822",
+    "504827830566716",
+    "862206667692846",
+    "1078821085942013",
+    "3820815898039287"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/296497208762822.jpg",
+    "data/raw/mapillary_facade/504827830566716.jpg",
+    "data/raw/mapillary_ref/862206667692846.jpg",
+    "data/raw/mapillary_facade/1078821085942013.jpg",
+    "data/raw/mapillary_facade/3820815898039287.jpg"
+   ]
+  },
+  {
+   "id": "way/1099847939:6",
+   "osm_id": "way/1099847939",
+   "tags": {
+    "addr:housenumber": "1",
+    "addr:postcode": "CB2 1SZ",
+    "addr:street": "Trinity Street",
+    "building": "yes",
+    "wikidata": "Q26616763"
+   },
+   "length": 14.92,
+   "p0": [
+    -171.46,
+    83.89
+   ],
+   "p1": [
+    -156.63,
+    85.57
+   ],
+   "ground_z": 9.58,
+   "eave_z": 22.12,
+   "height": 12.53,
+   "dist_centre": 67.0,
+   "refs": [
+    "327898408702941",
+    "1395962697425004",
+    "582381189402070",
+    "196427945630290",
+    "158330012801652"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_ref/327898408702941.jpg",
+    "data/raw/mapillary_facade/1395962697425004.jpg",
+    "data/raw/mapillary_ref/582381189402070.jpg",
+    "data/raw/mapillary_ref/196427945630290.jpg",
+    "data/raw/mapillary_ref/158330012801652.jpg"
+   ]
+  },
+  {
+   "id": "way/1099847940:0",
+   "osm_id": "way/1099847940",
+   "tags": {
+    "addr:housenumber": "27-28",
+    "addr:postcode": "CB2 3NR",
+    "addr:street": "Market Hill",
+    "building": "yes",
+    "wikidata": "Q26627465"
+   },
+   "length": 10.44,
+   "p0": [
+    -156.63,
+    85.57
+   ],
+   "p1": [
+    -146.26,
+    86.75
+   ],
+   "ground_z": 9.42,
+   "eave_z": 23.06,
+   "height": 13.65,
+   "dist_centre": 56.4,
+   "refs": [
+    "327898408702941",
+    "582381189402070",
+    "196427945630290",
+    "158330012801652",
+    "1118444955303989"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_ref/327898408702941.jpg",
+    "data/raw/mapillary_ref/582381189402070.jpg",
+    "data/raw/mapillary_ref/196427945630290.jpg",
+    "data/raw/mapillary_ref/158330012801652.jpg",
+    "data/raw/mapillary_ref/1118444955303989.jpg"
+   ]
+  },
+  {
+   "id": "way/1099847940:1",
+   "osm_id": "way/1099847940",
+   "tags": {
+    "addr:housenumber": "27-28",
+    "addr:postcode": "CB2 3NR",
+    "addr:street": "Market Hill",
+    "building": "yes",
+    "wikidata": "Q26627465"
+   },
+   "length": 6.27,
+   "p0": [
+    -146.26,
+    86.75
+   ],
+   "p1": [
+    -147.9,
+    92.8
+   ],
+   "ground_z": 9.34,
+   "eave_z": 22.87,
+   "height": 13.54,
+   "dist_centre": 54.8,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/1099847940:2",
+   "osm_id": "way/1099847940",
+   "tags": {
+    "addr:housenumber": "27-28",
+    "addr:postcode": "CB2 3NR",
+    "addr:street": "Market Hill",
+    "building": "yes",
+    "wikidata": "Q26627465"
+   },
+   "length": 2.51,
+   "p0": [
+    -147.9,
+    92.8
+   ],
+   "p1": [
+    -148.62,
+    95.2
+   ],
+   "ground_z": 9.37,
+   "eave_z": 19.93,
+   "height": 10.56,
+   "dist_centre": 58.3,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/1099847940:3",
+   "osm_id": "way/1099847940",
+   "tags": {
+    "addr:housenumber": "27-28",
+    "addr:postcode": "CB2 3NR",
+    "addr:street": "Market Hill",
+    "building": "yes",
+    "wikidata": "Q26627465"
+   },
+   "length": 5.04,
+   "p0": [
+    -148.62,
+    95.2
+   ],
+   "p1": [
+    -153.43,
+    93.7
+   ],
+   "ground_z": 9.58,
+   "eave_z": 20.58,
+   "height": 11.0,
+   "dist_centre": 60.8,
+   "refs": [
+    "2788878518108339",
+    "138010701576161"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_ref/2788878518108339.jpg",
+    "data/raw/mapillary_ref/138010701576161.jpg"
+   ]
+  },
+  {
+   "id": "way/1099847940:4",
+   "osm_id": "way/1099847940",
+   "tags": {
+    "addr:housenumber": "27-28",
+    "addr:postcode": "CB2 3NR",
+    "addr:street": "Market Hill",
+    "building": "yes",
+    "wikidata": "Q26627465"
+   },
+   "length": 5.83,
+   "p0": [
+    -153.43,
+    93.7
+   ],
+   "p1": [
+    -159.23,
+    93.12
+   ],
+   "ground_z": 9.82,
+   "eave_z": 19.81,
+   "height": 9.99,
+   "dist_centre": 64.5,
+   "refs": [
+    "3818552014925396",
+    "2788878518108339",
+    "138010701576161",
+    "1090785804763201",
+    "2897708863821043"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_ref/3818552014925396.jpg",
+    "data/raw/mapillary_ref/2788878518108339.jpg",
+    "data/raw/mapillary_ref/138010701576161.jpg",
+    "data/raw/mapillary_ref/1090785804763201.jpg",
+    "data/raw/mapillary_ref/2897708863821043.jpg"
+   ]
+  },
+  {
+   "id": "way/1211948487:3",
+   "osm_id": "way/1211948487",
+   "tags": {
+    "addr:housenumber": "2",
+    "addr:postcode": "CB2 3NJ",
+    "addr:street": "Market Hill",
+    "building": "retail"
+   },
+   "length": 9.74,
+   "p0": [
+    -65.16,
+    48.9
+   ],
+   "p1": [
+    -64.56,
+    39.18
+   ],
+   "ground_z": 9.41,
+   "eave_z": 24.77,
+   "height": 15.37,
+   "dist_centre": 40.3,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/1211948487:4",
+   "osm_id": "way/1211948487",
+   "tags": {
+    "addr:housenumber": "2",
+    "addr:postcode": "CB2 3NJ",
+    "addr:street": "Market Hill",
+    "building": "retail"
+   },
+   "length": 2.37,
+   "p0": [
+    -64.56,
+    39.18
+   ],
+   "p1": [
+    -62.64,
+    37.8
+   ],
+   "ground_z": 9.47,
+   "eave_z": 24.16,
+   "height": 14.69,
+   "dist_centre": 43.6,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/1211948487:5",
+   "osm_id": "way/1211948487",
+   "tags": {
+    "addr:housenumber": "2",
+    "addr:postcode": "CB2 3NJ",
+    "addr:street": "Market Hill",
+    "building": "retail"
+   },
+   "length": 13.38,
+   "p0": [
+    -62.64,
+    37.8
+   ],
+   "p1": [
+    -49.29,
+    38.76
+   ],
+   "ground_z": 9.42,
+   "eave_z": 24.49,
+   "height": 15.08,
+   "dist_centre": 50.7,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/1211948488:3",
+   "osm_id": "way/1211948488",
+   "tags": {
+    "addr:housenumber": "2",
+    "addr:postcode": "CB2 3NJ",
+    "addr:street": "Market Hill",
+    "building": "yes"
+   },
+   "length": 7.46,
+   "p0": [
+    -66.34,
+    56.27
+   ],
+   "p1": [
+    -65.16,
+    48.9
+   ],
+   "ground_z": 9.33,
+   "eave_z": 23.58,
+   "height": 14.24,
+   "dist_centre": 37.5,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/1211948489:2",
+   "osm_id": "way/1211948489",
+   "tags": {
+    "addr:housenumber": "3",
+    "addr:postcode": "CB2 3NJ",
+    "addr:street": "Market Hill",
+    "building": "yes"
+   },
+   "length": 5.39,
+   "p0": [
+    -67.28,
+    61.57
+   ],
+   "p1": [
+    -66.34,
+    56.27
+   ],
+   "ground_z": 9.29,
+   "eave_z": 20.35,
+   "height": 11.07,
+   "dist_centre": 36.1,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/1211948490:4",
+   "osm_id": "way/1211948490",
+   "tags": {
+    "addr:housenumber": "4",
+    "addr:postcode": "CB2 3NJ",
+    "addr:street": "Market Hill",
+    "building": "retail",
+    "wikidata": "Q26419114"
+   },
+   "length": 7.5,
+   "p0": [
+    -68.56,
+    68.96
+   ],
+   "p1": [
+    -67.28,
+    61.57
+   ],
+   "ground_z": 9.27,
+   "eave_z": 19.17,
+   "height": 9.9,
+   "dist_centre": 35.9,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/1211948491:7",
+   "osm_id": "way/1211948491",
+   "tags": {
+    "addr:housenumber": "5",
+    "addr:postcode": "CB2 3NJ",
+    "addr:street": "Market Hill",
+    "building": "retail",
+    "wikidata": "Q17527473",
+    "wikimedia_commons": "Category:5 Market Hill, Cambridge"
+   },
+   "length": 5.96,
+   "p0": [
+    -69.95,
+    74.75
+   ],
+   "p1": [
+    -68.56,
+    68.96
+   ],
+   "ground_z": 9.22,
+   "eave_z": 21.87,
+   "height": 12.65,
+   "dist_centre": 36.6,
+   "refs": [
+    "153927726666858"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/153927726666858.jpg"
+   ]
+  },
+  {
+   "id": "way/1211951044:5",
+   "osm_id": "way/1211951044",
+   "tags": {
+    "addr:housenumber": "35",
+    "addr:postcode": "CB2 3NB",
+    "addr:street": "Petty Cury",
+    "building": "retail"
+   },
+   "length": 5.47,
+   "p0": [
+    -34.87,
+    41.16
+   ],
+   "p1": [
+    -29.52,
+    42.29
+   ],
+   "ground_z": 9.27,
+   "eave_z": 20.0,
+   "height": 10.73,
+   "dist_centre": 72.4,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/1211951046:9",
+   "osm_id": "way/1211951046",
+   "tags": {
+    "building": "retail"
+   },
+   "length": 22.35,
+   "p0": [
+    -55.27,
+    124.89
+   ],
+   "p1": [
+    -74.95,
+    114.3
+   ],
+   "ground_z": 8.96,
+   "eave_z": 19.02,
+   "height": 10.06,
+   "dist_centre": 72.8,
+   "refs": [
+    "298738958864117",
+    "795230574437603",
+    "295737195855594",
+    "745884646375599"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_ref/298738958864117.jpg",
+    "data/raw/mapillary_ref/795230574437603.jpg",
+    "data/raw/mapillary_ref/295737195855594.jpg",
+    "data/raw/mapillary_facade/745884646375599.jpg"
+   ]
+  },
+  {
+   "id": "way/1211951046:10",
+   "osm_id": "way/1211951046",
+   "tags": {
+    "building": "retail"
+   },
+   "length": 2.73,
+   "p0": [
+    -74.95,
+    114.3
+   ],
+   "p1": [
+    -77.17,
+    112.71
+   ],
+   "ground_z": 9.02,
+   "eave_z": 19.01,
+   "height": 9.99,
+   "dist_centre": 62.2,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/1211951047:4",
+   "osm_id": "way/1211951047",
+   "tags": {
+    "addr:housenumber": "37-38",
+    "addr:postcode": "CB2 3NB",
+    "addr:street": "Petty Cury",
+    "building": "yes"
+   },
+   "length": 8.8,
+   "p0": [
+    -49.29,
+    38.76
+   ],
+   "p1": [
+    -40.61,
+    40.26
+   ],
+   "ground_z": 9.38,
+   "eave_z": 19.55,
+   "height": 10.17,
+   "dist_centre": 60.6,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/1211951053:2",
+   "osm_id": "way/1211951053",
+   "tags": {
+    "addr:housenumber": "36",
+    "addr:postcode": "CB2 3NB",
+    "addr:street": "Petty Cury",
+    "building": "retail"
+   },
+   "length": 5.82,
+   "p0": [
+    -40.61,
+    40.26
+   ],
+   "p1": [
+    -34.87,
+    41.16
+   ],
+   "ground_z": 9.28,
+   "eave_z": 19.87,
+   "height": 10.58,
+   "dist_centre": 67.3,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/1211951054:7",
+   "osm_id": "way/1211951054",
+   "tags": {
+    "addr:housenumber": "12",
+    "addr:postcode": "CB2 3NJ",
+    "addr:street": "Market Hill",
+    "building": "yes"
+   },
+   "length": 8.27,
+   "p0": [
+    -77.45,
+    110.8
+   ],
+   "p1": [
+    -77.71,
+    102.53
+   ],
+   "ground_z": 9.09,
+   "eave_z": 23.21,
+   "height": 14.11,
+   "dist_centre": 55.4,
+   "refs": [
+    "644178576432021",
+    "2798949150347432",
+    "798596987448760",
+    "153927726666858",
+    "1114292965734083"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/644178576432021.jpg",
+    "data/raw/mapillary_facade/2798949150347432.jpg",
+    "data/raw/mapillary_facade/798596987448760.jpg",
+    "data/raw/mapillary_facade/153927726666858.jpg",
+    "data/raw/mapillary_facade/1114292965734083.jpg"
+   ]
+  },
+  {
+   "id": "way/1211951056:6",
+   "osm_id": "way/1211951056",
+   "tags": {
+    "addr:housenumber": "34",
+    "addr:postcode": "CB2 3NB",
+    "addr:street": "Petty Cury",
+    "building": "retail"
+   },
+   "length": 4.73,
+   "p0": [
+    -29.52,
+    42.29
+   ],
+   "p1": [
+    -24.98,
+    43.59
+   ],
+   "ground_z": 9.22,
+   "eave_z": 20.64,
+   "height": 11.43,
+   "dist_centre": 77.0,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/1211951057:4",
+   "osm_id": "way/1211951057",
+   "tags": {
+    "addr:housenumber": "32-33",
+    "addr:postcode": "CB2 3NB",
+    "addr:street": "Petty Cury",
+    "building": "retail",
+    "wikidata": "Q26419077"
+   },
+   "length": 9.8,
+   "p0": [
+    -24.98,
+    43.59
+   ],
+   "p1": [
+    -15.56,
+    46.28
+   ],
+   "ground_z": 9.21,
+   "eave_z": 20.78,
+   "height": 11.58,
+   "dist_centre": 83.6,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/1222243455:2",
+   "osm_id": "way/1222243455",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:housenumber": "17",
+    "addr:postcode": "CB2 1SP",
+    "addr:street": "King's Parade",
+    "building": "retail",
+    "wikidata": "Q26616708"
+   },
+   "length": 6.17,
+   "p0": [
+    -169.46,
+    -2.8
+   ],
+   "p1": [
+    -169.49,
+    3.37
+   ],
+   "ground_z": 10.19,
+   "eave_z": 16.76,
+   "height": 6.57,
+   "dist_centre": 87.7,
+   "refs": [],
+   "ref_files": []
+  },
+  {
+   "id": "way/1288730353:9",
+   "osm_id": "way/1288730353",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:housenumber": "1-11",
+    "addr:postcode": "CB2 3LL",
+    "addr:street": "Rose Crescent",
+    "building": "yes",
+    "wikidata": "Q26638859"
+   },
+   "length": 26.29,
+   "p0": [
+    -110.63,
+    143.86
+   ],
+   "p1": [
+    -103.07,
+    118.68
+   ],
+   "ground_z": 9.55,
+   "eave_z": 22.23,
+   "height": 12.68,
+   "dist_centre": 74.0,
+   "refs": [
+    "3304474719779190"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/3304474719779190.jpg"
+   ]
+  },
+  {
+   "id": "way/1288730356:0",
+   "osm_id": "way/1288730356",
+   "tags": {
+    "addr:housenumber": "16",
+    "addr:postcode": "CB2 3PA",
+    "addr:street": "Market Street",
+    "building": "yes"
+   },
+   "length": 5.72,
+   "p0": [
+    -77.1,
+    124.33
+   ],
+   "p1": [
+    -72.06,
+    127.05
+   ],
+   "ground_z": 9.0,
+   "eave_z": 22.54,
+   "height": 13.54,
+   "dist_centre": 74.0,
+   "refs": [
+    "543390210382861"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/543390210382861.jpg"
+   ]
+  },
+  {
+   "id": "way/1288730358:0",
+   "osm_id": "way/1288730358",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:housenumber": "10-15",
+    "addr:postcode": "CB2 3PE",
+    "addr:street": "Market Street",
+    "building": "retail",
+    "source": "Bing"
+   },
+   "length": 12.61,
+   "p0": [
+    -72.06,
+    127.05
+   ],
+   "p1": [
+    -60.97,
+    133.04
+   ],
+   "ground_z": 8.89,
+   "eave_z": 22.07,
+   "height": 13.18,
+   "dist_centre": 81.3,
+   "refs": [
+    "543390210382861",
+    "2802021553394282",
+    "484065959384228"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/543390210382861.jpg",
+    "data/raw/mapillary_ref/2802021553394282.jpg",
+    "data/raw/mapillary_ref/484065959384228.jpg"
+   ]
+  },
+  {
+   "id": "way/1288730360:0",
+   "osm_id": "way/1288730360",
+   "tags": {
+    "addr:housenumber": "15",
+    "addr:postcode": "CB2 3NR",
+    "addr:street": "Market Hill",
+    "building": "retail",
+    "wikidata": "Q26555898"
+   },
+   "length": 8.95,
+   "p0": [
+    -103.07,
+    118.68
+   ],
+   "p1": [
+    -99.51,
+    110.47
+   ],
+   "ground_z": 9.19,
+   "eave_z": 22.71,
+   "height": 13.51,
+   "dist_centre": 57.2,
+   "refs": [
+    "1114292965734083",
+    "3304474719779190",
+    "153927726666858"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/1114292965734083.jpg",
+    "data/raw/mapillary_facade/3304474719779190.jpg",
+    "data/raw/mapillary_facade/153927726666858.jpg"
+   ]
+  },
+  {
+   "id": "way/1288730360:1",
+   "osm_id": "way/1288730360",
+   "tags": {
+    "addr:housenumber": "15",
+    "addr:postcode": "CB2 3NR",
+    "addr:street": "Market Hill",
+    "building": "retail",
+    "wikidata": "Q26555898"
+   },
+   "length": 2.07,
+   "p0": [
+    -99.51,
+    110.47
+   ],
+   "p1": [
+    -97.57,
+    109.76
+   ],
+   "ground_z": 9.06,
+   "eave_z": 22.72,
+   "height": 13.66,
+   "dist_centre": 52.9,
+   "refs": [
+    "153927726666858",
+    "1114292965734083",
+    "3304474719779190"
+   ],
+   "ref_files": [
+    "data/raw/mapillary_facade/153927726666858.jpg",
+    "data/raw/mapillary_facade/1114292965734083.jpg",
+    "data/raw/mapillary_facade/3304474719779190.jpg"
+   ]
+  },
+  {
+   "id": "way/1288730360:2",
+   "osm_id": "way/1288730360",
+   "tags": {
+    "addr:housenumber": "15",
+    "addr:postcode": "CB2 3NR",
+    "addr:street": "Market Hill",
+    "building": "retail",
+    "wikidata": "Q26555898"
+   },
+   "length": 5.24,
+   "p0": [
+    -97.57,
+    109.76
+   ],
+   "p1": [
+    -92.96,
+    112.27
+   ],
+   "ground_z": 9.02,
+   "eave_z": 23.2,
+   "height": 14.18,
+   "dist_centre": 54.2,
+   "refs": [],
+   "ref_files": []
+  }
+ ]
+}

@@ -193,6 +193,10 @@ def main():
     log(len(pieces), "within", RADIUS, "m of GSM")
 
     held = json.load(open(os.path.join(ROOT, "data/benchmark/heldout.json")))
+    msp = os.path.join(ROOT, "data/benchmark/heldout_ms.json")   # the 40 Market Square photos (session 30)
+    if os.path.exists(msp):
+        ms = json.load(open(msp))
+        held = {"images": held["images"] + ms["images"], "sequence_near": held["sequence_near"] + ms["sequence_near"]}
     cams = cameras(held, cx, cy)
     for c in cams:
         c["z"] = float(samp(DTM, [c["e"] + B.E0], [c["n"] + B.N0])[0]) + CAM_H
