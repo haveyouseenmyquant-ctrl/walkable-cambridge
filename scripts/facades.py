@@ -13,6 +13,7 @@ collision frame (x east, y north, z up), corner order bottom-left, bottom-right,
 outside. Manifest tiles get "facades"/"facade_tex"/"nfacades"; manifest.layers.facades = True. Also writes
 data/derived/facades.json (per piece: building, area, photo id) used by kpi.py for real_facade_pct.
 """
+import hashlib
 import io
 import json
 import math
@@ -399,6 +400,12 @@ def main():
             o = man_t[tile["id"]]   # one entry per atlas page
             tile["facades"], tile["facade_tex"], tile["nfacades"] = [x[0] for x in o], [x[1] for x in o], sum(x[2] for x in o)
     man.setdefault("layers", {})["facades"] = True
+    # atlas contents can change with an identical layout (e.g. masks): put their digest in the manifest so the build
+    # hash (scripts/build_hash.py) and the benchmark cache see a new build
+    hd = hashlib.sha256()
+    for f in sorted(os.listdir(out_dir)):
+        hd.update(open(os.path.join(out_dir, f), "rb").read())
+    man["facades_digest"] = hd.hexdigest()[:16]
     json.dump(man, open(man_path, "w"), separators=(",", ":"))
     json.dump({"radius": RADIUS, "area_total": round(tot_area, 1), "all_pieces": all_pieces,
                "photos": sorted({m["photo"] for m in meta}), "textured": meta},

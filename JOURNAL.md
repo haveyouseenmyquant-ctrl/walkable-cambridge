@@ -762,3 +762,7 @@ Next
 2. Wikimedia Commons photos of central buildings, registered locally for poses (more real facade area).
 3. Synthetic per-building facades for walls with no photo (the generic grid didn't help; needs per-building style).
 - Live check: walkable 99.39, buildings 100, roof_match 93.03, real_facade 7.6, site_errors 0. service.sh will benchmark the new build.
+- Fix after publishing: the build hash didn't change (facade atlases changed but manifest.json didn't), so the
+  benchmark cache would have mixed the two builds. facades.py now writes `facades_digest` (sha256 of the atlas
+  files) into the manifest; republished as build dad9daeed9ad93d0. Any score cached under b45c1234a047bcaa after
+  08:12 UTC came from renders taken during the switch: ignore it (session 23's build has no valid photo_match score).
