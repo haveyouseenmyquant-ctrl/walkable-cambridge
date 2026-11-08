@@ -10,7 +10,12 @@ const BASE = new URL('./', location.href).href;
 // ?look=v2: sky dome, AgX tone mapping, plausible albedos (session 9). Off by default: it lowered photo_match on the
 // 50-view check (7.75 -> 7.40), so it stays opt-in until materials/textures make it pay off.
 const LOOK2 = new URLSearchParams(location.search).get('look') === 'v2';
-const SKY = LOOK2 ? 0xccd8e2 : 0xbcd3e6;
+// ?sky=white: the near-white overcast sky of the street photos (non-held-out Mapillary: 83 % of sky tops are
+// unsaturated, median RGB 0.96/0.97/1.00). Default since session 19: photo_match on the 67 views <= 520 m 25.09 -> 25.79.
+// ?sky=blue is the old sky; ?sky=overcast also softens the light (weaker sun, stronger sky light): 25.40, not used.
+const SKYMODE = new URLSearchParams(location.search).get('sky') || 'white';
+const SKY = LOOK2 ? 0xccd8e2 : SKYMODE === 'blue' ? 0xbcd3e6 : 0xeef1f6;
+const OVERCAST = SKYMODE === 'overcast';
 const $ = id => document.getElementById(id);
 const status = msg => { $('status').textContent = msg; };
 
@@ -42,10 +47,10 @@ async function main() {
   skyDome.renderOrder = -1; skyDome.frustumCulled = false; if (LOOK2) scene.add(skyDome);
   const camera = new THREE.PerspectiveCamera(70, 1, 0.2, LOOK2 ? 1200 : 600);
   if (LOOK2) { renderer.toneMapping = THREE.AgXToneMapping; renderer.toneMappingExposure = 1.15; }
-  scene.add(LOOK2 ? new THREE.HemisphereLight(0xc4d8ee, 0x5f584c, 0.75) : new THREE.HemisphereLight(0xdfeaf5, 0x6b6450, 1.6));
+  scene.add(LOOK2 ? new THREE.HemisphereLight(0xc4d8ee, 0x5f584c, 0.75) : new THREE.HemisphereLight(0xdfeaf5, 0x6b6450, OVERCAST ? 2.3 : 1.6));
   // Sun for Cambridge, mid-June 14:00 BST: azimuth ~200 deg (SSW), elevation ~58 deg. Frame: x east, y up, z south.
   const SUN_DIR = new THREE.Vector3(-0.181, 0.848, 0.498).normalize();
-  const sun = new THREE.DirectionalLight(0xfff1dc, LOOK2 ? 2.6 : 1.8);
+  const sun = new THREE.DirectionalLight(0xfff1dc, LOOK2 ? 2.6 : OVERCAST ? 1.0 : 1.8);
   sun.position.copy(SUN_DIR); scene.add(sun); scene.add(sun.target);
   // Quality: ?quality=low (default on touch devices) has no shadows; otherwise a 2048 shadow map, 240 m square
   const quality = new URLSearchParams(location.search).get('quality') || (matchMedia('(pointer: coarse)').matches ? 'low' : 'high');
