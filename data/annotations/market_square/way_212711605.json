@@ -304,5 +304,6 @@
    "confidence": "low",
    "notes": "Market Street face of the white-rendered 1970s Radcliffe Court block, next to 16 Market Street. Mapillary 543390210382861 shows a recessed full-width grey-framed glazed shopfront under a white rendered overhang (then Dune London; no current shop in OSM, so no fascia text) and one wide modern window per upper floor. Upper window rhythm copied from wall :6; only the 1st floor window clearly seen."
   }
- ]
+ ],
+ "colour_source": "s39 audit (unchanged): Commons File:15 Market Hill, Cambridge.jpg + mapillary 1114292965734083: white render 1970s block confirmed"
 }

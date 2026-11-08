@@ -42,13 +42,19 @@ BAY = 3.0            # stall bay pitch along the row (m)
 FRAME = (0.58, 0.60, 0.61)   # galvanised scaffold tube
 CLOTHS = [(0.12, 0.45, 0.28), (0.12, 0.45, 0.28), (0.10, 0.10, 0.11), (0.85, 0.85, 0.82), (0.55, 0.12, 0.14),
           (0.16, 0.22, 0.45), (0.45, 0.62, 0.30)]
-SHEETS = [(0.16, 0.24, 0.19), (0.14, 0.17, 0.28), (0.28, 0.28, 0.29), (0.80, 0.80, 0.77), (0.40, 0.12, 0.13),
-          (0.16, 0.24, 0.19)]   # s38: darker tarps (photos: dark green / navy / grey backs, few bright ones)
+SHEETS = [(0.13, 0.20, 0.15), (0.12, 0.14, 0.24), (0.17, 0.17, 0.18), (0.13, 0.20, 0.15), (0.30, 0.10, 0.11),
+          (0.12, 0.14, 0.24)]   # s38: darker tarps (photos: dark green / navy / grey backs, few bright ones)
 CRATE = (0.55, 0.42, 0.28)
 GOODS = [(0.80, 0.20, 0.12), (0.92, 0.62, 0.15), (0.35, 0.55, 0.20), (0.85, 0.75, 0.45), (0.55, 0.30, 0.45),
          (0.75, 0.68, 0.55), (0.30, 0.35, 0.55), (0.90, 0.85, 0.70)]
 SKIRTS = [(0.10, 0.45, 0.28), (0.10, 0.45, 0.28), (0.72, 0.12, 0.14), (0.15, 0.28, 0.62)]   # stripe on white cloth
 POST = (0.12, 0.12, 0.13)
+FRAME_DK = (0.30, 0.31, 0.32)   # trestle legs / hanging rails
+TURF = (0.30, 0.52, 0.22)       # artificial-grass table cover on veg stalls
+PRODUCE = [(0.80, 0.16, 0.10), (0.93, 0.55, 0.10), (0.95, 0.82, 0.20), (0.36, 0.58, 0.20), (0.18, 0.38, 0.14),
+           (0.62, 0.45, 0.28), (0.45, 0.18, 0.35), (0.90, 0.88, 0.78), (0.70, 0.78, 0.30), (0.55, 0.08, 0.12)]
+CRATE_COLS = [(0.55, 0.42, 0.28), (0.62, 0.50, 0.34), (0.20, 0.30, 0.55), (0.18, 0.42, 0.25), (0.25, 0.25, 0.26),
+              (0.75, 0.70, 0.62)]   # wooden, blue / green / black plastic, cardboard
 BOARD = (0.86, 0.85, 0.80)
 COUNTER_TOP = (0.55, 0.42, 0.28)
 STONE = (0.72, 0.68, 0.60)
@@ -247,68 +253,97 @@ def stall_strip(m, B, g, gB, centre, seed, base=None):
 
 
 def stall(m, g, c, ax, front, depth, width, rng, ze, hgt, off):
-    """Stall goods/sheets under the shared canopy, centred at c; front = unit towards the aisle."""
+    """Stall under the shared canopy, centred at c; front = unit towards the aisle. Session 39: open-fronted
+    trestle stall instead of solid cloth boxes. Trestle table (thin top on thin legs) with a cloth/astroturf top and
+    a front skirt that stops ~0.3 m above the setts (crates and legs show beneath); produce in rows of small crates
+    tilted ~15 deg towards the aisle on a stepped riser (front row at table height, back row raised), price cards;
+    non-food stalls get flat trays and hanging garments/bags on the front rail; a dark tarp back sheet (dark green /
+    navy / charcoal) on most bays. No solid full-height side sheets (s38's big plain panels): bays are open between
+    neighbours, at most a low side table/crate stack."""
     z = g(*c)
     up = np.array([0, 0, 1.0])
     A3, F3 = np.array([*ax, 0]), np.array([*front, 0])
     P = lambda s, t, h: np.array([*(c + s * ax + t * front), z + h])  # noqa: E731
     hw, hd = width / 2, depth / 2
-    # table along the front, cloth to the ground (box), slightly lighter top
-    cloth = CLOTHS[rng.integers(len(CLOTHS))]
-    tw, td, th = width - 0.4, 0.85, 0.78
-    if rng.random() < 0.08:     # closed / empty bay: just a stack of crates at the back
+    kind = rng.random()
+    food = kind < 0.6
+    cloth = CLOTHS[rng.integers(len(CLOTHS))] if not food else (TURF if rng.random() < 0.7 else CLOTHS[rng.integers(len(CLOTHS))])
+    tw, td, th = width - 0.35, 0.95, 0.78
+    if rng.random() < 0.06:     # closed / empty bay: just a stack of crates at the back
         tw = 0
+    fy = hd - 0.2                                           # table front edge (along front)
+    by = fy - td                                            # table back edge
     if tw:
-        m.box(P(-tw / 2, hd - 0.25 - td, 0), A3 * tw, F3 * td, up * th, cloth, top=tuple(min(1, x * 1.12 + 0.03) for x in cloth))
-        if rng.random() < 0.45:   # striped counter skirt (green/white, Commons "Cambridge Market stalls at lunchtime")
-            sk = SKIRTS[rng.integers(len(SKIRTS))]
-            ns = max(2, int(round(tw / 0.12)))
-            for k in range(ns):
-                if k % 2:
-                    continue
-                s0, s1 = -tw / 2 + tw * k / ns, -tw / 2 + tw * (k + 1) / ns
-                fy = hd - 0.25 + 0.012
-                m.quad(P(s1, fy, 0.02), P(s0, fy, 0.02), P(s0, fy, th - 0.02), P(s1, fy, th - 0.02), sk) \
-                    if np.dot(np.cross(A3, F3), up) > 0 else \
-                    m.quad(P(s0, fy, 0.02), P(s1, fy, 0.02), P(s1, fy, th - 0.02), P(s0, fy, th - 0.02), sk)
-        # goods: a row of crates / trays on the table, tilted display not modelled
-        n = int(rng.integers(2, 5))
-        cw = tw / n
-        for k in range(n):
-            gc = GOODS[rng.integers(len(GOODS))]
-            h = rng.uniform(0.10, 0.22)
-            m.box(P(-tw / 2 + cw * k + 0.05, hd - 0.25 - td + 0.08, th), A3 * (cw - 0.1), F3 * (td - 0.16), up * h,
-                  CRATE, top=gc)
-            # heaped produce: a low four-sided mound on the crate
-            cx0, cy0, zt0 = -tw / 2 + cw * k + cw / 2, hd - 0.25 - td / 2, th + h
-            ex, ey = (cw - 0.14) / 2, (td - 0.2) / 2
-            apex = P(cx0, cy0, zt0 + rng.uniform(0.06, 0.14))
-            cs = [P(cx0 - ex, cy0 - ey, zt0), P(cx0 + ex, cy0 - ey, zt0), P(cx0 + ex, cy0 + ey, zt0), P(cx0 - ex, cy0 + ey, zt0)]
-            for a_, b_ in zip(cs, cs[1:] + cs[:1]):
-                m.tri(a_, b_, apex, gc)
-                m.tri(a_, apex, b_, tuple(x * 0.8 for x in gc))
-    if rng.random() < 0.3:   # hanging goods (bags, clothes, baskets) on the front eave rail
-        q = c + front * (hd - 0.1)
-        zr = ze + hgt([q])[0] - off - 0.1
-        for k in range(int(rng.integers(3, 7))):
-            s0 = -hw + 0.25 + k * (width - 0.5) / 6
-            ln = rng.uniform(0.35, 0.7)
-            m.box(P(s0, hd - 0.12, zr - z - ln), A3 * rng.uniform(0.2, 0.35), F3 * 0.06, up * ln, GOODS[rng.integers(len(GOODS))])
-    # crates stacked under / behind
-    for k in range(int(rng.integers(0, 3))):
-        s0 = rng.uniform(-hw + 0.2, hw - 0.7)
-        m.box(P(s0, -hd + 0.25, 0), A3 * 0.5, F3 * 0.35, up * (0.3 * (k + 1)), CRATE, top=GOODS[rng.integers(len(GOODS))])
-    # back sheet: thin board/sheet at the back of the bay, up to the canopy underside
-    if rng.random() < 0.5:
+        # trestle legs (4 thin) + table top slab with cloth top
+        for s_ in (-tw / 2 + 0.06, tw / 2 - 0.1):
+            for t_ in (by + 0.06, fy - 0.1):
+                m.box(P(s_, t_, 0), A3 * 0.04, F3 * 0.04, up * (th - 0.04), FRAME_DK)
+        m.box(P(-tw / 2, by, th - 0.04), A3 * tw, F3 * td, up * 0.04, cloth)
+        # cloth skirt on the front, hanging to ~0.3 m (thin), sometimes striped
+        sk = cloth if rng.random() < 0.6 else SKIRTS[rng.integers(len(SKIRTS))]
+        skirt_bot = rng.uniform(0.22, 0.45)
+        m.box(P(-tw / 2, fy - 0.01, skirt_bot), A3 * tw, F3 * 0.015, up * (th - skirt_bot), tuple(x * 0.85 for x in sk))
+        # crates / boxes under the table (visible below the skirt)
+        for k in range(int(rng.integers(1, 4))):
+            s0 = rng.uniform(-tw / 2 + 0.05, tw / 2 - 0.55)
+            m.box(P(s0, by + 0.1, 0), A3 * 0.5, F3 * 0.35, up * rng.uniform(0.25, 0.45),
+                  CRATE_COLS[rng.integers(len(CRATE_COLS))])
+        if food:
+            # stepped riser at the back of the table; two rows of tilted crates
+            m.box(P(-tw / 2 + 0.02, by + 0.02, th), A3 * (tw - 0.04), F3 * 0.4, up * 0.2, CRATE)
+            n = int(rng.integers(3, 6))
+            cw = tw / n
+            ang = np.radians(15)
+            V = F3 * np.cos(ang) - up * np.sin(ang)
+            Wv = up * np.cos(ang) + F3 * np.sin(ang)
+            for row, (t0, h0) in enumerate(((fy - 0.55, th), (by + 0.04, th + 0.2))):
+                for k in range(n):
+                    gc = PRODUCE[rng.integers(len(PRODUCE))]
+                    ch = rng.uniform(0.12, 0.2)
+                    o = P(-tw / 2 + cw * k + 0.03, t0, h0 + 0.12)
+                    m.box(o, A3 * (cw - 0.06), V * 0.48, Wv * ch, CRATE_COLS[rng.integers(len(CRATE_COLS))], top=gc)
+                    if rng.random() < 0.35:   # price card stuck in the produce
+                        q = P(-tw / 2 + cw * k + cw / 2, t0 + 0.4, h0 + 0.12 + ch)
+                        m.quad(q + A3 * 0.08, q - A3 * 0.08, q - A3 * 0.08 + up * 0.1, q + A3 * 0.08 + up * 0.1,
+                               (0.97, 0.97, 0.95), two=True)
+        else:
+            # flat trays / folded goods / boxes of varied colours
+            n = int(rng.integers(3, 7))
+            cw = tw / n
+            for k in range(n):
+                gc = GOODS[rng.integers(len(GOODS))]
+                m.box(P(-tw / 2 + cw * k + 0.04, by + rng.uniform(0.05, 0.3), th), A3 * (cw - 0.08),
+                      F3 * rng.uniform(0.35, 0.6), up * rng.uniform(0.04, 0.25), gc)
+    # back sheet: dark tarp at the back of the bay, up to the canopy underside (most bays)
+    sheet = rng.random() < 0.75
+    if sheet:
         sc = SHEETS[rng.integers(len(SHEETS))]
         q = c - front * (hd - 0.04)
         zt = ze + hgt([q])[0] - off - 0.02
         m.box(np.array([*(q - ax * (hw - 0.05)), z + 0.05]), A3 * (width - 0.1), F3 * 0.02, up * (zt - z - 0.05), sc)
-        if rng.random() < 0.4:   # side sheet on one side, back half
-            s = hw - 0.06 if rng.random() < 0.5 else -hw + 0.04
-            q1 = c + ax * s - front * (hd - 0.06)
-            zt1 = ze + min(hgt([q1])[0], hgt([q1 + front * depth * 0.5])[0]) - off - 0.02
-            m.box(np.array([*q1, z + 0.05]), A3 * 0.02, F3 * (depth * 0.5), up * (zt1 - z - 0.05), sc)
+    # hanging goods on the front eave rail (non-food stalls mostly) or on the back sheet
+    if (not food and rng.random() < 0.8) or rng.random() < 0.15:
+        q = c + front * (hd - 0.1)
+        zr = ze + hgt([q])[0] - off - 0.1
+        m.box(P(-hw + 0.1, hd - 0.12, zr - z - 0.03), A3 * (width - 0.2), F3 * 0.03, up * 0.03, FRAME_DK)
+        nh = int(rng.integers(4, 9))
+        for k in range(nh):
+            s0 = -hw + 0.2 + k * (width - 0.5) / nh
+            ln = rng.uniform(0.3, 0.75)
+            m.box(P(s0, hd - 0.13, zr - z - 0.03 - ln), A3 * rng.uniform(0.15, 0.28), F3 * 0.04, up * ln,
+                  GOODS[rng.integers(len(GOODS))])
+    if sheet and not food and rng.random() < 0.6:   # garments / bags pinned to the back sheet
+        for k in range(int(rng.integers(3, 6))):
+            s0 = -hw + 0.3 + k * 0.5
+            if s0 > hw - 0.4:
+                break
+            ln = rng.uniform(0.4, 0.8)
+            m.box(P(s0, -hd + 0.07, 1.1), A3 * 0.38, F3 * 0.03, up * ln, GOODS[rng.integers(len(GOODS))])
+    # crates stacked behind the table
+    for k in range(int(rng.integers(0, 3))):
+        s0 = rng.uniform(-hw + 0.2, hw - 0.7)
+        m.box(P(s0, -hd + 0.15, 0), A3 * 0.5, F3 * 0.35, up * (0.3 * (k + 1)), CRATE_COLS[rng.integers(len(CRATE_COLS))],
+              top=PRODUCE[rng.integers(len(PRODUCE))] if food else None)
 
 
 def fountain(m, g, cx, cy):

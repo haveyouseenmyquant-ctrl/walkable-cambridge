@@ -1,0 +1,72 @@
+{
+ "osm_id": "way/134519981",
+ "sources": [
+  "commons:File:9 St Edward's Passage, Cambridge.jpg",
+  "commons:File:Haunted Bookshop, St Edward's Passage, Cambridge.JPG"
+ ],
+ "walls": [
+  {
+   "id": "way/134519981:1",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.0
+   ],
+   "material": "brick",
+   "wall_colour": "#eeeae0",
+   "trim_colour": "#8a1f1f",
+   "cornice_z": 5.6,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.0
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.6,
+     "x1": 3.2,
+     "z1": 2.6,
+     "fascia_text": "The Haunted Bookshop",
+     "fascia_colour": "#8a1f1f",
+     "text_colour": "#f2ead8",
+     "door_x": 1.0,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.2,
+     "w": 0.9,
+     "z": 3.4,
+     "h": 1.5,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.6,
+     "w": 0.8,
+     "z": 3.4,
+     "h": 1.5,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    }
+   ],
+   "confidence": "high",
+   "notes": "The Haunted Bookshop: tiny 2-storey painted white brick, red shopfront and door, two red segmental-headed casements, dentil eaves."
+  }
+ ]
+}

@@ -1,0 +1,208 @@
+{
+ "osm_id": "way/169842585",
+ "sources": [
+  "commons:File:Corpus Christi Playroom, St Edward's Passage, Cambridge.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/169842585:0",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.6,
+    6.4
+   ],
+   "material": "brick",
+   "wall_colour": "#4f4c47",
+   "trim_colour": "#ece8e0",
+   "cornice_z": 8.9,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "door",
+     "style": "gothic",
+     "x": 6.4,
+     "w": 1.2,
+     "h": 2.8,
+     "surround": "pilastered"
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 1.4,
+     "w": 1.2,
+     "z": 0.9,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 3.6,
+     "w": 1.2,
+     "z": 0.9,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 9.4,
+     "w": 1.2,
+     "z": 0.9,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 11.8,
+     "w": 1.2,
+     "z": 0.9,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.8,
+     "w": 1.0,
+     "z": 4.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.8,
+     "w": 1.0,
+     "z": 4.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.8,
+     "w": 1.0,
+     "z": 4.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 10.8,
+     "w": 1.0,
+     "z": 4.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.8,
+     "w": 1.0,
+     "z": 6.7,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.8,
+     "w": 1.0,
+     "z": 6.7,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.8,
+     "w": 1.0,
+     "z": 6.7,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 10.8,
+     "w": 1.0,
+     "z": 6.7,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Corpus Christi Playroom: white-painted Gothic ground floor (pointed arches, doorway), pierced frieze, dark stock brick above with sashes. Window positions approximate."
+  }
+ ]
+}

@@ -16,8 +16,8 @@
     10.0
    ],
    "material": "brick",
-   "wall_colour": "#d9cba7",
-   "trim_colour": "#f2efe6",
+   "wall_colour": "#b0a07f",
+   "trim_colour": "#e6dcc6",
    "cornice_z": 13.2,
    "cornice": "simple",
    "parapet": true,
@@ -300,5 +300,6 @@
    "confidence": "low",
    "notes": "Gault (buff) brick 4-storey range with WHSmith shopfront: blue fascia, white pilasters, plate glass. Window count estimated from oblique views. Brand read from photo (not in OSM)."
   }
- ]
+ ],
+ "colour_source": "s39 audit: colour from colours/ring1.json (Commons Taco Bell, Market Street geograph 7393555; Market Passage geograph 6888585); buff gault, darker than the old #d9cba7"
 }

@@ -344,6 +344,7 @@ def dormer(P, el, H, wall_col, trim_col, roof_col):
     face = Polygon([(x0, H), (x1, H), (x1, zt), (xc, zt + rise), (x0, zt)])
     win = {"x": xc, "w": w - 0.1, "z": H + 0.2, "h": h - 0.35, "panes": [2, 2], "head": "flat", "sill": False, "lintel": False}
     op = window(P, win, wall_col, trim_col, yb=yf + 0.12)
+    P.count("window", -1)               # the dormer's own window is part of the dormer element (SCHEMA.md)
     P.face_xz(face.difference(op), yf + 0.12, trim_col)
     P.quad((x0, yk, H), (x0, yf + 0.12, H), (x0, yf + 0.12, zt), (x0, yk, zt), (-1, 0, 0), wall_col)
     P.quad((x1, yf + 0.12, H), (x1, yk, H), (x1, yk, zt), (x1, yf + 0.12, zt), (1, 0, 0), wall_col)

@@ -13,7 +13,7 @@
     7.8
    ],
    "material": "brick",
-   "wall_colour": "#b8a27a",
+   "wall_colour": "#ab9b7c",
    "trim_colour": "#efe9dc",
    "cornice_z": 11.4,
    "cornice": "simple",
@@ -434,5 +434,6 @@
    "confidence": "low",
    "notes": "Uniform 1820s gault-brick terrace, 3 storeys, ~2 sash bays per house, parapet; individual timber shopfronts. Seen only very obliquely (2022 photo looking N along Rose Crescent), so house divisions are estimated (~4.2 m each) and shops are assigned south->north from OSM house numbers (11 Loake at S end = North Shoes in the 2022 photo, 10 Laser Clinics, 9 McDonald's, 7-8 R.M.Williams, 5a La Raza, 5 Molton Brown). Fascia colours partly guessed."
   }
- ]
+ ],
+ "colour_source": "s39 audit: colour from colours/ring1.json (Commons 1-11 Rose Crescent, Cambridge.jpg); also Commons 'Cambridge - Market Hill - View NNW into Rose Crescent'"
 }

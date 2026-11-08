@@ -10872,9 +10872,10 @@
     -27.02
    ],
    "ground_z": 10.45,
-   "eave_z": 14.26,
-   "height": 3.81,
-   "dist_centre": 102.1
+   "eave_z": 17.06,
+   "height": 6.61,
+   "dist_centre": 102.1,
+   "eave_fixed": true
   },
   {
    "id": "way/134519982:4",

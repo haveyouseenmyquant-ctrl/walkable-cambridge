@@ -1,0 +1,484 @@
+{
+ "osm_id": "way/1288730353",
+ "sources": [
+  "commons:File:1-11 Rose Crescent, Cambridge.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1288730353:3",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.9,
+    7.1
+   ],
+   "material": "brick",
+   "wall_colour": "#b6a07e",
+   "trim_colour": "#efe9dc",
+   "cornice_z": 10.2,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.9
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 5.85,
+     "z1": 3.6,
+     "fascia_text": "",
+     "fascia_colour": "#8f8478",
+     "text_colour": "#f2ede4",
+     "door_x": 3.08,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 6.45,
+     "x1": 12.0,
+     "z1": 3.6,
+     "fascia_text": "",
+     "fascia_colour": "#8f8478",
+     "text_colour": "#f2ede4",
+     "door_x": 9.23,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.54,
+     "w": 1.0,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.54,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.61,
+     "w": 1.0,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.61,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.69,
+     "w": 1.0,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.69,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 10.76,
+     "w": 1.0,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 10.76,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "1-11 Rose Crescent (1826 crescent): gault brick, 3 storeys, regular sashes, painted timber shopfronts. Window pitch from photo; fascias unknown so left blank."
+  },
+  {
+   "id": "way/1288730353:5",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.9,
+    7.1
+   ],
+   "material": "brick",
+   "wall_colour": "#b6a07e",
+   "trim_colour": "#efe9dc",
+   "cornice_z": 10.2,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.9
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 5.25,
+     "z1": 3.6,
+     "fascia_text": "",
+     "fascia_colour": "#8f8478",
+     "text_colour": "#f2ede4",
+     "door_x": 2.77,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.77,
+     "w": 1.0,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.77,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "1-11 Rose Crescent (1826 crescent): gault brick, 3 storeys, regular sashes, painted timber shopfronts. Window pitch from photo; fascias unknown so left blank."
+  },
+  {
+   "id": "way/1288730353:7",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.9,
+    7.1
+   ],
+   "material": "brick",
+   "wall_colour": "#b6a07e",
+   "trim_colour": "#efe9dc",
+   "cornice_z": 10.2,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.9
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 5.92,
+     "z1": 3.6,
+     "fascia_text": "",
+     "fascia_colour": "#8f8478",
+     "text_colour": "#f2ede4",
+     "door_x": 3.11,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.55,
+     "w": 1.0,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.55,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.67,
+     "w": 1.0,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.67,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "1-11 Rose Crescent (1826 crescent): gault brick, 3 storeys, regular sashes, painted timber shopfronts. Window pitch from photo; fascias unknown so left blank."
+  },
+  {
+   "id": "way/1288730353:8",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.9,
+    7.1
+   ],
+   "material": "brick",
+   "wall_colour": "#b6a07e",
+   "trim_colour": "#efe9dc",
+   "cornice_z": 10.2,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.9
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 6.32,
+     "z1": 3.6,
+     "fascia_text": "",
+     "fascia_colour": "#8f8478",
+     "text_colour": "#f2ede4",
+     "door_x": 3.31,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 6.92,
+     "x1": 12.94,
+     "z1": 3.6,
+     "fascia_text": "",
+     "fascia_colour": "#8f8478",
+     "text_colour": "#f2ede4",
+     "door_x": 9.93,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.66,
+     "w": 1.0,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.66,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.96,
+     "w": 1.0,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.96,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.28,
+     "w": 1.0,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.28,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 11.59,
+     "w": 1.0,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 11.59,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "1-11 Rose Crescent (1826 crescent): gault brick, 3 storeys, regular sashes, painted timber shopfronts. Window pitch from photo; fascias unknown so left blank."
+  }
+ ]
+}
