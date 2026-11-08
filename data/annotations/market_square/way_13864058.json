@@ -1,0 +1,291 @@
+{
+ "osm_id": "way/13864058",
+ "sources": [
+  "664472238266303",
+  "1078821085942013"
+ ],
+ "walls": [
+  {
+   "id": "way/13864058:28",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.2,
+    8.4
+   ],
+   "material": "stone",
+   "wall_colour": "#c9b58e",
+   "trim_colour": "#b8a27a",
+   "cornice_z": 13.8,
+   "cornice": "bracketed",
+   "parapet": true,
+   "string_courses": [
+    4.2,
+    8.4
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.0,
+     "w": 1.6,
+     "z": 1.2,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.5,
+     "w": 1.6,
+     "z": 1.2,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 9.0,
+     "w": 1.6,
+     "z": 1.2,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.4,
+     "w": 1.6,
+     "z": 1.2,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.0,
+     "w": 1.6,
+     "z": 5.3,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.5,
+     "w": 1.6,
+     "z": 5.3,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 9.0,
+     "w": 1.6,
+     "z": 5.3,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.4,
+     "w": 1.6,
+     "z": 5.3,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.0,
+     "w": 1.6,
+     "z": 9.4,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.5,
+     "w": 1.6,
+     "z": 9.4,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 9.0,
+     "w": 1.6,
+     "z": 9.4,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.4,
+     "w": 1.6,
+     "z": 9.4,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 3.8,
+     "w": 1.6,
+     "h": 2.0
+    },
+    {
+     "type": "dormer",
+     "x": 10.6,
+     "w": 1.6,
+     "h": 2.0
+    }
+   ],
+   "confidence": "low",
+   "notes": "Gonville & Caius Waterhouse range (Gothic/French Renaissance stone, mullioned windows, steep slate roof with gabled dormers). Seen only obliquely/distant; bay positions schematic."
+  },
+  {
+   "id": "way/13864058:26",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.2,
+    8.4
+   ],
+   "material": "stone",
+   "wall_colour": "#c9b58e",
+   "trim_colour": "#b8a27a",
+   "cornice_z": 14.4,
+   "cornice": "bracketed",
+   "parapet": true,
+   "string_courses": [
+    4.2,
+    8.4
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [],
+   "confidence": "low",
+   "notes": "Short corner return of Caius Waterhouse range; plain ashlar, no clear openings visible."
+  },
+  {
+   "id": "way/13864058:27",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.2,
+    8.4
+   ],
+   "material": "stone",
+   "wall_colour": "#c9b58e",
+   "trim_colour": "#b8a27a",
+   "cornice_z": 13.8,
+   "cornice": "bracketed",
+   "parapet": true,
+   "string_courses": [
+    4.2,
+    8.4
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.45,
+     "w": 1.2,
+     "z": 5.3,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.45,
+     "w": 1.2,
+     "z": 9.4,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Corner splay; assumed single window column per upper floor."
+  }
+ ]
+}

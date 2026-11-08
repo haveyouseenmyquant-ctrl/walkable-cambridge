@@ -1,0 +1,104 @@
+{
+ "osm_id": "way/1099847938",
+ "sources": [
+  "1078821085942013",
+  "664472238266303",
+  "2897708863821043"
+ ],
+ "walls": [
+  {
+   "id": "way/1099847938:0",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.8,
+    7.3
+   ],
+   "material": "brick",
+   "wall_colour": "#7d6447",
+   "trim_colour": "#f4f2ec",
+   "cornice_z": 11.1,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    3.8
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.4,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.6,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.4,
+     "w": 1.0,
+     "z": 8.0,
+     "h": 1.8,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.6,
+     "w": 1.0,
+     "z": 8.0,
+     "h": 1.8,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "arched",
+     "x": 2.5,
+     "w": 2.0,
+     "h": 3.0,
+     "surround": "none"
+    },
+    {
+     "type": "dormer",
+     "x": 2.5,
+     "w": 1.1,
+     "h": 1.4
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Brown stock brick, white stucco ground storey with round-arched opening, white-pedimented sashes; slate mansard with dormer; blue plaque between 1st-floor windows."
+  }
+ ]
+}

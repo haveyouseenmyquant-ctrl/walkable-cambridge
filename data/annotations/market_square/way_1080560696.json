@@ -1,0 +1,55 @@
+{
+ "osm_id": "way/1080560696",
+ "sources": [
+  "302224751350928"
+ ],
+ "walls": [
+  {
+   "id": "way/1080560696:0",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.4
+   ],
+   "material": "brick",
+   "wall_colour": "#8e4a36",
+   "trim_colour": "#efe8da",
+   "cornice_z": 6.9,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.2,
+     "w": 0.9,
+     "z": 4.1,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 4.2,
+     "z1": 3.2,
+     "fascia_text": null,
+     "fascia_colour": "#3a3532",
+     "text_colour": "#e8e0c8",
+     "door_x": 3.4,
+     "stallriser": 0.5,
+     "awning": false
+    }
+   ],
+   "confidence": "low",
+   "notes": "Continuation of brick shop range on St Mary's Passage; blurred photo."
+  }
+ ]
+}

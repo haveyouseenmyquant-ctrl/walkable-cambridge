@@ -1,0 +1,304 @@
+{
+ "osm_id": "way/1288730358",
+ "sources": [
+  "2802021553394282",
+  "543390210382861",
+  "745884646375599"
+ ],
+ "walls": [
+  {
+   "id": "way/1288730358:0",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.0,
+    7.1,
+    10.0
+   ],
+   "material": "brick",
+   "wall_colour": "#d9cba7",
+   "trim_colour": "#f2efe6",
+   "cornice_z": 13.2,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.0
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.3,
+    4.4,
+    8.4,
+    12.3
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.3,
+     "w": 1.0,
+     "z": 4.7,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.4,
+     "w": 1.0,
+     "z": 4.7,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.4,
+     "w": 1.0,
+     "z": 4.7,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.4,
+     "w": 1.0,
+     "z": 4.7,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.4,
+     "w": 1.0,
+     "z": 4.7,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 11.4,
+     "w": 1.0,
+     "z": 4.7,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.3,
+     "w": 1.0,
+     "z": 7.7,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.4,
+     "w": 1.0,
+     "z": 7.7,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.4,
+     "w": 1.0,
+     "z": 7.7,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.4,
+     "w": 1.0,
+     "z": 7.7,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.4,
+     "w": 1.0,
+     "z": 7.7,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 11.4,
+     "w": 1.0,
+     "z": 7.7,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.3,
+     "w": 1.0,
+     "z": 10.6,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.4,
+     "w": 1.0,
+     "z": 10.6,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.4,
+     "w": 1.0,
+     "z": 10.6,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.4,
+     "w": 1.0,
+     "z": 10.6,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.4,
+     "w": 1.0,
+     "z": 10.6,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 11.4,
+     "w": 1.0,
+     "z": 10.6,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 12.3,
+     "z1": 4.0,
+     "fascia_text": "WHSmith",
+     "fascia_colour": "#1d3c8f",
+     "text_colour": "#ffffff",
+     "door_x": 10.8,
+     "stallriser": 0.5,
+     "awning": false
+    }
+   ],
+   "confidence": "low",
+   "notes": "Gault (buff) brick 4-storey range with WHSmith shopfront: blue fascia, white pilasters, plate glass. Window count estimated from oblique views. Brand read from photo (not in OSM)."
+  }
+ ]
+}

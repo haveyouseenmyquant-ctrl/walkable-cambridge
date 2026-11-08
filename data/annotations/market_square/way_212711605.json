@@ -1,0 +1,215 @@
+{
+ "osm_id": "way/212711605",
+ "sources": [
+  "798596987448760",
+  "2798949150347432"
+ ],
+ "walls": [
+  {
+   "id": "way/212711605:6",
+   "storeys": 5,
+   "floor_z": [
+    0,
+    4.0,
+    6.6,
+    9.2,
+    11.8
+   ],
+   "material": "render",
+   "wall_colour": "#eceae4",
+   "trim_colour": "#3a3a3a",
+   "cornice_z": 14.2,
+   "cornice": "none",
+   "parapet": true,
+   "string_courses": [
+    4.0
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 12.0,
+     "z1": 3.6,
+     "fascia_text": "",
+     "fascia_colour": "#1d4a2e",
+     "text_colour": "#f2f2f2",
+     "door_x": 1.2,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 2.2,
+     "w": 2.6,
+     "z": 4.8,
+     "h": 1.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 6.2,
+     "w": 2.6,
+     "z": 4.8,
+     "h": 1.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 10.2,
+     "w": 2.6,
+     "z": 4.8,
+     "h": 1.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 2.2,
+     "w": 2.6,
+     "z": 7.4,
+     "h": 1.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 6.2,
+     "w": 2.6,
+     "z": 7.4,
+     "h": 1.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 10.2,
+     "w": 2.6,
+     "z": 7.4,
+     "h": 1.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 2.2,
+     "w": 2.6,
+     "z": 10.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 6.2,
+     "w": 2.6,
+     "z": 10.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 10.2,
+     "w": 2.6,
+     "z": 10.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 2.2,
+     "w": 2.6,
+     "z": 12.5,
+     "h": 1.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 6.2,
+     "w": 2.6,
+     "z": 12.5,
+     "h": 1.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 10.2,
+     "w": 2.6,
+     "z": 12.5,
+     "h": 1.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "White-rendered 1970s block, upper windows in angled projecting frames; ground floor dark green fascia (photo shows Subway, not in OSM tags). Window x positions approximate."
+  }
+ ]
+}

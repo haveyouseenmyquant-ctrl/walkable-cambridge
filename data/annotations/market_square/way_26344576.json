@@ -1,0 +1,70 @@
+{
+ "osm_id": "way/26344576",
+ "sources": [
+  "511369380021521"
+ ],
+ "walls": [
+  {
+   "id": "way/26344576:3",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "stone",
+   "wall_colour": "#86705a",
+   "trim_colour": "#b9a78a",
+   "cornice_z": 6.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 5.5,
+     "w": 1.6,
+     "z": 1.8,
+     "h": 3.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 11.5,
+     "w": 1.6,
+     "z": 1.8,
+     "h": 3.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 17.5,
+     "w": 1.6,
+     "z": 1.8,
+     "h": 3.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Church seen small in distance (photo 511369380021521); rubble stone with pointed traceried windows; count/spacing approximate. Wall 0 ref (189066929702180) does not show the church."
+  }
+ ]
+}

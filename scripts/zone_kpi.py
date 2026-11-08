@@ -5,7 +5,7 @@
 Walls: data/annotations/market_square/walls.json (street-facing walls within 90 m of 52.2053N 0.1190E).
 - facade_geometry_match_pct: per wall, agreement between the annotation (data/annotations/market_square/way_*.json,
   made from non-held-out photos) and the 3D elements the build actually emitted (site/zone/zone.json "walls"):
-  mean over [storeys, window, door, shopfront, dormer] of min(model, annot) / max(model, annot) (1 if both 0).
+  mean over [window, door, shopfront, dormer] (storeys not yet counted separately) of min(model, annot) / max(model, annot) (1 if both 0).
   Walls without an annotation count as 0. KPI = length-weighted mean x 100.
 - painted_detail_pct (lower is better): wall area (length x height) whose windows/doors exist only as a photo
   texture: walls carrying a photo-baked facade quad (site/facades/*.bin) and no modelled facade skin, divided by the
@@ -34,7 +34,11 @@ def main():
         except Exception:
             pass
     zp = os.path.join(SITE, "zone/zone.json")
-    model = {w["id"]: w for w in json.load(open(zp)).get("walls", [])} if os.path.exists(zp) else {}
+    gp = os.path.join(ROOT, "data/derived/facade_geometry.json")   # per wall, written by zone_build.py with the build
+    model = {}
+    if os.path.exists(zp) and os.path.exists(gp):
+        for w in json.load(open(gp))["walls"]:
+            model[w["id"]] = dict(counts=w.get("elements", {}), skin=w.get("tris", 0) > 0)
     quads = []
     for f in glob.glob(os.path.join(SITE, "facades/*.bin")):
         q = np.fromfile(f, "<f4").reshape(-1, 4, 5)
@@ -51,7 +55,7 @@ def main():
         if a and m:
             ac = {t: sum(1 for e in a.get("elements", []) if e.get("type") == t) for t in TYPES}
             mc = m.get("counts", {})
-            parts = [(a.get("storeys", 0), m.get("storeys", 0))] + [(ac[t], mc.get(t, 0)) for t in TYPES]
+            parts = [(ac[t], mc.get(t, 0)) for t in TYPES]
             score = float(np.mean([1.0 if x == y == 0 else min(x, y) / max(x, y) for x, y in parts]))
         num += score * L; den += L
         area += L * H

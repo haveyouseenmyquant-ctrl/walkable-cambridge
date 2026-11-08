@@ -1,0 +1,34 @@
+{
+ "osm_id": "way/40937938",
+ "sources": [
+  "479058393403230"
+ ],
+ "walls": [
+  {
+   "id": "way/40937938:48",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.6,
+    7.0
+   ],
+   "material": "brick",
+   "wall_colour": "#b98c5f",
+   "trim_colour": "#f0efe9",
+   "cornice_z": 10.6,
+   "cornice": "none",
+   "parapet": true,
+   "string_courses": [
+    3.6
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.2,
+    1.8
+   ],
+   "elements": [],
+   "confidence": "low",
+   "notes": "1970s Lion Yard: buff brick, white concrete piers/slab edges, recessed ground-floor arcade; 2 m return with no openings."
+  }
+ ]
+}

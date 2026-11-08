@@ -1,0 +1,276 @@
+{
+ "osm_id": "way/13864148",
+ "sources": [
+  "150365460382983"
+ ],
+ "walls": [
+  {
+   "id": "way/13864148:8",
+   "storeys": 5,
+   "floor_z": [
+    0,
+    4.6,
+    7.4,
+    10.2,
+    13.0
+   ],
+   "material": "stone",
+   "wall_colour": "#d8d0bd",
+   "trim_colour": "#c9c1ad",
+   "cornice_z": 15.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.6
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.2,
+    3.9,
+    7.6,
+    11.3,
+    15.0
+   ],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 14.8,
+     "z1": 4.0,
+     "fascia_text": "",
+     "fascia_colour": "#e6e0d2",
+     "text_colour": "#6b5a4a",
+     "door_x": 5.7,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.0,
+     "w": 2.2,
+     "z": 5.2,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.7,
+     "w": 2.2,
+     "z": 5.2,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 9.4,
+     "w": 2.2,
+     "z": 5.2,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 13.1,
+     "w": 2.2,
+     "z": 5.2,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.0,
+     "w": 2.2,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.7,
+     "w": 2.2,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 9.4,
+     "w": 2.2,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 13.1,
+     "w": 2.2,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.0,
+     "w": 2.2,
+     "z": 10.8,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.7,
+     "w": 2.2,
+     "z": 10.8,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 9.4,
+     "w": 2.2,
+     "z": 10.8,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 13.1,
+     "w": 2.2,
+     "z": 10.8,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.0,
+     "w": 2.2,
+     "z": 13.5,
+     "h": 1.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.7,
+     "w": 2.2,
+     "z": 13.5,
+     "h": 1.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 9.4,
+     "w": 2.2,
+     "z": 13.5,
+     "h": 1.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 13.1,
+     "w": 2.2,
+     "z": 13.5,
+     "h": 1.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Curved 1930s Portland-stone block; recessed colonnaded ground-floor arcade with glazed shopfronts (photo shows Paperchase; no shop tag in OSM). 3-light metal windows per bay; bay x positions approximate."
+  }
+ ]
+}

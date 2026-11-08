@@ -4,6 +4,7 @@ import { CollisionWorld } from './collision.js';
 import { TileManager } from './tiles.js';
 import { Player } from './player.js';
 import { Avatar } from './avatar.js';
+import { loadZone } from './zone.js';
 import { Minimap, renderTileMap, initLandmarks, mergeLandmarks, initOverlays } from './ui.js';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
@@ -110,6 +111,7 @@ async function main() {
   });
 
   player.canPlace = (x, y) => tiles.settled(x, y);
+  loadZone(BASE, scene);   // detailed facade zone (site/zone/zone.json, optional; ?zone=0 off)
   const avatar = new Avatar(scene);
   const modeEl = $('mode');
   player.onChange = () => {

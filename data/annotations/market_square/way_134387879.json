@@ -1,0 +1,70 @@
+{
+ "osm_id": "way/134387879",
+ "sources": [
+  "302224751350928",
+  "541914280138693"
+ ],
+ "walls": [
+  {
+   "id": "way/134387879:0",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.4
+   ],
+   "material": "brick",
+   "wall_colour": "#8e4a36",
+   "trim_colour": "#efe8da",
+   "cornice_z": 6.7,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.7,
+     "w": 0.9,
+     "z": 4.1,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.6,
+     "w": 0.9,
+     "z": 4.1,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 6.2,
+     "z1": 3.2,
+     "fascia_text": null,
+     "fascia_colour": "#3a3532",
+     "text_colour": "#e8e0c8",
+     "door_x": 5.4,
+     "stallriser": 0.5,
+     "awning": false
+    }
+   ],
+   "confidence": "low",
+   "notes": "Red brick, dark shopfront, white sash windows; from blurred/oblique photos, layout approximate."
+  }
+ ]
+}

@@ -1,0 +1,472 @@
+"""Parametric facade parts library (session 30, Market Square zone).
+
+Everything works in a wall-local frame: x = metres along the wall (p0 -> p1), y = outward from the original wall
+plane, z = metres above the wall's ground_z. A `Parts` accumulator collects triangles (k,3,3), the intended
+outward normal of each triangle (k,3) and a per-triangle sRGB colour (k,3); `zone_build.py` maps them to the
+collision frame and fixes the winding from the intended normals (the local frame is left-handed there).
+
+The real tile wall stays at y = 0. The facade skin is a sheet at y = SKIN (0.25 m) with real openings; reveals run
+back from the skin to the glass / door leaf just outside the wall plane (y = GLASS), so the depth is geometry.
+"""
+import hashlib
+import math
+
+import mapbox_earcut as earcut
+import numpy as np
+from shapely.geometry import MultiPolygon, Polygon, box
+from shapely.ops import unary_union
+
+SKIN = 0.25    # skin plane, metres outside the wall
+GLASS = 0.07   # glass / door leaf plane (just proud of the tile wall and the photo-facade quads at 0.04)
+GLASS_COL = "#2b3034"
+STOREY = 3.2
+BAY = 2.8
+
+
+def rgb(h):
+    h = h.lstrip("#")
+    return np.array([int(h[i:i + 2], 16) / 255 for i in (0, 2, 4)])
+
+
+def shade(c, k):
+    return np.clip(np.asarray(c, float) * k, 0, 1)
+
+
+def polys(g):
+    if g is None or g.is_empty:
+        return []
+    if isinstance(g, Polygon):
+        return [g]
+    return [q for q in getattr(g, "geoms", []) if isinstance(q, Polygon) and q.area > 1e-4]
+
+
+def earcut2d(poly):
+    """(k,3,2) triangles of a shapely polygon (with holes)."""
+    rings = [np.asarray(poly.exterior.coords)[:-1]] + [np.asarray(r.coords)[:-1] for r in poly.interiors]
+    rings = [r for r in rings if len(r) >= 3]
+    if not rings:
+        return np.zeros((0, 3, 2))
+    v = np.concatenate(rings).astype(np.float64)
+    ends = np.cumsum([len(r) for r in rings]).astype(np.uint32)
+    idx = np.asarray(earcut.triangulate_float64(v, ends)).reshape(-1, 3)
+    return v[idx]
+
+
+class Parts:
+    def __init__(self):
+        self.t, self.n, self.c = [], [], []
+        self.counts = {}
+        self.detail_area = 0.0   # facade area (m2, projected on the wall) covered by modelled 3D elements
+
+    def count(self, kind, k=1):
+        self.counts[kind] = self.counts.get(kind, 0) + k
+
+    def add(self, T, n, col):
+        T = np.asarray(T, float).reshape(-1, 3, 3)
+        if not len(T):
+            return
+        self.t.append(T)
+        self.n.append(np.tile(np.asarray(n, float), (len(T), 1)) if np.ndim(n) == 1 else np.asarray(n, float))
+        self.c.append(np.tile(np.asarray(col, float), (len(T), 1)))
+
+    def quad(self, a, b, c, d, n, col):
+        self.add([[a, b, c], [a, c, d]], n, col)
+
+    def face_xz(self, g, y, col, n=(0, 1, 0)):
+        """Polygon(s) in the xz plane at depth y."""
+        for p in polys(g):
+            T2 = earcut2d(p)
+            if len(T2):
+                self.add(np.stack([T2[..., 0], np.full(T2.shape[:2], y), T2[..., 1]], -1), n, col)
+
+    def sides_xz(self, g, y0, y1, col, inward=False, skip_ground=False):
+        """Extrude the boundary rings of polygon(s) between y0 and y1. Normals point out of the polygon, or into it
+        (inward=True: reveals of a hole)."""
+        for p in polys(g):
+            for ring, hole in [(p.exterior, False)] + [(r, True) for r in p.interiors]:
+                P = np.asarray(ring.coords)
+                if ring.is_ccw == hole:   # make exterior rings CCW in (x,z), holes CW
+                    P = P[::-1]
+                for (ax, az), (bx, bz) in zip(P[:-1], P[1:]):
+                    if skip_ground and az < 0.01 and bz < 0.01:
+                        continue
+                    L = math.hypot(bx - ax, bz - az)
+                    if L < 1e-4:
+                        continue
+                    nx, nz = (bz - az) / L, -(bx - ax) / L   # right of a CCW edge = outward
+                    if inward:
+                        nx, nz = -nx, -nz
+                    self.quad((ax, y0, az), (bx, y0, bz), (bx, y1, bz), (ax, y1, az), (nx, 0, nz), col)
+
+    def slab(self, g, y0, y1, col, sides=True):
+        """Polygon(s) extruded from y0 (against the wall, back face omitted) to a front face at y1."""
+        self.face_xz(g, y1, col)
+        if sides:
+            self.sides_xz(g, y0, y1, col)
+
+    def box(self, x0, x1, y0, y1, z0, z1, col, top=True, bottom=True):
+        """Axis box; the back face (y0) is omitted."""
+        self.slab(box(x0, z0, x1, z1), y0, y1, col, sides=False)
+        self.quad((x0, y0, z0), (x0, y1, z0), (x0, y1, z1), (x0, y0, z1), (-1, 0, 0), col)
+        self.quad((x1, y0, z0), (x1, y1, z0), (x1, y1, z1), (x1, y0, z1), (1, 0, 0), col)
+        if top:
+            self.quad((x0, y0, z1), (x1, y0, z1), (x1, y1, z1), (x0, y1, z1), (0, 0, 1), col)
+        if bottom:
+            self.quad((x0, y0, z0), (x1, y0, z0), (x1, y1, z0), (x0, y1, z0), (0, 0, -1), col)
+
+    def extrude_profile(self, prof, x0, x1, col):
+        """Profile [(y, z), ...] traversed counter-clockwise in the (y, z) plane (y right, z up), from the wall at the
+        bottom outwards and back to the wall at the top; extruded along x from x0 to x1, with end caps."""
+        P = np.asarray(prof, float)
+        for (ay, az), (by, bz) in zip(P[:-1], P[1:]):
+            L = math.hypot(by - ay, bz - az)
+            if L < 1e-5:
+                continue
+            ny, nz = (bz - az) / L, -(by - ay) / L
+            self.quad((x0, ay, az), (x1, ay, az), (x1, by, bz), (x0, by, bz), (0, ny, nz), col)
+        T2 = earcut2d(Polygon(P))
+        for x, nx in ((x0, -1), (x1, 1)):
+            self.add(np.stack([np.full(T2.shape[:2], x), T2[..., 0], T2[..., 1]], -1), (nx, 0, 0), col)
+
+    def arrays(self):
+        if not self.t:
+            return np.zeros((0, 3, 3)), np.zeros((0, 3)), np.zeros((0, 3))
+        return np.concatenate(self.t), np.concatenate(self.n), np.concatenate(self.c)
+
+
+# ---------------------------------------------------------------- opening shapes (polygons in the xz plane)
+
+def arc(cx, cz, r, a0, a1, n):
+    a = np.linspace(a0, a1, n + 1)
+    return list(zip(cx + r * np.cos(a), cz + r * np.sin(a)))
+
+
+def opening_shape(xc, w, z0, h, head="flat"):
+    x0, x1 = xc - w / 2, xc + w / 2
+    if head == "arched" and h > w / 2 + 0.2:
+        zs = z0 + h - w / 2
+        return Polygon([(x0, z0), (x1, z0)] + arc(xc, zs, w / 2, 0, math.pi, 8) + [(x0, z0)])
+    if head == "pointed" and h > w * 0.87 + 0.2:   # equilateral gothic arch
+        zs = z0 + h - w * 0.866
+        right = arc(x0, zs, w, 0, math.pi / 3, 4)
+        left = arc(x1, zs, w, 2 * math.pi / 3, math.pi, 4)
+        return Polygon([(x0, z0), (x1, z0)] + right + left[1:])
+    return box(x0, z0, x1, z0 + h)
+
+
+# ---------------------------------------------------------------- elements
+
+def window(P, el, wall_col, trim_col, yb=SKIN):
+    """Returns the opening polygon (for the skin). Adds reveals, glass, frame + glazing bars, sill and head."""
+    xc, w, z0, h = el["x"], el.get("w", 1.0), el.get("z", 1.0), el.get("h", 1.6)
+    head = el.get("head", "pointed" if el.get("style") == "gothic" else "flat")
+    op = opening_shape(xc, w, z0, h, head)
+    P.sides_xz(op, GLASS, yb, shade(wall_col, 0.82), inward=True)
+    P.face_xz(op, GLASS, rgb(GLASS_COL))
+    cols, rows = el.get("panes", [2, 2])
+    fw = 0.07 if w > 0.6 else 0.05
+    inner = op.buffer(-fw, join_style=2)
+    bars = []
+    bw = 0.035
+    (bx0, bz0, bx1, bz1) = inner.bounds if not inner.is_empty else op.bounds
+    for i in range(1, max(1, int(cols))):
+        x = bx0 + (bx1 - bx0) * i / cols
+        bars.append(box(x - bw / 2, bz0, x + bw / 2, bz1))
+    rz1 = bz1 if head == "flat" else min(bz1, z0 + h - w * (0.5 if head == "arched" else 0.866))
+    for j in range(1, max(1, int(rows))):
+        z = bz0 + (rz1 - bz0) * j / rows
+        bars.append(box(bx0, z - (bw if j == rows // 2 and rows % 2 == 0 else bw / 2), bx1, z + bw / 2))
+    frame = unary_union([op.difference(inner)] + [b.intersection(inner) for b in bars])
+    P.slab(frame, GLASS, GLASS + 0.05, trim_col, sides=False)
+    if el.get("sill", True):
+        P.box(xc - w / 2 - 0.08, xc + w / 2 + 0.08, GLASS, yb + 0.07, z0 - 0.09, z0, trim_col, bottom=True)
+        P.detail_area += (w + 0.16) * 0.09
+    zt = op.bounds[3]
+    if head == "pediment":
+        tri = Polygon([(xc - w / 2 - 0.2, zt + 0.05), (xc + w / 2 + 0.2, zt + 0.05), (xc, zt + 0.05 + 0.35 * w)])
+        P.box(xc - w / 2 - 0.2, xc + w / 2 + 0.2, yb, yb + 0.1, zt, zt + 0.08, trim_col)
+        P.slab(tri, yb, yb + 0.08, trim_col)
+        P.detail_area += tri.area + (w + 0.4) * 0.08
+    elif head == "flat" and el.get("lintel", True):
+        P.box(xc - w / 2 - 0.06, xc + w / 2 + 0.06, yb, yb + 0.025, zt, zt + 0.16, shade(trim_col, 0.95), bottom=False)
+        P.detail_area += (w + 0.12) * 0.16
+    elif head in ("arched", "pointed"):   # thin archivolt band around the head
+        band = op.buffer(0.1, join_style=2).difference(op).intersection(box(xc - w, zt - w * 0.9, xc + w, zt + 1))
+        P.slab(band, yb, yb + 0.03, trim_col)
+        P.detail_area += band.area
+    P.detail_area += op.area
+    P.count("window")
+    return op
+
+
+def door(P, el, wall_col, trim_col, yb=SKIN):
+    xc, w, h = el["x"], el.get("w", 1.0), el.get("h", 2.2)
+    surround = el.get("surround", "none")
+    style = el.get("style", "panelled")
+    fan = surround == "fanlight" or style == "arched"
+    op = opening_shape(xc, w, 0, h + (w / 2 if fan else 0), "arched" if fan else ("pointed" if style == "gothic" else "flat"))
+    P.sides_xz(op, GLASS, yb, shade(wall_col, 0.8), inward=True, skip_ground=True)
+    leaf_col = rgb(el.get("colour", "#2e3b33"))
+    leaf = op.intersection(box(xc - w, 0, xc + w, h)) if fan else op
+    P.face_xz(leaf, GLASS, leaf_col)
+    if fan:
+        P.face_xz(op.difference(box(xc - w, 0, xc + w, h)), GLASS, rgb(GLASS_COL))
+        P.box(xc - w / 2, xc + w / 2, GLASS, GLASS + 0.06, h, h + 0.06, trim_col)
+    if style == "glazed":
+        P.face_xz(box(xc - w / 2 + 0.12, 1.0, xc + w / 2 - 0.12, h - 0.15), GLASS + 0.01, rgb(GLASS_COL))
+    else:   # four raised panels
+        pw, gap = (w - 0.36) / 2, 0.12
+        for i in range(2):
+            x0 = xc - w / 2 + gap + i * (pw + gap)
+            for z0, z1 in ((0.2, 0.95), (1.1, h - 0.18)):
+                if z1 > z0 + 0.2:
+                    P.box(x0, x0 + pw, GLASS, GLASS + 0.025, z0, z1, shade(leaf_col, 1.15))
+    zt = op.bounds[3]
+    if surround == "pilastered":
+        for x in (xc - w / 2 - 0.3, xc + w / 2):
+            P.box(x, x + 0.3, yb, yb + 0.1, 0, zt, trim_col, bottom=False)
+        P.box(xc - w / 2 - 0.4, xc + w / 2 + 0.4, yb, yb + 0.16, zt, zt + 0.35, trim_col)
+        P.detail_area += 0.6 * zt + (w + 0.8) * 0.35
+    elif surround != "none":
+        band = op.buffer(0.12, join_style=2).difference(op).intersection(box(xc - w, 0, xc + w, zt + 1))
+        P.slab(band, yb, yb + 0.03, trim_col)
+        P.detail_area += band.area
+    P.detail_area += op.area
+    P.count("door")
+    return op
+
+
+def shopfront(P, el, wall_col, trim_col, yb=SKIN):
+    x0, x1, z1 = el["x0"], el["x1"], el.get("z1", 3.3)
+    fh = min(0.7, z1 * 0.22)
+    zf = z1 - fh                         # fascia bottom = top of the glazing opening
+    sr = el.get("stallriser", 0.5)
+    fcol = rgb(el.get("fascia_colour", "#26343a"))
+    pil = 0.25
+    gx0, gx1 = x0 + pil, x1 - pil         # glazed opening between the end pilasters
+    op = box(gx0, 0, gx1, zf)
+    P.sides_xz(op, GLASS, yb, shade(fcol, 0.9), inward=True, skip_ground=True)
+    dx = el.get("door_x")
+    dw = 1.0
+    if dx is not None:
+        dx = min(max(dx, gx0 + dw / 2), gx1 - dw / 2)
+    segs = [(gx0, gx1)] if dx is None else [(gx0, dx - dw / 2), (dx + dw / 2, gx1)]
+    for a, b in segs:
+        if b - a < 0.1:
+            continue
+        if sr > 0.05:
+            P.box(a, b, GLASS, GLASS + 0.12, 0, sr, shade(fcol, 0.85), bottom=False)
+        P.face_xz(box(a, sr, b, zf), GLASS, rgb(GLASS_COL))
+        nm = max(1, round((b - a) / 1.4))
+        for i in range(1, nm):
+            x = a + (b - a) * i / nm
+            P.box(x - 0.03, x + 0.03, GLASS, GLASS + 0.06, sr, zf, fcol, top=False, bottom=False)
+        P.box(a, b, GLASS, GLASS + 0.06, zf - 0.55, zf - 0.5, fcol)   # transom
+    if dx is not None:   # recessed door: deep frame, glazed leaf
+        P.face_xz(box(dx - dw / 2, 0, dx + dw / 2, zf), GLASS - 0.01, shade(fcol, 0.7))
+        P.face_xz(box(dx - dw / 2 + 0.12, 0.9, dx + dw / 2 - 0.12, zf - 0.7), GLASS, rgb(GLASS_COL))
+        for x in (dx - dw / 2, dx + dw / 2 - 0.06):
+            P.box(x, x + 0.06, GLASS, GLASS + 0.12, 0, zf, fcol, top=False, bottom=False)
+        P.count("shop_door")
+    for a in (x0, x1 - pil):              # end pilasters with corbels
+        P.box(a, a + pil, yb, yb + 0.1, 0, zf, fcol, bottom=False)
+    P.box(x0 - 0.05, x1 + 0.05, yb, yb + 0.12, zf, z1 - 0.12, fcol)                       # fascia board
+    P.extrude_profile([(yb, z1 - 0.12), (yb + 0.2, z1 - 0.12), (yb + 0.26, z1 - 0.05), (yb + 0.26, z1),
+                       (yb, z1)], x0 - 0.1, x1 + 0.1, shade(fcol, 0.8))                      # fascia cornice
+    if el.get("awning"):
+        P.quad((x0, yb + 0.15, zf), (x1, yb + 0.15, zf), (x1, yb + 1.3, zf - 0.7), (x0, yb + 1.3, zf - 0.7),
+               (0, 0.5, 0.86), shade(fcol, 1.2))
+    P.detail_area += (x1 - x0) * z1
+    P.count("shopfront")
+    return op
+
+
+def dormer(P, el, H, wall_col, trim_col, roof_col):
+    xc, w, h = el["x"], el.get("w", 1.2), el.get("h", 1.4)
+    W = w + 0.4
+    x0, x1, zt = xc - W / 2, xc + W / 2, H + h
+    yf, yk = 0.0, -1.6                   # front plane at the wall, cheeks run back into the roof
+    rise = W * 0.45
+    face = Polygon([(x0, H), (x1, H), (x1, zt), (xc, zt + rise), (x0, zt)])
+    win = {"x": xc, "w": w - 0.1, "z": H + 0.2, "h": h - 0.35, "panes": [2, 2], "head": "flat", "sill": False, "lintel": False}
+    op = window(P, win, wall_col, trim_col, yb=yf + 0.12)
+    P.face_xz(face.difference(op), yf + 0.12, trim_col)
+    P.quad((x0, yk, H), (x0, yf + 0.12, H), (x0, yf + 0.12, zt), (x0, yk, zt), (-1, 0, 0), wall_col)
+    P.quad((x1, yf + 0.12, H), (x1, yk, H), (x1, yk, zt), (x1, yf + 0.12, zt), (1, 0, 0), wall_col)
+    s = math.hypot(W / 2, rise)
+    for sx in (-1, 1):                   # pitched roof with a small overhang
+        e = (xc + sx * (W / 2 + 0.1), zt - 0.07)
+        P.quad((e[0], yk, e[1]), (e[0], yf + 0.22, e[1]), (xc, yf + 0.22, zt + rise + 0.05), (xc, yk, zt + rise + 0.05),
+               (sx * rise / s, 0, (W / 2) / s), roof_col)
+    P.detail_area += face.area
+    P.count("dormer")
+
+
+def cornice(P, kind, z, x0, x1, col):
+    if kind == "none":
+        return
+    y = SKIN
+    if kind == "classical" or kind == "bracketed":
+        prof = [(y, z - 0.45), (y + 0.06, z - 0.45), (y + 0.06, z - 0.33), (y + 0.16, z - 0.28), (y + 0.2, z - 0.18),
+                (y + 0.42, z - 0.15), (y + 0.42, z - 0.08), (y + 0.5, z), (y, z)]
+        P.extrude_profile(prof, x0, x1, col)
+        if kind == "bracketed":
+            n = max(1, int((x1 - x0) / 0.9))
+            for i in range(n):
+                x = x0 + (x1 - x0) * (i + 0.5) / n
+                P.box(x - 0.07, x + 0.07, y, y + 0.36, z - 0.6, z - 0.15, shade(col, 0.95), top=False)
+        P.detail_area += (x1 - x0) * 0.45
+    else:   # simple
+        prof = [(y, z - 0.25), (y + 0.08, z - 0.25), (y + 0.08, z - 0.15), (y + 0.22, z - 0.08), (y + 0.22, z), (y, z)]
+        P.extrude_profile(prof, x0, x1, col)
+        P.detail_area += (x1 - x0) * 0.25
+    P.count("cornice")
+
+
+def string_course(P, z, x0, x1, col):
+    y = SKIN
+    P.extrude_profile([(y, z - 0.09), (y + 0.06, z - 0.09), (y + 0.08, z - 0.03), (y + 0.08, z + 0.07), (y, z + 0.09)],
+                      x0, x1, col)
+    P.detail_area += (x1 - x0) * 0.18
+    P.count("string_course")
+
+
+def quoins(P, x0, x1, H, col):
+    k = 0
+    for x, sgn in ((x0, 1), (x1, -1)):
+        z, i = 0.0, 0
+        while z + 0.3 <= H - 0.2:
+            wq = 0.55 if i % 2 == 0 else 0.32
+            a, b = (x, x + wq) if sgn > 0 else (x - wq, x)
+            P.box(a, b, SKIN, SKIN + 0.025, z + 0.01, z + 0.29, col, bottom=False)
+            P.detail_area += wq * 0.28
+            z += 0.3; i += 1; k += 1
+    P.count("quoin", k)
+
+
+def pilaster(P, x, H, col):
+    P.box(x - 0.22, x + 0.22, SKIN, SKIN + 0.1, 0, H, col, top=False, bottom=False)
+    P.detail_area += 0.44 * H
+    P.count("pilaster")
+
+
+# ---------------------------------------------------------------- wall assembly
+
+def wall_facade(L, H, ann, x0s=0.0, x1s=None, roof_col="#5d4f48"):
+    """Build one wall. ann: annotation wall dict (schema in data/annotations/market_square/SCHEMA.md).
+    x0s/x1s: skin extent along x (corners: extended or mitred). Returns Parts."""
+    x1s = L if x1s is None else x1s
+    P = Parts()
+    wall_col = rgb(ann.get("wall_colour", "#b9a784"))
+    trim_col = rgb(ann.get("trim_colour", "#e6e0d2"))
+    roof_col = rgb(roof_col)
+    holes = []
+    for el in ann.get("elements", []):
+        t = el.get("type")
+        try:
+            if t == "window":
+                if el.get("z", 1) + el.get("h", 1.6) > H - 0.1 or not (0.2 < el["x"] < L - 0.2):
+                    continue
+                holes.append(window(P, el, wall_col, trim_col))
+            elif t == "door":
+                if el.get("h", 2.2) > H - 0.2 or not (0.2 < el["x"] < L - 0.2):
+                    continue
+                holes.append(door(P, el, wall_col, trim_col))
+            elif t == "shopfront":
+                el = dict(el, x0=max(el["x0"], x0s + 0.05), x1=min(el["x1"], x1s - 0.05), z1=min(el.get("z1", 3.3), H - 0.3))
+                if el["x1"] - el["x0"] < 1.0:
+                    continue
+                holes.append(shopfront(P, el, wall_col, trim_col))
+            elif t == "dormer":
+                dormer(P, el, H, wall_col, trim_col, roof_col)
+        except (KeyError, TypeError, ValueError):
+            continue
+    # skin with openings, its edges returned back to the wall plane
+    skin = box(x0s, 0, x1s, H).difference(unary_union(holes)) if holes else box(x0s, 0, x1s, H)
+    P.face_xz(skin, SKIN, wall_col)
+    P.quad((x0s, 0, 0), (x0s, SKIN, 0), (x0s, SKIN, H), (x0s, 0, H), (-1, 0, 0), wall_col)
+    P.quad((x1s, SKIN, 0), (x1s, 0, 0), (x1s, 0, H), (x1s, SKIN, H), (1, 0, 0), wall_col)
+    P.quad((x0s, 0, H), (x1s, 0, H), (x1s, SKIN, H), (x0s, SKIN, H), (0, 0, 1), wall_col)
+    for z in ann.get("string_courses", []):
+        if 0.5 < z < H - 0.3:
+            string_course(P, z, x0s, x1s, trim_col)
+    cz = min(ann.get("cornice_z", H), H)
+    cornice(P, ann.get("cornice", "simple"), cz, x0s, x1s, trim_col)
+    if ann.get("parapet"):
+        P.box(x0s, x1s, 0, SKIN + 0.05, H - 0.02, H + 0.1, shade(trim_col, 0.9), bottom=False)
+    if ann.get("quoins"):
+        quoins(P, x0s, x1s, H, trim_col)
+    for x in ann.get("pilasters", []) or []:
+        if 0.25 < x < L - 0.25:
+            pilaster(P, x, min(cz, H) - 0.3, trim_col)
+    return P
+
+
+PALETTE = [("#bcae8c", "#e8e2d4"), ("#c2b494", "#efe9dc"), ("#9c5f45", "#e9e4d8"), ("#d9d1c0", "#f1ede4"),
+           ("#c9bea3", "#ece6d8"), ("#a8754f", "#efe9dc")]
+
+
+def default_layout(wall):
+    """Procedural georgian/victorian layout for a wall without an annotation."""
+    L, H = wall["length"], wall["eave_z"] - wall["ground_z"]
+    tags = wall.get("tags", {})
+    hsh = int(hashlib.md5(wall["osm_id"].encode()).hexdigest()[:8], 16)
+    wc, tc = PALETTE[hsh % len(PALETTE)]
+    ann = {"id": wall["id"], "wall_colour": wc, "trim_colour": tc, "cornice": "simple", "elements": [],
+           "string_courses": []}
+    if L < 2.4 or H < 2.5:
+        ann["cornice"] = "none" if H < 2.5 else "simple"
+        return ann
+    church = tags.get("amenity") == "place_of_worship" or tags.get("building") in ("church", "chapel")
+    if church:   # tall gothic lancets
+        ann.update(wall_colour="#c4b99c", trim_colour="#d6ccb2", cornice="simple")
+        nb = max(1, int(L / 4.0))
+        for i in range(nb):
+            x = L * (i + 0.5) / nb
+            h = min(H - 3.2, 6.5)
+            if h > 2.0:
+                ann["elements"].append({"type": "window", "style": "gothic", "x": x, "w": 1.4, "z": 2.2, "h": h,
+                                        "panes": [2, 4], "head": "pointed", "sill": True})
+        return ann
+    try:
+        lv = int(float(tags.get("building:levels", "0")))
+    except ValueError:
+        lv = 0
+    n = lv if lv and 2.6 <= H / lv <= 5.0 else max(1, round(H / STOREY))
+    n = max(1, min(n, int(H / 2.6)))
+    fh = H / n
+    floor_z = [fh * k for k in range(n)]
+    ann["storeys"], ann["floor_z"] = n, floor_z
+    nb = max(1, int(L / BAY))
+    bw = L / nb
+    georgian = hsh % 2 == 0
+    shop = ("shop" in tags or "amenity" in tags) and L >= 3.0
+    if n > 1:
+        ann["string_courses"] = [floor_z[1]]
+    if shop:
+        z1 = min(fh, 4.0)
+        units = max(1, round(L / 6.5))
+        uw = L / units
+        for u in range(units):
+            a, b = u * uw + 0.15, (u + 1) * uw - 0.15
+            ann["elements"].append({"type": "shopfront", "x0": a, "x1": b, "z1": z1, "door_x": a + 1.0 if u % 2 == 0 else b - 1.0,
+                                    "stallriser": 0.5, "fascia_colour": ["#1f3a30", "#2b2f3a", "#5a1f22", "#30302e"][(hsh + u) % 4]})
+    for k in range(n):
+        if k == 0 and shop:
+            continue
+        top = k == n - 1 and n > 2
+        h = min(1.75 if not top else 1.35, fh - 1.25)
+        if h < 0.8:
+            continue
+        sill = floor_z[k] + (0.85 if k else 0.8)
+        for i in range(nb):
+            x = bw * (i + 0.5)
+            w = min(1.05 if not top else 0.95, bw * 0.48)
+            if k == 0 and i == nb // 2 and L > 5 and fh > 2.6:
+                ann["elements"].append({"type": "door", "style": "panelled", "x": x, "w": 1.0, "h": min(2.3, fh - 0.6),
+                                        "surround": "fanlight" if georgian and fh > 3.4 else "none"})
+                continue
+            ann["elements"].append({"type": "window", "style": "sash_georgian" if georgian else "sash_victorian",
+                                    "x": x, "w": w, "z": sill, "h": h, "panes": [3, 3] if georgian else [1, 2],
+                                    "head": "flat", "sill": True})
+    return ann

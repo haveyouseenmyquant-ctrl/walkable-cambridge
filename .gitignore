@@ -21,3 +21,5 @@ data/benchmark/renders/
 tools/pw/node_modules/
 site/facades/
 site/markings/
+site/zone/
+data/benchmark/photos_ms/

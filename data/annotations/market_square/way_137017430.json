@@ -1,0 +1,103 @@
+{
+ "osm_id": "way/137017430",
+ "sources": [
+  "296497208762822",
+  "1078821085942013"
+ ],
+ "walls": [
+  {
+   "id": "way/137017430:1",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.4,
+    6.9
+   ],
+   "material": "brick",
+   "wall_colour": "#6b5940",
+   "trim_colour": "#f3f1ea",
+   "cornice_z": 10.8,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.4
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 0.94,
+     "w": 0.75,
+     "z": 3.8,
+     "h": 2.1,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.28,
+     "w": 0.75,
+     "z": 3.8,
+     "h": 2.1,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 0.94,
+     "w": 0.75,
+     "z": 7.4,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.28,
+     "w": 0.75,
+     "z": 7.4,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "arched",
+     "x": 1.6,
+     "w": 1.6,
+     "h": 3.0,
+     "surround": "none"
+    },
+    {
+     "type": "dormer",
+     "x": 1.6,
+     "w": 1.0,
+     "h": 1.5
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Brown stock-brick 3 storeys + slate mansard; white rendered ground floor with wide arched shop entrance; white window surrounds. Photo face looks ~5.5 m wide vs 3.26 m wall: x positions scaled to wall. Other walls not visible (refs are Great St Mary's interiors)."
+  }
+ ]
+}

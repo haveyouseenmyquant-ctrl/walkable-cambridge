@@ -1,0 +1,2024 @@
+{
+ "zone": "market_square",
+ "built": "2026-11-08T11:26:42Z",
+ "walls": [
+  {
+   "id": "way/13864058:26",
+   "osm_id": "way/13864058",
+   "annotated": true,
+   "length": 2.21,
+   "height": 14.38,
+   "area": 31.78,
+   "detail_area": 1.99,
+   "elements": {
+    "cornice": 1,
+    "string_course": 2
+   },
+   "tris": 90
+  },
+  {
+   "id": "way/13864058:27",
+   "osm_id": "way/13864058",
+   "annotated": true,
+   "length": 2.88,
+   "height": 13.77,
+   "area": 39.66,
+   "detail_area": 8.68,
+   "elements": {
+    "cornice": 1,
+    "string_course": 2,
+    "window": 2
+   },
+   "tris": 210
+  },
+  {
+   "id": "way/13864058:28",
+   "osm_id": "way/13864058",
+   "annotated": true,
+   "length": 14.16,
+   "height": 13.83,
+   "area": 195.83,
+   "detail_area": 73.87,
+   "elements": {
+    "cornice": 1,
+    "dormer": 2,
+    "string_course": 2,
+    "window": 14
+   },
+   "tris": 954
+  },
+  {
+   "id": "way/13864148:1",
+   "osm_id": "way/13864148",
+   "annotated": false,
+   "length": 5.25,
+   "height": 14.07,
+   "area": 73.87,
+   "detail_area": 11.63,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 3
+   },
+   "tris": 428
+  },
+  {
+   "id": "way/13864148:2",
+   "osm_id": "way/13864148",
+   "annotated": false,
+   "length": 8.85,
+   "height": 14.53,
+   "area": 128.59,
+   "detail_area": 33.26,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 14
+   },
+   "tris": 1168
+  },
+  {
+   "id": "way/13864148:4",
+   "osm_id": "way/13864148",
+   "annotated": false,
+   "length": 13.81,
+   "height": 15.73,
+   "area": 217.23,
+   "detail_area": 46.35,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 19
+   },
+   "tris": 1548
+  },
+  {
+   "id": "way/13864148:5",
+   "osm_id": "way/13864148",
+   "annotated": false,
+   "length": 2.41,
+   "height": 15.66,
+   "area": 37.74,
+   "detail_area": 11.02,
+   "elements": {
+    "cornice": 1,
+    "string_course": 1,
+    "window": 5
+   },
+   "tris": 430
+  },
+  {
+   "id": "way/13864148:6",
+   "osm_id": "way/13864148",
+   "annotated": false,
+   "length": 10.25,
+   "height": 16.08,
+   "area": 164.82,
+   "detail_area": 34.95,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 14
+   },
+   "tris": 1168
+  },
+  {
+   "id": "way/13864148:7",
+   "osm_id": "way/13864148",
+   "annotated": false,
+   "length": 6.24,
+   "height": 15.98,
+   "area": 99.72,
+   "detail_area": 23.24,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 9
+   },
+   "tris": 786
+  },
+  {
+   "id": "way/13864148:8",
+   "osm_id": "way/13864148",
+   "annotated": true,
+   "length": 15.07,
+   "height": 15.76,
+   "area": 237.5,
+   "detail_area": 157.48,
+   "elements": {
+    "cornice": 1,
+    "pilaster": 3,
+    "shop_door": 1,
+    "shopfront": 1,
+    "string_course": 1,
+    "window": 16
+   },
+   "tris": 1438
+  },
+  {
+   "id": "way/13864148:9",
+   "osm_id": "way/13864148",
+   "annotated": false,
+   "length": 14.35,
+   "height": 15.73,
+   "area": 225.73,
+   "detail_area": 56.78,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 24
+   },
+   "tris": 1928
+  },
+  {
+   "id": "way/13864148:10",
+   "osm_id": "way/13864148",
+   "annotated": false,
+   "length": 6.18,
+   "height": 16.86,
+   "area": 104.19,
+   "detail_area": 23.0,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 9
+   },
+   "tris": 786
+  },
+  {
+   "id": "way/13864148:11",
+   "osm_id": "way/13864148",
+   "annotated": false,
+   "length": 3.61,
+   "height": 18.22,
+   "area": 65.77,
+   "detail_area": 13.77,
+   "elements": {
+    "cornice": 1,
+    "string_course": 1,
+    "window": 6
+   },
+   "tris": 508
+  },
+  {
+   "id": "way/13864148:12",
+   "osm_id": "way/13864148",
+   "annotated": false,
+   "length": 2.92,
+   "height": 18.42,
+   "area": 53.79,
+   "detail_area": 13.58,
+   "elements": {
+    "cornice": 1,
+    "string_course": 1,
+    "window": 6
+   },
+   "tris": 508
+  },
+  {
+   "id": "way/13864148:13",
+   "osm_id": "way/13864148",
+   "annotated": false,
+   "length": 14.42,
+   "height": 12.27,
+   "area": 176.93,
+   "detail_area": 46.25,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 19
+   },
+   "tris": 1546
+  },
+  {
+   "id": "way/26344576:0",
+   "osm_id": "way/26344576",
+   "annotated": false,
+   "length": 7.89,
+   "height": 16.65,
+   "area": 131.37,
+   "detail_area": 11.14,
+   "elements": {
+    "cornice": 1,
+    "window": 1
+   },
+   "tris": 199
+  },
+  {
+   "id": "way/26344576:1",
+   "osm_id": "way/26344576",
+   "annotated": false,
+   "length": 2.74,
+   "height": 12.88,
+   "area": 35.29,
+   "detail_area": 9.73,
+   "elements": {
+    "cornice": 1,
+    "window": 1
+   },
+   "tris": 199
+  },
+  {
+   "id": "way/26344576:2",
+   "osm_id": "way/26344576",
+   "annotated": false,
+   "length": 2.05,
+   "height": 11.07,
+   "area": 22.69,
+   "detail_area": 0.51,
+   "elements": {
+    "cornice": 1
+   },
+   "tris": 26
+  },
+  {
+   "id": "way/26344576:3",
+   "osm_id": "way/26344576",
+   "annotated": true,
+   "length": 23.85,
+   "height": 6.85,
+   "area": 163.37,
+   "detail_area": 20.98,
+   "elements": {
+    "cornice": 1,
+    "window": 3
+   },
+   "tris": 519
+  },
+  {
+   "id": "way/26344576:4",
+   "osm_id": "way/26344576",
+   "annotated": false,
+   "length": 18.21,
+   "height": 6.12,
+   "area": 111.45,
+   "detail_area": 20.8,
+   "elements": {
+    "cornice": 1,
+    "window": 4
+   },
+   "tris": 717
+  },
+  {
+   "id": "way/26344576:5",
+   "osm_id": "way/26344576",
+   "annotated": false,
+   "length": 9.3,
+   "height": 6.56,
+   "area": 61.01,
+   "detail_area": 11.74,
+   "elements": {
+    "cornice": 1,
+    "window": 2
+   },
+   "tris": 372
+  },
+  {
+   "id": "way/26344576:6",
+   "osm_id": "way/26344576",
+   "annotated": false,
+   "length": 5.63,
+   "height": 5.84,
+   "area": 32.88,
+   "detail_area": 5.05,
+   "elements": {
+    "cornice": 1,
+    "window": 1
+   },
+   "tris": 199
+  },
+  {
+   "id": "way/26344576:7",
+   "osm_id": "way/26344576",
+   "annotated": false,
+   "length": 11.93,
+   "height": 6.19,
+   "area": 73.85,
+   "detail_area": 11.24,
+   "elements": {
+    "cornice": 1,
+    "window": 2
+   },
+   "tris": 375
+  },
+  {
+   "id": "way/26344576:8",
+   "osm_id": "way/26344576",
+   "annotated": false,
+   "length": 2.64,
+   "height": 5.96,
+   "area": 15.73,
+   "detail_area": 4.47,
+   "elements": {
+    "cornice": 1,
+    "window": 1
+   },
+   "tris": 200
+  },
+  {
+   "id": "way/26344576:9",
+   "osm_id": "way/26344576",
+   "annotated": false,
+   "length": 5.36,
+   "height": 14.99,
+   "area": 80.35,
+   "detail_area": 10.38,
+   "elements": {
+    "cornice": 1,
+    "window": 1
+   },
+   "tris": 199
+  },
+  {
+   "id": "way/40937938:44",
+   "osm_id": "way/40937938",
+   "annotated": false,
+   "length": 17.36,
+   "height": 6.32,
+   "area": 109.72,
+   "detail_area": 72.28,
+   "elements": {
+    "cornice": 1,
+    "shop_door": 3,
+    "shopfront": 3,
+    "string_course": 1,
+    "window": 6
+   },
+   "tris": 852
+  },
+  {
+   "id": "way/40937938:45",
+   "osm_id": "way/40937938",
+   "annotated": false,
+   "length": 26.8,
+   "height": 2.95,
+   "area": 79.06,
+   "detail_area": 74.6,
+   "elements": {
+    "cornice": 1,
+    "shop_door": 4,
+    "shopfront": 4
+   },
+   "tris": 498
+  },
+  {
+   "id": "way/40937938:46",
+   "osm_id": "way/40937938",
+   "annotated": false,
+   "length": 7.59,
+   "height": 10.59,
+   "area": 80.38,
+   "detail_area": 36.59,
+   "elements": {
+    "cornice": 1,
+    "shop_door": 1,
+    "shopfront": 1,
+    "string_course": 1,
+    "window": 4
+   },
+   "tris": 472
+  },
+  {
+   "id": "way/40937938:47",
+   "osm_id": "way/40937938",
+   "annotated": false,
+   "length": 18.63,
+   "height": 10.64,
+   "area": 198.22,
+   "detail_area": 93.23,
+   "elements": {
+    "cornice": 1,
+    "shop_door": 3,
+    "shopfront": 3,
+    "string_course": 1,
+    "window": 12
+   },
+   "tris": 1310
+  },
+  {
+   "id": "way/40937938:48",
+   "osm_id": "way/40937938",
+   "annotated": true,
+   "length": 2.01,
+   "height": 10.65,
+   "area": 21.41,
+   "detail_area": 0.41,
+   "elements": {
+    "string_course": 1
+   },
+   "tris": 30
+  },
+  {
+   "id": "way/95406730:3",
+   "osm_id": "way/95406730",
+   "annotated": false,
+   "length": 13.25,
+   "height": 5.91,
+   "area": 78.31,
+   "detail_area": 14.52,
+   "elements": {
+    "cornice": 1,
+    "window": 3
+   },
+   "tris": 547
+  },
+  {
+   "id": "way/95406730:4",
+   "osm_id": "way/95406730",
+   "annotated": false,
+   "length": 12.55,
+   "height": 5.94,
+   "area": 74.55,
+   "detail_area": 14.53,
+   "elements": {
+    "cornice": 1,
+    "window": 3
+   },
+   "tris": 546
+  },
+  {
+   "id": "way/95406730:5",
+   "osm_id": "way/95406730",
+   "annotated": false,
+   "length": 17.69,
+   "height": 8.6,
+   "area": 152.13,
+   "detail_area": 34.49,
+   "elements": {
+    "cornice": 1,
+    "window": 4
+   },
+   "tris": 720
+  },
+  {
+   "id": "way/119881004:6",
+   "osm_id": "way/119881004",
+   "annotated": false,
+   "length": 3.11,
+   "height": 12.13,
+   "area": 37.72,
+   "detail_area": 9.29,
+   "elements": {
+    "cornice": 1,
+    "string_course": 1,
+    "window": 4
+   },
+   "tris": 352
+  },
+  {
+   "id": "way/119881004:7",
+   "osm_id": "way/119881004",
+   "annotated": false,
+   "length": 3.71,
+   "height": 8.15,
+   "area": 30.24,
+   "detail_area": 6.82,
+   "elements": {
+    "cornice": 1,
+    "string_course": 1,
+    "window": 3
+   },
+   "tris": 274
+  },
+  {
+   "id": "way/134387866:3",
+   "osm_id": "way/134387866",
+   "annotated": false,
+   "length": 5.44,
+   "height": 10.72,
+   "area": 58.32,
+   "detail_area": 9.57,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 3
+   },
+   "tris": 236
+  },
+  {
+   "id": "way/134387870:4",
+   "osm_id": "way/134387870",
+   "annotated": false,
+   "length": 4.76,
+   "height": 12.65,
+   "area": 60.21,
+   "detail_area": 10.0,
+   "elements": {
+    "cornice": 1,
+    "string_course": 1,
+    "window": 4
+   },
+   "tris": 232
+  },
+  {
+   "id": "way/134387872:0",
+   "osm_id": "way/134387872",
+   "annotated": false,
+   "length": 4.95,
+   "height": 9.49,
+   "area": 46.98,
+   "detail_area": 8.06,
+   "elements": {
+    "cornice": 1,
+    "string_course": 1,
+    "window": 3
+   },
+   "tris": 184
+  },
+  {
+   "id": "way/134387872:3",
+   "osm_id": "way/134387872",
+   "annotated": true,
+   "length": 10.98,
+   "height": 10.76,
+   "area": 118.14,
+   "detail_area": 31.48,
+   "elements": {
+    "cornice": 1,
+    "shop_door": 1,
+    "shopfront": 1,
+    "string_course": 2,
+    "window": 4
+   },
+   "tris": 454
+  },
+  {
+   "id": "way/134387879:0",
+   "osm_id": "way/134387879",
+   "annotated": true,
+   "length": 6.53,
+   "height": 6.74,
+   "area": 44.01,
+   "detail_area": 24.09,
+   "elements": {
+    "cornice": 1,
+    "shop_door": 1,
+    "shopfront": 1,
+    "window": 2
+   },
+   "tris": 278
+  },
+  {
+   "id": "way/137017428:0",
+   "osm_id": "way/137017428",
+   "annotated": false,
+   "length": 15.45,
+   "height": 10.8,
+   "area": 166.86,
+   "detail_area": 36.02,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 14
+   },
+   "tris": 744
+  },
+  {
+   "id": "way/137017428:1",
+   "osm_id": "way/137017428",
+   "annotated": false,
+   "length": 16.04,
+   "height": 11.28,
+   "area": 180.93,
+   "detail_area": 44.22,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 19
+   },
+   "tris": 976
+  },
+  {
+   "id": "way/137017428:2",
+   "osm_id": "way/137017428",
+   "annotated": false,
+   "length": 4.96,
+   "height": 11.15,
+   "area": 55.3,
+   "detail_area": 7.95,
+   "elements": {
+    "cornice": 1,
+    "string_course": 1,
+    "window": 3
+   },
+   "tris": 184
+  },
+  {
+   "id": "way/137017428:3",
+   "osm_id": "way/137017428",
+   "annotated": false,
+   "length": 5.09,
+   "height": 11.31,
+   "area": 57.57,
+   "detail_area": 9.98,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 3
+   },
+   "tris": 236
+  },
+  {
+   "id": "way/137017428:4",
+   "osm_id": "way/137017428",
+   "annotated": false,
+   "length": 5.44,
+   "height": 12.88,
+   "area": 70.07,
+   "detail_area": 10.57,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 3
+   },
+   "tris": 236
+  },
+  {
+   "id": "way/137017428:9",
+   "osm_id": "way/137017428",
+   "annotated": false,
+   "length": 2.47,
+   "height": 8.8,
+   "area": 21.74,
+   "detail_area": 6.64,
+   "elements": {
+    "cornice": 1,
+    "string_course": 1,
+    "window": 3
+   },
+   "tris": 184
+  },
+  {
+   "id": "way/137017428:10",
+   "osm_id": "way/137017428",
+   "annotated": false,
+   "length": 7.68,
+   "height": 9.11,
+   "area": 69.96,
+   "detail_area": 15.11,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 5
+   },
+   "tris": 328
+  },
+  {
+   "id": "way/137017428:11",
+   "osm_id": "way/137017428",
+   "annotated": false,
+   "length": 7.94,
+   "height": 3.36,
+   "area": 26.68,
+   "detail_area": 6.48,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "window": 1
+   },
+   "tris": 126
+  },
+  {
+   "id": "way/137017430:1",
+   "osm_id": "way/137017430",
+   "annotated": true,
+   "length": 3.26,
+   "height": 12.05,
+   "area": 39.28,
+   "detail_area": 17.9,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "dormer": 1,
+    "string_course": 1,
+    "window": 5
+   },
+   "tris": 488
+  },
+  {
+   "id": "way/137017430:2",
+   "osm_id": "way/137017430",
+   "annotated": false,
+   "length": 14.92,
+   "height": 12.54,
+   "area": 187.1,
+   "detail_area": 35.79,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 14
+   },
+   "tris": 744
+  },
+  {
+   "id": "way/137017430:3",
+   "osm_id": "way/137017430",
+   "annotated": false,
+   "length": 10.44,
+   "height": 13.64,
+   "area": 142.4,
+   "detail_area": 22.12,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 8
+   },
+   "tris": 468
+  },
+  {
+   "id": "way/137017430:5",
+   "osm_id": "way/137017430",
+   "annotated": false,
+   "length": 6.82,
+   "height": 13.6,
+   "area": 92.75,
+   "detail_area": 14.74,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 5
+   },
+   "tris": 328
+  },
+  {
+   "id": "way/137017430:6",
+   "osm_id": "way/137017430",
+   "annotated": false,
+   "length": 2.51,
+   "height": 10.56,
+   "area": 26.51,
+   "detail_area": 7.01,
+   "elements": {
+    "cornice": 1,
+    "string_course": 1,
+    "window": 3
+   },
+   "tris": 184
+  },
+  {
+   "id": "way/137017430:7",
+   "osm_id": "way/137017430",
+   "annotated": false,
+   "length": 5.04,
+   "height": 11.0,
+   "area": 55.44,
+   "detail_area": 8.15,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 2
+   },
+   "tris": 188
+  },
+  {
+   "id": "way/137017430:8",
+   "osm_id": "way/137017430",
+   "annotated": false,
+   "length": 5.83,
+   "height": 9.99,
+   "area": 58.24,
+   "detail_area": 14.21,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 5
+   },
+   "tris": 328
+  },
+  {
+   "id": "way/137017433:0",
+   "osm_id": "way/137017433",
+   "annotated": false,
+   "length": 8.82,
+   "height": 10.71,
+   "area": 94.46,
+   "detail_area": 21.42,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 8
+   },
+   "tris": 468
+  },
+  {
+   "id": "way/137017433:1",
+   "osm_id": "way/137017433",
+   "annotated": false,
+   "length": 5.01,
+   "height": 13.15,
+   "area": 65.88,
+   "detail_area": 8.14,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 2
+   },
+   "tris": 188
+  },
+  {
+   "id": "way/137017433:2",
+   "osm_id": "way/137017433",
+   "annotated": false,
+   "length": 2.98,
+   "height": 15.74,
+   "area": 46.91,
+   "detail_area": 11.37,
+   "elements": {
+    "cornice": 1,
+    "string_course": 1,
+    "window": 5
+   },
+   "tris": 280
+  },
+  {
+   "id": "way/137017433:4",
+   "osm_id": "way/137017433",
+   "annotated": false,
+   "length": 24.09,
+   "height": 11.18,
+   "area": 269.33,
+   "detail_area": 57.09,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 23
+   },
+   "tris": 1158
+  },
+  {
+   "id": "way/137017433:21",
+   "osm_id": "way/137017433",
+   "annotated": false,
+   "length": 8.46,
+   "height": 10.33,
+   "area": 87.39,
+   "detail_area": 21.27,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 8
+   },
+   "tris": 468
+  },
+  {
+   "id": "way/137017433:22",
+   "osm_id": "way/137017433",
+   "annotated": false,
+   "length": 10.45,
+   "height": 10.73,
+   "area": 112.13,
+   "detail_area": 22.12,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 8
+   },
+   "tris": 468
+  },
+  {
+   "id": "way/137017435:2",
+   "osm_id": "way/137017435",
+   "annotated": false,
+   "length": 7.7,
+   "height": 0.01,
+   "area": 0.08,
+   "detail_area": 0.0,
+   "elements": {},
+   "tris": 8
+  },
+  {
+   "id": "way/137017435:3",
+   "osm_id": "way/137017435",
+   "annotated": false,
+   "length": 4.31,
+   "height": 0.11,
+   "area": 0.47,
+   "detail_area": 0.0,
+   "elements": {},
+   "tris": 8
+  },
+  {
+   "id": "way/137017435:4",
+   "osm_id": "way/137017435",
+   "annotated": false,
+   "length": 3.5,
+   "height": 3.68,
+   "area": 12.88,
+   "detail_area": 3.01,
+   "elements": {
+    "cornice": 1,
+    "window": 1
+   },
+   "tris": 74
+  },
+  {
+   "id": "way/137017435:5",
+   "osm_id": "way/137017435",
+   "annotated": false,
+   "length": 5.36,
+   "height": 3.63,
+   "area": 19.46,
+   "detail_area": 3.7,
+   "elements": {
+    "cornice": 1,
+    "door": 1
+   },
+   "tris": 78
+  },
+  {
+   "id": "way/137017435:7",
+   "osm_id": "way/137017435",
+   "annotated": false,
+   "length": 2.09,
+   "height": 3.63,
+   "area": 7.59,
+   "detail_area": 0.52,
+   "elements": {
+    "cornice": 1
+   },
+   "tris": 26
+  },
+  {
+   "id": "way/137017435:8",
+   "osm_id": "way/137017435",
+   "annotated": false,
+   "length": 6.59,
+   "height": 3.75,
+   "area": 24.71,
+   "detail_area": 6.08,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "window": 1
+   },
+   "tris": 126
+  },
+  {
+   "id": "way/137152223:2",
+   "osm_id": "way/137152223",
+   "annotated": true,
+   "length": 9.56,
+   "height": 8.2,
+   "area": 78.39,
+   "detail_area": 26.27,
+   "elements": {
+    "door": 1,
+    "pilaster": 4,
+    "string_course": 2,
+    "window": 2
+   },
+   "tris": 182
+  },
+  {
+   "id": "way/164853890:6",
+   "osm_id": "way/164853890",
+   "annotated": false,
+   "length": 11.36,
+   "height": 10.3,
+   "area": 117.01,
+   "detail_area": 29.48,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 11
+   },
+   "tris": 1038
+  },
+  {
+   "id": "way/164853890:7",
+   "osm_id": "way/164853890",
+   "annotated": false,
+   "length": 3.55,
+   "height": 13.44,
+   "area": 47.71,
+   "detail_area": 9.48,
+   "elements": {
+    "cornice": 1,
+    "string_course": 1,
+    "window": 4
+   },
+   "tris": 352
+  },
+  {
+   "id": "way/212711605:6",
+   "osm_id": "way/212711605",
+   "annotated": true,
+   "length": 12.35,
+   "height": 14.24,
+   "area": 175.86,
+   "detail_area": 92.62,
+   "elements": {
+    "shop_door": 1,
+    "shopfront": 1,
+    "string_course": 1,
+    "window": 9
+   },
+   "tris": 574
+  },
+  {
+   "id": "way/212711605:8",
+   "osm_id": "way/212711605",
+   "annotated": false,
+   "length": 6.68,
+   "height": 13.98,
+   "area": 93.39,
+   "detail_area": 18.95,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 7
+   },
+   "tris": 422
+  },
+  {
+   "id": "way/229680560:20",
+   "osm_id": "way/229680560",
+   "annotated": false,
+   "length": 14.39,
+   "height": 13.33,
+   "area": 191.82,
+   "detail_area": 81.25,
+   "elements": {
+    "cornice": 1,
+    "shop_door": 2,
+    "shopfront": 2,
+    "string_course": 1,
+    "window": 15
+   },
+   "tris": 984
+  },
+  {
+   "id": "way/229680560:21",
+   "osm_id": "way/229680560",
+   "annotated": false,
+   "length": 8.83,
+   "height": 13.26,
+   "area": 117.09,
+   "detail_area": 49.54,
+   "elements": {
+    "cornice": 1,
+    "shop_door": 1,
+    "shopfront": 1,
+    "string_course": 1,
+    "window": 9
+   },
+   "tris": 590
+  },
+  {
+   "id": "way/229680560:22",
+   "osm_id": "way/229680560",
+   "annotated": false,
+   "length": 5.8,
+   "height": 13.3,
+   "area": 77.14,
+   "detail_area": 32.42,
+   "elements": {
+    "cornice": 1,
+    "shop_door": 1,
+    "shopfront": 1,
+    "string_course": 1,
+    "window": 6
+   },
+   "tris": 440
+  },
+  {
+   "id": "way/400160677:0",
+   "osm_id": "way/400160677",
+   "annotated": false,
+   "length": 8.96,
+   "height": 0.02,
+   "area": 0.18,
+   "detail_area": 0.0,
+   "elements": {},
+   "tris": 8
+  },
+  {
+   "id": "way/400160677:1",
+   "osm_id": "way/400160677",
+   "annotated": false,
+   "length": 2.14,
+   "height": -0.01,
+   "area": -0.02,
+   "detail_area": -0.02,
+   "elements": {},
+   "tris": 8
+  },
+  {
+   "id": "way/400160677:3",
+   "osm_id": "way/400160677",
+   "annotated": false,
+   "length": 2.14,
+   "height": -0.02,
+   "area": -0.04,
+   "detail_area": -0.04,
+   "elements": {},
+   "tris": 8
+  },
+  {
+   "id": "way/400160678:0",
+   "osm_id": "way/400160678",
+   "annotated": false,
+   "length": 17.86,
+   "height": 0.09,
+   "area": 1.61,
+   "detail_area": 0.0,
+   "elements": {},
+   "tris": 8
+  },
+  {
+   "id": "way/400160678:3",
+   "osm_id": "way/400160678",
+   "annotated": false,
+   "length": 3.96,
+   "height": 0.06,
+   "area": 0.24,
+   "detail_area": 0.0,
+   "elements": {},
+   "tris": 8
+  },
+  {
+   "id": "way/400160679:0",
+   "osm_id": "way/400160679",
+   "annotated": false,
+   "length": 17.69,
+   "height": 0.74,
+   "area": 13.09,
+   "detail_area": 0.0,
+   "elements": {},
+   "tris": 8
+  },
+  {
+   "id": "way/400160679:1",
+   "osm_id": "way/400160679",
+   "annotated": false,
+   "length": 3.68,
+   "height": -0.08,
+   "area": -0.29,
+   "detail_area": -0.29,
+   "elements": {},
+   "tris": 8
+  },
+  {
+   "id": "way/400160680:0",
+   "osm_id": "way/400160680",
+   "annotated": false,
+   "length": 4.78,
+   "height": 2.32,
+   "area": 11.09,
+   "detail_area": 0.0,
+   "elements": {},
+   "tris": 8
+  },
+  {
+   "id": "way/400160680:5",
+   "osm_id": "way/400160680",
+   "annotated": false,
+   "length": 7.39,
+   "height": 1.8,
+   "area": 13.3,
+   "detail_area": 0.0,
+   "elements": {},
+   "tris": 8
+  },
+  {
+   "id": "way/400160681:1",
+   "osm_id": "way/400160681",
+   "annotated": false,
+   "length": 7.39,
+   "height": 2.23,
+   "area": 16.48,
+   "detail_area": 0.0,
+   "elements": {},
+   "tris": 8
+  },
+  {
+   "id": "way/400160682:5",
+   "osm_id": "way/400160682",
+   "annotated": false,
+   "length": 8.46,
+   "height": 0.62,
+   "area": 5.25,
+   "detail_area": 0.0,
+   "elements": {},
+   "tris": 8
+  },
+  {
+   "id": "way/400160683:1",
+   "osm_id": "way/400160683",
+   "annotated": false,
+   "length": 7.25,
+   "height": 2.08,
+   "area": 15.08,
+   "detail_area": 0.0,
+   "elements": {},
+   "tris": 8
+  },
+  {
+   "id": "way/400160684:1",
+   "osm_id": "way/400160684",
+   "annotated": false,
+   "length": 20.05,
+   "height": 0.03,
+   "area": 0.6,
+   "detail_area": 0.0,
+   "elements": {},
+   "tris": 8
+  },
+  {
+   "id": "way/400160685:1",
+   "osm_id": "way/400160685",
+   "annotated": false,
+   "length": 30.88,
+   "height": 0.01,
+   "area": 0.31,
+   "detail_area": 0.0,
+   "elements": {},
+   "tris": 8
+  },
+  {
+   "id": "way/400160686:1",
+   "osm_id": "way/400160686",
+   "annotated": false,
+   "length": 6.86,
+   "height": 2.62,
+   "area": 17.97,
+   "detail_area": 16.93,
+   "elements": {
+    "cornice": 1,
+    "shop_door": 1,
+    "shopfront": 1
+   },
+   "tris": 144
+  },
+  {
+   "id": "way/1080560696:0",
+   "osm_id": "way/1080560696",
+   "annotated": true,
+   "length": 4.39,
+   "height": 6.88,
+   "area": 30.2,
+   "detail_area": 15.69,
+   "elements": {
+    "cornice": 1,
+    "shop_door": 1,
+    "shopfront": 1,
+    "window": 1
+   },
+   "tris": 196
+  },
+  {
+   "id": "way/1080560696:2",
+   "osm_id": "way/1080560696",
+   "annotated": false,
+   "length": 4.49,
+   "height": 9.53,
+   "area": 42.79,
+   "detail_area": 7.75,
+   "elements": {
+    "cornice": 1,
+    "string_course": 1,
+    "window": 3
+   },
+   "tris": 184
+  },
+  {
+   "id": "way/1099847936:5",
+   "osm_id": "way/1099847936",
+   "annotated": false,
+   "length": 15.45,
+   "height": 10.8,
+   "area": 166.86,
+   "detail_area": 36.02,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 14
+   },
+   "tris": 744
+  },
+  {
+   "id": "way/1099847936:6",
+   "osm_id": "way/1099847936",
+   "annotated": false,
+   "length": 16.04,
+   "height": 11.28,
+   "area": 180.93,
+   "detail_area": 44.22,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 19
+   },
+   "tris": 976
+  },
+  {
+   "id": "way/1099847937:0",
+   "osm_id": "way/1099847937",
+   "annotated": true,
+   "length": 5.09,
+   "height": 11.31,
+   "area": 57.57,
+   "detail_area": 29.9,
+   "elements": {
+    "cornice": 1,
+    "shop_door": 1,
+    "shopfront": 1,
+    "string_course": 1,
+    "window": 6
+   },
+   "tris": 632
+  },
+  {
+   "id": "way/1099847937:1",
+   "osm_id": "way/1099847937",
+   "annotated": true,
+   "length": 5.44,
+   "height": 12.88,
+   "area": 70.07,
+   "detail_area": 24.94,
+   "elements": {
+    "cornice": 1,
+    "shop_door": 1,
+    "shopfront": 1,
+    "string_course": 1,
+    "window": 3
+   },
+   "tris": 375
+  },
+  {
+   "id": "way/1099847937:5",
+   "osm_id": "way/1099847937",
+   "annotated": false,
+   "length": 3.81,
+   "height": 7.27,
+   "area": 27.7,
+   "detail_area": 5.91,
+   "elements": {
+    "cornice": 1,
+    "string_course": 1,
+    "window": 2
+   },
+   "tris": 196
+  },
+  {
+   "id": "way/1099847938:0",
+   "osm_id": "way/1099847938",
+   "annotated": true,
+   "length": 4.96,
+   "height": 11.15,
+   "area": 55.3,
+   "detail_area": 21.85,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "dormer": 1,
+    "string_course": 1,
+    "window": 5
+   },
+   "tris": 495
+  },
+  {
+   "id": "way/1099847939:5",
+   "osm_id": "way/1099847939",
+   "annotated": false,
+   "length": 3.26,
+   "height": 12.05,
+   "area": 39.28,
+   "detail_area": 9.46,
+   "elements": {
+    "cornice": 1,
+    "string_course": 1,
+    "window": 4
+   },
+   "tris": 352
+  },
+  {
+   "id": "way/1099847939:6",
+   "osm_id": "way/1099847939",
+   "annotated": false,
+   "length": 14.92,
+   "height": 12.54,
+   "area": 187.1,
+   "detail_area": 46.46,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 19
+   },
+   "tris": 1546
+  },
+  {
+   "id": "way/1099847940:0",
+   "osm_id": "way/1099847940",
+   "annotated": false,
+   "length": 10.44,
+   "height": 13.64,
+   "area": 142.4,
+   "detail_area": 28.63,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 11
+   },
+   "tris": 608
+  },
+  {
+   "id": "way/1099847940:1",
+   "osm_id": "way/1099847940",
+   "annotated": false,
+   "length": 6.27,
+   "height": 13.53,
+   "area": 84.83,
+   "detail_area": 18.88,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 7
+   },
+   "tris": 422
+  },
+  {
+   "id": "way/1099847940:2",
+   "osm_id": "way/1099847940",
+   "annotated": false,
+   "length": 2.51,
+   "height": 10.56,
+   "area": 26.51,
+   "detail_area": 7.01,
+   "elements": {
+    "cornice": 1,
+    "string_course": 1,
+    "window": 3
+   },
+   "tris": 184
+  },
+  {
+   "id": "way/1099847940:3",
+   "osm_id": "way/1099847940",
+   "annotated": false,
+   "length": 5.04,
+   "height": 11.0,
+   "area": 55.44,
+   "detail_area": 8.15,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 2
+   },
+   "tris": 188
+  },
+  {
+   "id": "way/1099847940:4",
+   "osm_id": "way/1099847940",
+   "annotated": false,
+   "length": 5.83,
+   "height": 9.99,
+   "area": 58.24,
+   "detail_area": 14.21,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 5
+   },
+   "tris": 328
+  },
+  {
+   "id": "way/1211948487:3",
+   "osm_id": "way/1211948487",
+   "annotated": false,
+   "length": 9.74,
+   "height": 15.36,
+   "area": 149.61,
+   "detail_area": 34.73,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 14
+   },
+   "tris": 1168
+  },
+  {
+   "id": "way/1211948487:4",
+   "osm_id": "way/1211948487",
+   "annotated": false,
+   "length": 2.37,
+   "height": 14.69,
+   "area": 34.82,
+   "detail_area": 0.72,
+   "elements": {
+    "cornice": 1
+   },
+   "tris": 26
+  },
+  {
+   "id": "way/1211948487:5",
+   "osm_id": "way/1211948487",
+   "annotated": false,
+   "length": 13.38,
+   "height": 15.07,
+   "area": 201.64,
+   "detail_area": 46.38,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 19
+   },
+   "tris": 1548
+  },
+  {
+   "id": "way/1211948488:3",
+   "osm_id": "way/1211948488",
+   "annotated": false,
+   "length": 7.46,
+   "height": 14.25,
+   "area": 106.3,
+   "detail_area": 20.43,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 7
+   },
+   "tris": 734
+  },
+  {
+   "id": "way/1211948489:2",
+   "osm_id": "way/1211948489",
+   "annotated": false,
+   "length": 5.39,
+   "height": 11.06,
+   "area": 59.61,
+   "detail_area": 9.45,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 2
+   },
+   "tris": 350
+  },
+  {
+   "id": "way/1211948490:4",
+   "osm_id": "way/1211948490",
+   "annotated": false,
+   "length": 7.5,
+   "height": 9.9,
+   "area": 74.25,
+   "detail_area": 15.03,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 5
+   },
+   "tris": 478
+  },
+  {
+   "id": "way/1211948491:7",
+   "osm_id": "way/1211948491",
+   "annotated": false,
+   "length": 5.96,
+   "height": 12.65,
+   "area": 75.39,
+   "detail_area": 18.64,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 7
+   },
+   "tris": 422
+  },
+  {
+   "id": "way/1211951044:5",
+   "osm_id": "way/1211951044",
+   "annotated": false,
+   "length": 5.47,
+   "height": 10.73,
+   "area": 58.69,
+   "detail_area": 9.48,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 2
+   },
+   "tris": 350
+  },
+  {
+   "id": "way/1211951046:9",
+   "osm_id": "way/1211951046",
+   "annotated": true,
+   "length": 22.35,
+   "height": 10.06,
+   "area": 224.84,
+   "detail_area": 118.3,
+   "elements": {
+    "cornice": 1,
+    "pilaster": 2,
+    "shop_door": 3,
+    "shopfront": 3,
+    "string_course": 1,
+    "window": 12
+   },
+   "tris": 1448
+  },
+  {
+   "id": "way/1211951046:10",
+   "osm_id": "way/1211951046",
+   "annotated": false,
+   "length": 2.73,
+   "height": 9.99,
+   "area": 27.27,
+   "detail_area": 6.99,
+   "elements": {
+    "cornice": 1,
+    "string_course": 1,
+    "window": 3
+   },
+   "tris": 274
+  },
+  {
+   "id": "way/1211951047:4",
+   "osm_id": "way/1211951047",
+   "annotated": false,
+   "length": 8.8,
+   "height": 10.17,
+   "area": 89.5,
+   "detail_area": 21.41,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 8
+   },
+   "tris": 708
+  },
+  {
+   "id": "way/1211951053:2",
+   "osm_id": "way/1211951053",
+   "annotated": false,
+   "length": 5.82,
+   "height": 10.59,
+   "area": 61.63,
+   "detail_area": 15.46,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 5
+   },
+   "tris": 580
+  },
+  {
+   "id": "way/1211951054:7",
+   "osm_id": "way/1211951054",
+   "annotated": true,
+   "length": 8.27,
+   "height": 14.12,
+   "area": 116.77,
+   "detail_area": 47.36,
+   "elements": {
+    "cornice": 1,
+    "shop_door": 2,
+    "shopfront": 2,
+    "string_course": 1,
+    "window": 6
+   },
+   "tris": 666
+  },
+  {
+   "id": "way/1211951056:6",
+   "osm_id": "way/1211951056",
+   "annotated": false,
+   "length": 4.73,
+   "height": 11.42,
+   "area": 54.02,
+   "detail_area": 9.53,
+   "elements": {
+    "cornice": 1,
+    "string_course": 1,
+    "window": 4
+   },
+   "tris": 232
+  },
+  {
+   "id": "way/1211951057:4",
+   "osm_id": "way/1211951057",
+   "annotated": false,
+   "length": 9.8,
+   "height": 11.57,
+   "area": 113.39,
+   "detail_area": 27.33,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 11
+   },
+   "tris": 938
+  },
+  {
+   "id": "way/1222243455:2",
+   "osm_id": "way/1222243455",
+   "annotated": false,
+   "length": 6.17,
+   "height": 6.57,
+   "area": 40.54,
+   "detail_area": 11.35,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 3
+   },
+   "tris": 324
+  },
+  {
+   "id": "way/1288730353:9",
+   "osm_id": "way/1288730353",
+   "annotated": false,
+   "length": 26.29,
+   "height": 12.68,
+   "area": 333.36,
+   "detail_area": 83.06,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 35
+   },
+   "tris": 2762
+  },
+  {
+   "id": "way/1288730356:0",
+   "osm_id": "way/1288730356",
+   "annotated": false,
+   "length": 5.72,
+   "height": 13.54,
+   "area": 77.45,
+   "detail_area": 18.53,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 7
+   },
+   "tris": 632
+  },
+  {
+   "id": "way/1288730358:0",
+   "osm_id": "way/1288730358",
+   "annotated": true,
+   "length": 12.61,
+   "height": 13.18,
+   "area": 166.2,
+   "detail_area": 111.8,
+   "elements": {
+    "cornice": 1,
+    "pilaster": 4,
+    "shop_door": 1,
+    "shopfront": 1,
+    "string_course": 1,
+    "window": 18
+   },
+   "tris": 1192
+  },
+  {
+   "id": "way/1288730360:0",
+   "osm_id": "way/1288730360",
+   "annotated": false,
+   "length": 8.95,
+   "height": 13.52,
+   "area": 121.0,
+   "detail_area": 27.99,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 11
+   },
+   "tris": 608
+  },
+  {
+   "id": "way/1288730360:1",
+   "osm_id": "way/1288730360",
+   "annotated": false,
+   "length": 2.07,
+   "height": 13.66,
+   "area": 28.28,
+   "detail_area": 0.64,
+   "elements": {
+    "cornice": 1
+   },
+   "tris": 26
+  },
+  {
+   "id": "way/1288730360:2",
+   "osm_id": "way/1288730360",
+   "annotated": false,
+   "length": 5.24,
+   "height": 14.18,
+   "area": 74.3,
+   "detail_area": 10.48,
+   "elements": {
+    "cornice": 1,
+    "door": 1,
+    "string_course": 1,
+    "window": 3
+   },
+   "tris": 236
+  }
+ ],
+ "skipped": [
+  {
+   "id": "way/5094872:7",
+   "reason": "landmark:guildhall"
+  },
+  {
+   "id": "way/5094872:8",
+   "reason": "landmark:guildhall"
+  },
+  {
+   "id": "way/5094872:9",
+   "reason": "landmark:guildhall"
+  },
+  {
+   "id": "way/5094872:10",
+   "reason": "landmark:guildhall"
+  },
+  {
+   "id": "way/5094872:12",
+   "reason": "landmark:guildhall"
+  },
+  {
+   "id": "way/5094872:16",
+   "reason": "landmark:guildhall"
+  },
+  {
+   "id": "way/5094872:17",
+   "reason": "landmark:guildhall"
+  },
+  {
+   "id": "way/5094872:21",
+   "reason": "landmark:guildhall"
+  },
+  {
+   "id": "way/5094872:23",
+   "reason": "landmark:guildhall"
+  },
+  {
+   "id": "way/5094872:24",
+   "reason": "landmark:guildhall"
+  },
+  {
+   "id": "way/5094872:25",
+   "reason": "landmark:guildhall"
+  },
+  {
+   "id": "way/5094872:26",
+   "reason": "landmark:guildhall"
+  },
+  {
+   "id": "way/26344507:0",
+   "reason": "landmark:great-st-marys"
+  },
+  {
+   "id": "way/26344507:1",
+   "reason": "landmark:great-st-marys"
+  },
+  {
+   "id": "way/26344507:2",
+   "reason": "landmark:great-st-marys"
+  },
+  {
+   "id": "way/26344507:3",
+   "reason": "landmark:great-st-marys"
+  },
+  {
+   "id": "way/26344507:4",
+   "reason": "landmark:great-st-marys"
+  },
+  {
+   "id": "way/26344507:5",
+   "reason": "landmark:great-st-marys"
+  },
+  {
+   "id": "way/26344507:9",
+   "reason": "landmark:great-st-marys"
+  },
+  {
+   "id": "way/26344507:10",
+   "reason": "landmark:great-st-marys"
+  },
+  {
+   "id": "way/26344507:11",
+   "reason": "landmark:great-st-marys"
+  },
+  {
+   "id": "way/26344507:12",
+   "reason": "landmark:great-st-marys"
+  },
+  {
+   "id": "way/26344507:13",
+   "reason": "landmark:great-st-marys"
+  },
+  {
+   "id": "way/26344507:14",
+   "reason": "landmark:great-st-marys"
+  },
+  {
+   "id": "way/26344507:15",
+   "reason": "landmark:great-st-marys"
+  },
+  {
+   "id": "way/26344507:16",
+   "reason": "landmark:great-st-marys"
+  }
+ ],
+ "stats": {
+  "walls_annotated": 18,
+  "walls_total": 153,
+  "walls_built": 127,
+  "tris": 76388,
+  "facade_tris": 60544,
+  "prop_tris": 15844,
+  "facade_area_m2": 10270.0,
+  "modelled_detail_area_m2": 2854.2
+ }
+}

@@ -1,0 +1,75 @@
+{
+ "osm_id": "way/137152223",
+ "sources": [
+  "4038831659543196",
+  "479058393403230"
+ ],
+ "walls": [
+  {
+   "id": "way/137152223:2",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.4,
+    6.2
+   ],
+   "material": "brick",
+   "wall_colour": "#b98a5c",
+   "trim_colour": "#e9e9e5",
+   "cornice_z": 8.2,
+   "cornice": "none",
+   "parapet": true,
+   "string_courses": [
+    3.4,
+    4.4
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.3,
+    3.4,
+    6.4,
+    9.3
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 2.0,
+     "w": 0.9,
+     "z": 6.4,
+     "h": 1.6,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 8.0,
+     "w": 0.9,
+     "z": 6.4,
+     "h": 1.6,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 5.0,
+     "w": 2.2,
+     "h": 2.6,
+     "surround": "none"
+    }
+   ],
+   "confidence": "low",
+   "notes": "1960s-70s block: white concrete columns, recessed ground-floor arcade, white band then honeycomb brick screen (4.4-6.2), buff brick upper with slot windows. Door is a roller shutter. Wall/face mapping uncertain."
+  }
+ ]
+}
