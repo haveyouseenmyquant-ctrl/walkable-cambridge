@@ -1073,3 +1073,51 @@ Next
 3. More bespoke models: St Edward's, Lion Yard / Petty Cury frontages, the Market Hill colonnade block; better
    annotations (upgrade the low-confidence ones from Commons/Geograph photos).
 4. Street trees and lamp posts in the square checked against OSM; shopfront signs with real names as geometry.
+
+## 2026-11-08 — Session 33: bespoke Senate House, OSM railings/walls/steps, Petty Cury shopfronts
+
+Done (4 parallel subagents + integration)
+- **Senate House** (`scripts/zone_bespoke_senate.py`, 40k tris, way/5094870, tile body hidden): 9-bay south front
+  with 4 engaged Corinthian columns + pediment, pilasters, alternating pedimented ground-floor windows and round-headed
+  upper windows (real reveals, sashes, glazing bars), entablature, balustrade with urns, temple-front east end, lead
+  roof. Heights match the LiDAR DSM within ~0.3 m (balustrade 22.55 vs 22.4–22.9, ridge 23.75 vs 23.7–23.8). Its
+  photo facade is now skipped too (facades.js SKIP gets a 20 m circle at -213.3, 80.3). Before/after:
+  docs/zone_s33_senate_before_after.png: the biggest visible change this session.
+- **Barriers** (`scripts/zone_props_barriers.py`, 46k tris): every OSM fence/railing/wall/gate/steps way within
+  170 m: black spear-topped railings on stone plinths with piers (Senate House lawn 0.45+1.55 m, GSM churchyard),
+  stone walls (LiDAR height), stone step flights. zone_build.py now loads every `scripts/zone_props*.py`.
+- **Annotations**: 2 annotators, walls_annotated 48 → 63 by the builder's count (the commit message says 69; wrong).
+  Petty Cury 32–38 (Body Shop, Timpson, Fone World, Halifax, Trailfinders: real shopfronts), St Edward's south and
+  east walls and tower, Lion Yard, King's Parade 20–22, 1 Trinity St, Radcliffe Court, 16 Market St. Petty Cury /
+  St Edward's evidence is 16 CC BY-SA Commons/Geograph photos (data/raw/commons_ref, credited in DATA.md + each
+  annotation's sources); no held-out photos.
+- **zone_build.py**: no facade skins on the stall rows (`building=roof`) and trailers (they had windowed skins on
+  the canopies); overlapping OSM footprints deduped (13 walls of 137017428/137017430 dropped; keep annotated, then
+  addressed ways).
+- **zone_kpi.py**: painted_detail_pct now ignores photo quads the viewer doesn't draw (facades.js SKIP). It reads
+  **0.0**, but that is because photo facades are hidden in the zone, not because every wall is modelled: 54 of 153
+  walls have no skin (bespoke, stalls, dupes) and ~36 built walls still use the default procedural layout.
+  facade_geometry_match_pct 38.3 → **44.2** locally.
+- Zone GLB 199k tris, 25 MB (Pages serves it gzipped, 1.9 MB was the old one; new ~3 MB). Local: site_errors 0,
+  load 2.55 s (swiftshader), GPU fps 60. WebKit smoke still crashes at launch (known since session 13).
+- Published world-20261108-1227, live hash **afce85b5fd43a94e**. measure.sh: roof_match_pct 93 → 92.35 (still ≥ 90; not investigated). Before/after shots for Petty Cury, St Edward's,
+  King's Parade, Trinity St, Senate House: docs/zone_s33_*_before_after.png (poses in docs/s33_views.json; not
+  benchmark poses).
+- Market-square scores for 2204808 (session 32) were never computed: the service was busy with the 200-view bench.
+  service.sh will score afce85 next; nothing was benchmarked in-session.
+
+Learned
+- The Senate House long front faces south (lawn), not east; OSM footprint is 13.8 m deep while the LiDAR roof is
+  ~17.5 m (kept OSM for collision consistency).
+- An agent put the owner's email in a User-Agent header when downloading from Wikimedia. Brief agents explicitly
+  never to send it anywhere.
+- Annotators: many walls have no openly licensed photo at all (rear/courtyard walls); 134387872:3 (Ryder & Amies)
+  should be redone from Mapillary 306889447541810 / 1401075926896432. No "blind window" or mixed-material
+  (stucco ground floor + brick above) support in facade_parts yet.
+
+Next
+1. Read afce85 market_square_realism / photo match; compare with 25.25 / 34.06 baseline and 23.62 (9197e).
+2. facade_parts: blind windows, per-storey material (stucco ground floor), shop signs as 3D letters.
+3. Bespoke: Market Hill colonnade block, Lion Yard frontage, King's Parade terraces (next ring), Caius gate.
+4. Check the barrier guesses (Corpus steps ways 149032847/149032852/375395069, low walls 95406723/95406726).
+5. Zone GLB size: index/quantize (meshopt) before it grows further.
