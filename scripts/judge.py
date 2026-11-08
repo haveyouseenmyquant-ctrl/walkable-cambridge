@@ -109,6 +109,36 @@ def realism(h, renders, jobs, tmp):
     return {"judged_realism": out["judged_realism"], "n": len(ok)}
 
 
+MARKET_PROMPT = """You are a strict visual judge. Read the image file {path} . It shows two pictures side by side,
+labelled A (left) and B (right), supposed to show the same place (Cambridge Market Square area) from the same
+position and viewing direction. Score from 0 to 10 how well the two show the same 3D scene, considering: building
+shapes and proportions, window and door layout, mouldings and depth, rooflines, materials and colours, market
+stalls, street furniture and lighting. 0 = nothing in common, 5 = clearly the same place with the main shapes
+matching, 10 = indistinguishable.
+Reply with only a JSON object: {{"score": <0-10 number>, "reason": "<one short sentence>"}}"""
+
+
+def market(h, renders, jobs, tmp):
+    """market_square_realism: the 40 frozen Market Square photos (market_square.json), blind A/B like realism()."""
+    views = [v["id"] for v in json.load(open(os.path.join(B, "market_square.json")))]
+    def one(vid):
+        r = os.path.join(renders, f"{vid}.png")
+        if not os.path.exists(r):
+            return vid, None
+        swap = int(hashlib.sha256(f"{h}:ms:{vid}".encode()).hexdigest(), 16) % 2 == 1
+        p = os.path.join(tmp, f"ms_{vid}.jpg")
+        side_by_side(os.path.join(B, "photos_ms", f"{vid}.jpg"), r, swap, p)
+        res = ask(MARKET_PROMPT.format(path=p), tmp)
+        return vid, (dict(res, render_side="A" if swap else "B") if res and "score" in res else None)
+    with ThreadPoolExecutor(jobs) as ex:
+        per = dict(ex.map(one, views))
+    ok = {k: v for k, v in per.items() if v}
+    mean = sum(float(v["score"]) for v in ok.values()) / max(1, len(ok))
+    out = {"market_square_realism": round(mean * 10, 2), "n": len(ok), "model": JUDGE_MODEL, "per_view": per}
+    json.dump(out, open(os.path.join(B, "scores", f"{h}_msjudge.json"), "w"), indent=1)
+    return {"market_square_realism": out["market_square_realism"], "n": len(ok)}
+
+
 def quality(h, renders, jobs, tmp):
     views = json.load(open(os.path.join(B, "quality_views.json")))
     keys = json.dumps({k: 0 for k in RUBRIC})
@@ -151,6 +181,8 @@ def main():
     with tempfile.TemporaryDirectory() as tmp:
         if only in (None, "realism"):
             print(json.dumps(realism(h, renders, jobs, tmp)))
+        if only == "market":
+            print(json.dumps(market(h, renders, jobs, tmp)))
         if only in (None, "quality"):
             print(json.dumps(quality(h, renders, jobs, tmp)))
 

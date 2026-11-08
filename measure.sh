@@ -25,9 +25,17 @@ if os.path.exists(p):
 # photo_match_score / judged_realism / visual_quality: cached per build hash by scripts/bench.sh (benchmark renders + DINOv2)
 # roof_match_pct: cached per build hash by scripts/roof_match.py (reads every GLB; run by publish.sh and bench.sh)
 h = os.environ.get("BUILD_HASH", "")
-for k, suf in (("photo_match_score", ""), ("judged_realism", "_judge"), ("visual_quality", "_quality"), ("roof_match_pct", "_roof")):
+for k, suf in (("photo_match_score", ""), ("judged_realism", "_judge"), ("visual_quality", "_quality"), ("roof_match_pct", "_roof"),
+               ("market_square_photo_match", "_ms"), ("market_square_realism", "_msjudge")):
     f = "data/benchmark/scores/%s%s.json" % (h, suf)
     if h and os.path.exists(f):
         out[k] = json.load(open(f))[k]
+# facade_geometry_match_pct / painted_detail_pct: Market Square zone, from the local build (= the live one after publish.sh)
+try:
+    import subprocess
+    out.update(json.loads(subprocess.run([".venv/bin/python", "-I", "scripts/zone_kpi.py", "site"], capture_output=True, text=True, timeout=30).stdout))
+except Exception:
+    pass
 out.pop("fetch_failures", None)
+out.pop("real_facade_pct", None)   # retired by Gaspard (8 Nov 2026): photo-baked facades are being replaced by geometry
 print(json.dumps(out))'

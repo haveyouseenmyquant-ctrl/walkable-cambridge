@@ -22,5 +22,6 @@ except Exception: print("{}")')
     echo "$(date -u +%FT%TZ) browser test failed: $(tail -n3 /tmp/wc_browser_test.err)"
   fi
   [ -f data/benchmark/benchmark.json ] && scripts/bench.sh "$SRC" 2>&1 | tail -n2
+  [ -f data/benchmark/market_square.json ] && scripts/ms_bench.sh "$SRC" 2>&1 | tail -n2
   sleep 3600
 done
