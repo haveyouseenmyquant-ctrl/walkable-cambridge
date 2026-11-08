@@ -4,10 +4,13 @@
 # judge scores each clip 0-10 on a fixed 7-item rubric (scripts/gameplay_judge.py); KPI = mean over classes x 10.
 #   scripts/gameplay_kpi.sh [-f]
 cd "$(dirname "$0")/.."
-H=$(.venv/bin/python -I scripts/build_hash.py site)
+S=${WC_SITE:-site}
+H=$(.venv/bin/python -I scripts/build_hash.py "$S")
 OUT=data/benchmark/scores/${H}_gameplay.json
 [ -s "$OUT" ] && [ "$1" != "-f" ] && { cat "$OUT"; exit 0; }
+# one run at a time (service.sh and a session may both start one)
+mkdir /tmp/wc_gameplay_kpi.lock 2>/dev/null || { echo '{}'; exit 0; }
 TMP=$(mktemp -d /tmp/wc_gameplay.XXXXXX)
-trap 'rm -rf "$TMP"' EXIT
-node scripts/gameplay_clip.mjs site "$TMP" 2>/tmp/wc_gameplay_clip.err | tail -n1 >&2
+trap 'rm -rf "$TMP"; rmdir /tmp/wc_gameplay_kpi.lock' EXIT
+node scripts/gameplay_clip.mjs "$S" "$TMP" 2>/tmp/wc_gameplay_clip.err | tail -n1 >&2
 .venv/bin/python -I scripts/gameplay_judge.py "$TMP" --hash "$H" -f

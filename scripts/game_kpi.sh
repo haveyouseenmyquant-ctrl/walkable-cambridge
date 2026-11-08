@@ -5,12 +5,16 @@
 # equipment_effects counts items whose effect test passes. playable_classes / playtest_pass_pct / boss_ttk_spread_pct
 # come from the headless route bot (scripts/playtest.mjs: 5 runs per class over a fixed 5-encounter route + the Bellwarden).
 cd "$(dirname "$0")/.."
-H=$(.venv/bin/python -I scripts/build_hash.py site)
+S=${WC_SITE:-site}
+H=$(.venv/bin/python -I scripts/build_hash.py "$S")
 OUT=data/benchmark/scores/${H}_game.json
 [ -s "$OUT" ] && [ "$1" != "-f" ] && { cat "$OUT"; exit 0; }
-M=$(node scripts/test_mobs.mjs site 2>/tmp/wc_test_mobs.err | tail -n1)
-I=$(node scripts/test_items.mjs site 2>/tmp/wc_test_items.err | tail -n1)
-P=$(node scripts/playtest.mjs site 2>/tmp/wc_playtest.err | tail -n1)
+# one run at a time (service.sh and a session may both start one)
+mkdir /tmp/wc_game_kpi.lock 2>/dev/null || { echo '{}'; exit 0; }
+trap 'rmdir /tmp/wc_game_kpi.lock' EXIT
+M=$(node scripts/test_mobs.mjs "$S" 2>/tmp/wc_test_mobs.err | tail -n1)
+I=$(node scripts/test_items.mjs "$S" 2>/tmp/wc_test_items.err | tail -n1)
+P=$(node scripts/playtest.mjs "$S" 2>/tmp/wc_playtest.err | tail -n1)
 .venv/bin/python -I -c '
 import json, sys
 out = {}
