@@ -766,3 +766,42 @@ Next
   benchmark cache would have mixed the two builds. facades.py now writes `facades_digest` (sha256 of the atlas
   files) into the manifest; republished as build dad9daeed9ad93d0. Any score cached under b45c1234a047bcaa after
   08:12 UTC came from renders taken during the switch: ignore it (session 23's build has no valid photo_match score).
+
+## 2026-11-08 — Session 25: parked cars from OSM parking tags (11 views with cars in shot: 10.60 → 11.99)
+
+Done
+- Stopped service.sh's benchmark run. It had started before session 24's republish, so it was rendering the new
+  build (dad9daeed9ad93d0) under the old hash b45c1234a047bcaa. Nothing was cached from it. The next service.sh
+  loop benchmarks the live build.
+- Bikes in the bicycle racks were already drawn (objects.js since session 11), so I did parked cars instead.
+  New scripts/cars.py places them on OSM parking lanes (`parking:<side>=lane|street_side|half_on_kerb`, older
+  `parking:lane:*`, orientation tags) and `amenity=parking` strips (lane/street_side/layby), 80 % occupancy, none
+  within 8 m of a junction. 543 cars, appended as type 13 to the object bins. `--lots` (surface car parks) is
+  available but off.
+- objects.js: three low-poly car shapes (hatch, estate, SUV) built from an extruded side profile, plus glass,
+  wheels and lights, in one InstancedMesh per shape with per-instance paint (UK-typical colours).
+- First try put cars at ROAD_HALF − 1 m from the way. The modelled carriageway is narrower than a real street with
+  parking, so cars stood in the camera's lane. Now: car centre ≥ 2.75 m lane + half a car from the centreline.
+- A/B on the 11 benchmark views with a car within 40 m in the field of view (only 11, all but one beyond 600 m:
+  the centre is mostly car-free): control **10.60**, first try 11.21, shipped version **11.99**
+  (6 views better by > 1, 3 worse by > 1). Side-by-side (photo | before | cars): docs/parked_cars_session25.jpg
+  (photos Mapillary CC-BY-SA 4.0, ids 5603743449697891, 802068647098639, 249946750257860).
+- Local check: load 1.81 s, site_errors 0. WebKit smoke still crashes at launch (known since session 13; it does
+  the same on the live site). Published (release world-20261108-0841).
+
+Learned
+- Row 3 of the side-by-side: OSM tags parking on both sides, and the photo shows two cars. Occupancy should drop
+  where streets are tagged with residents' or time-limited restrictions, and probably to ~50 % in general.
+- A shared, rough problem in all outer views: walls are generic, roofs are jagged LiDAR fits, and the ground is
+  cobbles where the real street is tarmac. The ground material on residential streets looks like a cheap win
+  (pavement texture spreads over the carriageway).
+- The car effect on the full benchmark is small (≤ 11 of 200 views); the full score comes from service.sh.
+
+Next
+1. Ground: the carriageway width/material on residential roads (tarmac to the kerb, not setts), outer views.
+2. Wikimedia Commons photos of central buildings, registered locally for poses (more real facade area, centre).
+3. Synthetic per-building facades for walls with no photo.
+4. Footprints built after the LiDAR survey (session 22).
+- Live check: build 2d6709bcb8bac9c0; measure.sh: walkable 99.39, buildings 100, roof_match 93.03, real_facade 7.6,
+  street_objects 100, site_errors 0. measure.sh took 84 s on its first, uncached run of a new build (0.9 s when cached).
+  service.sh will benchmark the build at its next loop (~10:25 CET).
