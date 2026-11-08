@@ -161,18 +161,22 @@ def write_col(path, verts, tris, kind, surf):
 
 
 def write_glb(path, meshes):
-    """meshes: list of (node_name, pos (n,3) Y-up, nrm (n,3), col (n,3), idx (m,))"""
+    """meshes: list of (node_name, pos (n,3) Y-up, nrm (n,3), col (n,3), idx (m,)[, mat (n,)])
+    (optional mat: per-vertex float material id, written as the custom attribute _MAT; three.js exposes it as `_mat`)"""
     chunks, bin_len = [], 0
     js = {"asset": {"version": "2.0", "generator": "walkable-cambridge build.py",
                     "copyright": "© OpenStreetMap contributors; © Environment Agency copyright and/or database right 2022"},
           "scenes": [{"nodes": list(range(len(meshes)))}], "scene": 0, "nodes": [], "meshes": [],
           "materials": [{"pbrMetallicRoughness": {"baseColorFactor": [1, 1, 1, 1], "metallicFactor": 0, "roughnessFactor": 0.9}}],
           "accessors": [], "bufferViews": [], "buffers": []}
-    for name, pos, nrm, col, idx in meshes:
+    for name, pos, nrm, col, idx, *extra in meshes:
         pos = np.asarray(pos, "<f4"); nrm = np.asarray(nrm, "<f4"); col = np.asarray(col, "<f4")
         idx = np.asarray(idx, "<u2" if len(pos) < 65536 else "<u4")
         acc = {}
-        for key, arr, target in (("POSITION", pos, 34962), ("NORMAL", nrm, 34962), ("COLOR_0", col, 34962), ("idx", idx, 34963)):
+        streams = [("POSITION", pos, 34962), ("NORMAL", nrm, 34962), ("COLOR_0", col, 34962)]
+        if extra and extra[0] is not None:
+            streams.append(("_MAT", np.asarray(extra[0], "<f4").reshape(-1), 34962))
+        for key, arr, target in streams + [("idx", idx, 34963)]:
             b = arr.tobytes()
             js["bufferViews"].append({"buffer": 0, "byteOffset": bin_len, "byteLength": len(b), "target": target})
             pad = b"\0" * (-len(b) % 4)
@@ -180,13 +184,15 @@ def write_glb(path, meshes):
             a = {"bufferView": len(js["bufferViews"]) - 1, "count": len(arr)}
             if key == "idx":
                 a.update(componentType=5123 if arr.dtype == np.dtype("<u2") else 5125, type="SCALAR")
+            elif arr.ndim == 1:
+                a.update(componentType=5126, type="SCALAR")
             else:
                 a.update(componentType=5126, type="VEC3")
                 if key == "POSITION":
                     a.update(min=pos.min(0).tolist(), max=pos.max(0).tolist())
             js["accessors"].append(a)
             acc[key] = len(js["accessors"]) - 1
-        js["meshes"].append({"primitives": [{"attributes": {k: acc[k] for k in ("POSITION", "NORMAL", "COLOR_0")},
+        js["meshes"].append({"primitives": [{"attributes": {k: acc[k] for k in ("POSITION", "NORMAL", "COLOR_0", "_MAT") if k in acc},
                                              "indices": acc["idx"], "material": 0}]})
         js["nodes"].append({"name": name, "mesh": len(js["meshes"]) - 1})
     js["buffers"].append({"byteLength": bin_len})
@@ -270,6 +276,79 @@ def add_prism(m, poly, z0, z1, color, roof_color, top=True, bottom=False):
             m.tris(np.concatenate([T, np.full((len(T), 3, 1), z1)], 2), roof_color, 0)
         if bottom:
             m.tris(np.concatenate([T[:, ::-1], np.full((len(T), 3, 1), z0)], 2), roof_color, 0)
+
+
+# ---- building=roof (session 31): in OSM a roof with no walls. Rendered as a thin canopy slab, no walls, no
+# collision (people walk under it). The Market Hill stall rows (MARKET_STALL_ROOFS) are one long gabled canopy each,
+# ridge along the strip's long axis, eaves CANOPY_EAVE above the strip's median ground (Commons photos of the market:
+# eaves ~2.3-2.5 m, shallow ~13 deg pitch); scripts/zone_props.py wraps its striped canvas around this slab.
+MARKET_STALL_ROOFS = {f"way/{i}" for i in range(400160678, 400160686)}
+CANOPY_EAVE = 2.4     # market canopy: eave height above the strip's median ground (m)
+CANOPY_SLOPE = 0.24   # rise per metre from eave to ridge
+CANOPY_T = 0.12       # canopy slab thickness in the tile (m)
+
+
+def canopy_parts(g, gabled):
+    """Planar parts of a building=roof canopy: [(polygon, f)] with f(P (n,2), same frame as g) -> height above the
+    eave. Gabled: g split along the long axis of its minimum rotated rectangle (ridge at mid-width)."""
+    if not gabled:
+        return [(g, lambda P: np.zeros(len(P)))]
+    r = np.asarray(g.minimum_rotated_rectangle.exterior.coords)[:4]
+    e1, e2 = r[1] - r[0], r[2] - r[1]
+    if np.linalg.norm(e1) < np.linalg.norm(e2):
+        r = np.roll(r, -1, 0)
+        e1, e2 = e2, e1
+    W = np.linalg.norm(e2)
+    nr, c = e2 / W, r.mean(0)
+    out = []
+    m0, m1 = (r[0] + r[3]) / 2, (r[1] + r[2]) / 2
+    for q in ([m0, m1, r[2], r[3]], [r[0], r[1], m1, m0]):
+        sg = 1 if np.dot(np.mean(q, 0) - c, nr) > 0 else -1
+        part = g.intersection(Polygon(q).buffer(1e-6, join_style=2))
+        if not part.is_empty:
+            out.append((part, lambda P, sg=sg: CANOPY_SLOPE * np.clip(W / 2 - sg * ((np.asarray(P) - c) @ nr), 0, W / 2)))
+    return out
+
+
+def canopy_height(g, P, gabled=True):
+    """Height above the eave of the canopy over footprint g at points P (n,2), same frame as g."""
+    P = np.asarray(P, float).reshape(-1, 2)
+    if not gabled:
+        return np.zeros(len(P))
+    parts = canopy_parts(g, True)
+    return np.max([f(P) for _, f in parts], 0) if parts else np.zeros(len(P))
+
+
+def canopy_surface(g, z, gabled, local_off=(E0, N0)):
+    """Upward-facing triangles (k,3,3), local frame, of the canopy surface over g (BNG) whose eave is at z."""
+    out = []
+    for part, f in canopy_parts(g, gabled):
+        for p in polys_of(part):
+            T = triangulate(p)   # local frame
+            if len(T):
+                h = f(T.reshape(-1, 2) + np.asarray(local_off)).reshape(-1, 3, 1)
+                out.append(np.concatenate([T, z + h], 2))
+    return np.concatenate(out) if out else np.zeros((0, 3, 3))
+
+
+def add_canopy(m, g, ze, gabled, color):
+    """Thin slab (CANOPY_T) centred on the canopy surface with eave at ze: top, underside and rim; no walls."""
+    t2 = CANOPY_T / 2
+    T = canopy_surface(g, ze, gabled)
+    if not len(T):
+        return
+    m.tris(T + [0, 0, t2], color, 0)
+    m.tris(T[:, ::-1] - [0, 0, t2], color, 0)
+    for part, f in canopy_parts(g, gabled):
+        for p in polys_of(part):
+            p = p if p.exterior.is_ccw else Polygon(p.exterior.coords[::-1])
+            a = np.asarray(p.exterior.coords)
+            h = ze + f(a)
+            a = a - [E0, N0]
+            A, B, ha, hb = a[:-1], a[1:], h[:-1], h[1:]
+            A0, B0 = np.c_[A, ha - t2], np.c_[B, hb - t2]
+            A1, B1 = np.c_[A, ha + t2], np.c_[B, hb + t2]
+            m.tris(np.concatenate([np.stack([A0, B0, B1], 1), np.stack([A0, B1, A1], 1)]), color, 0)
 
 
 ROOF_CELL = 8.0       # roof heightfield: coarsest quadtree cell (m)
@@ -653,7 +732,7 @@ def main():
     conns = [LineString(c["line"]) for c in json.load(open(cpath))["connectors"]] if os.path.exists(cpath) else []
     conn_bufs = [ln.buffer(PASS_W) for ln in conns]
     burn(conn_bufs, S_PAVE)
-    burn([g for _, g, _ in buildings], S_UNDER)
+    burn([g for _, g, t in buildings if t.get("building") != "roof"], S_UNDER)   # open ground under roofs
     log("class raster done", np.bincount(cls.ravel(), minlength=10).tolist())
 
     # ---- building heights and passages
@@ -687,7 +766,7 @@ def main():
                     R = s[ii, jj]   # session 16: no 3x3 median, chimneys and ridges stay sharp
                     q10, q90 = np.percentile(R[src], [10, 90])
                     roof = (R, m, (LEFT + c0c + 0.5 - E0, TOP - r0c - 0.5 - N0), q90 - q10 >= 1.5)
-                    if GROUND_HOLES:   # session 22: footprint parts where the LiDAR shows ground (building sites,
+                    if GROUND_HOLES and t.get("building") != "roof":   # session 22: footprint parts where the LiDAR shows ground (building sites,
                         # courtyards mapped without an inner ring) become open ground, not a roof at ground + 1 m
                         low = binary_opening(m & (R - a < HOLE_H), np.ones((3, 3), bool))
                         lab, nl = label(low)
@@ -712,6 +791,16 @@ def main():
                 lv = t.get("building:levels")
                 h = 3.0 * float(lv) + 1.0 if lv and lv.replace(".", "").isdigit() else max(h or 0, 3.0)
             h = max(h, 2.5)
+        is_roof = t.get("building") == "roof"
+        if is_roof:   # canopy: market rows gabled at CANOPY_EAVE; others flat at the height tag / LiDAR top
+            roof = None
+            try:
+                h = float(str(t.get("height", "")).split()[0])
+            except (ValueError, IndexError):
+                h = p95 if p95 is not None and 2.2 <= p95 <= 12 else 3.0
+            if oid in MARKET_STALL_ROOFS:
+                S = canopy_surface(g, 0.0, True)
+                h = CANOPY_EAVE + CANOPY_T / 2 + (float(S[..., 2].max()) if len(S) else 0.0)
         top = dmed + h
         base = dmin - 0.3
         # passages for walkable ways that cross the building interior
@@ -732,8 +821,10 @@ def main():
             gx, gy = np.meshgrid(np.arange(bx0, bx1 + 1, 1.0), np.arange(by0, by1 + 1, 1.0))
             zcut = float(dtm_at(gx.ravel(), gy.ravel()).max())
         c = g.representative_point()
+        if is_roof:
+            cut = zcut = None
         bdata.append(dict(oid=oid, g=g, t=t, top=top, base=base, dmed=dmed, cut=cut, zcut=zcut, cx=c.x - E0, cy=c.y - N0,
-                          tone=rng.uniform(-0.06, 0.06)))
+                          tone=rng.uniform(-0.06, 0.06), is_roof=is_roof))
         if roof is not None:
             bdata[-1].update(roofR=roof[0], roofM=roof[1], roofO=roof[2], pitched=roof[3])
             if ROOF_PLANES and roof[3]:
@@ -833,7 +924,11 @@ def main():
                     roof = np.clip(np.array([0.50, 0.33, 0.28]) + tone, 0, 1)   # pitched: tiled-roof red
                 if zf is not None:
                     n_pitched += 1
-                if cut is None:
+                if bd["is_roof"]:   # session 31: roof with no walls (see add_canopy), no collision
+                    gab = bd["oid"] in MARKET_STALL_ROOFS
+                    ze = bd["dmed"] + CANOPY_EAVE if gab else z1 - CANOPY_T / 2
+                    add_canopy(bm, g, ze, gab, np.array([0.88, 0.87, 0.83]) if gab else roof)
+                elif cut is None:
                     for p in polys_of(g):
                         if zf is None or not add_lidar_roof(bm, p, z0, zf, wall, roof):
                             add_prism(bm, p, z0, z1, wall, roof)
@@ -853,7 +948,8 @@ def main():
                     continue
                 p, nrm, colr, k, s = arr
                 node = "b:" + bd["oid"]
-                col_parts.append((p, k, s))   # collision keeps the plain body (passages, walls)
+                if not bd["is_roof"]:
+                    col_parts.append((p, k, s))   # collision keeps the plain body (passages, walls)
                 lm = bd.get("lm")
                 if lm:
                     parts = ([arr] if lm["keep_body"] or bd["cut"] is not None else []) + [a for a in (lm["solid"], lm["deco"]) if a is not None]
@@ -861,6 +957,8 @@ def main():
                 glb_meshes.append((node, to_gl(p), to_gl(nrm), colr, np.arange(len(p))))
                 man_b.append({"osm_id": bd["oid"], "tile": tid, "node": node, "detailed": bool(lm),
                               "name": bd["t"].get("name"), "height": round(z1 - bd["dmed"], 1)})
+                if bd["is_roof"]:
+                    man_b[-1].update(roof_only=True, base=round(bd["dmed"], 3))
             for ex in lm_extra:
                 if bx0 <= ex["cx"] < bx1 and by0 <= ex["cy"] < by1:
                     parts = [a for a in (ex["lm"]["solid"], ex["lm"]["deco"]) if a is not None]

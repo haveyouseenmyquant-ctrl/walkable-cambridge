@@ -1,9 +1,10 @@
 {
  "osm_id": "way/1211951054",
  "sources": [
-  "2798949150347432",
-  "798596987448760",
-  "644178576432021"
+  "Commons: File:12 Market Hill, Cambridge.jpg (Smb1001, CC BY-SA 4.0)",
+  "Commons: File:Market Hill Cambridge UK.jpg (Kestreltail, CC BY-SA 4.0; view from Great St Mary's tower, used for x positions)",
+  "1114292965734083",
+  "2798949150347432"
  ],
  "walls": [
   {
@@ -11,87 +12,116 @@
    "storeys": 4,
    "floor_z": [
     0,
-    4.0,
-    7.4,
-    10.6
+    4.8,
+    8.2,
+    11.0
    ],
    "material": "render",
-   "wall_colour": "#ebe6da",
-   "trim_colour": "#f7f5ef",
-   "cornice_z": 14.1,
+   "wall_colour": "#c8694a",
+   "trim_colour": "#f2efe8",
+   "cornice_z": 12.8,
    "cornice": "simple",
    "parapet": true,
    "string_courses": [
-    4.0
+    7.9,
+    10.8
    ],
    "quoins": false,
    "pilasters": [],
    "elements": [
     {
      "type": "window",
-     "style": "sash_victorian",
-     "x": 3.6,
+     "style": "sash_georgian",
+     "x": 1.7,
      "w": 1.2,
-     "z": 4.6,
-     "h": 2.0,
+     "z": 5.1,
+     "h": 2.3,
      "panes": [
       3,
-      3
+      4
      ],
      "head": "flat",
      "sill": true
     },
     {
      "type": "window",
-     "style": "sash_victorian",
-     "x": 6.6,
+     "style": "sash_georgian",
+     "x": 4.2,
      "w": 1.2,
-     "z": 4.6,
-     "h": 2.0,
+     "z": 5.1,
+     "h": 2.3,
      "panes": [
       3,
-      3
+      4
      ],
      "head": "flat",
      "sill": true
     },
     {
      "type": "window",
-     "style": "sash_victorian",
-     "x": 3.6,
+     "style": "sash_georgian",
+     "x": 6.8,
      "w": 1.2,
-     "z": 8.0,
-     "h": 1.9,
+     "z": 5.1,
+     "h": 2.3,
      "panes": [
       3,
-      3
+      4
      ],
      "head": "flat",
      "sill": true
     },
     {
      "type": "window",
-     "style": "sash_victorian",
-     "x": 6.6,
-     "w": 1.2,
-     "z": 8.0,
-     "h": 1.9,
-     "panes": [
-      3,
-      3
-     ],
-     "head": "flat",
-     "sill": true
-    },
-    {
-     "type": "window",
-     "style": "sash_victorian",
-     "x": 3.6,
+     "style": "sash_georgian",
+     "x": 1.7,
      "w": 1.1,
-     "z": 11.2,
-     "h": 1.6,
+     "z": 8.5,
+     "h": 1.8,
      "panes": [
-      2,
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.2,
+     "w": 1.1,
+     "z": 8.5,
+     "h": 1.8,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.8,
+     "w": 1.1,
+     "z": 8.5,
+     "h": 1.8,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.7,
+     "w": 1.0,
+     "z": 11.3,
+     "h": 1.1,
+     "panes": [
+      3,
       2
      ],
      "head": "flat",
@@ -99,13 +129,27 @@
     },
     {
      "type": "window",
-     "style": "sash_victorian",
-     "x": 6.6,
-     "w": 1.1,
-     "z": 11.2,
-     "h": 1.6,
+     "style": "sash_georgian",
+     "x": 4.2,
+     "w": 1.0,
+     "z": 11.3,
+     "h": 1.1,
      "panes": [
-      2,
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.8,
+     "w": 1.0,
+     "z": 11.3,
+     "h": 1.1,
+     "panes": [
+      3,
       2
      ],
      "head": "flat",
@@ -113,31 +157,19 @@
     },
     {
      "type": "shopfront",
-     "x0": 0.0,
-     "x1": 1.8,
-     "z1": 3.8,
-     "fascia_text": null,
-     "fascia_colour": "#f2f2f0",
-     "text_colour": "#1a1a1a",
-     "door_x": 0.8,
-     "stallriser": 0.3,
+     "x0": 0.3,
+     "x1": 8.0,
+     "z1": 4.7,
+     "fascia_text": "Market House",
+     "fascia_colour": "#4b4c4f",
+     "text_colour": "#c9a94a",
+     "door_x": 3.5,
+     "stallriser": 0.6,
      "awning": false
-    },
-    {
-     "type": "shopfront",
-     "x0": 2.0,
-     "x1": 8.2,
-     "z1": 3.6,
-     "fascia_text": "Don Pasquale",
-     "fascia_colour": "#1f4a3a",
-     "text_colour": "#e6e0cc",
-     "door_x": 4.5,
-     "stallriser": 0.3,
-     "awning": true
     }
    ],
-   "confidence": "medium",
-   "notes": "Cream render; curved glazed corner shop (Three mobile) at x=0 (Market St corner); Don Pasquale restaurant with dark-green awnings over ground and 1st-floor windows, green window frames. Upper floors partly out of frame. Name not in OSM, read from awnings."
+   "confidence": "high",
+   "notes": "Market House (OSM name; 2022 photo): orange-red painted brick, 3 bays x 3 upper floors (6/6 sashes, 3rd floor 3/3), stepped parapet; dark grey shopfront with 4 round arches (x~1.6,3.5,5.4,7.3; door in arch 2, 12a door in arch 4). Was white 'Don Pasquale' in 2016-17 Mapillary. x from tower view; heights from straight-on 2022 photo."
   }
  ]
 }

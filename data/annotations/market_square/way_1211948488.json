@@ -1,0 +1,130 @@
+{
+ "osm_id": "way/1211948488",
+ "sources": [
+  "Commons: File:1-3 Market Hill, Cambridge.jpg (Smb1001, CC BY-SA 4.0)",
+  "Commons: File:Market Hill Cambridge UK.jpg (Kestreltail, CC BY-SA 4.0; view from Great St Mary's tower, used for x positions)"
+ ],
+ "walls": [
+  {
+   "id": "way/1211948488:3",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.4,
+    7.9
+   ],
+   "material": "brick",
+   "wall_colour": "#a2432f",
+   "trim_colour": "#d8c8a2",
+   "cornice_z": 11.6,
+   "cornice": "classical",
+   "parapet": false,
+   "string_courses": [
+    4.4,
+    7.9
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.8,
+     "w": 3.4,
+     "z": 4.9,
+     "h": 2.4,
+     "panes": [
+      4,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.0,
+     "w": 1.5,
+     "z": 4.9,
+     "h": 2.4,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.8,
+     "w": 3.4,
+     "z": 8.2,
+     "h": 2.4,
+     "panes": [
+      4,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.0,
+     "w": 1.5,
+     "z": 8.2,
+     "h": 2.4,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.9,
+     "w": 1.5,
+     "z": 12.0,
+     "h": 1.4,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.3,
+     "w": 1.0,
+     "z": 12.2,
+     "h": 1.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 7.3,
+     "z1": 4.3,
+     "fascia_text": "lululemon",
+     "fascia_colour": "#d6c7a5",
+     "text_colour": "#222222",
+     "door_x": 3.6,
+     "stallriser": 0.3,
+     "awning": false
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Red brick with Bath-stone dressings (c.1900): 4-light and 2-light mullion-transom windows on 1st/2nd floors in stone surrounds, gabled attic window over the 4-light bay, small dormer over the 2-light; stone ground floor with white lululemon shopfront. x from tower view + 2021 photo (oblique)."
+  }
+ ]
+}

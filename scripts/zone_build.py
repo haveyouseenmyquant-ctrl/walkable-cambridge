@@ -88,16 +88,20 @@ def orient(P, Nw):
     return P[keep], g[keep] / ln[keep, None], keep
 
 
-def gl_mesh(name, P, nrm, col):
+def gl_mesh(name, P, nrm, col, mat=None):
+    """mat: optional (k,) per-triangle material ids (facade_parts.MATS) -> the _MAT vertex attribute."""
     k = len(P)
     pos = B.to_gl(P.reshape(-1, 3))
     nr = B.to_gl(np.repeat(nrm, 3, 0))
     cl = np.repeat(col, 3, 0)
-    return (name, pos, nr, cl, np.arange(k * 3))
+    if mat is None:
+        return (name, pos, nr, cl, np.arange(k * 3))
+    return (name, pos, nr, cl, np.arange(k * 3), np.repeat(np.asarray(mat, np.float32), 3))
 
 
 def load_bespoke():
     """scripts/zone_bespoke_*.py modules: BUILDS = {osm_id: fn(walls_of_building) -> [{"name", "tris", "col"}, ...]}
+    (optional "mat": a facade_parts.MATS name/id, or a per-triangle array of them; default plain)
     (tris: world collision-frame triangles (E, N, z) like zone_props). A bespoke building gets no generic skin."""
     here = os.path.dirname(os.path.abspath(__file__))
     out = {}
@@ -120,7 +124,13 @@ def prop_meshes(items):
         ln = np.linalg.norm(g, axis=1)
         ok = ln > 1e-9
         col = np.broadcast_to(np.asarray(pr["col"], float), (len(T), 3))[ok]
-        meshes.append(gl_mesh(pr["name"], T[ok], g[ok] / ln[ok, None], col))
+        m = pr.get("mat", 0)
+        if isinstance(m, (str, int, float, np.integer)) or m is None:
+            m = np.full(len(T), F.mat_id(m))
+        else:
+            m = np.array([F.mat_id(x) for x in np.asarray(m).reshape(-1)])
+        mat = np.broadcast_to(m, (len(T),))[ok]
+        meshes.append(gl_mesh(pr["name"], T[ok], g[ok] / ln[ok, None], col, mat))
         n += int(ok.sum())
     return meshes, n
 
@@ -152,12 +162,13 @@ def main():
         x0s, x1s = ext[w["id"]]
         P = F.wall_facade(L, H, lay, x0s, x1s)
         T, N, C = P.arrays()
+        M = P.mats()
         if not len(T):
             continue
         Pw, Nw = to_collision(w, T, N)
         Pw, nrm, keep = orient(Pw, Nw)
         col = np.clip(C[keep], 0, 1) ** GAMMA
-        by_b.setdefault(w["osm_id"], []).append((Pw, nrm, col))
+        by_b.setdefault(w["osm_id"], []).append((Pw, nrm, col, M[keep]))
         area = L * H
         tot_area += area
         tot_detail += min(P.detail_area, area)
@@ -178,16 +189,9 @@ def main():
     if os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), "zone_props.py")):
         try:
             zp = importlib.import_module("zone_props")
-            for pr in zp.build() if hasattr(zp, "build") else []:
-                T = np.asarray(pr["tris"], float).reshape(-1, 3, 3)
-                if not len(T):
-                    continue
-                g = np.cross(T[:, 1] - T[:, 0], T[:, 2] - T[:, 0])
-                ln = np.linalg.norm(g, axis=1)
-                ok = ln > 1e-9
-                col = np.broadcast_to(np.asarray(pr["col"], float), (len(T), 3))[ok]
-                meshes.append(gl_mesh(pr["name"], T[ok], g[ok] / ln[ok, None], col))
-                nprops += int(ok.sum())
+            m, n = prop_meshes(zp.build() if hasattr(zp, "build") else [])
+            meshes += m
+            nprops += n
         except Exception as e:   # props are optional; never break the facade build
             print("zone_props failed:", repr(e), file=sys.stderr)
     out = os.path.join(ROOT, "site/zone")

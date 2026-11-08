@@ -1,0 +1,176 @@
+{
+ "osm_id": "way/1211948490",
+ "sources": [
+  "Commons: File:4 Market Hill, Cambridge.jpg (Smb1001, CC BY-SA 4.0)",
+  "Commons: File:Market Hill Cambridge UK.jpg (Kestreltail, CC BY-SA 4.0; view from Great St Mary's tower, used for x positions)",
+  "Commons: File:5 Market Hill, Cambridge.jpg (The wub, CC BY-SA 3.0)"
+ ],
+ "walls": [
+  {
+   "id": "way/1211948490:4",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.7,
+    6.5
+   ],
+   "material": "render",
+   "wall_colour": "#ece6d6",
+   "trim_colour": "#f7f5ef",
+   "cornice_z": 9.3,
+   "cornice": "classical",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.05,
+     "w": 0.95,
+     "z": 4.2,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.8,
+     "w": 0.95,
+     "z": 4.2,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.6,
+     "w": 0.95,
+     "z": 4.2,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.35,
+     "w": 0.95,
+     "z": 4.2,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.05,
+     "w": 0.95,
+     "z": 6.9,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.8,
+     "w": 0.95,
+     "z": 6.9,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.6,
+     "w": 0.95,
+     "z": 6.9,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.35,
+     "w": 0.95,
+     "z": 6.9,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 2.0,
+     "w": 1.0,
+     "h": 1.2
+    },
+    {
+     "type": "dormer",
+     "x": 5.5,
+     "w": 1.0,
+     "h": 1.2
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 0.75,
+     "w": 1.1,
+     "h": 2.6,
+     "surround": "none"
+    },
+    {
+     "type": "shopfront",
+     "x0": 1.5,
+     "x1": 7.4,
+     "z1": 3.5,
+     "fascia_text": "Popeyes",
+     "fascia_colour": "#e35205",
+     "text_colour": "#ffffff",
+     "door_x": 2.2,
+     "stallriser": 0.4,
+     "awning": false
+    }
+   ],
+   "confidence": "high",
+   "notes": "White-painted brick Georgian front, 4 bays x 2 floors of sashes, dentil cornice, two pedimented dormers, chimney at N. Ground: covered passage at N end (x 0.2-1.4, glazed transom), white timber shopfront with 3 large lights + transom lights (vacant in 2022 photo; OSM now Popeyes 3-4 Market Hill, fascia colour assumed brand)."
+  }
+ ]
+}

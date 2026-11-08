@@ -1,0 +1,324 @@
+{
+ "osm_id": "way/1288730360",
+ "sources": [
+  "Commons: File:15 Market Hill, Cambridge.jpg (Smb1001, CC BY-SA 4.0)",
+  "1114292965734083"
+ ],
+ "walls": [
+  {
+   "id": "way/1288730360:0",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.4,
+    7.8,
+    10.6
+   ],
+   "material": "brick",
+   "wall_colour": "#c4a979",
+   "trim_colour": "#e3dccb",
+   "cornice_z": 12.9,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.8,
+     "w": 0.95,
+     "z": 4.9,
+     "h": 2.1,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.4,
+     "w": 0.95,
+     "z": 4.9,
+     "h": 2.1,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.0,
+     "w": 0.95,
+     "z": 4.9,
+     "h": 2.1,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.8,
+     "w": 0.95,
+     "z": 8.1,
+     "h": 1.8,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.4,
+     "w": 0.95,
+     "z": 8.1,
+     "h": 1.8,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.0,
+     "w": 0.95,
+     "z": 8.1,
+     "h": 1.8,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.8,
+     "w": 0.95,
+     "z": 10.9,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.4,
+     "w": 0.95,
+     "z": 10.9,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.0,
+     "w": 0.95,
+     "z": 10.9,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 8.9,
+     "z1": 4.3,
+     "fascia_text": "Franco Manca",
+     "fascia_colour": "#2f3a33",
+     "text_colour": "#e6dfc8",
+     "door_x": 4.0,
+     "stallriser": 0.5,
+     "awning": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Gault (yellow) brick 4-storey corner building with rounded corner, stone ground floor with white glazing bars, dark green bowed fascia 'Franco Manca'. SW face: 3 sash bays per floor, red awnings over the ground floor. x approximate (oblique view)."
+  },
+  {
+   "id": "way/1288730360:1",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.4,
+    7.8,
+    10.6
+   ],
+   "material": "brick",
+   "wall_colour": "#c4a979",
+   "trim_colour": "#e3dccb",
+   "cornice_z": 12.9,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.1,
+     "x1": 2.0,
+     "z1": 4.3,
+     "fascia_text": "Franco Manca",
+     "fascia_colour": "#2f3a33",
+     "text_colour": "#e6dfc8",
+     "door_x": 1.0,
+     "stallriser": 0.5,
+     "awning": false
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Gault (yellow) brick 4-storey corner building with rounded corner, stone ground floor with white glazing bars, dark green bowed fascia 'Franco Manca'. Rounded corner: glazed corner window, no upper openings."
+  },
+  {
+   "id": "way/1288730360:2",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.4,
+    7.8,
+    10.6
+   ],
+   "material": "brick",
+   "wall_colour": "#c4a979",
+   "trim_colour": "#e3dccb",
+   "cornice_z": 12.9,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.6,
+     "w": 0.95,
+     "z": 5.0,
+     "h": 2.2,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "pediment",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.0,
+     "w": 0.95,
+     "z": 5.0,
+     "h": 2.2,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "pediment",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.6,
+     "w": 0.95,
+     "z": 8.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.0,
+     "w": 0.95,
+     "z": 8.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.6,
+     "w": 0.95,
+     "z": 10.9,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.0,
+     "w": 0.95,
+     "z": 10.9,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.1,
+     "x1": 5.1,
+     "z1": 4.3,
+     "fascia_text": "Franco Manca",
+     "fascia_colour": "#2f3a33",
+     "text_colour": "#e6dfc8",
+     "door_x": 1.2,
+     "stallriser": 0.5,
+     "awning": false
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Gault (yellow) brick 4-storey corner building with rounded corner, stone ground floor with white glazing bars, dark green bowed fascia 'Franco Manca'. SE face: paired sashes per floor, 1st floor with pediments and an iron balcony (balcony not modelled)."
+  }
+ ]
+}

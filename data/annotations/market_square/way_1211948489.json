@@ -1,0 +1,99 @@
+{
+ "osm_id": "way/1211948489",
+ "sources": [
+  "Commons: File:Market Hill Cambridge UK.jpg (Kestreltail, CC BY-SA 4.0; view from Great St Mary's tower, used for x positions)",
+  "Commons: File:4 Market Hill, Cambridge.jpg (Smb1001, CC BY-SA 4.0)"
+ ],
+ "walls": [
+  {
+   "id": "way/1211948489:2",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.0,
+    7.4
+   ],
+   "material": "render",
+   "wall_colour": "#eeeae0",
+   "trim_colour": "#f7f5ef",
+   "cornice_z": 10.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.3,
+     "w": 1.05,
+     "z": 4.6,
+     "h": 2.1,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.1,
+     "w": 1.05,
+     "z": 4.6,
+     "h": 2.1,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.3,
+     "w": 1.05,
+     "z": 7.9,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.1,
+     "w": 1.05,
+     "z": 7.9,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 5.2,
+     "z1": 3.9,
+     "fascia_text": "Popeyes",
+     "fascia_colour": "#e35205",
+     "text_colour": "#ffffff",
+     "door_x": 4.4,
+     "stallriser": 0.4,
+     "awning": false
+    }
+   ],
+   "confidence": "low",
+   "notes": "White-painted front taller than no.4, 2 bays x 2 upper floors, parapet; only seen from Great St Mary's tower (2019, Gap shop) and edge of the no.4 photo. Shop per OSM: Popeyes (3-4 Market Hill)."
+  }
+ ]
+}

@@ -52,34 +52,70 @@ def earcut2d(poly):
     return v[idx]
 
 
+# Surface material ids (per triangle; zone_build writes them as the _MAT vertex attribute, site/app/zone.js shades
+# them procedurally: brick coursing, ashlar joints, render noise, glass reflection, painted timber sheen).
+MATS = {"plain": 0, "brick": 1, "stone": 2, "render": 3, "stucco": 3, "timber": 4, "frame": 4, "glass": 5,
+        "flint": 6, "trim": 7}
+
+
+def mat_id(m, default=0):
+    if m is None:
+        return default
+    if isinstance(m, str):
+        return MATS.get(m.lower(), default)
+    return int(m)
+
+
+def wall_material(ann):
+    """Wall surface material: the annotation's `material`, else guessed from the wall colour (red/brown -> brick,
+    pale -> render, buff -> gault brick or ashlar)."""
+    m = ann.get("material")
+    if m in MATS:
+        return m
+    c = rgb(ann.get("wall_colour", "#b9a784"))
+    if c[0] - c[2] > 0.25:
+        return "brick"
+    if c.mean() > 0.78:
+        return "render"
+    return "brick" if int(hashlib.md5(str(ann.get("id", "")).encode()).hexdigest()[:2], 16) % 3 == 0 else "stone"
+
+
 class Parts:
-    def __init__(self):
+    """mat: default material of the wall surface; per-triangle ids are explicit (`mat=` on any emitter) or inferred
+    in mats(): glass colour -> glass, colour proportional to wall_col -> wall material, thin parts at the glass plane
+    (frames, glazing bars, door leaves, stallrisers) -> painted timber, everything else -> trim."""
+
+    def __init__(self, mat="render", wall_col=None):
         self.t, self.n, self.c = [], [], []
+        self.m = []
+        self.mat = mat_id(mat, 3)
+        self.wall_col = None if wall_col is None else np.asarray(wall_col, float)
         self.counts = {}
         self.detail_area = 0.0   # facade area (m2, projected on the wall) covered by modelled 3D elements
 
     def count(self, kind, k=1):
         self.counts[kind] = self.counts.get(kind, 0) + k
 
-    def add(self, T, n, col):
+    def add(self, T, n, col, mat=None):
         T = np.asarray(T, float).reshape(-1, 3, 3)
         if not len(T):
             return
         self.t.append(T)
         self.n.append(np.tile(np.asarray(n, float), (len(T), 1)) if np.ndim(n) == 1 else np.asarray(n, float))
         self.c.append(np.tile(np.asarray(col, float), (len(T), 1)))
+        self.m.append(np.full(len(T), mat_id(mat, -1), np.int16))
 
-    def quad(self, a, b, c, d, n, col):
-        self.add([[a, b, c], [a, c, d]], n, col)
+    def quad(self, a, b, c, d, n, col, mat=None):
+        self.add([[a, b, c], [a, c, d]], n, col, mat)
 
-    def face_xz(self, g, y, col, n=(0, 1, 0)):
+    def face_xz(self, g, y, col, n=(0, 1, 0), mat=None):
         """Polygon(s) in the xz plane at depth y."""
         for p in polys(g):
             T2 = earcut2d(p)
             if len(T2):
-                self.add(np.stack([T2[..., 0], np.full(T2.shape[:2], y), T2[..., 1]], -1), n, col)
+                self.add(np.stack([T2[..., 0], np.full(T2.shape[:2], y), T2[..., 1]], -1), n, col, mat)
 
-    def sides_xz(self, g, y0, y1, col, inward=False, skip_ground=False):
+    def sides_xz(self, g, y0, y1, col, inward=False, skip_ground=False, mat=None):
         """Extrude the boundary rings of polygon(s) between y0 and y1. Normals point out of the polygon, or into it
         (inward=True: reveals of a hole)."""
         for p in polys(g):
@@ -96,25 +132,25 @@ class Parts:
                     nx, nz = (bz - az) / L, -(bx - ax) / L   # right of a CCW edge = outward
                     if inward:
                         nx, nz = -nx, -nz
-                    self.quad((ax, y0, az), (bx, y0, bz), (bx, y1, bz), (ax, y1, az), (nx, 0, nz), col)
+                    self.quad((ax, y0, az), (bx, y0, bz), (bx, y1, bz), (ax, y1, az), (nx, 0, nz), col, mat)
 
-    def slab(self, g, y0, y1, col, sides=True):
+    def slab(self, g, y0, y1, col, sides=True, mat=None):
         """Polygon(s) extruded from y0 (against the wall, back face omitted) to a front face at y1."""
-        self.face_xz(g, y1, col)
+        self.face_xz(g, y1, col, mat=mat)
         if sides:
-            self.sides_xz(g, y0, y1, col)
+            self.sides_xz(g, y0, y1, col, mat=mat)
 
-    def box(self, x0, x1, y0, y1, z0, z1, col, top=True, bottom=True):
+    def box(self, x0, x1, y0, y1, z0, z1, col, top=True, bottom=True, mat=None):
         """Axis box; the back face (y0) is omitted."""
-        self.slab(box(x0, z0, x1, z1), y0, y1, col, sides=False)
-        self.quad((x0, y0, z0), (x0, y1, z0), (x0, y1, z1), (x0, y0, z1), (-1, 0, 0), col)
-        self.quad((x1, y0, z0), (x1, y1, z0), (x1, y1, z1), (x1, y0, z1), (1, 0, 0), col)
+        self.slab(box(x0, z0, x1, z1), y0, y1, col, sides=False, mat=mat)
+        self.quad((x0, y0, z0), (x0, y1, z0), (x0, y1, z1), (x0, y0, z1), (-1, 0, 0), col, mat)
+        self.quad((x1, y0, z0), (x1, y1, z0), (x1, y1, z1), (x1, y0, z1), (1, 0, 0), col, mat)
         if top:
-            self.quad((x0, y0, z1), (x1, y0, z1), (x1, y1, z1), (x0, y1, z1), (0, 0, 1), col)
+            self.quad((x0, y0, z1), (x1, y0, z1), (x1, y1, z1), (x0, y1, z1), (0, 0, 1), col, mat)
         if bottom:
-            self.quad((x0, y0, z0), (x1, y0, z0), (x1, y1, z0), (x0, y1, z0), (0, 0, -1), col)
+            self.quad((x0, y0, z0), (x1, y0, z0), (x1, y1, z0), (x0, y1, z0), (0, 0, -1), col, mat)
 
-    def extrude_profile(self, prof, x0, x1, col):
+    def extrude_profile(self, prof, x0, x1, col, mat=None):
         """Profile [(y, z), ...] traversed counter-clockwise in the (y, z) plane (y right, z up), from the wall at the
         bottom outwards and back to the wall at the top; extruded along x from x0 to x1, with end caps."""
         P = np.asarray(prof, float)
@@ -123,15 +159,33 @@ class Parts:
             if L < 1e-5:
                 continue
             ny, nz = (bz - az) / L, -(by - ay) / L
-            self.quad((x0, ay, az), (x1, ay, az), (x1, by, bz), (x0, by, bz), (0, ny, nz), col)
+            self.quad((x0, ay, az), (x1, ay, az), (x1, by, bz), (x0, by, bz), (0, ny, nz), col, mat)
         T2 = earcut2d(Polygon(P))
         for x, nx in ((x0, -1), (x1, 1)):
-            self.add(np.stack([np.full(T2.shape[:2], x), T2[..., 0], T2[..., 1]], -1), (nx, 0, 0), col)
+            self.add(np.stack([np.full(T2.shape[:2], x), T2[..., 0], T2[..., 1]], -1), (nx, 0, 0), col, mat)
 
     def arrays(self):
         if not self.t:
             return np.zeros((0, 3, 3)), np.zeros((0, 3)), np.zeros((0, 3))
         return np.concatenate(self.t), np.concatenate(self.n), np.concatenate(self.c)
+
+    def mats(self):
+        """(k,) per-triangle material ids aligned with arrays() (see the class docstring for the inference)."""
+        if not self.t:
+            return np.zeros(0, np.int16)
+        m = np.concatenate(self.m).copy()
+        auto = m < 0
+        if auto.any():
+            T, C = np.concatenate(self.t), np.concatenate(self.c)
+            a = np.full(len(m), MATS["trim"], np.int16)
+            ys = T[..., 1]
+            a[(ys.max(1) <= SKIN - 0.05) & (ys.min(1) >= -0.01)] = MATS["frame"]
+            if self.wall_col is not None:
+                r = C / np.maximum(self.wall_col, 1e-3)
+                a[(np.ptp(r, 1) < 0.02) & (r.mean(1) > 0.6) & (r.mean(1) < 1.15)] = self.mat
+            a[np.abs(C - rgb(GLASS_COL)).max(1) < 0.02] = MATS["glass"]
+            m[auto] = a[auto]
+        return m
 
 
 # ---------------------------------------------------------------- opening shapes (polygons in the xz plane)
@@ -356,8 +410,8 @@ def wall_facade(L, H, ann, x0s=0.0, x1s=None, roof_col="#5d4f48"):
     """Build one wall. ann: annotation wall dict (schema in data/annotations/market_square/SCHEMA.md).
     x0s/x1s: skin extent along x (corners: extended or mitred). Returns Parts."""
     x1s = L if x1s is None else x1s
-    P = Parts()
     wall_col = rgb(ann.get("wall_colour", "#b9a784"))
+    P = Parts(mat=wall_material(ann), wall_col=wall_col)
     trim_col = rgb(ann.get("trim_colour", "#e6e0d2"))
     roof_col = rgb(roof_col)
     holes = []

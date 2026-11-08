@@ -1,0 +1,122 @@
+{
+ "osm_id": "way/1211948491",
+ "sources": [
+  "Commons: File:5 Market Hill, Cambridge.jpg (The wub, CC BY-SA 3.0)",
+  "Commons: File:Market Hill Cambridge UK.jpg (Kestreltail, CC BY-SA 4.0; view from Great St Mary's tower, used for x positions)",
+  "1114292965734083"
+ ],
+ "walls": [
+  {
+   "id": "way/1211948491:7",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.6,
+    8.2
+   ],
+   "material": "brick",
+   "wall_colour": "#7d3b2c",
+   "trim_colour": "#b8ab98",
+   "cornice_z": 11.5,
+   "cornice": "classical",
+   "parapet": false,
+   "string_courses": [
+    4.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 0.95,
+     "w": 1.1,
+     "z": 5.1,
+     "h": 2.1,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.95,
+     "w": 1.4,
+     "z": 4.9,
+     "h": 2.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.95,
+     "w": 1.1,
+     "z": 5.1,
+     "h": 2.1,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.3,
+     "w": 1.1,
+     "z": 8.5,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.6,
+     "w": 1.1,
+     "z": 8.5,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 2.95,
+     "w": 1.3,
+     "h": 1.2
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 5.7,
+     "z1": 4.4,
+     "fascia_text": "House of Wizard",
+     "fascia_colour": "#2a2340",
+     "text_colour": "#d8c27a",
+     "door_x": 4.9,
+     "stallriser": 0.4,
+     "awning": false
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Dark red/blue chequer brick c.1700-style front: 1st floor sash, central French doors under a carved shell hood, sash; wrought-iron balcony across 1st floor (not modelled); 2nd floor two sashes; one dormer, brick chimney at S end. Shop: House of Wizard (OSM); 2013 photo shows Oasis with grey-brown console shopfront, fascia colour of current shop not verified."
+  }
+ ]
+}

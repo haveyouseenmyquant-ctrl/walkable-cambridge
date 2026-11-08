@@ -1,6 +1,6 @@
 {
  "zone": "market_square",
- "built": "2026-11-08T11:26:42Z",
+ "built": "2026-11-08T11:45:39Z",
  "walls": [
   {
    "id": "way/13864058:26",
@@ -1071,14 +1071,14 @@
    "length": 12.35,
    "height": 14.24,
    "area": 175.86,
-   "detail_area": 92.62,
+   "detail_area": 107.15,
    "elements": {
     "shop_door": 1,
     "shopfront": 1,
     "string_course": 1,
-    "window": 9
+    "window": 12
    },
-   "tris": 574
+   "tris": 708
   },
   {
    "id": "way/212711605:8",
@@ -1099,53 +1099,52 @@
   {
    "id": "way/229680560:20",
    "osm_id": "way/229680560",
-   "annotated": false,
+   "annotated": true,
    "length": 14.39,
    "height": 13.33,
    "area": 191.82,
-   "detail_area": 81.25,
+   "detail_area": 126.79,
    "elements": {
     "cornice": 1,
-    "shop_door": 2,
-    "shopfront": 2,
-    "string_course": 1,
-    "window": 15
+    "pilaster": 4,
+    "shop_door": 1,
+    "shopfront": 1,
+    "window": 6
    },
-   "tris": 984
+   "tris": 860
   },
   {
    "id": "way/229680560:21",
    "osm_id": "way/229680560",
-   "annotated": false,
+   "annotated": true,
    "length": 8.83,
    "height": 13.26,
    "area": 117.09,
-   "detail_area": 49.54,
+   "detail_area": 56.2,
    "elements": {
     "cornice": 1,
     "shop_door": 1,
     "shopfront": 1,
-    "string_course": 1,
-    "window": 9
+    "window": 8
    },
-   "tris": 590
+   "tris": 824
   },
   {
    "id": "way/229680560:22",
    "osm_id": "way/229680560",
-   "annotated": false,
+   "annotated": true,
    "length": 5.8,
    "height": 13.3,
    "area": 77.14,
-   "detail_area": 32.42,
+   "detail_area": 54.91,
    "elements": {
     "cornice": 1,
+    "pilaster": 2,
     "shop_door": 1,
     "shopfront": 1,
-    "string_course": 1,
-    "window": 6
+    "window": 5
    },
-   "tris": 440
+   "tris": 732
   },
   {
    "id": "way/400160677:0",
@@ -1479,18 +1478,19 @@
   {
    "id": "way/1099847940:0",
    "osm_id": "way/1099847940",
-   "annotated": false,
+   "annotated": true,
    "length": 10.44,
    "height": 13.64,
    "area": 142.4,
-   "detail_area": 28.63,
+   "detail_area": 75.12,
    "elements": {
     "cornice": 1,
     "door": 1,
-    "string_course": 1,
-    "window": 11
+    "shop_door": 1,
+    "shopfront": 1,
+    "window": 12
    },
-   "tris": 608
+   "tris": 1158
   },
   {
    "id": "way/1099847940:1",
@@ -1558,18 +1558,19 @@
   {
    "id": "way/1211948487:3",
    "osm_id": "way/1211948487",
-   "annotated": false,
+   "annotated": true,
    "length": 9.74,
    "height": 15.36,
    "area": 149.61,
-   "detail_area": 34.73,
+   "detail_area": 75.36,
    "elements": {
     "cornice": 1,
-    "door": 1,
-    "string_course": 1,
-    "window": 14
+    "shop_door": 2,
+    "shopfront": 2,
+    "string_course": 2,
+    "window": 9
    },
-   "tris": 1168
+   "tris": 1271
   },
   {
    "id": "way/1211948487:4",
@@ -1603,66 +1604,71 @@
   {
    "id": "way/1211948488:3",
    "osm_id": "way/1211948488",
-   "annotated": false,
+   "annotated": true,
    "length": 7.46,
    "height": 14.25,
    "area": 106.3,
-   "detail_area": 20.43,
+   "detail_area": 66.67,
    "elements": {
     "cornice": 1,
-    "door": 1,
-    "string_course": 1,
-    "window": 7
+    "shop_door": 1,
+    "shopfront": 1,
+    "string_course": 2,
+    "window": 6
    },
-   "tris": 734
+   "tris": 667
   },
   {
    "id": "way/1211948489:2",
    "osm_id": "way/1211948489",
-   "annotated": false,
+   "annotated": true,
    "length": 5.39,
    "height": 11.06,
    "area": 59.61,
-   "detail_area": 9.45,
+   "detail_area": 30.22,
    "elements": {
     "cornice": 1,
-    "door": 1,
-    "string_course": 1,
-    "window": 2
+    "shop_door": 1,
+    "shopfront": 1,
+    "window": 4
    },
-   "tris": 350
+   "tris": 346
   },
   {
    "id": "way/1211948490:4",
    "osm_id": "way/1211948490",
-   "annotated": false,
+   "annotated": true,
    "length": 7.5,
    "height": 9.9,
    "area": 74.25,
-   "detail_area": 15.03,
+   "detail_area": 47.37,
    "elements": {
     "cornice": 1,
     "door": 1,
-    "string_course": 1,
-    "window": 5
+    "dormer": 2,
+    "shop_door": 1,
+    "shopfront": 1,
+    "window": 10
    },
-   "tris": 478
+   "tris": 722
   },
   {
    "id": "way/1211948491:7",
    "osm_id": "way/1211948491",
-   "annotated": false,
+   "annotated": true,
    "length": 5.96,
    "height": 12.65,
    "area": 75.39,
-   "detail_area": 18.64,
+   "detail_area": 45.36,
    "elements": {
     "cornice": 1,
-    "door": 1,
+    "dormer": 1,
+    "shop_door": 1,
+    "shopfront": 1,
     "string_course": 1,
-    "window": 7
+    "window": 6
    },
-   "tris": 422
+   "tris": 487
   },
   {
    "id": "way/1211951044:5",
@@ -1752,15 +1758,15 @@
    "length": 8.27,
    "height": 14.12,
    "area": 116.77,
-   "detail_area": 47.36,
+   "detail_area": 61.53,
    "elements": {
     "cornice": 1,
-    "shop_door": 2,
-    "shopfront": 2,
-    "string_course": 1,
-    "window": 6
+    "shop_door": 1,
+    "shopfront": 1,
+    "string_course": 2,
+    "window": 9
    },
-   "tris": 666
+   "tris": 918
   },
   {
    "id": "way/1211951056:6",
@@ -1812,18 +1818,18 @@
   {
    "id": "way/1288730353:9",
    "osm_id": "way/1288730353",
-   "annotated": false,
+   "annotated": true,
    "length": 26.29,
    "height": 12.68,
    "area": 333.36,
-   "detail_area": 83.06,
+   "detail_area": 162.51,
    "elements": {
     "cornice": 1,
-    "door": 1,
-    "string_course": 1,
-    "window": 35
+    "shop_door": 6,
+    "shopfront": 6,
+    "window": 24
    },
-   "tris": 2762
+   "tris": 2666
   },
   {
    "id": "way/1288730356:0",
@@ -1862,97 +1868,99 @@
   {
    "id": "way/1288730360:0",
    "osm_id": "way/1288730360",
-   "annotated": false,
+   "annotated": true,
    "length": 8.95,
    "height": 13.52,
    "area": 121.0,
-   "detail_area": 27.99,
+   "detail_area": 57.25,
    "elements": {
     "cornice": 1,
-    "door": 1,
-    "string_course": 1,
-    "window": 11
+    "shop_door": 1,
+    "shopfront": 1,
+    "window": 9
    },
-   "tris": 608
+   "tris": 772
   },
   {
    "id": "way/1288730360:1",
    "osm_id": "way/1288730360",
-   "annotated": false,
+   "annotated": true,
    "length": 2.07,
    "height": 13.66,
    "area": 28.28,
-   "detail_area": 0.64,
+   "detail_area": 8.81,
    "elements": {
-    "cornice": 1
+    "cornice": 1,
+    "shop_door": 1,
+    "shopfront": 1
    },
-   "tris": 26
+   "tris": 140
   },
   {
    "id": "way/1288730360:2",
    "osm_id": "way/1288730360",
-   "annotated": false,
+   "annotated": true,
    "length": 5.24,
    "height": 14.18,
    "area": 74.3,
-   "detail_area": 10.48,
+   "detail_area": 35.08,
    "elements": {
     "cornice": 1,
-    "door": 1,
-    "string_course": 1,
-    "window": 3
+    "shop_door": 1,
+    "shopfront": 1,
+    "window": 6
    },
-   "tris": 236
+   "tris": 574
   }
  ],
  "skipped": [
   {
    "id": "way/5094872:7",
-   "reason": "landmark:guildhall"
+   "reason": "bespoke"
   },
   {
    "id": "way/5094872:8",
-   "reason": "landmark:guildhall"
+   "reason": "bespoke"
   },
   {
    "id": "way/5094872:9",
-   "reason": "landmark:guildhall"
+   "reason": "bespoke"
   },
   {
    "id": "way/5094872:10",
-   "reason": "landmark:guildhall"
+   "reason": "bespoke"
   },
   {
    "id": "way/5094872:12",
-   "reason": "landmark:guildhall"
+   "reason": "bespoke"
   },
   {
    "id": "way/5094872:16",
-   "reason": "landmark:guildhall"
+   "reason": "bespoke"
   },
   {
    "id": "way/5094872:17",
-   "reason": "landmark:guildhall"
+   "reason": "bespoke"
   },
   {
    "id": "way/5094872:21",
-   "reason": "landmark:guildhall"
+   "reason": "bespoke"
   },
   {
    "id": "way/5094872:23",
-   "reason": "landmark:guildhall"
+   "reason": "bespoke"
   },
   {
    "id": "way/5094872:24",
-   "reason": "landmark:guildhall"
+   "reason": "bespoke"
   },
   {
    "id": "way/5094872:25",
-   "reason": "landmark:guildhall"
+   "reason": "bespoke"
   },
   {
    "id": "way/5094872:26",
-   "reason": "landmark:guildhall"
+   "reason": "bespoke"
   },
   {
    "id": "way/26344507:0",
@@ -2012,13 +2020,13 @@
   }
  ],
  "stats": {
-  "walls_annotated": 18,
+  "walls_annotated": 31,
   "walls_total": 153,
   "walls_built": 127,
-  "tris": 76388,
-  "facade_tris": 60544,
-  "prop_tris": 15844,
+  "tris": 96348,
+  "facade_tris": 62743,
+  "prop_tris": 33605,
   "facade_area_m2": 10270.0,
-  "modelled_detail_area_m2": 2854.2
+  "modelled_detail_area_m2": 3312.3
  }
 }

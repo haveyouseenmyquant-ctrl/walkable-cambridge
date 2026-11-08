@@ -2,7 +2,8 @@
  "osm_id": "way/212711605",
  "sources": [
   "798596987448760",
-  "2798949150347432"
+  "2798949150347432",
+  "Commons: File:15 Market Hill, Cambridge.jpg (Smb1001, CC BY-SA 4.0)"
  ],
  "walls": [
   {
@@ -32,9 +33,9 @@
      "x0": 0.3,
      "x1": 12.0,
      "z1": 3.6,
-     "fascia_text": "",
-     "fascia_colour": "#1d4a2e",
-     "text_colour": "#f2f2f2",
+     "fascia_text": "Costa Coffee",
+     "fascia_colour": "#7b1d2e",
+     "text_colour": "#ffffff",
      "door_x": 1.2,
      "stallriser": 0.3,
      "awning": false
@@ -170,8 +171,8 @@
      "style": "modern",
      "x": 2.2,
      "w": 2.6,
-     "z": 12.5,
-     "h": 1.8,
+     "z": 12.2,
+     "h": 1.6,
      "panes": [
       2,
       1
@@ -184,8 +185,8 @@
      "style": "modern",
      "x": 6.2,
      "w": 2.6,
-     "z": 12.5,
-     "h": 1.8,
+     "z": 12.2,
+     "h": 1.6,
      "panes": [
       2,
       1
@@ -198,8 +199,8 @@
      "style": "modern",
      "x": 10.2,
      "w": 2.6,
-     "z": 12.5,
-     "h": 1.8,
+     "z": 12.2,
+     "h": 1.6,
      "panes": [
       2,
       1
@@ -209,7 +210,7 @@
     }
    ],
    "confidence": "low",
-   "notes": "White-rendered 1970s block, upper windows in angled projecting frames; ground floor dark green fascia (photo shows Subway, not in OSM tags). Window x positions approximate."
+   "notes": "White-rendered 1970s block, upper windows in angled projecting frames; ground floor dark green fascia (photo shows Subway, not in OSM tags). Window x positions approximate. Session 31: ground floor is Costa Coffee (OSM 14 Market Hill; red fascia seen right of Franco Manca in Commons 15 Market Hill photo, 2021); top window row lowered to fit under the eave."
   }
  ]
 }

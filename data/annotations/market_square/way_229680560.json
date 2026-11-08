@@ -1,0 +1,387 @@
+{
+ "osm_id": "way/229680560",
+ "sources": [
+  "Commons: File:Market Hill Cambridge UK.jpg (Kestreltail, CC BY-SA 4.0; view from Great St Mary's tower, used for x positions)",
+  "Commons: File:12 Market Hill, Cambridge.jpg (Smb1001, CC BY-SA 4.0)",
+  "Commons: File:5 Market Hill, Cambridge.jpg (The wub, CC BY-SA 3.0)",
+  "1114292965734083"
+ ],
+ "walls": [
+  {
+   "id": "way/229680560:20",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.3,
+    8.4
+   ],
+   "material": "stone",
+   "wall_colour": "#e4dfd2",
+   "trim_colour": "#efece4",
+   "cornice_z": 12.6,
+   "cornice": "classical",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [
+    0.4,
+    5.0,
+    9.4,
+    14.0
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.8,
+     "w": 2.2,
+     "z": 4.8,
+     "h": 3.0,
+     "panes": [
+      4,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 7.2,
+     "w": 3.4,
+     "z": 4.8,
+     "h": 3.0,
+     "panes": [
+      6,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 11.5,
+     "w": 2.2,
+     "z": 4.8,
+     "h": 3.0,
+     "panes": [
+      4,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.8,
+     "w": 2.2,
+     "z": 9.0,
+     "h": 1.8,
+     "panes": [
+      4,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 7.2,
+     "w": 3.4,
+     "z": 9.0,
+     "h": 1.8,
+     "panes": [
+      6,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 11.5,
+     "w": 2.2,
+     "z": 9.0,
+     "h": 1.8,
+     "panes": [
+      4,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.4,
+     "x1": 14.0,
+     "z1": 4.2,
+     "fascia_text": "Marks & Spencer",
+     "fascia_colour": "#e9e5da",
+     "text_colour": "#1b1b1b",
+     "door_x": 1.6,
+     "stallriser": 0.3,
+     "awning": false
+    }
+   ],
+   "confidence": "medium",
+   "notes": "M&S main block: 1930s white stone classical front; two rows of steel multi-pane windows in groups of 2-3-2 lights between pilaster strips, blank attic band, cornice. Ground: M&S entrance at N end, ATM, closed/grey glazing. Group x from tower view (2019), heights from 2016 Mapillary 1114292965734083 (38 m)."
+  },
+  {
+   "id": "way/229680560:21",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.4,
+    7.9
+   ],
+   "material": "brick",
+   "wall_colour": "#a5553a",
+   "trim_colour": "#f0ece2",
+   "cornice_z": 11.4,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.45,
+     "w": 1.0,
+     "z": 4.9,
+     "h": 1.9,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.45,
+     "w": 1.0,
+     "z": 4.9,
+     "h": 1.9,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.4,
+     "w": 1.0,
+     "z": 4.9,
+     "h": 1.9,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.4,
+     "w": 1.0,
+     "z": 4.9,
+     "h": 1.9,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.45,
+     "w": 1.0,
+     "z": 8.4,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.45,
+     "w": 1.0,
+     "z": 8.4,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.4,
+     "w": 1.0,
+     "z": 8.4,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.4,
+     "w": 1.0,
+     "z": 8.4,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.1,
+     "x1": 8.8,
+     "z1": 4.3,
+     "fascia_text": "M&S Foodhall",
+     "fascia_colour": "#f1efe9",
+     "text_colour": "#1b1b1b",
+     "door_x": 4.5,
+     "stallriser": 0.3,
+     "awning": false
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Red brick Georgian-style front, 4 bays x 2 upper floors of white sashes, slate roof; ground = M&S Foodhall (lettering seen on tower view). Upper row seen in Mapillary 1114292965734083, lower row hidden by stalls there but visible in tower view."
+  },
+  {
+   "id": "way/229680560:22",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.7,
+    8.0
+   ],
+   "material": "stone",
+   "wall_colour": "#d9c9a3",
+   "trim_colour": "#e8dcc0",
+   "cornice_z": 10.6,
+   "cornice": "classical",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [
+    0.3,
+    5.5
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.45,
+     "w": 2.0,
+     "z": 5.0,
+     "h": 2.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.35,
+     "w": 2.0,
+     "z": 5.0,
+     "h": 2.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.45,
+     "w": 1.7,
+     "z": 8.2,
+     "h": 1.6,
+     "panes": [
+      4,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.35,
+     "w": 1.7,
+     "z": 8.2,
+     "h": 1.6,
+     "panes": [
+      4,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.9,
+     "w": 1.5,
+     "z": 10.9,
+     "h": 1.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.1,
+     "x1": 5.7,
+     "z1": 4.4,
+     "fascia_text": "M&S Foodhall",
+     "fascia_colour": "#f1efe9",
+     "text_colour": "#1b1b1b",
+     "door_x": 2.9,
+     "stallriser": 0.3,
+     "awning": false
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Ornate Victorian ashlar front (Flemish/Dutch gable to ~13.6 m): 1st floor two large round-arched windows with tracery-style glazing, 2nd floor two paired-light windows, 2-light window in the gable; columns flank the bays. Ground = M&S Foodhall glazing. From 2013 Commons photo of no.5 (left part) + tower view."
+  }
+ ]
+}
