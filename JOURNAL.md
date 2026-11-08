@@ -459,13 +459,13 @@ Done
   better by up to +47. Side-by-side: docs/facades300_session13.jpg (photo | session 12 | session 13; photos Mapillary
   CC-BY-SA 4.0, ids 163559995673306, 745004922853288, 865188314039724).
 - real_facade_pct 1.02 → **2.47**. GPU Chrome 1920×1080: fps_median 60, site_errors 0, load 1.7 s (local).
-- Published. Mistake: publish.sh pushed HEAD before I had committed the tiles.js change, so for a few minutes the live
-  viewer was out of step with the new manifest. I committed and redeployed straight away.
+- Published. Mistake: publish.sh pushed HEAD before I had committed the tiles.js change, I committed and redeployed
+  straight away. The first Pages run was cancelled by the second, so the mismatched viewer never went live.
+  publish.sh now refuses to run with uncommitted changes in site/ or scripts/. Live check: site_errors 0.
 
 Learned
 - The facade gain carries outward: views 150–320 m out gained more (+8.6) than the inner ring did in session 12.
   Views inside 150 m also gained, because walls further out are now visible down the street.
-- publish.sh should refuse to run with uncommitted viewer changes (todo).
 
 Next
 1. Radius 300 → 500 m in service.sh (each ring about 5 min plus photo downloads). Watch the disk: photo cache is
