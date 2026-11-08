@@ -47,6 +47,7 @@ const browser = await puppeteer.launch({
 });
 try {
   const page = await browser.newPage();
+  if (process.env.WC_DEBUG) { page.on('console', m => console.error('[console]', m.text())); page.on('pageerror', e => console.error('[pageerror]', e.message)); }
   await page.setViewport({ width: WIDTH, height: Math.round(WIDTH * 0.75) });
   await page.goto(base + (base.includes('?') ? '&' : '?') + 'debug' + (process.env.WC_QUERY ? '&' + process.env.WC_QUERY : ''), { waitUntil: 'domcontentloaded' });
   await page.waitForFunction('window.__walkReady === true', { timeout: 60000 });

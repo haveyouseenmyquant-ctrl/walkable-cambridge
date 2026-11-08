@@ -17,7 +17,7 @@ export function makeFacades(buf, tex) {
   g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
   g.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
   g.setIndex(new THREE.BufferAttribute(idx, 1));
-  g.computeBoundingSphere();
+  g.computeBoundingSphere(); g.computeVertexNormals();   // normals only for the ?post=ao normal pass
   tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 8; tex.flipY = true;
   const m = new THREE.MeshBasicMaterial({ map: tex, alphaTest: 0.5, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -2 });
   const mesh = new THREE.Mesh(g, m);

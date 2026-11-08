@@ -5,6 +5,10 @@ import { TileManager } from './tiles.js';
 import { Player } from './player.js';
 import { Avatar } from './avatar.js';
 import { Minimap, renderTileMap, initLandmarks, mergeLandmarks, initOverlays } from './ui.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 
 const BASE = new URL('./', location.href).href;
 // ?look=v2: sky dome, AgX tone mapping, plausible albedos (session 9). Off by default: it lowered photo_match on the
@@ -17,6 +21,10 @@ const SKYMODE = new URLSearchParams(location.search).get('sky') || 'white';
 const SKY = LOOK2 ? 0xccd8e2 : SKYMODE === 'blue' ? 0xbcd3e6 : 0xeef1f6;
 const OVERCAST = SKYMODE === 'overcast';
 const LK = parseFloat(new URLSearchParams(location.search).get('light') || '0.45');   // scales sun + sky light; 0.45 won the session-21 A/B (photo_match <=520 m 25.79 -> 26.80)
+// ?post=ao: ground-truth ambient occlusion (GTAOPass, normals from depth) on a 4x MSAA half-float target, then OutputPass (sRGB).
+// ?ao=<intensity> (default 1), ?aor=<radius m> (default 2), ?aores=<AO buffer scale>, ?aos=<AO and denoise samples>.
+const QS = new URLSearchParams(location.search);
+const POST = QS.get('post') || 'off';
 const $ = id => document.getElementById(id);
 const status = msg => { $('status').textContent = msg; };
 
@@ -62,8 +70,30 @@ async function main() {
     sun.shadow.bias = -0.0005; sun.shadow.normalBias = 0.4;
   }
 
+  let composer = null;
+  if (POST !== 'off' && quality !== 'low') {
+    // AO reads the main pass's depth and reconstructs normals from it: no second scene pass, and alpha-tested
+    // leaves and facade photos occlude only where they are drawn
+    const rt = new THREE.WebGLRenderTarget(1, 1, { type: THREE.HalfFloatType, samples: 4, depthTexture: new THREE.DepthTexture(1, 1) });
+    composer = new EffectComposer(renderer, rt);
+    composer.addPass(new RenderPass(scene, camera));
+    // RenderPass draws into readBuffer = renderTarget2 (a clone of rt with its own depth texture): GTAO + Output swap twice per frame
+    const ao = new GTAOPass(scene, camera, 1, 1, { depthTexture: composer.renderTarget2.depthTexture });
+    const aoRes = parseFloat(QS.get('aores') || '1'), aoN = parseInt(QS.get('aos') || '16');
+    ao.updateGtaoMaterial({ radius: parseFloat(QS.get('aor') || '2'), distanceExponent: 1, thickness: 1, scale: 1, samples: aoN });
+    ao.updatePdMaterial({ samples: aoN });
+    if (aoRes !== 1) { const ss = ao.setSize; ao.setSize = (w, h) => ss.call(ao, Math.round(w * aoRes), Math.round(h * aoRes)); }
+    ao.blendIntensity = parseFloat(QS.get('ao') || '1');
+    composer.addPass(ao);
+    composer.addPass(new OutputPass());
+  }
+
   const resize = () => {
     renderer.setSize(innerWidth, innerHeight, false);
+    if (composer) {
+      composer.setPixelRatio(renderer.getPixelRatio()); composer.setSize(innerWidth, innerHeight);
+      for (const t of [composer.renderTarget1, composer.renderTarget2]) Object.assign(t.depthTexture.image, { width: t.width, height: t.height });   // RenderTarget.setSize leaves depth textures at their old size
+    }
     camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix();
   };
   addEventListener('resize', resize); resize();
@@ -154,7 +184,7 @@ async function main() {
       sun.target.position.set(cx, 0, cz); sun.position.set(cx, 0, cz).addScaledVector(SUN_DIR, 300); sun.target.updateMatrixWorld();
     }
     skyDome.position.copy(camera.position);
-    renderer.render(scene, camera);
+    if (composer) composer.render(dt); else renderer.render(scene, camera);
     if (!ready && !player.pendingPlace && tiles.readyAt(player.x, player.y)) {
       ready = true; window.__walkReadyAt = performance.now(); window.__walkReady = true;
       console.log(`[walkable] ready ${(performance.now() / 1000).toFixed(2)}s`);
