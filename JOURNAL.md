@@ -805,3 +805,42 @@ Next
 - Live check: build 2d6709bcb8bac9c0; measure.sh: walkable 99.39, buildings 100, roof_match 93.03, real_facade 7.6,
   street_objects 100, site_errors 0. measure.sh took 84 s on its first, uncached run of a new build (0.9 s when cached).
   service.sh will benchmark the build at its next loop (~10:25 CET).
+
+## 2026-11-08 — Session 26: road widths, footways and surfaces from OSM; benchmark renders made resumable
+
+Done
+- The main KPI was missing: service.sh had logged "renders incomplete" twice, so builds dad9…, b45c… and 2d67… have
+  no photo_match/judged_realism. The cause: a photo_render worker that crashes (machine busy) dropped its whole
+  share, and bench.sh then threw away all renders. Now photo_render.mjs skips views already rendered, and bench.sh
+  re-runs workers for the missing views (3 rounds) without deleting anything. A benchmark that gets interrupted
+  resumes on the next run.
+- Ground (build.py), per the session 25 side-by-sides (cobbles everywhere, carriageway too narrow):
+  - `road_half(t)`: OSM `width` if mapped, else the class default + 1 m per side with on-road parking
+    (`WC_ROAD_PARK`). cars.py and markings.py use it too, so parked cars stand just inside the kerb.
+  - Carriageway surface from OSM `surface` (asphalt → road, paving stones → pavement, sett/cobblestone → the
+    cobble texture). Footways and cycleways with a surface tag follow it too (asphalt paths are now tarmac).
+  - 2 m footways beside primary to residential roads with `sidewalk=both|left|right|yes`, and untagged ones
+    (`WC_SIDEWALK_DEFAULT`). Squares and parking areas: pavement.
+  - Unmapped ground (`WC_GROUND_DEFAULT`): paving instead of cobbles. Cobbles now appear only where OSM says sett.
+- A/B on 25 views (every 8th benchmark view, live build as control): control **18.13**, roads+footways 18.16,
+  plus the paving default **18.19** (3 views better by > 1, 1 worse, range −1.3…+1.9). DINOv2 sees this as neutral.
+  Shipped because the ground now matches the photos (side-by-side docs/ground_session26.jpg, photo | before |
+  after; photos Mapillary CC-BY-SA 4.0, ids 812167710181454, 465367698087024, 183228076993113). Row 1 shows a tarmac
+  road at its real width instead of paving slabs.
+- Guardrails on the new build: walkable 99.39, buildings 100, street_objects 100, real_facade 7.6. Local load
+  4.39 s, live load 5.03 s (both measured while the benchmark and other projects' jobs were loading the machine:
+  load average about 40), site_errors 0. Published as build b8682f1eb62dea45. The benchmark of this build was started
+  at the end of the session; service.sh resumes it if it is cut off.
+
+Learned
+- The Mac mini is shared: other projects run 3 CPU-bound Python processes, and a swiftshader render takes about
+  1 view/min per worker. A 3-arm A/B on 25 views took about 25 min. Keep A/Bs at ≤ 25 views, reuse control renders.
+- Ground changes hardly move DINOv2, which is dominated by buildings, sky and trees. The visible problems in the outer
+  views are the jagged LiDAR roofs (sawtooth ridges from 1 m DSM pixels at eaves) and the plain walls.
+
+Next
+1. Roofs that look right at eye level: fit planes (gable/hip) to the DSM per footprint and keep the fit when its RMSE
+   is ≤ 0.75 m (roof_match stays), instead of meshing the raw 1 m DSM. That removes the sawtooth eaves.
+2. Wikimedia Commons photos of central buildings registered locally for poses (real facade area, centre first).
+3. Synthetic per-building facades for walls with no photo.
+4. Check the benchmark score of b8682f1eb62dea45 at the start of next session (data/benchmark/scores).
