@@ -542,7 +542,7 @@ def main():
 
     # ---- surface class raster (1 m, same grid as the DTM); later layers win
     shp = DTM.shape
-    cls = np.full(shp, int(os.environ.get("WC_GROUND_DEFAULT", S_COURT)), np.uint8)   # default: unmapped urban ground (yards, forecourts)
+    cls = np.full(shp, int(os.environ.get("WC_GROUND_DEFAULT", S_PAVE)), np.uint8)   # default: unmapped urban ground (yards, forecourts): paving since session 26 (was cobbles)
 
     def burn(geoms, val):
         geoms = [mapping(g) for g in geoms if g is not None and not g.is_empty]

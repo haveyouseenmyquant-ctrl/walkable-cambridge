@@ -96,3 +96,4 @@ with `sidewalk=*` (untagged urban roads too) get a 2 m footway (2) each side; sq
   carry the DSM values instead of corner averages), and the roof floor is median ground + 1 m (was + 2 m), so low
   parts of a footprint stay low. roof_match_pct 23.18 → 92.11 (median RMSE 1.05 → 0.21 m). The legacy
   height_accuracy_pct (model top vs LiDAR p95) drops 91 → 79 because chimneys and spikes are no longer filtered.
+Unmapped urban ground (yards, forecourts) defaults to 2 (paving; it was 5, cobbles, before session 26).
