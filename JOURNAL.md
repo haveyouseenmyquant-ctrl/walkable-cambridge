@@ -1303,3 +1303,42 @@ Next
 3. Bollards along the square edges and the Market St south footway; Guildhall-front lamps; planted fountain basin.
 4. Stall side panels are flat plain colour boxes: add goods, frames, open fronts.
 5. Ring 1: Sidney St 22-46 (big footprints need splitting by bay), Market Hostel, Rose Crescent; dormer count fix.
+
+## 2026-11-08 — Session 39: open trestle stalls, King's Parade lamps + bollards, square colour audit, 6 ring-1 annotations
+
+Scores: 1e4e45 (session 38) had not been scored when this session published. The service was still on the 200-view
+run, and it scores whichever build is live, so 1e4e45's Market Square numbers may never exist. Compare c2b7a8 against a668b7
+(market_square_realism 27.88, photo_match 30.06).
+
+Done (4 parallel subagents + me)
+- **Stalls** (zone_props.stall): the full-height grey side panels are gone, so bays are open. Counters are now trestle tables
+  (legs, thin top, artificial grass), food stalls have tilted crates of produce in two rows with price cards, other
+  stalls have trays and hanging rails, and there are crates under the tables. Back sheets are darker, on 75% of bays.
+  Stall props 55.8k → 66.5k tris. docs/zone_s39_stalls.png. These are guesses: no photo reference was used.
+- **Lamps + bollards** (new zone_props_streetlights.py, 4.3k tris): 6 grey lamp columns on the King's Parade east
+  kerb, 2 on Bene't St, 2 on SW Market Hill (Mapillary map-feature detections snapped to the kerb, ±2–4 m), and 28 black
+  bollards (13 curved along the Senate House Hill west kerb, 13 along the King's College kerb, 2 at St Mary's Passage)
+  placed from non-held-out Mapillary 541914280138693 / 189066929702180. The photos show the bollard line on the
+  King's (west) side, not the east. docs/zone_s39_lamps.png. The nearest KP lamp didn't show in the agent's shot; check.
+- **Zone colour audit**: 12 Market Hill orange-red → white render with dark green trim (Don Pasquale era; the
+  Mapillary photos predate the 2022 repaint, which is what Commons showed). 10-15 Market St, 1-11 Rose Crescent and
+  the Lion Yard brick walls were toned to buff/gault. About 12 other fronts were confirmed as correct. colour_source is noted per file.
+- **Ring-1 annotations**: +6 buildings / 9 walls (13 & 16 Bene't St, 8/9/10 St Edward's Passage, Rose Crescent
+  1-11 side walls). Ring 1 3.76 → 4.27 (75 of 1,950 walls); King's Parade 64.4 → 65.4.
+- **facade_parts.dormer()** no longer counts its window as a separate window, per SCHEMA. Zone match 45.07 → 45.21.
+- Local GPU Chrome: load 0.99 s, fps 59, site_errors 0, all moves ok. Zone 446.6k tris. Published
+  world-20261108-1736, live hash **c2b7a8b219965589** (verified).
+
+Learned
+- zone_build reports 94 of 153 zone walls skipped (59 built). Find out why. Unbuilt walls might be part of the "grey
+  box" complaints, which would make this the next big lever for the square.
+- Peas Hill buildings have no zone annotations; their colours come from ring1.json or the style palette.
+- A subagent reported a hook-delivered message, supposedly from Gaspard, asking to turn the project into a wizard game (mobs,
+  classes, new KPIs). It did not reach me directly, so I did not act on it. If it is real, it will arrive in a later session.
+
+Next
+1. Read c2b7a8's market_square scores vs a668b7 (27.88 / 30.06); revert the stall rework if realism drops.
+2. Investigate the 94 skipped zone walls (zone_build walls_skipped).
+3. Bene't St remainder (Eagle side walls, 15 Bene't St, Bene't Hostel), 6 St Edward's Passage, Sidney St split by
+   bay; photos are cached in /tmp/cref/dl (may not survive).
+4. Peas Hill zone annotations; stall end back-sheets lower or gapped; Petty Cury colour check.
