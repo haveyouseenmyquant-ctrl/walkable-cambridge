@@ -485,3 +485,50 @@ Done
   Cached per build hash. height_accuracy_pct dropped 98.6 → 91 (the roof is no longer stretched to the p95 top).
 - facades.py --radius 500 (RAM fix: keep only one tile's decoded photos). photo_match on the views ≤ 520 m
   16.60 → **22.22**. real_facade_pct 2.47 → **4.65**. Side-by-side: docs/facades500_roofs_session14.jpg.
+
+## 2026-11-08 — Session 15: facades in vertical bands from several photos, half pieces
+
+(Entry written at the start of session 16 from the session-15 commit; session 15 ended before writing it.)
+
+Done
+- facades.py: a wall piece whose best photo only shows its lower part gets the rest as an upper band with its own
+  photo (up to 3 bands per wall); a piece with no photo is split into halves once; cameras up to 40 m (was 35).
+- real_facade_pct 4.65 → **5.7**; photo_match on views ≤ 520 m 22.22 → **23.06**. Side-by-side:
+  docs/facade_bands_session15.jpg. measure.sh caches kpi.py per build hash.
+- Not committed: a tiles.js change that streams facade atlases after the tile is walkable. The live build measured
+  load_seconds **9.17** (> 5 guardrail) because the atlases were fetched before the tile counted as loaded.
+  Session 16 committed and shipped it.
+
+## 2026-11-08 — Session 16: roofs that match the LiDAR (roof_match_pct 23.18 → 92.11), load time fixed
+
+Done
+- Load time: the live session-15 build measured load_seconds 9.17 (guardrail 5) because each tile waited for its facade
+  atlases. Committed the tiles.js change that streams atlases after the tile is walkable (photo_render waits for
+  `window.__facadesPending` to reach 0). Live after publishing: **3.21 s**, site_errors 0.
+- Roofs (build.py), each change measured with roof_match.py on a side build (build 43 s + score 5 s):
+  - quadtree grid on LiDAR pixel centres, no 3×3 median: 23.18 → 40.08
+  - no eave-pixel replacement (it lifted pitched eaves to the higher inner pixels: every failure had positive bias):
+    → 80.01
+  - roof floor median ground + 1 m instead of + 2 m (350 of the remaining 413 failures had > 10 % of the footprint
+    below 2 m): → **92.11**, median RMSE 1.05 → 0.21 m.
+  - Guardrails on the new build: walkable 99.38, buildings 100. Legacy height_accuracy_pct 91 → 79 (chimneys and
+    spikes are no longer filtered; that KPI compares the top with the p95).
+- A/B on the 67 benchmark views within 520 m (same viewer, old vs new roofs, rendered locally): **23.05 → 23.52**;
+  25 views better by > 1, 14 worse by > 1 (−6.7 to +9.6). Side-by-side: docs/roofs_session16.jpg (photo | old | new;
+  photos Mapillary CC-BY-SA 4.0, ids 577055006604384, 289425219597328, 214764576744027).
+- Published (build c46db5cb1e141ed6).
+
+Learned
+- The worst view (bottom row of the side-by-side) shows the cost: where trees overhang a footprint, the raw DSM turns
+  the canopy into tall red roof spikes. roof_match counts this as a match because it compares with the DSM, but it
+  is wrong to the eye. Probably most of the 14 views that got worse.
+- Roof experiments are cheap (under a minute each); facades, trees and objects do not need re-baking after build.py:
+  copy their manifest keys from the previous manifest.
+
+Next
+1. Canopy-over-roof filter: detect tree pixels inside footprints (OSM/LiDAR trees from trees.py within the crown
+   radius, or local roughness: canopy is rough, roofs are planar) and replace them with the planar fit of the
+   neighbouring roof. Check that roof_match stays ≥ 90 and the 14 worse views recover.
+2. Facade coverage in the inner ring (real_facade_pct is 5.7 overall): synthetic per-building facades where there is
+   no photo, centre first.
+3. finished_radius_m: roof_match now passes everywhere; facades and judged_realism are the blockers.
