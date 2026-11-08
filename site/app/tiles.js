@@ -38,7 +38,7 @@ export class TileManager {
     this.tiles = manifest.tiles.map(m => ({ m, state: 'idle', group: null, col: null, gen: 0 }));
     this.jobs = 0;
     this.trees = layerOn(manifest, 'trees'); this.objects = layerOn(manifest, 'objects');
-    this.markings = layerOn(manifest, 'markings');
+    this.markings = Q.get('markings') === '1';   // off by default: neutral on the benchmark (session 21)
     this.facades = layerOn(manifest, 'facades'); this.texLoader = new THREE.TextureLoader();
     this.loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
   }

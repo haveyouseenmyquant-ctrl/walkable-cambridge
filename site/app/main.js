@@ -16,7 +16,7 @@ const LOOK2 = new URLSearchParams(location.search).get('look') === 'v2';
 const SKYMODE = new URLSearchParams(location.search).get('sky') || 'white';
 const SKY = LOOK2 ? 0xccd8e2 : SKYMODE === 'blue' ? 0xbcd3e6 : 0xeef1f6;
 const OVERCAST = SKYMODE === 'overcast';
-const LK = parseFloat(new URLSearchParams(location.search).get('light') || '1');   // scales sun + sky light
+const LK = parseFloat(new URLSearchParams(location.search).get('light') || '0.45');   // scales sun + sky light; 0.45 won the session-21 A/B (photo_match <=520 m 25.79 -> 26.80)
 const $ = id => document.getElementById(id);
 const status = msg => { $('status').textContent = msg; };
 
