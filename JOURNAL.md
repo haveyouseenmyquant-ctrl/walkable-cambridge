@@ -726,3 +726,4 @@ Next
 2. Synthetic per-building facades (storeys, windows, material colour) for walls with no photo.
 3. Mask people/bikes in facade photos (a local segmentation model) and pick the cleanest photo per piece.
 4. Footprints built after the LiDAR survey (session 22).
+- Live check: build b45c1234a047bcaa, real_facade_pct 7.6 (measure.sh), walkable 99.39, buildings 100, roof_match 93.03.
