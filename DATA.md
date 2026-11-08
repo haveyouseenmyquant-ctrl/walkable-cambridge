@@ -29,6 +29,22 @@ Facade annotation references (session 33, `data/raw/commons_ref/`, git-ignored):
 photos (CC BY-SA 2.0/4.0) of Petty Cury, Lion Yard and St Edward King and Martyr, used only as visual references for
 the layout annotations in `data/annotations/market_square/` (file name, licence and author are listed in each
 annotation's `sources`). No pixels from them are in the world.
+Added in session 34 (same terms, licence checked via the Commons API): St Mary's Passage: "1 St Mary's Passage" and
+"3 St Mary's Passage, Cambridge" (Smb1001, CC BY-SA 4.0), geograph 4994976 Cambridge Satchel Company (Hugh Venables),
+6497174 Cuckoo and 7561311 Sahara (Mr Ignavy), 6094985 (John Sutton), 6887870 Ryder & Amies (Colin Smith); Petty Cury:
+"Petty Cury, Cambridge" (Magnus Manske, CC BY-SA 3.0), geograph 1944505/1944508 (Stacey Harris), 4040570, 4332543,
+5322026, 5897664, 5231641 (N Chadwick), 4350366 (Hugh Venables), 4353388 (Fernweh); Guildhall Street (Magnus Manske,
+CC BY-SA 4.0), geograph 6095002 (John Sutton); Market Street: "Market Street, Cambridge" and "1, Market Street"
+(Magnus Manske, CC BY-SA 3.0), geograph 4171681/4350410 (Hugh Venables); "St Edward's Passage, Cambridge, looking
+toward Peas Hill (cropped)" (CC BY 1.0) and "3-4 St Edward's Passage" (Smb1001, CC BY-SA 4.0). Geograph photos are
+CC BY-SA 2.0.
+Bespoke models (session 34, references for shape/proportion/colour only, credited in the module docstrings):
+`scripts/zone_bespoke_caius.py`: Commons "Trinity Street – View SSW along Gonville & Caius…", "King's Parade – View
+West into Senate House Passage…", "King's Parade – View North into Trinity Street…", "Market Hill – View NNW into Rose
+Crescent" (Txllxt TxllxT, CC BY-SA 4.0), "1125528 … St Michael's Court" (Tilman2007, CC BY-SA 4.0);
+`scripts/zone_bespoke_churches.py`: geograph 3803723 St Michael, Trinity Street (N Chadwick, CC BY-SA 2.0), Commons
+St Michael's view east from the churchyard (Txllxt TxllxT, CC BY-SA 4.0), plus the St Edward's photos above.
+Market stalls / street furniture (session 34, `scripts/zone_props.py`, `scripts/zone_props_furniture.py`; same terms, licence checked via the Commons API): "Cambridge Market stalls at lunchtime" (Jonosunde, CC BY-SA 4.0), geograph 5652394 "Looking over the market stalls in Cambridge" (Richard Humphrey), 1133717 "Empty market stalls", 703624 "Cambridge Market" and 972242 "A vital part of Cambridge" (Sebastian Ballard), all CC BY-SA 2.0. Used only to read the stall look (white canvas with red/blue/green/yellow stripes down the slope, scalloped hems, scaffold frames, striped counter cloths, red side sheets); no pixels from them are in the world.
 
 ## Held-out benchmark (session 8)
 - 200 Mapillary photos (CC-BY-SA 4.0, contributors credited per photo in `data/benchmark/benchmark.json`),

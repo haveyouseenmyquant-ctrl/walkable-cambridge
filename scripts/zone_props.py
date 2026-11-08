@@ -44,6 +44,7 @@ SHEETS = [(0.62, 0.14, 0.17), (0.62, 0.14, 0.17), (0.16, 0.22, 0.45), (0.88, 0.8
 CRATE = (0.55, 0.42, 0.28)
 GOODS = [(0.80, 0.20, 0.12), (0.92, 0.62, 0.15), (0.35, 0.55, 0.20), (0.85, 0.75, 0.45), (0.55, 0.30, 0.45),
          (0.75, 0.68, 0.55), (0.30, 0.35, 0.55), (0.90, 0.85, 0.70)]
+SKIRTS = [(0.10, 0.45, 0.28), (0.10, 0.45, 0.28), (0.72, 0.12, 0.14), (0.15, 0.28, 0.62)]   # stripe on white cloth
 POST = (0.12, 0.12, 0.13)
 BOARD = (0.86, 0.85, 0.80)
 COUNTER_TOP = (0.55, 0.42, 0.28)
@@ -152,7 +153,18 @@ def stall_strip(m, B, g, gB, centre, seed, base=None):
     o, ax, nr, L, W = strip_frame(gB)
     zb = strip_base(gB, g.a, g.ds) if base is None else base
     ze = zb + B.CANOPY_EAVE
-    hgt = lambda P: B.canopy_height(gB, np.asarray(P).reshape(-1, 2) + [E0, N0])  # noqa: E731
+    parts_f = B.canopy_parts(gB, True)
+
+    def hgt(P):
+        """Canopy height above the eave at local points: the slope part nearest each point (B.canopy_height takes
+        the max over every part's plane, which reads the ridge height everywhere)."""
+        Q = np.asarray(P, float).reshape(-1, 2) + [E0, N0]
+        if not parts_f:
+            return np.zeros(len(Q))
+        from shapely.geometry import Point as _P
+        d = np.array([[pt.distance(_P(*q)) for q in Q] for pt, _ in parts_f])
+        vals = np.array([f(Q) for _, f in parts_f])
+        return np.clip(vals[d.argmin(0), np.arange(len(Q))], 0, None)
     off = B.CANOPY_T / 2 + 0.04          # canvas sits 4 cm off the tile slab, top and bottom
     cols = [STRIPES[i] for i in rng.permutation(len(STRIPES))]
     loc = lambda q: q + [E0, N0]  # noqa: E731
@@ -180,6 +192,19 @@ def stall_strip(m, B, g, gB, centre, seed, base=None):
             for a, b in zip(ring[:-1], ring[1:]):
                 d = b - a
                 ln = np.linalg.norm(d)
+                if ln >= 0.3 and abs(np.dot(d / ln, nr)) > 0.95:
+                    # gable / notch edge across the row: a canvas band hiding the tile slab's textured edge
+                    outn = np.array([d[1], -d[0]]) / ln
+                    k = int(min(max(np.dot((a + b) / 2 - o, ax), 0), L - 1e-3) // sw)
+                    col = cols[(k // 2) % len(cols)] if k % 2 else WHITE
+                    nseg = max(1, int(np.ceil(ln / 0.4)))
+                    Ps = [a + d * j / nseg + outn * 0.03 for j in range(nseg + 1)]
+                    hs = hgt([a + d * j / nseg - outn * 0.05 for j in range(nseg + 1)])   # sampled just inside
+                    for j in range(nseg):
+                        p0, p1, h0, h1 = Ps[j], Ps[j + 1], hs[j], hs[j + 1]
+                        m.quad([*p0, ze + h0 - off - 0.12], [*p1, ze + h1 - off - 0.12], [*p1, ze + h1 + off + 0.03],
+                               [*p0, ze + h0 + off + 0.03], col, two=True)
+                    continue
                 if ln < 0.3 or abs(np.dot(d / ln, ax)) < 0.95 or hgt([(a + b) / 2])[0] > 0.05:
                     continue
                 outn = np.array([d[1], -d[0]]) / ln
@@ -192,10 +217,18 @@ def stall_strip(m, B, g, gB, centre, seed, base=None):
                     P0, P1 = o + ax * u0 + nr * t, o + ax * u1 + nr * t
                     if np.dot(np.cross([*ax, 0], [*outn, 0]), [0, 0, 1]) > 0:
                         P0, P1 = P1, P0
-                    zt, zl = ze + off, ze - 0.28
+                    zt, zl = ze + off, ze - 0.22
                     m.quad([*P0, zl], [*P1, zl], [*P1, zt], [*P0, zt], col)
                     Q0, Q1 = P0 - outn * 0.02, P1 - outn * 0.02
                     m.quad([*Q1, zl], [*Q0, zl], [*Q0, zt - 2 * off], [*Q1, zt - 2 * off], col)
+                    # scalloped hem: half-round tongues below the flap, ~0.3 m wide, both faces
+                    nsc = max(1, int(round(np.linalg.norm(P1 - P0) / 0.3)))
+                    for j in range(nsc):
+                        A_, B_ = P0 + (P1 - P0) * j / nsc, P0 + (P1 - P0) * (j + 1) / nsc
+                        arc = [A_ + (B_ - A_) * f for f in (0.0, 0.25, 0.75, 1.0)]
+                        dz = [0.0, 0.075, 0.075, 0.0]
+                        for a_, b_, da, db in zip(arc[:-1], arc[1:], dz[:-1], dz[1:]):
+                            m.quad([*a_, zl - da], [*b_, zl - db], [*b_, zl], [*a_, zl], col, two=True)
     # --- bays, frame and stalls
     nst = max(1, int(round(L / BAY)))
     bw = L / nst
@@ -251,6 +284,17 @@ def stall(m, g, c, ax, front, depth, width, rng, ze, hgt, off):
         tw = 0
     if tw:
         m.box(P(-tw / 2, hd - 0.25 - td, 0), A3 * tw, F3 * td, up * th, cloth, top=tuple(min(1, x * 1.12 + 0.03) for x in cloth))
+        if rng.random() < 0.45:   # striped counter skirt (green/white, Commons "Cambridge Market stalls at lunchtime")
+            sk = SKIRTS[rng.integers(len(SKIRTS))]
+            ns = max(2, int(round(tw / 0.12)))
+            for k in range(ns):
+                if k % 2:
+                    continue
+                s0, s1 = -tw / 2 + tw * k / ns, -tw / 2 + tw * (k + 1) / ns
+                fy = hd - 0.25 + 0.012
+                m.quad(P(s1, fy, 0.02), P(s0, fy, 0.02), P(s0, fy, th - 0.02), P(s1, fy, th - 0.02), sk) \
+                    if np.dot(np.cross(A3, F3), up) > 0 else \
+                    m.quad(P(s0, fy, 0.02), P(s1, fy, 0.02), P(s1, fy, th - 0.02), P(s0, fy, th - 0.02), sk)
         # goods: a row of crates / trays on the table, tilted display not modelled
         n = int(rng.integers(2, 5))
         cw = tw / n
@@ -259,6 +303,21 @@ def stall(m, g, c, ax, front, depth, width, rng, ze, hgt, off):
             h = rng.uniform(0.10, 0.22)
             m.box(P(-tw / 2 + cw * k + 0.05, hd - 0.25 - td + 0.08, th), A3 * (cw - 0.1), F3 * (td - 0.16), up * h,
                   CRATE, top=gc)
+            # heaped produce: a low four-sided mound on the crate
+            cx0, cy0, zt0 = -tw / 2 + cw * k + cw / 2, hd - 0.25 - td / 2, th + h
+            ex, ey = (cw - 0.14) / 2, (td - 0.2) / 2
+            apex = P(cx0, cy0, zt0 + rng.uniform(0.06, 0.14))
+            cs = [P(cx0 - ex, cy0 - ey, zt0), P(cx0 + ex, cy0 - ey, zt0), P(cx0 + ex, cy0 + ey, zt0), P(cx0 - ex, cy0 + ey, zt0)]
+            for a_, b_ in zip(cs, cs[1:] + cs[:1]):
+                m.tri(a_, b_, apex, gc)
+                m.tri(a_, apex, b_, tuple(x * 0.8 for x in gc))
+    if rng.random() < 0.3:   # hanging goods (bags, clothes, baskets) on the front eave rail
+        q = c + front * (hd - 0.1)
+        zr = ze + hgt([q])[0] - off - 0.1
+        for k in range(int(rng.integers(3, 7))):
+            s0 = -hw + 0.25 + k * (width - 0.5) / 6
+            ln = rng.uniform(0.35, 0.7)
+            m.box(P(s0, hd - 0.12, zr - z - ln), A3 * rng.uniform(0.2, 0.35), F3 * 0.06, up * ln, GOODS[rng.integers(len(GOODS))])
     # crates stacked under / behind
     for k in range(int(rng.integers(0, 3))):
         s0 = rng.uniform(-hw + 0.2, hw - 0.7)
@@ -303,7 +362,7 @@ def fountain(m, g, cx, cy):
 
 
 def trailer(m, g, poly):
-    rect = np.array(poly.minimum_rotated_rectangle.exterior.coords)[:4]
+    rect = np.array(poly.buffer(0.08, join_style=2).minimum_rotated_rectangle.exterior.coords)[:4]
     e1, e2 = rect[1] - rect[0], rect[3] - rect[0]
     o = rect[0]
     if np.cross(e1, e2) < 0:

@@ -55,6 +55,10 @@ const GEOS = {
 };
 const BIKES = [merge(bike(0.42)), merge(bike(-0.42))];
 const mat = new THREE.MeshLambertMaterial({ vertexColors: true });
+// Inside the Market Square zone these types are real geometry in site/zone/market_square.glb, built at the same OSM
+// positions by scripts/zone_props_furniture.py (ZONE_C / ZONE_R / KINDS there): skip them here. ?zone=0 restores them.
+// street_objects_pct (kpi.py) reads the objects/*.bin records, which are unchanged.
+const ZONE_SKIP = new URLSearchParams(location.search).get('zone') === '0' ? null : { x: -96.8, y: 57.0, r: 140, types: new Set([1, 2, 3, 4, 5, 6, 7]) };
 
 // Parked cars (type 13, scripts/cars.py): side profile (length along local x, nose at +x) extruded across the width.
 // Body vertex colour is white and tinted per instance (paint); glass, tyres and trim stay dark.
@@ -89,6 +93,7 @@ export function makeObjects(buf) {
   const m = new THREE.Matrix4(), r = new THREE.Matrix4(), paint = [];
   for (let i = 0; i < n; i++) {
     const [x, y, zg, type, head, seed, cnt] = a.subarray(i * 7, i * 7 + 7);
+    if (ZONE_SKIP && ZONE_SKIP.types.has(type) && (x - ZONE_SKIP.x) ** 2 + (y - ZONE_SKIP.y) ** 2 < ZONE_SKIP.r ** 2) continue;
     r.makeRotationY(head);
     if (type === 5) {   // stands perpendicular to the way, spaced along it
       for (let j = 0; j < cnt; j++) {

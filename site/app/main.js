@@ -111,7 +111,9 @@ async function main() {
   });
 
   player.canPlace = (x, y) => tiles.settled(x, y);
-  loadZone(BASE, scene);   // detailed facade zone (site/zone/zone.json, optional; ?zone=0 off)
+  // detailed facade zone (site/zone/zone.json, optional; ?zone=0 off): streamed in once the spawn tiles are walkable
+  // (session 34), so its download/parse doesn't hold up the collision tiles
+  window.__zoneReady = false;
   const avatar = new Avatar(scene);
   const modeEl = $('mode');
   player.onChange = () => {
@@ -190,6 +192,7 @@ async function main() {
     if (composer) composer.render(dt); else renderer.render(scene, camera);
     if (!ready && !player.pendingPlace && tiles.readyAt(player.x, player.y)) {
       ready = true; window.__walkReadyAt = performance.now(); window.__walkReady = true;
+      loadZone(BASE, scene);
       console.log(`[walkable] ready ${(performance.now() / 1000).toFixed(2)}s`);
       status('');
       $('help').hidden = false;

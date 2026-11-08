@@ -2,7 +2,9 @@
  "osm_id": "way/1211948487",
  "sources": [
   "Commons: File:1-3 Market Hill, Cambridge.jpg (Smb1001, CC BY-SA 4.0)",
-  "Commons: File:Market Hill Cambridge UK.jpg (Kestreltail, CC BY-SA 4.0; view from Great St Mary's tower, used for x positions)"
+  "Commons: File:Market Hill Cambridge UK.jpg (Kestreltail, CC BY-SA 4.0; view from Great St Mary's tower, used for x positions)",
+  "Commons: File:Petty Cury - geograph.org.uk - 4040570.jpg (N Chadwick, CC BY-SA 2.0; looking west, north side on the right)",
+  "Commons: File:Petty Cury, Cambridge - geograph.org.uk - 1944508.jpg (Stacey Harris, CC BY-SA 2.0)"
  ],
  "walls": [
   {
@@ -180,6 +182,266 @@
    ],
    "confidence": "medium",
    "notes": "Red brick with stone 2-storey canted oriel bays (round-arched centre lights, leaded) at x~2 and ~7.2 under two tall gables; flat window between under a small dormer. Ground: navy Stazione restaurant door (N end) and white Optical Express shopfront. Bays modelled as flat windows (no bay style in parts library). Walls :4 (corner splay) and :5 (Petty Cury side) not seen in any verified photo."
+  },
+  {
+   "id": "way/1211948487:5",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.5,
+    8.3,
+    11.6
+   ],
+   "material": "brick",
+   "wall_colour": "#9a4a35",
+   "trim_colour": "#d8c8a2",
+   "cornice_z": 14.2,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.5,
+    8.3
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.4,
+     "x1": 12.9,
+     "z1": 4.0,
+     "fascia_text": null,
+     "fascia_colour": "#2a2a2a",
+     "text_colour": "#ffffff",
+     "door_x": 6.7,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.0,
+     "w": 1.2,
+     "z": 5.0,
+     "h": 2.1,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.0,
+     "w": 1.2,
+     "z": 8.8,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.0,
+     "w": 1.0,
+     "z": 12.0,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.2,
+     "w": 1.2,
+     "z": 5.0,
+     "h": 2.1,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.2,
+     "w": 1.2,
+     "z": 8.8,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.2,
+     "w": 1.0,
+     "z": 12.0,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.2,
+     "w": 1.2,
+     "z": 5.0,
+     "h": 2.1,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.2,
+     "w": 1.2,
+     "z": 8.8,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.2,
+     "w": 1.0,
+     "z": 12.0,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 11.4,
+     "w": 1.2,
+     "z": 5.0,
+     "h": 2.1,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 11.4,
+     "w": 1.2,
+     "z": 8.8,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 11.4,
+     "w": 1.0,
+     "z": 12.0,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Petty Cury side of 2 Market Hill (corner block with 1-3 Market Hill). Geograph 4040570 (looking west, small): the block continues the red brick with pale Bath-stone window dressings of the Market Hill front (:3) and of 37-38 Petty Cury next door, 4 storeys, modern shop units below. Bay positions and window sizes not measurable at this resolution: 4 evenly spaced stone-framed mullioned windows per floor assumed."
+  },
+  {
+   "id": "way/1211948487:4",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.5,
+    8.3,
+    11.6
+   ],
+   "material": "brick",
+   "wall_colour": "#9a4a35",
+   "trim_colour": "#d8c8a2",
+   "cornice_z": 14.2,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.5,
+    8.3
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.2,
+     "w": 0.9,
+     "z": 5.0,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.2,
+     "w": 0.9,
+     "z": 8.8,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "2.4 m corner splay between the Market Hill front (:3) and Petty Cury (:5); same red brick + stone dressings, one narrow window per floor assumed. No photo shows it clearly."
   }
  ]
 }

@@ -237,6 +237,70 @@
    ],
    "confidence": "low",
    "notes": "Mixed terrace: red brick with oriel at east/middle, white-rendered arched-window unit at west end with black ornate Art-Nouveau shopfront (Trollbeads, later Ben's Cookies). x=0 at east end. No OSM names; unit boundaries approximate."
+  },
+  {
+   "id": "way/1211951046:10",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.8,
+    6.9
+   ],
+   "material": "render",
+   "wall_colour": "#efece4",
+   "trim_colour": "#f7f5ef",
+   "cornice_z": 9.6,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.8
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.15,
+     "x1": 2.6,
+     "z1": 3.4,
+     "fascia_text": null,
+     "fascia_colour": "#1c1c1c",
+     "text_colour": "#e8d9a0",
+     "door_x": 1.35,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.35,
+     "w": 0.9,
+     "z": 4.6,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.35,
+     "w": 0.9,
+     "z": 7.5,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "2.7 m corner splay at the west end of the Market Street terrace (:9), continuing its white-rendered unit with arched sashes and black shopfront (from the :9 Mapillary refs). One window per floor assumed."
   }
  ]
 }

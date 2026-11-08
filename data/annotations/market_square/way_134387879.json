@@ -1,70 +1,137 @@
 {
  "osm_id": "way/134387879",
  "sources": [
-  "302224751350928",
-  "541914280138693"
+  "Commons: File:1 St Mary's Passage, Cambridge.jpg (Smb1001, CC BY-SA 4.0)",
+  "Commons: File:The Cambridge Satchel Company - geograph.org.uk - 4994976.jpg (Hugh Venables, CC BY-SA 2.0)"
  ],
  "walls": [
   {
    "id": "way/134387879:0",
-   "storeys": 2,
+   "storeys": 3,
    "floor_z": [
     0,
-    3.4
+    3.1,
+    5.3
    ],
-   "material": "brick",
-   "wall_colour": "#8e4a36",
-   "trim_colour": "#efe8da",
-   "cornice_z": 6.7,
+   "material": "render",
+   "wall_colour": "#f3f2ee",
+   "trim_colour": "#2b2b2b",
+   "cornice_z": 6.6,
    "cornice": "simple",
-   "parapet": false,
-   "string_courses": [],
+   "parapet": true,
+   "string_courses": [
+    3.1
+   ],
    "quoins": false,
    "pilasters": [],
    "elements": [
     {
-     "type": "window",
-     "style": "sash_georgian",
-     "x": 1.7,
-     "w": 0.9,
-     "z": 4.1,
-     "h": 1.7,
-     "panes": [
-      3,
-      3
-     ],
-     "head": "flat",
-     "sill": true
-    },
-    {
-     "type": "window",
-     "style": "sash_georgian",
-     "x": 4.6,
-     "w": 0.9,
-     "z": 4.1,
-     "h": 1.7,
-     "panes": [
-      3,
-      3
-     ],
-     "head": "flat",
-     "sill": true
-    },
-    {
      "type": "shopfront",
-     "x0": 0.3,
-     "x1": 6.2,
-     "z1": 3.2,
-     "fascia_text": null,
-     "fascia_colour": "#3a3532",
-     "text_colour": "#e8e0c8",
-     "door_x": 5.4,
-     "stallriser": 0.5,
+     "x0": 0.2,
+     "x1": 5.0,
+     "z1": 3.0,
+     "fascia_text": "The Senate",
+     "fascia_colour": "#24302e",
+     "text_colour": "#c8b37a",
+     "door_x": 4.4,
+     "stallriser": 0.4,
      "awning": false
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 5.8,
+     "w": 0.9,
+     "h": 2.3,
+     "surround": "pilastered"
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.2,
+     "w": 0.9,
+     "z": 3.5,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.25,
+     "w": 0.9,
+     "z": 3.5,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.3,
+     "w": 0.9,
+     "z": 3.5,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.2,
+     "w": 0.8,
+     "z": 5.45,
+     "h": 0.95,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.25,
+     "w": 0.8,
+     "z": 5.45,
+     "h": 0.95,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.3,
+     "w": 0.8,
+     "z": 5.45,
+     "h": 0.95,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
     }
    ],
-   "confidence": "low",
-   "notes": "Red brick, dark shopfront, white sash windows; from blurred/oblique photos, layout approximate."
+   "confidence": "medium",
+   "notes": "1 St Mary's Passage (The Senate pub). Commons '1 St Mary's Passage' (2022) and geograph 4994976: white-painted render (not red brick as previously annotated), 3 storeys x 3 bays: first-floor sashes with heavy black cornice hoods, smaller 6/6 sashes above, parapet; dark green-black pub front with gold 'THE SENATE' lettering across most of the width and a black panelled side door at the west end. Heights squeezed to fit the 6.7 m LiDAR eave of this wall (real front is taller, ~9 m)."
   }
  ]
 }

@@ -165,6 +165,60 @@
    "elements": [],
    "confidence": "low",
    "notes": "1970s Lion Yard: buff brick, white concrete piers/slab edges, recessed ground-floor arcade; 2 m return with no openings."
+  },
+  {
+   "id": "way/40937938:46",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.6,
+    6.8
+   ],
+   "material": "brick",
+   "wall_colour": "#b98c5f",
+   "trim_colour": "#f1efe8",
+   "cornice_z": 10.2,
+   "cornice": "none",
+   "parapet": false,
+   "string_courses": [
+    3.6
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.1,
+    6.0
+   ],
+   "elements": [],
+   "confidence": "low",
+   "notes": "Lion Yard west flank on Guildhall Place (the passage between the Guildhall and Lion Yard). No openly licensed photo of this face found; material and treatment copied from the Petty Cury frontage of the same 1970s building (:44/:48: orange-buff brick, white concrete band and piers at ~6 m). Left blank (no windows) instead of the default procedural layout, which invents a 2.8 m window grid."
+  },
+  {
+   "id": "way/40937938:47",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.6,
+    6.8
+   ],
+   "material": "brick",
+   "wall_colour": "#b98c5f",
+   "trim_colour": "#f1efe8",
+   "cornice_z": 10.2,
+   "cornice": "none",
+   "parapet": false,
+   "string_courses": [
+    3.6
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.1,
+    6.0,
+    12.0,
+    18.0
+   ],
+   "elements": [],
+   "confidence": "low",
+   "notes": "Lion Yard west flank on Guildhall Place (the passage between the Guildhall and Lion Yard). No openly licensed photo of this face found; material and treatment copied from the Petty Cury frontage of the same 1970s building (:44/:48: orange-buff brick, white concrete band and piers at ~6 m). Left blank (no windows) instead of the default procedural layout, which invents a 2.8 m window grid."
   }
  ]
 }

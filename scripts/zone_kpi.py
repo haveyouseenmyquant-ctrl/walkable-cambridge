@@ -6,6 +6,7 @@ Walls: data/annotations/market_square/walls.json (street-facing walls within 90 
 - facade_geometry_match_pct: per wall, agreement between the annotation (data/annotations/market_square/way_*.json,
   made from non-held-out photos) and the 3D elements the build actually emitted (site/zone/zone.json "walls"):
   mean over [window, door, shopfront, dormer] (storeys not yet counted separately) of min(model, annot) / max(model, annot) (1 if both 0).
+  Bespoke buildings count through their modules' ELEMENTS (openings counted from the emitted geometry; session 34).
   Walls without an annotation count as 0. KPI = length-weighted mean x 100.
 - painted_detail_pct (lower is better): wall area (length x height) whose windows/doors exist only as a photo
   texture: walls carrying a photo-baked facade quad (site/facades/*.bin) that the viewer draws (not inside a
@@ -38,7 +39,9 @@ def main():
     gp = os.path.join(ROOT, "data/derived/facade_geometry.json")   # per wall, written by zone_build.py with the build
     model = {}
     if os.path.exists(zp) and os.path.exists(gp):
-        for w in json.load(open(gp))["walls"]:
+        g = json.load(open(gp))
+        # bespoke buildings (scripts/zone_bespoke_*.py ELEMENTS): openings counted from their emitted geometry
+        for w in g["walls"] + g.get("bespoke_walls", []):
             model[w["id"]] = dict(counts=w.get("elements", {}), skin=w.get("tris", 0) > 0)
     quads = []
     for f in glob.glob(os.path.join(SITE, "facades/*.bin")):

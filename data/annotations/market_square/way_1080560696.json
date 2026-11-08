@@ -1,7 +1,9 @@
 {
  "osm_id": "way/1080560696",
  "sources": [
-  "302224751350928"
+  "Commons: File:Sahara - St Mary's Passage - geograph.org.uk - 7561311.jpg (Mr Ignavy, CC BY-SA 2.0)",
+  "Commons: File:3 St Mary's Passage, Cambridge.jpg (Smb1001, CC BY-SA 4.0)",
+  "Commons: File:Cuckoo - St Mary's Passage - geograph.org.uk - 6497174.jpg (Mr Ignavy, CC BY-SA 2.0)"
  ],
  "walls": [
   {
@@ -9,25 +11,50 @@
    "storeys": 2,
    "floor_z": [
     0,
-    3.4
+    3.2
    ],
-   "material": "brick",
-   "wall_colour": "#8e4a36",
-   "trim_colour": "#efe8da",
-   "cornice_z": 6.9,
-   "cornice": "simple",
+   "material": "render",
+   "wall_colour": "#f2f0ea",
+   "trim_colour": "#d9d5c4",
+   "cornice_z": 5.6,
+   "cornice": "bracketed",
    "parapet": false,
-   "string_courses": [],
+   "string_courses": [
+    3.2
+   ],
    "quoins": false,
-   "pilasters": [],
+   "pilasters": [
+    0.05,
+    4.35
+   ],
    "elements": [
     {
+     "type": "door",
+     "style": "panelled",
+     "x": 0.5,
+     "w": 0.75,
+     "h": 2.3,
+     "surround": "pilastered"
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.95,
+     "x1": 4.15,
+     "z1": 3.0,
+     "fascia_text": "Sahara",
+     "fascia_colour": "#e4e1d3",
+     "text_colour": "#3a3a3a",
+     "door_x": null,
+     "stallriser": 0.6,
+     "awning": false
+    },
+    {
      "type": "window",
-     "style": "sash_georgian",
+     "style": "oriel",
      "x": 2.2,
-     "w": 0.9,
-     "z": 4.1,
-     "h": 1.7,
+     "w": 2.0,
+     "z": 3.5,
+     "h": 1.6,
      "panes": [
       3,
       3
@@ -36,20 +63,14 @@
      "sill": true
     },
     {
-     "type": "shopfront",
-     "x0": 0.2,
-     "x1": 4.2,
-     "z1": 3.2,
-     "fascia_text": null,
-     "fascia_colour": "#3a3532",
-     "text_colour": "#e8e0c8",
-     "door_x": 3.4,
-     "stallriser": 0.5,
-     "awning": false
+     "type": "dormer",
+     "x": 2.1,
+     "w": 1.0,
+     "h": 1.0
     }
    ],
-   "confidence": "low",
-   "notes": "Continuation of brick shop range on St Mary's Passage; blurred photo."
+   "confidence": "high",
+   "notes": "3 St Mary's Passage (listed, wikidata Q98175669): small 17th-c. house, white pargetted (moulded fleur-de-lys plaster) front, not brick. Geograph 7561311 / Commons 3 St Mary's Passage: panelled oak door at the east end under a shell hood, 6-light leaded shop window, 3-light leaded oriel on the first floor with bracketed cornice, steep tiled gable dormer with 2-light leaded window and finial. Trim cream-grey. Previous annotation (red brick, from a blurred photo) was wrong."
   }
  ]
 }

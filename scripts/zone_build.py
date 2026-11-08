@@ -100,6 +100,7 @@ def gl_mesh(name, P, nrm, col, mat=None):
 
 
 HIDE = []
+ELEMENTS = {}   # wall id -> {"window": n, ...} counted from the geometry of the bespoke modules (their ELEMENTS)
 PROP_BUILDINGS = {"way/400160677", "way/400160686"}   # food trailers: modelled by zone_props.py
 
 
@@ -127,7 +128,9 @@ def load_bespoke():
     """scripts/zone_bespoke_*.py modules: BUILDS = {osm_id: fn(walls_of_building) -> [{"name", "tris", "col"}, ...]}
     (optional "mat": a facade_parts.MATS name/id, or a per-triangle array of them; default plain)
     (tris: world collision-frame triangles (E, N, z) like zone_props). A bespoke building gets no generic skin.
-    Optional HIDE_TILE = [osm_id, ...]: complete bespoke models whose tile body the viewer hides (zone.json "hide")."""
+    Optional HIDE_TILE = [osm_id, ...]: complete bespoke models whose tile body the viewer hides (zone.json "hide").
+    Optional ELEMENTS = {wall_id: {"window": n, "door": n, "shopfront": n, "dormer": n}}: openings the module's geometry
+    really emits per walls.json wall (for facade_geometry_match_pct; walls without it count as unmodelled)."""
     here = os.path.dirname(os.path.abspath(__file__))
     out = {}
     for f in sorted(glob.glob(os.path.join(here, "zone_bespoke_*.py"))):
@@ -135,6 +138,7 @@ def load_bespoke():
             mod = importlib.import_module(os.path.basename(f)[:-3])
             out.update(getattr(mod, "BUILDS", {}))
             HIDE.extend(getattr(mod, "HIDE_TILE", []))
+            ELEMENTS.update(getattr(mod, "ELEMENTS", {}))
         except Exception as e:   # never break the zone build
             print("bespoke module failed:", f, repr(e), file=sys.stderr)
     return out
@@ -159,6 +163,77 @@ def prop_meshes(items):
         meshes.append(gl_mesh(pr["name"], T[ok], g[ok] / ln[ok, None], col, mat))
         n += int(ok.sum())
     return meshes, n
+
+
+def write_compact_glb(path, meshes):
+    """Session 34: the zone GLB, indexed and quantized (KHR_mesh_quantization): flat-shaded triangle soup is deduped
+    into shared vertices; POSITION int16 normalized (node translation + uniform scale restore metres; ~5 mm at 170 m), NORMAL int8,
+    COLOR_0 uint8 normalized, _MAT uint8. ~20 bytes per vertex instead of 40, ~1/3 of the old file."""
+    import struct
+    chunks, bin_len = [], 0
+    js = {"asset": {"version": "2.0", "generator": "walkable-cambridge zone_build.py",
+                    "copyright": "© OpenStreetMap contributors; © Environment Agency copyright and/or database right 2022"},
+          "extensionsUsed": ["KHR_mesh_quantization"], "extensionsRequired": ["KHR_mesh_quantization"],
+          "scenes": [{"nodes": list(range(len(meshes)))}], "scene": 0, "nodes": [], "meshes": [],
+          "materials": [{"pbrMetallicRoughness": {"baseColorFactor": [1, 1, 1, 1], "metallicFactor": 0, "roughnessFactor": 0.9}}],
+          "accessors": [], "bufferViews": [], "buffers": []}
+
+    def view(b, target, stride=None):
+        nonlocal bin_len
+        bv = {"buffer": 0, "byteOffset": bin_len, "byteLength": len(b), "target": target}
+        if stride:
+            bv["byteStride"] = stride
+        js["bufferViews"].append(bv)
+        chunks.extend([b, b"\0" * (-len(b) % 4)])
+        bin_len += len(b) + (-len(b) % 4)
+        return len(js["bufferViews"]) - 1
+
+    def acc(bv, count, ctype, typ, norm=False, **kw):
+        a = {"bufferView": bv, "count": int(count), "componentType": ctype, "type": typ, **kw}
+        if norm:
+            a["normalized"] = True
+        js["accessors"].append(a)
+        return len(js["accessors"]) - 1
+
+    for name, pos, nrm, col, idx, *extra in meshes:
+        pos = np.asarray(pos, np.float64)[np.asarray(idx)]
+        nrm = np.asarray(nrm, np.float64)[np.asarray(idx)]
+        col = np.asarray(col, np.float64)[np.asarray(idx)]
+        mat = np.asarray(extra[0], np.float64)[np.asarray(idx)] if extra and extra[0] is not None else np.zeros(len(pos))
+        lo, hi = pos.min(0), pos.max(0)
+        c, h = (lo + hi) / 2, max(float((hi - lo).max()) / 2, 1e-3)   # uniform scale: zone.js transforms normals by mat3(modelMatrix)
+        qp = np.round((pos - c) / h * 32767).astype("<i2")
+        qn = np.round(np.clip(nrm, -1, 1) * 127).astype("i1")
+        qc = np.round(np.clip(col, 0, 1) * 255).astype("u1")
+        qm = np.clip(np.round(mat), 0, 255).astype("u1")
+        key = np.zeros((len(pos), 12), "u1")
+        key[:, 0:6] = qp.view("u1").reshape(-1, 6)
+        key[:, 6:9] = qn.view("u1")
+        key[:, 9:12] = qc
+        key = np.concatenate([key, qm[:, None]], 1)
+        _, first, inv = np.unique(np.ascontiguousarray(key).view("V13").ravel(), return_index=True, return_inverse=True)
+        n = len(first)
+        P4 = np.zeros((n, 4), "<i2"); P4[:, :3] = qp[first]
+        N4 = np.zeros((n, 4), "i1"); N4[:, :3] = qn[first]
+        C4 = np.zeros((n, 4), "u1"); C4[:, :3] = qc[first]
+        M4 = np.zeros((n, 4), "u1"); M4[:, 0] = qm[first]
+        I = inv.astype("<u2" if n < 65536 else "<u4")
+        a = {"POSITION": acc(view(P4.tobytes(), 34962, 8), n, 5122, "VEC3", True, min=[-32767] * 3, max=[32767] * 3),
+             "NORMAL": acc(view(N4.tobytes(), 34962, 4), n, 5120, "VEC3", True),
+             "COLOR_0": acc(view(C4.tobytes(), 34962, 4), n, 5121, "VEC3", True),
+             "_MAT": acc(view(M4.tobytes(), 34962, 4), n, 5121, "SCALAR")}
+        ia = acc(view(I.tobytes(), 34963), len(I), 5123 if I.dtype == np.dtype("<u2") else 5125, "SCALAR")
+        js["meshes"].append({"primitives": [{"attributes": a, "indices": ia, "material": 0}]})
+        js["nodes"].append({"name": name, "mesh": len(js["meshes"]) - 1,
+                            "translation": c.tolist(), "scale": [h, h, h]})
+    js["buffers"].append({"byteLength": bin_len})
+    j = json.dumps(js, separators=(",", ":")).encode(); j += b" " * (-len(j) % 4)
+    with open(path, "wb") as f:
+        f.write(struct.pack("<III", 0x46546C67, 2, 12 + 8 + len(j) + 8 + bin_len))
+        f.write(struct.pack("<II", len(j), 0x4E4F534A) + j)
+        f.write(struct.pack("<II", bin_len, 0x004E4942))
+        for ch in chunks:
+            f.write(ch)
 
 
 def main():
@@ -231,7 +306,7 @@ def main():
             print("props module failed:", f, repr(e), file=sys.stderr)
     out = os.path.join(ROOT, "site/zone")
     os.makedirs(out, exist_ok=True)
-    B.write_glb(os.path.join(out, ZONE + ".glb"), meshes)
+    (B.write_glb if os.environ.get("ZONE_FLOAT_GLB") else write_compact_glb)(os.path.join(out, ZONE + ".glb"), meshes)
     ntris = sum(len(m[4]) // 3 for m in meshes)
     allp = np.array([w["p0"] for w in W] + [w["p1"] for w in W])
     centre = ((allp.min(0) + allp.max(0)) / 2).round(1).tolist()
@@ -245,6 +320,8 @@ def main():
     os.makedirs(os.path.join(ROOT, "data/derived"), exist_ok=True)
     json.dump({"zone": ZONE, "built": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "walls": rows,
                "skipped": skipped,
+               "bespoke_walls": [{"id": k, "elements": v, "tris": 1} for k, v in sorted(ELEMENTS.items())
+                                 if any(w["id"] == k and w["osm_id"] in bespoke for w in W)],
                "stats": {k: v for k, v in stats.items() if k not in ("walls_unannotated", "walls_skipped")}},
               open(os.path.join(ROOT, "data/derived/facade_geometry.json"), "w"), indent=1)
     s = {k: v for k, v in stats.items() if k not in ("walls_unannotated", "walls_skipped")}

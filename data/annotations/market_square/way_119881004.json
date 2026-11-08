@@ -1,0 +1,125 @@
+{
+ "osm_id": "way/119881004",
+ "sources": [
+  "Commons: File:The Cambridge Satchel Company - geograph.org.uk - 4994976.jpg (Hugh Venables, CC BY-SA 2.0)",
+  "Commons: File:Sahara - St Mary's Passage - geograph.org.uk - 7561311.jpg (Mr Ignavy, CC BY-SA 2.0)",
+  "Commons: File:Cuckoo - St Mary's Passage - geograph.org.uk - 6497174.jpg (Mr Ignavy, CC BY-SA 2.0)"
+ ],
+ "walls": [
+  {
+   "id": "way/119881004:6",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.0,
+    7.2
+   ],
+   "material": "brick",
+   "wall_colour": "#bdb08f",
+   "trim_colour": "#f2efe6",
+   "cornice_z": 10.6,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.0
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.15,
+     "x1": 3.11,
+     "z1": 3.9,
+     "fascia_text": "The Cambridge Satchel Company",
+     "fascia_colour": "#151515",
+     "text_colour": "#c9a85a",
+     "door_x": null,
+     "stallriser": 0.35,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.4,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 1.9,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.4,
+     "w": 1.0,
+     "z": 7.6,
+     "h": 1.6,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "2 St Mary's Passage (Cambridge Satchel Co.). Geograph 4994976 square-on: grey-buff Cambridge gault brick, black classical shopfront with three round-arched lights (east part) and a pair of arched glazed doors at the west end, gold lettering; 2 upper sashes with white moulded architraves, one per wall segment. Second-floor windows assumed to repeat the first (Sahara photo shows a tall gault front above). x measured with the 6.8 m total frontage (p0 = east end)."
+  },
+  {
+   "id": "way/119881004:7",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.0
+   ],
+   "material": "brick",
+   "wall_colour": "#bdb08f",
+   "trim_colour": "#f2efe6",
+   "cornice_z": 7.9,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.0
+   ],
+   "quoins": false,
+   "pilasters": [
+    3.55
+   ],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.0,
+     "x1": 3.5,
+     "z1": 3.9,
+     "fascia_text": null,
+     "fascia_colour": "#151515",
+     "text_colour": "#c9a85a",
+     "door_x": 2.4,
+     "stallriser": 0.35,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.0,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 1.9,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "West half of the Satchel Co. front (geograph 4994976): last arched shop light, glazed double door at x~2.4, black pilaster at the boundary with The Senate (1 St Mary's Passage); one white-framed sash above. Lower LiDAR height here (8.2 m) so only one upper floor modelled."
+  }
+ ]
+}
