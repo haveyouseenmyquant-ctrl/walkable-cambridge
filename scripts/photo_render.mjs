@@ -63,6 +63,8 @@ try {
     const at = [v.x + Math.sin(hd) * Math.cos(pt) * 10, v.y + Math.cos(hd) * Math.cos(pt) * 10, z + EYE + Math.sin(pt) * 10];
     await page.evaluate((pos, at, fov) => { window.__cam = { pos, at, fov }; }, pos, at, vfov);
     await sleep(1500);   // neighbouring tiles finish streaming
+    await page.waitForFunction('!(window.__facadesPending > 0)', { timeout: 30000 }).catch(() => {});
+    await sleep(200);   // a frame with the new atlases
     await page.screenshot({ path: path.join(OUT, `${v.id}.png`) });
     console.error('[render]', v.id, z.toFixed(2));
   }

@@ -68,10 +68,9 @@ export class TileManager {
     t.state = 'loading'; const gen = ++t.gen; this.jobs++;
     try {
       const bin = p => fetch(this.base + p).then(r => { if (!r.ok) throw new Error(`${r.status} ${p}`); return r.arrayBuffer(); });
-      const [gltf, buf, tbuf, obuf, fac] = await Promise.all([
+      const [gltf, buf, tbuf, obuf] = await Promise.all([
         this.loader.loadAsync(this.base + t.m.glb), bin(t.m.collision), this.trees && t.m.trees ? bin(t.m.trees) : null,
         this.objects && t.m.objects ? bin(t.m.objects) : null,
-        this.facades && t.m.facades ? Promise.all([t.m.facades].flat().map((f, k) => Promise.all([bin(f), this.texLoader.loadAsync(this.base + [t.m.facade_tex].flat()[k])]))) : null,
       ]);
       if (gen !== t.gen) return; // unloaded meanwhile
       const t0 = performance.now();
@@ -81,8 +80,8 @@ export class TileManager {
       t.group = this.prepare(gltf.scene, col);
       if (tbuf) t.group.add(makeTrees(tbuf));
       if (obuf) t.group.add(makeObjects(obuf));
-      if (fac) for (const [fb, ft] of fac) t.group.add(makeFacades(fb, ft));   // one mesh per atlas page
       this.scene.add(t.group);
+      if (this.facades && t.m.facades) this.loadFacades(t, gen, bin);   // after the tile is walkable: atlases are the bulk of the bytes
       t.state = 'loaded';
       const t2 = performance.now();
       this.onCollision?.(t);
@@ -91,6 +90,17 @@ export class TileManager {
       console.warn('tile load failed', t.m.id, e);
       if (gen === t.gen) t.state = 'failed';
     } finally { this.jobs--; }
+  }
+
+  // Facade atlas pages stream in after the tile; window.__facadesPending counts pages still loading (photo_render waits on it).
+  loadFacades(t, gen, bin) {
+    [t.m.facades].flat().forEach((f, k) => {
+      window.__facadesPending = (window.__facadesPending || 0) + 1;
+      Promise.all([bin(f), this.texLoader.loadAsync(this.base + [t.m.facade_tex].flat()[k])])
+        .then(([fb, ft]) => { if (gen === t.gen && t.group) t.group.add(makeFacades(fb, ft)); else ft.dispose(); })
+        .catch(e => console.warn('facade page failed', f, e))
+        .finally(() => { window.__facadesPending--; });
+    });
   }
 
   unload(t) {
