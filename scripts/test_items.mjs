@@ -26,7 +26,7 @@ const server = http.createServer((req, res) => {
 });
 await new Promise(ok => server.listen(0, '127.0.0.1', ok));
 const browser = await puppeteer.launch({
-  executablePath: CHROME, headless: true,
+  executablePath: CHROME, headless: true, protocolTimeout: 0,
   args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist', '--window-size=1280,720'],
   defaultViewport: { width: 1280, height: 720 },
 });
@@ -35,17 +35,19 @@ try {
   const errors = [];
   page.on('pageerror', e => errors.push(String(e.message)));
   page.on('console', m => { if (m.type() === 'warning' && /items/.test(m.text())) errors.push(m.text()); });
-  await page.goto(`http://127.0.0.1:${server.address().port}/?debug`, { waitUntil: 'domcontentloaded' });
-  await page.waitForFunction('window.__walkReady === true && !!window.__game && !!window.__itemTest', { timeout: 90000 });
+  await page.goto(`http://127.0.0.1:${server.address().port}/?debug`, { waitUntil: 'domcontentloaded', timeout: 300000 });
+  await page.waitForFunction('window.__walkReady === true && !!window.__game && !!window.__itemTest', { timeout: 300000 });
   const ids = await page.evaluate(() => window.__itemIds());
   const results = [];
   for (const id of ids) results.push(await page.evaluate(id => window.__itemTest(id), id));
   for (const r of results) console.error('[items]', r.ok ? 'ok  ' : 'FAIL', r.id, '-', r.detail);
   // chests: teleport to Market Square so the tiles load, give placement a few seconds
   await page.evaluate(() => window.__player.teleport(-102.9, 57.4));
+  // session 44: item effect tests are synchronous (ticks are emitted by the test, no wall/game clock involved);
+  // chest placement waits on tile streaming, so the caps below are generous wall-clock safety limits only
   await sleep(1000);
-  await page.waitForFunction('!window.__player.pendingPlace', { timeout: 30000 }).catch(() => {});
-  await page.waitForFunction('window.__game.items.chests.every(c => c.placed)', { timeout: 30000 }).catch(() => {});
+  await page.waitForFunction('!window.__player.pendingPlace', { timeout: 180000 }).catch(() => {});
+  await page.waitForFunction('window.__game.items.chests.every(c => c.placed)', { timeout: 180000 }).catch(() => {});
   const chests = await page.evaluate(() => window.__game.items.chests.map(c => ({ id: c.id, placed: !!c.g, x: +c.x.toFixed(1), y: +c.y.toFixed(1), z: c.z && +c.z.toFixed(2), top: +(window.__game.world.support(c.x, c.y, 1e4, true)?.z ?? 0).toFixed(2) })));
   for (const c of chests) console.error('[chest]', JSON.stringify(c));
   // loot drop: kill a stub with a guaranteed drop, check a pickup appears

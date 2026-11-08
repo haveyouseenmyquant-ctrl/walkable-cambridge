@@ -206,6 +206,7 @@ export function install(game) {
     else if (e.code === 'KeyI') togglePanel(); };
   addEventListener('keydown', onKey);
   items.chests = chests;
+  items.drops = pickups;   // session 44: live loot pickups (scripts/test_mobs.mjs checks a kill drops loot)
 
   // ---------------- inventory panel (I)
   const style = document.createElement('style');

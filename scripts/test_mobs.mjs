@@ -32,7 +32,9 @@ const browser = await puppeteer.launch({
 });
 // session 42: the run hung for 20+ min with no output; a watchdog reports what finished and exits
 const stage = { at: 'load' };
-setTimeout(() => { console.log(JSON.stringify({ mob_types_ok: 0, bosses_ok: 0, error: 'watchdog 900 s at ' + stage.at })); process.exit(1); }, 900000).unref();
+// session 44: all in-page waits are game time (window.__game.time); this is only a wall-clock safety cap
+const WATCHDOG_S = +(process.env.WC_TEST_WATCHDOG_S || 3600);
+setTimeout(() => { console.log(JSON.stringify({ mob_types_ok: 0, bosses_ok: 0, error: `watchdog ${WATCHDOG_S} s at ` + stage.at })); process.exit(1); }, WATCHDOG_S * 1000).unref();
 const errors = [];
 let out = { mob_types_ok: 0, bosses_ok: 0 }, ok = false;
 try {
@@ -41,9 +43,9 @@ try {
   page.on('pageerror', e => errors.push(String(e)));
   const missing = [];
   page.on('response', r => { if (r.status() === 404) missing.push(new URL(r.url()).pathname); });
-  await page.goto(`http://127.0.0.1:${server.address().port}/?debug`, { waitUntil: 'domcontentloaded' });
-  await page.waitForFunction('window.__walkReady === true', { timeout: 90000 });
-  await page.waitForFunction('window.__game && window.__game.mobSystem && window.__mobTest', { timeout: 30000 });
+  await page.goto(`http://127.0.0.1:${server.address().port}/?debug`, { waitUntil: 'domcontentloaded', timeout: 300000 });
+  await page.waitForFunction('window.__walkReady === true', { timeout: 300000 });
+  await page.waitForFunction('window.__game && window.__game.mobSystem && window.__mobTest', { timeout: 120000 });
   await sleep(3000);   // let encounters near the spawn point stream in
   // encounter check: teleport to each encounter, wait for tiles, report whether its mobs spawned on walkable ground
   stage.at = 'encounters';
@@ -53,10 +55,10 @@ try {
     const near = [...g.encounters].sort((a, b) => Math.hypot(a.x + 102.9, a.y - 70) - Math.hypot(b.x + 102.9, b.y - 70)).slice(0, 15);
     for (const e of near) {
       window.__player.teleport(e.x, e.y);
-      const t0 = performance.now();
-      while (performance.now() - t0 < 12000) {
-        await new Promise(r => setTimeout(r, 400));
-        if (sys.encounterState.get(e.id)?.active) break;
+      const t0 = performance.now(), g0 = g.time;   // game-time limit, wall-clock safety cap
+      while (g.time - g0 < 8 && performance.now() - t0 < 90000) {
+        await new Promise(r => setTimeout(r, 200));
+        if (sys.encounterState.get(e.id)?.active && !window.__player.pendingPlace) break;
       }
       const s = sys.encounterState.get(e.id);
       const live = (s?.mobs || []).filter(m => !m.dead);
@@ -71,7 +73,7 @@ try {
   const perf = await page.evaluate(async () => {
     const g = window.__game, sys = g.mobSystem;
     window.__player.teleport(-102.9, 70);
-    await new Promise(r => setTimeout(r, 6000));
+    { const g0 = g.time, t0 = performance.now(); while (g.time - g0 < 4 && performance.now() - t0 < 60000) await new Promise(r => setTimeout(r, 200)); }
     const fps = async () => { let n = 0; const t0 = performance.now();
       await new Promise(r => { const f = () => { n++; if (performance.now() - t0 < 3000) requestAnimationFrame(f); else r(); }; requestAnimationFrame(f); });
       return +(n / ((performance.now() - t0) / 1000)).toFixed(1); };
@@ -79,6 +81,10 @@ try {
     return { liveMobs: g.mobs.length, fps: withMobs, fpsMobsHidden: without };
   });
   stage.at = 'per-type';
+  // session 44: a sim pump steps player + game at 20 Hz x 8 per 30 ms timer tick in addition to the render loop, so
+  // the game clock (which __mobTest's limits use) advances at a steady rate even when swiftshader renders < 1 fps
+  await page.evaluate(() => { const g = window.__game, P = window.__p;
+    window.__simPump = setInterval(() => { for (let i = 0; i < 8; i++) { P?.update?.(0.05); g.update(0.05); } }, 30); });
   // per-type test away from encounters, with encounters off
   await page.evaluate(async () => {
     const g = window.__game, sys = g.mobSystem;
@@ -87,9 +93,10 @@ try {
     for (const s of sys.encounterState.values()) { s.active = false; s.mobs = []; }
     const p = g.encounters.find(e => e.id === 'market-north');
     window.__player.teleport(p.x, p.y);
-    await new Promise(r => setTimeout(r, 4000));
+    { const g0 = g.time, t0 = performance.now(); while (g.time - g0 < 3 && performance.now() - t0 < 60000) await new Promise(r => setTimeout(r, 200)); }
   });
-  // session 42: one evaluate per type with a 45 s cap, so a hung type fails alone instead of hanging the run
+  // session 42: one evaluate per type with a cap, so a hung type fails alone instead of hanging the run.
+  // session 44: __mobTest limits are game time; the wall cap here is only a safety net (was 45 s -> timeouts at low fps)
   const types = await page.evaluate(() => window.__game.mobTypes.map(t => ({ id: t.id, boss: !!t.boss })));
   const results = [];
   for (const t of types) {
@@ -99,14 +106,21 @@ try {
       g.invulnUntil = 0; g.shield = 0;
       for (const m of [...g.mobs]) sys.remove(m);
       const drops0 = items?.drops?.length ?? null;
-      const r = await Promise.race([window.__mobTest(id), new Promise(ok => setTimeout(() => ok({ id, timeout: true }), 45000))]);
-      if (items) r.dropAppeared = drops0 == null ? 'unknown' : (items.drops?.length ?? 0) > drops0;
+      // session 44: loot rolls are random; pin Math.random low only while the 'kill' event is dispatched so the loot
+      // roll always succeeds, then check a pickup actually appeared
+      const rnd = Math.random, emit = g.emit;
+      g.emit = function (ev, data) { if (ev !== 'kill') return emit.call(this, ev, data); Math.random = () => 0.001; try { return emit.call(this, ev, data); } finally { Math.random = rnd; } };
+      let picked = 0; const offPick = g.on('pickup', () => picked++);   // a drop the player auto-collected also counts
+      let r;
+      try { r = await Promise.race([window.__mobTest(id), new Promise(ok => setTimeout(() => ok({ id, timeout: true }), 240000))]); }
+      finally { Math.random = rnd; g.emit = emit; offPick(); }
+      r.dropAppeared = drops0 == null ? 'unknown' : (items.drops?.length ?? 0) > drops0 || picked > 0;
       return r;
     }, t.id);
     r.boss = t.boss; results.push(r);
     console.error('[mob]', JSON.stringify(r).slice(0, 200));
   }
-  const pass = r => r.spawned && r.attacked && r.damaged && r.died && r.killEvent;
+  const pass = r => r.spawned && r.attacked && r.damaged && r.died && r.killEvent && r.dropAppeared === true;
   out = {
     mob_types_ok: results.filter(r => !r.boss && pass(r)).length,
     bosses_ok: results.filter(r => r.boss && pass(r)).length,

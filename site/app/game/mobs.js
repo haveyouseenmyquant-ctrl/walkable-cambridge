@@ -2,6 +2,7 @@
 // Frames: collision x east, y north, z up; three.js position = (x, z, -y). Models face local +Z (yaw = atan2(dx, -dy)).
 // Encounter data lives in encounters.json (read by tooling too). Honours mob.slowUntil / mob.stunUntil / mob.damageTaken.
 import * as THREE from 'three';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 
 export const ENCOUNTERS = [];
 const SPAWN_R = 120, DESPAWN_R = 200, RESPAWN_S = 90, MAX_LIVE = 24;
@@ -9,302 +10,708 @@ const TAU = Math.PI * 2;
 const rnd = (a, b) => a + Math.random() * (b - a);
 
 // ---------- shared geometry / materials (one copy for every instance)
+// session 44: mobs are smooth-shaded procedural models (lathe / tapered tubes / extruded shapes / displaced spheres),
+// merged per rigid part and material, built once per type (KIT cache) and shared by every instance.
 const G = {
-  box: new THREE.BoxGeometry(1, 1, 1),
-  ico: new THREE.IcosahedronGeometry(0.5, 0),
-  ico1: new THREE.IcosahedronGeometry(0.5, 1),
-  oct: new THREE.OctahedronGeometry(0.5, 0),
-  cyl: new THREE.CylinderGeometry(0.5, 0.5, 1, 8),
-  cone: new THREE.ConeGeometry(0.5, 1, 6),
-  bell: new THREE.CylinderGeometry(0.35, 0.9, 1.4, 10, 1, true),
-  torus: new THREE.TorusGeometry(0.5, 0.12, 5, 12),
-  wing: (() => { const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute([0, 0, 0, 1.4, 0.3, -0.2, 1.1, -0.4, -0.3, 0, 0, 0, 1.1, -0.4, -0.3, 0.4, -0.5, -0.1], 3)); g.computeVertexNormals(); return g; })(),
   ring: new THREE.RingGeometry(0.92, 1, 40).rotateX(-Math.PI / 2),
   disc: new THREE.CircleGeometry(1, 40).rotateX(-Math.PI / 2),
   rect: new THREE.PlaneGeometry(1, 1).rotateX(-Math.PI / 2).translate(0, 0, 0.5),   // unit strip along +Z from origin
   shard: new THREE.TetrahedronGeometry(0.18, 0),
   bolt: new THREE.IcosahedronGeometry(0.28, 0),
 };
+
+// procedural textures (canvas): stone grain (bump/roughness), inked parchment, blazer stripes, sally stripes, sky env
+const TEX = (() => {
+  if (typeof document === 'undefined') return {};
+  let seed = 7; const r = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const cv = (w, h, draw, srgb) => {
+    const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'), w, h);
+    const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; if (srgb) t.colorSpace = THREE.SRGBColorSpace; return t;
+  };
+  const grain = cv(128, 128, (x, w, h) => {
+    x.fillStyle = '#808080'; x.fillRect(0, 0, w, h);
+    for (const [n, s, a] of [[50, 22, 0.10], [260, 7, 0.12], [1800, 1.6, 0.2]]) for (let i = 0; i < n; i++) {
+      const v = r() < 0.5 ? 0 : 255; x.fillStyle = `rgba(${v},${v},${v},${a})`; x.beginPath(); x.arc(r() * w, r() * h, s * (0.4 + r()), 0, TAU); x.fill();
+    }
+    x.strokeStyle = 'rgba(0,0,0,0.4)'; x.lineWidth = 1;
+    for (let i = 0; i < 5; i++) { x.beginPath(); let px = r() * w, py = r() * h; x.moveTo(px, py); for (let k = 0; k < 6; k++) { px += (r() - 0.5) * 26; py += (r() - 0.3) * 18; x.lineTo(px, py); } x.stroke(); }
+  });
+  grain.repeat.set(3, 3);
+  const scribble = cv(128, 128, (x, w, h) => {
+    x.fillStyle = '#e4d4a8'; x.fillRect(0, 0, w, h);
+    x.fillStyle = 'rgba(120,90,40,0.25)'; for (let i = 0; i < 40; i++) { x.beginPath(); x.arc(r() * w, r() * h, 2 + r() * 8, 0, TAU); x.fill(); }
+    x.strokeStyle = 'rgba(30,24,60,0.75)'; x.lineWidth = 1.2;
+    for (let y = 10; y < h - 6; y += 9) { let px = 8; while (px < w - 12) { const l = 4 + r() * 14; x.beginPath(); x.moveTo(px, y + (r() - 0.5) * 1.5); x.lineTo(px + l, y + (r() - 0.5) * 1.5); x.stroke(); px += l + 3 + r() * 4; } }
+  }, true);
+  const stripes = (w, h, cols, vertical) => cv(w, h, (x) => {
+    cols.forEach((c, i) => { x.fillStyle = c; if (vertical) x.fillRect(i * w / cols.length, 0, w / cols.length + 1, h); else x.fillRect(0, i * h / cols.length, w, h / cols.length + 1); });
+  }, true);
+  const blazer = stripes(64, 4, ['#d8ccb0', '#d8ccb0', '#6e2a2c', '#d8ccb0', '#d8ccb0', '#2e3a5a'].flatMap(c => [c, c, c, c]), true);
+  const sally = stripes(4, 64, ['#a02a26', '#e8e0cc', '#25386a', '#e8e0cc', '#a02a26', '#e8e0cc', '#25386a', '#e8e0cc'], false);
+  const env = cv(64, 32, (x, w, h) => {
+    const g = x.createLinearGradient(0, 0, 0, h);
+    g.addColorStop(0, '#9fb8d8'); g.addColorStop(0.45, '#e8e2d2'); g.addColorStop(0.55, '#8a8070'); g.addColorStop(1, '#3a342c');
+    x.fillStyle = g; x.fillRect(0, 0, w, h);
+  }, true);
+  env.mapping = THREE.EquirectangularReflectionMapping;
+  return { grain, scribble, blazer, sally, env };
+})();
+
+const std = (o) => new THREE.MeshStandardMaterial(o);
+const metal = (color, roughness, o) => std({ color, roughness, metalness: 0.85, envMap: TEX.env, envMapIntensity: 1.1, bumpMap: TEX.grain, bumpScale: 0.3, ...o });
+const glow = (color, emissive, emissiveIntensity, o) => std({ color, emissive, emissiveIntensity, ...o });
 const BASE = {
-  stone: new THREE.MeshStandardMaterial({ color: 0x8d8a80, roughness: 0.95, flatShading: true }),
-  darkstone: new THREE.MeshStandardMaterial({ color: 0x5c5a55, roughness: 0.95, flatShading: true }),
-  marble: new THREE.MeshStandardMaterial({ color: 0xd8d4c8, roughness: 0.7, flatShading: true }),
-  ink: new THREE.MeshStandardMaterial({ color: 0x1a1730, roughness: 0.4, metalness: 0.2, flatShading: true }),
-  parchment: new THREE.MeshStandardMaterial({ color: 0xd9c79a, roughness: 0.9, flatShading: true, side: THREE.DoubleSide }),
-  brass: new THREE.MeshStandardMaterial({ color: 0xb58a3c, roughness: 0.35, metalness: 0.85, flatShading: true }),
-  copper: new THREE.MeshStandardMaterial({ color: 0x9a5a35, roughness: 0.45, metalness: 0.7, flatShading: true }),
-  iron: new THREE.MeshStandardMaterial({ color: 0x3b3d42, roughness: 0.6, metalness: 0.6, flatShading: true }),
-  wisp: new THREE.MeshStandardMaterial({ color: 0x9fe8ff, emissive: 0x58c8ff, emissiveIntensity: 1.6, transparent: true, opacity: 0.8, flatShading: true }),
-  eye: new THREE.MeshStandardMaterial({ color: 0xffb040, emissive: 0xff8a00, emissiveIntensity: 2 }),
-  eyeBlue: new THREE.MeshStandardMaterial({ color: 0x80d0ff, emissive: 0x40a0ff, emissiveIntensity: 2 }),
-  wingMat: new THREE.MeshStandardMaterial({ color: 0x6f6c66, roughness: 1, flatShading: true, side: THREE.DoubleSide }),
+  stone: std({ color: 0x9c978b, roughness: 0.93, bumpMap: TEX.grain, bumpScale: 1.6, roughnessMap: TEX.grain }),
+  darkstone: std({ color: 0x5e5b55, roughness: 0.9, bumpMap: TEX.grain, bumpScale: 1.6 }),
+  marble: std({ color: 0xe4ded0, roughness: 0.5, bumpMap: TEX.grain, bumpScale: 0.5, envMap: TEX.env, envMapIntensity: 0.25 }),
+  ink: new THREE.MeshPhysicalMaterial({ color: 0x17132e, roughness: 0.16, clearcoat: 1, clearcoatRoughness: 0.06, envMap: TEX.env, envMapIntensity: 0.9 }),
+  parchment: std({ color: 0xffffff, map: TEX.scribble, roughness: 0.85, side: THREE.DoubleSide }),
+  brass: metal(0xc99a45, 0.3),
+  copper: metal(0xb26a40, 0.36),
+  iron: metal(0x4a4d54, 0.48, { metalness: 0.7 }),
+  verdigris: std({ color: 0x5f9a86, roughness: 0.6, metalness: 0.3, bumpMap: TEX.grain, bumpScale: 1, envMap: TEX.env, envMapIntensity: 0.4 }),
+  wisp: glow(0xc8f4ff, 0x58c8ff, 1.8, { transparent: true, opacity: 0.85, roughness: 0.3 }),
+  wispShell: new THREE.MeshBasicMaterial({ color: 0x3a90d0, transparent: true, opacity: 0.16, depthWrite: false, side: THREE.DoubleSide, blending: THREE.AdditiveBlending }),
+  wispCore: glow(0xffffff, 0xe0ffff, 3),
+  eye: glow(0xffb040, 0xff8a00, 2.2),
+  eyeBlue: glow(0x80d0ff, 0x40a0ff, 2.2),
+  eyeglow: glow(0xffc060, 0xff7a00, 2.5),
+  wingMat: std({ color: 0x5e5a54, roughness: 0.85, side: THREE.DoubleSide }),
+  wingStone: std({ color: 0x77736b, roughness: 0.9, bumpMap: TEX.grain, bumpScale: 1.2, side: THREE.DoubleSide }),
+  water: new THREE.MeshPhysicalMaterial({ color: 0x4f9a94, emissive: 0x1d5a5a, emissiveIntensity: 0.6, roughness: 0.12, clearcoat: 1, transparent: true, opacity: 0.8, envMap: TEX.env, envMapIntensity: 1 }),
+  moss: std({ color: 0x4f6e2c, roughness: 1, bumpMap: TEX.grain, bumpScale: 2.5 }),
+  bone: std({ color: 0xd4caa8, roughness: 0.75, bumpMap: TEX.grain, bumpScale: 0.6 }),
+  soot: std({ color: 0x23211e, roughness: 1, bumpMap: TEX.grain, bumpScale: 2 }),
+  rope: std({ color: 0x8a6a40, roughness: 0.95, bumpMap: TEX.grain, bumpScale: 2 }),
+  straw: std({ color: 0xc9ac68, roughness: 0.9, bumpMap: TEX.grain, bumpScale: 2 }),
+  hair: std({ color: 0xa8a69a, roughness: 1 }),
+  heraldRed: std({ color: 0x9e2a26, roughness: 0.55, envMap: TEX.env, envMapIntensity: 0.3 }),
+  terracotta: std({ color: 0xa4532f, roughness: 0.85, bumpMap: TEX.grain, bumpScale: 1 }),
+  blazer: std({ color: 0xffffff, map: TEX.blazer, roughness: 0.9, bumpMap: TEX.grain, bumpScale: 0.8 }),
+  sally: std({ color: 0xffffff, map: TEX.sally, roughness: 0.95, bumpMap: TEX.grain, bumpScale: 2 }),
+  bogglow: glow(0xb8ff80, 0x60ff40, 2.2),
+  ember: glow(0xffa040, 0xff5010, 2.2),
+  smoke: std({ color: 0x55524d, roughness: 1, transparent: true, opacity: 0.55, depthWrite: false }),
 };
 const decalMat = (c) => new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: 0.5, depthWrite: false, side: THREE.DoubleSide, polygonOffset: true, polygonOffsetFactor: -4 });
 const HIT_TINT = new THREE.Color(0xffd8b0);
 const boltMats = {};
 const boltMat = c => boltMats[c] ||= new THREE.MeshBasicMaterial({ color: c });
 
-// ---------- model builders: return {group, parts}; `m(name)` gives a per-instance material clone (for flash/glow)
-function mesh(geo, mat, sx, sy, sz, x = 0, y = 0, z = 0, parent) {
-  const o = new THREE.Mesh(geo, mat); o.scale.set(sx, sy, sz); o.position.set(x, y, z); o.castShadow = true; parent?.add(o); return o;
+// ---------- geometry kit
+const _m4 = new THREE.Matrix4(), _q = new THREE.Quaternion(), _e = new THREE.Euler(), PI = Math.PI;
+const v3 = (a) => new THREE.Vector3(...a);
+function xf(g, p = [0, 0, 0], r = [0, 0, 0], s = 1) {
+  if (typeof s === 'number') s = [s, s, s];
+  return g.applyMatrix4(_m4.compose(v3(p), _q.setFromEuler(_e.set(...r)), v3(s)));
+}
+const sph = (r, p, s = 1, w = 12, h = 8) => xf(new THREE.SphereGeometry(r, w, h), p, [0, 0, 0], s);
+const cone = (r, h, p, rot, seg = 7) => xf(new THREE.ConeGeometry(r, h, seg), p, rot);            // tip along +Y before rot
+const cyl = (r0, r1, h, p, rot, seg = 10, open = false) => xf(new THREE.CylinderGeometry(r0, r1, h, seg, 1, open), p, rot);
+const box = (w, h, d, p, rot) => xf(new THREE.BoxGeometry(w, h, d), p, rot);
+const tor = (R, r, p, rot, rs = 6, ts = 24, arc = TAU) => xf(new THREE.TorusGeometry(R, r, rs, ts, arc), p, rot);
+const lathe = (prof, seg = 16) => new THREE.LatheGeometry(prof.map(([x, y]) => new THREE.Vector2(x, y)), seg);
+const flat = (g) => { g = g.index ? g.toNonIndexed() : g; g.computeVertexNormals(); return g; };
+function extr(shape, depth, bevel, p, rot, s) {
+  const g = new THREE.ExtrudeGeometry(shape, { depth, bevelEnabled: bevel > 0, bevelThickness: bevel, bevelSize: bevel, bevelSegments: 2, curveSegments: 8 });
+  g.translate(0, 0, -depth / 2); return xf(g, p, rot, s);
+}
+// tapered tube through points (radius r0 -> r1, or r0(t))
+function tube(pts, r0, r1 = r0, seg = 8, rad = 7) {
+  const curve = new THREE.CatmullRomCurve3(pts.map(v3)), g = new THREE.TubeGeometry(curve, seg, 1, rad, false);
+  const pos = g.attributes.position, v = new THREE.Vector3();
+  for (let i = 0; i <= seg; i++) {
+    const t = i / seg, c = curve.getPointAt(t), r = typeof r0 === 'function' ? r0(t) : r0 + (r1 - r0) * t;
+    for (let j = 0; j <= rad; j++) { const k = i * (rad + 1) + j; v.fromBufferAttribute(pos, k).sub(c).multiplyScalar(r).add(c); pos.setXYZ(k, v.x, v.y, v.z); }
+  }
+  return g;
+}
+// tube with rounded ends (limbs, horns, tails)
+const limb = (pts, r0, r1 = r0, seg = 8, rad = 8) => [tube(pts, r0, r1, seg, rad), sph(r0, pts[0], 1, rad + 1, 6), sph(r1, pts.at(-1), 1, rad + 1, 6)];
+const nz = (x, y, z) => Math.sin(x * 1.7 + y * 3.1 + 1.3) * Math.sin(y * 2.3 + z * 1.3 + 0.7) * Math.sin(z * 1.9 + x * 2.7 + 2.1)
+  + 0.5 * Math.sin(x * 4.1 - z * 3.7 + 0.4) * Math.sin(y * 4.3 + x * 2.9);
+// displace along the normal by smooth noise (carved / lumpy / fluffy surfaces); indexed geometry only
+function lumpy(g, amp, f = 6) {
+  if (Array.isArray(g)) return g.map(x => lumpy(x, amp, f));
+  const p = g.attributes.position, n = g.attributes.normal;
+  for (let i = 0; i < p.count; i++) {
+    const x = p.getX(i), y = p.getY(i), z = p.getZ(i), d = amp * nz(x * f, y * f, z * f);
+    p.setXYZ(i, x + n.getX(i) * d, y + n.getY(i) * d, z + n.getZ(i) * d);
+  }
+  g.computeVertexNormals(); return g;
+}
+// radial folds for lathe garments (axis Y at origin); w(y) weights the fold depth
+function drape(g, n, amp, w = () => 1, twist = 0) {
+  const p = g.attributes.position;
+  for (let i = 0; i < p.count; i++) {
+    const x = p.getX(i), y = p.getY(i), z = p.getZ(i), a = Math.atan2(x, z), k = 1 + amp * Math.sin(a * n) * w(y);
+    const tw = twist * y, c = Math.cos(tw), s = Math.sin(tw);
+    p.setX(i, (x * c + z * s) * k); p.setZ(i, (z * c - x * s) * k);
+  }
+  g.computeVertexNormals(); return g;
+}
+// ragged hem: drag the lowest ring of a lathe down into points
+function hem(g, amp, n) {
+  const p = g.attributes.position; let lo = Infinity;
+  for (let i = 0; i < p.count; i++) lo = Math.min(lo, p.getY(i));
+  for (let i = 0; i < p.count; i++) if (p.getY(i) < lo + 1e-4) { const a = Math.atan2(p.getX(i), p.getZ(i)); p.setY(i, lo - amp * Math.pow(Math.abs(Math.sin(a * n * 0.5 + 0.3 * Math.sin(a * 3))), 3)); }
+  g.computeVertexNormals(); return g;
+}
+function merge(...gs) {
+  const list = gs.flat(Infinity).map(g => {
+    g = g.index ? g.toNonIndexed() : g;
+    for (const k of Object.keys(g.attributes)) if (k !== 'position' && k !== 'normal' && k !== 'uv') g.deleteAttribute(k);
+    if (!g.attributes.uv) g.setAttribute('uv', new THREE.Float32BufferAttribute(new Float32Array(g.attributes.position.count * 2), 2));
+    g.clearGroups(); return g;
+  });
+  const out = mergeGeometries(list, false); out.computeBoundingSphere(); return out;
+}
+const KIT = {};
+const kit = (id, f) => KIT[id] ||= f();
+function add(parent, geo, mat, x = 0, y = 0, z = 0, mirror = false) {
+  const o = new THREE.Mesh(geo, mat); o.position.set(x, y, z); if (mirror) o.scale.x = -1;
+  o.castShadow = !(mat.emissiveIntensity >= 1) && !mat.transparent; parent.add(o); return o;
 }
 function pivot(parent, x = 0, y = 0, z = 0) { const g = new THREE.Group(); g.position.set(x, y, z); parent.add(g); return g; }
 
+// a bat/gargoyle wing along +X from the shoulder: scalloped membrane between finger bones
+function batWing(s = 1) {
+  const R = [0, 0, 0], E = [0.55, 0.28, -0.08], W = [0.95, 0.45, -0.18], T = [[1.6, 0.28, -0.32], [1.4, -0.22, -0.34], [0.98, -0.55, -0.26]], B = [0.1, -0.45, -0.04];
+  const pts = [...T, B], out = [], w = v3(W);
+  for (let i = 0; i < pts.length - 1; i++) {
+    const a = v3(pts[i]), c = v3(pts[i + 1]); out.push(a);
+    for (const t of [0.2, 0.4, 0.6, 0.8]) { const q = a.clone().lerp(c, t).lerp(w, 0.26 * Math.sin(PI * t)); q.z -= 0.06 * Math.sin(PI * t); out.push(q); }
+  }
+  out.push(v3(B));
+  const pos = [], push = (...vs) => vs.forEach(q => pos.push(q.x, q.y, q.z));
+  for (let i = 0; i < out.length - 1; i++) push(w, out[i + 1], out[i]);
+  push(v3(R), w, v3(E)); push(v3(R), v3(B), w);
+  const mem = new THREE.BufferGeometry(); mem.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+  mem.setAttribute('uv', new THREE.Float32BufferAttribute(pos.filter((_, i) => i % 3 !== 2).map((x, i) => i % 2 ? x + 0.5 : x / 1.6), 2));
+  mem.computeVertexNormals(); xf(mem, [0, 0, 0], [0, 0, 0], s);
+  const bones = [limb([R, E, W], 0.05, 0.035, 6, 6), ...T.map(t => tube([W, [(W[0] + t[0]) / 2, (W[1] + t[1]) / 2 + 0.04, (W[2] + t[2]) / 2], t], 0.032, 0.006, 6, 5)),
+    cone(0.03, 0.14, [W[0] + 0.02, W[1] + 0.08, W[2]], [0, 0, -0.5], 5)].flat().map(g => xf(g, [0, 0, 0], [0, 0, 0], s));
+  return { mem, bones: merge(bones) };
+}
+// a feathered wing along +X: arm bone with a fan of primaries and a row of coverts
+function featherWing() {
+  const sh = new THREE.Shape(); sh.moveTo(0, 0); sh.quadraticCurveTo(0.1, 0.25, 0.012, 0.62); sh.lineTo(-0.012, 0.62); sh.quadraticCurveTo(-0.07, 0.25, 0, 0);
+  const fs = [], n = 10;
+  for (let i = 0; i < n; i++) {
+    const t = i / (n - 1), L = 0.5 + 0.65 * t, phi = 0.1 + 1.15 * t;
+    fs.push(xf(xf(new THREE.ShapeGeometry(sh, 4), [0, 0, 0], [0, 0, 0], [1.9, L / 0.62, 1]), [0.12 + 0.95 * t, 0.12 + 0.33 * t, -0.015 * i], [0.12, 0, PI + phi]));
+  }
+  for (let i = 0; i < 7; i++) {
+    const t = i / 6, L = 0.3 + 0.1 * t, phi = 0.15 + 0.9 * t;
+    fs.push(xf(xf(new THREE.ShapeGeometry(sh, 3), [0, 0, 0], [0, 0, 0], [2.2, L / 0.62, 1]), [0.1 + 0.85 * t, 0.2 + 0.3 * t, 0.04], [0.12, 0, PI + phi]));
+  }
+  return merge(fs, limb([[0, 0, 0], [0.5, 0.3, 0], [1.1, 0.46, -0.05]], 0.09, 0.04, 8, 6));
+}
+function gearShape(R, r, n, hole, holes = 0) {
+  const s = new THREE.Shape();
+  for (let i = 0; i < n; i++) {
+    const a0 = i / n * TAU, d = TAU / n;
+    [[r, a0], [R, a0 + 0.12 * d], [R, a0 + 0.42 * d], [r, a0 + 0.55 * d]].forEach(([rr, a], k) => i === 0 && k === 0 ? s.moveTo(Math.cos(a) * rr, Math.sin(a) * rr) : s.lineTo(Math.cos(a) * rr, Math.sin(a) * rr));
+  }
+  s.closePath();
+  const hp = (x, y, rr) => { const h = new THREE.Path(); h.absarc(x, y, rr, 0, TAU, true); s.holes.push(h); };
+  if (hole) hp(0, 0, hole);
+  for (let i = 0; i < holes; i++) { const a = i / holes * TAU; hp(Math.cos(a) * r * 0.58, Math.sin(a) * r * 0.58, r * 0.2); }
+  return s;
+}
+function shieldShape(w, h) {
+  const s = new THREE.Shape(); s.moveTo(-w, h); s.lineTo(w, h); s.lineTo(w, 0); s.quadraticCurveTo(w, -h * 0.7, 0, -h); s.quadraticCurveTo(-w, -h * 0.7, -w, 0); s.closePath(); return s;
+}
+// a cast bell (outer + inner surface), crown at y=0, lip at y=-h
+const bellGeo = (rad, h, seg = 24) => xf(lathe([[0, 0.02], [0.5, -0.02], [0.6, -0.1], [0.64, -0.3], [0.68, -0.55], [0.8, -0.8], [0.98, -0.97], [1.0, -1.0],
+  [0.96, -1.01], [0.88, -0.95], [0.72, -0.8], [0.6, -0.55], [0.56, -0.3], [0.5, -0.1], [0, -0.05]], seg), [0, 0, 0], [0, 0, 0], [rad, h, rad]);
+const flameGeo = (r, h, seg = 12) => lathe([[0, -0.45 * h], [0.7 * r, -0.33 * h], [r, -0.1 * h], [0.8 * r, 0.2 * h], [0.4 * r, 0.42 * h], [0, 0.55 * h]], seg);
+
 const MODELS = {
-  gargoyle(m) {
-    const g = new THREE.Group(), p = {};
+  gargoyle(m) {   // a hunched, horned stone gargoyle with bat wings, clawed arms, digitigrade legs and a spade tail
+    const K = kit('gargoyle', () => {
+      const back = (y) => -0.25 + (y + 0.4) / 0.7 * 0.47 - 0.27;
+      const w = batWing(1.05);
+      return {
+        torso: merge(lumpy([limb([[0, -0.4, -0.25], [0, -0.05, -0.02], [0, 0.3, 0.22]], 0.27, 0.25, 8, 10), sph(0.2, [0.13, 0.13, 0.25], 1), sph(0.2, [-0.13, 0.13, 0.25], 1),
+          sph(0.22, [0, -0.17, 0.06], [1, 1.1, 0.9]), sph(0.15, [0.3, 0.24, 0.18]), sph(0.15, [-0.3, 0.24, 0.18])].flat(), 0.025, 7)),
+        ridge: merge([0, 1, 2, 3, 4, 5].map(i => { const y = -0.32 + 0.12 * i; return cone(0.045, 0.14, [0, y, back(y)], [-1.25, 0, 0], 5); })),
+        head: merge(lumpy([sph(0.21, [0, 0.04, 0], [1.05, 0.95, 1.15], 14, 10), limb([[0, -0.02, 0.12], [0, -0.06, 0.3]], 0.13, 0.095), sph(0.1, [0.13, -0.03, 0.15]), sph(0.1, [-0.13, -0.03, 0.15])].flat(), 0.02, 9),
+          tube([[-0.17, 0.11, 0.12], [0, 0.07, 0.23], [0.17, 0.11, 0.12]], 0.045, 0.045, 8, 6),
+          cone(0.06, 0.22, [0.21, 0.12, -0.02], [0, 0, -1.1], 5), cone(0.06, 0.22, [-0.21, 0.12, -0.02], [0, 0, 1.1], 5)),
+        horns: merge([1, -1].map(s => tube([[s * 0.11, 0.17, 0.02], [s * 0.24, 0.31, -0.08], [s * 0.3, 0.35, -0.28], [s * 0.23, 0.24, -0.42], [s * 0.15, 0.13, -0.36]], 0.065, 0.01, 14, 7))),
+        jaw: merge(limb([[0, -0.13, 0.0], [0, -0.16, 0.27]], 0.1, 0.065)),
+        fangs: merge([[0.065, -0.1, 0.34, PI], [-0.065, -0.1, 0.34, PI], [0.045, -0.13, 0.31, 0], [-0.045, -0.13, 0.31, 0]].map(([x, y, z, r]) => cone(0.022, 0.09, [x, y, z], [r, 0, 0], 5))),
+        eyes: merge(sph(0.042, [0.085, 0.04, 0.245], [1.2, 0.8, 1], 8, 6), sph(0.042, [-0.085, 0.04, 0.245], [1.2, 0.8, 1], 8, 6)),
+        arm: merge(lumpy(limb([[0, 0, 0], [0.12, -0.25, 0.1], [0.07, -0.5, 0.22]], 0.09, 0.06), 0.015, 9), sph(0.07, [0.07, -0.55, 0.25], [1, 0.8, 1.1])),
+        claws: merge([-0.05, 0, 0.05].map(dx => cone(0.02, 0.13, [0.07 + dx, -0.6, 0.31], [2.4, 0, dx * 3], 5))),
+        leg: merge(lumpy([...limb([[0, 0, 0], [0.04, -0.12, 0.24], [0.03, -0.42, 0.04], [0.03, -0.5, 0.22]], 0.12, 0.05, 12, 8), sph(0.13, [0.02, -0.08, 0.13])], 0.015, 9)),
+        talons: merge([-0.05, 0, 0.05].map(dx => cone(0.022, 0.11, [0.03 + dx, -0.52, 0.3], [PI / 2, 0, 0], 5)), cone(0.02, 0.09, [0.03, -0.5, 0.12], [-PI / 2 - 0.3, 0, 0], 5)),
+        tail: merge(tube([[0, 0, 0], [0, -0.25, -0.3], [0, -0.25, -0.65], [0, -0.05, -0.95], [0, 0.1, -1.08]], 0.1, 0.025, 16, 7),
+          xf(new THREE.ConeGeometry(0.11, 0.24, 4), [0, 0.2, -1.15], [-0.5, 0, 0], [1, 1, 0.35])),
+        wingMem: w.mem, wingBones: w.bones,
+      };
+    });
+    const g = new THREE.Group(), p = {}, stone = m('stone'), dark = m('darkstone'), wing = m('wingStone');
     p.body = pivot(g, 0, 0.9, 0);
-    mesh(G.ico, m('stone'), 0.9, 1.0, 1.1, 0, 0, 0, p.body);
-    p.head = pivot(p.body, 0, 0.45, 0.45);
-    mesh(G.box, m('stone'), 0.5, 0.42, 0.55, 0, 0, 0, p.head);
-    mesh(G.cone, m('darkstone'), 0.12, 0.35, 0.12, -0.18, 0.32, -0.05, p.head);
-    mesh(G.cone, m('darkstone'), 0.12, 0.35, 0.12, 0.18, 0.32, -0.05, p.head);
-    mesh(G.box, BASE.eye, 0.1, 0.06, 0.05, -0.12, 0.05, 0.28, p.head); mesh(G.box, BASE.eye, 0.1, 0.06, 0.05, 0.12, 0.05, 0.28, p.head);
-    mesh(G.box, m('darkstone'), 0.4, 0.12, 0.3, 0, -0.17, 0.2, p.head);  // jaw
-    p.wl = pivot(p.body, -0.3, 0.25, -0.1); mesh(G.wing, BASE.wingMat, -1.1, 1.1, 1.1, 0, 0, 0, p.wl);
-    p.wr = pivot(p.body, 0.3, 0.25, -0.1); mesh(G.wing, BASE.wingMat, 1.1, 1.1, 1.1, 0, 0, 0, p.wr);
-    p.legL = mesh(G.box, m('darkstone'), 0.2, 0.5, 0.25, -0.25, -0.55, 0.1, p.body);
-    p.legR = mesh(G.box, m('darkstone'), 0.2, 0.5, 0.25, 0.25, -0.55, 0.1, p.body);
-    mesh(G.cone, m('darkstone'), 0.12, 0.8, 0.12, 0, -0.2, -0.65, p.body).rotation.x = -1.9;   // tail
+    add(p.body, K.torso, stone); add(p.body, K.ridge, dark);
+    p.head = pivot(p.body, 0, 0.45, 0.42);
+    add(p.head, K.head, stone); add(p.head, K.horns, dark); add(p.head, K.fangs, BASE.bone); add(p.head, K.eyes, BASE.eye);
+    p.jaw = pivot(p.head, 0, 0, 0); add(p.jaw, K.jaw, dark);
+    p.wl = pivot(p.body, -0.22, 0.28, -0.12); add(p.wl, K.wingMem, wing, 0, 0, 0, true); add(p.wl, K.wingBones, dark, 0, 0, 0, true);
+    p.wr = pivot(p.body, 0.22, 0.28, -0.12); add(p.wr, K.wingMem, wing); add(p.wr, K.wingBones, dark);
+    p.armL = pivot(p.body, -0.3, 0.2, 0.22); add(p.armL, K.arm, stone, 0, 0, 0, true); add(p.armL, K.claws, dark, 0, 0, 0, true);
+    p.armR = pivot(p.body, 0.3, 0.2, 0.22); add(p.armR, K.arm, stone); add(p.armR, K.claws, dark);
+    p.legL = pivot(p.body, -0.22, -0.32, -0.08); add(p.legL, K.leg, stone, 0, 0, 0, true); add(p.legL, K.talons, dark, 0, 0, 0, true);
+    p.legR = pivot(p.body, 0.22, -0.32, -0.08); add(p.legR, K.leg, stone); add(p.legR, K.talons, dark);
+    p.tail = pivot(p.body, 0, -0.35, -0.3); add(p.tail, K.tail, dark);
     return { group: g, parts: p };
   },
-  wisp(m) {
+  wisp(m) {   // a marsh-light: a bright core inside a flickering teardrop of cold flame, two rings and orbiting motes
+    const K = kit('wisp', () => ({
+      core: new THREE.SphereGeometry(0.5, 20, 14),
+      heart: sph(0.25, [0, 0, 0], 1, 12, 8),
+      shell: xf(flameGeo(0.45, 1.25, 18), [0, 0.12, 0]),
+      tail: (() => { const t = lathe([[0, -1.35], [0.06, -1.0], [0.18, -0.55], [0.27, -0.2], [0.2, 0.02], [0, 0.08]], 14); const p = t.attributes.position;
+        for (let i = 0; i < p.count; i++) { const y = p.getY(i); p.setX(i, p.getX(i) + Math.sin(y * 4) * 0.1 * -y); } t.computeVertexNormals(); return t; })(),
+      halo: merge(tor(0.85, 0.022, [0, 0, 0], [0, 0, 0], 5, 40), tor(0.72, 0.016, [0, 0, 0], [1.1, 0.4, 0], 5, 36)),
+      mote: sph(0.065, [0, 0, 0], 1, 8, 6),
+      face: merge(sph(0.06, [0.12, 0.05, 0.25], [0.8, 1.2, 0.5], 8, 6), sph(0.06, [-0.12, 0.05, 0.25], [0.8, 1.2, 0.5], 8, 6), sph(0.05, [0, -0.11, 0.27], [1.3, 0.6, 0.5], 8, 6)),
+    }));
     const g = new THREE.Group(), p = {};
     p.body = pivot(g, 0, 0, 0);
-    p.core = mesh(G.ico1, m('wisp'), 0.55, 0.55, 0.55, 0, 0, 0, p.body);
-    p.halo = mesh(G.torus, BASE.wisp, 0.9, 0.9, 0.9, 0, 0, 0, p.body);
-    p.motes = [];
-    for (let i = 0; i < 3; i++) p.motes.push(mesh(G.oct, BASE.wisp, 0.18, 0.18, 0.18, 0, 0, 0, p.body));
-    p.tail = mesh(G.cone, m('wisp'), 0.3, 0.8, 0.3, 0, -0.55, 0, p.body); p.tail.rotation.x = Math.PI;
+    p.core = add(p.body, K.core, m('wisp')); p.core.scale.setScalar(0.55);
+    add(p.core, K.heart, BASE.wispCore);
+    add(p.core, K.face, m('ink'));
+    p.shell = add(p.body, K.shell, BASE.wispShell); p.shell.renderOrder = 3;
+    p.halo = add(p.body, K.halo, BASE.wisp);
+    p.motes = [0, 1, 2].map(() => add(p.body, K.mote, BASE.wispCore));
+    p.tail = add(p.body, K.tail, m('wisp'));
     return { group: g, parts: p };
   },
-  statue(m) {   // a robed scholar in Portland stone on a plinth stub
-    const g = new THREE.Group(), p = {};
+  statue(m) {   // a robed scholar in Portland stone on a moulded plinth: gown folds, stole, mortarboard, stone tome
+    const K = kit('statue', () => {
+      const sq = (prof, r) => flat(xf(xf(lathe(prof, 4), [0, 0, 0], [0, PI / 4, 0]), [0, 0, 0], [0, 0, 0], r));
+      const sleeve = drape(lathe([[0, -0.95], [0.19, -0.95], [0.2, -0.9], [0.15, -0.6], [0.11, -0.2], [0.12, 0], [0, 0.06]], 12), 5, 0.1, y => y < -0.3 ? 1 : 0.3);
+      return {
+        plinth: sq([[0, 0], [0.8, 0], [0.8, 0.06], [0.72, 0.1], [0.72, 0.28], [0.78, 0.31], [0.78, 0.36], [0, 0.36]], 1),
+        rune: tor(0.47, 0.014, [0, 0.365, 0], [PI / 2, 0, 0], 4, 40),
+        robe: xf(drape(lathe([[0, 0.02], [0.5, 0.02], [0.52, 0.08], [0.47, 0.5], [0.4, 1.0], [0.35, 1.35], [0.42, 1.6], [0.49, 1.72], [0.3, 1.86], [0.12, 1.9], [0, 1.9]], 28),
+          9, 0.07, y => y < 1.4 ? 1 : 0.15), [0, 0, 0], [0, 0, 0], [1, 1, 0.8]),
+        stole: merge([1, -1].map(s => xf(tube([[s * 0.17, 1.86, 0.1], [s * 0.21, 1.62, 0.3], [s * 0.2, 1.0, 0.33]], 0.06, 0.07, 8, 6), [0, 0, 0], [0, 0, 0], [1, 1, 1]))),
+        head: merge(lumpy([cyl(0.1, 0.11, 0.2, [0, 1.95, 0]), sph(0.2, [0, 2.17, 0], [0.95, 1.1, 1], 14, 10), sph(0.14, [0, 2.03, 0.1], [1, 1.25, 0.75]),
+          sph(0.04, [0.19, 2.17, 0]), sph(0.04, [-0.19, 2.17, 0])], 0.012, 12), cone(0.035, 0.1, [0, 2.16, 0.22], [1.5, 0, 0], 6)),
+        board: merge(box(0.6, 0.045, 0.6, [0, 2.4, 0], [0, PI / 4, 0]), sph(0.21, [0, 2.3, 0], [1, 0.5, 1]),
+          tube([[0, 2.43, 0], [0.3, 2.42, 0.03], [0.37, 2.22, 0.05]], 0.012, 0.012, 6, 4), sph(0.03, [0.37, 2.2, 0.05], [1, 1.6, 1], 6, 5)),
+        eyes: merge(sph(0.028, [0.072, 2.2, 0.185], 1, 6, 5), sph(0.028, [-0.072, 2.2, 0.185], 1, 6, 5)),
+        arm: merge(sleeve, sph(0.075, [0, -0.98, 0.03], 1, 8, 6)),
+        tome: merge(box(0.42, 0.54, 0.13, [0, -1.12, 0.14])),
+        pages: box(0.38, 0.5, 0.135, [0.025, -1.12, 0.14]),
+      };
+    });
+    const g = new THREE.Group(), p = {}, marble = m('marble'), dark = m('darkstone');
     p.body = pivot(g, 0, 0, 0);
-    mesh(G.box, m('darkstone'), 1.1, 0.35, 1.1, 0, 0.17, 0, p.body);                 // plinth stub
+    add(p.body, K.plinth, dark); add(p.body, K.rune, BASE.eye);
     p.torso = pivot(p.body, 0, 0.35, 0);
-    mesh(G.cyl, m('marble'), 0.9, 1.7, 0.75, 0, 0.85, 0, p.torso);                     // robe
-    mesh(G.box, m('marble'), 1.15, 0.35, 0.6, 0, 1.75, 0, p.torso);                     // shoulders / gown yoke
-    p.head = mesh(G.ico, m('marble'), 0.5, 0.58, 0.5, 0, 2.2, 0, p.torso);
-    mesh(G.box, m('darkstone'), 0.7, 0.07, 0.7, 0, 2.52, 0, p.torso);                   // mortarboard
-    mesh(G.box, BASE.eye, 0.08, 0.05, 0.04, -0.1, 2.24, 0.24, p.torso); mesh(G.box, BASE.eye, 0.08, 0.05, 0.04, 0.1, 2.24, 0.24, p.torso);
-    p.armL = pivot(p.torso, -0.62, 1.7, 0); mesh(G.box, m('marble'), 0.3, 1.1, 0.3, 0, -0.5, 0, p.armL);
-    p.armR = pivot(p.torso, 0.62, 1.7, 0); mesh(G.box, m('marble'), 0.3, 1.1, 0.3, 0, -0.5, 0, p.armR);
-    mesh(G.box, m('darkstone'), 0.55, 0.7, 0.18, 0, -1.15, 0.1, p.armR);                // stone tome
+    add(p.torso, K.robe, marble); add(p.torso, K.stole, dark);
+    p.head = pivot(p.torso, 0, 0, 0);
+    add(p.head, K.head, marble); add(p.head, K.board, dark); add(p.head, K.eyes, BASE.eye);
+    p.armL = pivot(p.torso, -0.46, 1.7, 0); add(p.armL, K.arm, marble);
+    p.armR = pivot(p.torso, 0.46, 1.7, 0); add(p.armR, K.arm, marble); add(p.armR, K.tome, dark); add(p.armR, K.pages, marble);
     return { group: g, parts: p };
   },
-  ink_imp(m) {   // a blot of library ink with a quill horn and paper-scrap wings
-    const g = new THREE.Group(), p = {};
+  ink_imp(m) {   // a glossy blot of library ink with dripping edges, a quill-feather horn, a glowing grin and paper-scrap wings
+    const K = kit('ink_imp', () => {
+      const leaf = new THREE.Shape(); leaf.moveTo(0, 0); leaf.quadraticCurveTo(0.08, 0.3, 0.01, 0.6); leaf.lineTo(-0.01, 0.6); leaf.quadraticCurveTo(-0.07, 0.3, 0, 0);
+      const page = new THREE.PlaneGeometry(0.42, 0.3, 6, 2); const pp = page.attributes.position;
+      for (let i = 0; i < pp.count; i++) { const x = pp.getX(i), y = pp.getY(i); pp.setZ(i, 0.1 * Math.sin((x + 0.21) * 7) * (x + 0.21) + 0.03 * y * y); }
+      page.computeVertexNormals(); xf(page, [0.22, 0, 0], [-PI / 2 + 0.2, 0, 0]);
+      return {
+        blob: merge(lumpy(sph(0.5, [0, 0, 0], 1, 18, 12), 0.03, 4), [0, 1, 2, 3, 4, 5].map(i => { const a = i / 6 * TAU + 0.3; return xf(flameGeo(0.07, 0.4, 7), [Math.sin(a) * 0.36, -0.38, Math.cos(a) * 0.36], [PI, 0, 0]); })),
+        eyes: merge(sph(0.075, [0.11, 0.07, 0.27], [1, 1.25, 0.55], 10, 8), sph(0.075, [-0.11, 0.07, 0.27], [1, 1.25, 0.55], 10, 8),
+          tube([[-0.13, -0.07, 0.26], [-0.06, -0.11, 0.3], [0.06, -0.11, 0.3], [0.13, -0.07, 0.26]], 0.016, 0.016, 10, 5)),
+        teeth: merge([-0.07, -0.025, 0.025, 0.07].map(x => cone(0.014, 0.04, [x, -0.09, 0.3], [PI, 0, 0], 4))),
+        quill: merge(tube([[0, 0.25, 0.05], [0, 0.4, 0.0], [0, 0.55, -0.12]], 0.018, 0.008, 6, 5),
+          xf(new THREE.ShapeGeometry(leaf, 5), [0, 0.32, 0.02], [-0.55, 0.3, 0])),
+        page,
+        arm: merge(limb([[0.2, -0.04, 0.06], [0.32, -0.1, 0.16], [0.3, -0.15, 0.27]], 0.045, 0.03, 6, 6), [-0.02, 0.02].map(d => cone(0.012, 0.06, [0.3 + d, -0.17, 0.31], [2.2, 0, 0], 4))),
+        leg: merge(limb([[0, 0, 0], [0, -0.13, 0.02], [0, -0.22, 0.05]], 0.06, 0.045, 5, 6), sph(0.06, [0, -0.25, 0.09], [1, 0.5, 1.5], 8, 5)),
+      };
+    });
+    const g = new THREE.Group(), p = {}, ink = m('ink'), paper = m('parchment');
     p.body = pivot(g, 0, 0.45, 0);
-    p.blob = mesh(G.ico1, m('ink'), 0.65, 0.55, 0.65, 0, 0, 0, p.body);
-    mesh(G.cone, m('parchment'), 0.08, 0.55, 0.08, 0, 0.42, 0.05, p.body).rotation.x = 0.4;   // quill horn
-    mesh(G.box, BASE.eyeBlue, 0.09, 0.09, 0.04, -0.12, 0.08, 0.3, p.body); mesh(G.box, BASE.eyeBlue, 0.09, 0.09, 0.04, 0.12, 0.08, 0.3, p.body);
-    p.wl = pivot(p.body, -0.25, 0.15, -0.1); mesh(G.box, BASE.parchment, 0.45, 0.02, 0.3, -0.22, 0, 0, p.wl);
-    p.wr = pivot(p.body, 0.25, 0.15, -0.1); mesh(G.box, BASE.parchment, 0.45, 0.02, 0.3, 0.22, 0, 0, p.wr);
-    p.legL = mesh(G.cone, m('ink'), 0.12, 0.3, 0.12, -0.15, -0.35, 0, p.body); p.legL.rotation.x = Math.PI;
-    p.legR = mesh(G.cone, m('ink'), 0.12, 0.3, 0.12, 0.15, -0.35, 0, p.body); p.legR.rotation.x = Math.PI;
+    p.blob = add(p.body, K.blob, ink); p.blob.scale.set(0.65, 0.55, 0.65);
+    add(p.body, K.eyes, BASE.eyeBlue); add(p.body, K.teeth, BASE.bone); add(p.body, K.quill, paper);
+    add(p.body, K.arm, ink); add(p.body, K.arm, ink, 0, 0, 0, true);
+    p.wl = pivot(p.body, -0.22, 0.15, -0.12); add(p.wl, K.page, paper, 0, 0, 0, true);
+    p.wr = pivot(p.body, 0.22, 0.15, -0.12); add(p.wr, K.page, paper);
+    p.legL = pivot(p.body, -0.14, -0.22, 0); add(p.legL, K.leg, ink);
+    p.legR = pivot(p.body, 0.14, -0.22, 0); add(p.legR, K.leg, ink);
     return { group: g, parts: p };
   },
-  automaton(m) {   // a brass clockwork porter: barrel body, gear on the chest, piston legs
-    const g = new THREE.Group(), p = {};
+  automaton(m) {   // a brass clockwork porter: riveted barrel body, toothed chest gear, furnace grille, domed helm, wind-up key
+    const K = kit('automaton', () => {
+      const ring = (y, r) => [tor(r, 0.03, [0, y, 0], [PI / 2, 0, 0], 5, 28)].map(g => xf(g, [0, 0, 0], [0, 0, 0], [1, 1, 0.85]));
+      const rivets = (y, r) => Array.from({ length: 14 }, (_, i) => { const a = i / 14 * TAU; return sph(0.022, [Math.sin(a) * r, y, Math.cos(a) * r * 0.85], 1, 5, 4); });
+      return {
+        torso: xf(lathe([[0, -0.5], [0.34, -0.5], [0.43, -0.36], [0.47, 0], [0.45, 0.3], [0.34, 0.48], [0.15, 0.53], [0, 0.53]], 20), [0, 0, 0], [0, 0, 0], [1, 1, 0.85]),
+        bands: merge(ring(-0.25, 0.465), ring(0.22, 0.47), tor(0.2, 0.05, [0, 0.52, 0], [PI / 2, 0, 0], 6, 18)),
+        rivets: merge(rivets(-0.25, 0.49), rivets(0.22, 0.495)),
+        gear: merge(extr(gearShape(0.25, 0.205, 14, 0.05, 5), 0.05, 0.01), sph(0.06, [0, 0, 0.03], [1, 1, 0.6], 8, 6)),
+        grille: merge([-0.08, 0, 0.08].map(y => box(0.26, 0.025, 0.05, [0, -0.3 + y, 0.39]))),
+        helm: lathe([[0, -0.2], [0.24, -0.2], [0.27, -0.06], [0.26, 0.08], [0.19, 0.19], [0, 0.24]], 18),
+        visor: xf(xf(new THREE.TorusGeometry(0.262, 0.024, 4, 10, 1.6), [0, 0, 0], [PI / 2, 0, 0]), [0, 0.0, 0], [0, -0.77 + PI / 2 - PI / 2, 0]),
+        stack: merge(cyl(0.05, 0.06, 0.28, [0.1, 0.32, -0.05], [0, 0, 0], 8), tor(0.065, 0.015, [0.1, 0.46, -0.05], [PI / 2, 0, 0], 4, 10)),
+        key: merge(cyl(0.035, 0.035, 0.3, [0, 0, -0.15], [PI / 2, 0, 0], 6), tor(0.11, 0.03, [0.11, 0, -0.32], [0, PI / 2, 0], 5, 14), tor(0.11, 0.03, [-0.11, 0, -0.32], [0, PI / 2, 0], 5, 14)),
+        shoulder: sph(0.13, [0, 0, 0], 1, 10, 8),
+        arm: merge(cyl(0.055, 0.055, 0.42, [0, -0.2, 0], [0, 0, 0], 8), cyl(0.045, 0.06, 0.38, [0, -0.6, 0.04], [0.1, 0, 0], 8), [-1, 1].map(s => tube([[s * 0.03, -0.8, 0.05], [s * 0.09, -0.92, 0.07], [s * 0.03, -1.02, 0.08]], 0.025, 0.012, 6, 5))),
+        armBrass: merge(cyl(0.08, 0.08, 0.2, [0, -0.15, 0], [0, 0, 0], 10), sph(0.08, [0, -0.42, 0.02], 1, 8, 6), cyl(0.07, 0.07, 0.06, [0, -0.79, 0.05], [0, 0, 0], 10)),
+        leg: merge(cyl(0.07, 0.06, 0.3, [0, -0.15, 0], [0, 0, 0], 8), cyl(0.06, 0.05, 0.28, [0, -0.47, 0], [0, 0, 0], 8)),
+        legBrass: merge(cyl(0.09, 0.09, 0.14, [0, -0.08, 0], [0, 0, 0], 10), sph(0.085, [0, -0.32, 0.02], 1, 8, 6), sph(0.14, [0, -0.63, 0.06], [1, 0.45, 1.5], 10, 6)),
+      };
+    });
+    const g = new THREE.Group(), p = {}, brass = m('brass'), copper = m('copper'), iron = m('iron');
     p.body = pivot(g, 0, 0, 0);
     p.torso = pivot(p.body, 0, 1.15, 0);
-    mesh(G.cyl, m('brass'), 0.95, 1.0, 0.8, 0, 0, 0, p.torso);
-    p.gear = mesh(G.torus, m('copper'), 0.55, 0.55, 0.9, 0, 0.05, 0.42, p.torso);
-    p.head = pivot(p.torso, 0, 0.7, 0);
-    mesh(G.box, m('copper'), 0.5, 0.38, 0.45, 0, 0, 0, p.head);
-    mesh(G.box, BASE.eye, 0.36, 0.06, 0.04, 0, 0.03, 0.23, p.head);
-    mesh(G.cyl, m('iron'), 0.06, 0.4, 0.06, 0, 0.35, 0, p.head);                       // key / chimney
-    p.armL = pivot(p.torso, -0.6, 0.3, 0); mesh(G.box, m('iron'), 0.22, 0.9, 0.22, 0, -0.45, 0, p.armL);
-    p.armR = pivot(p.torso, 0.6, 0.3, 0); mesh(G.box, m('iron'), 0.22, 0.9, 0.22, 0, -0.45, 0, p.armR);
-    p.legL = pivot(p.body, -0.25, 0.65, 0); mesh(G.cyl, m('iron'), 0.18, 0.65, 0.18, 0, -0.33, 0, p.legL);
-    p.legR = pivot(p.body, 0.25, 0.65, 0); mesh(G.cyl, m('iron'), 0.18, 0.65, 0.18, 0, -0.33, 0, p.legR);
+    add(p.torso, K.torso, brass); add(p.torso, K.bands, copper); add(p.torso, K.rivets, iron); add(p.torso, K.grille, BASE.eye);
+    p.gear = add(p.torso, K.gear, copper, 0, 0.05, 0.4);
+    p.key = pivot(p.torso, 0, 0.1, -0.38); add(p.key, K.key, brass);
+    p.head = pivot(p.torso, 0, 0.72, 0);
+    add(p.head, K.helm, copper); add(p.head, K.visor, BASE.eye); add(p.head, K.stack, iron);
+    for (const s of [-1, 1]) {
+      const a = p[s < 0 ? 'armL' : 'armR'] = pivot(p.torso, s * 0.56, 0.3, 0);
+      add(a, K.shoulder, copper); add(a, K.arm, iron); add(a, K.armBrass, brass);
+      const l = p[s < 0 ? 'legL' : 'legR'] = pivot(p.body, s * 0.22, 0.65, 0);
+      add(l, K.leg, iron); add(l, K.legBrass, brass);
+    }
     return { group: g, parts: p };
   },
   // --- session 41 regulars (original Cambridge wizard folklore)
-  river_wraith(m) {   // a drowned shape of Cam water: hooded, tapering to a point, river-weed trailing from its sleeves
-    const g = new THREE.Group(), p = {};
+  river_wraith(m) {   // a drowned shape of Cam water: a deep hood over a void, a twisting robe that ends in a point, weed-hung sleeves
+    const K = kit('river_wraith', () => ({
+      robe: merge(drape(lathe([[0, -1.25], [0.06, -1.05], [0.2, -0.7], [0.36, -0.2], [0.42, 0.25], [0.38, 0.6], [0.22, 0.8], [0, 0.85]], 22), 7, 0.13, y => Math.min(1, (0.9 - y) / 1.2), 0.7),
+        [0, 1, 2, 3].map(i => { const a = i / 4 * TAU + 0.4; return tube([[Math.sin(a) * 0.3, -0.35, Math.cos(a) * 0.3], [Math.sin(a + 0.6) * 0.32, -0.75, Math.cos(a + 0.6) * 0.32], [Math.sin(a + 1.2) * 0.22, -1.15, Math.cos(a + 1.2) * 0.22], [Math.sin(a + 1.6) * 0.12, -1.45, Math.cos(a + 1.6) * 0.12]], 0.05, 0.004, 10, 5); })),
+      hood: merge(xf(new THREE.SphereGeometry(0.32, 18, 12, PI / 2 + 0.75, TAU - 1.5, 0, 2.3), [0, 0, 0], [0, 0, 0], [1, 1.15, 1.1]), cone(0.14, 0.3, [0, 0.3, -0.18], [-1.0, 0, 0], 8)),
+      void: sph(0.27, [0, -0.02, 0.03], [1, 1.05, 1], 12, 8),
+      eyes: merge(sph(0.035, [0.08, 0.0, 0.27], [1.2, 0.7, 1], 8, 6), sph(0.035, [-0.08, 0.0, 0.27], [1.2, 0.7, 1], 8, 6)),
+      sleeve: drape(lathe([[0, -0.72], [0.17, -0.72], [0.15, -0.5], [0.1, -0.2], [0.09, 0], [0, 0.05]], 12), 5, 0.12, y => y < -0.3 ? 1 : 0.2),
+      hand: merge([-0.04, 0, 0.04].map(d => tube([[d, -0.7, 0.02], [d * 1.4, -0.82, 0.06], [d * 1.6, -0.93, 0.03]], 0.014, 0.006, 5, 4))),
+      weed: merge([0, 1, 2].map(i => { const a = i * 2.1; return tube([[Math.sin(a) * 0.06, 0.3, Math.cos(a) * 0.06], [Math.sin(a) * 0.1 + 0.04, 0, Math.cos(a) * 0.1], [Math.sin(a) * 0.06 - 0.05, -0.3, Math.cos(a) * 0.08], [Math.sin(a) * 0.1, -0.55 - i * 0.08, Math.cos(a) * 0.1]], 0.025, 0.004, 10, 4); })),
+    }));
+    const g = new THREE.Group(), p = {}, water = m('water'), moss = m('moss');
     p.body = pivot(g, 0, 0, 0);
-    p.robe = mesh(G.cone, m('water'), 0.95, 1.9, 0.95, 0, -0.15, 0, p.body); p.robe.rotation.x = Math.PI;
+    p.robe = add(p.body, K.robe, water);
     p.head = pivot(p.body, 0, 0.95, 0);
-    mesh(G.ico, m('water'), 0.62, 0.7, 0.62, 0, 0, 0, p.head);
-    mesh(G.box, BASE.ink, 0.36, 0.3, 0.1, 0, -0.02, 0.26, p.head);                      // hollow under the hood
-    mesh(G.box, BASE.eyeBlue, 0.07, 0.05, 0.04, -0.08, 0.02, 0.32, p.head); mesh(G.box, BASE.eyeBlue, 0.07, 0.05, 0.04, 0.08, 0.02, 0.32, p.head);
-    p.armL = pivot(p.body, -0.4, 0.6, 0); mesh(G.box, m('water'), 0.16, 0.8, 0.16, 0, -0.38, 0, p.armL);
-    p.armR = pivot(p.body, 0.4, 0.6, 0); mesh(G.box, m('water'), 0.16, 0.8, 0.16, 0, -0.38, 0, p.armR);
-    p.weedL = mesh(G.cone, m('moss'), 0.08, 0.7, 0.08, 0, -1.0, 0, p.armL); p.weedL.rotation.x = Math.PI;
-    p.weedR = mesh(G.cone, m('moss'), 0.08, 0.7, 0.08, 0, -1.0, 0, p.armR); p.weedR.rotation.x = Math.PI;
+    add(p.head, K.hood, water); add(p.head, K.void, BASE.ink); add(p.head, K.eyes, BASE.eyeBlue);
+    for (const s of [-1, 1]) {
+      const a = p[s < 0 ? 'armL' : 'armR'] = pivot(p.body, s * 0.38, 0.6, 0);
+      add(a, K.sleeve, water); add(a, K.hand, BASE.bone);
+      p[s < 0 ? 'weedL' : 'weedR'] = add(a, K.weed, moss, 0, -0.62, 0);
+    }
     return { group: g, parts: p };
   },
-  bog_hag(m) {   // a hunched fen-hag in a moss shawl, leaning on a crook that carries a marsh lantern
-    const g = new THREE.Group(), p = {};
+  bog_hag(m) {   // a hunched fen-hag in ragged moss skirts and hood, long nose, grey hair, a hooked crook with a hanging marsh lantern
+    const K = kit('bog_hag', () => {
+      const arm = merge(lumpy(limb([[0, 0, 0], [0.05, -0.25, 0.08], [0, -0.48, 0.15]], 0.09, 0.07, 6, 7), 0.02, 8));
+      return {
+        skirt: merge(hem(drape(lathe([[0, 0], [0.55, 0], [0.58, 0.05], [0.5, 0.4], [0.4, 0.8], [0.36, 1.1], [0.3, 1.3], [0.15, 1.42], [0, 1.45]], 22), 8, 0.1, y => y < 1.1 ? 1 : 0.3), 0.14, 9),
+          lumpy(sph(0.34, [0, 1.2, -0.12], [1.1, 0.8, 1], 12, 8), 0.04, 6)),
+        belt: merge(tor(0.42, 0.035, [0, 0.78, 0], [PI / 2, 0, 0], 5, 22), sph(0.08, [0.3, 0.68, 0.3], [1, 1.3, 0.7], 8, 6), sph(0.06, [-0.36, 0.7, 0.2], 1, 8, 6)),
+        face: merge(lumpy([sph(0.18, [0, 0, 0.02], [0.9, 1.05, 0.95], 14, 10), sph(0.07, [0, -0.15, 0.12], 1, 8, 6)], 0.015, 12),
+          tube([[0, 0, 0.16], [0, -0.03, 0.29], [0, -0.11, 0.35]], 0.045, 0.018, 6, 6), sph(0.015, [0.04, -0.05, 0.27], 1, 5, 4)),
+        hood: merge(xf(new THREE.SphereGeometry(0.26, 16, 10, PI / 2 + 0.8, TAU - 1.6, 0, 2.0), [0, 0.03, -0.02], [0, 0, 0], [1, 1.1, 1.1]), cone(0.12, 0.25, [0, 0.24, -0.2], [-1.2, 0, 0], 8)),
+        hair: merge([-0.16, -0.12, -0.07, 0.07, 0.12, 0.16].map((x, i) => tube([[x, 0.05, 0.08], [x * 1.3, -0.15, 0.06], [x * 1.2 + 0.02, -0.35 - (i % 2) * 0.08, 0.02]], 0.018, 0.004, 6, 4))),
+        eyes: merge(sph(0.028, [0.065, 0.04, 0.17], 1, 6, 5), sph(0.028, [-0.065, 0.04, 0.17], 1, 6, 5)),
+        arm, hand: merge(sph(0.06, [0, -0.54, 0.16], [1, 1.2, 1], 8, 6), [-0.03, 0, 0.03].map(d => tube([[d, -0.55, 0.19], [d * 1.4, -0.63, 0.22], [d, -0.68, 0.2]], 0.012, 0.005, 4, 4))),
+        crook: merge(tube([[0, -0.75, 0], [0.02, 0.4, 0], [0, 1.6, 0], [0.05, 1.9, 0.05], [0.22, 2.05, 0.15], [0.33, 1.93, 0.25], [0.29, 1.78, 0.25]], 0.04, 0.026, 28, 6),
+          sph(0.055, [0.01, 0.3, 0], 1, 6, 5), sph(0.05, [0.01, 1.1, 0], 1, 6, 5)),
+        cage: merge(tube([[0.29, 1.78, 0.25], [0.29, 1.66, 0.25]], 0.008, 0.008, 2, 4), cone(0.14, 0.1, [0.29, 1.62, 0.25], [0, 0, 0], 6), cyl(0.12, 0.12, 0.03, [0.29, 1.3, 0.25], [0, 0, 0], 6),
+          [0, 1, 2, 3].map(i => { const a = i / 4 * TAU + PI / 4; return cyl(0.008, 0.008, 0.28, [0.29 + Math.cos(a) * 0.12, 1.44, 0.25 + Math.sin(a) * 0.12], [0, 0, 0], 4); })),
+        lantern: flameGeo(0.5, 1.1, 10),
+      };
+    });
+    const g = new THREE.Group(), p = {}, moss = m('moss'), bone = m('bone');
     p.body = pivot(g, 0, 0, 0);
     p.torso = pivot(p.body, 0, 0.1, 0);
-    mesh(G.cone, m('moss'), 1.1, 1.4, 1.0, 0, 0.7, 0, p.torso);                          // shawl / skirts
+    add(p.torso, K.skirt, moss); add(p.torso, K.belt, m('rope'));
     p.head = pivot(p.torso, 0, 1.4, 0.25);
-    mesh(G.ico, m('bone'), 0.45, 0.45, 0.45, 0, 0, 0, p.head);
-    mesh(G.cone, m('bone'), 0.09, 0.3, 0.09, 0, -0.05, 0.25, p.head).rotation.x = 1.9;   // long nose
-    mesh(G.cone, m('moss'), 0.6, 0.45, 0.6, 0, 0.2, -0.05, p.head);                       // hood
-    mesh(G.box, BASE.bogglow, 0.07, 0.05, 0.04, -0.1, 0.05, 0.2, p.head); mesh(G.box, BASE.bogglow, 0.07, 0.05, 0.04, 0.1, 0.05, 0.2, p.head);
-    p.armR = pivot(p.torso, 0.45, 1.05, 0.1);
-    mesh(G.box, m('moss'), 0.16, 0.55, 0.16, 0, -0.25, 0, p.armR);
+    add(p.head, K.face, bone); add(p.head, K.hood, moss); add(p.head, K.hair, BASE.hair); add(p.head, K.eyes, BASE.bogglow);
+    p.armR = pivot(p.torso, 0.4, 1.05, 0.1); add(p.armR, K.arm, moss); add(p.armR, K.hand, bone);
     p.crook = pivot(p.armR, 0, -0.5, 0.15);
-    mesh(G.cyl, m('rope'), 0.07, 2.3, 0.07, 0, 0.6, 0, p.crook);
-    p.lantern = mesh(G.oct, m('bogglow'), 0.28, 0.4, 0.28, 0, 1.85, 0.2, p.crook);
-    p.armL = pivot(p.torso, -0.45, 1.05, 0.1); mesh(G.box, m('moss'), 0.16, 0.55, 0.16, 0, -0.25, 0, p.armL);
+    add(p.crook, K.crook, m('rope')); add(p.crook, K.cage, m('iron'));
+    p.lantern = add(p.crook, K.lantern, m('bogglow'), 0.29, 1.45, 0.25);
+    p.armL = pivot(p.torso, -0.4, 1.05, 0.1); add(p.armL, K.arm, moss, 0, 0, 0, true); add(p.armL, K.hand, bone, 0, 0, 0, true);
     return { group: g, parts: p };
   },
-  punt_revenant(m) {   // a gaunt drowned punter in a rotting boater, still carrying his pole
-    const g = new THREE.Group(), p = {};
+  punt_revenant(m) {   // a gaunt drowned punter: faded striped blazer, skull face with drowned-blue eyes, straw boater, weed-hung pole
+    const K = kit('punt_revenant', () => ({
+      leg: merge(limb([[0, 0, 0], [0, -0.45, 0.03], [0, -0.9, 0]], 0.085, 0.06, 6, 7), sph(0.075, [0, -0.96, 0.07], [1, 0.6, 1.8], 8, 6)),
+      blazer: merge(xf(lathe([[0, -0.06], [0.2, -0.06], [0.215, 0.1], [0.18, 0.45], [0.22, 0.75], [0.25, 0.82], [0.13, 0.9], [0, 0.92]], 18), [0, 0, 0], [0, 0, 0], [1, 1, 0.7])),
+      shirt: merge(cyl(0.05, 0.06, 0.2, [0, 0.98, 0], [0, 0, 0], 8), cone(0.05, 0.3, [0, 0.72, 0.15], [PI - 0.1, 0, 0], 4)),
+      skull: merge(lumpy([sph(0.15, [0, 0.16, 0], [0.88, 1.1, 1], 14, 10), sph(0.085, [0, 0.04, 0.05], [0.9, 0.7, 1], 10, 6)], 0.012, 14)),
+      sockets: merge(sph(0.038, [0.055, 0.17, 0.115], 1, 8, 6), sph(0.038, [-0.055, 0.17, 0.115], 1, 8, 6), sph(0.02, [0, 0.11, 0.135], [1, 0.7, 1], 6, 4)),
+      eyes: merge(sph(0.02, [0.055, 0.17, 0.135], 1, 6, 5), sph(0.02, [-0.055, 0.17, 0.135], 1, 6, 5)),
+      boater: xf(lathe([[0, 0.27], [0.3, 0.27], [0.31, 0.285], [0.17, 0.285], [0.165, 0.38], [0.15, 0.4], [0, 0.4]], 20), [0, 0, 0], [0, 0, 0.12]),
+      band: xf(cyl(0.168, 0.167, 0.04, [0, 0.31, 0], [0, 0, 0], 20, true), [0, 0, 0], [0, 0, 0.12]),
+      hatWeed: tube([[0.12, 0.4, 0.05], [0.22, 0.3, 0.1], [0.3, 0.12, 0.12], [0.28, -0.05, 0.1]], 0.02, 0.004, 8, 4),
+      sleeve: merge(limb([[0, 0.02, 0], [0, -0.3, 0.04]], 0.075, 0.065, 4, 7)),
+      arm: merge(limb([[0, -0.28, 0.04], [0, -0.5, 0.08], [0, -0.7, 0.15]], 0.04, 0.032, 5, 6), [-0.03, 0, 0.03].map(d => tube([[d, -0.72, 0.16], [d * 1.3, -0.8, 0.2], [d, -0.84, 0.18]], 0.012, 0.006, 4, 4))),
+      pole: cyl(0.035, 0.035, 4.4, [0, 0, 0], [PI / 2, 0, 0], 7),
+      shoe: merge(cyl(0.045, 0.02, 0.32, [0, 0, 2.34], [PI / 2, 0, 0], 7), tor(0.045, 0.012, [0, 0, 2.18], [0, 0, 0], 4, 10)),
+      poleWeed: merge(tube([[0, 0, 1.6], [0.05, -0.2, 1.7], [-0.03, -0.45, 1.65], [0.02, -0.62, 1.7]], 0.025, 0.004, 8, 4), tube([[0, 0, 1.3], [-0.04, -0.18, 1.32], [0.02, -0.34, 1.28]], 0.02, 0.004, 6, 4)),
+    }));
+    const g = new THREE.Group(), p = {}, bone = m('bone'), blazer = m('blazer'), soot = m('soot'), moss = m('moss');
     p.body = pivot(g, 0, 0, 0);
-    p.legL = pivot(p.body, -0.16, 1.0, 0); mesh(G.box, m('soot'), 0.16, 1.0, 0.16, 0, -0.5, 0, p.legL);
-    p.legR = pivot(p.body, 0.16, 1.0, 0); mesh(G.box, m('soot'), 0.16, 1.0, 0.16, 0, -0.5, 0, p.legR);
+    p.legL = pivot(p.body, -0.11, 1.0, 0); add(p.legL, K.leg, soot);
+    p.legR = pivot(p.body, 0.11, 1.0, 0); add(p.legR, K.leg, soot);
     p.torso = pivot(p.body, 0, 1.0, 0);
-    mesh(G.box, m('parchment'), 0.55, 0.85, 0.3, 0, 0.45, 0, p.torso);                    // blazer gone pale
-    mesh(G.box, m('bone'), 0.12, 0.4, 0.12, 0, 0.95, 0, p.torso);                         // neck
-    p.head = mesh(G.ico, m('bone'), 0.38, 0.44, 0.38, 0, 1.25, 0, p.torso);
-    mesh(G.cyl, m('rope'), 0.62, 0.04, 0.62, 0, 1.45, 0, p.torso); mesh(G.cyl, m('rope'), 0.36, 0.14, 0.36, 0, 1.52, 0, p.torso);   // boater
-    mesh(G.box, BASE.eyeBlue, 0.06, 0.05, 0.04, -0.08, 1.27, 0.18, p.torso); mesh(G.box, BASE.eyeBlue, 0.06, 0.05, 0.04, 0.08, 1.27, 0.18, p.torso);
-    p.armL = pivot(p.torso, -0.34, 0.8, 0); mesh(G.box, m('bone'), 0.1, 0.75, 0.1, 0, -0.36, 0, p.armL);
-    p.armR = pivot(p.torso, 0.34, 0.8, 0); mesh(G.box, m('bone'), 0.1, 0.75, 0.1, 0, -0.36, 0, p.armR);
+    add(p.torso, K.blazer, blazer); add(p.torso, K.shirt, bone);
+    p.head = pivot(p.torso, 0, 1.06, 0);
+    add(p.head, K.skull, bone); add(p.head, K.sockets, soot); add(p.head, K.eyes, BASE.eyeBlue);
+    add(p.head, K.boater, m('straw')); add(p.head, K.band, m('heraldRed')); add(p.head, K.hatWeed, moss);
+    for (const s of [-1, 1]) { const a = p[s < 0 ? 'armL' : 'armR'] = pivot(p.torso, s * 0.27, 0.8, 0); add(a, K.sleeve, blazer); add(a, K.arm, bone); }
     p.pole = pivot(p.torso, 0.1, 0.25, 0.3);
-    mesh(G.cyl, m('rope'), 0.07, 4.4, 0.07, 0, 0, 0, p.pole).rotation.x = Math.PI / 2;    // pole lies along +Z
-    mesh(G.box, m('iron'), 0.12, 0.12, 0.3, 0, 0, 2.3, p.pole);                           // iron shoe
+    add(p.pole, K.pole, m('rope')); add(p.pole, K.shoe, m('iron')); add(p.pole, K.poleWeed, moss);
     return { group: g, parts: p };
   },
-  bell_bats(m) {   // a frayed bell-rope sally with a swarm of belfry bats wheeling round it
-    const g = new THREE.Group(), p = {};
+  bell_bats(m) {   // a frayed, twisted bell-rope with a striped woollen sally, and a swarm of belfry bats wheeling round it
+    const K = kit('bell_bats', () => {
+      const helix = (ph) => Array.from({ length: 16 }, (_, i) => { const y = 0.9 - i / 15 * 1.25, a = y * 18 + ph; return [Math.cos(a) * 0.022, y, Math.sin(a) * 0.022]; });
+      const w = batWing(0.27);
+      return {
+        rope: merge(tube(helix(0), 0.022, 0.022, 40, 5), tube(helix(PI), 0.022, 0.022, 40, 5), [0, 1, 2, 3].map(i => tube([[0, -0.6, 0], [Math.cos(i * 1.6) * 0.04, -0.68, Math.sin(i * 1.6) * 0.04], [Math.cos(i * 1.6) * 0.07, -0.78, Math.sin(i * 1.6) * 0.07]], 0.012, 0.004, 4, 4))),
+        sally: lathe([[0, -0.26], [0.05, -0.26], [0.095, -0.17], [0.11, 0], [0.095, 0.17], [0.05, 0.26], [0, 0.26]], 12),
+        bat: merge(lumpy([sph(0.09, [0, 0, 0], [0.9, 0.85, 1.3], 10, 7), sph(0.06, [0, 0.03, 0.12], 1, 8, 6)], 0.01, 25),
+          cone(0.025, 0.08, [0.035, 0.1, 0.11], [0, 0, -0.3], 4), cone(0.025, 0.08, [-0.035, 0.1, 0.11], [0, 0, 0.3], 4)),
+        batEyes: merge(sph(0.014, [0.025, 0.045, 0.17], 1, 5, 4), sph(0.014, [-0.025, 0.045, 0.17], 1, 5, 4)),
+        wing: merge(w.mem, w.bones),
+      };
+    });
+    const g = new THREE.Group(), p = {}, soot = m('soot');
     p.body = pivot(g, 0, 0, 0);
-    p.rope = mesh(G.cyl, m('rope'), 0.06, 1.4, 0.06, 0, 0.2, 0, p.body);
-    p.sally = mesh(G.cyl, m('heraldRed'), 0.2, 0.45, 0.2, 0, -0.35, 0, p.body);          // striped woollen grip
+    p.rope = add(p.body, K.rope, m('rope'));
+    p.sally = add(p.body, K.sally, m('sally'), 0, -0.35, 0);
     p.bats = [];
     for (let i = 0; i < 5; i++) {
       const b = pivot(p.body, 0, 0, 0);
-      mesh(G.ico, m('soot'), 0.2, 0.18, 0.26, 0, 0, 0, b);
-      mesh(G.box, BASE.eye, 0.04, 0.03, 0.03, 0, 0.03, 0.12, b);
-      b.wl = pivot(b, -0.06, 0, 0); mesh(G.wing, BASE.wingMat, -0.32, 0.32, 0.32, 0, 0, 0, b.wl);
-      b.wr = pivot(b, 0.06, 0, 0); mesh(G.wing, BASE.wingMat, 0.32, 0.32, 0.32, 0, 0, 0, b.wr);
+      add(b, K.bat, soot); add(b, K.batEyes, BASE.eye);
+      b.wl = pivot(b, -0.06, 0.02, 0); add(b.wl, K.wing, BASE.wingMat, 0, 0, 0, true);
+      b.wr = pivot(b, 0.06, 0.02, 0); add(b.wr, K.wing, BASE.wingMat);
       p.bats.push(b);
     }
     return { group: g, parts: p };
   },
-  soot_sprite(m) {   // a puff of chimney soot with ember eyes, wearing a chimney pot for a hat
-    const g = new THREE.Group(), p = {};
+  soot_sprite(m) {   // a fluffy puff of chimney soot with ember eyes and a smouldering grin, wearing a terracotta chimney pot
+    const K = kit('soot_sprite', () => ({
+      blob: lumpy(lumpy(new THREE.SphereGeometry(0.5, 26, 18), 0.05, 5), 0.035, 19),
+      pot: lathe([[0, -0.16], [0.17, -0.16], [0.19, -0.11], [0.15, 0.08], [0.16, 0.16], [0.21, 0.19], [0.2, 0.23], [0.14, 0.23], [0.12, 0.05], [0, 0.05]], 16),
+      eye: sph(0.06, [0, 0, 0], [1, 1.15, 0.6], 8, 6),
+      mouth: tube([[-0.11, -0.08, 0.27], [-0.05, -0.12, 0.29], [0, -0.1, 0.3], [0.05, -0.12, 0.29], [0.11, -0.08, 0.27]], 0.015, 0.015, 10, 4),
+      arm: merge(tube([[0.26, -0.02, 0.05], [0.37, 0.02, 0.1], [0.43, 0.1, 0.12]], 0.025, 0.012, 5, 4), [-1, 1].map(s => tube([[0.43, 0.1, 0.12], [0.47, 0.14 + s * 0.03, 0.13]], 0.01, 0.005, 2, 3))),
+      puff: lumpy(sph(0.5, [0, 0, 0], 1, 10, 7), 0.08, 5),
+    }));
+    const g = new THREE.Group(), p = {}, soot = m('soot'), ember = m('ember');
     p.body = pivot(g, 0, 0, 0);
-    p.blob = mesh(G.ico1, m('soot'), 0.6, 0.6, 0.6, 0, 0, 0, p.body);
-    p.pot = mesh(G.cyl, m('heraldRed'), 0.22, 0.32, 0.22, 0, 0.38, 0, p.body);
-    p.eyes = [mesh(G.box, m('ember'), 0.09, 0.09, 0.04, -0.11, 0.05, 0.28, p.body), mesh(G.box, m('ember'), 0.09, 0.09, 0.04, 0.11, 0.05, 0.28, p.body)];
-    p.puffs = [];
-    for (let i = 0; i < 3; i++) p.puffs.push(mesh(G.ico, BASE.smoke, 0.25, 0.25, 0.25, 0, 0, 0, p.body));
+    p.blob = add(p.body, K.blob, soot); p.blob.scale.setScalar(0.6);
+    p.pot = add(p.body, K.pot, m('terracotta'), 0, 0.38, 0);
+    p.eyes = [add(p.body, K.eye, ember, -0.11, 0.05, 0.27), add(p.body, K.eye, ember, 0.11, 0.05, 0.27)];
+    add(p.body, K.mouth, ember); add(p.body, K.arm, soot); add(p.body, K.arm, soot, 0, 0, 0, true);
+    p.puffs = [0, 1, 2].map(() => { const o = add(p.body, K.puff, BASE.smoke); o.scale.setScalar(0.25); o.castShadow = false; return o; });
     return { group: g, parts: p };
   },
-  crest_griffin(m) {   // a college-crest griffin climbed down off its gatehouse: gilt stone, eagle head, lion haunches
-    const g = new THREE.Group(), p = {};
+  crest_griffin(m) {   // a college-crest griffin off its gatehouse: gilt eagle fore-body, hooked beak, feathered wings, lion haunches, red crest shield
+    const K = kit('crest_griffin', () => ({
+      body: merge(lumpy([limb([[0, -0.02, -0.5], [0, 0, 0], [0, 0.12, 0.4]], 0.26, 0.29, 8, 12), sph(0.3, [0, 0.08, 0.42], [1, 1.1, 1], 14, 10),
+        sph(0.23, [0.14, -0.02, -0.42], [0.8, 1, 1]), sph(0.23, [-0.14, -0.02, -0.42], [0.8, 1, 1]), limb([[0, 0.2, 0.48], [0, 0.42, 0.6]], 0.17, 0.14, 4, 10)].flat(), 0.02, 10)),
+      shield: extr(shieldShape(0.17, 0.2), 0.03, 0.015, [0, 0.05, 0.72], [-0.25, 0, 0]),
+      bezants: merge([[-0.07, 0.11], [0.07, 0.11], [0, -0.05]].map(([x, y]) => sph(0.035, [x, 0.05 + y * Math.cos(0.25), 0.745 + y * Math.sin(0.25) * 0.5], [1, 1, 0.5], 8, 6))),
+      head: merge(lumpy(sph(0.17, [0, 0, 0], [0.85, 0.95, 1.1], 14, 10), 0.012, 14), tube([[-0.12, 0.08, 0.08], [0, 0.06, 0.15], [0.12, 0.08, 0.08]], 0.035, 0.035, 6, 5),
+        cone(0.04, 0.2, [0.08, 0.14, -0.14], [-1.9, 0, -0.3], 5), cone(0.04, 0.2, [-0.08, 0.14, -0.14], [-1.9, 0, 0.3], 5)),
+      beak: merge(tube([[0, 0.02, 0.13], [0, 0.0, 0.25], [0, -0.06, 0.32], [0, -0.13, 0.3]], 0.06, 0.01, 10, 7), xf(new THREE.ConeGeometry(0.045, 0.14, 7), [0, -0.06, 0.2], [1.75, 0, 0], [1, 1, 0.6])),
+      eyes: merge(sph(0.03, [0.085, 0.05, 0.13], 1, 6, 5), sph(0.03, [-0.085, 0.05, 0.13], 1, 6, 5)),
+      wing: featherWing(),
+      fore: merge(limb([[0, 0.05, 0], [0, -0.3, 0.05], [0, -0.55, 0.02]], 0.085, 0.045, 6, 7)),
+      talons: merge([-0.04, 0, 0.04].map(d => tube([[d, -0.57, 0.04], [d * 1.5, -0.6, 0.13], [d * 1.5, -0.64, 0.16]], 0.02, 0.005, 4, 4)), tube([[0, -0.57, -0.02], [0, -0.63, -0.08]], 0.018, 0.005, 3, 4)),
+      hind: merge(lumpy([limb([[0, 0.05, 0], [0, -0.25, -0.1], [0, -0.55, 0]], 0.11, 0.06, 7, 8), sph(0.08, [0, -0.6, 0.04], [1, 0.6, 1.3], 8, 6)].flat(), 0.01, 12)),
+      tail: merge(tube([[0, 0, 0], [0, 0.25, -0.25], [0, 0.55, -0.3], [0, 0.75, -0.15]], 0.045, 0.028, 12, 6), lumpy(sph(0.08, [0, 0.8, -0.1], [1, 1.5, 1], 8, 6), 0.03, 12)),
+    }));
+    const g = new THREE.Group(), p = {}, gilt = m('brass'), dark = m('darkstone');
     p.body = pivot(g, 0, 0.85, 0);
-    mesh(G.box, m('brass'), 0.6, 0.55, 1.2, 0, 0, 0, p.body);
-    mesh(G.box, m('heraldRed'), 0.66, 0.6, 0.12, 0, 0.05, 0.55, p.body);                  // crest shield on the breast
-    p.head = pivot(p.body, 0, 0.45, 0.6);
-    mesh(G.ico, m('brass'), 0.42, 0.42, 0.5, 0, 0, 0, p.head);
-    mesh(G.cone, m('darkstone'), 0.14, 0.32, 0.14, 0, -0.04, 0.3, p.head).rotation.x = 1.9;   // beak
-    mesh(G.box, BASE.eye, 0.06, 0.05, 0.04, -0.12, 0.06, 0.2, p.head); mesh(G.box, BASE.eye, 0.06, 0.05, 0.04, 0.12, 0.06, 0.2, p.head);
-    p.wl = pivot(p.body, -0.25, 0.25, 0.1); mesh(G.wing, BASE.wingMat, -1.0, 1.0, 1.0, 0, 0, 0, p.wl);
-    p.wr = pivot(p.body, 0.25, 0.25, 0.1); mesh(G.wing, BASE.wingMat, 1.0, 1.0, 1.0, 0, 0, 0, p.wr);
-    p.legs = [[-0.22, 0.45], [0.22, 0.45], [-0.22, -0.45], [0.22, -0.45]].map(([x, z]) => { const l = pivot(p.body, x, -0.2, z); mesh(G.box, m('darkstone'), 0.16, 0.65, 0.18, 0, -0.32, 0, l); return l; });
-    p.tail = pivot(p.body, 0, 0.1, -0.6); mesh(G.cone, m('brass'), 0.1, 0.8, 0.1, 0, 0.35, -0.15, p.tail).rotation.x = -0.6;
+    add(p.body, K.body, gilt); add(p.body, K.shield, m('heraldRed')); add(p.body, K.bezants, gilt);
+    p.head = pivot(p.body, 0, 0.5, 0.65);
+    add(p.head, K.head, gilt); add(p.head, K.beak, dark); add(p.head, K.eyes, BASE.eye);
+    p.wl = pivot(p.body, -0.22, 0.25, 0.1); add(p.wl, K.wing, gilt, 0, 0, 0, true);
+    p.wr = pivot(p.body, 0.22, 0.25, 0.1); add(p.wr, K.wing, gilt);
+    p.legs = [[-0.2, 0.42], [0.2, 0.42], [-0.2, -0.45], [0.2, -0.45]].map(([x, z]) => {
+      const l = pivot(p.body, x, -0.15, z);
+      if (z > 0) { add(l, K.fore, gilt); add(l, K.talons, dark); } else add(l, K.hind, gilt);
+      return l;
+    });
+    p.tail = pivot(p.body, 0, 0.1, -0.6); add(p.tail, K.tail, gilt);
     return { group: g, parts: p };
   },
-  bicycle_golem(m) {   // an abandoned college bicycle grown over with moss until it got up and rode off by itself
-    const g = new THREE.Group(), p = {};
+  bicycle_golem(m) {   // an abandoned college bicycle overgrown with moss until a moss-golem rider rose out of the basket
+    const K = kit('bicycle_golem', () => {
+      const T = (a, b, r = 0.022) => tube([a, b], r, r, 1, 6);
+      return {
+        tyre: tor(0.45, 0.035, [0, 0, 0], [0, PI / 2, 0], 6, 32),
+        rim: merge(tor(0.42, 0.014, [0, 0, 0], [0, PI / 2, 0], 4, 32), cyl(0.04, 0.04, 0.12, [0, 0, 0], [0, 0, PI / 2], 8),
+          Array.from({ length: 12 }, (_, i) => { const a = i / 12 * TAU; return cyl(0.005, 0.005, 0.41, [0, Math.sin(a) * 0.21, Math.cos(a) * 0.21], [a, 0, 0], 3); })),
+        frame: merge(T([0, 0, 0], [0, 0.55, -0.12]), T([0, 0.55, -0.12], [0, 0.6, 0.5]), T([0, 0, 0], [0, 0.48, 0.52], 0.026), T([0, 0.42, 0.52], [0, 0.66, 0.54], 0.03),
+          [1, -1].map(s => [T([0, 0, 0], [s * 0.06, 0, -0.6], 0.016), T([0, 0.55, -0.12], [s * 0.06, 0, -0.6], 0.014), T([0, 0.45, 0.53], [s * 0.06, 0, 0.6], 0.018)]),
+          T([0, 0.55, -0.12], [0, 0.66, -0.14], 0.018)),
+        ring: extr(gearShape(0.12, 0.105, 18, 0.03, 5), 0.015, 0, [0.05, 0, 0], [0, PI / 2, 0]),
+        saddle: sph(0.1, [0, 0.69, -0.16], [0.9, 0.35, 1.7], 10, 6),
+        vines: merge(tube(Array.from({ length: 14 }, (_, i) => { const t = i / 13, a = t * 18; return [Math.cos(a) * 0.04, 0.55 + 0.05 * t + Math.sin(a) * 0.04, -0.12 + 0.62 * t]; }), 0.014, 0.01, 40, 4),
+          lumpy(sph(0.08, [0, 0.05, -0.05], [1.2, 0.8, 1.6], 8, 6), 0.03, 10)),
+        bars: merge(tube([[-0.34, 0.05, -0.1], [-0.2, 0.0, 0.02], [0.2, 0.0, 0.02], [0.34, 0.05, -0.1]], 0.018, 0.018, 10, 5), T([0, -0.06, -0.01], [0, 0.0, 0.02], 0.02)),
+        grips: merge(cyl(0.03, 0.03, 0.12, [-0.36, 0.06, -0.14], [0.3, 0, PI / 2 - 0.3], 6), cyl(0.03, 0.03, 0.12, [0.36, 0.06, -0.14], [0.3, 0, -PI / 2 + 0.3], 6)),
+        bell: merge(lathe([[0, 0.06], [0.04, 0.055], [0.065, 0.02], [0.07, -0.01], [0, -0.01]], 12), cyl(0.008, 0.008, 0.05, [0, -0.03, 0], [0, 0, 0], 4)),
+        basket: xf(lathe([[0, -0.15], [0.18, -0.15], [0.23, 0.15], [0.21, 0.15], [0.16, -0.12], [0, -0.12]], 12), [0, 0, 0], [0, 0, 0], [1.1, 1, 0.85]),
+        basketMoss: lumpy(sph(0.2, [0, 0.12, 0], [1.1, 0.5, 0.9], 10, 6), 0.05, 9),
+        rider: merge(lumpy([sph(0.4, [0, 0.35, 0], [1, 1.12, 0.95], 16, 12), sph(0.22, [0, 0.8, 0.1], [1, 0.9, 1], 12, 8)], 0.05, 6)),
+        tufts: merge(Array.from({ length: 22 }, (_, i) => { const a = i * 2.4, y = 0.15 + (i % 7) * 0.12, r = 0.36 * Math.sqrt(1 - ((y - 0.38) / 0.5) ** 2) + 0.02;
+          return cone(0.025, 0.14, [Math.sin(a) * r, y, Math.cos(a) * r * 0.95], [Math.cos(a) * 0.9, 0, -Math.sin(a) * 0.9], 4); })),
+        shrooms: merge([[0.22, 0.75, -0.1], [-0.18, 0.95, -0.02], [0.3, 0.3, -0.25]].map(([x, y, z], i) => [cyl(0.015, 0.02, 0.08, [x, y, z], [0, 0, 0], 5),
+          lathe([[0, 0.07], [0.05 + i * 0.01, 0.04], [0.06 + i * 0.01, 0.02], [0, 0.02]], 8).translate(x, y, z)])),
+        eyes: merge(sph(0.04, [0.09, 0.84, 0.29], [1, 0.8, 0.6], 8, 6), sph(0.04, [-0.09, 0.84, 0.29], [1, 0.8, 0.6], 8, 6)),
+        arm: merge(lumpy(limb([[0, 0, 0], [0.02, -0.2, 0.33], [0, -0.38, 0.62]], 0.085, 0.06, 6, 7), 0.02, 8), lumpy(sph(0.07, [0, -0.42, 0.66], 1, 8, 6), 0.02, 10)),
+      };
+    });
+    const g = new THREE.Group(), p = {}, moss = m('moss'), brass = m('brass'), iron = m('iron');
     p.body = pivot(g, 0, 0, 0);
-    p.wheels = [0.6, -0.6].map(z => { const w = pivot(p.body, 0, 0.5, z); mesh(G.torus, m('iron'), 0.95, 0.95, 0.95, 0, 0, 0, w).rotation.y = Math.PI / 2; mesh(G.box, m('brass'), 0.04, 0.9, 0.05, 0, 0, 0, w); return w; });
+    p.wheels = [0.6, -0.6].map(z => { const w = pivot(p.body, 0, 0.5, z); add(w, K.tyre, iron); add(w, K.rim, brass); return w; });
     p.frame = pivot(p.body, 0, 0.5, 0);
-    mesh(G.box, m('brass'), 0.06, 0.06, 1.2, 0, 0.35, 0, p.frame);
-    mesh(G.box, m('brass'), 0.06, 0.6, 0.06, 0, 0.25, 0.55, p.frame);                     // fork
-    p.bars = pivot(p.frame, 0, 0.6, 0.55); mesh(G.box, m('iron'), 0.7, 0.06, 0.06, 0, 0, 0, p.bars);
-    p.bell = mesh(G.ico, m('brass'), 0.12, 0.1, 0.12, 0.25, 0.06, 0, p.bars);
+    add(p.frame, K.frame, brass); add(p.frame, K.ring, iron); add(p.frame, K.saddle, m('rope')); add(p.frame, K.vines, moss);
+    p.bars = pivot(p.frame, 0, 0.66, 0.55); add(p.bars, K.bars, iron); add(p.bars, K.grips, m('rope'));
+    p.bell = add(p.bars, K.bell, brass, 0.24, 0.05, 0);
+    p.basket = add(p.frame, K.basket, m('straw'), 0, 0.75, 0.82); add(p.basket, K.basketMoss, moss);
     p.rider = pivot(p.frame, 0, 0.55, -0.2);
-    mesh(G.ico1, m('moss'), 0.85, 0.95, 0.8, 0, 0.35, 0, p.rider);
-    mesh(G.box, BASE.bogglow, 0.08, 0.06, 0.04, -0.13, 0.5, 0.37, p.rider); mesh(G.box, BASE.bogglow, 0.08, 0.06, 0.04, 0.13, 0.5, 0.37, p.rider);
-    p.armL = pivot(p.rider, -0.35, 0.5, 0.1); mesh(G.box, m('moss'), 0.14, 0.14, 0.7, 0, 0, 0.3, p.armL);
-    p.armR = pivot(p.rider, 0.35, 0.5, 0.1); mesh(G.box, m('moss'), 0.14, 0.14, 0.7, 0, 0, 0.3, p.armR);
-    p.basket = mesh(G.box, m('rope'), 0.4, 0.3, 0.3, 0, 0.75, 0.8, p.frame);
+    add(p.rider, K.rider, moss); add(p.rider, K.tufts, moss); add(p.rider, K.shrooms, BASE.bone); add(p.rider, K.eyes, BASE.bogglow);
+    p.armL = pivot(p.rider, -0.33, 0.5, 0.1); add(p.armL, K.arm, moss);
+    p.armR = pivot(p.rider, 0.33, 0.5, 0.1); add(p.armR, K.arm, moss);
     return { group: g, parts: p };
   },
-  bellwarden(m) {   // boss: a bronze bell for a body, carried on stone-and-iron legs, with clapper arms and a lantern crown
-    const g = new THREE.Group(), p = {};
+  bellwarden(m) {   // boss: a cast bronze bell for a body hung from a timber headstock, on stone-and-iron legs, clapper-mace arms, lantern crown
+    const K = kit('bellwarden', () => ({
+      leg: merge(lumpy([limb([[0, 0, 0], [0, -0.75, 0.12], [0, -1.45, 0]], 0.33, 0.24, 10, 10), sph(0.36, [0, -1.52, 0.14], [1, 0.45, 1.4], 12, 8)].flat(), 0.04, 4)),
+      legIron: merge(sph(0.3, [0, -0.75, 0.2], [1.05, 1, 0.75], 12, 8), tor(0.27, 0.04, [0, -1.15, 0.05], [PI / 2, 0, 0], 5, 18), tor(0.32, 0.04, [0, -0.35, 0.06], [PI / 2, 0, 0], 5, 18)),
+      bell: xf(bellGeo(1.65, 2.6, 36), [0, 2.55, 0]),
+      bands: merge(tor(1.1, 0.035, [0, 1.65, 0], [PI / 2, 0, 0], 5, 40), tor(1.17, 0.035, [0, 1.15, 0], [PI / 2, 0, 0], 5, 40), tor(1.6, 0.06, [0, -0.02, 0], [PI / 2, 0, 0], 6, 48),
+        [0, 1, 2, 3].map(i => tor(0.2, 0.06, [0, 2.65, 0], [0, i * PI / 4, 0], 6, 12, PI)), cyl(0.3, 0.38, 0.2, [0, 2.6, 0], [0, 0, 0], 16)),
+      eyeRim: tor(0.3, 0.05, [0, 1.45, 1.1], [-0.2, 0, 0], 6, 24),
+      headstock: merge(box(3.6, 0.35, 0.5, [0, 3.2, 0]), [1, -1].map(s => limb([[s * 1.6, 1.6, 0], [s * 1.62, 3.05, 0]], 0.12, 0.12, 2, 8))),
+      straps: merge([-1.1, -0.4, 0.4, 1.1].map(x => box(0.1, 0.38, 0.54, [x, 3.2, 0])), cyl(0.12, 0.12, 0.4, [0, 2.88, 0], [0, 0, 0], 10)),
+      clapper: merge(sph(0.42, [0, 0, 0], [1, 1.25, 1], 14, 10), cyl(0.08, 0.08, 2.1, [0, 1.05, 0], [0, 0, 0], 8)),
+      eye: sph(0.25, [0, 0, 0], [1, 0.7, 0.5], 14, 10),
+      arm: merge(limb([[0, 0, 0], [0.15, -0.9, 0.1], [0.1, -1.85, 0.15]], 0.2, 0.15, 10, 8), sph(0.42, [0.1, -2.1, 0.15], [1, 1.2, 1], 12, 10),
+        Array.from({ length: 6 }, (_, i) => { const a = i / 6 * TAU; return cone(0.09, 0.3, [0.1 + Math.cos(a) * 0.42, -2.15, 0.15 + Math.sin(a) * 0.42], [Math.sin(a) * PI / 2, 0, -Math.cos(a) * PI / 2], 6); })),
+      armBrass: merge(sph(0.34, [0, 0, 0], 1, 12, 8), tor(0.19, 0.05, [0.12, -0.9, 0.1], [PI / 2, 0, 0], 5, 14), tor(0.17, 0.05, [0.1, -1.7, 0.15], [PI / 2, 0, 0], 5, 14)),
+      lantern: lathe([[0, -0.35], [0.22, -0.28], [0.3, 0], [0.24, 0.26], [0, 0.4]], 8),
+      cage: merge(cone(0.42, 0.35, [0, 4.35, 0], [0, 0, 0], 8), tor(0.32, 0.035, [0, 3.5, 0], [PI / 2, 0, 0], 4, 16), sph(0.08, [0, 4.58, 0], 1, 8, 6),
+        Array.from({ length: 4 }, (_, i) => { const a = i / 4 * TAU + PI / 4; return cyl(0.025, 0.025, 0.7, [Math.cos(a) * 0.32, 3.85, Math.sin(a) * 0.32], [0, 0, 0], 4); })),
+    }));
+    const g = new THREE.Group(), p = {}, bronze = m('brass'), iron = m('iron'), stone = m('darkstone');
     p.body = pivot(g, 0, 0, 0);
-    p.legL = pivot(p.body, -0.9, 1.6, 0); mesh(G.box, m('darkstone'), 0.6, 1.6, 0.7, 0, -0.8, 0, p.legL);
-    p.legR = pivot(p.body, 0.9, 1.6, 0); mesh(G.box, m('darkstone'), 0.6, 1.6, 0.7, 0, -0.8, 0, p.legR);
+    for (const s of [-1, 1]) { const l = p[s < 0 ? 'legL' : 'legR'] = pivot(p.body, s * 0.9, 1.6, 0); add(l, K.leg, stone); add(l, K.legIron, iron); }
     p.torso = pivot(p.body, 0, 2.0, 0);
-    p.bell = mesh(G.bell, m('brass'), 1.9, 1.9, 1.9, 0, 1.2, 0, p.torso);
-    mesh(G.cyl, m('brass'), 0.7, 0.4, 0.7, 0, 2.6, 0, p.torso);                        // crown of the bell
-    mesh(G.torus, m('copper'), 1.75, 1.75, 1.75, 0, -0.05, 0, p.torso).rotation.x = Math.PI / 2;   // lip
-    p.clapper = mesh(G.ico, m('iron'), 0.9, 0.9, 0.9, 0, 0.3, 0, p.torso);
-    p.eye = mesh(G.ico, m('eyeglow'), 0.5, 0.5, 0.5, 0, 1.5, 0.95, p.torso);
-    p.armL = pivot(p.torso, -1.6, 1.6, 0); mesh(G.box, m('iron'), 0.45, 2.0, 0.45, 0, -1.0, 0, p.armL); mesh(G.ico, m('iron'), 0.9, 0.9, 0.9, 0, -2.1, 0, p.armL);
-    p.armR = pivot(p.torso, 1.6, 1.6, 0); mesh(G.box, m('iron'), 0.45, 2.0, 0.45, 0, -1.0, 0, p.armR); mesh(G.ico, m('iron'), 0.9, 0.9, 0.9, 0, -2.1, 0, p.armR);
-    p.lantern = mesh(G.oct, BASE.eye, 0.5, 0.7, 0.5, 0, 3.3, 0, p.torso);
+    p.bell = add(p.torso, K.bell, bronze); add(p.torso, K.bands, m('copper')); add(p.torso, K.eyeRim, iron);
+    add(p.torso, K.headstock, m('rope')); add(p.torso, K.straps, iron);
+    p.clapper = add(p.torso, K.clapper, iron, 0, 0.3, 0);
+    p.eye = add(p.torso, K.eye, m('eyeglow'), 0, 1.45, 1.12);
+    for (const s of [-1, 1]) { const a = p[s < 0 ? 'armL' : 'armR'] = pivot(p.torso, s * 1.6, 1.6, 0); add(a, K.arm, iron, 0, 0, 0, s < 0); add(a, K.armBrass, bronze, 0, 0, 0, s < 0); }
+    p.lantern = add(p.torso, K.lantern, BASE.eye, 0, 3.9, 0); add(p.torso, K.cage, iron, 0, 0, 0);
     return { group: g, parts: p };
   },
-  chimekeeper(m) {   // boss: a walking clock-tower — robed stone shaft, a clock face for a head, hand-bells, a brass pendulum
-    const g = new THREE.Group(), p = {};
+  chimekeeper(m) {   // boss: a walking clock-tower — draped stone skirt, moulded tower shaft with lit lancets, clock face, open belfry under a copper spire
+    const K = kit('chimekeeper', () => {
+      const lancet = new THREE.Shape(); lancet.moveTo(-0.09, 0); lancet.lineTo(0.09, 0); lancet.lineTo(0.09, 0.3); lancet.quadraticCurveTo(0.09, 0.42, 0, 0.5); lancet.quadraticCurveTo(-0.09, 0.42, -0.09, 0.3); lancet.closePath();
+      const hand = (L, w) => { const s = new THREE.Shape(); s.moveTo(-w * 0.5, -0.1 * L); s.lineTo(-w * 0.35, 0.72 * L); s.lineTo(-w, 0.8 * L); s.lineTo(0, L); s.lineTo(w, 0.8 * L); s.lineTo(w * 0.35, 0.72 * L); s.lineTo(w * 0.5, -0.1 * L); s.closePath(); return extr(s, 0.02, 0.006); };
+      const shaft = flat(xf(xf(lathe([[0, 0], [0.95, 0], [0.95, 0.12], [0.88, 0.18], [0.88, 1.2], [0.94, 1.26], [0.94, 1.32], [0.88, 1.36], [0.88, 2.35], [0.98, 2.42], [0.98, 2.5], [0, 2.5]], 4), [0, 0, 0], [0, PI / 4, 0]), [0, 0, 0], [0, 0, 0], [1.37, 1, 1.05]));
+      const win = []; for (const [x, z, ry] of [[0.86, 0, PI / 2], [-0.86, 0, -PI / 2], [0, -0.66, PI]]) for (const y of [0.35, 1.55]) for (const d of [-0.22, 0.22]) {
+        const ox = ry === PI ? d : 0, oz = ry === PI ? 0 : d; win.push(extr(lancet, 0.03, 0, [x * 1.37 + ox, y, z + oz], [0, ry, 0]));
+      }
+      for (const d of [-0.32, 0.32]) win.push(extr(lancet, 0.03, 0, [d, 0.2, 0.66], [0, 0, 0]));
+      const pin = lathe([[0, 0], [0.13, 0], [0.13, 0.3], [0.17, 0.34], [0.1, 0.38], [0, 0.8]], 6);
+      return {
+        skirt: drape(lathe([[0, 0], [1.35, 0], [1.38, 0.1], [1.2, 0.6], [1.0, 1.4], [0.9, 2.2], [0.85, 2.8], [0, 2.8]], 28), 10, 0.06, y => Math.max(0, 1 - y / 2.6)),
+        hemBand: tor(1.37, 0.07, [0, 0.12, 0], [PI / 2, 0, 0], 6, 40),
+        shaft, windows: merge(win),
+        pinnacles: merge([[-1, -1], [1, -1], [-1, 1], [1, 1]].map(([x, z]) => pin.clone().translate(x * 0.75, 2.5, z * 0.55))),
+        face: cyl(0.66, 0.66, 0.07, [0, 0, 0], [PI / 2, 0, 0], 32),
+        ticks: merge(Array.from({ length: 12 }, (_, i) => { const a = i / 12 * TAU; return box(i % 3 ? 0.035 : 0.06, i % 3 ? 0.1 : 0.15, 0.02, [Math.sin(a) * 0.53, 1.35 + Math.cos(a) * 0.53, 0.71], [0, 0, -a]); })),
+        rim: tor(0.68, 0.05, [0, 1.35, 0.7], [0, 0, 0], 6, 36),
+        minute: hand(0.6, 0.06), hour: hand(0.4, 0.08),
+        hub: sph(0.08, [0, 0, 0], 1, 10, 8),
+        belfry: merge([[-1, -1], [1, -1], [-1, 1], [1, 1]].map(([x, z]) => cyl(0.07, 0.08, 0.72, [x * 0.45, 0.36, z * 0.45], [0, 0, 0], 6)), flat(xf(lathe([[0, 0], [0.7, 0], [0.7, 0.08], [0, 0.08]], 4), [0, -0.02, 0], [0, PI / 4, 0]))),
+        spire: merge(lathe([[0, 0.7], [0.78, 0.7], [0.8, 0.8], [0.62, 0.86], [0, 2.6]], 8)),
+        finial: merge(sph(0.09, [0, 2.62, 0], 1, 10, 8), cyl(0.015, 0.015, 0.3, [0, 2.8, 0], [0, 0, 0], 4), tor(0.07, 0.012, [0, 2.85, 0], [0, 0, 0], 4, 12)),
+        bell: bellGeo(0.3, 0.45, 18),
+        arm: merge(lumpy(limb([[0, 0, 0], [0.1, -0.8, 0.05], [0.05, -1.5, 0.1]], 0.21, 0.15, 8, 8), 0.02, 6), drape(lathe([[0, -0.6], [0.3, -0.6], [0.26, -0.3], [0.22, 0], [0, 0.1]], 12), 5, 0.1).translate(0.06, -0.1, 0.02)),
+        handbell: merge(xf(bellGeo(0.3, 0.42, 16), [0.05, -1.62, 0.1]), cyl(0.04, 0.04, 0.22, [0.05, -1.55, 0.1], [0, 0, 0], 6), sph(0.07, [0.05, -1.45, 0.1], 1, 8, 6)),
+        pendRod: cyl(0.03, 0.03, 1.5, [0, -0.75, 0], [0, 0, 0], 6),
+        bob: xf(lathe([[0, -0.06], [0.28, -0.015], [0.3, 0], [0.28, 0.015], [0, 0.06]], 20), [0, -1.55, 0], [PI / 2, 0, 0]),
+      };
+    });
+    const g = new THREE.Group(), p = {}, stone = m('stone'), dark = m('darkstone'), brass = m('brass'), iron = m('iron');
     p.body = pivot(g, 0, 0, 0);
     p.robe = pivot(p.body, 0, 0, 0);
-    mesh(G.cone, m('darkstone'), 2.6, 2.8, 2.6, 0, 1.4, 0, p.robe);                  // flared stone skirt
-    mesh(G.torus, m('copper'), 2.2, 2.2, 2.2, 0, 0.25, 0, p.robe).rotation.x = Math.PI / 2;   // hem band
+    add(p.robe, K.skirt, dark); add(p.robe, K.hemBand, m('copper'));
     p.torso = pivot(p.body, 0, 2.4, 0);
-    mesh(G.box, m('stone'), 1.7, 2.4, 1.3, 0, 1.2, 0, p.torso);                        // tower shaft
-    for (const [x, z] of [[-0.65, -0.45], [0.65, -0.45], [-0.65, 0.45], [0.65, 0.45]]) mesh(G.box, m('stone'), 0.38, 0.4, 0.38, x, 2.6, z, p.torso);   // battlements
-    p.face = mesh(G.cyl, m('marble'), 1.35, 0.14, 1.35, 0, 1.35, 0.66, p.torso); p.face.rotation.x = Math.PI / 2;
-    mesh(G.torus, m('brass'), 1.4, 1.4, 1.0, 0, 1.35, 0.7, p.torso);                  // face rim
-    p.minute = pivot(p.torso, 0, 1.35, 0.76); mesh(G.box, m('iron'), 0.09, 0.62, 0.04, 0, 0.29, 0, p.minute);
-    p.hour = pivot(p.torso, 0, 1.35, 0.78); mesh(G.box, m('iron'), 0.13, 0.4, 0.04, 0, 0.18, 0, p.hour);
-    p.eye = mesh(G.ico, m('eyeglow'), 0.16, 0.16, 0.16, 0, 1.35, 0.8, p.torso);
-    p.spire = pivot(p.torso, 0, 2.8, 0);
-    mesh(G.cone, m('copper'), 1.1, 1.8, 1.1, 0, 0.9, 0, p.spire);
-    p.bell = mesh(G.bell, m('brass'), 0.45, 0.45, 0.45, 0, 0.1, 0, p.spire);
-    p.armL = pivot(p.torso, -1.05, 2.0, 0); mesh(G.box, m('darkstone'), 0.38, 1.6, 0.38, 0, -0.8, 0, p.armL); mesh(G.bell, m('brass'), 0.55, 0.55, 0.55, 0, -1.85, 0, p.armL);
-    p.armR = pivot(p.torso, 1.05, 2.0, 0); mesh(G.box, m('darkstone'), 0.38, 1.6, 0.38, 0, -0.8, 0, p.armR); mesh(G.bell, m('brass'), 0.55, 0.55, 0.55, 0, -1.85, 0, p.armR);
-    p.pend = pivot(p.torso, 0, 0.5, 0.75); mesh(G.cyl, m('iron'), 0.06, 1.5, 0.06, 0, -0.75, 0, p.pend); mesh(G.ico, m('brass'), 0.55, 0.55, 0.2, 0, -1.55, 0, p.pend);
+    add(p.torso, K.shaft, stone); add(p.torso, K.pinnacles, stone); add(p.torso, K.windows, BASE.eyeglow);
+    p.face = add(p.torso, K.face, m('marble'), 0, 1.35, 0.66); add(p.torso, K.ticks, iron); add(p.torso, K.rim, brass);
+    p.minute = pivot(p.torso, 0, 1.35, 0.72); add(p.minute, K.minute, iron);
+    p.hour = pivot(p.torso, 0, 1.35, 0.745); add(p.hour, K.hour, iron);
+    p.eye = add(p.torso, K.hub, m('eyeglow'), 0, 1.35, 0.77);
+    p.spire = pivot(p.torso, 0, 2.5, 0);
+    add(p.spire, K.belfry, stone); add(p.spire, K.spire, m('verdigris')); add(p.spire, K.finial, brass);
+    p.bell = add(p.spire, K.bell, brass, 0, 0.62, 0);
+    for (const s of [-1, 1]) { const a = p[s < 0 ? 'armL' : 'armR'] = pivot(p.torso, s * 1.05, 2.0, 0); add(a, K.arm, dark, 0, 0, 0, s < 0); add(a, K.handbell, brass, 0, 0, 0, s < 0); }
+    p.pend = pivot(p.torso, 0, 0.5, 0.75); add(p.pend, K.pendRod, iron); add(p.pend, K.bob, brass);
     return { group: g, parts: p };
   },
-  gatehouse_lion(m) {   // boss: a crowned heraldic stone lion off a college gatehouse; gilds itself in its second phase
-    const g = new THREE.Group(), p = {}, hide = m('stone');
+  gatehouse_lion(m) {   // boss: a crowned heraldic stone lion off a college gatehouse, curled mane, chest shield of three roses; gilds itself in phase II
+    const K = kit('gatehouse_lion', () => {
+      const curls = Array.from({ length: 26 }, (_, i) => { const a = i / 26 * TAU * 2 + (i > 12 ? 0.25 : 0), rr = i > 12 ? 0.72 : 0.92;
+        return sph(i > 12 ? 0.2 : 0.24, [Math.cos(a) * rr, 0.45 + Math.sin(a) * rr * 0.95, 1.55 - (i > 12 ? 0 : 0.1)], 1, 10, 7); });
+      const rose = (x, y) => merge(lumpy(sph(0.11, [x, y, 1.69], [1, 1, 0.4], 12, 8), 0.025, 30));
+      return {
+        body: merge(lumpy([limb([[0, -0.05, -1.25], [0, 0, -0.2], [0, 0.12, 0.85]], 0.62, 0.7, 10, 14), sph(0.76, [0, 0.05, 0.85], [1, 1.05, 1], 16, 12),
+          sph(0.52, [0.3, 0, -1.0], [0.8, 1, 1]), sph(0.52, [-0.3, 0, -1.0], [0.8, 1, 1])].flat(), 0.03, 3)),
+        mane: merge(lumpy([sph(0.95, [0, 0.42, 1.25], [1.05, 1.05, 0.8], 18, 12), ...curls], 0.06, 5)),
+        shield: extr(shieldShape(0.42, 0.45), 0.06, 0.03, [0, -0.25, 1.62], [0, 0, 0]),
+        roses: merge(rose(-0.18, -0.12), rose(0.18, -0.12), rose(0, -0.45)),
+        head: merge(lumpy([sph(0.46, [0, 0, 0], [1, 0.95, 1], 16, 12), sph(0.3, [0, -0.17, 0.4], [1.1, 0.8, 1], 12, 8), sph(0.21, [0.19, -0.2, 0.44], 1, 10, 7), sph(0.21, [-0.19, -0.2, 0.44], 1, 10, 7),
+          sph(0.13, [0.36, 0.36, -0.08], [1, 1, 0.5], 8, 6), sph(0.13, [-0.36, 0.36, -0.08], [1, 1, 0.5], 8, 6)], 0.02, 7), tube([[-0.3, 0.18, 0.33], [0, 0.14, 0.44], [0.3, 0.18, 0.33]], 0.07, 0.07, 8, 6)),
+        nose: sph(0.11, [0, -0.06, 0.62], [1.3, 0.8, 1], 10, 7),
+        fangs: merge([[0.12, PI], [-0.12, PI]].map(([x, r]) => cone(0.035, 0.16, [x, -0.38, 0.55], [r, 0, 0], 6))),
+        jaw: merge(lumpy(sph(0.24, [0, -0.02, 0.25], [1, 0.45, 1.3], 12, 8), 0.015, 8), [0.1, -0.1].map(x => cone(0.03, 0.12, [x, 0.06, 0.45], [0, 0, 0], 6))),
+        eyes: merge(sph(0.07, [0.2, 0.1, 0.42], [1.3, 0.7, 0.6], 10, 7), sph(0.07, [-0.2, 0.1, 0.42], [1.3, 0.7, 0.6], 10, 7)),
+        crown: merge(lathe([[0.3, 0], [0.34, 0], [0.36, 0.16], [0.32, 0.16], [0.3, 0.02]], 20),
+          Array.from({ length: 5 }, (_, i) => { const a = i / 5 * TAU; return [cone(0.07, 0.2, [Math.cos(a) * 0.33, 0.25, Math.sin(a) * 0.33], [0, 0, 0], 6), sph(0.04, [Math.cos(a) * 0.33, 0.37, Math.sin(a) * 0.33], 1, 6, 5)]; })),
+        foreleg: merge(lumpy([sph(0.32, [0, 0, 0], 1, 12, 8), ...limb([[0, 0, 0], [0, -0.55, 0.06], [0, -1.05, 0]], 0.25, 0.17, 8, 10)], 0.025, 5)),
+        hindleg: merge(lumpy(limb([[0, 0.05, 0], [0, -0.45, -0.2], [0, -1.05, 0]], 0.3, 0.17, 8, 10), 0.025, 5)),
+        paw: merge(sph(0.22, [0, -1.15, 0.1], [1, 0.5, 1.3], 12, 8), [-0.12, -0.04, 0.04, 0.12].map(x => sph(0.065, [x, -1.17, 0.36], 1, 6, 5))),
+        tail: merge(tube([[0, 0, 0], [0, 0.6, -0.25], [0, 1.3, -0.2], [0, 1.6, 0.05]], 0.1, 0.06, 14, 7), lumpy(sph(0.24, [0, 1.7, 0.1], [1, 1.3, 1], 10, 7), 0.06, 9)),
+      };
+    });
+    const g = new THREE.Group(), p = {}, hide = m('stone'), dark = m('darkstone'), gold = m('brass');
     p.hide = hide;
     p.body = pivot(g, 0, 0, 0);
     p.torso = pivot(p.body, 0, 1.6, 0);
-    mesh(G.box, hide, 1.5, 1.3, 3.0, 0, 0, 0, p.torso);
-    mesh(G.ico1, hide, 2.0, 2.0, 1.6, 0, 0.35, 1.3, p.torso);                          // mane
+    add(p.torso, K.body, hide); add(p.torso, K.mane, hide); add(p.torso, K.shield, m('heraldRed')); add(p.torso, K.roses, gold);
     p.head = pivot(p.torso, 0, 0.55, 2.0);
-    mesh(G.box, hide, 0.95, 0.9, 0.9, 0, 0, 0, p.head);
-    mesh(G.box, hide, 0.6, 0.45, 0.5, 0, -0.15, 0.6, p.head);                           // snout
-    p.jaw = pivot(p.head, 0, -0.38, 0.3); mesh(G.box, m('darkstone'), 0.55, 0.15, 0.6, 0, 0, 0.3, p.jaw);
-    mesh(G.box, m('eyeglow'), 0.14, 0.08, 0.05, -0.24, 0.15, 0.46, p.head); p.eye = mesh(G.box, m('eyeglow'), 0.14, 0.08, 0.05, 0.24, 0.15, 0.46, p.head);
-    mesh(G.cone, hide, 0.22, 0.3, 0.2, -0.38, 0.5, -0.1, p.head); mesh(G.cone, hide, 0.22, 0.3, 0.2, 0.38, 0.5, -0.1, p.head);   // ears
-    p.crown = pivot(p.head, 0, 0.6, 0);
-    mesh(G.cyl, m('brass'), 0.65, 0.22, 0.65, 0, 0, 0, p.crown);
-    for (let i = 0; i < 5; i++) { const a = i / 5 * TAU; mesh(G.cone, m('brass'), 0.12, 0.25, 0.12, Math.cos(a) * 0.28, 0.22, Math.sin(a) * 0.28, p.crown); }
-    mesh(G.box, m('heraldRed'), 0.9, 0.9, 0.08, 0, -0.25, 1.62, p.torso);               // chest shield (a red field with three brass roses)
-    for (const [x, y] of [[-0.2, -0.1], [0.2, -0.1], [0, -0.42]]) mesh(G.ico, m('brass'), 0.18, 0.18, 0.08, x, y, 1.68, p.torso);
+    add(p.head, K.head, hide); add(p.head, K.nose, dark); add(p.head, K.fangs, BASE.bone);
+    p.jaw = pivot(p.head, 0, -0.38, 0.3); add(p.jaw, K.jaw, dark);
+    p.eye = add(p.head, K.eyes, m('eyeglow'));
+    p.crown = pivot(p.head, 0, 0.42, -0.02); add(p.crown, K.crown, gold);
     p.legs = [[-0.55, 1.1], [0.55, 1.1], [-0.55, -1.1], [0.55, -1.1]].map(([x, z]) => {
-      const l = pivot(p.torso, x, -0.4, z); mesh(G.box, hide, 0.45, 1.2, 0.5, 0, -0.6, 0, l); mesh(G.box, m('darkstone'), 0.55, 0.22, 0.65, 0, -1.15, 0.08, l); return l;
+      const l = pivot(p.torso, x, -0.4, z); add(l, z > 0 ? K.foreleg : K.hindleg, hide); add(l, K.paw, dark); return l;
     });
-    p.tail = pivot(p.torso, 0, 0.4, -1.5); mesh(G.cyl, hide, 0.12, 1.6, 0.12, 0, 0.8, 0, p.tail); mesh(G.ico, hide, 0.4, 0.4, 0.4, 0, 1.65, 0, p.tail);
+    p.tail = pivot(p.torso, 0, 0.4, -1.5); add(p.tail, K.tail, hide);
     return { group: g, parts: p };
   },
 };
-BASE.eyeglow = new THREE.MeshStandardMaterial({ color: 0xffc060, emissive: 0xff7a00, emissiveIntensity: 2.5 });
-Object.assign(BASE, {   // session 41 regular-mob materials
-  water: new THREE.MeshStandardMaterial({ color: 0x4f8f8a, emissive: 0x1d5a5a, emissiveIntensity: 0.6, roughness: 0.3, transparent: true, opacity: 0.78, flatShading: true }),
-  moss: new THREE.MeshStandardMaterial({ color: 0x4d6b2e, roughness: 1, flatShading: true }),
-  bone: new THREE.MeshStandardMaterial({ color: 0xcfc6a8, roughness: 0.9, flatShading: true }),
-  soot: new THREE.MeshStandardMaterial({ color: 0x24221f, roughness: 1, flatShading: true }),
-  rope: new THREE.MeshStandardMaterial({ color: 0x8a6a40, roughness: 1, flatShading: true }),
-  heraldRed: new THREE.MeshStandardMaterial({ color: 0x9a2a26, roughness: 0.8, flatShading: true }),
-  bogglow: new THREE.MeshStandardMaterial({ color: 0xb8ff80, emissive: 0x60ff40, emissiveIntensity: 2 }),
-  ember: new THREE.MeshStandardMaterial({ color: 0xffa040, emissive: 0xff5010, emissiveIntensity: 2.2 }),
-  smoke: new THREE.MeshStandardMaterial({ color: 0x55524d, roughness: 1, transparent: true, opacity: 0.55, flatShading: true }),
-});
 
 // ---------- attack definitions
 // kinds: ring (circle around the mob or a target point), line (strip from the mob towards the aim), bolt (projectile),
@@ -576,6 +983,20 @@ class MobSystem {
     for (let i = this.fx.length - 1; i >= 0; i--) if (!this.fx[i].update(dt)) this.fx.splice(i, 1);
   }
 
+  evictFarEncounter(minD) {
+    const g = this.game; let best = null, bd = minD;
+    for (const e of ENCOUNTERS) {
+      const s = this.encounterState.get(e.id); if (!s?.active || !s.mobs.length || s.mobs.every(m => m.dead)) continue;
+      const d = Math.hypot(e.x - g.px, e.y - g.py);
+      if (d <= bd || s.mobs.some(m => !m.dead && !['idle', 'patrol', 'return'].includes(m.state))) continue;
+      best = s; bd = d;
+    }
+    if (!best) return false;
+    for (const m of best.mobs) if (!m.removed) this.remove(m);
+    best.mobs = []; best.active = false; best.clearedAt = null;
+    return true;
+  }
+
   updateEncounters() {
     const g = this.game;
     for (const e of ENCOUNTERS) {
@@ -584,7 +1005,10 @@ class MobSystem {
       const d = Math.hypot(e.x - g.px, e.y - g.py);
       if (s.active && d > DESPAWN_R) { for (const m of s.mobs) if (!m.removed) this.remove(m); s.mobs = []; s.active = false; continue; }
       if (s.active && s.clearedAt != null && g.time - s.clearedAt > RESPAWN_S && d > 40) { s.active = false; s.mobs = []; s.clearedAt = null; }
-      if (!this.encountersEnabled || s.active || d > SPAWN_R || g.mobs.length >= MAX_LIVE) continue;
+      if (!this.encountersEnabled || s.active || d > SPAWN_R) continue;
+      // session 44: the live cap used to starve near encounters (incl. bosses) once far ring encounters filled it;
+      // when full, a closer encounter evicts the farthest calm (no mob fighting) active one at least 30 m farther away
+      if (g.mobs.length >= MAX_LIVE && !this.evictFarEncounter(d + 30)) continue;
       if (!this.world.covered(e.x, e.y)) continue;   // tiles not streamed yet
       const placed = [];
       for (let i = 0; i < e.mobs.length; i++) {
@@ -811,6 +1235,13 @@ class MobSystem {
         P.wl.rotation.z = flap + (st === 'windup' ? 0.9 * wf : 0); P.wr.rotation.z = -P.wl.rotation.z;
         P.body.rotation.x = st === 'active' ? 0.7 : st === 'windup' ? -0.4 * wf : 0.1;
         P.head.rotation.x = Math.sin(t * 1.3) * 0.15;
+        // session 44: clawed arms reach on wind-up / rake, tail lashes, jaw opens, legs tuck on the swoop
+        const reachG = st === 'windup' ? -1.3 * wf : st === 'active' ? -1.5 : Math.sin(t * 1.5) * 0.15;
+        P.armL.rotation.x = reachG; P.armR.rotation.x = reachG + (st === 'idle' || st === 'patrol' ? Math.sin(t * 1.5 + 1) * 0.1 : 0);
+        P.armL.rotation.z = st === 'windup' ? -0.5 * wf : 0; P.armR.rotation.z = -P.armL.rotation.z;
+        P.legL.rotation.x = P.legR.rotation.x = st === 'active' ? 0.9 : Math.sin(t * 1.1) * 0.12;
+        P.tail.rotation.y = Math.sin(t * 2.1) * 0.4; P.tail.rotation.x = Math.sin(t * 1.4) * 0.12;
+        P.jaw.rotation.x = st === 'windup' ? 0.45 * wf : st === 'active' ? 0.5 : 0.04 + Math.sin(t * 2.3) * 0.04;
         break;
       }
       case 'wisp': {
@@ -818,6 +1249,8 @@ class MobSystem {
         P.motes.forEach((o, i) => { const a = t * 2.4 + i * TAU / 3; o.position.set(Math.cos(a) * 0.8, Math.sin(t * 3 + i) * 0.3, Math.sin(a) * 0.8); });
         const s = 1 + Math.sin(t * 5) * 0.08 + wf * 0.5; P.core.scale.setScalar(0.55 * s);
         P.tail.rotation.z = Math.sin(t * 3) * 0.3;
+        P.shell.scale.set(1 + 0.07 * Math.sin(t * 13) + wf * 0.3, 1 + 0.14 * Math.sin(t * 9 + 1) + wf * 0.3, 1 + 0.07 * Math.sin(t * 11 + 2) + wf * 0.3);
+        P.shell.rotation.y = t * 0.8;
         break;
       }
       case 'statue': {
@@ -825,6 +1258,7 @@ class MobSystem {
         if (st === 'recover' && mob.attack?.kind === 'ring') P.armR.rotation.x = 0.4;
         P.torso.rotation.z = walk * 0.06; P.body.position.y = moving ? Math.abs(walk) * 0.08 : 0;
         P.torso.rotation.x = st === 'windup' ? -0.2 * wf : st === 'recover' ? 0.25 : 0;
+        P.head.rotation.y = st === 'windup' ? 0 : Math.sin(t * 0.6) * 0.35;
         break;
       }
       case 'ink_imp': {
@@ -842,6 +1276,7 @@ class MobSystem {
         if (st === 'windup' && mob.attack.kind === 'ring') { P.armL.rotation.z = -1.3 * wf; P.armR.rotation.z = 1.3 * wf; P.torso.rotation.y = wf * 6; }
         else { P.armL.rotation.z = P.armR.rotation.z = 0; P.torso.rotation.y = 0; }
         P.head.rotation.y = Math.sin(t * 0.8) * 0.4;
+        P.key.rotation.z += dt * (st === 'windup' ? 14 : moving ? 4 : 1.5);
         break;
       }
       // session 41 regulars; hr = hit-recoil 0..1 (rocks the body back while the white flash shows)

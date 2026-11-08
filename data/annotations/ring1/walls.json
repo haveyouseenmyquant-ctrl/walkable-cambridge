@@ -41294,9 +41294,10 @@
     -71.2
    ],
    "ground_z": 9.99,
-   "eave_z": 18.64,
-   "height": 8.65,
-   "dist_centre": 127.1
+   "eave_z": 23.79,
+   "height": 13.8,
+   "dist_centre": 127.1,
+   "eave_fixed": true
   },
   {
    "id": "way/1095395396:18",
@@ -41319,9 +41320,10 @@
     -80.61
    ],
    "ground_z": 10.07,
-   "eave_z": 14.86,
-   "height": 4.79,
-   "dist_centre": 133.5
+   "eave_z": 20.03,
+   "height": 9.96,
+   "dist_centre": 133.5,
+   "eave_fixed": true
   },
   {
    "id": "way/1095395397:0",

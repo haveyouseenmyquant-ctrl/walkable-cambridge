@@ -20,6 +20,8 @@ const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const puppeteer = createRequire(path.join(ROOT, 'tools/'))('puppeteer-core');
 const SRC = path.resolve(process.argv[2] || path.join(ROOT, 'site'));
 const RUNS = +(process.argv[3] || 5);
+const RUN_WALL_S = +(process.env.WC_PLAYTEST_RUN_WALL_S || 3600);   // wall-clock safety cap per run (limits are game time)
+const ONLY = process.env.WC_PLAYTEST_CLASSES ? process.env.WC_PLAYTEST_CLASSES.split(',') : null;   // debug: subset of classes
 const CHROME = process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.glb': 'model/gltf-binary' };
 const ROUTE = ['market-north', 'market-south', 'peas-hill', 'kings-parade', 'senate-house-hill', 'boss-market'];
@@ -45,6 +47,7 @@ const browser = await puppeteer.launch({
 
 // ---------------- the in-page bot (installed as window.__bot)
 function installBot(route, runIdx) {
+  const ROUTE_BOSS = 'bellwarden';
   const g = window.__game, P = window.__p, W = window.__world, sys = g.mobSystem, C = g.caster, items = g.items;
   const DT = 0.05;
   const ENC = Object.fromEntries(g.encounters.map(e => [e.id, e]));
@@ -61,7 +64,8 @@ function installBot(route, runIdx) {
   }));
   offs.push(g.on('cast', () => ev.casts++));
   // boss time-to-kill: from the first damage the boss takes to its death
-  offs.push(g.on('hit', e => { if (e.target?.boss && bot.bossStart == null) bot.bossStart = g.time; }));
+  // session 44: only the route's boss (the Bellwarden) counts; other bosses met on the way used to pollute the TTK
+  offs.push(g.on('hit', e => { if (e.target?.type?.id === ROUTE_BOSS && bot.bossStart == null) bot.bossStart = g.time; }));
   offs.push(g.on('playerDeath', () => ev.deaths++));
   offs.push(g.on('levelup', () => {
     for (let t = 0; t < 3; t++) if (C.picks[t] == null && g.stats.level >= C.talentLevels[t]) { if (C.pickTalent(t, (runIdx + t) % 2)) ev.talents++; }
@@ -101,7 +105,7 @@ function installBot(route, runIdx) {
   const bot = window.__bot = {
     ev, route, leg: 0, state: 'go', path: null, wp: 0, goal: null, stuckT: 0, lastPos: null, replans: 0,
     engaged: new Map(), loot: [], arriveT: null, bossStart: null, bossTtk: null, fail: null, done: false,
-    t0: g.time, maxT: 900, noSpawnT: 0,
+    t0: g.time, maxT: 900, noSpawnT: 0, clearedEnc: new Set(),
     dispose() { for (const f of offs) f(); },
   };
   const live = () => g.mobs.filter(m => !m.dead);
@@ -111,7 +115,15 @@ function installBot(route, runIdx) {
   function steer(dt) {   // hold W (+Shift) toward the next waypoint; returns true when the goal is reached
     const G = bot.goal; if (!G) return true;
     if (Math.hypot(G.x - P.x, G.y - P.y) <= G.tol + 0.3) { bot.path = null; bot.goal = null; return true; }
-    if (!bot.path || bot.wp >= bot.path.length) { setGoal(G.x, G.y, G.tol); if (!bot.path.length) return false; }
+    if (!bot.path || bot.wp >= bot.path.length) {
+      setGoal(G.x, G.y, G.tol);
+      if (!bot.path.length) {   // session 44: an empty plan used to idle forever without tripping the stuck check
+        bot.noPathT = (bot.noPathT || 0) + dt; P.keys.add('Space');
+        if (bot.noPathT > 20) bot.fail = `softlock: no path (leg ${bot.leg} ${route[bot.leg]}, at ${P.x.toFixed(1)},${P.y.toFixed(1)},${P.z.toFixed(1)}, goal ${G.x.toFixed(1)},${G.y.toFixed(1)})`;
+        return false;
+      }
+    }
+    bot.noPathT = 0;
     let q = bot.path[bot.wp];
     while (Math.hypot(q.x - P.x, q.y - P.y) < 0.9 && bot.wp < bot.path.length - 1) q = bot.path[++bot.wp];
     if (bot.wp >= bot.path.length - 1 && Math.hypot(q.x - P.x, q.y - P.y) < 0.9) { bot.path = null; bot.goal = null; return true; }
@@ -156,18 +168,21 @@ function installBot(route, runIdx) {
     P.keys.clear();
     // death: use the real "Rise again" button
     if (g.stats.hp <= 0 || g.paused) {
+      bot.why = `dead/paused hp ${Math.round(g.stats.hp)} paused ${!!g.paused}`;
       const btn = document.querySelector('.gh-death button'), shown = btn && !document.querySelector('.gh-death').hidden;
       if (shown) { btn.click(); bot.path = null; bot.state = 'go'; }
       return;
     }
     // engagement bookkeeping: a mob that is fought must die within its time budget
     for (const [m, e] of bot.engaged) {
-      if (m.dead) { if (m.boss && bot.bossStart != null && bot.bossTtk == null) bot.bossTtk = g.time - bot.bossStart; bot.engaged.delete(m); continue; }
+      if (m.dead) { if (m.type.id === ROUTE_BOSS && bot.bossStart != null && bot.bossTtk == null) bot.bossTtk = g.time - bot.bossStart; bot.engaged.delete(m); continue; }
       if (m.removed) { bot.engaged.delete(m); continue; }
-      if (e.hp !== m.hp) { e.hp = m.hp; e.lastDmg = g.time; }
+      if (m.hp < e.hp) e.lastDmg = g.time;   // session 44: only damage counts as progress (leash regen used to reset it)
+      e.hp = m.hp;
       if (g.time - e.lastDmg > 30) { bot.fail = `stuck mob: ${m.type.id} not damaged for 30 s`; return; }
       if (g.time - e.t > (m.boss ? 360 : 120)) { bot.fail = `stuck mob: ${m.type.id} not killed within ${m.boss ? 360 : 120} s`; return; }
     }
+    for (const id of route) { const s = sys.encounterState.get(id); if (s?.active && s.mobs.length && s.mobs.every(m => m.dead)) bot.clearedEnc.add(id); }
     const encId = route[bot.leg], enc = ENC[encId];
     const es = sys.encounterState.get(encId);
     const encMobs = es?.active ? es.mobs.filter(m => !m.dead && !m.removed) : [];
@@ -183,6 +198,7 @@ function installBot(route, runIdx) {
       const e = bot.engaged.get(tgt);
       P.yaw = Math.atan2(-(tgt.x - P.x), tgt.y - P.y);
       const cast = castAt(tgt);
+      bot.why = `fight ${tgt.type.id} ${tgt.state} d ${bd.toFixed(1)} hp ${Math.round(tgt.hp)} cast ${cast}`;
       const want = tgt.boss ? 9 : 7;
       if (!cast && (bd > want + 3 || g.time - e.lastDmg > 6)) {   // close in (or find a line of sight) along a path
         if (!bot.goal || Math.hypot(bot.goal.x - tgt.x, bot.goal.y - tgt.y) > 3) setGoal(tgt.x, tgt.y, Math.max(2, want - 3));
@@ -193,12 +209,16 @@ function installBot(route, runIdx) {
     // loot: walk over recent kill spots (drops sit within 0.8 m of the corpse)
     const spot = ev.kills.find(k => !k.looted);
     if (spot) {
+      bot.why = `loot ${spot.x.toFixed(1)},${spot.y.toFixed(1)}`;
       if (!bot.goal || bot.goal.loot !== spot) { setGoal(spot.x, spot.y, 0.4); bot.goal.loot = spot; spot.tries = (spot.tries || 0) + 1; }
       if (steer(dt) || g.time - spot.t > 40) { spot.looted = true; bot.goal = null; }
       return;
     }
     // travel along the route
     if (!enc) { bot.done = true; return; }
+    // session 44: an encounter on the route already cleared earlier in the run (e.g. pulled while passing) counts
+    if (bot.clearedEnc.has(encId)) { bot.leg++; bot.goal = null; bot.path = null; bot.noSpawnT = 0; return; }
+    bot.why = `travel ${encId} active ${!!es?.active} mobs ${es?.mobs?.length ?? 0} dead ${es?.mobs?.filter(m => m.dead).length ?? 0} removed ${es?.mobs?.filter(m => m.removed).length ?? 0}`;
     const dEnc = Math.hypot(enc.x - P.x, enc.y - P.y);
     const cleared = es?.active && es.mobs.length && es.mobs.every(m => m.dead);
     if (cleared && dEnc < enc.r + 25) { bot.leg++; bot.goal = null; bot.path = null; bot.noSpawnT = 0; return; }
@@ -218,7 +238,7 @@ function installBot(route, runIdx) {
     } catch (e) { bot.fail = 'bot exception: ' + e.message; }
     P.keys.clear();
     return { t: +(g.time - bot.t0).toFixed(1), leg: bot.leg, done: bot.done, fail: bot.fail, hp: Math.round(g.stats.hp), lvl: g.stats.level,
-      mobs: g.mobs.filter(m => !m.dead).length, x: +P.x.toFixed(1), y: +P.y.toFixed(1) };
+      why: bot.why, mobs: g.mobs.filter(m => !m.dead).length, x: +P.x.toFixed(1), y: +P.y.toFixed(1) };
   };
   return true;
 }
@@ -230,8 +250,8 @@ try {
   const probe = await ctx0.newPage();
   probe.on('pageerror', e => log('probe pageerror:', String(e.message || e).slice(0, 300)));
   probe.on('console', m => { if (m.type() === 'error') log('probe console error:', m.text().slice(0, 300)); });
-  await probe.goto(URL0, { waitUntil: 'domcontentloaded' });
-  await probe.waitForFunction('window.__walkReady === true', { timeout: 120000 });
+  await probe.goto(URL0, { waitUntil: 'domcontentloaded', timeout: 300000 });
+  await probe.waitForFunction('window.__walkReady === true', { timeout: 300000 });
   await probe.waitForFunction('window.__game && window.__game.caster && window.__game.mobSystem && window.__game.items', { timeout: 30000, polling: 250 })
     .catch(async e => { log('probe state:', await probe.evaluate(() => JSON.stringify({ game: !!window.__game, caster: !!window.__game?.caster, mobs: !!window.__game?.mobSystem, items: !!window.__game?.items, err: window.__gameError ? String(window.__gameError) : null }))); throw e; });
   const classData = await probe.evaluate(() => Object.fromEntries(Object.entries(window.__game.caster.classes).map(([id, c]) => [id, {
@@ -239,7 +259,7 @@ try {
     talentChoices: (c.talents || []).reduce((n, t) => n + t.length, 0), talentTiers: (c.talents || []).length }])));
   await ctx0.close();
   log('classes', JSON.stringify(classData));
-  await Promise.all(Object.keys(classData).map(async cls => {
+  await Promise.all(Object.keys(classData).filter(c => !ONLY || ONLY.includes(c)).map(async cls => {
     const res = classResults[cls] = { ...classData[cls], runs: [] };
     const ctx = await browser.createBrowserContext();   // fresh localStorage per class
     const page = await ctx.newPage();
@@ -252,22 +272,25 @@ try {
       let rec = { cls, run: r };
       try {
         await page.evaluate(() => { try { localStorage.clear(); } catch {} });
-        await page.goto(URL0, { waitUntil: 'domcontentloaded' });
-        await page.waitForFunction('window.__walkReady === true', { timeout: 120000 });
-        await page.waitForFunction('window.__game && window.__game.caster && window.__game.mobSystem && window.__game.items', { timeout: 120000, polling: 250 });
+        await page.goto(URL0, { waitUntil: 'domcontentloaded', timeout: 300000 });
+        await page.waitForFunction('window.__walkReady === true', { timeout: 300000 });
+        await page.waitForFunction('window.__game && window.__game.caster && window.__game.mobSystem && window.__game.items', { timeout: 300000, polling: 250 });
         await page.evaluate(c => { const g = window.__game; g.caster.setClass(c); g.save.cls = c; g.persist(); g.paused = false; }, cls);
         // wait for the tiles along the route to stream in around the start
         await page.evaluate(() => window.__player.teleport(-108.1, 93.97));
-        await page.waitForFunction('!window.__player.pendingPlace && window.__player.settled(160)', { timeout: 120000, polling: 500 });
+        await page.waitForFunction('!window.__player.pendingPlace && window.__player.settled(160)', { timeout: 300000, polling: 500 });
         await page.evaluate(installBot, ROUTE, r);
+        // session 44: the run limit is game time (bot.maxT, checked in bot.step); chunks are stepped until the bot is
+        // done/failed, with only a wall-clock safety cap so a heavily loaded machine cannot turn into 'not finished'
         let st;
-        for (let k = 0; k < 400; k++) {
+        for (let k = 0; ; k++) {
           st = await page.evaluate(() => window.__bot.chunk(6, 4000));
           if (st.done || st.fail || errors.length > e0) break;
+          if (Date.now() - w0 > RUN_WALL_S * 1000) { st.fail = `harness: wall-clock safety cap ${RUN_WALL_S} s at game ${st.t} s`; break; }
           if (k % 10 === 9) log(cls, r, JSON.stringify(st));
         }
         const ev = await page.evaluate(() => { const b = window.__bot; b.dispose(); const e = b.ev;
-          return { bossTtk: b.bossTtk, kills: e.kills.length, bossKilled: e.kills.some(k => k.boss), pickups: e.pickups, equips: e.equips,
+          return { bossTtk: b.bossTtk, kills: e.kills.length, bossKilled: e.kills.some(k => k.type === 'bellwarden'), pickups: e.pickups, equips: e.equips,
             deaths: e.deaths, casts: e.casts, talents: e.talents, equipped: Object.keys(window.__game.items.equipped).length }; });
         const perr = errors.slice(e0);
         rec = { ...rec, ...ev, gameS: st.t, fail: st.fail || (perr.length ? 'page error: ' + perr[0] : null) || (!st.done ? 'not finished' : null) || (!ev.bossKilled ? 'boss not killed' : null) };
