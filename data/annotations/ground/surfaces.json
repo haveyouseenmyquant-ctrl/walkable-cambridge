@@ -54,6 +54,45 @@
       ]
     },
     {
+      "id": "kings_parade_east_setts_south",
+      "line": [
+        [
+          -195.2,
+          -96.9
+        ],
+        [
+          -194.9,
+          -76.5
+        ],
+        [
+          -194.3,
+          -61.2
+        ],
+        [
+          -193.4,
+          -49.3
+        ],
+        [
+          -193.1,
+          -45.2
+        ],
+        [
+          -191.9,
+          -26.5
+        ]
+      ],
+      "side": "right",
+      "width": 2.6,
+      "surface": "sett",
+      "osm_says": "asphalt (way/3993048)",
+      "seen": "Session 77: looking north from the south end of King's College's screen, the east (shop-side) strip of King's Parade is setts all the way to Senate House Hill, with asphalt in the west lane and a narrow sett channel along the west kerb (too narrow for the 2 m ground grid, not modelled). Continues kings_parade_east_setts south along way/3993048 nodes to ~y -97 (St Catharine's/Bene't St end of the screen).",
+      "confidence": "medium (one oblique photo; the south end point is estimated)",
+      "sources": [
+        "commons:Along_King's_Parade_-_geograph.org.uk_-_7058834.jpg",
+        "commons:Cambridge_-_King's_Parade_-_View_SSW.jpg"
+      ]
+    },
+    {
       "id": "market_hill_loop_brick_147493268",
       "osm": "way/147493268",
       "surface": "brick",

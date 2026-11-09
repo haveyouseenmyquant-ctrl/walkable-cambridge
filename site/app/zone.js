@@ -95,6 +95,15 @@ const COLOR = `
     float zg = smoothstep(0.55, 0.75, zl);
     diffuseColor.rgb *= mix(vec3(1.0), vec3(1.85, 1.74, 1.50), zg * ${ZSB.toFixed(3)});
   }
+  // session 77: white / cream painted render and stucco (12 Market Hill, Radcliffe Court, 16 Market St, Petty Cury)
+  // had no lift, so a #eeebe2 render front came out as the judge's "flat grey mass / grey placeholder" next to the
+  // cream-lifted ashlar of M&S. Same lift, a little less warm (painted render is whiter than Ketton stone); only very
+  // pale renders (linear luma > ~0.7) are affected, so ochre / coloured renders keep their colour.
+  if (zm > 2.5 && zm < 3.5) {
+    float zl = dot(zc, vec3(0.299, 0.587, 0.114));
+    float zg = smoothstep(0.62, 0.8, zl);
+    diffuseColor.rgb *= mix(vec3(1.0), vec3(1.80, 1.76, 1.64), zg * ${ZSB.toFixed(3)});
+  }
 `;
 
 const LIGHTS = `

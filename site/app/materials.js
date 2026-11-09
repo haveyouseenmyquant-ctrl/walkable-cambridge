@@ -47,6 +47,8 @@ float h12(vec2 p) { vec3 p3 = fract(vec3(p.xyx) * 0.1031); p3 += dot(p3, p3.yzx 
 float vnoise(vec2 p) { vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f);
   return mix(mix(h12(i), h12(i + vec2(1, 0)), f.x), mix(h12(i + vec2(0, 1)), h12(i + vec2(1, 1)), f.x), f.y); }
 vec3 lumDetail(vec3 d) { return mix(vec3(dot(d, vec3(0.333))), d, 0.4); }
+float segT(vec3 c, vec3 x) { vec3 v = vec3(0.66, 0.62, 0.55) - x; float t = clamp(dot(c - x, v) / dot(v, v), 0.0, 1.0);
+  vec3 r = c - x - t * v; return t * (1.0 - smoothstep(3e-5, 9e-5, dot(r, r))); }
 float joint(float e, float jw, float px) { return 1.0 - smoothstep(jw - 0.5 * px, jw + 0.5 * px, e); }
 // 90-degree herringbone of 200 x 100 mm paviors, laid at 45 degrees; linear albedo
 vec3 brickPave(vec2 gp, float px) {
@@ -81,7 +83,12 @@ vec3 settPave(vec2 gp, float px) {
   col *= 0.8 + 0.2 * smoothstep(0.0, 0.025, e);                         // domed tops
   col *= 0.85 + 0.3 * vnoise(gp * 0.5);
   col = mix(col, vec3(0.07, 0.065, 0.06), joint(e, 0.006, px) * 0.85);
-  return mix(col, vec3(0.19, 0.18, 0.17) * (0.85 + 0.3 * vnoise(gp * 0.5)), smoothstep(0.03, 0.09, px));
+  // session 77: the far field kept reading as flat asphalt (judge: "asphalt vs cobbles"). Fade later and to a
+  // granular mid field: ~0.3 m speckle (a few setts' worth) plus faint course lines, which themselves fade by ~0.3 m/px
+  float far = (0.82 + 0.36 * vnoise(gp * 0.5)) * (0.86 + 0.28 * vnoise(gp * vec2(3.3, 9.1)));
+  far *= 1.0 - 0.22 * (1.0 - smoothstep(0.12, 0.3, px)) * smoothstep(0.7, 0.95, abs(fract(gp.y / 0.11) - 0.5) * 2.0);
+  vec3 mid = mix(vec3(0.19, 0.18, 0.17) * far, vec3(0.185, 0.178, 0.17) * (0.85 + 0.3 * vnoise(gp * 0.5)), smoothstep(0.15, 0.4, px));
+  return mix(col, mid, smoothstep(0.045, 0.12, px));
 }
 // Session 46: lawn colour on top of the grass texture (two scales, so it doesn't tile): patchy hue / wear at
 // 3-15 m and faint 1.5 m mowing stripes, which fade once a stripe is under ~4 px; returns a multiplier
@@ -124,9 +131,17 @@ const groundFrag = `
   float wp = exp(-dot(c - vec3(0.62, 0.60, 0.56), c - vec3(0.62, 0.60, 0.56)) * 200.0)
            + exp(-dot(c - vec3(0.60, 0.58, 0.54), c - vec3(0.60, 0.58, 0.54)) * 200.0);
   float wg = exp(-dot(c - vec3(0.33, 0.52, 0.24), c - vec3(0.33, 0.52, 0.24)) * 200.0);
-  float wc = exp(-dot(c - vec3(0.66, 0.62, 0.55), c - vec3(0.66, 0.62, 0.55)) * 200.0);
+  // session 77: setts (class 5) by projection onto the segment from each neighbour key to the sett key. The old
+  // gaussian gave a sett vertex only ~50% setts (the slab and steps keys are within 0.05) and nothing between
+  // sett and road vertices (a flat band), so narrow sett strips on the 2 m grid read as plain grey.
+  float wc = max(max(segT(c, vec3(0.32, 0.32, 0.34)), segT(c, vec3(0.62, 0.60, 0.56))),
+                 max(max(segT(c, vec3(0.60, 0.58, 0.54)), segT(c, vec3(0.33, 0.52, 0.24))),
+                     max(segT(c, vec3(0.50, 0.42, 0.31)), segT(c, vec3(0.55, 0.50, 0.45)))));
+  wc = smoothstep(0.3, 0.6, wc);
   float we = exp(-dot(c - vec3(0.50, 0.42, 0.31), c - vec3(0.50, 0.42, 0.31)) * 200.0)
            + exp(-dot(c - vec3(0.55, 0.50, 0.45), c - vec3(0.55, 0.50, 0.45)) * 200.0);
+  float keep = 1.0 - wc;
+  wr *= keep; wp *= keep; wg *= keep; we *= keep;
   float wsum = wr + wp + wg + wc + we;
   // vertex colour without the brick key (the albedo the non-brick classes are drawn on)
   vec3 base = wb > 0.001 ? (wsum > 0.02 ? c : vec3(0.62, 0.60, 0.56)) : diffuseColor.rgb;
@@ -136,8 +151,8 @@ const groundFrag = `
     if (wg > 0.01) acc += wg * base * grassLawn(gp, px, lumDetail(detail(t_grass, gp / ${sizes.grass})) * lumDetail(detail(t_grass, gp / ${sizes.grass} * 0.23 + 0.37)));
     if (we > 0.01) acc += we * base * lumDetail(detail(t_earth, gp / ${sizes.earth}));
     if (wp > 0.01) acc += wp * base * slabPave(gp, px);
-    if (wc > 0.01) acc += wc * settPave(gp, px) * 1.05;
-    vec3 col = wsum > 0.02 ? mix(base, acc / wsum, min(wsum * 8.0, 1.0)) : base;
+    vec3 col = wsum - wc > 0.02 ? mix(base, acc / (wsum - wc), min((wsum - wc) * 8.0, 1.0)) : base;
+    if (wc > 0.001) col = mix(col, settPave(gp, px) * 1.05, wc);
     if (wb > 0.001) col = mix(col, brickPave(gp, px) * 1.4, wb);
     diffuseColor.rgb = col;
   }
