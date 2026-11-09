@@ -2150,3 +2150,34 @@ Next
 2. Annotate the Clare and King's Gibbs fronts from Commons and feed them into the KPI, the same way as St John's.
 3. More ring-1 Commons annotations: Downing St and Sidney St college walls (3 s pacing, no 429s this time).
 4. Boss TTK spread (51.9% at s72): rebalance once a fresh playtest reading is in.
+
+## 2026-11-09 — Session 76: playtest unstick, readable damage numbers, VFX white-out cap, Clare/King's fronts from photos
+
+- Game (subagent): the warden softlock at leg 4 was a real walled pocket (probably the Great St Mary's railings) at
+  -169.5,27. The bot walked in for loot, and its 1 m planner couldn't path out. playtest.mjs now keeps a 1 m breadcrumb trail
+  and retraces it, re-planning every second, up to 6 times per leg. Stormcaller timeout cause: it farmed a respawning
+  pack at -124,-29 for about 600 s. After 150 s on a leg the bot stops looting and only fights within 8 m. Warden-only playtest
+  2/2 passed; neither run is confirmed to have entered the pocket. The stormcaller fix is untested.
+  hud.js: the damage-number overlap test uses the real on-screen size (the fixed 56 px caused "31144"). Numbers are placed oldest
+  first, with x jitter, and non-crit hits merge within 0.6 s. vfx.js: particles and shells fade between 1.2 and 4 m from the
+  camera, additive alpha is capped at 0.75, large on-screen sprites are dimmed, and at most 8 flash sprites show at once.
+  test_mobs 12+3 and 15/15 encounters, test_items 44/44. Not checked on screen; no screenshot.
+- Realism (subagent): Clare Old Court east range and King's gatehouse/Wilkins screen annotated from 10 Commons photos
+  (CC BY-SA/PD, not held out, in DATA.md). Clare now has a pedimented dormer per bay and gate-tower sashes either side of
+  the oriel (the model had niches there). Both are wired into the facade KPI (_OPS/KPI_WALLS). Ring 1 went from 53.18 to 53.67,
+  the city from 12.40 to 12.52, and the zone is unchanged at 80.9. Unverified: Clare's 6th south bay, the dormer x positions,
+  and whether the King's screen arches count as windows. The model and the annotation come from the same reading, so the
+  match is partly by construction.
+- Live build f16b1a43 (s75): market_square_realism 30.75 (40/40) scored this session. judged_realism and visual_quality were
+  not scored for it: the renders keep getting interrupted by back-to-back sessions.
+- Published with skip flags; service.sh scores game KPIs for the new game hash after the session.
+
+Next
+1. Read the s76 game scores: playtest (did the retrace fix work?), gameplay_judged (damage numbers, white-out).
+2. Take a screenshot of the damage-number and VFX changes. Cut the empty-square frames in the gameplay clip.
+3. Market Square realism (30.75) is the main KPI and has barely moved. Look at the per-view judge reasons in
+   f16b1a43_msjudge.json and attack the most common complaint.
+4. More ring-1 Commons annotations: Downing St and the Sidney St college walls.
+   Common judge complaint for s75: the white modern multi-storey block and the white turreted corner building on Market
+   Hill's north/west side (Don Pasquale with green awnings, Subway) are a "grey placeholder" or flat grey mass. Trees are
+   missing and the stalls are simplified. Next session: model those white frontages bespoke from non-held-out photos.
