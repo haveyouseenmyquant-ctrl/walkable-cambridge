@@ -1851,3 +1851,6 @@ Next
 1. Check that the new live hash has _game.json, and read per_class and the kill-time spread after the s61 rebalance.
 2. Ring-1 facade KPI: count bespoke elements, as zone_kpi does.
 3. Make the playtest faster (load 45-60 slows a run from 170 to 480 s of wall time), or key the game scores to the game inputs.
+- Result: published world-20261109-1200, scored before the push. Game KPIs for the new live hash: classes 4, mobs 12 + 3 bosses,
+  effects 44, encounter coverage 100, playtest 100 (20/20), boss kill-time spread 25.8% (median 11.4 s). The previous live build,
+  cc7ca0fc, read spread 30% with hexweaver fast at 7.8 s. gameplay_judged for the new hash is still pending; service.sh runs it.
