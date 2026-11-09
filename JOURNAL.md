@@ -1908,3 +1908,23 @@ Next
   hex 21.6). Hexweaver was 12.1 s, and earlier 7.8 s, with no hexweaver change since, so its kill times are very noisy. It may be
   the 1.45× mob scale (bosses aren't scaled), or the summons/curses whiffing. Next session: look at the hexweaver per-run TTKs and
   stabilise them before tuning further (more runs, or check the familiar's targeting).
+
+## 2026-11-09 — Session 68: Christ's College Great Gate (ring 2); playtest bot opens with a curse
+
+- Game: the live build's 84.9% kill-time spread came from hexweaver alone (per-run 17.4/12.0/37.2/21.6/21.6 s; the others are about 9-14 s).
+  Cause: playtest.mjs castAt sorted spells by raw damage, so Withering Mark (dmg 10, curse ×1.35 damage taken) almost never went out.
+  The bot now casts a curse first when the target isn't cursed or its curse ends within 1 s, as a player would. Only hexweaver spells
+  carry `curse`, so the other classes are unaffected. Local hexweaver-only run (4 runs): 9.6/17.5/9.5/15.4 s, median 12.5 s (was 21.6). No game balance change.
+- Realism, ring 2 (subagent): **Christ's College** Great Gate and the St Andrew's Street front range (scripts/zone_bespoke_christs.py,
+  pseudo id way/147487949:christs, 7.7k tris). It has the gate tower with octagonal battlemented turrets, a four-centred arch with oak gates
+  and a wicket, and the Lady Margaret Beaufort heraldic panel (crowned arms, yales, rose, portcullis). The front range is coursed ashlar
+  with two floors of 6/6 sashes, a string course, a cornice and a parapet, and steps up with the street. Heights come from the DSM (tower 11.4 m, turrets about 14 m).
+  docs/screens/session68_ring_{before,after}_christs_{gate,front,south,north}.jpg. Before: grey box plus generic Gothic windows. After: clearly the real gate.
+  Unverified: the window count, whether there's a niche above the panel, and the turret plan. ELEMENTS={}, so the ring facade KPI won't count it until annotated.
+- The live e5aa7869 judged_realism came in: 26.9 (previous builds 24.2 and 26.5).
+- Note: the screenshot tool can capture its first view before the camera has moved. Throw away the first shot.
+
+Next
+1. Read the new live hash's game KPIs: is the hexweaver spread fixed across all 5×4 runs? Is gameplay_judged steady?
+2. Annotate the bespoke walls (Christ's, Sidney, St John's gate, Round Church) from non-held-out photos so the ring facade KPI counts them.
+3. gameplay_judged: the judge keeps saying "enemies are primitive, little visible animation" (4.0) and "VFX clutter". Next game work: mob limb animation.
