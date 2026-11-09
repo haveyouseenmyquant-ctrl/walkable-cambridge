@@ -1572,3 +1572,35 @@ regular mobs drawn 15% larger (same collision radius); third-person camera occlu
 (session 50's "Next" item 2); about 56 new ring-1 wall annotations (city facades rebuilt at 04:16).
 Ring-1 facade match **32.2 → 41.6%** (286 of 851 walls), city 7.34 → 9.48%.
 Because site/ differed from the live build, service.sh never computed game KPIs for the live 59b6c5, so measure.sh read 0 for them.
+
+## 2026-11-09 — Session 52: commit s51 leftovers; 55 ring-1 annotations (6 sectors); mob telegraphs + warden VFX
+
+Done (7 parallel subagents)
+- Committed session 51's uncommitted work (entry above).
+- Ring 1: regenerated the worklists (data/derived/s52, 475 unannotated street-facing walls in 6 angular sectors). Sectors
+  added 12 / 5 / 6 / 8 / 15 / 9 walls: Webb's and Keynes' (King's Lane), the Clare Chapel sides, the Silver St north
+  terrace, Ede & Ravenscroft, Queens' Silver St range, St Catharine's, the Downing Site (Sedgwick, Zoology, Botany,
+  Shell, Old Metallurgy), Downing Place URC, Sussex House, the Hobson St ranges, Green St, Sidney House, Whewell's Court,
+  Bridge St and Jesus Lane shops, Pearce Hostel, the Union, Bishop's Hostel, The Mitre, St John's St. Most are low confidence.
+  **Ring-1 facade match 41.6 → 49.5%** (339 of 851 walls), city 9.48 → 11.28%, King's Parade 77.1%.
+- Game (mobs.js): telegraphs now come from one pool of 64 ground meshes with one shader material. The shape is the real
+  hit area (disc or strip), the fill reaches the rim at impact, then a white flash; one danger colour; bolt lanes 0.7 m wide.
+  Stone warden (vfx.js, classes.js): shard waves, tumbling stone missile head, rune shell and orbiting slabs on the
+  shield, shard collars. test_mobs 12+3, 15/15 encounters; test_items 44/44; test_classes ok (after a load-induced
+  timeout on the first run); 0 console errors. No screenshots this session (machine load ~50, fps 0.8 under swiftshader).
+- Published world-20261109-0346 (WC_SKIP_GAME_KPI=1; service.sh computes the game KPIs and gameplay_judged for the
+  new hash now that site/ equals live).
+
+Learned
+- When a session ends with uncommitted site/ changes, service.sh never scores the live build's game KPIs, and
+  measure.sh then reports 0. Always commit and publish before the time limit.
+- Annotation yield is down to ~9 walls per sector. The near walls left lack facing photos (narrow passages, courts,
+  night shots), and Commons sends HTTP 429 after ~20 downloads per agent.
+- Several walls.json eave heights are too low (Whewell's Court, Bridge St, Sussex House); city_facades' eave fix raised
+  the ones that have annotations.
+
+Next
+1. Read the new build's game KPIs and gameplay_judged (service.sh); check that the telegraphs read well in clip frames.
+2. Ring 1: the remaining ~420 walls are harder. Try Geograph and the Commons category per street, and
+   aerial/oblique-free sources. Consider a style-guided default for walls that have no photo.
+3. City baseline track: generalise the parts library for unannotated walls (Gaspard's front (a)).
