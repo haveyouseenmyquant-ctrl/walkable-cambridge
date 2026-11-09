@@ -1854,3 +1854,31 @@ Next
 - Result: published world-20261109-1200, scored before the push. Game KPIs for the new live hash: classes 4, mobs 12 + 3 bosses,
   effects 44, encounter coverage 100, playtest 100 (20/20), boss kill-time spread 25.8% (median 11.4 s). The previous live build,
   cc7ca0fc, read spread 30% with hexweaver fast at 7.8 s. gameplay_judged for the new hash is still pending; service.sh runs it.
+
+## 2026-11-09 — Sessions 64-65: St John's Great Gate; s64 left the game layer broken; publish guards
+
+Session 64 was cut off before committing. Session 65 checked its work, fixed it and committed it (38b6dbb):
+- Ring 2: **St John's College Great Gate** street face (scripts/zone_bespoke_stjohnsgate.py, pseudo id way/158913878:gate):
+  red brick tower with four octagonal turrets, stone strings, battlemented crowns, carriage arch with oak gates, a heraldic panel,
+  a niche, two-light windows, and heights from the DSM. Before it was a grey stone box with a slot between two cones.
+  docs/screens/session64_ring_{before,after}_sjg_{front,north,south}.jpg (front is a clear win).
+- Ring-1 facade KPI: bespoke buildings keep their wall rows, and openings their build() emits are counted per wall
+  (city_facades.bespoke_elements). St Andrew's 4 annotated walls now score 100. ring1_facade_geometry_match_pct reads 51.9 (was 53.4),
+  because 22 unannotated bespoke walls now count as 0. ring1_nonbespoke_facade_geometry_match_pct = 53.4 is also reported.
+- Game (mobs.js): melee strikes draw an additive crescent swoosh (ring attacks spin), a charge orb swells at the chest during
+  every wind-up, ring/leap blasts add a shockwave filling the radius, and the hit flash is brighter (judge said hit feedback was weak).
+- **Bug found:** the s64 hit-flash edit put the closing `}` inside a `//` comment. mobs.js didn't parse, the game layer silently
+  failed to start (console.warn only), and test_mobs timed out with errors=[]. `node --check file.js` on its own does NOT catch this
+  (it parses as CommonJS); copy to .mjs first. Fixed. test_mobs then passed: 12 mob types + 3 bosses.
+- publish.sh now refuses to publish if any site/app module fails an ES-module parse, or if the new build's game KPIs read mob_types 0.
+- test_mobs.mjs: MOB_WAIT_MS env var for the game-start wait.
+- Publishing in the background with game KPI scoring before the push.
+
+Next
+1. Check the new live hash's game KPIs and gameplay_judged (does the swoosh/charge orb lift readability and hit feedback?).
+2. Annotate the bespoke walls (St John's gate, Holy Trinity, Round Church) from non-held-out photos so ring 1 counts them.
+3. Ring 1/2 bespoke: King's College gatehouse and screen, Trinity Street shopfronts.
+- Result: published world-20261109-1257, scored before the push. Live game KPIs: classes 4, mobs 12 + 3 bosses, effects 44,
+  encounter coverage 100, playtest 100 (20/20), boss kill-time spread 33% (median 11.3 s; pyro 7.6, storm 10.5, warden 13.1,
+  hex 12.1; was 25.8%), gameplay_judged 46.4 (was 47.5). So the s64 strike VFX did not raise the judge score; that's within noise on 4 clips.
+  Pyromancer is the fast outlier again.
