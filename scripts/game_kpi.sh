@@ -27,6 +27,8 @@ try:
     p = json.loads(sys.argv[3])
     for k in ("playable_classes", "playtest_pass_pct", "boss_ttk_spread_pct", "boss_ttk_median_s"):
         if p.get(k) is not None: out[k] = p[k]
+    # session 57: per-class pass counts and failure reasons (measure.sh reads only the top-level numbers)
+    if p.get("classes"): out["per_class"] = {c: {"pass": v.get("pass"), "playable": v.get("playable"), "boss_ttk_median_s": v.get("boss_ttk_median_s"), "fails": v.get("fails", [])} for c, v in p["classes"].items()}
 except Exception: pass
 print(json.dumps(out))' "$M" "$I" "$P" | tee "$OUT.tmp"
 grep -q '[0-9]' "$OUT.tmp" && mv "$OUT.tmp" "$OUT" || rm -f "$OUT.tmp"

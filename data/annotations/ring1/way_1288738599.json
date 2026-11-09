@@ -1,0 +1,145 @@
+{
+ "osm_id": "way/1288738599",
+ "sources": [
+  "commons:File:68 Bridge Street, Cambridge.jpg"
+ ],
+ "walls": [
+  {
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "confidence": "medium",
+   "id": "way/1288738599:8",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.3
+   ],
+   "material": "brick",
+   "wall_colour": "#9a4a36",
+   "trim_colour": "#d8c9a4",
+   "cornice_z": 6.6,
+   "cornice": "simple",
+   "parapet": false,
+   "elements": [
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 0.45,
+     "w": 0.9,
+     "h": 2.3,
+     "surround": "plain"
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.6,
+     "w": 0.9,
+     "z": 0.9,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.8,
+     "w": 0.9,
+     "z": 0.9,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 3.7,
+     "x1": 6.1,
+     "z1": 3.2,
+     "fascia_text": "",
+     "fascia_colour": "#e8e2d4",
+     "text_colour": "#1e2a24",
+     "door_x": 4.9,
+     "stallriser": 0.0,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.0,
+     "w": 0.8,
+     "z": 3.9,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.4,
+     "w": 0.8,
+     "z": 3.9,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.5,
+     "w": 0.8,
+     "z": 4.1,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 6.2,
+     "w": 0.9,
+     "z": 4.1,
+     "h": 1.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 2.6,
+     "w": 1.0,
+     "h": 1.1
+    },
+    {
+     "type": "dormer",
+     "x": 5.2,
+     "w": 1.0,
+     "h": 1.1
+    }
+   ],
+   "notes": "68 Bridge Street (Commons, Smb1001, CC BY-SA 4.0): red brick, stone-dressed windows; ground: door at the SE end, two segmental-arched sashes, then a carriage arch with a spiral iron gate (modelled as an open shopfront bay); four first-floor sashes (two with balconettes), two dormers."
+  }
+ ]
+}

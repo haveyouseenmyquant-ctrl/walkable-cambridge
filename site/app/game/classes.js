@@ -560,7 +560,27 @@ export function install(game) {
       if (sp.hop && !fly) { p.vz = sp.hop; p.grounded = false; }
       if (!fly && !fromRoof) {   // session 48: never end a movement spell on a roof / wall top
         settleOnGround(x0, y0, z0);
-        if (sp.hop) { const t1 = game.time, chk = () => { if (p.grounded && p.vz <= 0) settleOnGround(x0, y0, z0); else if (game.time - t1 < 3) after(0.05, chk); }; after(0.1, chk); }
+        // session 57: the hop's airtime carried a running player over railings and churchyard walls (a warden leapt into
+        // an enclosure at -131,-29 off Bene't Street and could never walk out again: 3 of 5 route-bot runs). The landing
+        // must be walkable-reachable from where the leap put the player; otherwise it is pulled back to that spot.
+        if (sp.hop) {
+          const bx = p.x, by = p.y, bz = p.z, t1 = game.time;
+          const reach = () => {
+            const L = Math.hypot(p.x - bx, p.y - by); let z = bz;
+            for (let d = 0.4; d < L + 0.2; d += 0.4) {
+              const f = Math.min(1, d / L), g = world.standAt(bx + (p.x - bx) * f, by + (p.y - by) * f, z);
+              if (g == null || Math.abs(g - z) > 0.6) return false; z = g;
+            }
+            return true;
+          };
+          const chk = () => {
+            if (p.grounded && p.vz <= 0) {
+              if (!reach()) { p.x = bx; p.y = by; p.z = world.standAt(bx, by, bz) ?? bz; p.vx = p.vy = p.vz = 0; }
+              settleOnGround(x0, y0, z0);
+            } else if (game.time - t1 < 3) after(0.05, chk);
+          };
+          after(0.1, chk);
+        }
       }
       if (fly && sp.broomMult) game.stats.mana = Math.min(game.stats.maxMana, game.stats.mana + sp.mana * 0.5);   // broom synergy: half refund
       // trail along the path

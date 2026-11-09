@@ -1,0 +1,105 @@
+{
+ "osm_id": "way/149032882",
+ "sources": [
+  "commons:File:54 to 52 Trumpington Street, Cambridge.jpg",
+  "commons:File:53 Trumpington Street, Cambridge.jpg"
+ ],
+ "walls": [
+  {
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "confidence": "medium",
+   "id": "way/149032882:0",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.4,
+    6.6
+   ],
+   "material": "brick",
+   "wall_colour": "#a08a66",
+   "trim_colour": "#f1ede4",
+   "cornice_z": 10.0,
+   "cornice": "simple",
+   "parapet": false,
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 4.6,
+     "z1": 3.1,
+     "fascia_text": "Cambridge Barber Co.",
+     "fascia_colour": "#1c1f24",
+     "text_colour": "#d8c08a",
+     "door_x": 0.8,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.4,
+     "w": 1.0,
+     "z": 3.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.5,
+     "w": 1.0,
+     "z": 3.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.4,
+     "w": 1.0,
+     "z": 7.0,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.5,
+     "w": 1.0,
+     "z": 7.0,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 2.4,
+     "w": 1.4,
+     "h": 1.1
+    }
+   ],
+   "notes": "53 Trumpington Street (Commons, Ethan Doyle White and Smb1001, CC BY-SA 4.0): brown-grey brick, four storeys incl. attic; black shopfront 'Cambridge Barber Co.' with entrance at the north end; tall first-floor sashes with iron balconettes, second-floor sashes, one dormer."
+  }
+ ]
+}

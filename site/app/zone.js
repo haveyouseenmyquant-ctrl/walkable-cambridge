@@ -14,6 +14,8 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from '../vendor/meshoptimizer/meshopt_decoder.module.js';
 
 const Q = new URLSearchParams(location.search);
+// session 57: ?stoneboost=<0..1> scales the pale-stone lift below (1 = session 55's full boost)
+const ZSB = parseFloat(Q.get('stoneboost') || '1');
 
 const PARS = `
 varying vec3 zWP; varying vec3 zWN; varying float zMat;
@@ -91,7 +93,7 @@ const COLOR = `
   if (zm > 1.5 && zm < 2.5 || zm > 6.5) {
     float zl = dot(zc, vec3(0.299, 0.587, 0.114));
     float zg = smoothstep(0.55, 0.75, zl);
-    diffuseColor.rgb *= mix(vec3(1.0), vec3(1.85, 1.74, 1.50), zg);
+    diffuseColor.rgb *= mix(vec3(1.0), vec3(1.85, 1.74, 1.50), zg * ${ZSB.toFixed(3)});
   }
 `;
 

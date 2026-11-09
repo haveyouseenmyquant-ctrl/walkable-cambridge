@@ -54,7 +54,7 @@ for k in ("photo_match_score", "market_square_photo_match", "painted_detail_pct"
 # game KPIs: cached per build hash by scripts/game_kpi.sh (headless combat/item/class tests; run by publish + service.sh)
 gf = "data/benchmark/scores/%s_game.json" % h
 if h and os.path.exists(gf):
-    out.update(json.load(open(gf)))
+    out.update({k: v for k, v in json.load(open(gf)).items() if isinstance(v, (int, float))})   # per_class stays in the file
 # Gaspard (8 Nov 2026): always print all six game KPIs for the live build, 0 when not measured yet;
 # gameplay_judged is cached per build by scripts/gameplay_kpi.sh (service.sh)
 gp = "data/benchmark/scores/%s_gameplay.json" % h

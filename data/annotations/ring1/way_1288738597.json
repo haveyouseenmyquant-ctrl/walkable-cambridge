@@ -1,0 +1,71 @@
+{
+ "osm_id": "way/1288738597",
+ "sources": [
+  "commons:File:67 Bridge Street, Cambridge.jpg"
+ ],
+ "walls": [
+  {
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "confidence": "medium",
+   "id": "way/1288738597:3",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.6
+   ],
+   "material": "render",
+   "wall_colour": "#1f5fc8",
+   "trim_colour": "#f4f2ec",
+   "cornice_z": 7.4,
+   "cornice": "simple",
+   "parapet": false,
+   "elements": [
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 0.6,
+     "w": 1.0,
+     "h": 2.4,
+     "surround": "pilastered"
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.2,
+     "w": 1.0,
+     "z": 0.9,
+     "h": 1.9,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.6,
+     "w": 1.2,
+     "z": 4.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 1.6,
+     "w": 1.0,
+     "h": 1.1
+    }
+   ],
+   "notes": "67 Bridge Street, The Hockney Gallery (Commons, Smb1001, CC BY-SA 4.0): ground floor painted bright blue with shuttered sashes and the blue panelled door in a white pilastered case, white render above with a single sash and a balconette, two tiled dormers (one fits this 3.1 m OSM edge)."
+  }
+ ]
+}

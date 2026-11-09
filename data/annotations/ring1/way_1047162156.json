@@ -1,0 +1,133 @@
+{
+ "osm_id": "way/1047162156",
+ "sources": [
+  "commons:File:32 Hobson Street, Cambridge.jpg"
+ ],
+ "walls": [
+  {
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "confidence": "medium",
+   "id": "way/1047162156:1",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.3
+   ],
+   "material": "brick",
+   "wall_colour": "#7a3a2c",
+   "trim_colour": "#f2f0ea",
+   "cornice_z": 6.4,
+   "cornice": "bracketed",
+   "parapet": false,
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.5,
+     "w": 1.0,
+     "z": 0.8,
+     "h": 1.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.0,
+     "w": 1.0,
+     "z": 0.8,
+     "h": 1.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 5.2,
+     "w": 1.0,
+     "h": 2.4,
+     "surround": "fanlight"
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.7,
+     "w": 2.2,
+     "z": 0.8,
+     "h": 1.7,
+     "panes": [
+      6,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.6,
+     "w": 1.0,
+     "z": 3.9,
+     "h": 1.5,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.3,
+     "w": 1.0,
+     "z": 3.9,
+     "h": 1.5,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.0,
+     "w": 1.0,
+     "z": 3.9,
+     "h": 1.5,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 2.8,
+     "w": 1.0,
+     "h": 1.1
+    },
+    {
+     "type": "dormer",
+     "x": 7.9,
+     "w": 1.0,
+     "h": 1.1
+    }
+   ],
+   "notes": "32 Hobson Street, Christ's College X staircase (Commons, Smb1001, CC BY-SA 4.0): dark red brick house with S-shaped wall anchors, white modillion eaves cornice; door with pedimented fanlight case at centre, two sashes left, a wide paired sash right; three first-floor sashes; two dormers in the tiled roof."
+  }
+ ]
+}

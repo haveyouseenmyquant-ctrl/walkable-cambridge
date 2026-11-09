@@ -93,8 +93,13 @@ function installBot(route, runIdx) {
         const qx = cx + a, qy = cy + b; if (qx < 0 || qy < 0 || qx >= nx || qy >= ny) continue;
         const j = qx + qy * nx; if (closed[j]) continue;
         let z = W.standAt(wx + a, wy + b, zf[i]); if (z == null) continue;
-        if (a && b && (W.standAt(wx + a / 2, wy + b / 2, zf[i]) == null || W.standAt(wx + a, wy, zf[i]) == null || W.standAt(wx, wy + b, zf[i]) == null)) continue;
-        if (W.standAt(wx + a / 2, wy + b / 2, zf[i]) == null) continue;
+        // session 57: from the start cell only the target cell has to be standable. The player can stand up to 0.5 m from
+        // a cell centre that lies inside a wall/bollard, which made every half-step check fail: a 1-cell plan (warden
+        // softlocks at -131,-29 and -180,17 with 'path 1')
+        if (i !== s) {
+          if (a && b && (W.standAt(wx + a / 2, wy + b / 2, zf[i]) == null || W.standAt(wx + a, wy, zf[i]) == null || W.standAt(wx, wy + b, zf[i]) == null)) continue;
+          if (W.standAt(wx + a / 2, wy + b / 2, zf[i]) == null) continue;
+        }
         const ng = gs[i] + (a && b ? 1.414 : 1); if (ng >= gs[j]) continue;
         gs[j] = ng; from[j] = i; zf[j] = z; push(ng + Math.hypot(tx - qx - x0, ty - qy - y0), j);
       }
@@ -154,6 +159,20 @@ function installBot(route, runIdx) {
       else bot.replans = 0;
     }
     return false;
+  }
+  // session 57: a walkable spot 5-9 m from mob m (feet level with the player) with a clear line of fire to the mob's
+  // centre, nearest to the player; `n` rotates the start angle so successive calls try different sides
+  function vantage(m, n) {
+    const cz = m.z + 1, cands = [];
+    for (const r of [6, 8, 5, 9]) for (let k = 0; k < 16; k++) {
+      const a = (k + n * 5) / 16 * 6.283, x = m.x + Math.cos(a) * r, y = m.y + Math.sin(a) * r;
+      const z = W.standAt(x, y, P.z); if (z == null || Math.abs(z - P.z) > 1.5) continue;
+      const ez = z + 1.4, L = Math.hypot(m.x - x, m.y - y, cz - ez); let clear = true;
+      for (let d = 0.6; d < L - (m.radius || 0.5) && clear; d += 0.4) { const f = d / L; if (W.blocked(x + (m.x - x) * f, y + (m.y - y) * f, ez + (cz - ez) * f - 0.2, 0.1, 0, 0.4)) clear = false; }
+      if (clear) cands.push({ x, y, d: Math.hypot(x - P.x, y - P.y) + (n % 3) * 3 * Math.random() });
+    }
+    cands.sort((a, b) => a.d - b.d);
+    return cands[0] || null;
   }
   function castAt(m) {
     const d = dist(m), sp = C.spells, nearby = live().filter(o => Math.hypot(o.x - m.x, o.y - m.y) < 7).length;
@@ -217,6 +236,18 @@ function installBot(route, runIdx) {
       const cast = castAt(tgt);
       bot.why = `fight ${tgt.type.id} ${tgt.state} d ${bd.toFixed(1)} hp ${Math.round(tgt.hp)} cast ${cast}`;
       const want = tgt.boss ? 9 : 7;
+      // session 57: no damage for 6 s (bolts stopped by railings, a canopy or the wall top a flyer hovers over; a gargoyle
+      // straight overhead) -> walk to a vantage point 5-9 m from the mob with a clear line of fire, a new one every 5 s.
+      // Walking at the mob (the old rule) parked the bot under a hovering gargoyle / against King's railings for 30 s.
+      if (g.time - e.lastDmg > 6) {
+        if (!e.vant || g.time - e.vantT > 5 || Math.hypot(e.vant.x - tgt.x, e.vant.y - tgt.y) > 11) { e.vant = vantage(tgt, e.vantN = (e.vantN || 0) + 1); e.vantT = g.time; }
+        if (e.vant) {
+          bot.why += ` vantage ${e.vant.x.toFixed(1)},${e.vant.y.toFixed(1)}`;
+          if (!bot.goal || bot.goal.vant !== e.vant) { setGoal(e.vant.x, e.vant.y, 0.8); bot.goal.vant = e.vant; }
+          if (steer(dt)) e.vantT = -1e9;   // arrived and still no damage after the next 5 s: pick another
+          return;
+        }
+      }
       if (!cast && (bd > want + 3 || g.time - e.lastDmg > 6)) {   // close in (or find a line of sight) along a path
         if (!bot.goal || Math.hypot(bot.goal.x - tgt.x, bot.goal.y - tgt.y) > 3) setGoal(tgt.x, tgt.y, Math.max(2, want - 3));
         steer(dt);

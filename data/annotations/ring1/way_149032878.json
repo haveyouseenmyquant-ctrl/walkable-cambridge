@@ -1,0 +1,105 @@
+{
+ "osm_id": "way/149032878",
+ "sources": [
+  "commons:File:54 to 52 Trumpington Street, Cambridge.jpg",
+  "commons:File:52 Trumpington Street, Cambridge.jpg"
+ ],
+ "walls": [
+  {
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "confidence": "medium",
+   "id": "way/149032878:0",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.9,
+    6.6
+   ],
+   "material": "brick",
+   "wall_colour": "#c9b48a",
+   "trim_colour": "#e9dfc6",
+   "cornice_z": 9.6,
+   "cornice": "simple",
+   "parapet": false,
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 7.0,
+     "z1": 3.6,
+     "fascia_text": "Fitzbillies",
+     "fascia_colour": "#5a2e16",
+     "text_colour": "#d9b25a",
+     "door_x": 4.6,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.0,
+     "w": 1.1,
+     "z": 4.3,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.4,
+     "w": 1.1,
+     "z": 4.3,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.0,
+     "w": 1.1,
+     "z": 7.0,
+     "h": 1.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.4,
+     "w": 1.1,
+     "z": 7.0,
+     "h": 1.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 5.0,
+     "w": 2.0,
+     "h": 1.3
+    }
+   ],
+   "notes": "52 Trumpington Street, Fitzbillies (Commons, Ethan Doyle White and Smb1001, CC BY-SA 4.0): gault brick, stone flat-arch heads; full-width brown timber shopfront with gilt 'Fitzbillies' fascia, door left of centre; two bays of 3/3 sashes on two floors; slate mansard with one wide dormer."
+  }
+ ]
+}
