@@ -362,8 +362,15 @@ export function createVfx(game) {
     const e = rec(m, Math.max(0.12, dur * 1.3), 'bolt');
     e.flicker = 1; e.restrike = [x0, y0, z0, x1, y1, z1, jag, o.width ?? 1, o.branches ?? -1]; e.restruck = 0;
     genBolt(m, e.restrike); boltGeom(m);
-    burst(x1, y1, z1, 6, { tex: 'spark', color: 0xffffff, color2: color, speed: 6, size: 0.18, life: 0.3, drag: 3, grav: 6 });
+    LO.spark.color2 = color; LO.spark.speed = 6 + 2 * (o.width ?? 1); burst(x1, y1, z1, 10, LO.spark);
+    // session 80: storm bolts read heavier: a soft glow halo where the bolt lands and a white-hot pinpoint
+    LO.glow.color2 = color; LO.glow.size = 0.8 + 0.6 * (o.width ?? 1); burst(x1, y1, z1, 1, LO.glow);
+    if ((o.width ?? 1) >= 0.9) { const c = core(x1, y1, z1, 0xeaf4ff, 0.12 + 0.06 * (o.width ?? 1), 0.1); if (c) c.material.uniforms.uOp.value = 0.85; }
   }
+  const LO = {   // preallocated lightning burst options
+    spark: { tex: 'spark', color: 0xffffff, color2: 0xcfe8ff, speed: 6, size: 0.2, life: 0.35, drag: 3, grav: 7 },
+    glow: { tex: 'glow', color: 0xeaf4ff, color2: 0x4060ff, speed: 0.2, size: 1, life: 0.14, drag: 0, jitter: 0 },
+  };
   const P = []; for (let i = 0; i < 40; i++) P.push(new Float32Array(3));
   function genBolt(m, R) {
     const [x0, y0, z0, x1, y1, z1, jag, wmul, nbr] = R;
@@ -489,7 +496,7 @@ export function createVfx(game) {
     for (let k = 0; k < 4; k++) { const c = take(crystals); if (c) { c.material.color.set(color); e.cr.push(c); } }
     e.lat = take(lattices); if (e.lat) { e.lat.material.color.set(color); e.lat.scale.setScalar(0.2); }
     e.pl = [];   // stone slabs orbiting low around the shell (rock pool, flattened)
-    for (let k = 0; k < (LOW ? 3 : 6); k++) { const s = take(rocks); if (!s) break; s.geometry = rockGeos[k % 3]; s.material.color.set(0x9a8466).offsetHSL(0, 0, (rnd() - 0.5) * 0.08); s.material.opacity = 1; s.scale.set(0.34, 0.5, 0.12); e.pl.push(s); }
+    for (let k = 0; k < (LOW ? 4 : 8); k++) { const s = take(rocks); if (!s) break; s.geometry = rockGeos[k % 3]; s.material.color.set(0x8a7458).offsetHSL(0, 0, (rnd() - 0.5) * 0.1); s.material.opacity = 1; s.scale.set(0.42, 0.62, 0.16); e.pl.push(s); }   // s80: more, heavier slabs
     e.rune = decal('rune', game.player.x, game.player.y, game.player.z, r * 1.25, Infinity, color, 0.85, 0.8);
     if (e.rune) e.rune.until = until;
   }
@@ -552,7 +559,13 @@ export function createVfx(game) {
     const E = FO.ember; E.speed = r * 3; E.life = big ? 1.4 : 0.9; E.up = big ? 4 : 2.5; burst(x, y, z, big ? 26 : mid ? 12 : 6, E);
     emberStreaks(x, y, z, big ? 6 : mid ? 3 : 1, 0xffa040, r * 3 + 3);
     const S = FO.smoke; S.size = r * (big ? 0.45 : 0.4) + 0.4; S.life = big ? 2.4 : 1.5; S.jitter = r * 0.5; S.speed = r * 0.4; S.ring = 0; S.color = 0x4a2414; S.color2 = 0x121010; S.alpha = 0.55;
-    burst(x, y, z + 0.4, big ? 8 : mid ? 4 : 2, S);
+    burst(x, y, z + 0.4, big ? 8 : mid ? 4 : 3, S);
+    // session 80: weight on every hit, bolt hits included: a hot shockwave ring at the hit (ground if near), charred
+    // debris chunks that arc and bounce, and a slow low smoke plume that lingers after the flames are gone
+    if (!big && !mid) ring(x, y, ground ?? z - 0.3, 0xffc060, 0.15, r * 1.25, 0.28, 0.8);
+    debris(x, y, z, big ? 8 : mid ? 5 : 3, { color: 0x2a1c14, speed: r * (big ? 3 : 2.6), size: big ? 0.16 : 0.11, up: big ? 6 : 4.5, floor: ground ?? z - 1.2, life: 1.1 });
+    S.size = r * 0.6 + 0.5; S.life = big ? 3.2 : 2.4; S.speed = 0.25; S.color = 0x3a2a22; S.color2 = 0x161414; S.alpha = 0.4; S.jitter = r * 0.4;
+    burst(x, y, (ground ?? z - 0.4) + 0.5, big ? 4 : 2, S);
     const g = ground;
     if (g != null) {
       decal('scorch', x, y, g, r * (big ? 1.15 : 0.95), big ? 7 : 4, 0xffffff, 0.9);
@@ -631,6 +644,7 @@ export function createVfx(game) {
   function missile(x, y, z, color, o = {}) {
     const h = { isMissile: true, visible: true, x, y, z, color, sparkT: 0 };
     h.core = core(x, y, z, o.coreColor ?? color, o.radius ?? 0.16);
+    if (h.core) h.core.material.uniforms.uOp.value = 1;
     h.halo = orb(x, y, z, color, o.halo ?? 0.9);
     h.trail = trail(o.trailColor ?? color, o.width ?? 0.3, o.trailLife ?? 0.22);
     h.trail2 = o.width2 ? trail(o.trailColor2 ?? color, o.width2, o.trailLife2 ?? 0.35) : null;
@@ -729,7 +743,7 @@ export function createVfx(game) {
           o.rotation.x += e.wx * dt; o.rotation.y += e.wy * dt; o.scale.setScalar(e.s * (k > 0.7 ? (1 - k) / 0.3 : 1)); break; }
         case 'core': if (e.dur !== Infinity) { o.material.uniforms.uOp.value = 1 - k; o.scale.setScalar(e.r * (1 + k * 0.8)); } break;
         case 'dome': {
-          o.position.set(p.x, p.z + 1, -p.y); o.material.uniforms.uOp.value = (0.22 + 0.06 * Math.sin(e.t * 6)) * (0.25 + 0.75 * smooth(e.r + 0.5, e.r + 3, o.position.distanceTo(camPos)));   // session 54: faint when the camera is close (third person)
+          o.position.set(p.x, p.z + 1, -p.y); o.material.uniforms.uOp.value = (0.13 + 0.04 * Math.sin(e.t * 6))   /* s80: shell fainter, the stone carries the shield */ * (0.25 + 0.75 * smooth(e.r + 0.5, e.r + 3, o.position.distanceTo(camPos)));   // session 54: faint when the camera is close (third person)
           const n = e.cr.length;
           for (let c = 0; c < n; c++) { const a = e.t * 1.6 + c / n * TAU, cr = e.cr[c];
             cr.position.set(p.x + Math.cos(a) * e.r * 0.9, p.z + 0.7 + Math.sin(e.t * 3 + c) * 0.25, -(p.y + Math.sin(a) * e.r * 0.9)); cr.rotation.y += dt * 3;

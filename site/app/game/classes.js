@@ -234,7 +234,7 @@ export function install(game) {
   const ORB_SMOKE = { ...SMOKE, color: 0x5a2c16, speed: 0.4, size: 0.8, life: 0.9, up: 0.8, alpha: 0.3 };
   const MET_FIRE = { ...FIRE, color2: 0xc01800, speed: 1, size: 1, life: 0.3, jitter: 0.4 };
   function stoneHit(x, y, z, n = 6, floor) {
-    vfx.debris(x, y, z, n, { color: 0x9a8466, speed: 4, size: 0.12, up: 4, floor: floor ?? groundZ(x, y, z), life: 1.2 });
+    vfx.debris(x, y, z, n, { color: 0x8a7458, speed: 4.5, size: 0.17, up: 5, floor: floor ?? groundZ(x, y, z), life: 1.5 });   // s80: chunkier
     vfx.burst(x, y, z, Math.ceil(n * 0.8), { ...DUST, speed: 2, size: 0.9, life: 0.9, up: 0.5 });
     vfx.burst(x, y, z, n * 2, { tex: 'shard', color: 0xd8c098, speed: 6, size: 0.18, life: 0.5, grav: 14, drag: 1, spin: 6 });
   }
@@ -242,14 +242,16 @@ export function install(game) {
     vfx.burst(x, y, z, n, { tex: 'wisp', color: c1, color2: 0x4010a0, speed: 2.5, size: 0.6, life: 0.7, drag: 3, up: 0.8, spin: 4 });
     vfx.burst(x, y, z, Math.ceil(n / 2), { tex: 'ember', color: c2, speed: 3.5, size: 0.14, life: 0.6, drag: 2, up: 1 });
     vfx.burst(x, y, z, Math.ceil(n / 4), { tex: 'smoke', color: 0x2a1040, color2: 0x100818, grow: 2, speed: 0.8, size: 0.9, life: 1, alpha: 0.45 });
+    HEX_MOTE.speed = 1.6; HEX_MOTE.jitter = 0.4; vfx.burst(x, y, z, Math.ceil(n * 0.8), HEX_MOTE);   // s80: dark motes that curl up and linger
   }
+  const HEX_MOTE = { tex: 'wisp', blend: 'alpha', color: 0x1c0a2c, color2: 0x07030c, speed: 1.6, size: 0.45, life: 1.2, drag: 2.5, up: 1.1, spin: 3, alpha: 0.8, jitter: 0.4 };
   const LOOK = {
-    ember: { missile: { envelope: 0xff6a18, stretch: 3, coreColor: 0xffe8b0, radius: 0.16, halo: 0.8, width: 0.42, width2: 0.16, trailColor2: 0xffe080, trailLife: 0.28, trailLife2: 0.42 },
+    ember: { missile: { envelope: 0xff6a18, stretch: 3, coreColor: 0xfff4d8, radius: 0.22, halo: 0.9, width: 0.6, width2: 0.22, trailColor2: 0xffe080, trailLife: 0.28, trailLife2: 0.42 },
              trail: (x, y, z) => {   // session 51: flickering flame head (random size/colour each frame), licking tongues, ember sparks
                EMB_HEAD.size = 0.5 + Math.random() * 0.35; vfx.burst(x, y, z, 1, EMB_HEAD);
                vfx.burst(x, y, z, 2, EMB_LICK);
                if (Math.random() < 0.7) vfx.burst(x, y, z, 1, EMB_SPARK); },
-             impact: (x, y, z) => fireBlast(x, y, z, 1.2, 0) },
+             impact: (x, y, z) => fireBlast(x, y, z, 1.4, 0) },
     orb: { missile: { envelope: 0xff4a10, stretch: 1.8, coreColor: 0xfff0c0, radius: 0.26, halo: 1.3, width: 0.75, width2: 0.3, trailColor2: 0xffd060, trailLife: 0.3 },
            trail: (x, y, z) => { vfx.burst(x, y, z, 3, ORB_FIRE); if (Math.random() < 0.6) vfx.burst(x, y, z, 1, ORB_SMOKE); },
            impact: (x, y, z, sp) => { sfx.play('boom'); fireBlast(x, y, z, sp.splash, true); } },
@@ -471,7 +473,7 @@ export function install(game) {
         const arc = sp.look === 'arc';
         // session 51: jagged forked main bolt plus a thinner off-colour twin, a hand flash and an arc flash at the
         // end (white core, ring, sparks, light), and a small scorch where it strikes the ground
-        vfx.lightning(A.x, A.y, A.z - 0.1, ex, ey, ez, sp.color, arc ? 0.3 : 0.2, arc ? 1.1 : 0.8, { width: arc ? 1.3 : 0.95, branches: arc ? -1 : 3 });
+        vfx.lightning(A.x, A.y, A.z - 0.1, ex, ey, ez, sp.color, arc ? 0.3 : 0.2, arc ? 1.1 : 0.8, { width: arc ? 1.6 : 1.25, branches: arc ? -1 : 3 });
         vfx.lightning(A.x, A.y, A.z - 0.1, ex, ey, ez, 0x6a8cff, 0.14, arc ? 1.4 : 1.1, { width: 0.45, branches: 1 });
         vfx.core(A.x, A.y, A.z - 0.1, 0xd8f0ff, 0.12, 0.08);
         vfx.core(ex, ey, ez, 0xe8f6ff, arc ? 0.5 : 0.36, 0.12);
@@ -643,6 +645,7 @@ export function install(game) {
       // session 52: a collar of stone shards bursts up around the caster as the rune shell closes, plus a dust skirt
       for (let k = 0; k < 7; k++) { const a = k / 7 * 6.283 + Math.random() * 0.3; vfx.spike(p.x + Math.cos(a) * 1.6, p.y + Math.sin(a) * 1.6, p.z, 0.9 + Math.random() * 0.5, 0.7, 0xa09070); }
       vfx.burst(p.x, p.y, p.z + 0.2, 14, { ...DUST, speed: 0.6, radial: 3, size: 1.2, life: 1, ring: 1.4, up: 0.5 });
+      vfx.debris(p.x, p.y, p.z + 0.3, 8, { color: 0x8a7458, speed: 3, size: 0.18, up: 6, jitter: 2.4, floor: p.z, life: 1.3 });   // s80: earth thrown up
       vfx.ring(p.x, p.y, p.z, sp.color, 0.4, 2.6, 0.45, 0.8); vfx.light(p.x, p.y, p.z + 1.2, 0xffc060, 0.8, 0.4);
       vfx.burst(p.x, p.y, p.z + 0.3, 24, { tex: 'shard', color: 0xffd890, color2: 0xa07030, speed: 1, radial: 2.5, size: 0.28, life: 0.9, ring: 1.6, up: 3, grav: 4, spin: 5 });
       vfx.burst(p.x, p.y, p.z + 0.2, 10, { tex: 'rune', color: sp.color, speed: 0, size: 0.5, life: 1.2, ring: 1.5, up: 1.6, drag: 0, spin: 1.5 });
