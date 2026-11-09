@@ -388,11 +388,33 @@ export function install(game) {
       const nx = x0 + A.hx * d, ny = y0 + A.hy * d;
       if (flying) { if (world.blocked(nx, ny, z)) break; x = nx; y = ny; moved = d; continue; }
       const g = world.standAt(nx, ny, z);
-      if (g == null || Math.abs(g - z) > 1.2) break;
+      // session 48: at most a walkable step per 0.5 m (was 1.2 m, which let blinks climb kerb-walls and plinths)
+      if (g == null || Math.abs(g - z) > 0.6) break;
       x = nx; y = ny; z = g; moved = d;
     }
     p.x = x; p.y = y; if (!flying) p.z = z;
     return moved;
+  }
+  // session 48: is (x, y, z) on a roof or wall top (solid geometry, not walkable ground)? Movement spells must
+  // never leave the player there (a warden Boulder Leap hop of ~2.5 m landed on a wall top and softlocked the route bot).
+  const onRoof = (x, y, z) => { const g = world.support(x, y, z + 0.3, false); return !g || g.kind !== 1 || g.z < z - 0.5; };
+  // Nearest walkable ground at about the level the spell started from: back along the path first, then rings.
+  function settleOnGround(x0, y0, z0) {
+    if (p.flying || !onRoof(p.x, p.y, p.z)) return false;
+    const tryAt = (x, y) => {
+      const g = world.support(x, y, z0 + 1.5, false);
+      if (!g || g.kind !== 1 || Math.abs(g.z - z0) > 1.5) return null;
+      const z = world.standAt(x, y, g.z); return z == null ? null : z;
+    };
+    const lx = p.x, ly = p.y, L = Math.hypot(lx - x0, ly - y0);
+    let best = null;
+    for (let d = 0; d <= L && !best; d += 0.5) { const f = L ? d / L : 0, x = lx + (x0 - lx) * f, y = ly + (y0 - ly) * f, z = tryAt(x, y); if (z != null) best = [x, y, z]; }
+    for (let r = 0.5; r <= 6 && !best; r += 0.5) for (let k = 0, n = Math.ceil(r * 8); k < n && !best; k++) {
+      const a = k / n * 6.283, x = lx + Math.cos(a) * r, y = ly + Math.sin(a) * r, z = tryAt(x, y); if (z != null) best = [x, y, z];
+    }
+    if (!best) best = [x0, y0, z0];
+    [p.x, p.y, p.z] = best; p.vx = p.vy = p.vz = 0; p.grounded = true; if (p.climb) p.climb = null;
+    return true;
   }
   const KIND = {
     bolt(sp) {
@@ -506,12 +528,16 @@ export function install(game) {
       }
     },
     blink(sp) {
-      const fly = p.flying, x0 = p.x, y0 = p.y, z0 = p.z;
+      const fly = p.flying, x0 = p.x, y0 = p.y, z0 = p.z, fromRoof = !fly && onRoof(x0, y0, z0);
       const dist = sp.dist * (fly && sp.broomMult ? sp.broomMult : 1);
       if (sp.wake) { vfx.ring(x0, y0, z0, 0x8040c0, 0.5, sp.radius, 0.5); aoe(x0, y0, z0 + 1, sp.radius, sp); }
       const moved = blinkTo(dist, fly);
       if (sp.invuln) game.invulnUntil = Math.max(game.invulnUntil || 0, game.time + sp.invuln);
       if (sp.hop && !fly) { p.vz = sp.hop; p.grounded = false; }
+      if (!fly && !fromRoof) {   // session 48: never end a movement spell on a roof / wall top
+        settleOnGround(x0, y0, z0);
+        if (sp.hop) { const t1 = game.time, chk = () => { if (p.grounded && p.vz <= 0) settleOnGround(x0, y0, z0); else if (game.time - t1 < 3) after(0.05, chk); }; after(0.1, chk); }
+      }
       if (fly && sp.broomMult) game.stats.mana = Math.min(game.stats.maxMana, game.stats.mana + sp.mana * 0.5);   // broom synergy: half refund
       // trail along the path
       const steps = Math.max(2, Math.round(moved));

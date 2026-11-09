@@ -8,7 +8,16 @@
       "half_width": 2.3,
       "osm_says": "paving_stones",
       "seen": "Carriageway of dark red/plum clay paviors laid herringbone, ~4.5 m wide between grey granite kerbs with a slot-drain channel; buff stone/concrete slab footways either side.",
-      "sources": ["mapillary:918215512073749", "mapillary:484065959384228", "mapillary:2802021553394282", "mapillary:795230574437603", "mapillary:295737195855594", "mapillary:298738958864117", "commons:Market_Street,_Cambridge.jpg", "commons:Market_Street,_Cambridge_-_geograph.org.uk_-_4171681.jpg"]
+      "sources": [
+        "mapillary:918215512073749",
+        "mapillary:484065959384228",
+        "mapillary:2802021553394282",
+        "mapillary:795230574437603",
+        "mapillary:295737195855594",
+        "mapillary:298738958864117",
+        "commons:Market_Street,_Cambridge.jpg",
+        "commons:Market_Street,_Cambridge_-_geograph.org.uk_-_4171681.jpg"
+      ]
     },
     {
       "id": "market_hill_ne_junction_brick",
@@ -18,17 +27,170 @@
       "osm_says": "asphalt",
       "seen": "The herringbone brick of Market Street runs on to the Market Hill junction by the stalls (far end of the view).",
       "confidence": "medium (seen at ~40 m distance)",
-      "sources": ["mapillary:918215512073749"]
+      "sources": [
+        "mapillary:918215512073749"
+      ]
     },
     {
       "id": "kings_parade_east_setts",
-      "line": [[-192.0, -27.0], [-184.0, 33.0]],
+      "line": [
+        [
+          -192.0,
+          -27.0
+        ],
+        [
+          -184.0,
+          33.0
+        ]
+      ],
       "side": "right",
       "width": 2.6,
       "surface": "sett",
       "osm_says": "asphalt (way/3993048)",
       "seen": "The east (shop-side) half of King's Parade, the parking/loading strip, is grey granite setts with a two-sett channel at the kerb; the west traffic lane is asphalt with LOOK markings. Only the northern 60 m (Senate House Hill to St Edward's Passage) is covered by the photo; the rest of the way is left as OSM.",
-      "sources": ["mapillary:189066929702180", "mapillary:541914280138693"]
+      "sources": [
+        "mapillary:189066929702180",
+        "mapillary:541914280138693"
+      ]
+    },
+    {
+      "id": "market_hill_loop_brick_147493268",
+      "osm": "way/147493268",
+      "surface": "brick",
+      "half_width": 3.0,
+      "osm_says": "asphalt",
+      "seen": "Carriageway round the market (south and east sides, north side to St Mary's St) is herringbone clay paviors between granite kerbs with slot drains; the square itself is setts.",
+      "sources": [
+        "mapillary:3304474719779190",
+        "mapillary:153927726666858",
+        "mapillary:644178576432021"
+      ]
+    },
+    {
+      "id": "market_hill_loop_brick_147493277",
+      "osm": "way/147493277",
+      "surface": "brick",
+      "half_width": 3.0,
+      "osm_says": "asphalt",
+      "seen": "Carriageway round the market (south and east sides, north side to St Mary's St) is herringbone clay paviors between granite kerbs with slot drains; the square itself is setts.",
+      "sources": [
+        "mapillary:3304474719779190",
+        "mapillary:153927726666858",
+        "mapillary:644178576432021"
+      ]
+    },
+    {
+      "id": "st_marys_street_setts",
+      "osm": "way/147493298",
+      "surface": "sett",
+      "half_width": 3.0,
+      "osm_says": "asphalt",
+      "seen": "Small grey granite setts across the whole width beside Great St Mary's (north end, toward Market Hill).",
+      "confidence": "medium (one photo, rotated)",
+      "sources": [
+        "mapillary:388165332285036"
+      ]
+    },
+    {
+      "id": "st_marys_passage_flags",
+      "osm": "way/147493297",
+      "surface": "paving_stones",
+      "half_width": 3.0,
+      "osm_says": "asphalt",
+      "seen": "York stone flags across the full width from the shops to the GSM churchyard railings.",
+      "sources": [
+        "commons:St_Mary's_Passage_-_geograph.org.uk_-_6094985.jpg",
+        "commons:1_St_Mary's_Passage,_Cambridge.jpg"
+      ]
+    },
+    {
+      "id": "trinity_street_brick_64528328",
+      "osm": "way/64528328",
+      "surface": "brick",
+      "half_width": 3.0,
+      "osm_says": "asphalt",
+      "seen": "Carriageway of grey-pink clay paviors between granite kerbs (a granite sett strip on the east side at the King's Parade end); York stone / slab footways.",
+      "sources": [
+        "mapillary:1604146243307991",
+        "commons:Cambridge_-_King_s_Parade_-_View_North_into_Trinity_Street_-_On_the_Left-_Gonville_Caius_C.jpg",
+        "commons:Cambridge_-_Trinity_Street_-_View_SSW_along_Gonville_Caius_College_1876_by_Alfred_Waterhou.jpg"
+      ]
+    },
+    {
+      "id": "trinity_street_brick_1039414781",
+      "osm": "way/1039414781",
+      "surface": "brick",
+      "half_width": 3.0,
+      "osm_says": "asphalt",
+      "seen": "Carriageway of grey-pink clay paviors between granite kerbs (a granite sett strip on the east side at the King's Parade end); York stone / slab footways.",
+      "sources": [
+        "mapillary:1604146243307991",
+        "commons:Cambridge_-_King_s_Parade_-_View_North_into_Trinity_Street_-_On_the_Left-_Gonville_Caius_C.jpg",
+        "commons:Cambridge_-_Trinity_Street_-_View_SSW_along_Gonville_Caius_College_1876_by_Alfred_Waterhou.jpg"
+      ]
+    },
+    {
+      "id": "trinity_street_brick_1039414782",
+      "osm": "way/1039414782",
+      "surface": "brick",
+      "half_width": 3.0,
+      "osm_says": "asphalt",
+      "seen": "Carriageway of grey-pink clay paviors between granite kerbs (a granite sett strip on the east side at the King's Parade end); York stone / slab footways.",
+      "sources": [
+        "mapillary:1604146243307991",
+        "commons:Cambridge_-_King_s_Parade_-_View_North_into_Trinity_Street_-_On_the_Left-_Gonville_Caius_C.jpg",
+        "commons:Cambridge_-_Trinity_Street_-_View_SSW_along_Gonville_Caius_College_1876_by_Alfred_Waterhou.jpg"
+      ]
+    },
+    {
+      "id": "sidney_street_brick_760780336",
+      "osm": "way/760780336",
+      "surface": "brick",
+      "half_width": 3.2,
+      "osm_says": "asphalt",
+      "seen": "Red clay paviors laid herringbone across the carriageway, slab footways either side.",
+      "sources": [
+        "mapillary:477087780200381",
+        "mapillary:471772393927907"
+      ]
+    },
+    {
+      "id": "sidney_street_brick_3993033",
+      "osm": "way/3993033",
+      "surface": "brick",
+      "half_width": 3.2,
+      "osm_says": "asphalt",
+      "seen": "Red clay paviors laid herringbone across the carriageway, slab footways either side.",
+      "sources": [
+        "mapillary:477087780200381",
+        "mapillary:471772393927907"
+      ]
+    },
+    {
+      "id": "sidney_street_brick_147493283",
+      "osm": "way/147493283",
+      "surface": "brick",
+      "half_width": 3.2,
+      "osm_says": "paving_stones",
+      "seen": "Red clay paviors laid herringbone across the carriageway, slab footways either side.",
+      "sources": [
+        "mapillary:477087780200381",
+        "mapillary:471772393927907"
+      ],
+      "confidence": "medium (same street and paving scheme, not photographed on this way)"
+    },
+    {
+      "id": "sidney_street_brick_3993125",
+      "osm": "way/3993125",
+      "surface": "brick",
+      "half_width": 3.2,
+      "osm_says": "paving_stones",
+      "seen": "Red clay paviors laid herringbone across the carriageway, slab footways either side.",
+      "sources": [
+        "mapillary:477087780200381",
+        "mapillary:471772393927907"
+      ],
+      "confidence": "medium (same street and paving scheme, not photographed on this way)"
     }
   ],
   "osm_fixes_in_build": "Market Square (relation/8117433, surface=sett, Grade II listed cobbles) used to be burned as pavement because areas ignored their surface tag; build.py now honours it (area_class). Evidence: commons Cambridge_Market_stalls_at_lunchtime.jpg (granite setts between the stall rows).",
@@ -38,6 +200,10 @@
     "St Edward's Passage": "York stone flags with a sett gutter (commons St_Edward's_Passage,_Cambridge,_looking_toward_Peas_Hill_(cropped).jpg): pavement.",
     "Senate House Hill": "setts, already OSM sett (mapillary 541914280138693).",
     "Corn Exchange St / Wheeler St": "asphalt (mapillary 1373625636348222, 313982040097449).",
-    "Rose Crescent, Market Hill loop, Sidney Street": "no clear non-held-out photo of the surface; left as OSM."
-  }
+    "Rose Crescent, Market Hill loop, Sidney Street": "no clear non-held-out photo of the surface; left as OSM.",
+    "Bene't Street": "asphalt with double yellow lines (mapillary 942670703197540, session 48); left as OSM.",
+    "Peas Hill (south, way 908373409)": "asphalt with a sett channel and slab footways (commons Peas Hill NNW view); OSM right.",
+    "Rose Crescent, Peas Hill north (3993044)": "session 48: no non-held-out photo showing the surface; left as OSM."
+  },
+  "session48": "Market Hill loop, Trinity St and Sidney St are clay paviors, St Mary's St setts, St Mary's Passage flags (photo-checked, non-held-out)."
 }

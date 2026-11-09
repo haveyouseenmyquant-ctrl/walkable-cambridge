@@ -147,9 +147,9 @@ export function install(game) {
   function spawnPickup(id, x, y, z, from = null) { const d = ITEMS[id]; if (!d) return null; const col = RARITY[d.rarity].hex, ord = RARITY[d.rarity].order;
     const [ph, pw] = PILLAR[d.rarity] || PILLAR.common;
     const g = new T.Group();
-    const beam = new T.Mesh(beamGeo, new T.MeshBasicMaterial(add({ color: col, map: pillarTex, opacity: 0.95, side: T.DoubleSide, fog: false, premultipliedAlpha: true })));
+    const beam = new T.Mesh(beamGeo, new T.MeshBasicMaterial(add({ color: col, map: pillarTex, opacity: 0.6, side: T.DoubleSide, fog: false, premultipliedAlpha: true })));
     beam.scale.set(pw, 0.01, pw);
-    const core = new T.Mesh(beamGeo, new T.MeshBasicMaterial(add({ color: 0xffffff, map: pillarTex, opacity: 0.3, fog: false, premultipliedAlpha: true })));
+    const core = new T.Mesh(beamGeo, new T.MeshBasicMaterial(add({ color: 0xffffff, map: pillarTex, opacity: 0.12, fog: false, premultipliedAlpha: true })));
     core.scale.set(pw * 0.3, 0.01, pw * 0.3);
     const pad = new T.Mesh(padGeo, new T.MeshBasicMaterial(add({ color: col, map: padTex, opacity: 0.8, side: T.DoubleSide, premultipliedAlpha: true })));
     pad.position.y = 0.04; pad.scale.setScalar(1.1 + 0.25 * ord);
@@ -158,7 +158,7 @@ export function install(game) {
     const gem = new T.Mesh(gemGeo, new T.MeshBasicMaterial({ color: col }));
     const halo = new T.Sprite(new T.SpriteMaterial(add({ color: col, map: padTex, opacity: 0.9, premultipliedAlpha: true }))); halo.scale.setScalar(1.1 + 0.2 * ord);
     const ptex = plateTex(d), plate = new T.Sprite(new T.SpriteMaterial({ map: ptex, transparent: true, depthTest: false, depthWrite: false, fog: false }));
-    plate.scale.set(3.3, 0.72, 1); plate.position.y = 2.1; plate.visible = false; plate.renderOrder = 30;
+    plate.scale.set(2.3, 0.5, 1); plate.position.y = 2.1; plate.visible = false; plate.renderOrder = 30;
     for (const o of [beam, core, pad, ring, halo]) o.renderOrder = 6;
     g.add(beam, core, pad, ring, gem, halo, plate);
     const z0 = z ?? game.pz, f0 = from ? { x: from.x, y: from.y, z: from.z ?? z0 } : null;
@@ -186,9 +186,10 @@ export function install(game) {
         const fa = 1 - a, k = Math.min(1, (S.t - pk.got.t) / 0.3);
         pk.gem.position.set((p.x - pk.x) * k, 0.8 + (p.z + 1.2 - pk.z - 0.8) * k, -(p.y - pk.y) * k); pk.gem.visible = pk.halo.visible = k < 1;
         pk.halo.position.copy(pk.gem.position);
-        pk.beam.material.opacity = 0.9 * fa; pk.core.material.opacity = 0.3 * fa; pk.pad.material.opacity = 0.7 * fa; pk.ring.material.opacity = 0.5 * fa;
+        pk.beam.material.opacity = 0.55 * fa; pk.core.material.opacity = 0.12 * fa; pk.pad.material.opacity = 0.7 * fa; pk.ring.material.opacity = 0.5 * fa;
         pk.beam.scale.x = pk.beam.scale.z = pk.pw * (1 + 0.6 * a);
-        pk.plate.position.y = 2.1 + a * 1.2; pk.plate.material.opacity = Math.min(1, fa * 1.6);
+        // session 48: the nameplate goes at once on pickup (it used to rise over the player's head and fill a 1st-person view)
+        pk.plate.visible = (S.t - pk.got.t) < 0.3; pk.plate.material.opacity = Math.max(0, 1 - (S.t - pk.got.t) / 0.3);
         continue; }
       if (pk.fly && !pk.landed) {   // bounce-out arc from the corpse
         const f = Math.min(1, (S.t - pk.t0) / pk.fly.dur), e = 1 - (1 - f) ** 2;
@@ -203,9 +204,11 @@ export function install(game) {
       pk.g.position.set(pk.x, pk.z, -pk.y); pk.gem.position.y = pk.halo.position.y = 0.8 + Math.sin(age * 2.5) * 0.15 + bounce; pk.gem.rotation.y += dt * 2;
       pk.beam.scale.y = pk.ph * (1 - (1 - grow) ** 3); pk.core.scale.y = pk.beam.scale.y * 0.85;
       pk.beam.scale.x = pk.beam.scale.z = pk.pw * (1 + 0.8 * Math.max(0, 1 - age / 0.4));   // flare wide on landing
-      pk.beam.material.opacity = 0.85 + Math.sin(S.t * 3 + pk.t0) * 0.15; pk.core.material.opacity = 0.35 + Math.sin(S.t * 5 + pk.t0) * 0.08;
+      pk.beam.material.opacity = 0.5 + Math.sin(S.t * 3 + pk.t0) * 0.1; pk.core.material.opacity = 0.12 + Math.sin(S.t * 5 + pk.t0) * 0.04;   // session 48: dimmer pillars
       pk.pad.material.opacity = 0.65 + Math.sin(S.t * 3 + pk.t0) * 0.15;
       pk.plate.position.y = 2.1 + Math.sin(age * 2) * 0.05;
+      { const cp = game.camera?.position, cd = cp ? Math.hypot(cp.x - pk.x, cp.y - pk.z - 2.1, cp.z + pk.y) : 99;   // session 48: fade out up close
+        pk.plate.material.opacity = Math.max(0, Math.min(1, (cd - 3) / 3)); pk.plate.visible = cd > 3; }
       const rp = (age * 0.8) % 1; pk.ring.scale.setScalar(pk.rs * (0.3 + rp)); pk.ring.material.opacity = 0.65 * (1 - rp);
       if (Math.random() < dt * (3 + 3 * pk.ord)) { const a = Math.random() * 6.283; fx.stream(v3(pk.x + Math.cos(a) * 0.5, pk.y + Math.sin(a) * 0.5, pk.z + 0.1), v3(pk.x, pk.y, pk.z + 2.5 + pk.ord), RARITY[pk.d.rarity].hex, 1); }
       if (d < 1.8 && Math.abs(dz) < 2.5 && age > 0.3) collect(pk); } }

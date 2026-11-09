@@ -109,6 +109,18 @@ const BASE = {
   ember: glow(0xffa040, 0xff5010, 2.2),
   smoke: std({ color: 0x55524d, roughness: 1, transparent: true, opacity: 0.55, depthWrite: false }),
 };
+// session 48: fresnel rim light (emissive, type-coloured) injected into the standard shader; one shared program
+const hash01 = (str) => { let h = 2166136261; for (let i = 0; i < str.length; i++) h = Math.imul(h ^ str.charCodeAt(i), 16777619); return ((h >>> 0) % 10007) / 10007; };
+function addRim(mat, color, k) {
+  const u = { uRim: { value: new THREE.Color(color).multiplyScalar(k) } };
+  mat.userData.rim = u.uRim;
+  mat.onBeforeCompile = (sh) => {
+    sh.uniforms.uRim = u.uRim;
+    sh.fragmentShader = 'uniform vec3 uRim;\n' + sh.fragmentShader.replace('#include <emissivemap_fragment>',
+      '#include <emissivemap_fragment>\n  { float fr = 1.0 - saturate(dot(normal, normalize(vViewPosition))); totalEmissiveRadiance += uRim * fr * fr * fr; }');
+  };
+  mat.customProgramCacheKey = () => 'mobrim';
+}
 const decalMat = (c) => new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: 0.5, depthWrite: false, side: THREE.DoubleSide, polygonOffset: true, polygonOffsetFactor: -4 });
 const HIT_TINT = new THREE.Color(0xffd8b0);
 // session 46: soft type-coloured ground aura under every mob (reads as a glow pool in still frames; shared per type)
@@ -621,6 +633,9 @@ const MODELS = {
       bands: merge(tor(1.1, 0.035, [0, 1.65, 0], [PI / 2, 0, 0], 5, 40), tor(1.17, 0.035, [0, 1.15, 0], [PI / 2, 0, 0], 5, 40), tor(1.6, 0.06, [0, -0.02, 0], [PI / 2, 0, 0], 6, 48),
         [0, 1, 2, 3].map(i => tor(0.2, 0.06, [0, 2.65, 0], [0, i * PI / 4, 0], 6, 12, PI)), cyl(0.3, 0.38, 0.2, [0, 2.6, 0], [0, 0, 0], 16)),
       eyeRim: tor(0.3, 0.05, [0, 1.45, 1.1], [-0.2, 0, 0], 6, 24),
+      // session 48: a ring of glowing cast runes round the bell's sound-bow and a lit band at the lip
+      runes: merge(Array.from({ length: 14 }, (_, i) => { const a = i / 14 * TAU, r = 1.36; return sph(i % 2 ? 0.085 : 0.12, [Math.sin(a) * r, 0.55, Math.cos(a) * r], [1, i % 2 ? 1 : 1.6, 0.45], 8, 6); }),
+        tor(1.5, 0.025, [0, 0.2, 0], [PI / 2, 0, 0], 4, 48)),
       headstock: merge(box(3.6, 0.35, 0.5, [0, 3.2, 0]), [1, -1].map(s => limb([[s * 1.6, 1.6, 0], [s * 1.62, 3.05, 0]], 0.12, 0.12, 2, 8))),
       straps: merge([-1.1, -0.4, 0.4, 1.1].map(x => box(0.1, 0.38, 0.54, [x, 3.2, 0])), cyl(0.12, 0.12, 0.4, [0, 2.88, 0], [0, 0, 0], 10)),
       clapper: merge(sph(0.42, [0, 0, 0], [1, 1.25, 1], 14, 10), cyl(0.08, 0.08, 2.1, [0, 1.05, 0], [0, 0, 0], 8)),
@@ -640,6 +655,7 @@ const MODELS = {
     add(p.torso, K.headstock, m('rope')); add(p.torso, K.straps, iron);
     p.clapper = add(p.torso, K.clapper, iron, 0, 0.3, 0);
     p.eye = add(p.torso, K.eye, m('eyeglow'), 0, 1.45, 1.12);
+    p.runes = add(p.torso, K.runes, m('ember'));
     for (const s of [-1, 1]) { const a = p[s < 0 ? 'armL' : 'armR'] = pivot(p.torso, s * 1.6, 1.6, 0); add(a, K.arm, iron, 0, 0, 0, s < 0); add(a, K.armBrass, bronze, 0, 0, 0, s < 0); }
     p.lantern = add(p.torso, K.lantern, BASE.eye, 0, 3.9, 0); add(p.torso, K.cage, iron, 0, 0, 0);
     return { group: g, parts: p };
@@ -870,7 +886,17 @@ class MobSystem {
     const type = TYPE[typeId]; if (!type) throw new Error('unknown mob type ' + typeId);
     if (z == null) { const s = this.findSpot(x, y, 12); if (s) ({ x, y, z } = s); else z = this.game.groundAt(x, y) ?? this.game.pz; }
     const mats = [];
-    const m = (name) => { const c = BASE[name].clone(); mats.push(c); return c; };
+    // session 48: per-type + per-instance colour variation (subtle HSL shifts seeded by the type id) and a
+    // type-coloured fresnel rim on every lit material, so silhouettes separate from the stone city behind them
+    const seed = hash01(type.id), inst = Math.random();
+    const m = (name) => {
+      const c = BASE[name].clone(); mats.push(c);
+      if (c.isMeshStandardMaterial && !(c.emissiveIntensity >= 1) && !c.map) {
+        c.color.offsetHSL((seed - 0.5) * 0.03, (hash01(type.id + name) - 0.5) * 0.12, (seed - 0.5) * 0.06 + (inst - 0.5) * 0.05);
+      }
+      if (c.isMeshStandardMaterial && !c.transparent) addRim(c, type.color, type.boss ? 0.35 : 0.5);
+      return c;
+    };
     const { group, parts } = MODELS[type.id](m);
     // session 46: a 'rig' group between the yawed root and the model takes the shared body-language layer
     // (breathing, gait bob, wind-up crouch, strike lunge, hit flinch, death poses) on top of the per-type part animation

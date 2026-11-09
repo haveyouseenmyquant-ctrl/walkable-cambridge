@@ -107,8 +107,13 @@ vec3 slabPave(vec2 gp, float px) {
 const groundFrag = `
   vec2 gp = vec2(vWP.x, -vWP.z);
   float px = length(fwidth(gp));   // metres per pixel
-  // surface class weights from the interpolated vertex colour (build.py COLORS)
-  vec3 c = vColor.rgb;
+  // surface class weights from the interpolated vertex colour (build.py COLORS). Session 48: the brick key colour
+  // (0.62, 0.60, 0.80) is the only class with blue well above green, so its share t is read from b - g (water,
+  // b - g = 0.06, stays at 0) and the other classes are matched on the colour with that blue excess removed;
+  // edges between brick and road/pavement now blend into the neighbour instead of showing the lavender key.
+  vec3 c0 = vColor.rgb;
+  float wb = clamp((c0.b - c0.g - 0.06) / 0.14, 0.0, 1.0);
+  vec3 c = vec3(c0.rg, min(c0.b, c0.g + 0.06));
   float wr = exp(-dot(c - vec3(0.32, 0.32, 0.34), c - vec3(0.32, 0.32, 0.34)) * 200.0);
   float wp = exp(-dot(c - vec3(0.62, 0.60, 0.56), c - vec3(0.62, 0.60, 0.56)) * 200.0)
            + exp(-dot(c - vec3(0.60, 0.58, 0.54), c - vec3(0.60, 0.58, 0.54)) * 200.0);
@@ -116,18 +121,19 @@ const groundFrag = `
   float wc = exp(-dot(c - vec3(0.66, 0.62, 0.55), c - vec3(0.66, 0.62, 0.55)) * 200.0);
   float we = exp(-dot(c - vec3(0.50, 0.42, 0.31), c - vec3(0.50, 0.42, 0.31)) * 200.0)
            + exp(-dot(c - vec3(0.55, 0.50, 0.45), c - vec3(0.55, 0.50, 0.45)) * 200.0);
-  float wb = exp(-dot(c - vec3(0.62, 0.60, 0.80), c - vec3(0.62, 0.60, 0.80)) * 200.0);   // key colour only (see build.py)
-  float wsum = wr + wp + wg + wc + we + wb;
-  if (wsum > 0.02) {
-    vec3 base = diffuseColor.rgb, acc = vec3(0.0);
+  float wsum = wr + wp + wg + wc + we;
+  // vertex colour without the brick key (the albedo the non-brick classes are drawn on)
+  vec3 base = wb > 0.001 ? (wsum > 0.02 ? c : vec3(0.62, 0.60, 0.56)) : diffuseColor.rgb;
+  if (wsum > 0.02 || wb > 0.001) {
+    vec3 acc = vec3(0.0);
     if (wr > 0.01) acc += wr * base * lumDetail(detail(t_road, gp / ${sizes.road}));
     if (wg > 0.01) acc += wg * base * grassLawn(gp, px, lumDetail(detail(t_grass, gp / ${sizes.grass})) * lumDetail(detail(t_grass, gp / ${sizes.grass} * 0.23 + 0.37)));
     if (we > 0.01) acc += we * base * lumDetail(detail(t_earth, gp / ${sizes.earth}));
     if (wp > 0.01) acc += wp * base * slabPave(gp, px);
     if (wc > 0.01) acc += wc * settPave(gp, px) * 1.05;
-    if (wb > 0.01) acc += wb * brickPave(gp, px) * 1.4;
-    vec3 col = acc / wsum;
-    diffuseColor.rgb = mix(base, col, min(wsum * 8.0, 1.0));
+    vec3 col = wsum > 0.02 ? mix(base, acc / wsum, min(wsum * 8.0, 1.0)) : base;
+    if (wb > 0.001) col = mix(col, brickPave(gp, px) * 1.4, wb);
+    diffuseColor.rgb = col;
   }
   diffuseColor.rgb *= ${GK};
 `;

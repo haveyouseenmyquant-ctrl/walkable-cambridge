@@ -134,10 +134,12 @@ export function createVfx(game) {
           float col = mod(vTile, 4.0), row = floor(vTile / 4.0);
           vec4 t = texture2D(map, vec2((col + p.x) / 4.0, 1.0 - (row + p.y) / 2.0));
           ${additive ? 'gl_FragColor = vec4(vC.rgb * t.a * vC.a, t.a * vC.a);' : 'gl_FragColor = vec4(vC.rgb * t.rgb, t.a * vC.a);'} }`,
-      transparent: true, depthWrite: false, blending: additive ? THREE.AdditiveBlending : THREE.NormalBlending,
+      // session 48: additive sparks use screen blending (src + dst * (1 - src)) so stacked particles saturate softly
+      // instead of clipping to a white bloom over the fight
+      transparent: true, depthWrite: false, ...(additive ? SCREEN : { blending: THREE.NormalBlending }),
     });
     S.points = new THREE.Points(geo, S.mat); S.points.frustumCulled = false; S.points.renderOrder = additive ? 11 : 10;
-    S.points.onBeforeRender = (r) => { S.mat.uniforms.uH.value = viewH = r.getDrawingBufferSize(tmpV2).y; S.mat.uniforms.uMax.value = viewH * 0.2; };
+    S.points.onBeforeRender = (r) => { S.mat.uniforms.uH.value = viewH = r.getDrawingBufferSize(tmpV2).y; S.mat.uniforms.uMax.value = viewH * 0.12; };   // session 48: no sprite larger than 12% of the screen height
     root.add(S.points);
     return S;
   }
@@ -285,7 +287,7 @@ export function createVfx(game) {
   function light(x, y, z, color, intensity = 1, dur = 0.4, range = 16) {
     if (!lights.length) return;
     let best = lights[0]; for (const L of lights) if (L.t >= L.dur) { best = L; break; } else if (L.dur - L.t < best.dur - best.t) best = L;
-    best.l.color.set(color); best.l.distance = range; best.l.position.set(x, z, -y); best.t = 0; best.dur = dur; best.i0 = 60 * intensity;
+    best.l.color.set(color); best.l.distance = range; best.l.position.set(x, z, -y); best.t = 0; best.dur = dur; best.i0 = 32 * Math.min(1.2, intensity);   // session 48: capped (was 60 x, uncapped)
   }
 
   // ---------------- legacy API (kept signatures) ----------------
@@ -455,7 +457,7 @@ export function createVfx(game) {
   // impact at a hit point: rayed flash, sparks thrown back towards the attacker and a few embers
   function impact(x, y, z, color = 0xffffff, strength = 1, dx = 0, dy = 0) {
     const f = take(flashes);
-    if (f) { tone(f.material.color.set(color), 1); f.material.opacity = 0.9; f.material.rotation = rnd() * 6.28;
+    if (f) { tone(f.material.color.set(color), 1); f.material.opacity = 0.65; f.material.rotation = rnd() * 6.28;
       f.position.set(x, z, -y); const s0 = 0.6 + 0.4 * strength; f.scale.setScalar(s0 * 0.5); const e = rec(f, 0.09 + 0.05 * strength, 'flash'); e.s0 = s0; }
     const L = Math.hypot(dx, dy) || 1, n = Math.round(6 + 6 * strength);
     burst(x, y, z, n, { tex: 'spark', color: 0xffffff, color2: color, speed: 6 + 3 * strength, size: 0.16, life: 0.3, drag: 5, grav: 9, jitter: 0.1, dx: dx / L, dy: dy / L, dz: 0.35, cone: 0.9 });

@@ -41,8 +41,8 @@ export function install(game) {
       o.t.style.opacity = op.toFixed(2); o.t.style.transform = sl || op < 1 ? `translateX(${(sl + (1 - op) * 30).toFixed(0)}px)` : ''; } }));
   function toast(text, ms = 2200) {
     const t = el('div', 'gh-toast', toasts); t.textContent = text;
-    track(t, Math.max(3, ms / 1000));
-    while (toasts.children.length > 4) toasts.firstChild.remove();
+    track(t, Math.min(2.2, Math.max(1.4, ms / 1000)));   // session 48: brief (was >= 3 s), 3 at most
+    while (toasts.children.length > 3) toasts.firstChild.remove();
     return t;
   }
   // loot toast: rarity tag, item name in its rarity colour, slot note and an effect line; lingers 4-6 s of game time
@@ -54,17 +54,24 @@ export function install(game) {
     const head = el('div', 'gh-loot-h', t);
     el('span', 'gh-loot-r', head).textContent = rarity; el('span', 'gh-loot-n', head).textContent = name;
     if (note) el('span', 'gh-loot-d', head).textContent = note;
-    if (effect) el('div', 'gh-loot-e', t).textContent = effect.length > 90 ? effect.slice(0, 88) + '…' : effect;
-    track(t, big ? 6 : 4.5, 0);
-    while (lootBox.children.length > 3) lootBox.firstChild.remove();
+    if (effect) el('div', 'gh-loot-e', t).textContent = effect.length > 60 ? effect.slice(0, 58) + '…' : effect;
+    track(t, big ? 3.2 : 2.4, 0);   // session 48: brief side-panel toasts (were 4.5-6 s) so they never sit over a fight
+    while (lootBox.children.length > 2) lootBox.firstChild.remove();
     return t;
   }
   const css = el('style', null, document.head);
-  css.textContent = `#game-hud .gh-loots{position:absolute;right:24px;top:11%;display:flex;flex-direction:column;align-items:flex-end;gap:6px;pointer-events:none}
-#game-hud .gh-loot{--rc:#ccc;display:flex;flex-direction:column;align-items:flex-end;gap:3px;max-width:380px;padding:5px 12px;background:linear-gradient(90deg,rgba(10,10,16,.6),rgba(10,10,16,.9));border-right:4px solid var(--rc);border-radius:4px 2px 2px 4px;box-shadow:0 0 18px -3px var(--rc),inset -40px 0 40px -30px var(--rc);font:700 15px/1.2 system-ui,sans-serif;color:var(--rc);text-shadow:0 0 8px var(--rc)}
+  css.textContent = `#game-hud .gh-loots{position:absolute;right:14px;top:58%;display:flex;flex-direction:column;align-items:flex-end;gap:6px;pointer-events:none}
+#game-hud .gh-loot{--rc:#ccc;display:flex;flex-direction:column;align-items:flex-end;gap:3px;max-width:240px;padding:3px 9px;background:linear-gradient(90deg,rgba(10,10,16,.45),rgba(10,10,16,.8));border-right:3px solid var(--rc);border-radius:4px 2px 2px 4px;box-shadow:inset -24px 0 24px -20px var(--rc);font:700 12px/1.2 system-ui,sans-serif;color:var(--rc);text-shadow:0 0 4px rgba(0,0,0,.9)}
 #game-hud .gh-loot-h{display:flex;align-items:baseline;gap:8px}
-#game-hud .gh-loot-e{font:400 11px/1.2 system-ui,sans-serif;color:#d8d8e4;text-shadow:none;text-align:right}
-#game-hud .gh-loot.big{font-size:19px;box-shadow:0 0 28px 0 var(--rc),inset -60px 0 50px -30px var(--rc);border-right-width:6px}
+#game-hud .gh-loot-e{font:400 10px/1.2 system-ui,sans-serif;color:#d8d8e4;text-shadow:none;text-align:right}
+#game-hud .gh-loot.big{font-size:14px;box-shadow:0 0 10px -2px var(--rc),inset -30px 0 30px -20px var(--rc);border-right-width:4px}
+#game-hud .gh-toasts{left:18px;top:34%;transform:none;align-items:flex-start}
+#game-hud .gh-toast{font-size:12px;padding:3px 9px;background:rgba(0,0,0,.45)}
+#game-hud .gh-num{font:900 24px/1 system-ui,sans-serif;letter-spacing:-.02em;-webkit-text-stroke:1px rgba(0,0,0,.85);text-shadow:0 2px 0 #000,0 0 6px rgba(0,0,0,.8)}
+#game-hud .gh-num.big{font-size:30px}
+#game-hud .gh-num.crit{font-size:40px;color:#ffe14a !important;-webkit-text-stroke:1.5px #5a1800;text-shadow:0 0 10px #ff7a00,0 3px 0 #3a1000}
+#game-hud .gh-num.crit::before{content:'CRIT ';font-size:15px;letter-spacing:.08em;vertical-align:middle;color:#fff6c8}
+#game-hud .gh-num.taken{font-size:20px;color:#ff5050 !important}
 #game-hud .gh-loot-r{font:500 10px/1 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.12em;opacity:.8}
 #game-hud .gh-loot-d{font:400 11px/1 system-ui,sans-serif;color:#aab}
 #game-hud .gh-loot.out{opacity:0;transform:translateX(30px)}
@@ -87,7 +94,7 @@ body.explore #game-hud .gh-loots{display:none}`;
   offs.push(game.on('cast', ({ slot }) => { const s = slots[slot]; if (s) { s.s.classList.remove('pulse'); void s.s.offsetWidth; s.s.classList.add('pulse'); } }));
 
   // ---- floating damage numbers (pooled)
-  const POOL = 40, pool = [], v = new THREE.Vector3();
+  const POOL = 72, pool = [], v = new THREE.Vector3();   // session 48: bigger pool, bigger numbers (CSS above)
   for (let i = 0; i < POOL; i++) { const d = el('div', 'gh-num', nums); d.style.display = 'none'; pool.push({ d, t: 0, life: 0, x: 0, y: 0, z: 0, dx: 0 }); }
   let pi = 0;
   // ---- per-hit feedback: impact flash + sparks at the hit point, an impact sound on every hit, hit-stop on big ones
@@ -101,14 +108,17 @@ body.explore #game-hud .gh-loots{display:none}`;
     game.vfx?.impact?.(target.x + dx / L * r, target.y + dy / L * r, (target.z ?? p.z) + h, SPARK[type] ?? SPARK.physical, noProc ? 0.6 : big ? 2 : 1, dx, dy);
     const pitch = 0.85 + Math.random() * 0.3;
     sfx.play('hit_' + (SPARK[type] ? type : 'physical'), noProc ? 0.45 : 0.8, pitch);
-    if (big && !noProc) { sfx.play('crit', 0.7, pitch); game.hitStop?.(0.05, 0.08); }
+    if (big && !noProc) { sfx.play('crit', 0.7, pitch); game.hitStop?.(crit ? 0.085 : 0.06, 0.05); }
   }));
   offs.push(game.on('kill', ({ mob }) => { if (mob) sfx.play('kill', mob.boss ? 1.2 : 0.6, 0.9 + Math.random() * 0.2); }));
   offs.push(game.on('hit', ({ target, amount, crit, type }) => {
     if (!target || target === game.player || amount == null) return;
     const n = pool[pi]; pi = (pi + 1) % POOL;
-    n.x = target.x; n.y = target.y; n.z = target.z + (target.height ?? 1.6) + 0.2; n.t = 0; n.life = crit ? 1.2 : 0.9; n.dx = (Math.random() - 0.5) * 40;
-    n.d.textContent = crit ? amount + '!' : amount; n.d.className = 'gh-num' + (crit ? ' crit' : '');
+    // session 48: numbers fan out (no stacking on one spot), linger longer and pop; crits get a CRIT tag + gold
+    const big = !crit && (amount >= 0.12 * (target.maxHp || 1e9) || amount >= 40);
+    n.x = target.x + (Math.random() - 0.5) * 0.6; n.y = target.y + (Math.random() - 0.5) * 0.6; n.z = target.z + (target.height ?? 1.6) * (0.75 + Math.random() * 0.4) + 0.2;
+    n.t = 0; n.life = crit ? 1.5 : 1.15; n.dx = (Math.random() - 0.5) * 90; n.pop = crit ? 1.1 : big ? 0.7 : 0.45;
+    n.d.textContent = Math.round(amount); n.d.className = 'gh-num' + (crit ? ' crit' : big ? ' big' : '');
     n.d.style.color = TYPE_COLOR[type] || '#fff'; n.d.style.display = '';
   }));
   function updateNums(dt) {
@@ -121,7 +131,7 @@ body.explore #game-hud .gh-loots{display:none}`;
       if (v.z > 1 || v.z < -1) { n.d.style.opacity = 0; continue; }
       const k = n.t / n.life;
       n.d.style.opacity = k < 0.7 ? 1 : (1 - k) / 0.3;
-      n.d.style.transform = `translate(${(v.x * 0.5 + 0.5) * W + n.dx * k}px, ${(-v.y * 0.5 + 0.5) * H}px) translate(-50%,-50%) scale(${1 + (1 - Math.min(1, n.t * 6)) * 0.6})`;
+      n.d.style.transform = `translate(${(v.x * 0.5 + 0.5) * W + n.dx * Math.sqrt(k)}px, ${(-v.y * 0.5 + 0.5) * H}px) translate(-50%,-50%) scale(${1 + (1 - Math.min(1, n.t * 7)) * (n.pop ?? 0.5)})`;
     }
   }
 
