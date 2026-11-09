@@ -1,0 +1,67 @@
+{
+ "gameplay_judged": 39.6,
+ "n": 4,
+ "model": "claude-opus-5-5",
+ "hash": "8b314ed93a91f446",
+ "classes": {
+  "hexweaver": {
+   "score": 3.57,
+   "readability_telegraphs": 3.0,
+   "spell_vfx": 3.0,
+   "enemy_animation_variety": 2.0,
+   "hit_feedback": 4.0,
+   "ui_hud_clarity": 5.0,
+   "loot_excitement": 5.0,
+   "polished_arpg_feel": 3.0,
+   "overall": 3.5
+  },
+  "pyromancer": {
+   "score": 4.14,
+   "readability_telegraphs": 4.0,
+   "spell_vfx": 3.5,
+   "enemy_animation_variety": 3.0,
+   "hit_feedback": 4.5,
+   "ui_hud_clarity": 5.5,
+   "loot_excitement": 5.0,
+   "polished_arpg_feel": 3.5,
+   "overall": 4
+  },
+  "stormcaller": {
+   "score": 4.14,
+   "readability_telegraphs": 4.5,
+   "spell_vfx": 4.0,
+   "enemy_animation_variety": 3.5,
+   "hit_feedback": 4.5,
+   "ui_hud_clarity": 5.5,
+   "loot_excitement": 3.5,
+   "polished_arpg_feel": 3.5,
+   "overall": 4
+  },
+  "warden": {
+   "score": 4.0,
+   "readability_telegraphs": 4.0,
+   "spell_vfx": 3.0,
+   "enemy_animation_variety": 4.0,
+   "hit_feedback": 4.0,
+   "ui_hud_clarity": 5.0,
+   "loot_excitement": 5.0,
+   "polished_arpg_feel": 3.0,
+   "overall": 4
+  }
+ },
+ "by_criterion": {
+  "readability_telegraphs": 3.88,
+  "spell_vfx": 3.38,
+  "enemy_animation_variety": 3.12,
+  "hit_feedback": 4.25,
+  "ui_hud_clarity": 5.25,
+  "loot_excitement": 4.62,
+  "polished_arpg_feel": 3.25
+ },
+ "reasons": {
+  "hexweaver": "The HUD is the strongest part: clear HP and mana bars, a spell bar with cooldown numbers, a minimap, a boss bar showing phases, and loot labels with light beams and item tooltips. The log also shows plenty of sound voices and crits. Combat is hard to read, though: big flat green translucent discs and a red wedge block the view, enemies are rarely visible and look like simple low-poly blobs, and there are almost no telegraphs. Spell effects are crude flat shapes, and the town is built from untextured placeholder boxes, so it feels far from a commercial game.",
+  "pyromancer": "Strengths: the HUD has HP and mana bars, a numbered spell bar with cooldown timers, a minimap, and a boss bar that shows its phases. Loot gets light beams, coloured rarity labels and stat tooltips, and there are red ground markers for enemy attacks and crit damage numbers. Weaknesses: spells mostly look like flat orange or white blobs, enemies are mostly simple placeholder shapes with no visible animation, the camera often faces a grey wall or void (frames 5\u20136), the late fight turns into an unreadable mess of red cones, yellow shards and overlapping numbers, and a huge loot banner covers the centre of the screen in frame 10.",
+  "stormcaller": "The boss has a clear named health bar with phase markers and a named wind-up (Clapper Sweep) with red ground markers. Crit numbers and the lightning effects (beams, the floor electrified by static field) give combat some punch. But the camera often points at blank awning walls, enemies are simple low-poly shapes with flat orange effects, and loot drops show only as small floating text labels with no beams or strong rarity colours (5 of 21 picked up). Overlapping damage numbers and tooltips clutter the screen, so the whole thing feels like a functional prototype, not a polished ARPG.",
+  "warden": "Strengths: the boss has a clear framed health bar with phase markers, named attacks and an 'enraged' banner; red ground telegraphs are visible; loot shows rarity-coloured toasts, beams and comparison tooltips, and the stylised bell/automaton enemies have character. Weaknesses: the telegraph overlays and loot-name toasts swamp the screen and hide the action, several frames are dominated by stray wireframe lines and blank flat-coloured planes (camera clipping into geometry), and spell VFX are mostly flat translucent blobs. Damage numbers are small and plain, and the frames show no hit flashes or crit styling."
+ }
+}
