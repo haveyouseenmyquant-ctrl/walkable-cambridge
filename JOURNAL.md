@@ -2243,3 +2243,29 @@ Next
 2. Game: the pyromancer's mana sits near 0 in the clip (regen or costs); check the storm/warden/hex VFX on screen.
 3. Realism: the judge's other repeated complaints: missing trees on the GSM side, simplified stalls, the Guildhall's colour and
    proportions. Do the King's Parade sett-strip tile rebuild together with the next game edit.
+
+## 2026-11-09 — Session 81: Pages deploys stuck since s79, GSM tracery and churchyard trees, pyro mana
+
+- Found on start: the live site is still s77 (a7c038d3). The s79 and s80 releases were made, but all 3 Pages runs since 20:58
+  (42697977129, 42701528739, 42704820655) failed: the artifact (205 MB, the same as the 20:12 success) uploaded fine, then
+  deploy-pages sat on an empty "Current status" for 10 min and timed out. That points to the GitHub side (githubstatus says
+  Pages is operational); nothing in our artifact changed. Retried with this session's publish.
+- s77 judge reasons (a7c038d3_msjudge): many low views (0.5–2) are viewpoint/mirroring mismatches, not modelling. The repeated
+  modelling complaints were the GSM church ("plain flat stone", "skeletal"), "A's large trees missing" and the Guildhall proportions.
+- Realism (subagent): zone_bespoke_gsm.py: windows with 3+ lights get four-centred heads, Perpendicular panel tracery (cusped
+  light heads plus a second tier) and heavier mullions; buttresses are 1.3x deeper, with pale weathering caps and a plinth band.
+  GSM +6.4k tris (zone total 786k). Two real churchyard trees from the LiDAR canopy at the Peas Hill corner (12 m and 8.5 m;
+  first/last-return gap = foliage) were dropped by trees.py's penetration test; they were added as a hand-checked EXTRA list (only
+  t_3_4.bin changed, 18→20 trees). Screens: docs/screens/session81_gsm_{before,after}.jpg and _north_. Not checked against a photo;
+  the tracery pattern is generic Perpendicular.
+- Game (subagent): the pyromancer starter hat now gives +4 mana regen instead of +3% crit (regen 8→12/s; Ember Bolt spam costs ~11/s).
+  Local pyro clip: 12/12 frames, mana 3–79 instead of ~0, mobs in view in 11/12 frames. test_classes ok, test_items 44/44.
+  Still in the clip: frame 9 has the camera inside the dead boss's bell model, and the bot never leaves the market-north leg.
+  docs/screens/session81_game.jpg.
+
+Next
+1. Confirm the Pages deploy went through. If GitHub keeps timing out, try upload-pages-artifact v4 / deploy-pages with a
+   smaller artifact (split collision?), or wait it out.
+2. Read the s79–s81 scores once live: gameplay_judged, boss TTK spread (s79 rebalance + pyro regen), market_square_realism vs 31.0.
+3. Gameplay clip: push the camera out of the dead boss model, and route the bot onward after the boss kill.
+4. Guildhall proportions and colour (repeated judge complaint); the storm/warden/hex VFX are still unchecked on screen.
