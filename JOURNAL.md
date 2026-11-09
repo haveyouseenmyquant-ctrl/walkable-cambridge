@@ -2181,3 +2181,5 @@ Next
    Common judge complaint for s75: the white modern multi-storey block and the white turreted corner building on Market
    Hill's north/west side (Don Pasquale with green awnings, Subway) are a "grey placeholder" or flat grey mass. Trees are
    missing and the stalls are simplified. Next session: model those white frontages bespoke from non-held-out photos.
+- Publish: world-20261109-1942. The Pages deploy was "cancelled" twice (a GitHub-side failure), and a fresh workflow_dispatch went
+  through (run 42688057936). Late s75 scores: judged_realism 26.6, visual_quality 26.56.
