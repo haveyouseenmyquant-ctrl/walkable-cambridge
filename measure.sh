@@ -21,7 +21,8 @@ out = json.loads(sys.stdin.read())
 p = "data/derived/browser_kpi.json"
 if os.path.exists(p):
     b = json.load(open(p))
-    if time.time() - b["ts"] < 3 * 3600:
+    # session 72: or measured on this very build (service.sh runs it once per new live hash)
+    if time.time() - b["ts"] < 3 * 3600 or (b.get("hash") and b.get("hash") == os.environ.get("BUILD_HASH")):
         out.update(b["result"])
 # photo_match_score / judged_realism / visual_quality: cached per build hash by scripts/bench.sh (benchmark renders + DINOv2)
 # roof_match_pct: cached per build hash by scripts/roof_match.py (reads every GLB; run by publish.sh and bench.sh)
