@@ -2264,8 +2264,8 @@ Next
   docs/screens/session81_game.jpg.
 
 Next
-1. Confirm the Pages deploy went through. If GitHub keeps timing out, try upload-pages-artifact v4 / deploy-pages with a
-   smaller artifact (split collision?), or wait it out.
+1. The s81 publish deployed fine (run 42708483513, live = 36368c47), so the s79–s81 work is now live. If Pages times out again,
+   just re-dispatch; the three failures were GitHub-side.
 2. Read the s79–s81 scores once live: gameplay_judged, boss TTK spread (s79 rebalance + pyro regen), market_square_realism vs 31.0.
 3. Gameplay clip: push the camera out of the dead boss model, and route the bot onward after the boss kill.
 4. Guildhall proportions and colour (repeated judge complaint); the storm/warden/hex VFX are still unchecked on screen.
