@@ -10,6 +10,7 @@ SRC=site
 [ -s SITE_URL ] && SRC=$(head -n1 SITE_URL | tr -d '[:space:]')
 export SRC
 export BUILD_HASH=$($PY -I scripts/build_hash.py "$SRC" 2>/dev/null)
+export GAME_HASH=$($PY -I scripts/build_hash.py "$SRC" --game 2>/dev/null)
 # kpi.py reads every tile (~25-50 s); its result depends only on the build, so cache it per build hash.
 KC=data/derived/kpi_cache_$BUILD_HASH.json
 if [ -n "$BUILD_HASH" ] && [ -s "$KC" ]; then cat "$KC"; else
@@ -57,13 +58,14 @@ if miss is not None and "site_errors" in out:
 for k in ("photo_match_score", "market_square_photo_match", "painted_detail_pct"):
     out.pop(k, None)
 # game KPIs: cached per build hash by scripts/game_kpi.sh (headless combat/item/class tests; run by publish + service.sh)
-gf = "data/benchmark/scores/%s_game.json" % h
-if h and os.path.exists(gf):
+gh = os.environ.get("GAME_HASH", "")   # session 75: game scores are keyed by the game-only hash
+gf = "data/benchmark/scores/%s_game.json" % gh
+if gh and os.path.exists(gf):
     out.update({k: v for k, v in json.load(open(gf)).items() if isinstance(v, (int, float))})   # per_class stays in the file
 # Gaspard (8 Nov 2026): always print all six game KPIs for the live build, 0 when not measured yet;
 # gameplay_judged is cached per build by scripts/gameplay_kpi.sh (service.sh)
-gp = "data/benchmark/scores/%s_gameplay.json" % h
-if h and os.path.exists(gp):
+gp = "data/benchmark/scores/%s_gameplay.json" % gh
+if gh and os.path.exists(gp):
     out["gameplay_judged"] = json.load(open(gp))["gameplay_judged"]
 for k in ("playable_classes", "mob_types", "equipment_effects", "encounter_coverage_pct", "playtest_pass_pct", "gameplay_judged"):
     out.setdefault(k, 0)

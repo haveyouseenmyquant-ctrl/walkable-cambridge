@@ -6,7 +6,7 @@
 # come from the headless route bot (scripts/playtest.mjs: 5 runs per class over a fixed 5-encounter route + the Bellwarden).
 cd "$(dirname "$0")/.."
 S=${WC_SITE:-site}
-H=$(.venv/bin/python -I scripts/build_hash.py "$S")
+H=$(.venv/bin/python -I scripts/build_hash.py "$S" --game)   # session 75: game-only hash (see build_hash.py)
 OUT=data/benchmark/scores/${H}_game.json
 [ -s "$OUT" ] && [ "$1" != "-f" ] && { cat "$OUT"; exit 0; }
 # one run at a time (service.sh and a session may both start one)

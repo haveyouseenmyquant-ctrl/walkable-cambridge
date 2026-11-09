@@ -37,12 +37,14 @@ while true; do
   # fresh (< 75 min) skip the heavy render/playtest jobs so in-session tests and A/Bs get the CPU. The build being
   # scored would be replaced by the session's publish anyway.
   LH=$(.venv/bin/python -I scripts/build_hash.py "$SRC" 2>/dev/null)
+  # session 75: the game scores are keyed by the game-only hash (build_hash.py --game), so a world-only publish keeps them
+  GLH=$(.venv/bin/python -I scripts/build_hash.py "$SRC" --game 2>/dev/null)
   GS=site
-  [ -d data/derived/live_site ] && [ "$(.venv/bin/python -I scripts/build_hash.py data/derived/live_site 2>/dev/null)" = "$LH" ] && GS=data/derived/live_site
-  SH=$(.venv/bin/python -I scripts/build_hash.py $GS 2>/dev/null)
-  if [ -n "$LH" ] && [ "$LH" = "$SH" ]; then
-    [ -s data/benchmark/scores/${LH}_game.json ] || WC_SITE=$GS scripts/game_kpi.sh 2>&1 | tail -n1
-    [ -x scripts/gameplay_kpi.sh ] && [ ! -s data/benchmark/scores/${LH}_gameplay.json ] && WC_SITE=$GS scripts/gameplay_kpi.sh 2>&1 | tail -n1
+  [ -d data/derived/live_site ] && [ "$(.venv/bin/python -I scripts/build_hash.py data/derived/live_site --game 2>/dev/null)" = "$GLH" ] && GS=data/derived/live_site
+  SH=$(.venv/bin/python -I scripts/build_hash.py $GS --game 2>/dev/null)
+  if [ -n "$GLH" ] && [ "$GLH" = "$SH" ]; then
+    [ -s data/benchmark/scores/${GLH}_game.json ] || WC_SITE=$GS scripts/game_kpi.sh 2>&1 | tail -n1
+    [ -x scripts/gameplay_kpi.sh ] && [ ! -s data/benchmark/scores/${GLH}_gameplay.json ] && WC_SITE=$GS scripts/gameplay_kpi.sh 2>&1 | tail -n1
   fi
   BH=$(.venv/bin/python -I -c 'import json; print(json.load(open("data/derived/browser_kpi.json")).get("hash",""))' 2>/dev/null)
   if [ -n "$LH" ] && [ "$BH" != "$LH" ]; then run_browser; LAST=$(date +%s); fi

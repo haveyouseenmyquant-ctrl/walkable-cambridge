@@ -8,6 +8,8 @@ git diff --quiet HEAD -- site scripts || { echo "commit first: uncommitted chang
 # session 65: every browser module must parse as an ES module (s64 left a `}` inside a comment in mobs.js: the game
 # layer silently failed to start and every mob/item/playtest test timed out)
 for f in $(find site/app -name '*.js'); do cp "$f" /tmp/wc_check.mjs; node --check /tmp/wc_check.mjs || { echo "syntax error in $f"; exit 1; }; done
+# session 75: digest of the collision tiles, part of the game-only hash (build_hash.py --game); shipped with the world tarball
+.venv/bin/python -I scripts/collision_digest.py site
 .venv/bin/python -I scripts/roof_match.py site   # roof_match_pct, cached per build hash
 # game KPIs (mob/item/class tests + route bot), cached per build hash as data/benchmark/scores/<hash>_game.json
 # WC_SKIP_GAME_KPI=1: leave it to service.sh (runs it for every new live hash) when a session is short of time
@@ -27,7 +29,7 @@ fi
 [ -n "$MSP" ] && { wait $MSP && tail -n1 /tmp/wc_publish_ms.log || echo "ms_bench.sh failed (service.sh retries): $(tail -n2 /tmp/wc_publish_ms.log)"; }
 # session 65: never push a build whose game layer is broken (game KPIs scored but mob_types 0)
 if [ -z "${WC_SKIP_GAME_KPI:-}" ]; then
-  GK=data/benchmark/scores/$(.venv/bin/python -I scripts/build_hash.py site)_game.json
+  GK=data/benchmark/scores/$(.venv/bin/python -I scripts/build_hash.py site --game)_game.json
   [ -s "$GK" ] && ! .venv/bin/python -I -c 'import json,sys; sys.exit(0 if json.load(open(sys.argv[1])).get("mob_types",0) > 0 else 1)' "$GK" && { echo "game KPIs read mob_types 0: not publishing"; exit 1; }
 fi
 TAG="world-$(date -u +%Y%m%d-%H%M)"
