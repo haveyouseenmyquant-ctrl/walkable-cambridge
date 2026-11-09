@@ -8,6 +8,9 @@ git diff --quiet HEAD -- site scripts || { echo "commit first: uncommitted chang
 .venv/bin/python -I scripts/roof_match.py site   # roof_match_pct, cached per build hash
 # game KPIs (mob/item/class tests + route bot), cached per build hash as data/benchmark/scores/<hash>_game.json
 # WC_SKIP_GAME_KPI=1: leave it to service.sh (runs it for every new live hash) when a session is short of time
+# session 63: wait (up to 45 min) for service.sh's run on the old live hash, else game_kpi.sh returns {} and the new
+# live build goes out unscored (measure.sh then reads 0 for all six game KPIs until service.sh catches up)
+[ -n "${WC_SKIP_GAME_KPI:-}" ] || for _ in $(seq 270); do [ -d /tmp/wc_game_kpi.lock ] || break; sleep 10; done
 [ -n "${WC_SKIP_GAME_KPI:-}" ] || scripts/game_kpi.sh || echo "game_kpi.sh failed (service.sh retries for the live hash)"
 TAG="world-$(date -u +%Y%m%d-%H%M)"
 tar -czf /tmp/world.tar.gz -C site manifest.json landmarks.json tiles collision trees objects facades markings zone cityfac

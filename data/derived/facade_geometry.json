@@ -1,6 +1,6 @@
 {
  "zone": "market_square",
- "built": "2026-11-09T11:09:21Z",
+ "built": "2026-11-09T11:35:18Z",
  "walls": [
   {
    "id": "way/40937938:44",
@@ -2204,9 +2204,9 @@
   "walls_annotated": 48,
   "walls_total": 153,
   "walls_built": 59,
-  "tris": 544534,
+  "tris": 555565,
   "facade_tris": 34374,
-  "prop_tris": 510160,
+  "prop_tris": 521191,
   "facade_area_m2": 5393.5,
   "modelled_detail_area_m2": 2324.8
  }
