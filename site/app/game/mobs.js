@@ -5,9 +5,19 @@ import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 
 export const ENCOUNTERS = [];
-const SPAWN_R = 120, DESPAWN_R = 200, RESPAWN_S = 45, BOSS_RESPAWN_S = 150, MAX_LIVE = 30;
+const SPAWN_R = 120, DESPAWN_R = 200, RESPAWN_S = 45, BOSS_RESPAWN_S = 150, MAX_LIVE = 32;
 // session 46: encounter density near the centre (Market Square / ring 1), pack aggro, roaming patrols
-const CENTRE = { x: -105, y: 60 }, DENSE_R = 260, HELP_R = 14, PATROL_SPAWN_R = 110, PATROL_DESPAWN_R = 170, PATROL_SPEED = 2.2;
+const CENTRE = { x: -105, y: 60 }, DENSE_R = 260, HELP_R = 18, PATROL_SPAWN_R = 110, PATROL_DESPAWN_R = 170, PATROL_SPEED = 2.2;
+// session 49: combat pacing along the central route. Packs within CORE_R of the square respawn after CORE_RESPAWN_S,
+// and clearing one calls a reinforcement wave (WAVE_N mobs of the pack's kinds) that arrives from a side street a few
+// seconds later and charges in; bosses ring for adds (BOSS_ADDS) on each phase change and every ADD_EVERY_S in combat.
+const CORE_R = 110, CORE_RESPAWN_S = 25, WAVE_DELAY_S = 4, WAVE_N = 3, WAVE_PLAYER_R = 45, ADD_EVERY_S = 13, ADD_MAX = 3, WAVE_GAP_S = 60;   // at most one reinforcement wave a minute, so a fight can end
+const BOSS_ADDS = { bellwarden: ['bell_bats', 'gargoyle'], chimekeeper: ['bell_bats', 'wisp'], gatehouse_lion: ['gargoyle', 'ink_imp'] };
+// runtime-only street packs filling the long gaps on the Market Square -> Peas Hill -> King's Parade walk
+const EXTRA_ENCOUNTERS = [
+  { id: 'rt-market-passage', name: 'Market Passage', x: -110, y: 14, r: 6, mobs: ['ink_imp', 'soot_sprite', 'gargoyle', 'ink_imp'], runtime: true },
+  { id: 'rt-market-hill-east', name: 'Market Hill east stalls', x: -88, y: 70, r: 6, mobs: ['wisp', 'ink_imp', 'automaton'], runtime: true },
+];
 // roaming patrol groups between the hand-placed encounters (flyers, so the straight legs between waypoints never jam on walls)
 export const PATROLS = [
   { id: 'patrol-belfry', name: 'Belfry patrol', mobs: ['gargoyle', 'bell_bats', 'gargoyle'], start: 2,
@@ -281,19 +291,23 @@ const MODELS = {
         tail: merge(tube([[0, 0, 0], [0, -0.25, -0.3], [0, -0.25, -0.65], [0, -0.05, -0.95], [0, 0.1, -1.08]], 0.1, 0.025, 16, 7),
           xf(new THREE.ConeGeometry(0.11, 0.24, 4), [0, 0.2, -1.15], [-0.5, 0, 0], [1, 1, 0.35])),
         wingMem: w.mem, wingBones: w.bones,
+        // session 49: craggier silhouette: brow crest spikes, cheek frills, shoulder spurs, elbow spurs
+        crest: merge([1, -1].flatMap(s => [cone(0.035, 0.12, [s * 0.09, 0.2, 0.12], [-0.6, 0, -s * 0.5], 4), cone(0.04, 0.16, [s * 0.2, -0.02, 0.06], [0, 0, -s * 1.9], 4), cone(0.03, 0.12, [s * 0.18, 0.07, -0.08], [-0.8, 0, -s * 1.4], 4)])),
+        spurs: merge([1, -1].flatMap(s => [cone(0.06, 0.2, [s * 0.36, 0.36, 0.12], [-0.3, 0, -s * 0.9], 5), cone(0.045, 0.15, [s * 0.4, 0.3, 0.02], [-0.6, 0, -s * 1.3], 5)])),
+        elbow: merge(cone(0.03, 0.13, [0.15, -0.27, 0.03], [-1.9, 0, -0.5], 4)),
         rune: merge(tor(0.1, 0.014, [0, -0.08, 0.43], [0, 0, 0], 4, 24), box(0.016, 0.16, 0.02, [0, -0.08, 0.43]), box(0.12, 0.016, 0.02, [0, -0.06, 0.43])),   // session 46: lit chest sigil
       };
     });
     const g = new THREE.Group(), p = {}, stone = m('stone'), dark = m('darkstone'), wing = m('wingStone');
     p.body = pivot(g, 0, 0.9, 0);
-    add(p.body, K.torso, stone); add(p.body, K.ridge, dark); add(p.body, K.rune, BASE.eyeglow);
+    add(p.body, K.torso, stone); add(p.body, K.ridge, dark); add(p.body, K.rune, BASE.eyeglow); add(p.body, K.spurs, dark);
     p.head = pivot(p.body, 0, 0.45, 0.42);
-    add(p.head, K.head, stone); add(p.head, K.horns, dark); add(p.head, K.fangs, BASE.bone); add(p.head, K.eyes, BASE.eye);
+    add(p.head, K.head, stone); add(p.head, K.horns, dark); add(p.head, K.fangs, BASE.bone); add(p.head, K.eyes, BASE.eye); add(p.head, K.crest, dark);
     p.jaw = pivot(p.head, 0, 0, 0); add(p.jaw, K.jaw, dark);
     p.wl = pivot(p.body, -0.22, 0.28, -0.12); add(p.wl, K.wingMem, wing, 0, 0, 0, true); add(p.wl, K.wingBones, dark, 0, 0, 0, true);
     p.wr = pivot(p.body, 0.22, 0.28, -0.12); add(p.wr, K.wingMem, wing); add(p.wr, K.wingBones, dark);
-    p.armL = pivot(p.body, -0.3, 0.2, 0.22); add(p.armL, K.arm, stone, 0, 0, 0, true); add(p.armL, K.claws, dark, 0, 0, 0, true);
-    p.armR = pivot(p.body, 0.3, 0.2, 0.22); add(p.armR, K.arm, stone); add(p.armR, K.claws, dark);
+    p.armL = pivot(p.body, -0.3, 0.2, 0.22); add(p.armL, K.arm, stone, 0, 0, 0, true); add(p.armL, K.claws, dark, 0, 0, 0, true); add(p.armL, K.elbow, dark, 0, 0, 0, true);
+    p.armR = pivot(p.body, 0.3, 0.2, 0.22); add(p.armR, K.arm, stone); add(p.armR, K.claws, dark); add(p.armR, K.elbow, dark);
     p.legL = pivot(p.body, -0.22, -0.32, -0.08); add(p.legL, K.leg, stone, 0, 0, 0, true); add(p.legL, K.talons, dark, 0, 0, 0, true);
     p.legR = pivot(p.body, 0.22, -0.32, -0.08); add(p.legR, K.leg, stone); add(p.legR, K.talons, dark);
     p.tail = pivot(p.body, 0, -0.35, -0.3); add(p.tail, K.tail, dark);
@@ -369,12 +383,21 @@ const MODELS = {
         page,
         arm: merge(limb([[0.2, -0.04, 0.06], [0.32, -0.1, 0.16], [0.3, -0.15, 0.27]], 0.045, 0.03, 6, 6), [-0.02, 0.02].map(d => cone(0.012, 0.06, [0.3 + d, -0.17, 0.31], [2.2, 0, 0], 4))),
         leg: merge(limb([[0, 0, 0], [0, -0.13, 0.02], [0, -0.22, 0.05]], 0.06, 0.045, 5, 6), sph(0.06, [0, -0.25, 0.09], [1, 0.5, 1.5], 8, 5)),
+        // session 49: a sculpted silhouette instead of a plain blot: curled ram horns, a frill of pen-nib spines down
+        // the back, brow ridges, a whip tail ending in a steel nib, ink drips hanging off the belly, knuckled claws
+        horns: merge([1, -1].map(s => tube([[s * 0.13, 0.2, 0.06], [s * 0.26, 0.33, 0.0], [s * 0.34, 0.3, -0.14], [s * 0.3, 0.16, -0.2], [s * 0.22, 0.12, -0.1]], 0.05, 0.008, 14, 7))),
+        spines: merge([0, 1, 2, 3, 4].map(i => { const a = -0.25 + i * 0.32; return xf(cone(0.05, 0.2 - Math.abs(i - 1.5) * 0.025, [0, 0, 0], [0, 0, 0], 4), [0, Math.cos(a) * 0.3, -Math.sin(a) * 0.3 - 0.02], [-a - 0.2, 0, 0], [1, 1, 0.35]); })),
+        brow: merge([1, -1].map(s => tube([[s * 0.04, 0.15, 0.3], [s * 0.12, 0.17, 0.29], [s * 0.2, 0.13, 0.24]], 0.022, 0.012, 6, 5))),
+        tail: merge(tube([[0, -0.15, -0.25], [0, -0.28, -0.45], [0.08, -0.22, -0.68], [0.14, -0.05, -0.8]], 0.06, 0.018, 14, 6)),
+        nib: merge(xf(new THREE.ConeGeometry(0.06, 0.2, 4), [0.15, 0.04, -0.84], [0.5, 0, -0.4], [1, 1, 0.3]), cone(0.04, 0.14, [-0.0, 0.62, -0.17], [-0.9, 0, 0], 4)),
+        drips: merge([0, 1, 2, 3].map(i => { const a = i / 4 * TAU + 0.9; return limb([[Math.sin(a) * 0.22, -0.2, Math.cos(a) * 0.22], [Math.sin(a) * 0.24, -0.34 - 0.04 * i, Math.cos(a) * 0.24]], 0.035, 0.018, 4, 5); })),
       };
     });
     const g = new THREE.Group(), p = {}, ink = m('ink'), paper = m('parchment');
     p.body = pivot(g, 0, 0.45, 0);
     p.blob = add(p.body, K.blob, ink); p.blob.scale.set(0.65, 0.55, 0.65);
     add(p.body, K.eyes, BASE.eyeBlue); add(p.body, K.teeth, BASE.bone); add(p.body, K.quill, paper);
+    add(p.body, K.horns, ink); add(p.body, K.spines, ink); add(p.body, K.brow, ink); add(p.body, K.tail, ink); add(p.body, K.drips, ink); add(p.body, K.nib, BASE.iron);
     add(p.body, K.arm, ink); add(p.body, K.arm, ink, 0, 0, 0, true);
     p.wl = pivot(p.body, -0.22, 0.15, -0.12); add(p.wl, K.page, paper, 0, 0, 0, true);
     p.wr = pivot(p.body, 0.22, 0.15, -0.12); add(p.wr, K.page, paper);
@@ -401,6 +424,14 @@ const MODELS = {
         armBrass: merge(cyl(0.08, 0.08, 0.2, [0, -0.15, 0], [0, 0, 0], 10), sph(0.08, [0, -0.42, 0.02], 1, 8, 6), cyl(0.07, 0.07, 0.06, [0, -0.79, 0.05], [0, 0, 0], 10)),
         leg: merge(cyl(0.07, 0.06, 0.3, [0, -0.15, 0], [0, 0, 0], 8), cyl(0.06, 0.05, 0.28, [0, -0.47, 0], [0, 0, 0], 8)),
         legBrass: merge(cyl(0.09, 0.09, 0.14, [0, -0.08, 0], [0, 0, 0], 10), sph(0.085, [0, -0.32, 0.02], 1, 8, 6), sph(0.14, [0, -0.63, 0.06], [1, 0.45, 1.5], 10, 6)),
+        // session 49: layered armour and plumbing so the silhouette reads at street distance
+        pauldron: merge(xf(new THREE.SphereGeometry(0.2, 14, 8, 0, TAU, 0, 1.3), [0, 0.04, 0], [0, 0, 0], [1.1, 0.8, 1]),
+          tor(0.165, 0.022, [0, 0.07, 0], [PI / 2, 0, 0], 4, 20), [0, 1, 2, 3, 4].map(i => { const a = i / 5 * TAU; return sph(0.02, [Math.sin(a) * 0.15, 0.14, Math.cos(a) * 0.15], 1, 5, 4); })),
+        gauge: merge(cyl(0.085, 0.085, 0.04, [0.24, 0.3, 0.33], [PI / 2 - 0.35, 0, -0.5], 14), tor(0.085, 0.015, [0.24, 0.3, 0.345], [-0.35, 0, -0.5], 4, 16)),
+        gaugeFace: cyl(0.068, 0.068, 0.01, [0.248, 0.303, 0.36], [PI / 2 - 0.35, 0, -0.5], 14),
+        pipes: merge([1, -1].map(s => tube([[s * 0.1, 0.45, -0.3], [s * 0.3, 0.42, -0.38], [s * 0.42, 0.1, -0.3], [s * 0.36, -0.3, -0.2]], 0.03, 0.03, 12, 6)),
+          [1, -1].map(s => tor(0.04, 0.014, [s * 0.42, 0.1, -0.3], [PI / 2, 0, 0], 4, 10))),
+        piston: merge(cyl(0.022, 0.022, 0.5, [0.0, -0.32, -0.09], [0, 0, 0], 6), cyl(0.04, 0.04, 0.16, [0, -0.15, -0.09], [0, 0, 0], 8), box(0.17, 0.14, 0.05, [0, -0.32, 0.1], [-0.15, 0, 0])),
       };
     });
     const g = new THREE.Group(), p = {}, brass = m('brass'), copper = m('copper'), iron = m('iron');
@@ -413,10 +444,11 @@ const MODELS = {
     add(p.head, K.helm, copper); add(p.head, K.visor, BASE.eye); add(p.head, K.stack, iron);
     for (const s of [-1, 1]) {
       const a = p[s < 0 ? 'armL' : 'armR'] = pivot(p.torso, s * 0.56, 0.3, 0);
-      add(a, K.shoulder, copper); add(a, K.arm, iron); add(a, K.armBrass, brass);
+      add(a, K.shoulder, copper); add(a, K.arm, iron); add(a, K.armBrass, brass); add(a, K.pauldron, brass, 0, 0, 0, s < 0);
       const l = p[s < 0 ? 'legL' : 'legR'] = pivot(p.body, s * 0.22, 0.65, 0);
-      add(l, K.leg, iron); add(l, K.legBrass, brass);
+      add(l, K.leg, iron); add(l, K.legBrass, brass); add(l, K.piston, copper);
     }
+    add(p.torso, K.gauge, iron); add(p.torso, K.gaugeFace, BASE.eyeglow); add(p.torso, K.pipes, copper);
     return { group: g, parts: p };
   },
   // --- session 41 regulars (original Cambridge wizard folklore)
@@ -756,7 +788,7 @@ const MODELS = {
 // Each: {name, kind, range, windup, cd, dmg, r?, len?, w?, speed?, n?}
 const A = (o) => ({ cd: 3, windup: 0.8, recover: 0.5, ...o });
 
-const D = (o) => ({ hp: 60, speed: 3, radius: 0.5, xp: 15, aggro: 24, leash: 40, flying: false, hover: 0, scale: 1, color: 0xff5040, ...o });
+const D = (o) => ({ hp: 60, speed: 3, radius: 0.5, xp: 15, aggro: 26, leash: 40, flying: false, hover: 0, scale: 1, color: 0xff5040, ...o });
 export const MOB_TYPES = [
   D({ id: 'gargoyle', death: 'crumble', scale: 1.3, name: 'Rooftop Gargoyle', hp: 70, speed: 4.2, radius: 0.6, xp: 22, flying: true, hover: 3.5, color: 0xff8a20,
       loot: [{ rarity: 'common', chance: 0.6 }, { rarity: 'uncommon', chance: 0.25 }, { rarity: 'rare', chance: 0.06 }],
@@ -947,7 +979,7 @@ class MobSystem {
       const f = mob.hp / mob.maxHp;
       let ph = 0; mob.type.phases.forEach((p, i) => { if (f <= p.at) ph = i; });
       if (ph > mob.phase) {
-        mob.phase = ph; this.clearTelegraph(mob); mob.state = 'stagger'; mob.stateT = 1.2;
+        mob.phase = ph; this.clearTelegraph(mob); mob.state = 'stagger'; mob.stateT = 1.2; mob.addT = 0.6;
         this.burst(mob.x, mob.y, mob.z + 3, mob.type.color, 18, 6);
         this.shockwave(mob.x, mob.y, mob.groundZ ?? mob.z, mob.type.color, mob.type.phases[ph].enrage ? 14 : 10, 0.8);
         g.emit('bossPhase', { mob, phase: ph, enrage: !!mob.type.phases[ph].enrage });
@@ -1075,7 +1107,11 @@ class MobSystem {
       const d = Math.hypot(e.x - g.px, e.y - g.py);
       if (s.active && d > DESPAWN_R) { for (const m of s.mobs) if (!m.removed) this.remove(m); s.mobs = []; s.active = false; continue; }
       // cleared packs come back after a while (once the player is out of sight range)
-      if (s.active && s.clearedAt != null && g.time - s.clearedAt > (e.boss ? BOSS_RESPAWN_S : RESPAWN_S) && d > (e.boss ? 40 : 32)) { s.active = false; s.mobs = []; s.clearedAt = null; }
+      const core = Math.hypot(e.x - CENTRE.x, e.y - CENTRE.y) < CORE_R;
+      if (s.active && s.clearedAt != null && g.time - s.clearedAt > (e.boss ? BOSS_RESPAWN_S : core ? CORE_RESPAWN_S : RESPAWN_S) && d > (e.boss ? 40 : 32)) { s.active = false; s.mobs = []; s.clearedAt = null; }
+      if (core && !e.boss && s.active && s.clearedAt != null && !s.waveDone && g.time - s.clearedAt > WAVE_DELAY_S && d < WAVE_PLAYER_R) {
+        if (g.time - (this.lastWaveT ?? -1e9) > WAVE_GAP_S) { s.waveDone = this.spawnWave(e); if (s.waveDone) this.lastWaveT = g.time; } else s.waveDone = true;
+      }
       if (!this.encountersEnabled || s.active || d > SPAWN_R) continue;
       // session 44: the live cap used to starve near encounters (incl. bosses) once far ring encounters filled it;
       // when full, a closer encounter evicts the farthest calm (no mob fighting) active one at least 30 m farther away
@@ -1088,11 +1124,51 @@ class MobSystem {
         if (spot) placed.push([e.mobs[i], spot]);
       }
       if (!placed.length) continue;
-      s.active = true; s.clearedAt = null;
+      s.active = true; s.clearedAt = null; s.waveDone = false;
       s.mobs = placed.map(([t, p]) => this.spawn(t, p.x, p.y, p.z, { encounter: e.id }));
       s.spot = placed[0][1];
     }
     if (this.encountersEnabled) this.updatePatrols();
+  }
+
+  // session 49: a spot on the player's level, dist m away, in the first direction that has ground (side streets, not roofs)
+  approachSpot(cx, cy, dist, tries = 10) {
+    const g = this.game, a0 = rnd(0, TAU);
+    for (let k = 0; k < tries; k++) {
+      const a = a0 + k * TAU / tries, s = this.findSpot(cx + Math.cos(a) * dist, cy + Math.sin(a) * dist, 4);
+      if (s && Math.abs(s.z - g.pz) < 3) return s;
+    }
+    return null;
+  }
+  // reinforcement wave after a core pack is cleared: true once spawned (or impossible), so it fires once per clear
+  spawnWave(e) {
+    const g = this.game; if (g.stats.hp <= 0) return false;
+    const n = Math.min(WAVE_N, MAX_LIVE + 4 - g.mobs.length); if (n <= 0) return false;
+    const spot = this.approachSpot(g.px, g.py, rnd(15, 19)); if (!spot) return true;
+    const kinds = [...new Set(e.mobs)], wave = { id: e.id + '-wave', mobs: [], clearedAt: null };
+    for (let i = 0; i < n; i++) {
+      const a = i / n * TAU, m = this.spawn(kinds[(i + Math.floor(g.time)) % kinds.length], spot.x + Math.cos(a) * 1.6, spot.y + Math.sin(a) * 1.6, null, { roam: wave });
+      m.state = 'chase'; m.alertT = 0.6; wave.mobs.push(m);
+    }
+    this.shockwave(spot.x, spot.y, spot.z, 0xffc070, 4, 0.7);
+    g.emit('wave', { encounter: e.id, n });
+    return true;
+  }
+  // boss adds: called from the boss's chase/attack states
+  bossAdds(mob, dt) {
+    const kinds = BOSS_ADDS[mob.type.id]; if (!kinds) return;
+    mob.addT = (mob.addT ?? 4) - dt;
+    if (mob.addT > 0) return;
+    mob.addT = ADD_EVERY_S;
+    mob.adds = (mob.adds || []).filter(m => !m.dead && !m.removed);
+    const n = Math.min(2, ADD_MAX - mob.adds.length, MAX_LIVE + 4 - this.game.mobs.length);
+    for (let i = 0; i < n; i++) {
+      const a = mob.yaw + (i ? 2.2 : -2.2), x = mob.x + Math.sin(a) * 4, y = mob.y - Math.cos(a) * 4;
+      const s = this.findSpot(x, y, 4); if (!s) continue;
+      const m = this.spawn(kinds[(mob.adds.length + i) % kinds.length], s.x, s.y, s.z, { roam: mob.addRoam || (mob.addRoam = { id: mob.id + '-adds', mobs: mob.adds, clearedAt: null }) });
+      m.state = 'chase'; m.alertT = 0.5; mob.adds.push(m); mob.addRoam.mobs = mob.adds;
+      this.burst(s.x, s.y, s.z + 1, mob.type.color, 10, 4);
+    }
   }
 
   // session 46: roaming patrols. Each group has a virtual anchor walking its waypoint loop (also while unspawned);
@@ -1147,6 +1223,7 @@ class MobSystem {
     const g = this.game, T = mob.type, P = mob.parts;
     mob.t += dt;
     if (mob.state === 'dead') { this.tickDeath(mob, dt); return; }
+    if (mob.boss && !['idle', 'patrol', 'return'].includes(mob.state) && this.game.stats.hp > 0) this.bossAdds(mob, dt);
     // flash + glow
     mob.flashT = Math.max(0, mob.flashT - dt);
     const glow = mob.state === 'windup' ? 0.4 + 0.6 * Math.min(1, 1 - mob.stateT / mob.windupEff) : 0;
@@ -1650,9 +1727,10 @@ export async function loadEncounters() {
   for (const e of list) {
     if (e.boss) continue;
     const d = Math.hypot(e.x - CENTRE.x, e.y - CENTRE.y); if (d > DENSE_R) continue;
-    const extra = e.gen ? (d < 150 ? 2 : 1) : 1;
+    const extra = e.gen ? (d < 150 ? 2 : 1) : d < CORE_R ? 2 : 1;
     for (let i = 0; i < extra; i++) e.mobs = [...e.mobs, e.mobs[i % e.mobs.length]];
   }
+  for (const e of EXTRA_ENCOUNTERS) if (!list.some(x => x.id === e.id)) list.push({ ...e, mobs: [...e.mobs] });
   ENCOUNTERS.push(...list);
   return ENCOUNTERS;
 }

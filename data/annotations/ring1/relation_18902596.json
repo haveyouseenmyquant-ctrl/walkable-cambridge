@@ -1,0 +1,347 @@
+{
+ "osm_id": "relation/18902596",
+ "sources": [
+  "mapillary:1357097568007100",
+  "mapillary:1264655400619374",
+  "mapillary:1177659432665774",
+  "mapillary:498072817906148"
+ ],
+ "walls": [
+  {
+   "id": "relation/18902596:30",
+   "storeys": 5,
+   "floor_z": [
+    0,
+    7.0,
+    10.6,
+    14.0,
+    17.4
+   ],
+   "material": "brick",
+   "wall_colour": "#6b4a3a",
+   "trim_colour": "#9a9488",
+   "cornice_z": 21.8,
+   "cornice": "none",
+   "parapet": true,
+   "string_courses": [
+    7.0
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 4.0,
+     "w": 2.2,
+     "h": 3.0,
+     "surround": "none"
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 13.5,
+     "w": 1.6,
+     "h": 2.6,
+     "surround": "none"
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 9.0,
+     "w": 1.4,
+     "z": 1.2,
+     "h": 1.4,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 2.0,
+     "w": 3.3,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 5.9,
+     "w": 3.3,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 9.8,
+     "w": 3.3,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 13.7,
+     "w": 3.3,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 17.6,
+     "w": 3.3,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 2.0,
+     "w": 3.3,
+     "z": 11.4,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 5.9,
+     "w": 3.3,
+     "z": 11.4,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 9.8,
+     "w": 3.3,
+     "z": 11.4,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 13.7,
+     "w": 3.3,
+     "z": 11.4,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 17.6,
+     "w": 3.3,
+     "z": 11.4,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 2.0,
+     "w": 3.3,
+     "z": 14.8,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 5.9,
+     "w": 3.3,
+     "z": 14.8,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 9.8,
+     "w": 3.3,
+     "z": 14.8,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 13.7,
+     "w": 3.3,
+     "z": 14.8,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 17.6,
+     "w": 3.3,
+     "z": 14.8,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 2.0,
+     "w": 3.3,
+     "z": 18.2,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 5.9,
+     "w": 3.3,
+     "z": 18.2,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 9.8,
+     "w": 3.3,
+     "z": 18.2,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 13.7,
+     "w": 3.3,
+     "z": 18.2,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 17.6,
+     "w": 3.3,
+     "z": 18.2,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "David Attenborough Building (former Arup building, 1970s, refurbished 2016), Corn Exchange St side: a tall plain dark-brown brick plinth wall (~7 m) with black louvred service double doors and one small window, over which the concrete-framed upper floors carry continuous horizontal ribbon windows between deep concrete spandrel bands (modelled as 5 window panels per floor, 4 floors). From 2016 Mapillary views looking north up Corn Exchange St (oblique)."
+  }
+ ]
+}

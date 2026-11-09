@@ -1,0 +1,128 @@
+{
+ "osm_id": "way/1288730354",
+ "sources": [
+  "mapillary:819218512029304",
+  "mapillary:1470085586678990"
+ ],
+ "walls": [
+  {
+   "id": "way/1288730354:4",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.0,
+    6.4,
+    8.7
+   ],
+   "material": "brick",
+   "wall_colour": "#c9bd96",
+   "trim_colour": "#eae4d4",
+   "cornice_z": 11.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 6.3,
+     "z1": 3.6,
+     "fascia_text": "Offspring",
+     "fascia_colour": "#7a1f35",
+     "text_colour": "#ffffff",
+     "door_x": 1.2,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.8,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.8,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.8,
+     "w": 1.0,
+     "z": 6.8,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.8,
+     "w": 1.0,
+     "z": 6.8,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.8,
+     "w": 1.0,
+     "z": 9.1,
+     "h": 1.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.8,
+     "w": 1.0,
+     "z": 9.1,
+     "h": 1.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "9 Market Street, corner of the Market Passage leg (Market Passage nameplate on the shopfront): deep maroon Offspring shopfront with a large arched display window, buff-brick upper floors with two sash columns. Upper floors estimated from raking views."
+  }
+ ]
+}

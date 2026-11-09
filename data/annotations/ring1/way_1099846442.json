@@ -6,7 +6,11 @@
   "mapillary:790863758270642",
   "mapillary:282869780160744",
   "mapillary:1143583196146420",
-  "mapillary:165779838815360"
+  "mapillary:165779838815360",
+  "commons:File:Market Passage, Cambridge - geograph.org.uk - 7393572.jpg",
+  "commons:File:Market Passage - geograph.org.uk - 703649.jpg",
+  "mapillary:1148250115690155",
+  "mapillary:819218512029304"
  ],
  "walls": [
   {
@@ -323,6 +327,521 @@
    ],
    "confidence": "low",
    "notes": "Joshua Taylor Building, 59 Sidney St (Units A-C). Three fronts under one roof: south unit (ex-Monsoon in photos, OSM POI now Pizza Pilgrims) with large dark-framed plate-glass shopfront and pale upper floors; Superdrug middle unit in red brick with stone dressings, brick pilaster strips and round-arched second-floor windows over a white shopfront with dark fascia; north corner unit (David Clulow) white-painted brick with moulded architraves, cornice hoods on the first-floor windows and arched shopfront glazing under a green fascia. Single wall material can't express the three finishes; red brick chosen as dominant. Window counts per unit estimated from oblique views."
+  },
+  {
+   "id": "way/1099846442:9",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.0,
+    6.6,
+    8.9
+   ],
+   "material": "brick",
+   "wall_colour": "#d6c89c",
+   "trim_colour": "#f1ede2",
+   "cornice_z": 10.9,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.9
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 13.0,
+     "z1": 3.6,
+     "fascia_text": "David Clulow Opticians",
+     "fascia_colour": "#14303b",
+     "text_colour": "#d9c48a",
+     "door_x": 1.2,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 13.4,
+     "x1": 17.6,
+     "z1": 3.4,
+     "fascia_text": "",
+     "fascia_colour": "#1d2a3a",
+     "text_colour": "#f0e8d0",
+     "door_x": 14.0,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 18.0,
+     "x1": 22.5,
+     "z1": 3.4,
+     "fascia_text": "",
+     "fascia_colour": "#1d2a3a",
+     "text_colour": "#f0e8d0",
+     "door_x": 21.8,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.6,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.0,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.6,
+     "w": 1.0,
+     "z": 7.0,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.0,
+     "w": 1.0,
+     "z": 7.0,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.4,
+     "w": 0.95,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 10.4,
+     "w": 0.95,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 13.4,
+     "w": 0.95,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 16.4,
+     "w": 0.95,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 19.4,
+     "w": 0.95,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.4,
+     "w": 0.95,
+     "z": 7.0,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 10.4,
+     "w": 0.95,
+     "z": 7.0,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 13.4,
+     "w": 0.95,
+     "z": 7.0,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 16.4,
+     "w": 0.95,
+     "z": 7.0,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 19.4,
+     "w": 0.95,
+     "z": 7.0,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.4,
+     "w": 0.95,
+     "z": 9.3,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 10.4,
+     "w": 0.95,
+     "z": 9.3,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 13.4,
+     "w": 0.95,
+     "z": 9.3,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 16.4,
+     "w": 0.95,
+     "z": 9.3,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 19.4,
+     "w": 0.95,
+     "z": 9.3,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Joshua Taylor Building, Market Passage side (faces NNW onto Market Passage; the walls.json 'Sidney Street' label is the address). Corner unit is David Clulow Opticians: a long dark-teal glazed shopfront with slim cast-iron colonnettes running ~13 m along the lane, then two small dark-blue units. Above: a white-rendered Georgian corner block (two sash bays, two upper floors) at the Sidney St end, then a taller buff-brick Victorian range with plain sashes in five columns over three floors. Upper-floor column positions estimated from raking views (703649 from 2008, 7393572 from 2023, both looking west from Sidney St)."
+  },
+  {
+   "id": "way/1099846442:7",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.0,
+    6.6
+   ],
+   "material": "render",
+   "wall_colour": "#f2f0ea",
+   "trim_colour": "#1d1f22",
+   "cornice_z": 8.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    3.9
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 9.9,
+     "z1": 3.6,
+     "fascia_text": "Monsoon",
+     "fascia_colour": "#16181c",
+     "text_colour": "#e8e4dc",
+     "door_x": 8.9,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.0,
+     "w": 1.15,
+     "z": 4.4,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.0,
+     "w": 1.15,
+     "z": 4.4,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.0,
+     "w": 1.15,
+     "z": 4.4,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.0,
+     "w": 1.15,
+     "z": 4.4,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.0,
+     "w": 1.15,
+     "z": 4.4,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.0,
+     "w": 1.0,
+     "z": 7.0,
+     "h": 1.2,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.0,
+     "w": 1.0,
+     "z": 7.0,
+     "h": 1.2,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.0,
+     "w": 1.0,
+     "z": 7.0,
+     "h": 1.2,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.0,
+     "w": 1.0,
+     "z": 7.0,
+     "h": 1.2,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.0,
+     "w": 1.0,
+     "z": 7.0,
+     "h": 1.2,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 4.0,
+     "w": 1.4,
+     "h": 1.3
+    },
+    {
+     "type": "dormer",
+     "x": 6.8,
+     "w": 1.6,
+     "h": 1.3
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Joshua Taylor Building, Market Street return (corner unit with Sidney St; Monsoon in the 2017 photos). White-painted Georgian front: full-width black shopfront with large display windows, five 12-pane sashes on the first floor and five shorter sashes on the second, a dark moulded cornice and parapet, red-tile roof behind with two flat-roofed dormers. 'Market Street' nameplate on the corner. Seen near-frontally from the Market Hill side (1148250115690155)."
   }
  ]
 }

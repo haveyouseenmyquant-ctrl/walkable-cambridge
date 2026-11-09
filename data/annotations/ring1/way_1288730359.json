@@ -1,0 +1,433 @@
+{
+ "osm_id": "way/1288730359",
+ "sources": [
+  "commons:File:Cambridge - Market Passage - geograph.org.uk - 6888585.jpg",
+  "commons:File:Market Passage, Cambridge - geograph.org.uk - 7393572.jpg",
+  "commons:File:A damp Market Passage - geograph.org.uk - 7102349.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1288730359:7",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.8,
+    7.0
+   ],
+   "material": "brick",
+   "wall_colour": "#cfc193",
+   "trim_colour": "#a8452e",
+   "cornice_z": 10.6,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.8
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 6.6,
+     "z1": 3.4,
+     "fascia_text": "",
+     "fascia_colour": "#1f2a33",
+     "text_colour": "#f0e8d0",
+     "door_x": 5.8,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 7.0,
+     "x1": 13.2,
+     "z1": 3.4,
+     "fascia_text": "",
+     "fascia_colour": "#1d1f22",
+     "text_colour": "#f0e8d0",
+     "door_x": 7.8,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 13.6,
+     "x1": 20.6,
+     "z1": 3.4,
+     "fascia_text": "",
+     "fascia_colour": "#1d1f22",
+     "text_colour": "#f0e8d0",
+     "door_x": 19.8,
+     "stallriser": 0.4,
+     "awning": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.0,
+     "w": 1.1,
+     "z": 4.2,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.0,
+     "w": 1.1,
+     "z": 4.2,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 8.4,
+     "w": 1.1,
+     "z": 4.2,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 11.6,
+     "w": 1.1,
+     "z": 4.2,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 15.0,
+     "w": 1.1,
+     "z": 4.2,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 18.2,
+     "w": 1.1,
+     "z": 4.2,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.0,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.0,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 8.4,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 11.6,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 15.0,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 18.2,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "10-15 Market Passage, south side of the lane, faces NORTH (Market Passage, not Market St). Victorian gault (buff) brick, three storeys, with red-brick round-arched heads to tall first-floor windows and red-brick heads/bands to the second floor; dark painted shopfronts and cafe units at ground level (fascias mostly blank). Six window columns estimated from raking views along the lane; positions spaced evenly."
+  },
+  {
+   "id": "way/1288730359:9",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.7,
+    6.9
+   ],
+   "material": "brick",
+   "wall_colour": "#cfc193",
+   "trim_colour": "#a8452e",
+   "cornice_z": 10.4,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.7
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.4,
+     "x1": 9.0,
+     "z1": 3.2,
+     "fascia_text": "",
+     "fascia_colour": "#2a3a40",
+     "text_colour": "#f0e8d0",
+     "door_x": 6.5,
+     "stallriser": 0.4,
+     "awning": true
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 11.2,
+     "w": 1.0,
+     "h": 2.4,
+     "surround": "none"
+    },
+    {
+     "type": "shopfront",
+     "x0": 12.4,
+     "x1": 16.0,
+     "z1": 3.2,
+     "fascia_text": "",
+     "fascia_colour": "#30353a",
+     "text_colour": "#f0e8d0",
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.8,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.6,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.4,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 10.4,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 13.6,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.8,
+     "w": 1.0,
+     "z": 7.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.6,
+     "w": 1.0,
+     "z": 7.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.4,
+     "w": 1.0,
+     "z": 7.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 10.4,
+     "w": 1.0,
+     "z": 7.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 13.6,
+     "w": 1.0,
+     "z": 7.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Return of 10-15 Market Passage onto the narrow southern leg of Market Passage (to Market St), faces WEST. Same buff gault brick with red-brick round-arched first-floor windows and red heads above as the north front; ground floor is a cafe with a long canvas awning and outdoor seating, then a door and a small dark unit. Five window columns estimated (left side of 7102349, looking south towards Holy Trinity's spire)."
+  }
+ ]
+}

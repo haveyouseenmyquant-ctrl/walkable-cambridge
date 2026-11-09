@@ -1479,3 +1479,45 @@ Next
 3. More ring-1 annotations: Green Street (Commons photos are already listed), Town and Gown (check its orientation),
    the Cambridge Union, Clare Chapel on Trinity Lane, Sedgwick, Botany and Free School Lane.
 4. Check fps_median with session 46's denser packs and the new VFX once service measures afef09.
+
+## 2026-11-09 — Session 48 (entry written in session 49; this session ended without committing or a journal entry)
+
+Session 49 found these edits uncommitted and committed them as 94d1696:
+- Game: movement spells (blink, Boulder Leap hop) now step up at most 0.6 m per 0.5 m and are settled back onto
+  walkable ground if they end on a roof or wall top. This fixes the warden route softlock at (-182.4, -27.5).
+  Briefer, smaller loot toasts, side panel at 58% height; nameplates fade up close and vanish on pickup; dimmer loot
+  pillars; damage numbers are bigger, fan out, and crits get a gold "CRIT" tag; the hit-stop is a little longer on crits.
+  Mobs get a type-coloured fresnel rim light (one shared shader program) and per-type and per-instance HSL variation;
+  the bell boss gets glowing runes. VFX sparks use screen blending, no sprite is larger than 12% of the screen height,
+  and spell lights are capped.
+- Realism: brick paving key colour blends into neighbouring classes (no lavender seams); Market Hill brick loop and other
+  surfaces.json annotations. Before/after shots: docs/screens/session48_paving_*.png.
+- Not published or measured at the time.
+
+## 2026-11-09 — Session 49: commit/publish session 48; combat pacing + mob detail; 18 ring-1 annotations
+
+Start: session 48's work was uncommitted (entry above), committed as 94d1696. Live was afef09: gameplay_judged 37.1
+(lowest criteria: enemy animation variety 3.0, polished feel 3.0; judges said half the frames had no enemies).
+
+Done (2 parallel subagents + lead)
+- Game pacing (mobs.js): packs within 110 m of the square respawn after 25 s instead of 45; +2 mobs per hand-placed core pack;
+  a 3-mob reinforcement wave 4 s after a core pack is cleared (lead capped it at one wave a minute, since uncapped
+  waves kept the clip bot at market-north and the boss never appeared); bosses call up to 3 adds on each phase change
+  and every 13 s; aggro range 24 → 26 m, call-for-help radius 18 m; two runtime-only street packs (Market Passage,
+  Market Hill east stalls). encounters.json is unchanged.
+- Mob models: ink imp (horns, nib spines, tail, drips), automaton (riveted pauldrons, glowing gauge, steam pipes,
+  pistons), gargoyle (brow, shoulder and elbow spurs). Bigger missile cores and trails, ember ground rings, dart rune marks.
+- Check: test_mobs passes 12 regular + 3 bosses, 15/15 encounters, 0 console errors. The pyromancer clip has 12/12
+  frames, reaches market-north → Bellwarden → Peas Hill, 28 kills (19 before), 0 page errors.
+- Ring 1: 18 new street-facing wall annotations (Sedgwick, Grand Arcade car park, Attenborough, Revolution, Botany,
+  Old Cavendish, Town and Gown on Market Passage, Market Passage / Market St fronts, Trumpington St Georgian range;
+  mostly low confidence). Ring-1 facade match **13.85 → 18.20%** (111 of 851), city 3.16 → 4.15%, zone 69.32 unchanged.
+
+Learned
+- The clip bot targets anything hostile within 18 m, so endless reinforcements stall its route. Waves need a global gap.
+- Green Street has only night-time or close-up Mapillary shots; the Cambridge Union and Market Hostel have no usable frontal photos.
+
+Next
+1. Read gameplay_judged for this build (service.sh), and check boss TTK spread and fps with the bigger packs and adds.
+2. Ring 1: Clare Chapel, King's Parade shops, Bene't St; a Commons-led pass for Downing St.
+3. More mob model detail for the remaining types (wisp, statue, river wraith) and clearer telegraphs.

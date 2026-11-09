@@ -1,0 +1,221 @@
+{
+ "osm_id": "way/1099846444",
+ "sources": [
+  "commons:File:Town and Gown theatre, Market Passage, Cambridge.jpg",
+  "commons:File:Cambridge - Market Passage - geograph.org.uk - 6888585.jpg",
+  "commons:File:Market Passage, Cambridge - geograph.org.uk - 7393572.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1099846444:7",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.2
+   ],
+   "material": "brick",
+   "wall_colour": "#3a3d42",
+   "trim_colour": "#2e3035",
+   "cornice_z": 8.4,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.0
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 1.0,
+     "w": 1.3,
+     "h": 2.6,
+     "surround": "none"
+    },
+    {
+     "type": "shopfront",
+     "x0": 2.4,
+     "x1": 9.6,
+     "z1": 3.6,
+     "fascia_text": "The Town and Gown",
+     "fascia_colour": "#2b2f36",
+     "text_colour": "#efe3c2",
+     "door_x": 9.0,
+     "stallriser": 0.3,
+     "awning": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 12.6,
+     "w": 1.3,
+     "z": 0.9,
+     "h": 2.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 14.9,
+     "w": 1.3,
+     "z": 0.9,
+     "h": 2.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 17.2,
+     "w": 1.3,
+     "z": 0.9,
+     "h": 2.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 19.5,
+     "w": 1.3,
+     "z": 0.9,
+     "h": 2.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 21.8,
+     "w": 1.3,
+     "z": 0.9,
+     "h": 2.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.6,
+     "w": 1.2,
+     "z": 4.6,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.9,
+     "w": 1.2,
+     "z": 4.6,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.2,
+     "w": 1.2,
+     "z": 4.6,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.6,
+     "w": 1.2,
+     "z": 4.6,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 11.6,
+     "w": 1.2,
+     "z": 4.6,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 23.8,
+     "w": 0.8,
+     "z": 5.6,
+     "h": 2.0,
+     "panes": [
+      1,
+      3
+     ],
+     "head": "arched",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 25.4,
+     "w": 0.8,
+     "z": 5.6,
+     "h": 2.0,
+     "panes": [
+      1,
+      3
+     ],
+     "head": "arched",
+     "sill": false
+    }
+   ],
+   "confidence": "low",
+   "notes": "Town and Gown pub & theatre (ex Cambridge Arts Cinema), 6-8 Market Passage. Faces SOUTH onto Market Passage (north side of the lane), not Market St. Whole front painted charcoal-grey brick with a balustraded parapet. West part: timber stage door, then the glazed Town and Gown bar front under a dark scalloped awning with gold lettering and the entrance; five deep-revealed sash windows above with planters. East part: an arcade of round-arched windows on columns with gilded capitals; a taller set-back grey block at the east end with two tall round-arched windows. Arch count and spacing estimated from raking views (6888585 looks east along the lane)."
+  }
+ ]
+}

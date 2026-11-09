@@ -1,0 +1,317 @@
+{
+ "visual_quality": 25.06,
+ "n": 30,
+ "model": "claude-opus-5-5",
+ "by_criterion": {
+  "lighting_shadows": 2.55,
+  "gi_ao": 1.58,
+  "materials_wear": 2.95,
+  "geometric_detail": 2.93,
+  "vegetation": 0.65,
+  "atmosphere": 1.28,
+  "image_quality": 3.6,
+  "no_artefacts": 4.5
+ },
+ "per_view": {
+  "188216173137774": {
+   "lighting_shadows": 3.0,
+   "gi_ao": 2.0,
+   "materials_wear": 3.0,
+   "geometric_detail": 4.0,
+   "vegetation": 0.0,
+   "atmosphere": 1.0,
+   "image_quality": 5.0,
+   "no_artefacts": 5.0
+  },
+  "454288872304141": {
+   "lighting_shadows": 2.0,
+   "gi_ao": 2.0,
+   "materials_wear": 2.0,
+   "geometric_detail": 4.0,
+   "vegetation": 0.0,
+   "atmosphere": 1.0,
+   "image_quality": 3.0,
+   "no_artefacts": 6.0
+  },
+  "365274541579500": {
+   "lighting_shadows": 2.0,
+   "gi_ao": 1.0,
+   "materials_wear": 3.0,
+   "geometric_detail": 3.0,
+   "vegetation": 2.0,
+   "atmosphere": 1.0,
+   "image_quality": 5.0,
+   "no_artefacts": 5.0
+  },
+  "2824712737794062": {
+   "lighting_shadows": 3.0,
+   "gi_ao": 2.0,
+   "materials_wear": 3.0,
+   "geometric_detail": 4.0,
+   "vegetation": 2.0,
+   "atmosphere": 1.0,
+   "image_quality": 4.0,
+   "no_artefacts": 5.0
+  },
+  "788562325143664": {
+   "lighting_shadows": 2.0,
+   "gi_ao": 1.0,
+   "materials_wear": 4.0,
+   "geometric_detail": 3.0,
+   "vegetation": 0.0,
+   "atmosphere": 2.0,
+   "image_quality": 4.0,
+   "no_artefacts": 5.0
+  },
+  "921837248604491": {
+   "lighting_shadows": 3.0,
+   "gi_ao": 2.0,
+   "materials_wear": 3.0,
+   "geometric_detail": 3.0,
+   "vegetation": 0.0,
+   "atmosphere": 2.0,
+   "image_quality": 4.0,
+   "no_artefacts": 3.0
+  },
+  "5470402219697715": {
+   "lighting_shadows": 3.0,
+   "gi_ao": 2.0,
+   "materials_wear": 3.0,
+   "geometric_detail": 3.0,
+   "vegetation": 0.0,
+   "atmosphere": 1.0,
+   "image_quality": 4.0,
+   "no_artefacts": 3.0
+  },
+  "163559995673306": {
+   "lighting_shadows": 2.0,
+   "gi_ao": 1.0,
+   "materials_wear": 3.0,
+   "geometric_detail": 3.0,
+   "vegetation": 1.0,
+   "atmosphere": 1.0,
+   "image_quality": 3.0,
+   "no_artefacts": 3.0
+  },
+  "745004922853288": {
+   "lighting_shadows": 3.0,
+   "gi_ao": 2.0,
+   "materials_wear": 3.0,
+   "geometric_detail": 3.0,
+   "vegetation": 2.0,
+   "atmosphere": 1.0,
+   "image_quality": 4.0,
+   "no_artefacts": 5.0
+  },
+  "415696689873406": {
+   "lighting_shadows": 2.0,
+   "gi_ao": 1.0,
+   "materials_wear": 3.0,
+   "geometric_detail": 1.0,
+   "vegetation": 0.0,
+   "atmosphere": 0.0,
+   "image_quality": 3.0,
+   "no_artefacts": 2.0
+  },
+  "266509748492759": {
+   "lighting_shadows": 3.0,
+   "gi_ao": 2.0,
+   "materials_wear": 4.0,
+   "geometric_detail": 4.0,
+   "vegetation": 0.0,
+   "atmosphere": 2.0,
+   "image_quality": 5.0,
+   "no_artefacts": 7.0
+  },
+  "318865883196685": {
+   "lighting_shadows": 1.5,
+   "gi_ao": 1.0,
+   "materials_wear": 3.0,
+   "geometric_detail": 2.0,
+   "vegetation": 0.5,
+   "atmosphere": 1.0,
+   "image_quality": 2.0,
+   "no_artefacts": 2.0
+  },
+  "268422968357948": {
+   "lighting_shadows": 2.0,
+   "gi_ao": 1.0,
+   "materials_wear": 2.0,
+   "geometric_detail": 1.0,
+   "vegetation": 0.0,
+   "atmosphere": 1.0,
+   "image_quality": 3.0,
+   "no_artefacts": 3.0
+  },
+  "454043642567080": {
+   "lighting_shadows": 2.0,
+   "gi_ao": 1.0,
+   "materials_wear": 3.0,
+   "geometric_detail": 3.0,
+   "vegetation": 2.0,
+   "atmosphere": 1.0,
+   "image_quality": 4.0,
+   "no_artefacts": 6.0
+  },
+  "163625715689245": {
+   "lighting_shadows": 3.0,
+   "gi_ao": 1.0,
+   "materials_wear": 2.0,
+   "geometric_detail": 3.0,
+   "vegetation": 0.0,
+   "atmosphere": 1.0,
+   "image_quality": 3.0,
+   "no_artefacts": 3.0
+  },
+  "902886690492404": {
+   "lighting_shadows": 3.0,
+   "gi_ao": 2.0,
+   "materials_wear": 3.0,
+   "geometric_detail": 3.0,
+   "vegetation": 0.0,
+   "atmosphere": 2.0,
+   "image_quality": 3.0,
+   "no_artefacts": 5.0
+  },
+  "519716785698039": {
+   "lighting_shadows": 3.0,
+   "gi_ao": 2.0,
+   "materials_wear": 3.0,
+   "geometric_detail": 3.0,
+   "vegetation": 0.0,
+   "atmosphere": 2.0,
+   "image_quality": 3.0,
+   "no_artefacts": 6.0
+  },
+  "458344219144234": {
+   "lighting_shadows": 3.0,
+   "gi_ao": 2.0,
+   "materials_wear": 3.0,
+   "geometric_detail": 4.0,
+   "vegetation": 0.0,
+   "atmosphere": 1.0,
+   "image_quality": 4.0,
+   "no_artefacts": 6.0
+  },
+  "865188314039724": {
+   "lighting_shadows": 3.0,
+   "gi_ao": 1.0,
+   "materials_wear": 2.0,
+   "geometric_detail": 3.0,
+   "vegetation": 1.0,
+   "atmosphere": 1.0,
+   "image_quality": 3.0,
+   "no_artefacts": 5.0
+  },
+  "826760024631099": {
+   "lighting_shadows": 2.0,
+   "gi_ao": 2.0,
+   "materials_wear": 3.0,
+   "geometric_detail": 3.0,
+   "vegetation": 1.0,
+   "atmosphere": 2.0,
+   "image_quality": 4.0,
+   "no_artefacts": 5.0
+  },
+  "626066128357691": {
+   "lighting_shadows": 3.0,
+   "gi_ao": 2.0,
+   "materials_wear": 3.0,
+   "geometric_detail": 4.0,
+   "vegetation": 0.0,
+   "atmosphere": 2.0,
+   "image_quality": 4.0,
+   "no_artefacts": 5.0
+  },
+  "336962257817391": {
+   "lighting_shadows": 3.0,
+   "gi_ao": 2.0,
+   "materials_wear": 3.0,
+   "geometric_detail": 3.0,
+   "vegetation": 0.0,
+   "atmosphere": 1.0,
+   "image_quality": 3.0,
+   "no_artefacts": 4.0
+  },
+  "830854540862619": {
+   "lighting_shadows": 2.0,
+   "gi_ao": 1.0,
+   "materials_wear": 4.0,
+   "geometric_detail": 3.0,
+   "vegetation": 0.0,
+   "atmosphere": 1.0,
+   "image_quality": 4.0,
+   "no_artefacts": 5.0
+  },
+  "799949717293550": {
+   "lighting_shadows": 3.0,
+   "gi_ao": 2.0,
+   "materials_wear": 4.0,
+   "geometric_detail": 3.0,
+   "vegetation": 0.0,
+   "atmosphere": 1.0,
+   "image_quality": 4.0,
+   "no_artefacts": 5.0
+  },
+  "490595022302449": {
+   "lighting_shadows": 3.0,
+   "gi_ao": 2.0,
+   "materials_wear": 3.0,
+   "geometric_detail": 3.0,
+   "vegetation": 0.0,
+   "atmosphere": 1.0,
+   "image_quality": 4.0,
+   "no_artefacts": 5.0
+  },
+  "322766872606714": {
+   "lighting_shadows": 3.0,
+   "gi_ao": 2.0,
+   "materials_wear": 3.0,
+   "geometric_detail": 3.0,
+   "vegetation": 0.0,
+   "atmosphere": 2.0,
+   "image_quality": 4.0,
+   "no_artefacts": 5.0
+  },
+  "520931825748687": {
+   "lighting_shadows": 2.0,
+   "gi_ao": 1.0,
+   "materials_wear": 2.0,
+   "geometric_detail": 1.0,
+   "vegetation": 3.0,
+   "atmosphere": 1.0,
+   "image_quality": 3.0,
+   "no_artefacts": 3.0
+  },
+  "475705490415952": {
+   "lighting_shadows": 2.0,
+   "gi_ao": 1.0,
+   "materials_wear": 3.0,
+   "geometric_detail": 2.0,
+   "vegetation": 1.0,
+   "atmosphere": 1.0,
+   "image_quality": 3.0,
+   "no_artefacts": 3.0
+  },
+  "1195719307561700": {
+   "lighting_shadows": 3.0,
+   "gi_ao": 2.0,
+   "materials_wear": 3.0,
+   "geometric_detail": 4.0,
+   "vegetation": 2.0,
+   "atmosphere": 2.0,
+   "image_quality": 3.0,
+   "no_artefacts": 5.0
+  },
+  "751969738836469": {
+   "lighting_shadows": 2.0,
+   "gi_ao": 1.5,
+   "materials_wear": 2.5,
+   "geometric_detail": 2.0,
+   "vegetation": 2.0,
+   "atmosphere": 1.5,
+   "image_quality": 3.0,
+   "no_artefacts": 5.0
+  }
+ }
+}

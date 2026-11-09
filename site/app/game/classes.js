@@ -232,19 +232,19 @@ export function install(game) {
     vfx.burst(x, y, z, Math.ceil(n / 4), { tex: 'smoke', color: 0x2a1040, color2: 0x100818, grow: 2, speed: 0.8, size: 0.9, life: 1, alpha: 0.45 });
   }
   const LOOK = {
-    ember: { missile: { coreColor: 0xffe8b0, radius: 0.11, halo: 0.6, width: 0.32, width2: 0.12, trailColor2: 0xffe080 },
+    ember: { missile: { coreColor: 0xffe8b0, radius: 0.16, halo: 0.8, width: 0.42, width2: 0.16, trailColor2: 0xffe080, trailLife: 0.28, trailLife2: 0.42 },
              trail: (x, y, z) => { vfx.burst(x, y, z, 2, { ...FIRE, speed: 0.6, size: 0.42, life: 0.28, up: 1.2, jitter: 0.1 }); if (Math.random() < 0.4) vfx.burst(x, y, z, 1, { tex: 'ember', color: 0xffc060, speed: 1, size: 0.1, life: 0.6, grav: 3 }); },
-             impact: (x, y, z) => fireBlast(x, y, z, 1.2, false) },
+             impact: (x, y, z) => { fireBlast(x, y, z, 1.2, false); const g = nearGround(x, y, z); if (g != null) vfx.ring(x, y, g, 0xffa040, 0.2, 1.6, 0.3, 0.6); } },
     orb: { missile: { coreColor: 0xfff0c0, radius: 0.26, halo: 1.3, width: 0.75, width2: 0.3, trailColor2: 0xffd060, trailLife: 0.3 },
            trail: (x, y, z) => { vfx.burst(x, y, z, 4, { ...FIRE, speed: 1.2, size: 0.8, life: 0.35, up: 1.5, jitter: 0.35 }); vfx.burst(x, y, z, 1, { ...SMOKE, speed: 0.4, size: 0.8, life: 0.9, up: 0.8, alpha: 0.35 }); },
            impact: (x, y, z, sp) => { sfx.play('boom'); fireBlast(x, y, z, sp.splash, true); vfx.ring(x, y, groundZ(x, y, z), 0xffc060, 0.5, sp.splash * 1.4, 0.6, 0.7); } },
-    pebble: { missile: { coreColor: 0xffe8c0, radius: 0.09, halo: 0.35, width: 0.14, trailColor: 0xc8a878, trailLife: 0.18 },
+    pebble: { missile: { coreColor: 0xffe8c0, radius: 0.13, halo: 0.45, width: 0.2, trailColor: 0xc8a878, trailLife: 0.24, width2: 0.08, trailColor2: 0xffe0a0 },
               trail: (x, y, z) => { if (Math.random() < 0.5) vfx.burst(x, y, z, 1, { ...DUST, speed: 0.3, size: 0.35, life: 0.5, alpha: 0.4 }); },
               impact: (x, y, z) => { stoneHit(x, y, z, 6); const g = nearGround(x, y, z); if (g != null) vfx.decal('crack', x, y, g, 0.8, 3, 0xffffff, 0.7); } },
-    dart: { missile: { coreColor: 0xf4e0ff, radius: 0.1, halo: 0.6, width: 0.3, width2: 0.1, trailColor2: 0x70ff90, trailLife2: 0.3 },
+    dart: { missile: { coreColor: 0xf4e0ff, radius: 0.15, halo: 0.8, width: 0.4, width2: 0.14, trailColor2: 0x70ff90, trailLife: 0.28, trailLife2: 0.4 },
             trail: (x, y, z) => vfx.burst(x, y, z, 1, { tex: 'wisp', color: 0xb070ff, color2: 0x301080, speed: 0.4, size: 0.4, life: 0.45, spin: 5 }),
-            impact: (x, y, z) => { hexPuff(x, y, z, 10); vfx.core(x, y, z, 0xb070ff, 0.25, 0.15); } },
-    mark: { missile: { coreColor: 0xe0ffe8, radius: 0.13, halo: 0.7, width: 0.36, trailColor: 0x50ff70, width2: 0.12, trailColor2: 0xb070ff, trailLife: 0.3 },
+            impact: (x, y, z) => { hexPuff(x, y, z, 10); vfx.core(x, y, z, 0xb070ff, 0.25, 0.15); const g = nearGround(x, y, z); if (g != null) vfx.decal('rune', x, y, g, 0.9, 1.2, 0xb070ff, 0.7, 2); } },
+    mark: { missile: { coreColor: 0xe0ffe8, radius: 0.17, halo: 0.85, width: 0.44, trailColor: 0x50ff70, width2: 0.12, trailColor2: 0xb070ff, trailLife: 0.3 },
             trail: (x, y, z) => vfx.burst(x, y, z, 2, { tex: 'wisp', color: 0x70ff90, color2: 0x104020, speed: 0.6, size: 0.45, life: 0.5, up: -0.4, spin: 5 }),
             impact: (x, y, z) => { hexPuff(x, y, z, 12, 0x70ff90, 0xb070ff); vfx.sigil(x, y, z + 0.6, 0x70ff90, 1.3, 1.4); const g = nearGround(x, y, z); if (g != null) vfx.decal('rune', x, y, g, 1.4, 1.6, 0x50ff70, 0.8, 1.5); } },
   };

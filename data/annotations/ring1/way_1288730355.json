@@ -1,0 +1,267 @@
+{
+ "osm_id": "way/1288730355",
+ "sources": [
+  "mapillary:1148250115690155",
+  "mapillary:819218512029304",
+  "mapillary:216555696536075"
+ ],
+ "walls": [
+  {
+   "id": "way/1288730355:0",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.0,
+    6.4,
+    8.6
+   ],
+   "material": "render",
+   "wall_colour": "#f4f3ef",
+   "trim_colour": "#e4e6e8",
+   "cornice_z": 11.2,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 4.4,
+     "z1": 3.6,
+     "fascia_text": "claire's",
+     "fascia_colour": "#ffffff",
+     "text_colour": "#5b2d8e",
+     "door_x": 2.4,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 4.7,
+     "x1": 13.3,
+     "z1": 3.6,
+     "fascia_text": "Cool Britannia",
+     "fascia_colour": "#5f6a72",
+     "text_colour": "#ffffff",
+     "door_x": 9.0,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.4,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.8,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 6.6,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.4,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 12.0,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.4,
+     "w": 1.0,
+     "z": 6.8,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.8,
+     "w": 1.0,
+     "z": 6.8,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 6.6,
+     "w": 1.0,
+     "z": 6.8,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.4,
+     "w": 1.0,
+     "z": 6.8,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 12.0,
+     "w": 1.0,
+     "z": 6.8,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.4,
+     "w": 0.9,
+     "z": 9.0,
+     "h": 1.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.8,
+     "w": 0.9,
+     "z": 9.0,
+     "h": 1.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 6.6,
+     "w": 0.9,
+     "z": 9.0,
+     "h": 1.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.4,
+     "w": 0.9,
+     "z": 9.0,
+     "h": 1.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 12.0,
+     "w": 0.9,
+     "z": 9.0,
+     "h": 1.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "3-6 Market Street: white-painted four-storey range over two shopfronts (claire's to the west, Cool Britannia across two units to the east, grey fascia). Plain sashes in five columns on three upper floors; the easternmost second-floor window is round-headed. Column positions estimated from raking 2017 views along the north side."
+  }
+ ]
+}

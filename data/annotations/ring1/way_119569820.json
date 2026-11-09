@@ -1,0 +1,201 @@
+{
+ "osm_id": "way/119569820",
+ "sources": [
+  "commons:File:Cavendish Laboratory - Free School Lane Cambridge CB2 3QA.jpg",
+  "commons:File:Entrance to the former Cavendish Laboratory, Cambridge - geograph.org.uk - 5275246.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/119569820:6",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.0,
+    8.0
+   ],
+   "material": "stone",
+   "wall_colour": "#cdbf9c",
+   "trim_colour": "#d9ccab",
+   "cornice_z": 11.4,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    0.6,
+    4.0,
+    8.0
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "door",
+     "style": "gothic",
+     "x": 15.4,
+     "w": 2.8,
+     "h": 3.8,
+     "surround": "pilastered"
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.2,
+     "w": 1.8,
+     "z": 1.0,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.2,
+     "w": 1.8,
+     "z": 4.8,
+     "h": 2.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.2,
+     "w": 1.5,
+     "z": 8.8,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.4,
+     "w": 1.8,
+     "z": 1.0,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.4,
+     "w": 1.8,
+     "z": 4.8,
+     "h": 2.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.4,
+     "w": 1.5,
+     "z": 8.8,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 10.6,
+     "w": 1.8,
+     "z": 1.0,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 10.6,
+     "w": 1.8,
+     "z": 4.8,
+     "h": 2.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 10.6,
+     "w": 1.5,
+     "z": 8.8,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 15.4,
+     "w": 1.8,
+     "z": 6.2,
+     "h": 2.4,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 2.2,
+     "w": 1.6,
+     "h": 2.0
+    },
+    {
+     "type": "dormer",
+     "x": 6.4,
+     "w": 1.6,
+     "h": 2.0
+    },
+    {
+     "type": "dormer",
+     "x": 10.6,
+     "w": 1.6,
+     "h": 2.0
+    }
+   ],
+   "confidence": "low",
+   "notes": "Old Cavendish Laboratory (W.M. Fawcett, 1872-4), Free School Lane front: buff ashlar Gothic Revival. Deep ogee-arched carriage archway with crocketed finial, heraldic panels and a statue niche (of the Duke of Devonshire) above; small oriel over the arch; red pillar box beside it. Three bays of two-light stone-mullioned windows with hood moulds on three storeys and gabled stone dormers in the roof. Archway placed at the south end of the wall; bay positions estimated from two Commons close-ups."
+  }
+ ]
+}

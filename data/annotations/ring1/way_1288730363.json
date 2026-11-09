@@ -1,0 +1,86 @@
+{
+ "osm_id": "way/1288730363",
+ "sources": [
+  "mapillary:1148250115690155",
+  "mapillary:819218512029304"
+ ],
+ "walls": [
+  {
+   "id": "way/1288730363:0",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.0,
+    6.4,
+    8.6
+   ],
+   "material": "render",
+   "wall_colour": "#eeeadc",
+   "trim_colour": "#f7f6f1",
+   "cornice_z": 10.5,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 5.3,
+     "z1": 3.6,
+     "fascia_text": "scribbler",
+     "fascia_colour": "#cddc2a",
+     "text_colour": "#ffffff",
+     "door_x": 2.6,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.75,
+     "w": 1.2,
+     "z": 4.4,
+     "h": 1.8,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.75,
+     "w": 1.2,
+     "z": 6.8,
+     "h": 1.8,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.75,
+     "w": 1.2,
+     "z": 9.0,
+     "h": 1.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "2 Market Street: narrow cream-painted Georgian house, four storeys, a single column of large multi-pane sashes over a bright lime-green 'scribbler' shopfront with central door. Plain parapet."
+  }
+ ]
+}

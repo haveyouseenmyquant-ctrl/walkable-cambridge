@@ -1,0 +1,573 @@
+{
+ "osm_id": "way/40900608",
+ "sources": [
+  "mapillary:295448308745927",
+  "mapillary:862942124255807",
+  "mapillary:259307372560632",
+  "commons:File:Geological Museum, Law School And University Museum Of Archaeology And Ethnology.jpg",
+  "commons:File:The Sedgwick Museum of Earth Sciences, Downing Street - geograph.org.uk - 699009.jpg",
+  "commons:File:Entrance to Sedgwick Building, Downing Street, Cambridge - geograph.org.uk - 8226622.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/40900608:0",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.8,
+    10.2
+   ],
+   "material": "brick",
+   "wall_colour": "#7e5a44",
+   "trim_colour": "#c9b48a",
+   "cornice_z": 13.4,
+   "cornice": "bracketed",
+   "parapet": false,
+   "string_courses": [
+    0.8,
+    4.8,
+    10.2
+   ],
+   "quoins": true,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.05,
+     "w": 2.2,
+     "z": 1.0,
+     "h": 3.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.05,
+     "w": 2.0,
+     "z": 5.4,
+     "h": 4.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.05,
+     "w": 1.6,
+     "z": 10.7,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.16,
+     "w": 2.2,
+     "z": 1.0,
+     "h": 3.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.16,
+     "w": 2.0,
+     "z": 5.4,
+     "h": 4.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.16,
+     "w": 1.6,
+     "z": 10.7,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 10.26,
+     "w": 2.2,
+     "z": 1.0,
+     "h": 3.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 10.26,
+     "w": 2.0,
+     "z": 5.4,
+     "h": 4.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 10.26,
+     "w": 1.6,
+     "z": 10.7,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 14.36,
+     "w": 2.2,
+     "z": 1.0,
+     "h": 3.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 14.36,
+     "w": 2.0,
+     "z": 5.4,
+     "h": 4.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 14.36,
+     "w": 1.6,
+     "z": 10.7,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "arched",
+     "x": 18.46,
+     "w": 1.8,
+     "h": 3.2,
+     "surround": "pilastered"
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 18.46,
+     "w": 2.0,
+     "z": 5.4,
+     "h": 4.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 18.46,
+     "w": 1.6,
+     "z": 10.7,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 22.57,
+     "w": 2.2,
+     "z": 1.0,
+     "h": 3.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 22.57,
+     "w": 2.0,
+     "z": 5.4,
+     "h": 4.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 22.57,
+     "w": 1.6,
+     "z": 10.7,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 26.67,
+     "w": 2.2,
+     "z": 1.0,
+     "h": 3.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 26.67,
+     "w": 2.0,
+     "z": 5.4,
+     "h": 4.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 26.67,
+     "w": 1.6,
+     "z": 10.7,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 30.78,
+     "w": 2.2,
+     "z": 1.0,
+     "h": 3.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 30.78,
+     "w": 2.0,
+     "z": 5.4,
+     "h": 4.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 30.78,
+     "w": 1.6,
+     "z": 10.7,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 34.88,
+     "w": 2.2,
+     "z": 1.0,
+     "h": 3.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 34.88,
+     "w": 2.0,
+     "z": 5.4,
+     "h": 4.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 34.88,
+     "w": 1.6,
+     "z": 10.7,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 38.98,
+     "w": 2.2,
+     "z": 1.0,
+     "h": 3.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 38.98,
+     "w": 2.0,
+     "z": 5.4,
+     "h": 4.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 38.98,
+     "w": 1.6,
+     "z": 10.7,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 43.09,
+     "w": 2.2,
+     "z": 1.0,
+     "h": 3.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 43.09,
+     "w": 2.0,
+     "z": 5.4,
+     "h": 4.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 43.09,
+     "w": 1.6,
+     "z": 10.7,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 47.19,
+     "w": 2.2,
+     "z": 1.0,
+     "h": 3.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 47.19,
+     "w": 2.0,
+     "z": 5.4,
+     "h": 4.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 47.19,
+     "w": 1.6,
+     "z": 10.7,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 4.1,
+     "w": 1.6,
+     "h": 1.8
+    },
+    {
+     "type": "dormer",
+     "x": 12.31,
+     "w": 1.6,
+     "h": 1.8
+    },
+    {
+     "type": "dormer",
+     "x": 20.52,
+     "w": 1.6,
+     "h": 1.8
+    },
+    {
+     "type": "dormer",
+     "x": 28.72,
+     "w": 1.6,
+     "h": 1.8
+    },
+    {
+     "type": "dormer",
+     "x": 36.93,
+     "w": 1.6,
+     "h": 1.8
+    },
+    {
+     "type": "dormer",
+     "x": 45.14,
+     "w": 1.6,
+     "h": 1.8
+    }
+   ],
+   "confidence": "low",
+   "notes": "Sedgwick Building (T.G. Jackson, 1904), Downing St front: dark red-brown brick with buff Ketton/Clipsham stone dressings, Jacobean. Ground floor of round-arched windows with stone voussoirs over a stone plinth behind a low wall; first floor tall two-light mullion-and-transom windows; second floor shorter cross windows; steep tiled roof with gabled dormers above a corbelled cornice. A stone doorway with columns, broken pediment and carved tympanum (fourth bay from the east; the main museum entrance with the carved beasts lies further west, beyond this wall). 12 bays spaced evenly over the 49 m wall; window rhythm estimated from raking Mapillary views along Downing St and Commons photos."
+  }
+ ]
+}

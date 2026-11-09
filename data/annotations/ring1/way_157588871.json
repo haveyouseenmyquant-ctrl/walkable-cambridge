@@ -1,0 +1,423 @@
+{
+ "osm_id": "way/157588871",
+ "sources": [
+  "mapillary:519725679030998",
+  "mapillary:842265399972433",
+  "mapillary:646086009572452",
+  "mapillary:501677960969984",
+  "mapillary:1109434372858951"
+ ],
+ "walls": [
+  {
+   "id": "way/157588871:2",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.0,
+    7.8,
+    11.4
+   ],
+   "material": "stone",
+   "wall_colour": "#cfbf98",
+   "trim_colour": "#e2d8bf",
+   "cornice_z": 14.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.0
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.71,
+     "w": 1.1,
+     "z": 0.9,
+     "h": 2.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.71,
+     "w": 1.15,
+     "z": 4.5,
+     "h": 2.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.71,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.71,
+     "w": 1.0,
+     "z": 11.8,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.13,
+     "w": 1.1,
+     "z": 0.9,
+     "h": 2.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.13,
+     "w": 1.15,
+     "z": 4.5,
+     "h": 2.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.13,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.13,
+     "w": 1.0,
+     "z": 11.8,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.55,
+     "w": 1.1,
+     "z": 0.9,
+     "h": 2.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.55,
+     "w": 1.15,
+     "z": 4.5,
+     "h": 2.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.55,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.55,
+     "w": 1.0,
+     "z": 11.8,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 11.96,
+     "w": 1.3,
+     "h": 2.9,
+     "surround": "porch"
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 11.96,
+     "w": 1.15,
+     "z": 4.5,
+     "h": 2.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 11.96,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 11.96,
+     "w": 1.0,
+     "z": 11.8,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 15.38,
+     "w": 1.1,
+     "z": 0.9,
+     "h": 2.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 15.38,
+     "w": 1.15,
+     "z": 4.5,
+     "h": 2.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 15.38,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 15.38,
+     "w": 1.0,
+     "z": 11.8,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 18.8,
+     "w": 1.1,
+     "z": 0.9,
+     "h": 2.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 18.8,
+     "w": 1.15,
+     "z": 4.5,
+     "h": 2.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 18.8,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 18.8,
+     "w": 1.0,
+     "z": 11.8,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 22.22,
+     "w": 1.1,
+     "z": 0.9,
+     "h": 2.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 22.22,
+     "w": 1.15,
+     "z": 4.5,
+     "h": 2.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 22.22,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 22.22,
+     "w": 1.0,
+     "z": 11.8,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "West side of Trumpington St opposite the Pembroke St junction, facing east: buff ashlar late-Georgian four-storey range, ground-floor sashes with a Doric porch doorway, tall first-floor sashes behind a continuous wrought-iron balcony, shorter second and third floors, plain cornice and parapet. Seen raking from the street (2015-2019, scaffolded in 2019); 7 bays assumed evenly spaced, door bay placed centrally."
+  }
+ ]
+}

@@ -1,0 +1,379 @@
+{
+ "osm_id": "way/227825136",
+ "sources": [
+  "mapillary:222268895902808",
+  "mapillary:1677398805779021",
+  "mapillary:811817629761300",
+  "mapillary:516491239375858"
+ ],
+ "walls": [
+  {
+   "id": "way/227825136:10",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.0,
+    7.0
+   ],
+   "material": "brick",
+   "wall_colour": "#d9cfae",
+   "trim_colour": "#5a6648",
+   "cornice_z": 10.2,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.0
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.4,
+     "x1": 12.0,
+     "z1": 3.6,
+     "fascia_text": "Revolution",
+     "fascia_colour": "#4f5d3a",
+     "text_colour": "#f2efe6",
+     "door_x": 3.0,
+     "stallriser": 0.5,
+     "awning": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 12.4,
+     "x1": 24.0,
+     "z1": 3.6,
+     "fascia_text": null,
+     "fascia_colour": "#4f5d3a",
+     "text_colour": "#f2efe6",
+     "door_x": 20.0,
+     "stallriser": 0.5,
+     "awning": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 24.6,
+     "x1": 34.4,
+     "z1": 3.6,
+     "fascia_text": null,
+     "fascia_colour": "#1f4f3c",
+     "text_colour": "#f2efe6",
+     "door_x": 31.0,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 1.6,
+     "w": 1.3,
+     "z": 4.6,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 4.75,
+     "w": 1.3,
+     "z": 4.6,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 7.9,
+     "w": 1.3,
+     "z": 4.6,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 11.05,
+     "w": 1.3,
+     "z": 4.6,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 14.2,
+     "w": 1.3,
+     "z": 4.6,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 17.35,
+     "w": 1.3,
+     "z": 4.6,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 20.5,
+     "w": 1.3,
+     "z": 4.6,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 23.65,
+     "w": 1.3,
+     "z": 4.6,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 26.8,
+     "w": 1.3,
+     "z": 4.6,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 29.95,
+     "w": 1.3,
+     "z": 4.6,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 33.1,
+     "w": 1.3,
+     "z": 4.6,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 1.6,
+     "w": 1.3,
+     "z": 7.6,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 4.75,
+     "w": 1.3,
+     "z": 7.6,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 7.9,
+     "w": 1.3,
+     "z": 7.6,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 11.05,
+     "w": 1.3,
+     "z": 7.6,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 14.2,
+     "w": 1.3,
+     "z": 7.6,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 17.35,
+     "w": 1.3,
+     "z": 7.6,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 20.5,
+     "w": 1.3,
+     "z": 7.6,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 23.65,
+     "w": 1.3,
+     "z": 7.6,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 26.8,
+     "w": 1.3,
+     "z": 7.6,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 29.95,
+     "w": 1.3,
+     "z": 7.6,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 33.1,
+     "w": 1.3,
+     "z": 7.6,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Downing St south side at the St Andrew's St end: post-war buff-brick and stone block with a continuous ground-floor bar front painted olive green (Revolution bar, 'Revolution' lettering and green awnings, outdoor planters), a darker green-painted unit at the west end; two upper storeys of plain rectangular windows at ~3 m spacing, flat parapet. Hanging 'Revolution' sign. Window spacing estimated from raking 2016 and 2020 Mapillary views; walls.json height (7.3 m) looks low, the photos show three storeys (~10 m)."
+  }
+ ]
+}

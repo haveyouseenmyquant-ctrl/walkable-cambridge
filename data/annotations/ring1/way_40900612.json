@@ -1,0 +1,503 @@
+{
+ "osm_id": "way/40900612",
+ "sources": [
+  "mapillary:586551062317743",
+  "mapillary:159696349437511",
+  "commons:File:Department of Plant Sciences - geograph.org.uk - 1085000.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/40900612:3",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.2,
+    8.4
+   ],
+   "material": "brick",
+   "wall_colour": "#9c6a4e",
+   "trim_colour": "#d8c49a",
+   "cornice_z": 12.6,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.2,
+    8.4
+   ],
+   "quoins": true,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.79,
+     "w": 1.5,
+     "z": 1.2,
+     "h": 2.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.79,
+     "w": 1.5,
+     "z": 5.4,
+     "h": 2.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.79,
+     "w": 1.5,
+     "z": 9.6,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.37,
+     "w": 1.5,
+     "z": 1.2,
+     "h": 2.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.37,
+     "w": 1.5,
+     "z": 5.4,
+     "h": 2.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.37,
+     "w": 1.5,
+     "z": 9.6,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 8.96,
+     "w": 1.5,
+     "z": 1.2,
+     "h": 2.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 8.96,
+     "w": 1.5,
+     "z": 5.4,
+     "h": 2.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 8.96,
+     "w": 1.5,
+     "z": 9.6,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 12.54,
+     "w": 1.5,
+     "z": 1.2,
+     "h": 2.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 12.54,
+     "w": 1.5,
+     "z": 5.4,
+     "h": 2.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 12.54,
+     "w": 1.5,
+     "z": 9.6,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 16.12,
+     "w": 1.5,
+     "z": 1.2,
+     "h": 2.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 16.12,
+     "w": 1.5,
+     "z": 5.4,
+     "h": 2.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 16.12,
+     "w": 1.5,
+     "z": 9.6,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 19.7,
+     "w": 1.5,
+     "z": 1.2,
+     "h": 2.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 19.7,
+     "w": 1.5,
+     "z": 5.4,
+     "h": 2.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 19.7,
+     "w": 1.5,
+     "z": 9.6,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 23.28,
+     "w": 1.5,
+     "z": 1.2,
+     "h": 2.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 23.28,
+     "w": 1.5,
+     "z": 5.4,
+     "h": 2.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 23.28,
+     "w": 1.5,
+     "z": 9.6,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 26.86,
+     "w": 1.5,
+     "z": 1.2,
+     "h": 2.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 26.86,
+     "w": 1.5,
+     "z": 5.4,
+     "h": 2.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 26.86,
+     "w": 1.5,
+     "z": 9.6,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 30.45,
+     "w": 1.5,
+     "z": 1.2,
+     "h": 2.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 30.45,
+     "w": 1.5,
+     "z": 5.4,
+     "h": 2.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 30.45,
+     "w": 1.5,
+     "z": 9.6,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 34.03,
+     "w": 1.5,
+     "z": 1.2,
+     "h": 2.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 34.03,
+     "w": 1.5,
+     "z": 5.4,
+     "h": 2.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 34.03,
+     "w": 1.5,
+     "z": 9.6,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 2.6,
+     "w": 1.4,
+     "h": 1.6
+    },
+    {
+     "type": "dormer",
+     "x": 6.97,
+     "w": 1.4,
+     "h": 1.6
+    },
+    {
+     "type": "dormer",
+     "x": 11.34,
+     "w": 1.4,
+     "h": 1.6
+    },
+    {
+     "type": "dormer",
+     "x": 15.71,
+     "w": 1.4,
+     "h": 1.6
+    },
+    {
+     "type": "dormer",
+     "x": 20.08,
+     "w": 1.4,
+     "h": 1.6
+    },
+    {
+     "type": "dormer",
+     "x": 24.45,
+     "w": 1.4,
+     "h": 1.6
+    },
+    {
+     "type": "dormer",
+     "x": 28.82,
+     "w": 1.4,
+     "h": 1.6
+    },
+    {
+     "type": "dormer",
+     "x": 33.19,
+     "w": 1.4,
+     "h": 1.6
+    }
+   ],
+   "confidence": "low",
+   "notes": "Botany Building (W.S. Weatherley, 1904), south range: red-brown brick with buff stone bands and dressings, three main storeys of regular sash/cross windows and a slate mansard with a row of small dormers. The 2019 Mapillary views (one stationary car, raking from the south-west) show it under scaffolding, so the window grid (10 bays) and dormer count (8) are estimated; materials also follow the Commons photo of the courtyard (north) front."
+  }
+ ]
+}

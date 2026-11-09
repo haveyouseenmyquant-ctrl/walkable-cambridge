@@ -1,0 +1,345 @@
+{
+ "osm_id": "way/5236376",
+ "sources": [
+  "mapillary:1264655400619374",
+  "mapillary:1357097568007100",
+  "mapillary:1177659432665774",
+  "mapillary:759169374775921"
+ ],
+ "walls": [
+  {
+   "id": "way/5236376:27",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    5.0,
+    9.0,
+    13.0
+   ],
+   "material": "stone",
+   "wall_colour": "#a99c86",
+   "trim_colour": "#c9b98e",
+   "cornice_z": 17.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    5.0
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.2,
+    7.2,
+    14.3,
+    21.4,
+    28.5,
+    35.5
+   ],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.4,
+     "x1": 8.5,
+     "z1": 3.6,
+     "fascia_text": "Rutland Cycling",
+     "fascia_colour": "#0e6f7a",
+     "text_colour": "#ffffff",
+     "door_x": 2.0,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 10.5,
+     "w": 1.1,
+     "z": 1.6,
+     "h": 1.0,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 13.0,
+     "w": 1.1,
+     "z": 1.6,
+     "h": 1.0,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 15.5,
+     "w": 1.1,
+     "z": 1.6,
+     "h": 1.0,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 18.0,
+     "w": 1.1,
+     "z": 1.6,
+     "h": 1.0,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 20.5,
+     "w": 1.1,
+     "z": 1.6,
+     "h": 1.0,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 23.0,
+     "w": 1.1,
+     "z": 1.6,
+     "h": 1.0,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 25.5,
+     "w": 1.1,
+     "z": 1.6,
+     "h": 1.0,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 28.0,
+     "w": 1.1,
+     "z": 1.6,
+     "h": 1.0,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 30.5,
+     "w": 1.1,
+     "z": 1.6,
+     "h": 1.0,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 33.0,
+     "w": 1.1,
+     "z": 1.6,
+     "h": 1.0,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 3.6,
+     "w": 5.2,
+     "z": 6.0,
+     "h": 10.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 10.7,
+     "w": 5.2,
+     "z": 6.0,
+     "h": 10.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 17.8,
+     "w": 5.2,
+     "z": 6.0,
+     "h": 10.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 24.9,
+     "w": 5.2,
+     "z": 6.0,
+     "h": 10.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 32.0,
+     "w": 5.2,
+     "z": 6.0,
+     "h": 10.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Grand Arcade multi-storey car park (2008), west face on Corn Exchange St. Rusticated grey-buff stone base (~5 m) with a row of small square windows/louvres; Rutland Cycling shop unit with teal fascia at the north (x=0) end. Above, buff stone piers frame tall recessed bays of green-tinted glass panels with steel deck railings at each parking level, plain parapet. Bay count (5) and small-window spacing estimated from oblique 2016 Mapillary views looking north up the street."
+  },
+  {
+   "id": "way/5236376:28",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    5.0,
+    9.0,
+    13.0
+   ],
+   "material": "stone",
+   "wall_colour": "#a99c86",
+   "trim_colour": "#c9b98e",
+   "cornice_z": 17.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    5.0
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.2,
+    6.9,
+    13.8,
+    20.5
+   ],
+   "elements": [
+    {
+     "type": "door",
+     "style": "glazed",
+     "x": 7.0,
+     "w": 7.0,
+     "h": 4.2,
+     "surround": "none"
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 3.4,
+     "w": 5.0,
+     "z": 6.0,
+     "h": 10.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 10.3,
+     "w": 5.0,
+     "z": 6.0,
+     "h": 10.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 17.2,
+     "w": 5.0,
+     "z": 6.0,
+     "h": 10.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Grand Arcade car park, southern part of the Corn Exchange St face: the vehicle entrance/exit (dark undercroft under a projecting deck with 'HEADROOM' bar, modelled as a wide opening) at ground level, buff stone piers and green glass-panel bays with railings above as on the northern part. From one 2016 Mapillary view looking north and the same series for :27."
+  }
+ ]
+}
