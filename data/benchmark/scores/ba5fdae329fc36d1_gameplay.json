@@ -1,0 +1,43 @@
+{
+ "gameplay_judged": 50.0,
+ "n": 2,
+ "model": "claude-opus-5-5",
+ "hash": "ba5fdae329fc36d1",
+ "classes": {
+  "hexweaver": {
+   "score": 5.0,
+   "readability_telegraphs": 5.0,
+   "spell_vfx": 5.0,
+   "enemy_animation_variety": 4.0,
+   "hit_feedback": 5.0,
+   "ui_hud_clarity": 6.0,
+   "loot_excitement": 6.0,
+   "polished_arpg_feel": 4.0,
+   "overall": 5
+  },
+  "stormcaller": {
+   "score": 5.0,
+   "readability_telegraphs": 5.0,
+   "spell_vfx": 5.0,
+   "enemy_animation_variety": 4.0,
+   "hit_feedback": 4.5,
+   "ui_hud_clarity": 6.0,
+   "loot_excitement": 6.0,
+   "polished_arpg_feel": 4.5,
+   "overall": 4.8
+  }
+ },
+ "by_criterion": {
+  "readability_telegraphs": 5.0,
+  "spell_vfx": 5.0,
+  "enemy_animation_variety": 4.0,
+  "hit_feedback": 4.75,
+  "ui_hud_clarity": 6.0,
+  "loot_excitement": 6.0,
+  "polished_arpg_feel": 4.25
+ },
+ "reasons": {
+  "hexweaver": "Strengths: the boss fight reads well, with a named boss bar, phase labels, named attacks and red ground telegraphs, and loot gets rarity-coloured light beams and detailed item cards. Weaknesses: the camera is a third-person over-the-shoulder view rather than first-person, and the art is simple low-poly. Enemies are mostly translucent glowing shapes or primitive-looking models, spell effects are generic glowing orbs and arcs, and the second half of the clip is mostly empty walking with item tooltips stacking up on screen, which hurts pacing.",
+  "stormcaller": "The strongest parts are the boss presentation and the loot. The boss has a phased health bar, named attacks, an enraged red ground telegraph and a red screen tint. Loot has rarity-coloured light beams, name labels and stat toasts, and the HUD with its cooldown spell bar and minimap is clear. The weaknesses: enemies are few and look like simple primitive models, and the last third of the clip is empty streets with no combat. Spell effects are mostly generic blue rings and sprites with little sign of hit-stop or flashes, and on-screen damage numbers (123, 278) don't match the log's max hit of 51."
+ }
+}

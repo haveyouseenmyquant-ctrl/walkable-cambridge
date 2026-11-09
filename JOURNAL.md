@@ -1924,7 +1924,12 @@ Next
 - The live e5aa7869 judged_realism came in: 26.9 (previous builds 24.2 and 26.5).
 - Note: the screenshot tool can capture its first view before the camera has moved. Throw away the first shot.
 
+- **The full publish scoring does not confirm the bot fix.** On the new build hexweaver read 20.9/22.3/22.7/5.2/10.7 s, median 20.9
+  (pyro 11.0, storm 11.9, warden 10.6), spread 82.2%. The 4-run local sample was lucky. Hexweaver really is slow on the
+  Bellwarden in most runs (about 21 s), with occasional very fast kills. Next session needs a real balance or AI look, not more samples.
+
 Next
-1. Read the new live hash's game KPIs: is the hexweaver spread fixed across all 5×4 runs? Is gameplay_judged steady?
+1. Hexweaver vs the boss: log per-spell boss damage for hexweaver runs (is the familiar or siphon range the gap?), then buff its single-target
+   damage about ×1.4 against bosses, or fix the whiffing. Goal: spread ≤25%.
 2. Annotate the bespoke walls (Christ's, Sidney, St John's gate, Round Church) from non-held-out photos so the ring facade KPI counts them.
 3. gameplay_judged: the judge keeps saying "enemies are primitive, little visible animation" (4.0) and "VFX clutter". Next game work: mob limb animation.
