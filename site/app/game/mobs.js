@@ -129,6 +129,10 @@ const BASE = {
 };
 // session 48: fresnel rim light (emissive, type-coloured) injected into the standard shader; one shared program
 const hash01 = (str) => { let h = 2166136261; for (let i = 0; i < str.length; i++) h = Math.imul(h ^ str.charCodeAt(i), 16777619); return ((h >>> 0) % 10007) / 10007; };
+// s75: body-language families for regular mobs (bosses keep the generic layer): per-family wind-up flavour, hit reaction
+const FAMILY = { gargoyle: 'stone', statue: 'stone', crest_griffin: 'stone', punt_revenant: 'stone',
+  wisp: 'spirit', river_wraith: 'spirit', bog_hag: 'spirit', ink_imp: 'spirit',
+  automaton: 'clockwork', bicycle_golem: 'clockwork', bell_bats: 'swarm', soot_sprite: 'swarm' };
 const HIT_T = 0.36;   // s69: part-recoil duration (held at full for the first half, then eases out)
 const SCATTER_SKIP = new Set(['body', 'torso', 'robe', 'core', 'shell', 'pot', 'blob', 'sally', 'frame', 'halo', 'tail', 'crown', 'tendrils', 'reeds']);
 const MOB_VIS = 1.45;   // s66: 1.3 -> 1.45 (judge: 'small figures, hard to read')
@@ -918,7 +922,7 @@ export const MOB_TYPES = [
       loot: [{ rarity: 'common', chance: 0.45 }, { rarity: 'uncommon', chance: 0.12 }],
       attacks: [A({ name: 'Nib Bite', kind: 'line', range: 1.8, len: 2.2, w: 1.2, windup: 0.35, cd: 1.1, dmg: 5, recover: 0.25 }),
                 A({ name: 'Ink Spit', kind: 'bolt', range: 9, minRange: 3, windup: 0.5, cd: 3, dmg: 6, speed: 11, color: 0x30206a })] }),
-  D({ id: 'automaton', death: 'crumble', scale: 1.12, name: 'Clockwork Porter', hp: 95, speed: 2.8, radius: 0.6, xp: 26, color: 0xffb040,
+  D({ id: 'automaton', death: 'collapse', scale: 1.12, name: 'Clockwork Porter', hp: 95, speed: 2.8, radius: 0.6, xp: 26, color: 0xffb040,
       loot: [{ rarity: 'common', chance: 0.6 }, { rarity: 'uncommon', chance: 0.3 }, { rarity: 'rare', chance: 0.1 }],
       attacks: [A({ name: 'Wound-Spring Charge', kind: 'charge', range: 12, minRange: 3, len: 13, w: 1.6, windup: 1.0, cd: 5, dmg: 18, speed: 16 }),
                 A({ name: 'Gear Whirl', kind: 'ring', range: 2.6, r: 2.8, windup: 0.7, cd: 2.5, dmg: 10 })] }),
@@ -949,7 +953,7 @@ export const MOB_TYPES = [
       loot: [{ rarity: 'common', chance: 0.65 }, { rarity: 'uncommon', chance: 0.38 }, { rarity: 'rare', chance: 0.12 }, { rarity: 'epic', chance: 0.02 }],
       attacks: [A({ name: 'Rending Talons', kind: 'line', range: 2.6, len: 3, w: 2, windup: 0.55, cd: 1.8, dmg: 12, recover: 0.4 }),
                 A({ name: 'Heraldic Pounce', kind: 'leap', range: 10, minRange: 3.5, r: 2.4, windup: 0.9, cd: 5, dmg: 18, recover: 0.8 })] }),
-  D({ id: 'bicycle_golem', death: 'crumble', scale: 1.08, name: 'Mossbound Bicycle-Golem', hp: 110, speed: 3.4, radius: 0.65, xp: 28, color: 0xc0ff60, knockResist: 0.5, deathColor: 0x4d6b2e,
+  D({ id: 'bicycle_golem', death: 'collapse', scale: 1.08, name: 'Mossbound Bicycle-Golem', hp: 110, speed: 3.4, radius: 0.65, xp: 28, color: 0xc0ff60, knockResist: 0.5, deathColor: 0x4d6b2e,
       loot: [{ rarity: 'common', chance: 0.65 }, { rarity: 'uncommon', chance: 0.32 }, { rarity: 'rare', chance: 0.1 }],
       attacks: [A({ name: 'Freewheel Charge', kind: 'charge', range: 13, minRange: 3, len: 14, w: 1.6, windup: 1.0, cd: 4.5, dmg: 16, speed: 17 }),
                 A({ name: 'Chain Lash', kind: 'line', range: 3, len: 3.5, w: 2.6, windup: 0.7, cd: 2.4, dmg: 11 })] }),
@@ -1110,7 +1114,10 @@ class MobSystem {
     const T = mob.type, cz = mob.z + 1 * T.scale * (mob.boss ? 2.5 : 1), gz = mob.groundZ ?? mob.z;
     // session 46: three death styles. crumble: stone debris falls + dust ring; dissolve: motes stream upward;
     // burst: the body swells and pops in a wide spray + flash ring
-    if (T.death === 'crumble') {
+    if (T.death === 'collapse') {   // s75: clockwork: sprung sparks + small metal debris, no dust ring
+      this.burst(mob.x, mob.y, cz, 0xffc860, 18, 6, null, { size: 0.6, grav: 14, life: 0.9, glow: 2 });
+      this.burst(mob.x, mob.y, cz, 0x6a6458, 12, 3, mob.mats[0]?.color, { size: 1.4, grav: 16, life: 1.4 });
+    } else if (T.death === 'crumble') {
       this.burst(mob.x, mob.y, cz, 0x8a857a, mob.boss ? 46 : 22, mob.boss ? 7 : 4, mob.mats[0]?.color, { size: 2.2, grav: 16, life: 1.6 });
       this.burst(mob.x, mob.y, cz, T.color, mob.boss ? 24 : 10, mob.boss ? 8 : 5);
       this.shockwave(mob.x, mob.y, gz, 0xb8ae98, mob.boss ? 9 : 3.5, 0.9);
@@ -1529,12 +1536,35 @@ class MobSystem {
     }
     if (mob.alertT > 0) { const a = mob.alertT / 0.4; py += Math.sin(a * PI) * 0.45 * amp; sy += 0.14 * a; sx -= 0.06 * a; }   // noticed the player: a startled hop
     let heat = 0;
-    if (st === 'windup') {   // wind-up: coil (crouch, lean back, twist away), tremble just before release
+    const fam = mob.boss ? null : FAMILY[T.id], kind = mob.attack?.kind;
+    if (st === 'windup' && fam) {   // s75: pose follows the attack kind, flavour follows the family
+      const wf = 1 - Math.max(0, mob.stateT) / mob.windupEff, e = wf * (2 - wf);
+      if (kind === 'charge' || kind === 'leap') {   // pounce coil: crouch low, lean in, dig in and rock
+        sy -= (kind === 'leap' ? 0.36 : 0.28) * e; sx += 0.16 * e; rx += 0.3 * e; py -= 0.15 * e; pz -= 0.3 * e; ry += Math.sin(t * 9) * 0.07 * e;
+      } else if (kind === 'ring') {   // rear up tall and lean back, ready to slam down
+        sy += 0.22 * e; sx -= 0.08 * e; rx -= 0.5 * e; py += 0.25 * e;
+      } else if (kind === 'bolt' || kind === 'nova') {   // draw back and gather
+        rx -= 0.35 * e; pz -= 0.25 * e; sx -= 0.08 * e; sy += 0.06 * e; ry -= 0.2 * e;
+      } else {   // line: twist the shoulder away for a swing / thrust
+        ry -= 0.6 * e; rx -= 0.2 * e; sy -= 0.1 * e; sx += 0.06 * e; pz -= 0.15 * e;
+      }
+      if (fam === 'stone') { if (wf > 0.55) { rz += Math.sin(t * 40) * 0.05; py += Math.abs(Math.sin(t * 40)) * 0.03; } }   // grinding, heavy
+      else if (fam === 'spirit') { py += 0.35 * e; sx += 0.18 * e; sy += 0.22 * e; ry += Math.sin(t * 3) * 0.3 * e; }   // swells and lifts
+      else if (fam === 'clockwork') { const c = wf * 6; ry -= 1.1 * Math.floor(c) / 6; if (c % 1 < 0.2) rz += 0.06; }   // winds up in ratchet clicks
+      else if (fam === 'swarm') { sx -= 0.3 * e; sy -= 0.3 * e; py += Math.sin(t * 30) * 0.05 * e; }   // knots up tight
+      if (wf > 0.75 && fam !== 'stone') { rz += Math.sin(t * 70) * 0.06; sx += Math.sin(t * 55) * 0.02; }
+      heat = wf;
+    } else if (st === 'windup') {   // wind-up: coil (crouch, lean back, twist away), tremble just before release
       const wf = 1 - Math.max(0, mob.stateT) / mob.windupEff, e = wf * (2 - wf);
       sy -= 0.2 * e * amp; sx += 0.12 * e * amp; rx -= 0.38 * e * amp; ry -= 0.3 * e * amp; py -= 0.08 * e * amp; pz -= 0.15 * e * amp;
       if (wf > 0.7) { rz += Math.sin(t * 70) * 0.06 * amp; sx += Math.sin(t * 55) * 0.02; }
       heat = wf;
-    } else if (st === 'active') { rx += 0.45 * amp; sy += 0.14; sx -= 0.07; pz += 0.35 * amp; ry += 0.3 * amp; heat = 1; }   // strike: stretched, committed lunge
+    } else if (st === 'active') {   // strike: stretched, committed lunge
+      rx += 0.45 * amp; sy += 0.14; sx -= 0.07; pz += 0.35 * amp; ry += 0.3 * amp; heat = 1;
+      if (fam === 'swarm') { sx += 0.3; sy += 0.2; }   // s75: the knot bursts open
+      else if (fam === 'clockwork') ry += 0.8;   // spring unwinds
+      else if (fam === 'stone' && kind === 'ring') { rx += 0.25; py -= 0.2; sy -= 0.1; }   // slams down
+    }
     else if (st === 'recover' && mob.attack) {   // recovery: lunge decays back with an overshoot squash
       const f = Math.max(0, mob.stateT) / Math.max(0.05, mob.attack.recover), e = f * f, os = Math.sin((1 - f) * PI) * f;
       rx += 0.4 * e * amp; pz += 0.45 * e * amp; sy += 0.1 * e - 0.08 * os; sx -= 0.05 * e - 0.05 * os; ry += 0.3 * e * amp;
@@ -1542,7 +1572,11 @@ class MobSystem {
     if (mob.flinch > 0) {   // hit: snap back away from the blow, then a damped wobble
       const h = Math.min(1, mob.flinch / 0.22), w = Math.sin((1 - h) * 18) * h;
       const side = mob.flinchSide ??= (mob.id % 2 ? 1 : -1);
-      rx -= 0.55 * h * amp; rz += 0.25 * w * side * amp; sy -= 0.14 * h; sx += 0.1 * h; pz -= 0.25 * h * amp;
+      if (fam === 'stone') { rx -= 0.28 * h; rz += 0.12 * w * side + Math.sin(t * 90) * 0.05 * h; sy -= 0.06 * h; pz -= 0.12 * h; }   // s75: heavy, stiff jolt
+      else if (fam === 'spirit') { rx -= 0.4 * h; ry += 0.4 * w * side; sx += 0.32 * h; sy -= 0.3 * h; pz -= 0.35 * h; }   // gutters sideways, blown back
+      else if (fam === 'clockwork') { rx -= 0.35 * h; ry += 0.5 * Math.round(w * 3) / 3 * side; sy -= 0.12 * h; pz -= 0.2 * h; }   // jerky stutter-twist
+      else if (fam === 'swarm') { sx += 0.28 * h; sy += 0.22 * h; rz += 0.3 * w * side; }   // scatters outward
+      else { rx -= 0.55 * h * amp; rz += 0.25 * w * side * amp; sy -= 0.14 * h; sx += 0.1 * h; pz -= 0.25 * h * amp; }
     } else mob.flinchSide = null;
     if (st === 'stagger') { rz += Math.sin(t * 30) * 0.12; rx -= 0.2; sy -= 0.08; }
     R.rotation.set(rx, ry, rz); R.scale.set(sx, sy, sx); R.position.set(0, py, pz);
@@ -1559,20 +1593,26 @@ class MobSystem {
   // deathDur first play their own pose (animateDeath)
   tickDeath(mob, dt) {
     const T = mob.type, R = mob.rig, style = T.death || 'dissolve';
-    const dur = T.deathDur ?? (style === 'burst' ? 0.5 : style === 'crumble' ? 1.3 : 1.2);
+    const dur = T.deathDur ?? (style === 'burst' ? 0.5 : style === 'crumble' ? 1.3 : style === 'collapse' ? 1.4 : 1.2);
     mob.deathT += dt; let f = Math.min(1, mob.deathT / dur);
     if (T.deathDur) { this.animateDeath(mob, Math.min(1, f / 0.6)); f = Math.max(0, (f - 0.55) / 0.45); }
-    else if (mob.parts) { this.animateDeath(mob, f); if (style !== 'burst') this.scatterParts(mob, f, style); }   // session 50: per-type regular death poses under the shared style
+    else if (mob.parts) { this.animateDeath(mob, f); if (style !== 'burst') this.scatterParts(mob, f, style === 'collapse' ? 'crumble' : style); }   // session 50: per-type regular death poses under the shared style
     const fade = (a) => {
       if (a < 0.98 && !mob.outlinesOff) { mob.outlinesOff = true; mob.group.traverse(o => { if (o.userData.outline) o.visible = false; }); }   // s66: the ink shell can't fade
       for (const c of mob.mats) { c.transparent = true; c.opacity = Math.max(0, a); }
     };
     if (mob.aura) mob.aura.material.opacity = 0.5 * (1 - f);
     if (style === 'crumble') {
-      if (R && !T.deathDur) { R.rotation.x = Math.min(1.25, f * f * 2.2); R.rotation.z = Math.sin(mob.id) * 0.3 * f; }
+      if (R && !T.deathDur) { R.rotation.x = Math.min(1.25, f * f * 2.2); R.rotation.z = Math.sin(mob.id) * 0.3 * f + (f < 0.25 ? Math.sin(mob.deathT * 60) * 0.08 * (1 - f * 4) : 0); }   // s75: cracking shudder, then topple
       mob.group.position.y = mob.z - Math.max(0, f - 0.4) * 1.1 * T.scale;
       mob.group.scale.setScalar(T.scale * (mob.boss ? 1 : MOB_VIS) * (1 - Math.max(0, f - 0.5) * 0.6));
       fade(1 - Math.max(0, (f - 0.6) / 0.4));
+    } else if (style === 'collapse') {   // s75 clockwork: the spring lets go, spins down like a dropped coin and keels over
+      mob.spinA = (mob.spinA || 0) + dt * (16 * (1 - f) + 1);
+      if (R) { R.rotation.set(-0.15 * f, mob.spinA, Math.min(1.4, f * f * 1.8) + Math.sin(mob.spinA * 2) * 0.15 * (1 - f)); R.scale.set(1, 1 - 0.25 * f, 1); }
+      mob.group.position.y = mob.z - Math.max(0, f - 0.5) * 0.9 * T.scale;
+      mob.group.scale.setScalar(T.scale * MOB_VIS * (1 - Math.max(0, f - 0.6) * 0.5));
+      fade(1 - Math.max(0, (f - 0.65) / 0.35));
     } else if (style === 'dissolve') {
       mob.group.position.y = mob.z + f * 1.2 * T.scale;
       if (R) { R.scale.set(1 - 0.7 * f, 1 + 0.9 * f, 1 - 0.7 * f); R.rotation.y += dt * (2 + 10 * f); }   // s54: spins up as it unravels
