@@ -1,7 +1,9 @@
 {
  "osm_id": "relation/2214089",
  "sources": [
-  "mapillary:300255014830852"
+  "mapillary:300255014830852",
+  "commons:File:All Saints' Passage - geograph.org.uk - 4332942.jpg",
+  "commons:File:Whewell Building, Trinity College - geograph.org.uk - 3769258.jpg"
  ],
  "walls": [
   {
@@ -258,6 +260,445 @@
    ],
    "confidence": "low",
    "notes": "Whewell's Court (Salvin, 1860s) street range on Sidney Street: grey-buff ashlar Gothic Revival, buttressed bays, two-light mullioned windows with hood moulds, no shops. Only an oblique Mapillary view (300255014830852). walls.json height 6.4 m is far below the ~13 m eave seen in the photo. Session 37: vertical dimensions scaled x0.95 to fit the LiDAR DSM eave (12.1 m)."
+  },
+  {
+   "id": "relation/2214089:17",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.6,
+    6.9
+   ],
+   "material": "stone",
+   "wall_colour": "#b8a888",
+   "trim_colour": "#cbbd9f",
+   "cornice_z": 11.8,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    1.0
+   ],
+   "pilasters": [
+    0.4,
+    5.1,
+    10.3,
+    15.6,
+    20.8,
+    25.7
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.6,
+     "w": 1.4,
+     "z": 2.0,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 7.6,
+     "w": 1.4,
+     "z": 2.0,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 12.9,
+     "w": 1.4,
+     "z": 2.0,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 18.2,
+     "w": 1.4,
+     "z": 2.0,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 23.4,
+     "w": 1.4,
+     "z": 2.0,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.6,
+     "w": 1.4,
+     "z": 4.6,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 7.6,
+     "w": 1.4,
+     "z": 4.6,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 12.9,
+     "w": 1.4,
+     "z": 4.6,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 18.2,
+     "w": 1.4,
+     "z": 4.6,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 23.4,
+     "w": 1.4,
+     "z": 4.6,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.6,
+     "w": 1.4,
+     "z": 7.6,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 7.6,
+     "w": 1.4,
+     "z": 7.6,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 12.9,
+     "w": 1.4,
+     "z": 7.6,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 18.2,
+     "w": 1.4,
+     "z": 7.6,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 23.4,
+     "w": 1.4,
+     "z": 7.6,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Whewell's Court (Salvin 1860s) north face on All Saints' Passage (faces NW across the passage, x from the Sidney Street corner turret). Grey-buff ashlar on a moulded plinth, shallow buttress strips, no doors or shops; small two-light mullioned windows set high on the ground storey and two upper rows of two-light hood-moulded windows. Upper rows only glimpsed; bay count assumed. (length 26.1 m, height 12.1 m from walls.json)",
+   "quoins": false
+  },
+  {
+   "id": "relation/2214089:16",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    3.4,
+    6.52,
+    9.45
+   ],
+   "material": "stone",
+   "wall_colour": "#b5a487",
+   "trim_colour": "#c9bba0",
+   "cornice_z": 11.9,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    3.4
+   ],
+   "pilasters": [
+    0.3,
+    4.6,
+    9.1,
+    13.6
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.4,
+     "w": 1.4,
+     "z": 1.1,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 6.8,
+     "w": 1.4,
+     "z": 1.1,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 11.4,
+     "w": 1.4,
+     "z": 1.1,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.4,
+     "w": 1.4,
+     "z": 4.2,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 6.8,
+     "w": 1.4,
+     "z": 4.2,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 11.4,
+     "w": 1.4,
+     "z": 4.2,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.4,
+     "w": 1.4,
+     "z": 7.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 6.8,
+     "w": 1.4,
+     "z": 7.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 11.4,
+     "w": 1.4,
+     "z": 7.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.4,
+     "w": 1.4,
+     "z": 10.0,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 6.8,
+     "w": 1.4,
+     "z": 10.0,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 11.4,
+     "w": 1.4,
+     "z": 10.0,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Whewell's Court Sidney/Bridge Street range, northern part up to the octagonal oriel corner turret on All Saints' Passage (x from the south). Same Gothic Revival ashlar as wall :13: buttressed bays of two-light mullioned windows with hood moulds, four rows, no shops. walls.json height 6.1 m is far below the ~12 m eave in the photo; upper rows will only build once the eave is fixed from the DSM. (length 13.9 m, height 6.1 m from walls.json)",
+   "quoins": false
   }
  ]
 }

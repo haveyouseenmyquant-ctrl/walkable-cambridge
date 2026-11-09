@@ -6,7 +6,9 @@
   "mapillary:259307372560632",
   "commons:File:Geological Museum, Law School And University Museum Of Archaeology And Ethnology.jpg",
   "commons:File:The Sedgwick Museum of Earth Sciences, Downing Street - geograph.org.uk - 699009.jpg",
-  "commons:File:Entrance to Sedgwick Building, Downing Street, Cambridge - geograph.org.uk - 8226622.jpg"
+  "commons:File:Entrance to Sedgwick Building, Downing Street, Cambridge - geograph.org.uk - 8226622.jpg",
+  "mapillary:462762351458531",
+  "mapillary:830299431171536"
  ],
  "walls": [
   {
@@ -568,6 +570,399 @@
    ],
    "confidence": "low",
    "notes": "Sedgwick Building (T.G. Jackson, 1904), Downing St front: dark red-brown brick with buff Ketton/Clipsham stone dressings, Jacobean. Ground floor of round-arched windows with stone voussoirs over a stone plinth behind a low wall; first floor tall two-light mullion-and-transom windows; second floor shorter cross windows; steep tiled roof with gabled dormers above a corbelled cornice. A stone doorway with columns, broken pediment and carved tympanum (fourth bay from the east; the main museum entrance with the carved beasts lies further west, beyond this wall). 12 bays spaced evenly over the 49 m wall; window rhythm estimated from raking Mapillary views along Downing St and Commons photos."
+  },
+  {
+   "id": "way/40900608:7",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.7,
+    9.8
+   ],
+   "material": "brick",
+   "wall_colour": "#7a4a3a",
+   "trim_colour": "#c9a676",
+   "cornice_z": 15.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.7,
+    9.6
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.1,
+    3.9,
+    7.7,
+    11.2,
+    13.6,
+    15.2,
+    17.5,
+    20.4
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "arched",
+     "x": 2.0,
+     "w": 2.5,
+     "z": 1.3,
+     "h": 2.9,
+     "panes": [
+      5,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.0,
+     "w": 1.5,
+     "z": 5.6,
+     "h": 3.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.0,
+     "w": 1.4,
+     "z": 10.8,
+     "h": 2.3,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "arched",
+     "x": 5.8,
+     "w": 2.5,
+     "z": 1.3,
+     "h": 2.9,
+     "panes": [
+      5,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.8,
+     "w": 1.5,
+     "z": 5.6,
+     "h": 3.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.8,
+     "w": 1.4,
+     "z": 10.8,
+     "h": 2.3,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 9.5,
+     "w": 1.3,
+     "h": 3.0,
+     "surround": "pilastered"
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 9.5,
+     "w": 1.2,
+     "z": 5.6,
+     "h": 3.4,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 9.5,
+     "w": 1.2,
+     "z": 10.8,
+     "h": 2.3,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "arched",
+     "x": 12.4,
+     "w": 1.5,
+     "z": 1.3,
+     "h": 2.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.4,
+     "w": 1.2,
+     "z": 5.6,
+     "h": 3.4,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.4,
+     "w": 1.1,
+     "z": 10.8,
+     "h": 2.3,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "arched",
+     "x": 16.3,
+     "w": 1.5,
+     "z": 1.3,
+     "h": 2.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 16.3,
+     "w": 1.2,
+     "z": 5.6,
+     "h": 3.4,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 16.3,
+     "w": 1.1,
+     "z": 10.8,
+     "h": 2.3,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "arched",
+     "x": 18.6,
+     "w": 1.5,
+     "z": 1.3,
+     "h": 2.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 18.6,
+     "w": 1.2,
+     "z": 5.6,
+     "h": 3.4,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 18.6,
+     "w": 1.1,
+     "z": 10.8,
+     "h": 2.3,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Downing Site range on Downing Street (Sedgwick Building block): purple-red brick with Ancaster stone dressings, stone bands and pilaster strips. p0 = west end. Ground floor: two wide round-arched multi-pane windows with red-brick voussoirs (the arcade continues west onto the set-back wall :5), a pedimented stone doorcase with carved cartouche and paired columns at ~9.5 m, then narrower arched windows with a carved elephant relief panel between the first two; tall stone-mullioned transomed windows on the first floor, smaller windows in the top storey under a stone parapet. Positions located by intersecting the Mapillary camera headings with the wall line."
+  },
+  {
+   "id": "way/40900608:5",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.7,
+    9.8
+   ],
+   "material": "brick",
+   "wall_colour": "#7a4a3a",
+   "trim_colour": "#c9a676",
+   "cornice_z": 15.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.7,
+    9.6
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.1,
+    3.2,
+    6.4
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "arched",
+     "x": 1.5,
+     "w": 2.4,
+     "z": 1.3,
+     "h": 2.9,
+     "panes": [
+      5,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.5,
+     "w": 1.5,
+     "z": 5.6,
+     "h": 3.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.5,
+     "w": 1.4,
+     "z": 10.8,
+     "h": 2.3,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "arched",
+     "x": 4.9,
+     "w": 2.4,
+     "z": 1.3,
+     "h": 2.9,
+     "panes": [
+      5,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.9,
+     "w": 1.5,
+     "z": 5.6,
+     "h": 3.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.9,
+     "w": 1.4,
+     "z": 10.8,
+     "h": 2.3,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Short western continuation of the Downing Street range (see :7), same purple brick with stone dressings: two more wide round-arched ground-floor windows with red-brick voussoirs, mullioned first-floor windows and smaller top-storey windows. From a Mapillary view whose heading meets the wall line near the :6/:7 corner; positions approximate."
   }
  ]
 }

@@ -7,7 +7,9 @@
   "mapillary:316741473376513",
   "mapillary:916179375900871",
   "mapillary:485497869555323",
-  "commons:File:Christ's Lane - geograph.org.uk - 767310.jpg (CC BY-SA 2.0)"
+  "commons:File:Christ's Lane - geograph.org.uk - 767310.jpg (CC BY-SA 2.0)",
+  "mapillary:221747919855841",
+  "mapillary:763832931159662"
  ],
  "walls": [
   {
@@ -447,6 +449,113 @@
    ],
    "confidence": "medium",
    "notes": "Christ's College, south gable end of the St Andrew's Street range (p0 = corner with the battlemented street front). Ashlar, two storeys under a coped gable with a chimney: ground-floor three-light stone-mullioned window, moulded string course, and a four-light corbelled oriel at first floor, both slightly left of centre. Read from mapillary 316741473376513 (frontal from the south) and 916179375900871, 485497869555323. Refined with Geograph 767310 (Christ's Lane, frontal): five-light ground window and five-light corbelled oriel, both ~x 4.2; small battlemented turret at the p1 corner (not modelled)."
+  },
+  {
+   "id": "way/147487949:28",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.1
+   ],
+   "material": "stone",
+   "wall_colour": "#c8bb9a",
+   "trim_colour": "#d9cdae",
+   "cornice_z": 8.4,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.1
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.2,
+     "w": 1.1,
+     "z": 1.3,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.2,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.4,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.8,
+     "w": 1.1,
+     "z": 1.3,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.8,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.4,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 7.9,
+     "w": 1.1,
+     "z": 1.3,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.9,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.4,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Christ's College front range on St Andrew's Street between the Hobson Street corner (p0) and the Great Gate tower (p1). Weathered ashlar, two storeys under a battlemented parapet; three bays: ground floor two-light rectangular casements set high above a plinth, first floor taller plain sashes (18th-c. refacing). No door on this stretch (gate is in the tower beyond p1). Read from oblique Mapillary 221747919855841 and 763832931159662; bay positions estimated through perspective."
   }
  ]
 }

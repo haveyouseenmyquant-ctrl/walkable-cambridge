@@ -1,0 +1,81 @@
+{
+ "osm_id": "way/1288750540",
+ "sources": [
+  "commons:File:15 and 16 Bridge Street, Cambridge.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1288750540:1",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.6
+   ],
+   "material": "render",
+   "wall_colour": "#ece2c4",
+   "trim_colour": "#f4f1ea",
+   "cornice_z": 7.0,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 5.4,
+     "z1": 3.2,
+     "fascia_text": "",
+     "fascia_colour": "#7fd0d8",
+     "text_colour": "#1a1a1a",
+     "door_x": 1.2,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.6,
+     "w": 1.2,
+     "z": 4.3,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.3,
+     "w": 1.2,
+     "z": 4.3,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 1.6,
+     "w": 1.2,
+     "h": 1.2
+    },
+    {
+     "type": "dormer",
+     "x": 4.3,
+     "w": 1.2,
+     "h": 1.2
+    }
+   ],
+   "confidence": "low",
+   "notes": "14 Bridge Street: cream-rendered two-storey house with large multi-pane sashes and white flat-roofed dormers in an old-tile roof; full-width pale-blue painted timber shopfront with door at left. Seen at the right edge of Commons '15 and 16 Bridge Street, Cambridge.jpg'; second bay assumed."
+  }
+ ]
+}

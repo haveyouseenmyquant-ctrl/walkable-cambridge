@@ -1,0 +1,129 @@
+{
+ "osm_id": "way/164848641",
+ "sources": [
+  "mapillary:342344917408828"
+ ],
+ "walls": [
+  {
+   "id": "way/164848641:14",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.8,
+    7.4
+   ],
+   "material": "stone",
+   "wall_colour": "#c9b088",
+   "trim_colour": "#d8c39c",
+   "cornice_z": 10.9,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    3.6,
+    7.2
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 3.5,
+     "w": 2.0,
+     "z": 0.9,
+     "h": 2.0,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 3.5,
+     "w": 2.4,
+     "z": 4.4,
+     "h": 2.4,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 3.5,
+     "w": 1.8,
+     "z": 8.1,
+     "h": 1.9,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.8,
+     "w": 1.1,
+     "z": 0.9,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.8,
+     "w": 1.1,
+     "z": 4.6,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.8,
+     "w": 1.1,
+     "z": 8.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 3.5,
+     "w": 1.2,
+     "h": 1.5
+    },
+    {
+     "type": "dormer",
+     "x": 6.8,
+     "w": 1.2,
+     "h": 1.5
+    }
+   ],
+   "confidence": "low",
+   "notes": "King's Lane front, continuing the rough buff ashlar Jacobean-style range of Webb's Building to the west: three storeys plus attic dormers behind a parapet, with a first-floor canted oriel with stone corbels and mullioned casements. Lower modern blocks are set back further east. From one oblique wide-angle Mapillary view; the split from the Webb's wall is approximate."
+  }
+ ]
+}

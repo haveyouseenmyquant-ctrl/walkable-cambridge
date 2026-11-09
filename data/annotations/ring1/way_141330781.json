@@ -2,7 +2,8 @@
  "osm_id": "way/141330781",
  "sources": [
   "mapillary:295448308745927",
-  "mapillary:2992981850979823"
+  "mapillary:2992981850979823",
+  "mapillary:811817629761300"
  ],
  "walls": [
   {
@@ -114,6 +115,125 @@
    ],
    "confidence": "low",
    "notes": "Low porch/apse range of the Downing Place URC in front of the west gable, pyramid roof, three small lancets; church name painted on the band."
+  },
+  {
+   "id": "way/141330781:14",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "stone",
+   "wall_colour": "#b8a687",
+   "trim_colour": "#cbbb9c",
+   "cornice_z": 11.0,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.6
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.2,
+    4.6,
+    8.8,
+    12.8
+   ],
+   "elements": [
+    {
+     "type": "door",
+     "style": "arched",
+     "x": 2.4,
+     "w": 1.6,
+     "h": 3.0,
+     "surround": "stone"
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 1.9,
+     "w": 0.8,
+     "z": 4.4,
+     "h": 4.6,
+     "panes": [
+      1,
+      4
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 3.0,
+     "w": 0.8,
+     "z": 4.4,
+     "h": 4.6,
+     "panes": [
+      1,
+      4
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 6.2,
+     "w": 0.8,
+     "z": 4.4,
+     "h": 4.6,
+     "panes": [
+      1,
+      4
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 7.3,
+     "w": 0.8,
+     "z": 4.4,
+     "h": 4.6,
+     "panes": [
+      1,
+      4
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 10.3,
+     "w": 0.8,
+     "z": 4.4,
+     "h": 4.6,
+     "panes": [
+      1,
+      4
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 11.4,
+     "w": 0.8,
+     "z": 4.4,
+     "h": 4.6,
+     "panes": [
+      1,
+      4
+     ],
+     "head": "pointed",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Downing Place URC, north flank along Downing Street (p0 = east end). Buff ashlar Gothic flank with buttresses (pilasters), a pointed-arched doorway with red marble shafts near the east end, and paired tall lancets with red shafts per bay above a moulded band; red painted lettering on the plinth band. Only the eastern bay is clear in the oblique Mapillary view; the other bays repeat it by assumption."
   }
  ]
 }

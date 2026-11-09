@@ -19770,10 +19770,11 @@
     247.01
    ],
    "ground_z": 8.33,
-   "eave_z": 19.82,
-   "height": 11.49,
+   "eave_z": 23.83,
+   "height": 15.5,
    "dist_centre": 240.6,
-   "street_facing": true
+   "street_facing": true,
+   "eave_fixed": true
   },
   {
    "id": "way/147456536:6",
@@ -41338,10 +41339,11 @@
     348.59
    ],
    "ground_z": 9.26,
-   "eave_z": 15.59,
-   "height": 6.33,
+   "eave_z": 18.72,
+   "height": 9.46,
    "dist_centre": 287.4,
-   "street_facing": true
+   "street_facing": true,
+   "eave_fixed": true
   },
   {
    "id": "way/965378227:6",
@@ -49291,10 +49293,11 @@
     338.04
    ],
    "ground_z": 9.39,
-   "eave_z": 15.48,
-   "height": 6.09,
+   "eave_z": 21.84,
+   "height": 12.45,
    "dist_centre": 275.1,
-   "street_facing": true
+   "street_facing": true,
+   "eave_fixed": true
   },
   {
    "id": "relation/2214089:17",

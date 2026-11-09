@@ -1,0 +1,409 @@
+{
+ "osm_id": "way/965378225",
+ "sources": [
+  "commons:File:4 Bridge Street, Cambridge.jpg",
+  "mapillary:499439701436262",
+  "mapillary:175626607783492"
+ ],
+ "walls": [
+  {
+   "id": "way/965378225:20",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.0,
+    7.2
+   ],
+   "material": "brick",
+   "wall_colour": "#e9c7a3",
+   "trim_colour": "#f4f1ea",
+   "cornice_z": 10.4,
+   "cornice": "bracketed",
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 4.9,
+     "z1": 3.6,
+     "fascia_colour": "#2f3336",
+     "fascia_text": "",
+     "text_colour": "#e8e0c8",
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 5.1,
+     "x1": 11.4,
+     "z1": 3.8,
+     "fascia_colour": "#3b4048",
+     "fascia_text": "SEVENWOLVES",
+     "text_colour": "#f2f2f2",
+     "stallriser": 0.3,
+     "awning": false,
+     "door_x": 9.3
+    },
+    {
+     "type": "shopfront",
+     "x0": 11.6,
+     "x1": 16.3,
+     "z1": 3.6,
+     "fascia_colour": "#e9e4da",
+     "fascia_text": "",
+     "text_colour": "#333333",
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.8,
+     "w": 1.1,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.9,
+     "w": 1.1,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.0,
+     "w": 1.1,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.3,
+     "w": 1.1,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 10.6,
+     "w": 1.1,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 12.9,
+     "w": 1.1,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 15.0,
+     "w": 1.1,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.8,
+     "w": 1.1,
+     "z": 7.6,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.9,
+     "w": 1.1,
+     "z": 7.6,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.0,
+     "w": 1.1,
+     "z": 7.6,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.3,
+     "w": 1.1,
+     "z": 7.6,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 10.6,
+     "w": 1.1,
+     "z": 7.6,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 12.9,
+     "w": 1.1,
+     "z": 7.6,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 15.0,
+     "w": 1.1,
+     "z": 7.6,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 6.6,
+     "w": 2.4,
+     "h": 1.3
+    },
+    {
+     "type": "dormer",
+     "x": 10.6,
+     "w": 1.8,
+     "h": 1.3
+    },
+    {
+     "type": "dormer",
+     "x": 2.8,
+     "w": 1.2,
+     "h": 1.4
+    },
+    {
+     "type": "dormer",
+     "x": 14.0,
+     "w": 1.2,
+     "h": 1.4
+    }
+   ],
+   "confidence": "low",
+   "notes": "Bridge Street east side north of the Jesus Lane corner (faces west, x from the north end). Middle part (x ~5-11.5) is No. 4: peach-painted brick, three bays of 6/6 sashes on two upper storeys with white keystone blocks carved with masks, white modillion eaves cornice, slate mansard with a paired and a single dormer, dark grey Sevenwolves fascia over a full-width shopfront. Neighbouring frontages assumed to continue the same Georgian rhythm (not seen). (length 16.6 m, height 12.1 m from walls.json)",
+   "string_courses": [],
+   "pilasters": [],
+   "quoins": false,
+   "parapet": false
+  },
+  {
+   "id": "way/965378225:21",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.2,
+    7.7
+   ],
+   "material": "render",
+   "wall_colour": "#efe3d6",
+   "trim_colour": "#f6f2ea",
+   "cornice_z": 11.4,
+   "cornice": "simple",
+   "parapet": true,
+   "pilasters": [
+    0.4,
+    3.8,
+    7.4,
+    10.9
+   ],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 11.0,
+     "z1": 3.6,
+     "fascia_colour": "#b3202a",
+     "fascia_text": "COTSWOLD",
+     "text_colour": "#ffffff",
+     "stallriser": 0.0,
+     "awning": false,
+     "door_x": 5.6
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.9,
+     "w": 1.2,
+     "z": 4.6,
+     "h": 2.4,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.6,
+     "w": 1.2,
+     "z": 4.6,
+     "h": 2.4,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.3,
+     "w": 1.2,
+     "z": 4.6,
+     "h": 2.4,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.9,
+     "w": 1.1,
+     "z": 8.2,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.6,
+     "w": 1.1,
+     "z": 8.2,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.3,
+     "w": 1.1,
+     "z": 8.2,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Bridge Street east side just north of the Jesus Lane corner (faces west, x from the north end). Pale painted render: shop storey recessed behind square columns (Cotswold Outdoor / Mountain Warehouse, red fascia), tall round-arched first-floor windows, plain sashes above, parapet. Both Mapillary views look NNW along the street, so this is a raking read; column and bay spacing estimated. NB the existing note on way/965378226:1 places Cotswold on that building, but these poses put the colonnade on the east side (this wall). (length 11.3 m, height 12.6 m from walls.json)",
+   "string_courses": [],
+   "quoins": false
+  }
+ ]
+}

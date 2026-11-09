@@ -4,7 +4,8 @@
   "mapillary:941221033333012",
   "mapillary:4232489523430115",
   "mapillary:948668239220725",
-  "commons:File:Metro Bank, Christ's Lane - geograph.org.uk - 4363305.jpg (CC BY-SA 2.0)"
+  "commons:File:Metro Bank, Christ's Lane - geograph.org.uk - 4363305.jpg (CC BY-SA 2.0)",
+  "mapillary:316741473376513"
  ],
  "walls": [
   {
@@ -307,6 +308,83 @@
    ],
    "confidence": "low",
    "notes": "Christ's Lane (2007), Metro Bank frontage on the Christ's Lane passage, NW face. Full-length glazed ground floor in four bays under blue illuminated fascias, divided by buff-stone piers (big round stone column at the NE end bay, which is recessed under the projecting upper floors); upper floors plain buff brick with stone bands/panels and a single narrow vertical window slot near the NE end; stone coping. From Geograph 4363305 (raking view toward St Andrew's Street); bay positions approximate."
+  },
+  {
+   "id": "way/4273290:20",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.6
+   ],
+   "material": "stone",
+   "wall_colour": "#d8c7a0",
+   "trim_colour": "#e6d9b8",
+   "cornice_z": 12.4,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 9.3,
+     "z1": 4.2,
+     "fascia_text": "Metro Bank",
+     "fascia_colour": "#1f4fd8",
+     "text_colour": "#ffffff",
+     "door_x": 3.0,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 1.7,
+     "w": 2.3,
+     "z": 5.4,
+     "h": 4.0,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 4.7,
+     "w": 2.3,
+     "z": 5.4,
+     "h": 4.0,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 7.7,
+     "w": 2.3,
+     "z": 5.4,
+     "h": 4.0,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    }
+   ],
+   "confidence": "low",
+   "notes": "Christ's Lane (2006-07) block, St Andrew's Street face of the Metro Bank corner unit (p0 = Christ's Lane corner). Buff sandstone cladding; ground floor recessed glazing under a blue Metro Bank fascia behind a big round stone column at the corner; one tall upper level of three deep stone-framed bays (currently holding large backlit Metro Bank advert panels, modelled as tall single-pane windows); plain parapet band. Read from oblique Mapillary 316741473376513 (2048 px); bay widths estimated."
   }
  ]
 }

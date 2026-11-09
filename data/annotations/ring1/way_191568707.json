@@ -1,0 +1,86 @@
+{
+ "osm_id": "way/191568707",
+ "sources": [
+  "mapillary:172165374818253"
+ ],
+ "walls": [
+  {
+   "id": "way/191568707:0",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "stone",
+   "wall_colour": "#c8c5bd",
+   "trim_colour": "#d8d5ce",
+   "cornice_z": 4.2,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    0.75
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 1.6,
+     "w": 1.8,
+     "z": 0.8,
+     "h": 2.9,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 5.6,
+     "w": 1.4,
+     "z": 0.8,
+     "h": 2.9,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 8.6,
+     "w": 1.2,
+     "z": 0.8,
+     "h": 2.9,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 11.3,
+     "w": 1.2,
+     "z": 0.8,
+     "h": 2.9,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Cambridge Tap, Downing Street flank (p0 = St Andrew's Street corner). Grey banded ashlar ground storey with deep-set tall plate-glass windows on a plinth; the brick upper floors (other way/part) oversail on stepped concrete corbels at ~4.3 m, which matches the 4.3 m wall height here. From a Mapillary view looking SW along Downing Street."
+  }
+ ]
+}

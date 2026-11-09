@@ -1,0 +1,316 @@
+{
+ "osm_id": "way/166155936",
+ "sources": [
+  "commons:File:Cmglee Cambridge Trinity College Bishops Hostel.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/166155936:0",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.6
+   ],
+   "material": "brick",
+   "wall_colour": "#9a5f4a",
+   "trim_colour": "#d8c49a",
+   "cornice_z": 7.6,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.5
+   ],
+   "quoins": true,
+   "pilasters": [
+    17.6,
+    20.4
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement_leaded",
+     "x": 2.5,
+     "w": 1.4,
+     "z": 0.9,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement_leaded",
+     "x": 2.5,
+     "w": 1.4,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement_leaded",
+     "x": 6.5,
+     "w": 1.4,
+     "z": 0.9,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement_leaded",
+     "x": 6.5,
+     "w": 1.4,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement_leaded",
+     "x": 11.5,
+     "w": 1.4,
+     "z": 0.9,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement_leaded",
+     "x": 11.5,
+     "w": 1.4,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement_leaded",
+     "x": 14.5,
+     "w": 1.4,
+     "z": 0.9,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement_leaded",
+     "x": 14.5,
+     "w": 1.4,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement_leaded",
+     "x": 23.5,
+     "w": 1.4,
+     "z": 0.9,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement_leaded",
+     "x": 23.5,
+     "w": 1.4,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement_leaded",
+     "x": 26.5,
+     "w": 1.4,
+     "z": 0.9,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement_leaded",
+     "x": 26.5,
+     "w": 1.4,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement_leaded",
+     "x": 31.5,
+     "w": 1.4,
+     "z": 0.9,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement_leaded",
+     "x": 31.5,
+     "w": 1.4,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement_leaded",
+     "x": 35.5,
+     "w": 1.4,
+     "z": 0.9,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement_leaded",
+     "x": 35.5,
+     "w": 1.4,
+     "z": 4.4,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 19.0,
+     "w": 1.2,
+     "h": 2.6,
+     "surround": "pilastered"
+    },
+    {
+     "type": "window",
+     "style": "casement_leaded",
+     "x": 19.0,
+     "w": 1.3,
+     "z": 4.4,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 4.5,
+     "w": 1.4,
+     "h": 1.4
+    },
+    {
+     "type": "dormer",
+     "x": 12.5,
+     "w": 1.4,
+     "h": 1.4
+    },
+    {
+     "type": "dormer",
+     "x": 16.5,
+     "w": 1.4,
+     "h": 1.4
+    },
+    {
+     "type": "dormer",
+     "x": 21.5,
+     "w": 1.4,
+     "h": 1.4
+    },
+    {
+     "type": "dormer",
+     "x": 25.5,
+     "w": 1.4,
+     "h": 1.4
+    },
+    {
+     "type": "dormer",
+     "x": 33.5,
+     "w": 1.4,
+     "h": 1.4
+    }
+   ],
+   "confidence": "low",
+   "notes": "Bishop's Hostel, Trinity (1669-71): red brick with stone quoins, window surrounds and band course; two storeys of stone-mullioned leaded cross windows plus attic dormers in a tiled hipped roof; centre with giant stone pilasters and pediment over a panelled doorcase, flanked by gabled end wings. Commons view is elevated and oblique; matched to this 38 m wall by footprint orientation only, bay positions spread evenly. (length 38.0 m, height 10.0 m from walls.json)"
+  }
+ ]
+}

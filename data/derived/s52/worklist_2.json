@@ -1,0 +1,950 @@
+[
+ {
+  "id": "way/273016497:0",
+  "osm_id": "way/273016497",
+  "name": "Cambridge Central Telephone Exchange",
+  "street": "Post Office Terrace",
+  "length": 14.53,
+  "dist": 195.3,
+  "mid_local_xy": [
+   82.9,
+   -2.9
+  ]
+ },
+ {
+  "id": "way/375384962:6",
+  "osm_id": "way/375384962",
+  "name": null,
+  "street": null,
+  "length": 13.32,
+  "dist": 189.2,
+  "mid_local_xy": [
+   72.4,
+   -13.6
+  ]
+ },
+ {
+  "id": "way/40937938:15",
+  "osm_id": "way/40937938",
+  "name": "Lion Yard",
+  "street": "Staint Tibbs Row",
+  "length": 11.1,
+  "dist": 191.0,
+  "mid_local_xy": [
+   79.7,
+   1.3
+  ]
+ },
+ {
+  "id": "way/137152224:4",
+  "osm_id": "way/137152224",
+  "name": "Cambridge University Catholic Chaplaincy, Chapel of St John Fisher",
+  "street": "Guildhall Street",
+  "length": 10.33,
+  "dist": 114.9,
+  "mid_local_xy": [
+   -23.3,
+   -25.5
+  ]
+ },
+ {
+  "id": "way/137152219:4",
+  "osm_id": "way/137152219",
+  "name": null,
+  "street": null,
+  "length": 8.98,
+  "dist": 100.9,
+  "mid_local_xy": [
+   -41.3,
+   -22.5
+  ]
+ },
+ {
+  "id": "way/137152219:0",
+  "osm_id": "way/137152219",
+  "name": null,
+  "street": null,
+  "length": 8.73,
+  "dist": 105.4,
+  "mid_local_xy": [
+   -32.5,
+   -21.0
+  ]
+ },
+ {
+  "id": "way/40937938:14",
+  "osm_id": "way/40937938",
+  "name": "Lion Yard",
+  "street": "Staint Tibbs Row",
+  "length": 7.72,
+  "dist": 184.2,
+  "mid_local_xy": [
+   71.2,
+   -2.8
+  ]
+ },
+ {
+  "id": "way/40937938:60",
+  "osm_id": "way/40937938",
+  "name": "Lion Yard",
+  "street": "Staint Tibbs Row",
+  "length": 7.34,
+  "dist": 128.4,
+  "mid_local_xy": [
+   -1.7,
+   -21.6
+  ]
+ },
+ {
+  "id": "way/40937938:16",
+  "osm_id": "way/40937938",
+  "name": "Lion Yard",
+  "street": "Staint Tibbs Row",
+  "length": 5.67,
+  "dist": 197.3,
+  "mid_local_xy": [
+   87.2,
+   4.9
+  ]
+ },
+ {
+  "id": "way/135595981:4",
+  "osm_id": "way/135595981",
+  "name": "St Andrew The Great",
+  "street": "St Andrew's Street",
+  "length": 5.56,
+  "dist": 180.1,
+  "mid_local_xy": [
+   72.8,
+   17.9
+  ]
+ },
+ {
+  "id": "way/135595981:5",
+  "osm_id": "way/135595981",
+  "name": "St Andrew The Great",
+  "street": "St Andrew's Street",
+  "length": 4.46,
+  "dist": 183.5,
+  "mid_local_xy": [
+   75.8,
+   15.9
+  ]
+ },
+ {
+  "id": "way/5236376:19",
+  "osm_id": "way/5236376",
+  "name": null,
+  "street": null,
+  "length": 4.32,
+  "dist": 140.1,
+  "mid_local_xy": [
+   -17.0,
+   -53.3
+  ]
+ },
+ {
+  "id": "way/5236376:16",
+  "osm_id": "way/5236376",
+  "name": null,
+  "street": null,
+  "length": 4.32,
+  "dist": 137.6,
+  "mid_local_xy": [
+   -12.6,
+   -46.5
+  ]
+ },
+ {
+  "id": "way/40937939:31",
+  "osm_id": "way/40937939",
+  "name": "John Lewis",
+  "street": "Downing Street",
+  "length": 39.98,
+  "dist": 283.9,
+  "mid_local_xy": [
+   115.4,
+   -124.1
+  ]
+ },
+ {
+  "id": "way/40939407:8",
+  "osm_id": "way/40939407",
+  "name": "Hilton Cambridge City Centre",
+  "street": "Downing Street",
+  "length": 37.56,
+  "dist": 280.9,
+  "mid_local_xy": [
+   108.4,
+   -127.8
+  ]
+ },
+ {
+  "id": "way/131662340:21",
+  "osm_id": "way/131662340",
+  "name": "Zoology Building",
+  "street": "Downing Street",
+  "length": 21.93,
+  "dist": 257.9,
+  "mid_local_xy": [
+   29.1,
+   -164.2
+  ]
+ },
+ {
+  "id": "way/131662340:16",
+  "osm_id": "way/131662340",
+  "name": "Zoology Building",
+  "street": "Downing Street",
+  "length": 16.58,
+  "dist": 255.7,
+  "mid_local_xy": [
+   42.6,
+   -153.0
+  ]
+ },
+ {
+  "id": "way/274090660:8",
+  "osm_id": "way/274090660",
+  "name": null,
+  "street": null,
+  "length": 15.02,
+  "dist": 206.6,
+  "mid_local_xy": [
+   95.0,
+   -2.0
+  ]
+ },
+ {
+  "id": "way/1039074774:3",
+  "osm_id": "way/1039074774",
+  "name": null,
+  "street": null,
+  "length": 13.65,
+  "dist": 216.7,
+  "mid_local_xy": [
+   101.4,
+   -14.8
+  ]
+ },
+ {
+  "id": "way/131662340:3",
+  "osm_id": "way/131662340",
+  "name": "Zoology Building",
+  "street": "Downing Street",
+  "length": 12.58,
+  "dist": 292.9,
+  "mid_local_xy": [
+   62.8,
+   -184.2
+  ]
+ },
+ {
+  "id": "way/5236376:29",
+  "osm_id": "way/5236376",
+  "name": null,
+  "street": null,
+  "length": 11.58,
+  "dist": 234.6,
+  "mid_local_xy": [
+   37.4,
+   -130.7
+  ]
+ },
+ {
+  "id": "relation/18902598:4",
+  "osm_id": "relation/18902598",
+  "name": "Museum of Zoology",
+  "street": "Downing Street",
+  "length": 9.42,
+  "dist": 261.8,
+  "mid_local_xy": [
+   24.9,
+   -171.1
+  ]
+ },
+ {
+  "id": "way/40937938:18",
+  "osm_id": "way/40937938",
+  "name": "Lion Yard",
+  "street": "Staint Tibbs Row",
+  "length": 7.34,
+  "dist": 205.9,
+  "mid_local_xy": [
+   97.4,
+   9.8
+  ]
+ },
+ {
+  "id": "way/1039074775:2",
+  "osm_id": "way/1039074775",
+  "name": null,
+  "street": null,
+  "length": 6.93,
+  "dist": 224.1,
+  "mid_local_xy": [
+   104.3,
+   -27.8
+  ]
+ },
+ {
+  "id": "relation/18902596:27",
+  "osm_id": "relation/18902596",
+  "name": "David Attenborough Building",
+  "street": "Pembroke Street",
+  "length": 6.3,
+  "dist": 205.9,
+  "mid_local_xy": [
+   1.8,
+   -119.9
+  ]
+ },
+ {
+  "id": "way/131662340:1",
+  "osm_id": "way/131662340",
+  "name": "Zoology Building",
+  "street": "Downing Street",
+  "length": 6.05,
+  "dist": 294.0,
+  "mid_local_xy": [
+   56.4,
+   -189.8
+  ]
+ },
+ {
+  "id": "way/131662340:2",
+  "osm_id": "way/131662340",
+  "name": "Zoology Building",
+  "street": "Downing Street",
+  "length": 6.04,
+  "dist": 291.6,
+  "mid_local_xy": [
+   57.9,
+   -185.9
+  ]
+ },
+ {
+  "id": "way/40937938:19",
+  "osm_id": "way/40937938",
+  "name": "Lion Yard",
+  "street": "Staint Tibbs Row",
+  "length": 5.87,
+  "dist": 211.1,
+  "mid_local_xy": [
+   103.4,
+   12.6
+  ]
+ },
+ {
+  "id": "way/131662340:5",
+  "osm_id": "way/131662340",
+  "name": "Zoology Building",
+  "street": "Downing Street",
+  "length": 5.42,
+  "dist": 296.2,
+  "mid_local_xy": [
+   73.7,
+   -180.4
+  ]
+ },
+ {
+  "id": "way/131662340:15",
+  "osm_id": "way/131662340",
+  "name": "Zoology Building",
+  "street": "Downing Street",
+  "length": 5.11,
+  "dist": 266.4,
+  "mid_local_xy": [
+   46.8,
+   -163.0
+  ]
+ },
+ {
+  "id": "way/131662340:4",
+  "osm_id": "way/131662340",
+  "name": "Zoology Building",
+  "street": "Downing Street",
+  "length": 5.05,
+  "dist": 297.8,
+  "mid_local_xy": [
+   71.2,
+   -184.2
+  ]
+ },
+ {
+  "id": "relation/18902596:16",
+  "osm_id": "relation/18902596",
+  "name": "David Attenborough Building",
+  "street": "Pembroke Street",
+  "length": 4.8,
+  "dist": 226.0,
+  "mid_local_xy": [
+   18.7,
+   -133.2
+  ]
+ },
+ {
+  "id": "way/40937938:17",
+  "osm_id": "way/40937938",
+  "name": "Lion Yard",
+  "street": "Staint Tibbs Row",
+  "length": 4.78,
+  "dist": 201.2,
+  "mid_local_xy": [
+   92.0,
+   7.2
+  ]
+ },
+ {
+  "id": "relation/18902598:5",
+  "osm_id": "relation/18902598",
+  "name": "Museum of Zoology",
+  "street": "Downing Street",
+  "length": 4.69,
+  "dist": 254.8,
+  "mid_local_xy": [
+   22.0,
+   -164.7
+  ]
+ },
+ {
+  "id": "way/131662340:18",
+  "osm_id": "way/131662340",
+  "name": "Zoology Building",
+  "street": "Downing Street",
+  "length": 4.36,
+  "dist": 235.7,
+  "mid_local_xy": [
+   30.2,
+   -137.2
+  ]
+ },
+ {
+  "id": "way/273015950:64",
+  "osm_id": "way/273015950",
+  "name": "Grand Arcade",
+  "street": "St Andrew's Street",
+  "length": 4.35,
+  "dist": 284.5,
+  "mid_local_xy": [
+   157.4,
+   -57.6
+  ]
+ },
+ {
+  "id": "relation/18902598:6",
+  "osm_id": "relation/18902598",
+  "name": "Museum of Zoology",
+  "street": "Downing Street",
+  "length": 4.25,
+  "dist": 250.3,
+  "mid_local_xy": [
+   20.1,
+   -160.6
+  ]
+ },
+ {
+  "id": "way/131662340:7",
+  "osm_id": "way/131662340",
+  "name": "Zoology Building",
+  "street": "Downing Street",
+  "length": 4.09,
+  "dist": 288.9,
+  "mid_local_xy": [
+   70.8,
+   -173.5
+  ]
+ },
+ {
+  "id": "way/40939407:2",
+  "osm_id": "way/40939407",
+  "name": "Hilton Cambridge City Centre",
+  "street": "Downing Street",
+  "length": 4.07,
+  "dist": 299.8,
+  "mid_local_xy": [
+   90.2,
+   -172.0
+  ]
+ },
+ {
+  "id": "way/161131046:1",
+  "osm_id": "way/161131046",
+  "name": "New Court",
+  "street": null,
+  "length": 26.79,
+  "dist": 339.7,
+  "mid_local_xy": [
+   218.5,
+   -52.7
+  ]
+ },
+ {
+  "id": "way/131636839:7",
+  "osm_id": "way/131636839",
+  "name": "Language Centre - Old Music School",
+  "street": "Downing Place",
+  "length": 25.58,
+  "dist": 372.7,
+  "mid_local_xy": [
+   168.5,
+   -198.0
+  ]
+ },
+ {
+  "id": "way/1039073567:10",
+  "osm_id": "way/1039073567",
+  "name": "Christ's Lane",
+  "street": null,
+  "length": 23.32,
+  "dist": 304.9,
+  "mid_local_xy": [
+   189.7,
+   -28.2
+  ]
+ },
+ {
+  "id": "way/40900608:18",
+  "osm_id": "way/40900608",
+  "name": "Sedgwick Building",
+  "street": "Downing Street",
+  "length": 22.79,
+  "dist": 342.1,
+  "mid_local_xy": [
+   131.6,
+   -191.8
+  ]
+ },
+ {
+  "id": "way/40900608:7",
+  "osm_id": "way/40900608",
+  "name": "Sedgwick Building",
+  "street": "Downing Street",
+  "length": 20.54,
+  "dist": 321.9,
+  "mid_local_xy": [
+   93.2,
+   -197.9
+  ]
+ },
+ {
+  "id": "way/40939407:7",
+  "osm_id": "way/40939407",
+  "name": "Hilton Cambridge City Centre",
+  "street": "Downing Street",
+  "length": 15.33,
+  "dist": 306.7,
+  "mid_local_xy": [
+   124.3,
+   -148.7
+  ]
+ },
+ {
+  "id": "way/131625131:1",
+  "osm_id": "way/131625131",
+  "name": null,
+  "street": null,
+  "length": 14.97,
+  "dist": 380.0,
+  "mid_local_xy": [
+   117.8,
+   -251.9
+  ]
+ },
+ {
+  "id": "way/28343062:4",
+  "osm_id": "way/28343062",
+  "name": "Museum of Archaeology and Anthropology",
+  "street": "Downing Street",
+  "length": 14.79,
+  "dist": 314.9,
+  "mid_local_xy": [
+   49.8,
+   -218.0
+  ]
+ },
+ {
+  "id": "way/191568707:0",
+  "osm_id": "way/191568707",
+  "name": "Cambridge Tap",
+  "street": "St Andrew's Street",
+  "length": 13.9,
+  "dist": 361.8,
+  "mid_local_xy": [
+   201.1,
+   -138.8
+  ]
+ },
+ {
+  "id": "way/161131067:4",
+  "osm_id": "way/161131067",
+  "name": "Upper Hall",
+  "street": null,
+  "length": 13.72,
+  "dist": 326.9,
+  "mid_local_xy": [
+   198.8,
+   -68.3
+  ]
+ },
+ {
+  "id": "way/28342985:3",
+  "osm_id": "way/28342985",
+  "name": "Courtyard Building",
+  "street": "Downing Street",
+  "length": 13.49,
+  "dist": 349.3,
+  "mid_local_xy": [
+   102.0,
+   -225.5
+  ]
+ },
+ {
+  "id": "way/40900612:15",
+  "osm_id": "way/40900612",
+  "name": "Botany Building",
+  "street": "Downing Street",
+  "length": 13.36,
+  "dist": 368.8,
+  "mid_local_xy": [
+   118.8,
+   -237.4
+  ]
+ },
+ {
+  "id": "way/141330781:14",
+  "osm_id": "way/141330781",
+  "name": "Downing Place United Reformed Church",
+  "street": "Downing Place",
+  "length": 13.08,
+  "dist": 338.4,
+  "mid_local_xy": [
+   156.4,
+   -160.1
+  ]
+ },
+ {
+  "id": "way/40939407:6",
+  "osm_id": "way/40939407",
+  "name": "Hilton Cambridge City Centre",
+  "street": "Downing Street",
+  "length": 11.95,
+  "dist": 311.5,
+  "mid_local_xy": [
+   122.2,
+   -158.0
+  ]
+ },
+ {
+  "id": "way/40937939:4",
+  "osm_id": "way/40937939",
+  "name": "John Lewis",
+  "street": "Downing Street",
+  "length": 11.32,
+  "dist": 347.3,
+  "mid_local_xy": [
+   190.5,
+   -128.3
+  ]
+ },
+ {
+  "id": "way/161131040:8",
+  "osm_id": "way/161131040",
+  "name": "New Court Cloisters",
+  "street": null,
+  "length": 10.9,
+  "dist": 322.3,
+  "mid_local_xy": [
+   209.4,
+   -22.1
+  ]
+ },
+ {
+  "id": "way/161131046:6",
+  "osm_id": "way/161131046",
+  "name": "New Court",
+  "street": null,
+  "length": 10.22,
+  "dist": 348.6,
+  "mid_local_xy": [
+   225.4,
+   -59.7
+  ]
+ },
+ {
+  "id": "way/161131040:6",
+  "osm_id": "way/161131040",
+  "name": "New Court Cloisters",
+  "street": null,
+  "length": 9.77,
+  "dist": 313.7,
+  "mid_local_xy": [
+   202.8,
+   -13.2
+  ]
+ },
+ {
+  "id": "way/131636839:8",
+  "osm_id": "way/131636839",
+  "name": "Language Centre - Old Music School",
+  "street": "Downing Place",
+  "length": 9.4,
+  "dist": 390.0,
+  "mid_local_xy": [
+   179.5,
+   -211.6
+  ]
+ },
+ {
+  "id": "way/40939407:3",
+  "osm_id": "way/40939407",
+  "name": "Hilton Cambridge City Centre",
+  "street": "Downing Street",
+  "length": 9.18,
+  "dist": 301.8,
+  "mid_local_xy": [
+   96.3,
+   -169.3
+  ]
+ },
+ {
+  "id": "way/28364543:14",
+  "osm_id": "way/28364543",
+  "name": "Physiology Building",
+  "street": "Downing Street",
+  "length": 9.07,
+  "dist": 391.8,
+  "mid_local_xy": [
+   170.9,
+   -222.9
+  ]
+ },
+ {
+  "id": "way/161131040:5",
+  "osm_id": "way/161131040",
+  "name": "New Court Cloisters",
+  "street": null,
+  "length": 8.93,
+  "dist": 307.4,
+  "mid_local_xy": [
+   196.1,
+   -14.2
+  ]
+ },
+ {
+  "id": "way/131636312:14",
+  "osm_id": "way/131636312",
+  "name": "Mineralogy Building",
+  "street": null,
+  "length": 8.18,
+  "dist": 382.6,
+  "mid_local_xy": [
+   164.3,
+   -216.5
+  ]
+ },
+ {
+  "id": "way/161131040:9",
+  "osm_id": "way/161131040",
+  "name": "New Court Cloisters",
+  "street": null,
+  "length": 7.12,
+  "dist": 328.6,
+  "mid_local_xy": [
+   215.9,
+   -22.5
+  ]
+ },
+ {
+  "id": "way/40900608:5",
+  "osm_id": "way/40900608",
+  "name": "Sedgwick Building",
+  "street": "Downing Street",
+  "length": 6.51,
+  "dist": 317.2,
+  "mid_local_xy": [
+   80.0,
+   -201.8
+  ]
+ },
+ {
+  "id": "way/131636315:2",
+  "osm_id": "way/131636315",
+  "name": "Haddon Library",
+  "street": "Downing Street",
+  "length": 6.47,
+  "dist": 315.2,
+  "mid_local_xy": [
+   69.2,
+   -206.7
+  ]
+ },
+ {
+  "id": "way/161131046:7",
+  "osm_id": "way/161131046",
+  "name": "New Court",
+  "street": null,
+  "length": 6.25,
+  "dist": 353.8,
+  "mid_local_xy": [
+   232.4,
+   -55.4
+  ]
+ },
+ {
+  "id": "way/131636314:4",
+  "osm_id": "way/131636314",
+  "name": "West Building",
+  "street": "Tennis Court Road",
+  "length": 6.14,
+  "dist": 350.1,
+  "mid_local_xy": [
+   57.7,
+   -253.8
+  ]
+ },
+ {
+  "id": "way/40900612:2",
+  "osm_id": "way/40900612",
+  "name": "Botany Building",
+  "street": "Downing Street",
+  "length": 5.9,
+  "dist": 367.5,
+  "mid_local_xy": [
+   54.0,
+   -274.9
+  ]
+ },
+ {
+  "id": "way/161131040:13",
+  "osm_id": "way/161131040",
+  "name": "New Court Cloisters",
+  "street": null,
+  "length": 5.76,
+  "dist": 333.2,
+  "mid_local_xy": [
+   222.6,
+   -13.7
+  ]
+ },
+ {
+  "id": "way/40937939:2",
+  "osm_id": "way/40937939",
+  "name": "John Lewis",
+  "street": "Downing Street",
+  "length": 5.49,
+  "dist": 344.4,
+  "mid_local_xy": [
+   183.8,
+   -133.5
+  ]
+ },
+ {
+  "id": "way/161131062:3",
+  "osm_id": "way/161131062",
+  "name": "Hall",
+  "street": null,
+  "length": 5.45,
+  "dist": 359.4,
+  "mid_local_xy": [
+   224.3,
+   -91.3
+  ]
+ },
+ {
+  "id": "way/28343062:11",
+  "osm_id": "way/28343062",
+  "name": "Museum of Archaeology and Anthropology",
+  "street": "Downing Street",
+  "length": 5.4,
+  "dist": 314.3,
+  "mid_local_xy": [
+   63.7,
+   -209.1
+  ]
+ },
+ {
+  "id": "way/131636315:3",
+  "osm_id": "way/131636315",
+  "name": "Haddon Library",
+  "street": "Downing Street",
+  "length": 5.38,
+  "dist": 316.1,
+  "mid_local_xy": [
+   74.6,
+   -204.3
+  ]
+ },
+ {
+  "id": "way/161131046:2",
+  "osm_id": "way/161131046",
+  "name": "New Court",
+  "street": null,
+  "length": 4.96,
+  "dist": 330.5,
+  "mid_local_xy": [
+   205.4,
+   -61.6
+  ]
+ },
+ {
+  "id": "way/161131046:4",
+  "osm_id": "way/161131046",
+  "name": "New Court",
+  "street": null,
+  "length": 4.75,
+  "dist": 337.7,
+  "mid_local_xy": [
+   210.2,
+   -69.1
+  ]
+ },
+ {
+  "id": "way/1039073567:6",
+  "osm_id": "way/1039073567",
+  "name": "Christ's Lane",
+  "street": null,
+  "length": 4.53,
+  "dist": 305.3,
+  "mid_local_xy": [
+   180.8,
+   -55.2
+  ]
+ },
+ {
+  "id": "way/141330781:1",
+  "osm_id": "way/141330781",
+  "name": "Downing Place United Reformed Church",
+  "street": "Downing Place",
+  "length": 4.41,
+  "dist": 335.7,
+  "mid_local_xy": [
+   148.8,
+   -164.7
+  ]
+ },
+ {
+  "id": "way/1039073567:5",
+  "osm_id": "way/1039073567",
+  "name": "Christ's Lane",
+  "street": null,
+  "length": 4.37,
+  "dist": 300.9,
+  "mid_local_xy": [
+   176.4,
+   -54.7
+  ]
+ },
+ {
+  "id": "way/161131062:29",
+  "osm_id": "way/161131062",
+  "name": "Hall",
+  "street": null,
+  "length": 4.14,
+  "dist": 370.1,
+  "mid_local_xy": [
+   241.0,
+   -79.5
+  ]
+ }
+]

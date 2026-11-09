@@ -1,0 +1,112 @@
+{
+ "osm_id": "way/139308028",
+ "sources": [
+  "mapillary:737763553567883"
+ ],
+ "walls": [
+  {
+   "id": "way/139308028:14",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "stone",
+   "wall_colour": "#cdb684",
+   "trim_colour": "#dcc89c",
+   "cornice_z": 8.9,
+   "cornice": "classical",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [
+    3.3,
+    7.2,
+    10.7,
+    14.3
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.1,
+     "w": 1.7,
+     "z": 3.0,
+     "h": 4.6,
+     "panes": [
+      3,
+      6
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.7,
+     "w": 1.7,
+     "z": 3.0,
+     "h": 4.6,
+     "panes": [
+      3,
+      6
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.5,
+     "w": 1.7,
+     "z": 3.0,
+     "h": 4.6,
+     "panes": [
+      3,
+      6
+     ],
+     "head": "arched",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Clare College Chapel (Burrough, 1763), long side facing east-south-east towards the Old Schools: ashlar with giant Corinthian pilasters on a plinth, tall round-arched leaded/stained-glass windows with bracketed sills, entablature and balustraded parapet; west part of this wall is plain (tree in view). Bay positions from one oblique Mapillary view; wall split between :14 and :15 assumed."
+  },
+  {
+   "id": "way/139308028:15",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "stone",
+   "wall_colour": "#cdb684",
+   "trim_colour": "#dcc89c",
+   "cornice_z": 8.9,
+   "cornice": "classical",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [
+    2.7,
+    4.9
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.3,
+     "w": 1.7,
+     "z": 3.0,
+     "h": 4.6,
+     "panes": [
+      3,
+      6
+     ],
+     "head": "arched",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Clare College Chapel, north end of the long side: last round-arched window then a blind end bay with a sunk panel and roundel between Corinthian pilasters; entablature and balustrade. From one oblique Mapillary view."
+  }
+ ]
+}

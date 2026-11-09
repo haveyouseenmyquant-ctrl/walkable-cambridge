@@ -1,0 +1,128 @@
+{
+ "osm_id": "way/1288738588",
+ "sources": [
+  "commons:File:13, St John's Street.jpg",
+  "commons:File:14 And 15, St John's Street.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1288738588:1",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    3.6,
+    6.5,
+    9.0
+   ],
+   "material": "brick",
+   "wall_colour": "#c9b48a",
+   "trim_colour": "#f2efe6",
+   "cornice_z": 11.4,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 5.5,
+     "z1": 3.4,
+     "fascia_text": "stilo",
+     "fascia_colour": "#f4f2ec",
+     "text_colour": "#222222",
+     "door_x": 4.6,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.6,
+     "w": 1.0,
+     "z": 4.1,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.2,
+     "w": 1.0,
+     "z": 4.1,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.6,
+     "w": 1.0,
+     "z": 6.9,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.2,
+     "w": 1.0,
+     "z": 6.9,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.6,
+     "w": 1.0,
+     "z": 9.4,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.2,
+     "w": 1.0,
+     "z": 9.4,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "13 St John's Street (stilo salon): four-storey buff gault-brick house between Savoy Taylors Guild and the terracotta 12; plain sash windows with stone sills, two bays; white painted shopfront with fluted pilasters, fascia and door at the south end. Seen only at the edges of Commons '13, St John's Street.jpg' and '14 And 15, St John's Street.jpg'."
+  }
+ ]
+}

@@ -3,7 +3,9 @@
  "sources": [
   "mapillary:508189913647844",
   "mapillary:290763419315885",
-  "mapillary:515015919875305"
+  "mapillary:515015919875305",
+  "mapillary:1179049779182887",
+  "commons:File:Hobson Street - geograph.org.uk - 2945491.jpg (CC BY-SA 2.0)"
  ],
  "walls": [
   {
@@ -837,6 +839,266 @@
    ],
    "confidence": "low",
    "notes": "Sussex House, Hobson Street (west side), northern stretch: continuation of the same 1930s red-brick neo-Georgian range, ground floor of shop units, round-arched first-floor sashes and plain sashes on two floors above, parapet. Seen only obliquely and far away (Mapillary 508189913647844, 515015919875305); bay count assumed from the same ~2.4 m rhythm; number of shop units guessed."
+  },
+  {
+   "id": "way/147456536:6",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.6,
+    8.4,
+    11.8
+   ],
+   "material": "brick",
+   "wall_colour": "#8f4f3c",
+   "trim_colour": "#efe9dc",
+   "cornice_z": 15.2,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 7.6,
+     "z1": 4.0,
+     "fascia_text": "Tatties Cafe Restaurant",
+     "fascia_colour": "#6e1f2a",
+     "text_colour": "#f1e6d0",
+     "door_x": 1.3,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.6,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.7,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.6,
+     "w": 1.1,
+     "z": 8.8,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.6,
+     "w": 1.0,
+     "z": 12.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.0,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.7,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.0,
+     "w": 1.1,
+     "z": 8.8,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.0,
+     "w": 1.0,
+     "z": 12.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.4,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.7,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.4,
+     "w": 1.1,
+     "z": 8.8,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.4,
+     "w": 1.0,
+     "z": 12.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 2.2,
+     "w": 1.4,
+     "h": 1.6
+    },
+    {
+     "type": "dormer",
+     "x": 5.6,
+     "w": 1.4,
+     "h": 1.6
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Sussex House, Sussex Street front at the Hobson Street end (p0 = Hobson St corner). Same 1930s neo-Georgian red-brick range as walls 3/4: ground-floor shop (Tatties Cafe Restaurant, maroon fascia) between stone pilasters, three bays (~2.4 m) of round-arched first-floor sashes, two floors of plain sashes above, eaves cornice and slate roof with pedimented dormers. Read from oblique Mapillary 1179049779182887 (2048 px); bay positions approximate. Confirmed by Geograph 2945491 (arched first-floor sashes, mansard dormers on the Sussex Street side)."
+  },
+  {
+   "id": "way/147456536:5",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.6,
+    8.4,
+    11.8
+   ],
+   "material": "brick",
+   "wall_colour": "#8f4f3c",
+   "trim_colour": "#e6d6b0",
+   "cornice_z": 11.3,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.6
+   ],
+   "quoins": true,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 3.8,
+     "z1": 4.0,
+     "fascia_text": "Cafe Restaurant Tatties",
+     "fascia_colour": "#7a1f2b",
+     "text_colour": "#f1e6d0",
+     "door_x": 2.0,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.0,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.0,
+     "w": 1.1,
+     "z": 8.8,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.0,
+     "w": 1.0,
+     "z": 12.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 2.0,
+     "w": 1.5,
+     "h": 1.7
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Sussex House, canted corner bay at the Hobson Street / Sussex Street junction. Single window axis framed in Ketton stone: stone-pilastered ground-floor corner of the Tatties Cafe Restaurant shopfront (maroon fascia), first-floor sash in a stone architrave under a carved cartouche/broken pediment, second-floor sash with a small stone balcony, third-floor sash, then a pedimented dormer in the slate mansard. Stone quoin strips at both edges. OSM/LiDAR wall height (11.5 m) is lower than the real eaves (~15 m), so the top window/dormer may be clipped by the builder. Read from Geograph 2945491 (frontal) and Mapillary 1179049779182887."
   }
  ]
 }

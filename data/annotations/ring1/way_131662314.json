@@ -1,0 +1,523 @@
+{
+ "osm_id": "way/131662314",
+ "sources": [
+  "mapillary:1769943526517957",
+  "mapillary:2940323976246946"
+ ],
+ "walls": [
+  {
+   "id": "way/131662314:12",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.9,
+    8.9,
+    12.6
+   ],
+   "material": "stone",
+   "wall_colour": "#bfa98a",
+   "trim_colour": "#d3c3a6",
+   "cornice_z": 15.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.9,
+    8.9
+   ],
+   "quoins": false,
+   "confidence": "low",
+   "elements": [
+    {
+     "type": "window",
+     "x": 2.0,
+     "w": 1.5,
+     "z": 0.9,
+     "h": 3.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 5.3,
+     "w": 1.5,
+     "z": 0.9,
+     "h": 3.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 11.9,
+     "w": 1.5,
+     "z": 0.9,
+     "h": 3.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 15.0,
+     "w": 1.5,
+     "z": 0.9,
+     "h": 3.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "arched",
+     "x": 8.6,
+     "w": 2.0,
+     "h": 3.2,
+     "surround": "moulded",
+     "colour": "#2a2622"
+    },
+    {
+     "type": "window",
+     "x": 2.0,
+     "w": 1.3,
+     "z": 5.6,
+     "h": 2.8,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 2.0,
+     "w": 1.3,
+     "z": 9.4,
+     "h": 2.6,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 2.0,
+     "w": 1.1,
+     "z": 13.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 5.3,
+     "w": 1.3,
+     "z": 5.6,
+     "h": 2.8,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 5.3,
+     "w": 1.3,
+     "z": 9.4,
+     "h": 2.6,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 5.3,
+     "w": 1.1,
+     "z": 13.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 8.6,
+     "w": 1.3,
+     "z": 5.6,
+     "h": 2.8,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 8.6,
+     "w": 1.3,
+     "z": 9.4,
+     "h": 2.6,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 8.6,
+     "w": 1.1,
+     "z": 13.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 11.9,
+     "w": 1.3,
+     "z": 5.6,
+     "h": 2.8,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 11.9,
+     "w": 1.3,
+     "z": 9.4,
+     "h": 2.6,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 11.9,
+     "w": 1.1,
+     "z": 13.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 15.0,
+     "w": 1.3,
+     "z": 5.6,
+     "h": 2.8,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 15.0,
+     "w": 1.3,
+     "z": 9.4,
+     "h": 2.6,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 15.0,
+     "w": 1.1,
+     "z": 13.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "notes": "Shell Building, Pembroke Street front: same Edwardian ashlar range as Old Metallurgy, rusticated ground with arched openings, regular bays of tall mullioned windows, attic and cornice. Seen far and foreshortened; bay rhythm estimated. (length 16.9 m, height 16.5 m from walls.json)"
+  },
+  {
+   "id": "way/131662314:13",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.9,
+    8.9,
+    12.6
+   ],
+   "material": "stone",
+   "wall_colour": "#bfa98a",
+   "trim_colour": "#d3c3a6",
+   "cornice_z": 15.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.9,
+    8.9
+   ],
+   "quoins": false,
+   "confidence": "low",
+   "elements": [
+    {
+     "type": "window",
+     "x": 1.8,
+     "w": 1.5,
+     "z": 0.9,
+     "h": 3.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 5.0,
+     "w": 1.5,
+     "z": 0.9,
+     "h": 3.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 8.2,
+     "w": 1.5,
+     "z": 0.9,
+     "h": 3.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 11.0,
+     "w": 1.5,
+     "z": 0.9,
+     "h": 3.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 1.8,
+     "w": 1.3,
+     "z": 5.6,
+     "h": 2.8,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 1.8,
+     "w": 1.3,
+     "z": 9.4,
+     "h": 2.6,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 1.8,
+     "w": 1.1,
+     "z": 13.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 5.0,
+     "w": 1.3,
+     "z": 5.6,
+     "h": 2.8,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 5.0,
+     "w": 1.3,
+     "z": 9.4,
+     "h": 2.6,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 5.0,
+     "w": 1.1,
+     "z": 13.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 8.2,
+     "w": 1.3,
+     "z": 5.6,
+     "h": 2.8,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 8.2,
+     "w": 1.3,
+     "z": 9.4,
+     "h": 2.6,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 8.2,
+     "w": 1.1,
+     "z": 13.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 11.0,
+     "w": 1.3,
+     "z": 5.6,
+     "h": 2.8,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 11.0,
+     "w": 1.3,
+     "z": 9.4,
+     "h": 2.6,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 11.0,
+     "w": 1.1,
+     "z": 13.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "notes": "Shell Building east part on Pembroke Street: rusticated ashlar ground floor with round-arched windows, tall mullioned upper windows between shallow piers, attic, cornice. Bay rhythm estimated from foreshortened view. (length 12.4 m, height 16.3 m from walls.json)"
+  }
+ ]
+}

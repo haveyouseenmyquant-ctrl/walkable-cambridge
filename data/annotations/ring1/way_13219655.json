@@ -3,7 +3,9 @@
  "sources": [
   "mapillary:307488744108103",
   "mapillary:306132080921165",
-  "mapillary:880115206053660"
+  "mapillary:880115206053660",
+  "mapillary:155015243291694",
+  "mapillary:1232075063876423"
  ],
  "walls": [
   {
@@ -373,6 +375,98 @@
    ],
    "confidence": "low",
    "notes": "Round Church Street south side, late-20th-century range: buff brick with reconstituted-stone bands and piers; ground floor shop units behind an arcade of square stone piers (~4 m bays); first floor alternates projecting canted bay windows and single windows; second floor single windows; deep timber eaves. Rhythm read from oblique mapillary views; counts approximate."
+  },
+  {
+   "id": "way/13219655:22",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.3,
+    6.2
+   ],
+   "material": "brick",
+   "wall_colour": "#c8a878",
+   "trim_colour": "#e3d6bb",
+   "cornice_z": 8.1,
+   "cornice": "bracketed",
+   "parapet": false,
+   "string_courses": [
+    3.3
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.4,
+     "x1": 9.0,
+     "z1": 3.0,
+     "fascia_text": "Giulio",
+     "fascia_colour": "#1c1c1c",
+     "text_colour": "#ffffff",
+     "door_x": 4.6,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 2.4,
+     "w": 2.4,
+     "z": 3.8,
+     "h": 1.8,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.6,
+     "w": 1.0,
+     "z": 3.9,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.4,
+     "w": 1.0,
+     "z": 6.6,
+     "h": 1.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.6,
+     "w": 1.0,
+     "z": 6.6,
+     "h": 1.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Same late-20th-century buff-brick range as walls 23/24 (Round Church Street / King Street side of New Court): Giulio shop unit recessed behind an arcade of square stone piers with a stone band over it, first floor with one projecting canted bay window and one single window, second floor single windows under deep timber eaves. Read from oblique Mapillary 155015243291694 and 1232075063876423 along the street; which bays fall on this 9.4 m edge is estimated."
   }
  ]
 }

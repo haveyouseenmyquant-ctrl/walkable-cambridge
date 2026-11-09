@@ -1,0 +1,143 @@
+{
+ "osm_id": "way/1288750539",
+ "sources": [
+  "commons:File:15 and 16 Bridge Street, Cambridge.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1288750539:8",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.3,
+    6.0
+   ],
+   "material": "timber",
+   "wall_colour": "#ece8df",
+   "trim_colour": "#4a3a30",
+   "cornice_z": 8.6,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.3,
+    6.0
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 7.5,
+     "z1": 3.0,
+     "fascia_text": "",
+     "fascia_colour": "#2a2420",
+     "text_colour": "#f2f2f2",
+     "door_x": 2.4,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 1.8,
+     "w": 1.0,
+     "z": 3.6,
+     "h": 1.3,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 3.7,
+     "w": 1.0,
+     "z": 3.6,
+     "h": 1.3,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 6.2,
+     "w": 1.3,
+     "z": 3.6,
+     "h": 1.3,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 0.7,
+     "w": 0.5,
+     "z": 6.3,
+     "h": 1.0,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.7,
+     "w": 0.8,
+     "z": 6.3,
+     "h": 1.0,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 3.4,
+     "w": 1.0,
+     "z": 6.3,
+     "h": 1.0,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.8,
+     "w": 1.3,
+     "z": 6.3,
+     "h": 1.0,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "15-16 Bridge Street: 16th-century jettied timber-framed house, dark exposed studs and braces on white infill, two jetties; three grey-framed projecting oriel windows on the first floor, four casements under the eaves on the second, steep old-tile roof. Ground floor: dark timber shopfront with carriage passage (16a) at left and a cyan cafe front at right. Commons '15 and 16 Bridge Street, Cambridge.jpg'. Positions scaled from the photo to the 7.8 m wall."
+  }
+ ]
+}

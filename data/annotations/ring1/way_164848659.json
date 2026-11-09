@@ -1,0 +1,286 @@
+{
+ "osm_id": "way/164848659",
+ "sources": [
+  "mapillary:342344917408828"
+ ],
+ "walls": [
+  {
+   "id": "way/164848659:13",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.8,
+    7.4
+   ],
+   "material": "stone",
+   "wall_colour": "#c9b088",
+   "trim_colour": "#d8c39c",
+   "cornice_z": 10.9,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    3.6,
+    7.2
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.2,
+     "w": 1.0,
+     "z": 0.9,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.2,
+     "w": 1.4,
+     "z": 4.6,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.2,
+     "w": 1.3,
+     "z": 8.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 3.4,
+     "w": 1.0,
+     "z": 0.9,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 3.4,
+     "w": 1.4,
+     "z": 4.6,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 3.4,
+     "w": 1.3,
+     "z": 8.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 2.3,
+     "w": 1.2,
+     "h": 1.5
+    }
+   ],
+   "confidence": "low",
+   "notes": "Webb's Building (King's College), King's Lane front just west of the arched gateway tower: rough buff ashlar, three storeys and attic, two bays of mullioned casements per floor. From one oblique wide-angle Mapillary view; the split between this wall and the gateway returns is uncertain."
+  },
+  {
+   "id": "way/164848659:16",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.8,
+    7.4
+   ],
+   "material": "stone",
+   "wall_colour": "#c9b088",
+   "trim_colour": "#d8c39c",
+   "cornice_z": 10.9,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    3.6,
+    7.2
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.8,
+     "w": 1.1,
+     "z": 0.9,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.8,
+     "w": 1.1,
+     "z": 4.6,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.8,
+     "w": 1.1,
+     "z": 8.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.5,
+     "w": 2.2,
+     "z": 0.9,
+     "h": 2.0,
+     "panes": [
+      4,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 8.5,
+     "w": 2.6,
+     "z": 4.4,
+     "h": 2.4,
+     "panes": [
+      4,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.5,
+     "w": 2.0,
+     "z": 8.1,
+     "h": 1.9,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.8,
+     "w": 1.4,
+     "z": 0.9,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.8,
+     "w": 1.4,
+     "z": 4.6,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.8,
+     "w": 1.4,
+     "z": 8.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 5.5,
+     "w": 1.2,
+     "h": 1.5
+    },
+    {
+     "type": "dormer",
+     "x": 10.5,
+     "w": 1.2,
+     "h": 1.5
+    }
+   ],
+   "confidence": "low",
+   "notes": "Webb's Building (King's College) on King's Lane, section east of the arched gateway tower: rough-faced buff ashlar Tudor/Jacobean style, three storeys plus attic dormers behind a parapet, mullioned casements, a first-floor canted oriel on stone corbels in the middle bay. The same stone front continues east onto the next building (way/164848641 wall 14). Positions come from one wide-angle Mapillary view, using the arch width as scale."
+  }
+ ]
+}

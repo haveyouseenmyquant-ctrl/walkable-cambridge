@@ -7,7 +7,8 @@
   "mapillary:490320359088033",
   "mapillary:919159848898713",
   "mapillary:301075494954846",
-  "commons:File:Vacant units - Lion Yard - geograph.org.uk - 6716310.jpg (CC BY-SA 2.0)"
+  "commons:File:Vacant units - Lion Yard - geograph.org.uk - 6716310.jpg (CC BY-SA 2.0)",
+  "mapillary:515544902781992"
  ],
  "walls": [
   {
@@ -467,6 +468,69 @@
    ],
    "confidence": "low",
    "notes": "Lion Yard shop unit at the west end of the St Tibbs Row south side (p1 = west, by the mall's stone-clad entrance): full-width glazed shopfront under the slate-roof eave with a three-light box dormer above. From the Geograph view (6716310) and mapillary 919159848898713; unit split approximate."
+  },
+  {
+   "id": "way/40937938:38",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.6
+   ],
+   "material": "brick",
+   "wall_colour": "#9a6e4f",
+   "trim_colour": "#e8e6e0",
+   "cornice_z": 10.6,
+   "cornice": "none",
+   "parapet": false,
+   "string_courses": [
+    4.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.4,
+     "x1": 8.9,
+     "z1": 3.6,
+     "fascia_text": "EAT.",
+     "fascia_colour": "#d9d4c8",
+     "text_colour": "#3b3b3b",
+     "door_x": 4.5,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 2.6,
+     "w": 4.0,
+     "z": 5.6,
+     "h": 2.6,
+     "panes": [
+      4,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 7.0,
+     "w": 3.0,
+     "z": 5.6,
+     "h": 2.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    }
+   ],
+   "confidence": "low",
+   "notes": "Lion Yard, St Tibbs Row / Church Walk side by St Andrew the Great (p0 = south). 1970s-2000s shopping-centre block: glazed ground-floor shop units (EAT. and a cafe) under a white rendered band and canopy on tall white columns, first floor of brown brick with large dark-framed glazing. Read from a very oblique Mapillary view (515544902781992); widths approximate."
   }
  ]
 }

@@ -1,0 +1,279 @@
+{
+ "osm_id": "way/147487988",
+ "sources": [
+  "mapillary:837071610488805"
+ ],
+ "walls": [
+  {
+   "id": "way/147487988:9",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.2,
+    7.4,
+    10.2
+   ],
+   "material": "brick",
+   "wall_colour": "#cdb894",
+   "trim_colour": "#efe9dc",
+   "cornice_z": 11.8,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.2
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 5.8,
+     "x1": 10.6,
+     "z1": 3.8,
+     "fascia_text": "",
+     "fascia_colour": "#2e3440",
+     "text_colour": "#ffffff",
+     "door_x": 6.6,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 10.9,
+     "x1": 15.8,
+     "z1": 3.8,
+     "fascia_text": "",
+     "fascia_colour": "#3d4a5c",
+     "text_colour": "#ffffff",
+     "door_x": 15.0,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 16.4,
+     "x1": 23.1,
+     "z1": 4.0,
+     "fascia_text": "abantu",
+     "fascia_colour": "#8a9ea8",
+     "text_colour": "#ffffff",
+     "door_x": 19.0,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.3,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.3,
+     "w": 1.0,
+     "z": 7.6,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 10.8,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 10.8,
+     "w": 1.0,
+     "z": 7.6,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 14.3,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 14.3,
+     "w": 1.0,
+     "z": 7.6,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 17.7,
+     "w": 1.0,
+     "z": 4.6,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 17.7,
+     "w": 1.0,
+     "z": 7.8,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 17.7,
+     "w": 0.9,
+     "z": 10.5,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 19.9,
+     "w": 1.0,
+     "z": 4.6,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 19.9,
+     "w": 1.0,
+     "z": 7.8,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 19.9,
+     "w": 0.9,
+     "z": 10.5,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 22.1,
+     "w": 1.0,
+     "z": 4.6,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 22.1,
+     "w": 1.0,
+     "z": 7.8,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 22.1,
+     "w": 0.9,
+     "z": 10.5,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Hobson Street east side (Christ's College Z staircase over shops), p0 = north. Read looking north from the Sussex Street junction (Mapillary 837071610488805, 2048 px). Southern ~7 m: buff-brick four-storey front with three bays of plain sashes over the grey-blue 'abantu' shopfront. Middle ~10 m: white-rendered (modelled in the wall colour) three-storey front with three bays of round-headed sashes over two narrow dark shopfronts. Northern ~5 m not seen. Split of the frontage between this edge and its neighbours is estimated from the camera pose; Mapillary position error a few metres."
+  }
+ ]
+}

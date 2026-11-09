@@ -1563,3 +1563,12 @@ Next
 3. Ring 1: another 5-sector annotation round (regenerate the worklists from facade_geometry_city.json).
    Commons rate-limits, so give each sector its own Commons budget.
 4. Ring-report per-ring judged_realism for the new build.
+
+## 2026-11-09 — Session 51 (reconstructed in session 52)
+
+Session 51 ended before it wrote a journal entry, and most of its work was left uncommitted. Session 52 committed it as dfde243:
+spell VFX for fire, grit, hex and storm (a flickering flame head, grit shards, helix darts, forked bolts with scorch marks);
+regular mobs drawn 15% larger (same collision radius); third-person camera occlusion against zone meshes and stall canopies
+(session 50's "Next" item 2); about 56 new ring-1 wall annotations (city facades rebuilt at 04:16).
+Ring-1 facade match **32.2 → 41.6%** (286 of 851 walls), city 7.34 → 9.48%.
+Because site/ differed from the live build, service.sh never computed game KPIs for the live 59b6c5, so measure.sh read 0 for them.

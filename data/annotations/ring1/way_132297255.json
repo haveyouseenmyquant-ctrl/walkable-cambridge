@@ -1,0 +1,250 @@
+{
+ "osm_id": "way/132297255",
+ "sources": [
+  "commons:File:Cambridge Union Building - geograph.org.uk - 3472422.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/132297255:25",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.0
+   ],
+   "material": "brick",
+   "wall_colour": "#9b4a36",
+   "trim_colour": "#d9cfb6",
+   "cornice_z": 10.0,
+   "cornice": "simple",
+   "string_courses": [
+    3.9,
+    7.2
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 1.6,
+     "w": 1.7,
+     "z": 0.9,
+     "h": 2.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 4.9,
+     "w": 1.7,
+     "z": 0.9,
+     "h": 2.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 8.2,
+     "w": 1.7,
+     "z": 0.9,
+     "h": 2.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 11.5,
+     "w": 1.7,
+     "z": 0.9,
+     "h": 2.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 14.3,
+     "w": 1.7,
+     "z": 0.9,
+     "h": 2.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 1.6,
+     "w": 1.7,
+     "z": 4.6,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 4.9,
+     "w": 1.7,
+     "z": 4.6,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 8.2,
+     "w": 1.7,
+     "z": 4.6,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 11.5,
+     "w": 1.7,
+     "z": 4.6,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 14.3,
+     "w": 1.7,
+     "z": 4.6,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "gothic",
+     "x": 17.6,
+     "w": 1.5,
+     "h": 3.0,
+     "surround": "pilastered"
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 17.6,
+     "w": 1.2,
+     "z": 5.0,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 20.6,
+     "w": 0.9,
+     "z": 1.0,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 22.6,
+     "w": 0.9,
+     "z": 1.0,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 21.6,
+     "w": 2.0,
+     "z": 4.6,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 21.6,
+     "w": 1.3,
+     "z": 7.6,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Cambridge Union Society (Waterhouse 1866), garden front facing the lawn off Bridge Street (x from the NE end). Polychrome red brick with stone bands: two-storey range of paired mullioned windows with colonnettes on the ground floor (x 0-15.5), then the twin-gabled entrance block with a pointed-arch doorway under a tall traceried two-light window and roundel (left gable) and a stone oriel over two ground-floor sashes (right gable). Wall identification (which face of the Union this is) inferred from geometry; tiled roof and gables not modelled. (length 24.1 m, height 10.2 m from walls.json)",
+   "pilasters": [],
+   "quoins": false,
+   "parapet": false
+  }
+ ]
+}

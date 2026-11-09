@@ -3,7 +3,8 @@
  "sources": [
   "mapillary:586551062317743",
   "mapillary:159696349437511",
-  "commons:File:Department of Plant Sciences - geograph.org.uk - 1085000.jpg"
+  "commons:File:Department of Plant Sciences - geograph.org.uk - 1085000.jpg",
+  "mapillary:2910788469166915"
  ],
  "walls": [
   {
@@ -498,6 +499,236 @@
    ],
    "confidence": "low",
    "notes": "Botany Building (W.S. Weatherley, 1904), south range: red-brown brick with buff stone bands and dressings, three main storeys of regular sash/cross windows and a slate mansard with a row of small dormers. The 2019 Mapillary views (one stationary car, raking from the south-west) show it under scaffolding, so the window grid (10 bays) and dormer count (8) are estimated; materials also follow the Commons photo of the courtyard (north) front."
+  },
+  {
+   "id": "way/40900612:1",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    3.6,
+    7.0,
+    10.4
+   ],
+   "material": "brick",
+   "wall_colour": "#8f5a45",
+   "trim_colour": "#d8c7a4",
+   "cornice_z": 14.1,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.6,
+    7.0,
+    10.4
+   ],
+   "quoins": false,
+   "confidence": "low",
+   "elements": [
+    {
+     "type": "window",
+     "x": 2.8,
+     "w": 1.2,
+     "z": 0.9,
+     "h": 2.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 5.4,
+     "w": 1.2,
+     "z": 0.9,
+     "h": 2.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 11.0,
+     "w": 1.2,
+     "z": 0.9,
+     "h": 2.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 2.8,
+     "w": 1.1,
+     "z": 4.4,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 2.8,
+     "w": 1.1,
+     "z": 7.8,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 2.8,
+     "w": 1.0,
+     "z": 11.0,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 5.4,
+     "w": 1.1,
+     "z": 4.4,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 5.4,
+     "w": 1.1,
+     "z": 7.8,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 5.4,
+     "w": 1.0,
+     "z": 11.0,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 8.6,
+     "w": 1.1,
+     "z": 4.4,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 8.6,
+     "w": 1.1,
+     "z": 7.8,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 8.6,
+     "w": 1.0,
+     "z": 11.0,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 11.0,
+     "w": 1.1,
+     "z": 4.4,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 11.0,
+     "w": 1.1,
+     "z": 7.8,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 11.0,
+     "w": 1.0,
+     "z": 11.0,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 8.0,
+     "w": 1.2,
+     "h": 2.6,
+     "surround": "moulded",
+     "colour": "#8a4a2c"
+    }
+   ],
+   "notes": "Botany Building, Tennis Court Road side (Downing Site): red brick with buff stone bands and stone-dressed flat-headed windows, four storeys, a brown panelled side door near the middle; north part was under scaffolding in the reference frame, so its window positions are guessed from the bay rhythm. Projected from a wide-angle Mapillary frame. (length 13.5 m, height 14.4 m from walls.json)"
   }
  ]
 }

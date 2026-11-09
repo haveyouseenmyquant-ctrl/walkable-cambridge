@@ -1,0 +1,178 @@
+{
+ "osm_id": "way/1288738593",
+ "sources": [
+  "commons:File:14 And 15, St John's Street.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1288738593:5",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.6,
+    6.9
+   ],
+   "material": "render",
+   "wall_colour": "#ebe4d8",
+   "trim_colour": "#f6f4ee",
+   "cornice_z": 10.0,
+   "cornice": "classical",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 10.8,
+     "z1": 3.4,
+     "fascia_text": "SAVOY TAYLORS GUILD",
+     "fascia_colour": "#3c4246",
+     "text_colour": "#e8e8e8",
+     "door_x": 10.0,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.4,
+     "w": 1.1,
+     "z": 4.1,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.4,
+     "w": 1.1,
+     "z": 7.3,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.2,
+     "w": 1.1,
+     "z": 4.1,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.2,
+     "w": 1.1,
+     "z": 7.3,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.0,
+     "w": 1.1,
+     "z": 4.1,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.0,
+     "w": 1.1,
+     "z": 7.3,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.6,
+     "w": 1.1,
+     "z": 4.1,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.6,
+     "w": 1.1,
+     "z": 7.3,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 1.4,
+     "w": 1.2,
+     "h": 1.2
+    },
+    {
+     "type": "dormer",
+     "x": 4.2,
+     "w": 1.2,
+     "h": 1.2
+    },
+    {
+     "type": "dormer",
+     "x": 7.0,
+     "w": 1.2,
+     "h": 1.2
+    },
+    {
+     "type": "dormer",
+     "x": 9.6,
+     "w": 1.2,
+     "h": 1.2
+    }
+   ],
+   "confidence": "medium",
+   "notes": "14-15 St John's Street (Savoy Taylors Guild): cream-rendered Georgian front, four bays of white sashes, first-floor windows with scrolled console hoods, dentil eaves cornice, lead-clad dormers in the roof; full-width charcoal shopfront with door at right. Commons '14 And 15, St John's Street.jpg' (oblique). x from the north (left) end."
+  }
+ ]
+}

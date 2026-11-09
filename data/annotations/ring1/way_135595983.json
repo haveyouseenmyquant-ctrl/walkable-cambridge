@@ -4,7 +4,8 @@
   "mapillary:173478427991149",
   "mapillary:1143583196146420",
   "mapillary:933492514084360",
-  "mapillary:376548620288276"
+  "mapillary:376548620288276",
+  "mapillary:290763419315885"
  ],
  "walls": [
   {
@@ -549,6 +550,292 @@
    ],
    "confidence": "low",
    "notes": "Next unit east on the Sidney Street south-facing stretch: modern shopfront with a yellow fascia panel, red-brick upper storeys with stone architraves around plate-glass sashes. Only the western half seen clearly; window count estimated."
+  },
+  {
+   "id": "way/135595983:5",
+   "storeys": 5,
+   "floor_z": [
+    0,
+    4.4,
+    8.2,
+    11.4,
+    14.4
+   ],
+   "material": "brick",
+   "wall_colour": "#8a4a38",
+   "trim_colour": "#efe9dc",
+   "cornice_z": 17.4,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.4
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 3.5,
+     "z1": 4.0,
+     "fascia_text": "",
+     "fascia_colour": "#2a3f6a",
+     "text_colour": "#ffffff",
+     "door_x": 1.0,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 3.8,
+     "x1": 7.6,
+     "z1": 4.0,
+     "fascia_text": "",
+     "fascia_colour": "#3a3a3a",
+     "text_colour": "#ffffff",
+     "door_x": 4.6,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 7.9,
+     "x1": 10.9,
+     "z1": 4.0,
+     "fascia_text": "",
+     "fascia_colour": "#4a4f55",
+     "text_colour": "#ffffff",
+     "door_x": 8.6,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.4,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.4,
+     "w": 1.1,
+     "z": 8.6,
+     "h": 2.1,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.4,
+     "w": 1.1,
+     "z": 11.8,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.4,
+     "w": 1.0,
+     "z": 14.8,
+     "h": 1.5,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.0,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.0,
+     "w": 1.1,
+     "z": 8.6,
+     "h": 2.1,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.0,
+     "w": 1.1,
+     "z": 11.8,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.0,
+     "w": 1.0,
+     "z": 14.8,
+     "h": 1.5,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.6,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.6,
+     "w": 1.1,
+     "z": 8.6,
+     "h": 2.1,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.6,
+     "w": 1.1,
+     "z": 11.8,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.6,
+     "w": 1.0,
+     "z": 14.8,
+     "h": 1.5,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.2,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.2,
+     "w": 1.1,
+     "z": 8.6,
+     "h": 2.1,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.2,
+     "w": 1.1,
+     "z": 11.8,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.2,
+     "w": 1.0,
+     "z": 14.8,
+     "h": 1.5,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Hobson Street (west side) red-brick range north of the grey-brick bay beside the Central Cinema colonnade (p0 = south). Interwar neo-Georgian: ground floor of small shop units between stone pilasters (one with a blue roller shutter), first-floor tall round-arched white sashes on ~2.6 m bays, plain sashes above, parapet. Upper two floors cut off in the only oblique view (Mapillary 290763419315885, 2048 px) and assumed from the 18 m height; shop fascias not legible."
   }
  ]
 }

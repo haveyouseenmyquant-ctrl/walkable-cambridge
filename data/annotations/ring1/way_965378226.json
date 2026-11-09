@@ -2,7 +2,8 @@
  "osm_id": "way/965378226",
  "sources": [
   "mapillary:140857534678992",
-  "mapillary:136217458426719"
+  "mapillary:136217458426719",
+  "mapillary:499439701436262"
  ],
  "walls": [
   {
@@ -478,6 +479,142 @@
    ],
    "confidence": "low",
    "notes": "White-painted rendered range (Cotswold outdoor shop at the time of the photo): square stone-coloured columns along the shop storey at its southern end, round-headed first-floor sashes, plain sashes above. Seen from the street looking along it; bay count (10) and the split between units estimated."
+  },
+  {
+   "id": "way/965378226:2",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.5,
+    6.5
+   ],
+   "material": "render",
+   "wall_colour": "#f1efe9",
+   "trim_colour": "#ffffff",
+   "cornice_z": 9.2,
+   "cornice": "simple",
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.4,
+     "x1": 4.4,
+     "z1": 3.2,
+     "fascia_colour": "#f4f2ec",
+     "fascia_text": "",
+     "text_colour": "#333333",
+     "stallriser": 0.6,
+     "awning": false
+    },
+    {
+     "type": "door",
+     "style": "arched",
+     "x": 5.4,
+     "w": 1.2,
+     "h": 2.7,
+     "surround": "pilastered"
+    },
+    {
+     "type": "shopfront",
+     "x0": 6.4,
+     "x1": 9.2,
+     "z1": 3.2,
+     "fascia_colour": "#f4f2ec",
+     "fascia_text": "",
+     "text_colour": "#333333",
+     "stallriser": 0.6,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.4,
+     "w": 1.0,
+     "z": 3.9,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.4,
+     "w": 1.0,
+     "z": 3.9,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.0,
+     "w": 1.0,
+     "z": 3.9,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.4,
+     "w": 1.0,
+     "z": 6.8,
+     "h": 1.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.4,
+     "w": 1.0,
+     "z": 6.8,
+     "h": 1.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.0,
+     "w": 1.0,
+     "z": 6.8,
+     "h": 1.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Bridge Street west side north of the All Saints Passage corner (faces ENE, x from the south end). White-painted Georgian front: small-pane shop window between slender columns, a red-painted round-arched doorway, second shop window, plain sashes above. Raking Mapillary view only. walls.json height 6.3 m is lower than the three storeys seen; the second-floor row only builds if the eave is raised. (length 9.6 m, height 6.3 m from walls.json)",
+   "string_courses": [],
+   "pilasters": [],
+   "quoins": false,
+   "parapet": false
   }
  ]
 }

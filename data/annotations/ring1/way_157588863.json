@@ -1,0 +1,321 @@
+{
+ "osm_id": "way/157588863",
+ "sources": [
+  "mapillary:2406833236118692"
+ ],
+ "walls": [
+  {
+   "id": "way/157588863:19",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.8,
+    7.4
+   ],
+   "material": "brick",
+   "wall_colour": "#874434",
+   "trim_colour": "#d6c49a",
+   "cornice_z": 11.6,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.7,
+    7.3
+   ],
+   "quoins": true,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "door",
+     "style": "arched",
+     "x": 12.0,
+     "w": 1.3,
+     "h": 2.9,
+     "surround": "pilastered"
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.0,
+     "w": 1.3,
+     "z": 1.0,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.0,
+     "w": 1.3,
+     "z": 1.0,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.0,
+     "w": 1.3,
+     "z": 1.0,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 15.5,
+     "w": 1.3,
+     "z": 1.0,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 18.5,
+     "w": 1.3,
+     "z": 1.0,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 21.5,
+     "w": 1.3,
+     "z": 1.0,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.0,
+     "w": 1.3,
+     "z": 4.5,
+     "h": 2.3,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.0,
+     "w": 1.3,
+     "z": 8.2,
+     "h": 2.1,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.0,
+     "w": 1.3,
+     "z": 4.5,
+     "h": 2.3,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.0,
+     "w": 1.3,
+     "z": 8.2,
+     "h": 2.1,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.0,
+     "w": 1.3,
+     "z": 4.5,
+     "h": 2.3,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.0,
+     "w": 1.3,
+     "z": 8.2,
+     "h": 2.1,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.0,
+     "w": 1.3,
+     "z": 4.5,
+     "h": 2.3,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.0,
+     "w": 1.3,
+     "z": 8.2,
+     "h": 2.1,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 15.5,
+     "w": 1.3,
+     "z": 4.5,
+     "h": 2.3,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 15.5,
+     "w": 1.3,
+     "z": 8.2,
+     "h": 2.1,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 18.5,
+     "w": 1.3,
+     "z": 4.5,
+     "h": 2.3,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 18.5,
+     "w": 1.3,
+     "z": 8.2,
+     "h": 2.1,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 21.5,
+     "w": 1.3,
+     "z": 4.5,
+     "h": 2.3,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 21.5,
+     "w": 1.3,
+     "z": 8.2,
+     "h": 2.1,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "St Catharine's College, Queens' Lane front: red brick with ashlar dressings, three storeys of stone-framed mullion-and-transom windows with stone band courses, and a rusticated stone round-arched doorway. The camera stood almost on the wall line, so the bay rhythm (about 3 m) and the door position are extrapolated."
+  }
+ ]
+}

@@ -1,0 +1,199 @@
+{
+ "osm_id": "way/131662309",
+ "sources": [
+  "mapillary:484831516188009",
+  "mapillary:1769943526517957"
+ ],
+ "walls": [
+  {
+   "id": "way/131662309:14",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.9,
+    8.9,
+    12.6
+   ],
+   "material": "stone",
+   "wall_colour": "#bfa98a",
+   "trim_colour": "#d3c3a6",
+   "cornice_z": 15.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.9,
+    8.9
+   ],
+   "quoins": false,
+   "confidence": "low",
+   "elements": [
+    {
+     "type": "window",
+     "x": 3.6,
+     "w": 1.5,
+     "z": 0.9,
+     "h": 3.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 6.8,
+     "w": 1.5,
+     "z": 0.9,
+     "h": 3.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 13.0,
+     "w": 1.5,
+     "z": 0.9,
+     "h": 3.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "arched",
+     "x": 10.0,
+     "w": 2.0,
+     "h": 3.2,
+     "surround": "moulded",
+     "colour": "#2a2622"
+    },
+    {
+     "type": "window",
+     "x": 3.6,
+     "w": 1.3,
+     "z": 5.6,
+     "h": 2.8,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 3.6,
+     "w": 1.3,
+     "z": 9.4,
+     "h": 2.6,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 3.6,
+     "w": 1.1,
+     "z": 13.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 6.8,
+     "w": 1.3,
+     "z": 5.6,
+     "h": 2.8,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 6.8,
+     "w": 1.3,
+     "z": 9.4,
+     "h": 2.6,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 6.8,
+     "w": 1.1,
+     "z": 13.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 13.0,
+     "w": 1.3,
+     "z": 5.6,
+     "h": 2.8,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 13.0,
+     "w": 1.3,
+     "z": 9.4,
+     "h": 2.6,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "x": 13.0,
+     "w": 1.1,
+     "z": 13.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "notes": "Old Metallurgy, Pembroke Street front (New Museums site): Edwardian Baroque ashlar, rusticated ground floor with round-arched openings, big hooded arched entrance, tall mullioned windows on two main upper storeys, attic storey, cornice. Positions projected from Mapillary poses (few-metre uncertainty). (length 16.6 m, height 16.8 m from walls.json)"
+  }
+ ]
+}

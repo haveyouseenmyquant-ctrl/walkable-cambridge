@@ -1,0 +1,226 @@
+{
+ "osm_id": "way/134519982",
+ "sources": [
+  "mapillary:465922964705436",
+  "mapillary:746178059386493"
+ ],
+ "walls": [
+  {
+   "id": "way/134519982:4",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    3.6,
+    6.5,
+    9.2
+   ],
+   "material": "render",
+   "wall_colour": "#f1efe8",
+   "trim_colour": "#ffffff",
+   "cornice_z": 12.0,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.5
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 4.5,
+     "z1": 3.4,
+     "fascia_text": "",
+     "fascia_colour": "#2f4660",
+     "text_colour": "#e9e6dc",
+     "door_x": 3.6,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 5.0,
+     "x1": 12.4,
+     "z1": 3.4,
+     "fascia_text": "",
+     "fascia_colour": "#6f8a74",
+     "text_colour": "#f2efe6",
+     "door_x": 6.2,
+     "stallriser": 0.5,
+     "awning": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.3,
+     "w": 1.0,
+     "z": 4.1,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.2,
+     "w": 1.0,
+     "z": 4.1,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.5,
+     "w": 1.0,
+     "z": 4.1,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 10.8,
+     "w": 1.0,
+     "z": 4.1,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.3,
+     "w": 1.0,
+     "z": 6.9,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.2,
+     "w": 1.0,
+     "z": 6.9,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.5,
+     "w": 1.0,
+     "z": 6.9,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 10.8,
+     "w": 1.0,
+     "z": 6.9,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.3,
+     "w": 1.0,
+     "z": 9.6,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.2,
+     "w": 1.0,
+     "z": 9.6,
+     "h": 1.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.5,
+     "w": 1.0,
+     "z": 9.6,
+     "h": 1.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 10.8,
+     "w": 1.0,
+     "z": 9.6,
+     "h": 1.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Bene't Street north side, just west of the Aromi corner at Peas Hill (King's College 'Spalding Hostel' block): at the west end a narrow building with a dark blue shopfront, then a tall white-painted/rendered four-storey front with three bays of plain sash windows per floor and a sage-green timber shopfront with a projecting canopy at street level. From one wide-angle Mapillary view looking west along Bene't Street; window spacing is approximate."
+  }
+ ]
+}

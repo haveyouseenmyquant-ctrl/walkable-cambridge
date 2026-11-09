@@ -1,0 +1,103 @@
+{
+ "osm_id": "way/965378228",
+ "sources": [
+  "commons:File:1-4, Jesus Lane.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/965378228:5",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.6,
+    6.6
+   ],
+   "material": "render",
+   "wall_colour": "#e8dcb8",
+   "trim_colour": "#f4f1ea",
+   "cornice_z": 10.2,
+   "cornice": "simple",
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 5.2,
+     "z1": 3.4,
+     "fascia_colour": "#f4f2ec",
+     "fascia_text": "Est. 1926",
+     "text_colour": "#5a2a22",
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "dormer",
+     "x": 2.7,
+     "w": 1.2,
+     "h": 1.4
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.5,
+     "w": 0.9,
+     "z": 4.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.9,
+     "w": 0.9,
+     "z": 4.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.5,
+     "w": 0.9,
+     "z": 7.0,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.9,
+     "w": 0.9,
+     "z": 7.0,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Corner building of Bridge Street and Jesus Lane, Jesus Lane face (faces south): cream-painted three storeys plus an attic dormer, plain sashes, white shop fascia continuing the Patisserie Valerie front. Seen at the far end of a raking view; two bays assumed. (length 5.5 m, height 12.1 m from walls.json)",
+   "string_courses": [],
+   "pilasters": [],
+   "quoins": false,
+   "parapet": false
+  }
+ ]
+}

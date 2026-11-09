@@ -1,0 +1,129 @@
+{
+ "osm_id": "way/1288738594",
+ "sources": [
+  "commons:File:63-65 Bridge Street, Cambridge.jpg",
+  "commons:File:14 And 15, St John's Street.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1288738594:9",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.6,
+    6.6
+   ],
+   "material": "stucco",
+   "wall_colour": "#d8b2a2",
+   "trim_colour": "#f4f2ee",
+   "cornice_z": 9.5,
+   "cornice": "classical",
+   "parapet": false,
+   "string_courses": [
+    6.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 7.5,
+     "z1": 3.4,
+     "fascia_text": "",
+     "fascia_colour": "#5e1f33",
+     "text_colour": "#e8c45a",
+     "door_x": 0.9,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.4,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.4,
+     "w": 1.0,
+     "z": 7.0,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.9,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.9,
+     "w": 1.0,
+     "z": 7.0,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.4,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.4,
+     "w": 1.0,
+     "z": 7.0,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "63-66 Bridge Street: early-19th-century pink-washed stucco block with a curved corner, ruled ashlar lines, white band course under the second floor, multi-pane sashes, first-floor windows with scrolled console hoods, deep dentil cornice; maroon Hardy's sweetshop front with door at the corner and charcoal crepe-cafe front. This is the St John's Street side south of the curve; bay count inferred from Commons '63-65 Bridge Street, Cambridge.jpg' and the left edge of '14 And 15, St John's Street.jpg'."
+  }
+ ]
+}

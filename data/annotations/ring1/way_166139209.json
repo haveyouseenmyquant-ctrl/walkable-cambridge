@@ -1,0 +1,374 @@
+{
+ "osm_id": "way/166139209",
+ "sources": [
+  "commons:File:1 And 2, Green Street.jpg",
+  "commons:File:View along Green Street from Sidney Street - geograph.org.uk - 7017919.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/166139209:30",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    3.6,
+    6.6,
+    9.6
+   ],
+   "material": "brick",
+   "wall_colour": "#e4ddcc",
+   "trim_colour": "#f2efe6",
+   "cornice_z": 13.0,
+   "cornice": "simple",
+   "elements": [
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 0.7,
+     "w": 1.0,
+     "h": 2.4,
+     "surround": "none"
+    },
+    {
+     "type": "shopfront",
+     "x0": 1.6,
+     "x1": 6.3,
+     "z1": 3.3,
+     "fascia_colour": "#f2f0ea",
+     "fascia_text": "",
+     "text_colour": "#333333",
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.6,
+     "w": 1.0,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.0,
+     "w": 1.0,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.6,
+     "w": 1.0,
+     "z": 7.5,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.0,
+     "w": 1.0,
+     "z": 7.5,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.3,
+     "w": 1.0,
+     "z": 0.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "glazed",
+     "x": 10.0,
+     "w": 0.9,
+     "h": 2.4,
+     "surround": "none"
+    },
+    {
+     "type": "shopfront",
+     "x0": 11.2,
+     "x1": 18.9,
+     "z1": 3.2,
+     "fascia_colour": "#f4f4f4",
+     "fascia_text": "Sainsbury's",
+     "text_colour": "#ec8a00",
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.3,
+     "w": 1.0,
+     "z": 4.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 10.7,
+     "w": 1.0,
+     "z": 4.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 13.1,
+     "w": 1.0,
+     "z": 4.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 15.5,
+     "w": 1.0,
+     "z": 4.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 17.8,
+     "w": 1.0,
+     "z": 4.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.3,
+     "w": 1.0,
+     "z": 7.0,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 10.7,
+     "w": 1.0,
+     "z": 7.0,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 13.1,
+     "w": 1.0,
+     "z": 7.0,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 15.5,
+     "w": 1.0,
+     "z": 7.0,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 17.8,
+     "w": 1.0,
+     "z": 7.0,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.3,
+     "w": 1.0,
+     "z": 9.9,
+     "h": 1.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 10.7,
+     "w": 1.0,
+     "z": 9.9,
+     "h": 1.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 13.1,
+     "w": 1.0,
+     "z": 9.9,
+     "h": 1.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 15.5,
+     "w": 1.0,
+     "z": 9.9,
+     "h": 1.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 17.8,
+     "w": 1.0,
+     "z": 9.9,
+     "h": 1.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 3.8,
+     "w": 1.2,
+     "h": 1.4
+    },
+    {
+     "type": "dormer",
+     "x": 9.5,
+     "w": 1.2,
+     "h": 1.4
+    },
+    {
+     "type": "dormer",
+     "x": 13.1,
+     "w": 1.2,
+     "h": 1.4
+    },
+    {
+     "type": "dormer",
+     "x": 16.7,
+     "w": 1.2,
+     "h": 1.4
+    }
+   ],
+   "confidence": "low",
+   "notes": "1 and 2 Green Street (Trinity-owned). West part (x 0-6.7): No. 2, yellow-brown gault brick, two upper storeys of 2 sashes over a white-painted ground floor with door and multi-pane shop window, attic dormer. East part (x 6.7-19.2): No. 1, white-painted brick, four storeys of 5 sash bays, plain sash and door, then corner shopfront towards Sidney Street. Single colour used for both. (length 19.2 m, height 13.3 m from walls.json)",
+   "string_courses": [],
+   "pilasters": [],
+   "quoins": false,
+   "parapet": false
+  }
+ ]
+}

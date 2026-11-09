@@ -1,0 +1,179 @@
+{
+ "osm_id": "way/147456505",
+ "sources": [
+  "mapillary:1642628329271505",
+  "mapillary:492529762184534"
+ ],
+ "walls": [
+  {
+   "id": "way/147456505:2",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.5,
+    6.6
+   ],
+   "material": "brick",
+   "wall_colour": "#b0563d",
+   "trim_colour": "#f0ece2",
+   "cornice_z": 9.3,
+   "cornice": "simple",
+   "string_courses": [
+    3.4
+   ],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 4.9,
+     "z1": 3.3,
+     "fascia_colour": "#2a2a2e",
+     "fascia_text": "Millers",
+     "text_colour": "#f2f2f2",
+     "stallriser": 0.3,
+     "awning": false,
+     "door_x": 2.6
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.6,
+     "w": 0.9,
+     "z": 0.9,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 7.0,
+     "w": 0.9,
+     "h": 2.3,
+     "surround": "none"
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 2.5,
+     "w": 2.0,
+     "z": 3.9,
+     "h": 1.8,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.6,
+     "w": 0.95,
+     "z": 4.1,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.2,
+     "w": 0.95,
+     "z": 4.1,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.0,
+     "w": 0.95,
+     "z": 7.0,
+     "h": 1.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.4,
+     "w": 0.95,
+     "z": 7.0,
+     "h": 1.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.8,
+     "w": 0.95,
+     "z": 7.0,
+     "h": 1.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.4,
+     "w": 0.95,
+     "z": 7.0,
+     "h": 1.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 10.0,
+     "w": 0.95,
+     "z": 7.0,
+     "h": 1.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Hobson Court (Sidney Sussex), Hobson Street front north of the Sussex Street corner (faces east, x from the south end). Plain orange-red brick, three storeys of white 6/6 sashes with an off-centre canted first-floor bay window over the Millers music shopfront (dark fascia), then a domestic sash and white panelled door; the north part of the first floor is blind. Seen from King Street across the junction. (length 11.5 m, height 10.1 m from walls.json)",
+   "pilasters": [],
+   "quoins": false,
+   "parapet": false
+  }
+ ]
+}

@@ -1,0 +1,272 @@
+{
+ "osm_id": "way/1288648571",
+ "sources": [
+  "commons:File:Green Street, Cambridge.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1288648571:2",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.2
+   ],
+   "material": "brick",
+   "wall_colour": "#cbbd8e",
+   "trim_colour": "#e3d6b4",
+   "cornice_z": 9.0,
+   "cornice": "bracketed",
+   "parapet": false,
+   "string_courses": [
+    4.2
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "arched",
+     "x": 1.2,
+     "w": 1.8,
+     "z": 0.5,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.2,
+     "w": 1.0,
+     "z": 4.6,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "arched",
+     "x": 3.6,
+     "w": 1.8,
+     "z": 0.5,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.6,
+     "w": 1.0,
+     "z": 4.6,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "arched",
+     "x": 5.9,
+     "w": 1.8,
+     "z": 0.5,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.9,
+     "w": 1.0,
+     "z": 4.6,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "14 Trinity Street (Jigsaw) Green Street flank: Victorian buff gault-brick range with a ground-floor arcade of round-arched stone-framed shop windows and entrances on pilaster piers, tall first-floor sashes with bracketed stone hoods, bracketed eaves cornice, slate roof. Commons 'Green Street, Cambridge.jpg' (oblique, looking east; building on the left). Bay rhythm approx 2.5 m, positions estimated (length 7.1 m)."
+  },
+  {
+   "id": "way/1288648571:3",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.2
+   ],
+   "material": "brick",
+   "wall_colour": "#cbbd8e",
+   "trim_colour": "#e3d6b4",
+   "cornice_z": 9.0,
+   "cornice": "bracketed",
+   "parapet": false,
+   "string_courses": [
+    4.2
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "arched",
+     "x": 1.3,
+     "w": 1.8,
+     "z": 0.5,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.3,
+     "w": 1.0,
+     "z": 4.6,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "arched",
+     "x": 3.8,
+     "w": 1.8,
+     "z": 0.5,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.8,
+     "w": 1.0,
+     "z": 4.6,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "glazed",
+     "x": 6.3,
+     "w": 1.6,
+     "h": 3.0,
+     "surround": "pilastered"
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 6.3,
+     "w": 1.0,
+     "z": 4.6,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "arched",
+     "x": 8.8,
+     "w": 1.8,
+     "z": 0.5,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 8.8,
+     "w": 1.0,
+     "z": 4.6,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "arched",
+     "x": 11.3,
+     "w": 1.8,
+     "z": 0.5,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 11.3,
+     "w": 1.0,
+     "z": 4.6,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "14 Trinity Street (Jigsaw) Green Street flank: Victorian buff gault-brick range with a ground-floor arcade of round-arched stone-framed shop windows and entrances on pilaster piers, tall first-floor sashes with bracketed stone hoods, bracketed eaves cornice, slate roof. Commons 'Green Street, Cambridge.jpg' (oblique, looking east; building on the left). Bay rhythm approx 2.5 m, positions estimated (length 12.9 m)."
+  }
+ ]
+}

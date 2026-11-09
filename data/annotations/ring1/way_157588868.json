@@ -1,0 +1,255 @@
+{
+ "osm_id": "way/157588868",
+ "sources": [
+  "mapillary:487406202385180",
+  "mapillary:842265399972433"
+ ],
+ "walls": [
+  {
+   "id": "way/157588868:6",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.4,
+    6.6
+   ],
+   "material": "brick",
+   "wall_colour": "#7d3f30",
+   "trim_colour": "#d8c8a4",
+   "cornice_z": 10.2,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    0.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 1.9,
+     "w": 1.0,
+     "h": 2.4,
+     "surround": "pilastered"
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.9,
+     "w": 1.0,
+     "z": 4.1,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.9,
+     "w": 0.9,
+     "z": 7.2,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "pediment",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.5,
+     "w": 1.1,
+     "z": 0.9,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.5,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.5,
+     "w": 1.1,
+     "z": 7.1,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 5.5,
+     "w": 1.1,
+     "h": 1.4
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 8.3,
+     "w": 1.0,
+     "h": 2.5,
+     "surround": "fanlight"
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.3,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.3,
+     "w": 1.1,
+     "z": 7.1,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 8.3,
+     "w": 1.1,
+     "h": 1.4
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 11.1,
+     "w": 1.1,
+     "z": 0.9,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 11.1,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 11.1,
+     "w": 1.1,
+     "z": 7.1,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 11.1,
+     "w": 1.1,
+     "h": 1.4
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 13.9,
+     "w": 1.1,
+     "z": 0.9,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 13.9,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 13.9,
+     "w": 1.1,
+     "z": 7.1,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 13.9,
+     "w": 1.1,
+     "h": 1.4
+    }
+   ],
+   "confidence": "low",
+   "notes": "St Catharine's College range on the west side of Trumpington Street (street front between the stone Bull building to the north and King's Lane side): mostly a three-storey red-brick Georgian-style range with stone architraves to the sashes, stone plinth and cornice, and a row of dormers; at the south end a narrow stone-faced bay with a curved pedimented gable. Positions are rough from two oblique Mapillary views looking south along Trumpington Street."
+  }
+ ]
+}

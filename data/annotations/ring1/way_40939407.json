@@ -5,7 +5,8 @@
   "mapillary:266617828538339",
   "mapillary:2957339001177122",
   "mapillary:304605808007829",
-  "mapillary:5389494104454987"
+  "mapillary:5389494104454987",
+  "mapillary:178215070870568"
  ],
  "walls": [
   {
@@ -1101,6 +1102,146 @@
    ],
    "confidence": "low",
    "notes": "Hilton, Corn Exchange St side. Buff brick; ground floor is an arcade of round-arched openings with black grilles over a white rendered plinth (~1.4 m) with poster cases; grey stone band at first floor and grey pilaster strips between bay groups. NW end (x~0-14) is the open car park entrance undercroft (no arches there). Four upper storeys of plain sash-like windows, one per bay; top-floor heads shown arched. Bay pitch ~3.7 m and the arch count are estimated from oblique street-level views, so x positions are approximate."
+  },
+  {
+   "id": "way/40939407:3",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    3.9,
+    7.2,
+    10.2
+   ],
+   "material": "brick",
+   "wall_colour": "#d9a56c",
+   "trim_colour": "#cfcac0",
+   "cornice_z": 12.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    3.9,
+    7.0
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.4
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "arched",
+     "x": 3.0,
+     "w": 2.4,
+     "z": 0.5,
+     "h": 3.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "arched",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 3.0,
+     "w": 1.1,
+     "z": 4.5,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pediment",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 3.0,
+     "w": 1.1,
+     "z": 7.7,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 3.0,
+     "w": 1.0,
+     "z": 10.6,
+     "h": 1.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "arched",
+     "x": 6.6,
+     "w": 2.4,
+     "z": 0.5,
+     "h": 3.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "arched",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.6,
+     "w": 1.1,
+     "z": 4.5,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pediment",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.6,
+     "w": 1.1,
+     "z": 7.7,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.6,
+     "w": 1.0,
+     "z": 10.6,
+     "h": 1.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Hilton Cambridge City Centre, Downing Street flank just east of the curved corner (p0 = west, at the grey stone corner strip). Buff/orange brick with grey reconstituted-stone bands, ground-floor arcade of round-arched openings with stone arch rings on a cream plinth, first-floor windows with small pediments, plain windows above, stone band and parapet. Single raking Mapillary view; only ~2 bays fit in the 8.4 m wall."
   }
  ]
 }
