@@ -1802,3 +1802,32 @@ Next
 1. Fix the Holy Trinity tower rendering and the floating slab.
 2. Read the 5-run kill-time spread and gameplay_judged for the new hash, which has the s60 camera and VFX changes.
 3. Ring 1: new photo sources (Mapillary sequences that aren't held out) for annotations.
+
+## 2026-11-09 — Session 62: Holy Trinity fixed, St Andrew the Great (ring 1), canopy cutaway in game mode
+
+Three parallel forks; machine load 45-67 throughout, from service.sh game-scoring fd8f326f (still unscored at session end, so
+measure.sh showed game KPIs at 0; the last scored live build, 274747eb, had classes 4, mobs 12+3, effects 44, encounter 100,
+playtest 100, judged 41.1).
+- Ring fork A, **Holy Trinity**: the "missing tower" was never missing. The s61 ht_tower camera was pressed against a wall, and the tower is
+  hidden from street level by parapets and trees. The **floating slab** was the church's own 9.8 m lead roof over walls 6 m high: the
+  crossing line was wrong, and the per-edge DSM samples on short or tree-shaded walls (w3, w10, w11) read too low. Roof regions now come from
+  a DSM grid over the footprint, each wall takes the height of the roof behind it, and embattled step walls are added where roof levels meet.
+  docs/screens/session62_ring_{before,after}_ht_{marketst,junction,air_w,air_n}.jpg.
+- Ring fork B, **St Andrew the Great** (way/135595981, St Andrew's St), scripts/zone_bespoke_standrew.py: ashlar, embattled parapet,
+  Perpendicular windows between buttresses (from the non-held-out ring-1 annotation), coped east gable with a cross, chancel east
+  window, and a west tower with a belfry and pinnacles. About 15k triangles. docs/screens/session62_ring_{before,after}__sa_*.jpg.
+  Side effect: bespoke buildings drop out of the city facade rows, so ring1_facade_geometry_match_pct reads 53.4 (bespoke walls' annotations
+  are unmatched). The ring-1 facade KPI should score bespoke elements the way the Market Square zone does.
+- Game fork: stall canopies get a noisy-edge cutaway over the player's head within 8 m in third-person game mode only (no fade). The camera ray
+  ignores stalls, so the boom no longer collapses under canopies. Regular mobs are drawn at 1.3× their collision size, up from 1.15×. Exploration mode was checked and is unchanged.
+  docs/screens/session62_game_{before,after}_{hexweaver,pyromancer}.jpg. Smoke test, 1 run per class: 3/4, with stormcaller hitting "route not finished" under load 60+.
+  Unclear whether that is load or the s61 rebalance.
+- Published world-20261109-1115 (WC_SKIP_GAME_KPI=1).
+
+Learned
+- Session forks and service.sh playtests together push load above 60, and every in-session browser test then needs a 3-4x timeout.
+
+Next
+1. Read the 5-run scores for the new build: did stormcaller pass, the kill-time spread after the s61 rebalance, and gameplay_judged with the cutaway.
+2. Fix the ring-1 facade KPI so it counts bespoke elements, as zone_kpi does for the square.
+3. Ring 1: more bespoke landmarks or frontages (Sidney St, Trinity St shopfronts); new non-held-out annotation photos.
