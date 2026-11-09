@@ -29,6 +29,13 @@ ROOT = B.ROOT
 OUT = B.OUT
 L = os.path.join(ROOT, "data/lidar")
 
+# Session 81: canopy the automatic pass drops because the 5x5 mean first-minus-last return is only 1.0-1.6 m (< 3.0;
+# low penetration, likely leaf-off or dense crowns), checked by hand on the NLP 2023 CHM: Great St Mary's south-east
+# churchyard (Peas Hill / St Mary's Passage corner), CHM 11-12 m over a ~11 m round crown at (-133, 46) and 7-8 m over
+# a ~7 m crown east of the chancel at (-126.5, 53); nearly every pixel has first != last return. (x, y, height, crown_r)
+# in the collision frame.
+EXTRA = [(-133.0, 45.5, 12.0, 5.5), (-126.5, 53.0, 8.5, 3.5)]
+
 
 def main():
     first = rasterio.open(os.path.join(L, "nlp2023_first_return_dsm_1m.tif"))
@@ -114,6 +121,7 @@ def main():
         drop[near] = True
         trees.append((e, n, h, float(np.clip(r, 1.2, 10))))
     trees += [tuple(x) for x in lid[~drop]]
+    trees += [(B.E0 + x, B.N0 + y, h, r) for x, y, h, r in EXTRA]   # appended last: earlier seeds unchanged
     trees = np.array(trees, np.float32)
     # ground height and per-tile files
     rows = ((trees[:, 1] - tf.f) / tf.e).astype(int).clip(0, shp[0] - 1)

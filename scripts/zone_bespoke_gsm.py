@@ -62,9 +62,9 @@ def P_():
 
 # ------------------------------------------------------------------ elements (wall frame: x along, y out, z up)
 
-def perp_shape(xc, w, zb, zt):
-    """Perpendicular four-centred window head."""
-    hh = min(0.32 * w, 0.45 * (zt - zb))
+def perp_shape(xc, w, zb, zt, k=0.32):
+    """Perpendicular four-centred window head (k: head rise / width)."""
+    hh = min(k * w, 0.45 * (zt - zb))
     zs = zt - hh
     x0, x1 = xc - w / 2, xc + w / 2
     return Polygon([(x0, zb), (x1, zb), (x1, zs), (x1 - 0.1 * w, zs + 0.5 * hh), (xc + 0.22 * w, zs + 0.88 * hh),
@@ -74,24 +74,41 @@ def perp_shape(xc, w, zb, zt):
 def window(P, xc, w, zb, zt, y, lights=4, transoms=1, louvre=False):
     """Recessed traceried window (reveals, glass, mullions running up into the head, transom, label mould, sill).
     Returns the opening polygon to cut from the wall face."""
-    op = perp_shape(xc, w, zb, zt)
+    KH = 0.25 if lights >= 3 else 0.32   # s81: flatter four-centred heads on the big windows (read as Georgian round)
+    op = perp_shape(xc, w, zb, zt, KH)
     P.ops.append(("window", xc, y))
     yg = y - REV
     P.sides_xz(op, yg, y, STONE_D, inward=True, mat="stone")
     P.face_xz(op, yg, LOUVRE if louvre else GLASS, mat="trim" if louvre else "glass")
-    mw = 0.11
-    strips = [op.difference(op.buffer(-0.09, join_style=2))]
+    mw = 0.15 if lights >= 3 else 0.11   # s81: heavier mullions (were 0.11, read as sash glazing bars)
+    strips = [op.difference(op.buffer(-0.11, join_style=2))]
     for i in range(1, lights):
         x = xc - w / 2 + w * i / lights
         strips.append(box(x - mw / 2, zb, x + mw / 2, zt).intersection(op))
-    zs = zt - min(0.32 * w, 0.45 * (zt - zb))
-    for j in range(1, transoms + 1):
-        z = zb + (zs - zb) * j / (transoms + 1)
-        strips.append(box(xc - w / 2, z - 0.06, xc + w / 2, z + 0.06))
+    zs = zt - min(KH * w, 0.45 * (zt - zb))
+    tz = [zb + (zs - zb) * j / (transoms + 1) for j in range(1, transoms + 1)]
+    for z in tz:
+        strips.append(box(xc - w / 2, z - 0.07, xc + w / 2, z + 0.07))
+    if lights >= 3:
+        # s81: Perpendicular panel tracery: every light ends in a cusped pointed head under the springing and under each
+        # transom, and the head is divided into a second tier of panels (supermullions + small heads)
+        lw = w / lights
+        hl = min(0.55, 0.9 * lw)
+        for zt_ in [zs - 0.05] + [z - 0.07 for z in tz] + [zs + 0.55 * (zt - zs)]:
+            for i in range(lights):
+                a, b = xc - w / 2 + i * lw, xc - w / 2 + (i + 1) * lw
+                c = (a + b) / 2
+                pt = Polygon([(a, zt_ - hl), (b, zt_ - hl), (b, zt_ - 0.55 * hl), (c + 0.2 * lw, zt_ - 0.12 * hl),
+                              (c, zt_), (c - 0.2 * lw, zt_ - 0.12 * hl), (a, zt_ - 0.55 * hl)])
+                strips.append(box(a, zt_ - hl, b, zt_).difference(pt))
+                # cusp points either side of the light head
+                for sx in (-1, 1):
+                    strips.append(Polygon([(c + sx * 0.5 * lw, zt_ - 0.75 * hl), (c + sx * 0.18 * lw, zt_ - 0.5 * hl),
+                                           (c + sx * 0.5 * lw, zt_ - 0.35 * hl)]))
     # head: a sub-arch springing line and two inner arches (Perpendicular panel tracery, simplified)
     strips.append(box(xc - w / 2, zs - 0.05, xc + w / 2, zs + 0.05))
     if lights >= 3:
-        inner = perp_shape(xc, w * 0.5, zs - 0.4, zt - 0.25)
+        inner = perp_shape(xc, w * 0.5, zs - 0.4, zt - 0.25, KH)
         strips.append(inner.difference(inner.buffer(-0.07, join_style=2)).intersection(op))
     tr = unary_union(strips).intersection(op)
     if louvre:   # belfry: horizontal louvre boards behind the tracery
@@ -100,7 +117,7 @@ def window(P, xc, w, zb, zt, y, lights=4, transoms=1, louvre=False):
             P.extrude_profile([(yg + 0.05, z), (yg + 0.25, z - 0.12), (yg + 0.25, z - 0.06), (yg + 0.05, z + 0.08)],
                               xc - w / 2, xc + w / 2, LOUVRE, mat="timber")
             z += 0.3
-    P.slab(tr, yg, yg + 0.14, STONE_L, mat="stone")
+    P.slab(tr, yg, yg + 0.2, STONE_L, mat="stone")
     # label (hood) mould over the head and down to the springing
     lab = op.buffer(0.16, join_style=2).difference(op).intersection(box(xc - w, zs - 0.45, xc + w, zt + 1))
     P.slab(lab, y, y + 0.1, STONE_L, mat="stone")
@@ -127,12 +144,19 @@ def door(P, xc, w, h, y, depth=0.6):
 
 
 def buttress(P, x, y, ztop, d0=1.1, bw=0.75, setoffs=(0.45, 0.7)):
-    """Buttress with sloped set-offs: projects d0 at the bottom, steps back at the given fractions of ztop."""
+    """Buttress with sloped set-offs: projects d0 at the bottom, steps back at the given fractions of ztop.
+    s81: 1.3x deeper and the set-off weatherings are separate pale slopes (they catch the sky), plinth band dark."""
+    d0 *= 1.3
     za, zb = ztop * setoffs[0], ztop * setoffs[1]
     d1, d2 = d0 * 0.7, d0 * 0.42
     prof = [(y - 0.05, -0.9), (y + d0, -0.9), (y + d0, za), (y + d1, za + 0.35), (y + d1, zb), (y + d2, zb + 0.35),
             (y + d2, ztop), (y - 0.05, ztop + d2 * 1.1)]
     P.extrude_profile(prof, x - bw / 2, x + bw / 2, STONE, mat="stone")
+    for (dA, dB, z) in ((d0, d1, za), (d1, d2, zb)):   # weathering caps, slightly proud of the slope
+        P.extrude_profile([(y + dA + 0.06, z - 0.02), (y + dA + 0.06, z + 0.06), (y + dB + 0.02, z + 0.42),
+                           (y + dB - 0.05, z + 0.36)], x - bw / 2 - 0.04, x + bw / 2 + 0.04, STONE_L, mat="trim")
+    P.extrude_profile([(y + d0 - 0.02, -0.9), (y + d0 + 0.12, -0.9), (y + d0 + 0.12, 0.55), (y + d0 - 0.02, 0.75)],
+                      x - bw / 2 - 0.06, x + bw / 2 + 0.06, STONE_D, mat="stone")
 
 
 def pinnacle(P, x, y, z, h=2.2, r=0.26):
