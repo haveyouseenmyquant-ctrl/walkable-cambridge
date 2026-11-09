@@ -13,7 +13,9 @@ export const SLOTS = ['wand', 'hat', 'robe', 'boots', 'ring', 'amulet', 'broom']
 
 // starter gear (granted by classes.js): stat-only
 const STARTERS = {
-  pyromancer: ['Pyromancer', { power: 0.12 }, { maxHp: 25, armor: 8 }, { critChance: 0.03 }],
+  // session 72: tuple order is [name, staff, HAT, robe] and STARTING_GEAR (classes.js) grants only staff + robe, so the
+  // s70 pyro survivability (maxHp 25 / armour 8) sat on the never-granted hat and never applied; moved onto the robe
+  pyromancer: ['Pyromancer', { power: 0.12 }, { critChance: 0.03 }, { maxHp: 25, armor: 8 }],
   stormcaller: ['Stormcaller', { critChance: 0.05 }, { cdr: 0.05 }, { speedMult: 0.05 }],
   warden: ['Warden', { power: 0.05 }, { maxHp: 20 }, { armor: 10 }],
   hexweaver: ['Hexweaver', { power: 0.08 }, { manaRegen: 2 }, { maxMana: 20 }],

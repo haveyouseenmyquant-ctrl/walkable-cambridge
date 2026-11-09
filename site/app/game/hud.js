@@ -30,6 +30,19 @@ export function install(game) {
   // ---- static parts
   el('div', 'gh-crosshair', root);
   const vignette = el('div', 'gh-vignette', root), flash = el('div', 'gh-flash', root);
+  // session 72: low-HP danger layer (strong red edges only, centre stays clear) and a 'LOW HEALTH' tag above the bars
+  const css72 = el('style', null, document.head); offs.push(() => css72.remove());
+  css72.textContent = `#game-hud .gh-vignette{background:radial-gradient(ellipse at center,transparent 52%,rgba(150,0,0,.35) 72%,rgba(200,0,0,.85) 100%);box-shadow:inset 0 0 60px 18px rgba(255,0,0,.55);will-change:opacity,transform}
+#game-hud .gh-lowtag{position:absolute;left:50%;bottom:118px;transform:translateX(-50%);font:800 15px/1 system-ui,sans-serif;letter-spacing:.28em;color:#ff4a3a;text-shadow:0 0 10px #ff0000,0 2px 3px #000;animation:ghLow .5s ease-in-out infinite alternate;pointer-events:none}
+@keyframes ghLow{from{opacity:.55}to{opacity:1}}
+#game-hud .gh-bar.gh-danger{box-shadow:0 0 10px 2px rgba(255,30,20,.85);animation:ghLow .35s ease-in-out infinite alternate}
+#game-hud .gh-death h1{font-size:46px;color:#ff5a48;text-shadow:0 0 22px #a00000,0 3px 4px #000}
+#game-hud .gh-death .gh-why{font:600 15px/1.4 system-ui,sans-serif;color:#ffd8c8}
+#game-hud .gh-risen{position:absolute;left:50%;top:30%;transform:translateX(-50%);font:700 30px/1.1 Georgia,serif;letter-spacing:.1em;color:#fff2d0;text-shadow:0 0 18px #ffb040,0 3px 4px #000;pointer-events:none;transition:opacity .4s}
+#game-hud .gh-risen small{display:block;font:600 13px/1.4 system-ui,sans-serif;letter-spacing:.06em;color:#ffe0a0;margin-top:6px}`;
+  const lowTag = el('div', 'gh-lowtag', root, '\u26a0 LOW HEALTH'); lowTag.hidden = true;
+  const risen = el('div', 'gh-risen', root, 'You rise again<small>Shielded for 3 s \u00b7 back at the Market Hill spawn</small>'); risen.style.opacity = 0;
+  let lastPh = 1, risenTimer = 0;
   const bars = el('div', 'gh-bars', root);
   const bar = (cls, label) => { const b = el('div', 'gh-bar ' + cls, bars); const f = el('div', 'gh-fill', b); const t = el('span', 'gh-txt', b, label); return { f, t }; };
   const hpB = bar('gh-hp', ''), shB = { f: el('div', 'gh-shield', hpB.f.parentNode) }, mnB = bar('gh-mana', ''), xpB = bar('gh-xp', '');
@@ -182,16 +195,19 @@ body.explore #game-hud .gh-loots{display:none}`;
   }));
   const death = el('div', 'gh-overlay gh-death', root, '<h1>You have fallen</h1><p>The city keeps its secrets a while longer.</p>');
   death.hidden = true;
-  const rise = el('button', 'gh-btn', death, 'Rise again');
+  const why = el('p', 'gh-why', death, ''); let lastHitBy = '';
+  offs.push(game.on('playerHit', ({ source }) => { if (source?.name || source?.type?.name) lastHitBy = source.name || source.type.name; }));
+  const rise = el('button', 'gh-btn', death, 'Rise again (respawn at Market Hill)');
   rise.onclick = respawn;
   function respawn() {
     const s = game.stats; s.hp = s.maxHp; s.mana = s.maxMana; game.shield = 0;
     game.invulnUntil = game.time + 3; game.paused = false;
     game.player.teleport(SPAWN[0], SPAWN[1]);
     death.hidden = true; toast('You rise again');
+    risen.style.opacity = 1; clearTimeout(risenTimer); risenTimer = setTimeout(() => { risen.style.opacity = 0; }, 2600);
     game.emit('respawn', {});
   }
-  offs.push(game.on('playerDeath', () => { death.hidden = false; game.paused = true; sfx.play('death'); document.exitPointerLock?.(); }));
+  offs.push(game.on('playerDeath', () => { why.textContent = lastHitBy ? `Slain by ${lastHitBy}. Watch the red screen edge: it pulses below 30% health.` : 'Watch the red screen edge: it pulses below 30% health.'; death.hidden = false; game.paused = true; sfx.play('death'); document.exitPointerLock?.(); }));
 
   // ---- class select
   const pick = el('div', 'gh-overlay gh-pick', root, '<h1>Choose your path</h1>'); pick.hidden = true;
@@ -385,7 +401,18 @@ body.explore #game-hud .gh-loots{display:none}`;
       shB.f.style.width = (100 * Math.min(1, (game.shield || 0) / s.maxHp)).toFixed(1) + '%';
       mnB.f.style.width = (100 * s.mana / s.maxMana).toFixed(1) + '%'; mnB.t.textContent = `${Math.floor(s.mana)} / ${s.maxMana}`;
       const need = game.xpToNext(); xpB.f.style.width = (100 * s.xp / need).toFixed(1) + '%'; xpB.t.textContent = `Lv ${s.level} · ${Math.floor(s.xp)} / ${need} xp`;
-      const low = s.hp / s.maxHp; vignette.style.opacity = low < 0.35 ? ((0.35 - low) / 0.35 * (0.75 + 0.25 * Math.sin(game.time * 6))).toFixed(2) : 0;
+      // session 72: low-HP danger warning. Below 30% HP a red screen-edge vignette beats like a heart (lub-dub, faster as
+      // HP falls), the HP bar pulses and a 'LOW HEALTH' tag shows; a soft heartbeat thump plays on each beat.
+      const low = s.hp / s.maxHp, danger = low < 0.3 && s.hp > 0;
+      if (danger) {
+        const sev = (0.3 - low) / 0.3, bpm = 70 + 80 * sev, ph = (game.time * bpm / 60) % 1;
+        const beat = Math.max(Math.exp(-ph * 22), 0.7 * Math.exp(-Math.max(0, ph - 0.18) * 22) * (ph >= 0.18 ? 1 : 0));
+        vignette.style.opacity = Math.min(0.9, 0.35 + 0.3 * sev + 0.3 * beat).toFixed(2);
+        vignette.style.transform = `scale(${(1.04 - 0.04 * beat).toFixed(3)})`;
+        if (ph < lastPh) sfx.play('heartbeat', 0.35 + 0.4 * sev);
+        lastPh = ph;
+      } else { vignette.style.opacity = 0; lastPh = 1; }
+      lowTag.hidden = !danger; hpB.f.parentNode.classList.toggle('gh-danger', danger);
       const c = game.caster;
       if (c) for (let i = 0; i < 6; i++) {
         const sp = c.spells[i], sl = slots[i]; if (!sp) continue;

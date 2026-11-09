@@ -48,6 +48,7 @@ const R = {
   flamestep:{ n: [{ type: 'bandpass', f0: 600, f1: 3000, q: 1.5, t: 0.3, g: 0.5 }], o: [{ w: 'triangle', f0: 200, f1: 800, t: 0.25, g: 0.15 }] },
   kindle:   { n: [{ type: 'lowpass', f0: 2500, f1: 150, t: 0.8, g: 0.6 }], o: [{ w: 'sawtooth', f0: 110, f1: 40, t: 0.7, g: 0.12 }] },
   sunfall:  { n: [{ type: 'lowpass', f0: 400, f1: 3000, t: 1.2, g: 0.5 }], o: [{ w: 'sine', f0: 60, f1: 220, t: 1.2, g: 0.3 }, { w: 'sawtooth', f0: 90, f1: 45, t: 1.4, g: 0.08, d: 0.2 }] },
+  heartbeat:{ o: [{ w: 'sine', f0: 62, f1: 44, t: 0.16, g: 0.45 }, { w: 'sine', f0: 58, f1: 40, t: 0.14, g: 0.3, d: 0.17 }] },   // session 72: low-HP lub-dub
   boom:     { n: [{ type: 'lowpass', f0: 1200, f1: 80, t: 0.5, g: 0.6 }], o: [{ w: 'sine', f0: 90, f1: 35, t: 0.45, g: 0.4 }] },
   // stormcaller
   lance:    { o: [{ w: 'square', f0: 2400, f1: 300, t: 0.12, g: 0.07 }], n: [{ type: 'highpass', f0: 3000, t: 0.12, g: 0.35 }] },

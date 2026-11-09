@@ -70,7 +70,8 @@ function installBot(route, runIdx) {
   ev.bossDmg = {};
   offs.push(g.on('hit', e => { if (e.target?.type?.id === ROUTE_BOSS) { const k = e.spell?.id || e.spell || e.source || '?'; ev.bossDmg[k] = (ev.bossDmg[k] || 0) + e.amount; } }));
   // session 53: a death respawns the player far away; fights left behind are not 'stuck mobs'
-  offs.push(g.on('playerDeath', () => { ev.deaths++; bot.engaged.clear(); }));
+  // session 72: where each death happened (game time, route leg, what the bot was doing)
+  offs.push(g.on('playerDeath', () => { ev.deaths++; (ev.deathLog ||= []).push(`${(g.time - bot.t0).toFixed(0)}s L${bot.leg} ${bot.why || ''}`.slice(0, 90)); bot.engaged.clear(); }));
   offs.push(g.on('levelup', () => {
     for (let t = 0; t < 3; t++) if (C.picks[t] == null && g.stats.level >= C.talentLevels[t]) { if (C.pickTalent(t, (runIdx + t) % 2)) ev.talents++; }
   }));
@@ -371,7 +372,7 @@ try {
       }
       const ev = await page.evaluate(() => { const b = window.__bot; b.dispose(); const e = b.ev;
         return { bossTtk: b.bossTtk, kills: e.kills.length, bossKilled: e.kills.some(k => k.type === 'bellwarden'), pickups: e.pickups, equips: e.equips,
-          deaths: e.deaths, casts: e.casts, talents: e.talents, bossDmg: e.bossDmg, equipped: Object.keys(window.__game.items.equipped).length }; });
+          deaths: e.deaths, deathLog: e.deathLog || [], casts: e.casts, talents: e.talents, bossDmg: e.bossDmg, equipped: Object.keys(window.__game.items.equipped).length }; });
       const perr = errors.slice(e0);
       rec = { ...rec, ...ev, gameS: st.t, fail: st.fail || (perr.length ? 'page error: ' + perr[0] : null) || (!st.done ? 'not finished' : null) || (!ev.bossKilled ? 'boss not killed' : null) };
     } catch (e) {
@@ -383,7 +384,7 @@ try {
     rec.pass = !rec.fail; rec.wallS = +((Date.now() - w0) / 1000).toFixed(0);
     pageErrorsTotal += errors.length - e0;
     res.runs.push(rec); runs.push(rec);
-    log(cls, r, rec.pass ? 'PASS' : 'FAIL ' + rec.fail, `boss ${rec.bossTtk?.toFixed?.(1)}s game ${rec.gameS}s wall ${rec.wallS}s kills ${rec.kills} pickups ${rec.pickups} deaths ${rec.deaths} bossDmg ${JSON.stringify(rec.bossDmg)}`);
+    log(cls, r, rec.pass ? 'PASS' : 'FAIL ' + rec.fail, `boss ${rec.bossTtk?.toFixed?.(1)}s game ${rec.gameS}s wall ${rec.wallS}s kills ${rec.kills} pickups ${rec.pickups} deaths ${rec.deaths} bossDmg ${JSON.stringify(rec.bossDmg)} deathLog ${JSON.stringify(rec.deathLog)}`);
   }
   await Promise.all(Array.from({ length: Math.min(jobs.length, WORKERS * clsList.length) }, async (_, w) => {
     await new Promise(ok => setTimeout(ok, w * 8000));   // stagger the page loads

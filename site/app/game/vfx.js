@@ -527,27 +527,39 @@ export function createVfx(game) {
     ember: { tex: 'ember', color: 0xffe8a0, color2: 0xff2400, speed: 4, size: 0.12, life: 1.1, grav: 7, drag: 1.2, up: 3, jitter: 0.3 },
     smoke: { tex: 'smoke', color: 0x5a2c16, color2: 0x161212, grow: 2.2, drag: 1.6, alpha: 0.5, speed: 0.8, size: 1.5, life: 2, up: 1.6, jitter: 0.5, fadeIn: 0.35, ring: 0 },
   };
+  // session 72: the judge read big blasts as "screen-filling yellow shapes that hide the action". The bright centre is
+  // now small and capped (flash <= 1.6 m, shell <= 1 m, low opacity); the size of a big blast is carried by its EDGE:
+  // a ring of flame tongues licking up at the blast radius, a heat ring and the scorch/ember-bed decals on the ground,
+  // so mobs inside stay visible. Flames grade white-yellow -> orange -> deep red, then dark smoke rises late.
   function fireball(x, y, z, r, level = 1, ground = null) {
-    const big = level >= 2, mid = level === 1;
+    const big = level >= 2, mid = level === 1, near = camDist(x, z, -y), nf = smooth(2.5, 9, near);   // close to the camera: dimmer core
     const f = take(flashes);
-    if (f) { f.material.color.setRGB(1, 0.85, 0.55); f.material.opacity = 0.8; f.material.rotation = rnd() * 6.28; f.position.set(x, z, -y); const s0 = Math.min(3.2, r * (big ? 1.1 : 0.9)); f.scale.setScalar(s0 * 0.5); const e = rec(f, big ? 0.16 : 0.1, 'flash'); e.s0 = s0; }
-    core(x, y, z, 0xff9a30, r * (big ? 0.28 : 0.2), big ? 0.18 : 0.11);
-    if (big) { const sh = core(x, y, z + 0.2, 0xff4a10, r * 0.42, 0.34); if (sh) sh.material.uniforms.uOp.value = 0.75; }
-    const G = FO.glow; G.size = Math.min(2.2, r * (big ? 0.6 : 0.8)); G.life = big ? 0.25 : 0.16; burst(x, y, z, big ? 4 : 2, G);
+    if (f) { f.material.color.setRGB(1, 0.78, 0.42); f.material.opacity = 0.55 * nf + 0.1; f.material.rotation = rnd() * 6.28; f.position.set(x, z, -y); const s0 = Math.min(big ? 1.6 : 1.1, r * 0.7); f.scale.setScalar(s0 * 0.5); const e = rec(f, big ? 0.12 : 0.08, 'flash'); e.s0 = s0; e.o0f = f.material.opacity; }
+    const c0 = core(x, y, z, 0xffd070, Math.min(0.55, r * (big ? 0.16 : 0.13)), big ? 0.14 : 0.09); if (c0) c0.material.uniforms.uOp.value = 0.85;
+    if (big) { const sh = core(x, y, z + 0.2, 0xff4a10, Math.min(1, r * 0.22), 0.26); if (sh) sh.material.uniforms.uOp.value = 0.35 * nf; }
+    const G = FO.glow; G.size = Math.min(1.2, r * 0.4); G.life = big ? 0.2 : 0.14; burst(x, y, z, big ? 2 : 1, G);
     const F = FO.flame; F.dx = undefined; F.ring = 0; F.radial = 0; F.color = 0xfff2c0; F.color2 = 0xb81800;
-    F.speed = r * (big ? 2.4 : 2.1); F.size = r * (big ? 0.42 : 0.5) + 0.25; F.life = big ? 0.6 : 0.42; F.up = big ? 2.4 : 1.6; F.jitter = r * 0.25;
-    burst(x, y, z, big ? 34 : mid ? 16 : 10, F);
-    const E = FO.ember; E.speed = r * 3; E.life = big ? 1.4 : 0.9; E.up = big ? 4 : 2.5; burst(x, y, z, big ? 26 : mid ? 10 : 6, E);
-    emberStreaks(x, y, z, big ? 6 : mid ? 2 : 1, 0xffa040, r * 3 + 3);
-    const S = FO.smoke; S.size = r * (big ? 0.6 : 0.5) + 0.4; S.life = big ? 2.4 : 1.4; S.jitter = r * 0.5; S.speed = r * 0.4; S.ring = 0;
-    burst(x, y, z + 0.4, big ? 10 : mid ? 4 : 2, S);
+    // inner tongues: small and fast, so the centre flickers instead of glowing as one blob
+    F.speed = r * (big ? 1.8 : 1.9); F.size = Math.min(1.1, r * (big ? 0.24 : 0.36) + 0.2); F.life = big ? 0.5 : 0.4; F.up = big ? 2.6 : 1.8; F.jitter = r * 0.25;
+    burst(x, y, z, big ? 18 : mid ? 12 : 8, F);
+    if ((big || mid) && ground != null) {   // the edge: a crown of tongues at the blast radius, rising off the ground
+      F.ring = r * (big ? 0.85 : 0.7); F.radial = r * 0.5; F.speed = 0.5; F.size = big ? 0.85 : 0.65; F.life = big ? 0.55 : 0.42; F.up = big ? 4 : 3; F.jitter = 0.1;
+      F.color = 0xffe090; F.color2 = 0xa01200; burst(x, y, ground + 0.2, Math.round((big ? 26 : 12) * QN), F); F.ring = 0; F.radial = 0; F.color = 0xfff2c0; F.color2 = 0xb81800;
+    }
+    const E = FO.ember; E.speed = r * 3; E.life = big ? 1.4 : 0.9; E.up = big ? 4 : 2.5; burst(x, y, z, big ? 26 : mid ? 12 : 6, E);
+    emberStreaks(x, y, z, big ? 6 : mid ? 3 : 1, 0xffa040, r * 3 + 3);
+    const S = FO.smoke; S.size = r * (big ? 0.45 : 0.4) + 0.4; S.life = big ? 2.4 : 1.5; S.jitter = r * 0.5; S.speed = r * 0.4; S.ring = 0; S.color = 0x4a2414; S.color2 = 0x121010; S.alpha = 0.55;
+    burst(x, y, z + 0.4, big ? 8 : mid ? 4 : 2, S);
     const g = ground;
     if (g != null) {
-      decal('scorch', x, y, g, r * (big ? 1.15 : 0.95), big ? 7 : 4, 0xffffff, 0.85);
-      decal('embers', x, y, g + 0.01, r * (big ? 0.9 : 0.75), big ? 1.6 : 0.9, 0xff5a10, 0.9);
-      ring(x, y, g, 0xffa040, r * 0.25, r * (big ? 1.35 : 1.15), big ? 0.42 : 0.28, 0.75);
+      decal('scorch', x, y, g, r * (big ? 1.15 : 0.95), big ? 7 : 4, 0xffffff, 0.9);
+      decal('embers', x, y, g + 0.01, r * (big ? 0.9 : 0.75), big ? 2.2 : 1.2, 0xff5a10, 0.9);
+      ring(x, y, g, 0xffb050, r * 0.3, r * (big ? 1.3 : 1.1), big ? 0.45 : 0.3, 0.85);
+      if (big) ring(x, y, g + 0.05, 0xff3a08, r * 0.6, r * 1.05, 0.7, 0.6);   // slower deep-red heat edge
+      // lingering ground embers that keep flickering up for a moment after the blast
+      E.speed = 0.6; E.up = 2.2; E.life = 1.2; E.jitter = r * 0.6; burst(x, y, g + 0.1, Math.round((big ? 14 : 5) * QN), E); E.jitter = 0.3;
     }
-    light(x, y, z + 0.6, 0xff8030, big ? 1.3 : mid ? 0.7 : 0.45, big ? 0.45 : 0.22, big ? 18 : 10);
+    light(x, y, z + 0.6, 0xff7a28, big ? 1.2 : mid ? 0.75 : 0.45, big ? 0.4 : 0.2, big ? 16 : 10);
   }
   // pillar of flame rising from the ground (sunfall meteor strikes, kindle ring wall): a hot beam core, upward tongues
   function flameColumn(x, y, z, h = 5, w = 0.6, dur = 0.35) {
@@ -690,11 +702,11 @@ export function createVfx(game) {
       if (!o.visible || k >= 1 || (gone && e.kind === 'dome')) {
         o.visible = false; if (e.cr) { for (const c of e.cr) c.visible = false; e.cr = null; }
         if (e.lat) { e.lat.visible = false; e.lat = null; } if (e.pl) { for (const c of e.pl) c.visible = false; e.pl = null; }
-        fx[i] = fx[fx.length - 1]; fx.pop(); fxRec.push(e); e.fadeOut = 0; e.until = null; e.auto = null; continue;
+        fx[i] = fx[fx.length - 1]; fx.pop(); fxRec.push(e); e.fadeOut = 0; e.until = null; e.auto = null; e.o0f = 0; continue;
       }
       switch (e.kind) {
         case 'orb': if (e.dur !== Infinity) { o.material.opacity = e.o0 * (1 - k) * (1 - k) * smooth(0.8, 3, o.position.distanceTo(camPos)); o.scale.setScalar(e.s0 * (1 + k)); } else o.material.opacity = e.o0 * smooth(0.8, 3, o.position.distanceTo(camPos)); break;
-        case 'flash': o.material.opacity = 0.9 * (1 - k) * smooth(0.6, 2.2, o.position.distanceTo(camPos)); o.scale.setScalar(e.s0 * (0.5 + 0.8 * Math.sqrt(k))); break;
+        case 'flash': o.material.opacity = (e.o0f || 0.9) * (1 - k) * smooth(0.6, 2.2, o.position.distanceTo(camPos)); o.scale.setScalar(e.s0 * (0.5 + 0.8 * Math.sqrt(k))); break;
         case 'ring': o.scale.setScalar(e.r0 + (e.r1 - e.r0) * (1 - (1 - k) * (1 - k))); o.material.opacity = e.o0 * (1 - k); o.rotation.y += dt * 0.6; break;
         case 'decal': {
           const fin = Math.min(1, e.t / 0.15), fout = e.fadeOut ? Math.max(0, (e.dur - e.t) / 0.4) : e.dur === Infinity ? 1 : k > 0.7 ? (1 - k) / 0.3 : 1;
