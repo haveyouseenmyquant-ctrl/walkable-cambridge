@@ -1,112 +1,363 @@
 {
  "osm_id": "way/139308028",
+ "note": "Clare College Old Court east range, Trinity Lane face south of the gate tower (session 76; replaces the s3x Mapillary-based 1-storey reading, which saw only the ground floor over the railings). Built by scripts/zone_bespoke_clare.py (pseudo key way/139308028:clare); city_facades.py counts that module's emitted openings against these walls (KPI_WALLS). Layout read from the Commons photos below (layout only; no pixels used; none held out). Three storeys of sash windows in moulded architraves, alternating 3- and 2-light, balustraded parapet, one pedimented dormer per bay. Bay count south of the gate (6) is read from a frontal view whose left edge cuts the range: the southernmost bay is inferred, x positions are approximate.",
  "sources": [
-  "mapillary:737763553567883"
+  "commons:File:1320280 I CLARE COLLEGE, THE BUILDINGS SURROUNDING PRINCIPAL COURT, east range Cambridge 20260523 0001.jpg",
+  "commons:File:1320280 I CLARE COLLEGE, THE BUILDINGS SURROUNDING PRINCIPAL COURT, east range Cambridge 20260523 0002.jpg",
+  "commons:File:Cambridge - Trinity Lane - Clare College, founded in 1326 - View West on Clare's Old Court 1618-1715.jpg",
+  "commons:File:East front of Clare College, Cambridge (O49772).jpg",
+  "commons:File:Cambridge - King's College Chapel 1446-1544 - North Gate - View NW on Clare College.jpg"
  ],
  "walls": [
   {
    "id": "way/139308028:14",
-   "storeys": 1,
+   "storeys": 3,
    "floor_z": [
-    0
+    0,
+    3.6,
+    6.9
    ],
-   "material": "stone",
-   "wall_colour": "#cdb684",
-   "trim_colour": "#dcc89c",
-   "cornice_z": 8.9,
-   "cornice": "classical",
+   "material": "ashlar",
+   "wall_colour": "#cdb68a",
+   "trim_colour": "#d9c9a6",
+   "cornice_z": 10.6,
+   "cornice": "entablature",
    "parapet": true,
-   "string_courses": [],
-   "quoins": false,
-   "pilasters": [
-    3.3,
-    7.2,
-    10.7,
-    14.3
+   "balustrade": true,
+   "battlements": false,
+   "string_courses": [
+    3.4,
+    6.7
    ],
+   "quoins": false,
+   "length": 15.04,
    "elements": [
     {
      "type": "window",
-     "style": "casement",
-     "x": 5.1,
-     "w": 1.7,
-     "z": 3.0,
-     "h": 4.6,
+     "style": "sash",
+     "x": 1.73,
+     "w": 1.6,
+     "z": 0.9,
+     "h": 2.0,
      "panes": [
       3,
-      6
+      3
      ],
-     "head": "arched",
+     "head": "flat",
      "sill": true
     },
     {
      "type": "window",
-     "style": "casement",
-     "x": 8.7,
-     "w": 1.7,
-     "z": 3.0,
-     "h": 4.6,
+     "style": "sash",
+     "x": 1.73,
+     "w": 1.6,
+     "z": 4.2,
+     "h": 2.1,
      "panes": [
       3,
-      6
+      3
      ],
-     "head": "arched",
+     "head": "flat",
      "sill": true
     },
     {
      "type": "window",
-     "style": "casement",
-     "x": 12.5,
-     "w": 1.7,
-     "z": 3.0,
-     "h": 4.6,
+     "style": "sash",
+     "x": 1.73,
+     "w": 1.6,
+     "z": 7.4,
+     "h": 1.9,
      "panes": [
       3,
-      6
+      3
      ],
-     "head": "arched",
+     "head": "flat",
      "sill": true
+    },
+    {
+     "type": "dormer",
+     "style": "pedimented",
+     "x": 1.73,
+     "w": 1.5,
+     "z": 11.0,
+     "h": 1.5
+    },
+    {
+     "type": "window",
+     "style": "sash",
+     "x": 5.19,
+     "w": 1.15,
+     "z": 0.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash",
+     "x": 5.19,
+     "w": 1.15,
+     "z": 4.2,
+     "h": 2.1,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash",
+     "x": 5.19,
+     "w": 1.15,
+     "z": 7.4,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "style": "pedimented",
+     "x": 5.19,
+     "w": 1.5,
+     "z": 11.0,
+     "h": 1.5
+    },
+    {
+     "type": "window",
+     "style": "sash",
+     "x": 8.65,
+     "w": 1.6,
+     "z": 0.9,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash",
+     "x": 8.65,
+     "w": 1.6,
+     "z": 4.2,
+     "h": 2.1,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash",
+     "x": 8.65,
+     "w": 1.6,
+     "z": 7.4,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "style": "pedimented",
+     "x": 8.65,
+     "w": 1.5,
+     "z": 11.0,
+     "h": 1.5
+    },
+    {
+     "type": "window",
+     "style": "sash",
+     "x": 12.12,
+     "w": 1.15,
+     "z": 0.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash",
+     "x": 12.12,
+     "w": 1.15,
+     "z": 4.2,
+     "h": 2.1,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash",
+     "x": 12.12,
+     "w": 1.15,
+     "z": 7.4,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "style": "pedimented",
+     "x": 12.12,
+     "w": 1.5,
+     "z": 11.0,
+     "h": 1.5
     }
-   ],
-   "confidence": "low",
-   "notes": "Clare College Chapel (Burrough, 1763), long side facing east-south-east towards the Old Schools: ashlar with giant Corinthian pilasters on a plinth, tall round-arched leaded/stained-glass windows with bracketed sills, entablature and balustraded parapet; west part of this wall is plain (tree in view). Bay positions from one oblique Mapillary view; wall split between :14 and :15 assumed."
+   ]
   },
   {
    "id": "way/139308028:15",
-   "storeys": 1,
+   "storeys": 3,
    "floor_z": [
-    0
+    0,
+    3.6,
+    6.9
    ],
-   "material": "stone",
-   "wall_colour": "#cdb684",
-   "trim_colour": "#dcc89c",
-   "cornice_z": 8.9,
-   "cornice": "classical",
+   "material": "ashlar",
+   "wall_colour": "#cdb68a",
+   "trim_colour": "#d9c9a6",
+   "cornice_z": 10.6,
+   "cornice": "entablature",
    "parapet": true,
-   "string_courses": [],
-   "quoins": false,
-   "pilasters": [
-    2.7,
-    4.9
+   "balustrade": true,
+   "battlements": false,
+   "string_courses": [
+    3.4,
+    6.7
    ],
+   "quoins": false,
+   "length": 5.73,
    "elements": [
     {
      "type": "window",
-     "style": "casement",
-     "x": 1.3,
-     "w": 1.7,
-     "z": 3.0,
-     "h": 4.6,
+     "style": "sash",
+     "x": 0.54,
+     "w": 1.6,
+     "z": 0.9,
+     "h": 2.0,
      "panes": [
       3,
-      6
+      3
      ],
-     "head": "arched",
+     "head": "flat",
      "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash",
+     "x": 0.54,
+     "w": 1.6,
+     "z": 4.2,
+     "h": 2.1,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash",
+     "x": 0.54,
+     "w": 1.6,
+     "z": 7.4,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "style": "pedimented",
+     "x": 0.54,
+     "w": 1.5,
+     "z": 11.0,
+     "h": 1.5
+    },
+    {
+     "type": "window",
+     "style": "sash",
+     "x": 4.0,
+     "w": 1.15,
+     "z": 0.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash",
+     "x": 4.0,
+     "w": 1.15,
+     "z": 4.2,
+     "h": 2.1,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash",
+     "x": 4.0,
+     "w": 1.15,
+     "z": 7.4,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "style": "pedimented",
+     "x": 4.0,
+     "w": 1.5,
+     "z": 11.0,
+     "h": 1.5
     }
-   ],
-   "confidence": "low",
-   "notes": "Clare College Chapel, north end of the long side: last round-arched window then a blind end bay with a sunk panel and roundel between Corinthian pilasters; entablature and balustrade. From one oblique Mapillary view."
+   ]
   }
  ]
 }

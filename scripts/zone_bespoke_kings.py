@@ -571,7 +571,13 @@ def frame_world(P, p0, d, name, z0=Z0):
     return {"name": name, "tris": Wt, "col": np.clip(C, 0, 1), "mat": M}
 
 
+# world-xy openings of the last build() (kind, E, N), session 76: city_facades.py counts them onto the street walls
+# (screen bays = open traceried arches, counted as windows; gate = door; one tall transomed window per gatehouse wing)
+_OPS = []
+
+
 def build(walls=None):
+    _OPS.clear()
     out = []
     # north screen: east face t = 0 from s 32.39 (gatehouse) north to s 0 (chapel); 5 bays (DSM opening centres)
     Ln = 32.39
@@ -582,6 +588,13 @@ def build(walls=None):
     b = Ls / 5
     out.append(frame_world(screen(Ls, 0.8, [b * (k + 0.5) for k in range(5)]), A, (B - A) / Ls, "kings:screen_s"))
     out.append(frame_world(gatehouse(), W(57.5, 0.0), -U, "kings:gatehouse"))
+    ds = (B - A) / Ls
+    for c in (2.6 + 6.95 * k for k in range(5)):
+        pt = W(32.39 - c, 0.0); _OPS.append(("window", float(pt[0]), float(pt[1])))
+    for k in range(5):
+        pt = A + ds * b * (k + 0.5); _OPS.append(("window", float(pt[0]), float(pt[1])))
+    for kind, x, y in (("door", XC, Y_C), ("window", (GX0 + BX0) / 2, Y_SW), ("window", (BX1 + GX1) / 2, Y_NW)):
+        pt = W(57.5 - x, y); _OPS.append((kind, float(pt[0]), float(pt[1])))
     return [o for o in out if o is not None]
 
 

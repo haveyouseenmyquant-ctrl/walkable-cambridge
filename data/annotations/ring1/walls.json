@@ -17334,10 +17334,11 @@
     19.83
    ],
    "ground_z": 8.9,
-   "eave_z": 19.03,
-   "height": 10.13,
+   "eave_z": 20.0,
+   "height": 11.1,
    "dist_centre": 229.5,
-   "street_facing": true
+   "street_facing": true,
+   "eave_fixed": true
   },
   {
    "id": "way/139308028:15",
@@ -33974,10 +33975,11 @@
     -64.26
    ],
    "ground_z": 10.13,
-   "eave_z": 13.66,
-   "height": 3.53,
+   "eave_z": 15.72,
+   "height": 5.59,
    "dist_centre": 175.9,
-   "street_facing": true
+   "street_facing": true,
+   "eave_fixed": true
   },
   {
    "id": "way/164708972:16",
@@ -34001,10 +34003,11 @@
     -53.47
    ],
    "ground_z": 10.0,
-   "eave_z": 18.69,
-   "height": 8.69,
+   "eave_z": 21.38,
+   "height": 11.38,
    "dist_centre": 159.2,
-   "street_facing": true
+   "street_facing": true,
+   "eave_fixed": true
   },
   {
    "id": "way/164708972:18",
@@ -34055,10 +34058,11 @@
     -44.48
    ],
    "ground_z": 10.03,
-   "eave_z": 18.27,
-   "height": 8.24,
+   "eave_z": 19.66,
+   "height": 9.63,
    "dist_centre": 154.0,
-   "street_facing": true
+   "street_facing": true,
+   "eave_fixed": true
   },
   {
    "id": "way/164708972:21",

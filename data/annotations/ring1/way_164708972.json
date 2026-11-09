@@ -1,0 +1,154 @@
+{
+ "osm_id": "way/164708972",
+ "note": "King's College gatehouse and Wilkins' screen, King's Parade face (session 76). Built by scripts/zone_bespoke_kings.py (real key, HIDE_TILE); city_facades.py counts its _OPS. Read from the Commons photos below (layout only; none held out): the south screen has 5 open traceried arches (counted as windows, unglazed) between buttress-pinnacles; the gate block fronts either side of the gate arch carry blind panels and crown/rose bosses only (no openings); the gate itself sits on the 2.2 m centre wall :18; each wing has one tall transomed two-light window (north wing on :21). The south wing window falls 2.9 m off the OSM wall :11 end and is not on a street wall. The north screen has no street wall of its own in the OSM wall list. x positions from the model's DSM-fitted bay centres.",
+ "sources": [
+  "commons:File:Cambridge - King's Parade - View West on William Wilkins' Neo Gothic Screen 1828.jpg",
+  "commons:File:Cambridge - King's College Chapel 1446-1544 - King's Parade - View NNW on Wilkins' Screen 1828 & Chapel.jpg",
+  "commons:File:Cambridge - King's Parade - View WSW on King's College Gatehouse 1828 by William Wilkins.jpg",
+  "commons:File:King's College Gatehouse - geograph.org.uk - 1335739.jpg",
+  "commons:File:Cambridge - King's College - King's Parade - View South along Gatehouse & Screen 1828 by William Wilkins.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/164708972:11",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "ashlar",
+   "wall_colour": "#d8c9a6",
+   "cornice_z": 5.0,
+   "cornice": "gothic",
+   "parapet": true,
+   "pierced_parapet": true,
+   "elements": [
+    {
+     "type": "window",
+     "style": "screen_arch",
+     "x": 3.05,
+     "w": 2.7,
+     "z": 0.6,
+     "h": 3.6,
+     "head": "pointed",
+     "glazed": false
+    },
+    {
+     "type": "window",
+     "style": "screen_arch",
+     "x": 9.14,
+     "w": 2.7,
+     "z": 0.6,
+     "h": 3.6,
+     "head": "pointed",
+     "glazed": false
+    },
+    {
+     "type": "window",
+     "style": "screen_arch",
+     "x": 15.23,
+     "w": 2.7,
+     "z": 0.6,
+     "h": 3.6,
+     "head": "pointed",
+     "glazed": false
+    },
+    {
+     "type": "window",
+     "style": "screen_arch",
+     "x": 21.33,
+     "w": 2.7,
+     "z": 0.6,
+     "h": 3.6,
+     "head": "pointed",
+     "glazed": false
+    },
+    {
+     "type": "window",
+     "style": "screen_arch",
+     "x": 27.42,
+     "w": 2.7,
+     "z": 0.6,
+     "h": 3.6,
+     "head": "pointed",
+     "glazed": false
+    }
+   ]
+  },
+  {
+   "id": "way/164708972:16",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.6
+   ],
+   "material": "ashlar",
+   "wall_colour": "#d8c9a6",
+   "cornice_z": 9.2,
+   "parapet": true,
+   "elements": []
+  },
+  {
+   "id": "way/164708972:18",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.6
+   ],
+   "material": "ashlar",
+   "wall_colour": "#d8c9a6",
+   "cornice_z": 9.2,
+   "parapet": true,
+   "elements": [
+    {
+     "type": "door",
+     "style": "gate_arch",
+     "x": 0.3,
+     "w": 4.0,
+     "z": 0,
+     "h": 4.3,
+     "head": "four_centred"
+    }
+   ]
+  },
+  {
+   "id": "way/164708972:19",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.6
+   ],
+   "material": "ashlar",
+   "wall_colour": "#d8c9a6",
+   "cornice_z": 9.2,
+   "parapet": true,
+   "elements": []
+  },
+  {
+   "id": "way/164708972:21",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.6
+   ],
+   "material": "ashlar",
+   "wall_colour": "#d8c9a6",
+   "cornice_z": 9.2,
+   "parapet": true,
+   "elements": [
+    {
+     "type": "window",
+     "style": "transomed_2light",
+     "x": 2.75,
+     "w": 1.5,
+     "z": 2.4,
+     "h": 4.2,
+     "head": "four_centred",
+     "panes": [
+      2,
+      2
+     ]
+    }
+   ]
+  }
+ ]
+}

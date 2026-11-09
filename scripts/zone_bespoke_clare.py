@@ -188,7 +188,7 @@ def gate_tower(P, xc, w, Z_COR, y, col, Ztop):
         entablature(P, x0, x1, zs[k + 1], y, col, deep=0.36)
         if k > 0:
             for s in (-1, 1):
-                niche(P, xc + s * (w / 2 - 0.9), zs[k] + 0.6, zs[k + 1] - 0.9, 0.6, y, col, holes)
+                sash(P, xc + s * (w / 2 - 0.9), zs[k] + 0.7, zs[k + 1] - 1.1, 0.6, holes, y, col)
     win = arch(xc, 1.25, 5.7, 7.9)
     holes.append(win)
     P.sides_xz(win, y - 0.25, y, F.shade(col, 0.75), inward=True)
@@ -210,6 +210,24 @@ def gate_tower(P, xc, w, Z_COR, y, col, Ztop):
         box6(P, xe - 0.04, xe + 0.04, y - 0.7, y, -0.6, Z_COR + 0.1, col)
 
 
+# world-xy openings of build_clare_east() (kind, E, N): city_facades.py counts them onto KPI_WALLS (session 76)
+_OPS = []
+KPI_WALLS = {"way/139308028:clare": ["way/139308028:14", "way/139308028:15"]}
+
+
+def dormer(P, xc, zb, y, col):
+    """Pedimented ashlar dormer standing 1.2 m behind the balustrade face, slate cheeks."""
+    yf, yk, w, z0, z1 = y - 1.2, y - 3.0, 1.5, zb - 0.6, zb + 1.3
+    box6(P, xc - w / 2, xc + w / 2, yk, yf, z0, z1, col)
+    P.quad((xc - 0.38, yf + 0.01, z0 + 0.7), (xc + 0.38, yf + 0.01, z0 + 0.7), (xc + 0.38, yf + 0.01, z1 - 0.15),
+           (xc - 0.38, yf + 0.01, z1 - 0.15), (0, 1, 0), GLASS, "glass")
+    tri = Polygon([(xc - w / 2 - 0.1, z1), (xc + w / 2 + 0.1, z1), (xc, z1 + 0.55)])
+    P.slab(tri, yf - 0.1, yf + 0.08, F.shade(col, 1.05))
+    for sx in (-1, 1):
+        P.quad((xc + sx * w / 2, yk, z1), (xc + sx * w / 2, yf, z1), (xc, yf, z1 + 0.5), (xc, yk, z1 + 0.5),
+               (sx * 0.5, 0, 0.86), DARK, "plain")
+
+
 def build_clare_east():
     a, d, L = _frame(E_A, E_B)
     col = ASHLAR
@@ -223,6 +241,17 @@ def build_clare_east():
         range_face(P, xa, xb, nb, floors, Z_COR, Z_PT, Y, col)
         balustrade(P, xa, xb, Z_COR + 0.08, Y, col)
     gate_tower(P, AX, GW, Z_COR, YG, col, 15.3)
+    # session 76 (Commons photos, data/annotations/ring1/way_139308028.json): pedimented dormers over every bay behind
+    # the balustrade, and the gate tower's 1st/2nd floors have a small sash window either side of the oriel, not niches
+    _OPS.clear()
+    for xa, xb in ((0.0, AX - GW / 2), (AX + GW / 2, L)):
+        nb = max(1, int(round((xb - xa) / 3.3)))
+        b = (xb - xa) / nb
+        for i in range(nb):
+            xc = xa + (i + 0.5) * b
+            dormer(P, xc, Z_PT, Y, col)
+            pt = a + d * xc + np.array([d[1], -d[0]]) * Y
+            _OPS.extend([("window", float(pt[0]), float(pt[1]))] * len(floors) + [("dormer", float(pt[0]), float(pt[1]))])
     balustrade(P, AX - GW / 2, AX - 1.9, Z_COR + 0.1, YG, col)
     balustrade(P, AX + 1.9, AX + GW / 2, Z_COR + 0.1, YG, col)
     for xe, s in ((0.0, -1), (L, 1)):
