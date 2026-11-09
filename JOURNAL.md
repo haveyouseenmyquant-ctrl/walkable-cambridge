@@ -1656,3 +1656,44 @@ Next
 2. Stone tone: King's limestone renders grey; check the stone material/tone mapping against non-held-out photos.
 3. Boss telegraphs cover too much of the frame; canopy planes in the clip.
 4. Ring 1: generalise sibling-wall annotation and use a style default for walls without photos.
+
+## 2026-11-09 — Session 55: game-KPI snapshot fix; pale limestone; sky dome; mob chase give-up; 2 ring-1 walls
+
+Start: live dafa017 (session 54) had only roof scores. service.sh scores game KPIs only when site/ == live, so any
+session that edits site/ blocked them (sessions 51-54 kept hitting this).
+Done
+- Infra: publish.sh now leaves an APFS-clone snapshot of the published build in data/derived/live_site (`cp -c`, no
+  extra disk; gitignored). service.sh runs game_kpi.sh / gameplay_kpi.sh on that snapshot when its hash equals the live
+  hash. dafa017 then scored: mob_types 12 + 3 bosses, equipment_effects 44, **playable_classes 3, playtest_pass_pct 70**,
+  boss TTK spread 41.5% (median 11.4 s). That is down from 80% / 4 classes on 8b314e: one class failed to clear the
+  route in at least 3 of its 5 runs.
+- Fork B (stone): limestone was grey because the whole scene is lit dimly (LK 0.45 × Phong /π, about 0.17 linear for a
+  0.89 albedo), not because the albedo was wrong. zone.js now gives pale ashlar and trim (materials 2 and 7) a luma-gated
+  warm boost of up to ×1.85; King's Chapel's sunlit wall went from (111,108,99) to (147,139,119). Brick and render are
+  unchanged. docs/screens/session55_stone_*. The proper fix is overall exposure, which needs a benchmark A/B.
+- Fork D (sky): the sky dome with gradient, clouds and a sun glow is now the default (`?sky=flat` restores the old one).
+  Atmosphere scored 1-2/10 in all 30 visual_quality views. The clouds drift, so renders aren't pixel-identical any more.
+  GPU fps 60. docs/screens/session55_veg_*. Watch judged_realism: a flat white sky once won a photo_match A/B.
+- Fork C (game): an ordinary mob that gets no closer for 6 s gives up and goes home (fixes a statue stuck in "chase").
+  The playtest bot drops mobs that are going home and wanders with jumps after 3 failed replans; stuck-mob failures now
+  log their state. Pyromancer burst 42 → 32 and ult 17 → 13. Telegraphs are depth-tested, lighter, and offset to 0.12 m.
+  Local run: 8/8 passes (2 per class); TTK spread noisy (warden 17 s is now the outlier). test_mobs 12+3, items 44/44,
+  classes ok.
+- Fork A (ring 1): only 2 walls (John Lewis east, St Andrew the Great bay). Ring 1 52.0 → 52.2%; about 10 more
+  candidates were rejected (wrong Mapillary poses, building not identifiable).
+- Published world-20261109-0747 (hash 2641329a…; WC_SKIP_GAME_KPI=1, service.sh scores it on the snapshot).
+- The moves test failed for jump/run/dash/broom on both site/ and the live snapshot at load ~20 (swiftshader).
+  That's load-related, not a regression.
+
+Learned
+- Photo-driven annotation of ring 1 has run dry (2-4 walls per fork-round). Ring 1 at 70% needs a Commons
+  category sweep matched to named buildings, or a decision with Gaspard on what counts as an annotation source
+  (for example, OS/aerial plus a single oblique photo).
+- publish.sh swaps the snapshot out from under a running game_kpi run. That was harmless this time; skip the swap
+  (or wait) while /tmp/wc_game_kpi.lock exists.
+
+Next
+1. Read the game KPIs and gameplay_judged for 2641329a. Check which class fails (playable_classes 3 on dafa) and the
+   TTK spread with 5 runs per class.
+2. Exposure: A/B raising LK or adding tone-mapping exposure on the benchmark, then lower the stone boost to match.
+3. Ring 1: Commons category sweep per named building.
