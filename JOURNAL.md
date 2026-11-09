@@ -1882,3 +1882,29 @@ Next
   encounter coverage 100, playtest 100 (20/20), boss kill-time spread 33% (median 11.3 s; pyro 7.6, storm 10.5, warden 13.1,
   hex 12.1; was 25.8%), gameplay_judged 46.4 (was 47.5). So the s64 strike VFX did not raise the judge score; that's within noise on 4 clips.
   Pyromancer is the fast outlier again.
+
+## 2026-11-09 — Sessions 66-67: Sidney Sussex street front; mob ink outlines; pyromancer boss nerf
+
+Session 66 was cut off before committing. Session 67 reviewed its work and committed it (2582113):
+- Ring 1, **Sidney Sussex College** street ends on Sidney Street (scripts/zone_bespoke_sidney.py, pseudo ids way/147456527|522|529:sidney):
+  Wyatville's 1820s Tudor-Gothic refacing in buff "ashlar". It has crow-stepped gables with apex stacks, mullioned and transomed windows
+  under label moulds, the corbelled oriel with the founder's shield, and the gate tower with its four-centred arch. Heights come from the DSM.
+  Shape references are Wikimedia CC BY-SA photos (listed in the module docstring), none of them held-out photos.
+  docs/screens/session66_ring_{before,after}_ss_*.jpg. The gables are a clear improvement on the plain grey boxes. The s66 *after* cameras were
+  badly placed (inside the brick wall / under the bike-shed frames), so "street" shows only a wall. Re-shoot from the street centreline.
+- Game: regular mobs get an inverted-hull ink outline (back faces, welded normals, colour = type colour ×0.22, hidden once the
+  death fade starts) and are drawn at 1.45× their collision size (was 1.3×). The judge kept saying "small, crude, hard to read".
+  Pyromancer's spell and DoT damage against bosses is ×0.86, because its s65 kill time of 7.6 s was the fast outlier (spread 33%).
+- publish.sh also runs ms_bench.sh (market_square_realism) for the new build, in parallel with the gameplay clip.
+- Session 67 published the result. See the result line below.
+
+Next
+1. Re-shoot the Sidney before/after from Sidney St at eye level; annotate the Sidney gable walls from non-held-out photos (ring-1 KPI).
+2. If the outline/scale change lifted gameplay_judged, keep it. If not, revert MOB_VIS to 1.3.
+3. Ring 1/2: Trinity Street shopfronts, King's gatehouse screen check, Caius Gate of Honour from the street.
+- Result: published world-20261109-1344, scored before the push. Live game KPIs: classes 4, mobs 12 + 3 bosses, effects 44,
+  encounter coverage 100, playtest 100 (20/20), gameplay_judged **49.5** (was 46.4; the outlines and larger mobs seem to help).
+  market_square_realism is 30.5. The boss kill-time spread jumped to **84.9%** (median 11.7 s: pyro 9.3, storm 9.1, warden 14.1,
+  hex 21.6). Hexweaver was 12.1 s, and earlier 7.8 s, with no hexweaver change since, so its kill times are very noisy. It may be
+  the 1.45× mob scale (bosses aren't scaled), or the summons/curses whiffing. Next session: look at the hexweaver per-run TTKs and
+  stabilise them before tuning further (more runs, or check the familiar's targeting).
