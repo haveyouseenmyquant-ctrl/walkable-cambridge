@@ -17,12 +17,12 @@ export const CLASSES = {
   pyromancer: {
     name: 'Pyromancer', color: '#ff7a2a', blurb: 'Fire and burst damage. Burns linger, explosions stack.',
     spells: [
-      { id: 'ember_bolt', name: 'Ember Bolt', glyph: '✦', kind: 'bolt', type: 'fire', mana: 5, cd: 0.45, dmg: 22, speed: 48, range: 60, splash: 1.2, color: 0xff7a2a, sfx: 'ember', look: 'ember' },
+      { id: 'ember_bolt', name: 'Ember Bolt', glyph: '✦', kind: 'bolt', type: 'fire', mana: 5, cd: 0.45, dmg: 16, speed: 48, range: 60, splash: 1.2, color: 0xff7a2a, sfx: 'ember', look: 'ember' },
       { id: 'cinder_spray', name: 'Cinder Spray', glyph: '≋', kind: 'cone', type: 'fire', mana: 14, cd: 3, dmg: 14, range: 9, angle: 0.6, burn: { dps: 6, dur: 3 }, color: 0xffa040, sfx: 'spray', look: 'spray' },
-      { id: 'fireburst', name: 'Fireburst Orb', glyph: '◉', kind: 'bolt', type: 'fire', mana: 22, cd: 6, dmg: 32, speed: 22, range: 50, splash: 4.5, color: 0xff5010, sfx: 'orb', look: 'orb', size: 1.6 },
+      { id: 'fireburst', name: 'Fireburst Orb', glyph: '◉', kind: 'bolt', type: 'fire', mana: 22, cd: 6, dmg: 24, speed: 22, range: 50, splash: 4.5, color: 0xff5010, sfx: 'orb', look: 'orb', size: 1.6 },
       { id: 'flame_step', name: 'Flame Step', glyph: '➚', kind: 'blink', type: 'fire', mana: 15, cd: 5, dist: 11, dmg: 18, radius: 3, color: 0xff9a30, sfx: 'flamestep', look: 'flamestep' },
-      { id: 'kindle_ring', name: 'Kindle Ring', glyph: '◎', kind: 'nova', type: 'fire', mana: 24, cd: 9, dmg: 30, radius: 5.5, knock: 3, burn: { dps: 5, dur: 3 }, color: 0xff6a00, sfx: 'kindle', look: 'kindle' },
-      { id: 'sunfall', name: 'Sunfall', glyph: '☀', kind: 'zone', type: 'fire', mana: 50, cd: 60, dmg: 13, radius: 7, dur: 3, interval: 0.22, tick: 'meteor', splash: 2.5, range: 40, color: 0xffc040, sfx: 'sunfall', look: 'sunfall', ult: true },
+      { id: 'kindle_ring', name: 'Kindle Ring', glyph: '◎', kind: 'nova', type: 'fire', mana: 24, cd: 9, dmg: 24, radius: 5.5, knock: 3, burn: { dps: 5, dur: 3 }, color: 0xff6a00, sfx: 'kindle', look: 'kindle' },
+      { id: 'sunfall', name: 'Sunfall', glyph: '☀', kind: 'zone', type: 'fire', mana: 50, cd: 60, dmg: 11, radius: 7, dur: 3, interval: 0.22, tick: 'meteor', splash: 2.5, range: 40, color: 0xffc040, sfx: 'sunfall', look: 'sunfall', ult: true },
     ],
     talents: [
       [{ name: 'Split Embers', desc: 'Ember Bolt fires 3 bolts in a fan', f: S => { S.ember_bolt.count = 3; } },
@@ -36,11 +36,11 @@ export const CLASSES = {
   stormcaller: {
     name: 'Stormcaller', color: '#7fd4ff', blurb: 'Lightning and wind. Fast, mobile, chains between foes. Wind Dash goes further on a broom.',
     spells: [
-      { id: 'spark_lance', name: 'Spark Lance', glyph: 'ϟ', kind: 'beam', type: 'storm', mana: 5, cd: 0.4, dmg: 22, range: 40, chain: 1, color: 0xbfe6ff, sfx: 'lance', look: 'lance' },
-      { id: 'arc_chain', name: 'Arc Chain', glyph: '⚡', kind: 'beam', type: 'storm', mana: 14, cd: 4, dmg: 22, range: 30, chain: 4, chainRange: 8, color: 0x8fb8ff, sfx: 'arc', look: 'arc' },
+      { id: 'spark_lance', name: 'Spark Lance', glyph: 'ϟ', kind: 'beam', type: 'storm', mana: 5, cd: 0.4, dmg: 26, range: 40, chain: 1, color: 0xbfe6ff, sfx: 'lance', look: 'lance' },
+      { id: 'arc_chain', name: 'Arc Chain', glyph: '⚡', kind: 'beam', type: 'storm', mana: 14, cd: 4, dmg: 28, range: 30, chain: 4, chainRange: 8, color: 0x8fb8ff, sfx: 'arc', look: 'arc' },
       { id: 'gale_burst', name: 'Gale Burst', glyph: '༄', kind: 'cone', type: 'storm', mana: 12, cd: 6, dmg: 16, range: 10, angle: 0.8, knock: 5, slow: 2, color: 0xd8fff4, sfx: 'gale', look: 'gale' },
       { id: 'wind_dash', name: 'Wind Dash', glyph: '»', kind: 'blink', type: 'storm', mana: 10, cd: 4, dist: 14, broomMult: 1.6, color: 0xc8f0ff, sfx: 'winddash', look: 'winddash' },
-      { id: 'static_field', name: 'Static Field', glyph: '⌁', kind: 'zone', type: 'storm', mana: 22, cd: 12, dmg: 12, radius: 5, dur: 4, interval: 0.5, tick: 'field', slow: 1, range: 30, color: 0x66aaff, sfx: 'static', look: 'static' },
+      { id: 'static_field', name: 'Static Field', glyph: '⌁', kind: 'zone', type: 'storm', mana: 22, cd: 12, dmg: 16, radius: 5, dur: 4, interval: 0.5, tick: 'field', slow: 1, range: 30, color: 0x66aaff, sfx: 'static', look: 'static' },
       { id: 'tempest', name: 'Tempest', glyph: '☈', kind: 'zone', type: 'storm', mana: 50, cd: 70, dmg: 24, radius: 12, dur: 5, interval: 0.3, tick: 'strike', follow: true, color: 0xe0f0ff, sfx: 'tempest', look: 'tempest', ult: true },
     ],
     talents: [
@@ -74,9 +74,9 @@ export const CLASSES = {
   hexweaver: {
     name: 'Hex Weaver', color: '#b070ff', blurb: 'Curses, bound wisps and life drain. Weakens foes, feeds on them.',
     spells: [
-      { id: 'hex_dart', name: 'Hex Dart', glyph: '✧', kind: 'bolt', type: 'hex', mana: 5, cd: 0.4, dmg: 21, speed: 40, range: 50, splash: 0, drain: 0.3, color: 0xb070ff, sfx: 'dart', look: 'dart' },
+      { id: 'hex_dart', name: 'Hex Dart', glyph: '✧', kind: 'bolt', type: 'hex', mana: 5, cd: 0.4, dmg: 25, speed: 40, range: 50, splash: 0, drain: 0.3, color: 0xb070ff, sfx: 'dart', look: 'dart' },
       { id: 'withering_mark', name: 'Withering Mark', glyph: '⍟', kind: 'bolt', type: 'hex', mana: 12, cd: 5, dmg: 10, speed: 34, range: 45, splash: 0, curse: 1.35, curseDur: 8, burn: { dps: 5, dur: 8 }, color: 0x70ff90, sfx: 'mark', look: 'mark' },
-      { id: 'soul_siphon', name: 'Soul Siphon', glyph: '♆', kind: 'beam', type: 'hex', mana: 16, cd: 6, dmg: 46, range: 25, chain: 0, drain: 0.5, color: 0xd050ff, sfx: 'siphon', look: 'siphon' },
+      { id: 'soul_siphon', name: 'Soul Siphon', glyph: '♆', kind: 'beam', type: 'hex', mana: 16, cd: 6, dmg: 54, range: 25, chain: 0, drain: 0.5, color: 0xd050ff, sfx: 'siphon', look: 'siphon' },
       { id: 'shade_step', name: 'Shade Step', glyph: '⇢', kind: 'blink', type: 'hex', mana: 12, cd: 5, dist: 12, invuln: 0.5, color: 0x8040c0, sfx: 'shade', look: 'shade' },
       { id: 'bound_wisps', name: 'Bound Wisps', glyph: '❂', kind: 'summon', type: 'hex', mana: 24, cd: 18, dmg: 10, count: 2, dur: 12, interval: 0.8, range: 20, drain: 0.3, color: 0xa0ffd0, sfx: 'wisp', look: 'wisp' },
       { id: 'night_bloom', name: 'Night Bloom', glyph: '✿', kind: 'zone', type: 'hex', mana: 50, cd: 70, dmg: 28, radius: 8, dur: 4, interval: 0.5, tick: 'field', curse: 1.5, curseDur: 6, drain: 0.25, range: 30, color: 0x9030ff, sfx: 'bloom', look: 'bloom', ult: true },

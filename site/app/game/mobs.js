@@ -1123,10 +1123,10 @@ class MobSystem {
             edgeD = min((1.0 - ax) * 0.5 * uSize.x, min(v, 1.0 - v) * uSize.y); frontD = abs(v - uFill) * uSize.y; inside = step(v, uFill);
             bands = step(0.55, fract((v * uSize.y - ax * uSize.x * 0.35) * 0.8 - uTime * 2.0));   // chevrons pointing along the attack
           }
-          float rim = 1.0 - smoothstep(0.0, 0.2, edgeD), rimGlow = 1.0 - smoothstep(0.0, 0.6, edgeD);
+          float rim = 1.0 - smoothstep(0.0, 0.32, edgeD), rimGlow = 1.0 - smoothstep(0.0, 0.8, edgeD);   // s61: thicker rim, readable from the 3rd-person camera
           float front = (1.0 - smoothstep(0.0, 0.22, frontD)) * step(0.02, uFill) * (1.0 - inside * 0.5);
           float pulse = 0.75 + 0.25 * sin(uTime * (8.0 + 18.0 * uFill));
-          float a = 0.08 + 0.06 * bands * (1.0 - inside) + inside * (0.2 + 0.18 * uFill) + rim * 0.85 * pulse + rimGlow * 0.14 + front * 0.6;
+          float a = 0.13 + 0.1 * bands * (1.0 - inside) + inside * (0.2 + 0.18 * uFill) + rim * 0.85 * pulse + rimGlow * 0.14 + front * 0.6;
           vec3 hot = vec3(1.0, 0.82, 0.55);
           vec3 c = mix(uColor * (0.75 + 0.35 * inside), hot, clamp(rim * 0.45 + front * 0.7, 0.0, 1.0));
           c = mix(c, vec3(1.0, 0.96, 0.88), uFlash);
