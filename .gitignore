@@ -26,3 +26,5 @@ data/benchmark/photos_ms/
 site/cityfac/
 data/derived/live_site/
 data/benchmark/tuning/photos/
+data/derived/session_active
+data/derived/kpi_cache_*.json

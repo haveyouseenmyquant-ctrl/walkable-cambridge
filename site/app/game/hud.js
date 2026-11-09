@@ -75,7 +75,7 @@ export function install(game) {
     return t;
   }
   const css = el('style', null, document.head);
-  css.textContent = `#game-hud .gh-loots{position:absolute;right:14px;top:58%;display:flex;flex-direction:column;align-items:flex-end;gap:6px;pointer-events:none}
+  css.textContent = `#game-hud .gh-loots{position:absolute;right:14px;top:13%;max-height:40%;overflow:hidden;display:flex;flex-direction:column;align-items:flex-end;gap:6px;pointer-events:none}
 #game-hud .gh-loot{--rc:#ccc;display:flex;flex-direction:column;align-items:flex-end;gap:3px;max-width:240px;padding:3px 9px;background:linear-gradient(90deg,rgba(10,10,16,.45),rgba(10,10,16,.8));border-right:3px solid var(--rc);border-radius:4px 2px 2px 4px;box-shadow:inset -24px 0 24px -20px var(--rc);font:700 12px/1.2 system-ui,sans-serif;color:var(--rc);text-shadow:0 0 4px rgba(0,0,0,.9)}
 #game-hud .gh-loot-h{display:flex;align-items:baseline;gap:8px}
 #game-hud .gh-loot-e{font:400 10px/1.2 system-ui,sans-serif;color:#d8d8e4;text-shadow:none;text-align:right}

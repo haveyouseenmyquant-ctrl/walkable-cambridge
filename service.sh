@@ -16,6 +16,9 @@ while true; do
   # equals the live build after publish.sh; only run when the hashes agree so the cache is keyed to the live build.
   # session 55: prefer data/derived/live_site (publish.sh's APFS-clone snapshot of the published build), so sessions
   # editing site/ no longer block the live build's game scores
+  # session 58: a work session touches data/derived/session_active at its start and publish.sh removes it; while it is
+  # fresh (< 75 min) skip the heavy render/playtest jobs so in-session tests and A/Bs get the CPU. The build being
+  # scored would be replaced by the session's publish anyway.
   LH=$(.venv/bin/python -I scripts/build_hash.py "$SRC" 2>/dev/null)
   GS=site
   [ -d data/derived/live_site ] && [ "$(.venv/bin/python -I scripts/build_hash.py data/derived/live_site 2>/dev/null)" = "$LH" ] && GS=data/derived/live_site
@@ -23,6 +26,11 @@ while true; do
   if [ -n "$LH" ] && [ "$LH" = "$SH" ]; then
     [ -s data/benchmark/scores/${LH}_game.json ] || WC_SITE=$GS scripts/game_kpi.sh 2>&1 | tail -n1
     [ -x scripts/gameplay_kpi.sh ] && [ ! -s data/benchmark/scores/${LH}_gameplay.json ] && WC_SITE=$GS scripts/gameplay_kpi.sh 2>&1 | tail -n1
+  fi
+  # session 59: the game KPIs (one headless browser at a time, on the live snapshot) still run during a session, else
+  # an unpublished session leaves the live build's game KPIs unmeasured for hours; only the multi-worker renders pause
+  if [ -f data/derived/session_active ] && [ $(( $(date +%s) - $(stat -f %m data/derived/session_active) )) -lt 4500 ]; then
+    sleep 60; continue
   fi
   [ -f data/benchmark/market_square.json ] && scripts/ms_bench.sh "$SRC" 2>&1 | tail -n2
   if [ $(( $(date +%s) - LAST )) -lt 3300 ]; then

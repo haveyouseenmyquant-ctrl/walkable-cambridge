@@ -176,7 +176,8 @@ export function install(game) {
   function removePickup(pk) { game.root.remove(pk.g); for (const o of [pk.beam, pk.core, pk.pad, pk.ring, pk.gem, pk.halo, pk.plate]) o.material.dispose(); pk.ptex.dispose(); for (const a of [pickups, lingering]) { const i = a.indexOf(pk); if (i >= 0) a.splice(i, 1); } }
   function collect(pk) { const p = game.player, def = items.give(pk.id); const c = RARITY[def.rarity].hex;
     pk.got = { t: S.t, x: pk.x, y: pk.y, z: pk.z }; pickups.splice(pickups.indexOf(pk), 1); lingering.push(pk);
-    fx.burst(v3(p.x, p.y, p.z + 1), c, 30 + 8 * pk.ord, 3, 0.7); fx.ring(p.x, p.y, p.z + 0.05, c, 1.6 + 0.3 * pk.ord, 0.5); fx.stream(v3(pk.x, pk.y, pk.z + 0.8), v3(p.x, p.y, p.z + 1.2), c, 10 + 4 * pk.ord);
+    fx.burst(v3(p.x, p.y, p.z + 1), c, 12 + 6 * pk.ord, 3, 0.4); fx.ring(p.x, p.y, p.z + 0.05, c, 1.6 + 0.3 * pk.ord, 0.5); fx.stream(v3(pk.x, pk.y, pk.z + 0.8), v3(p.x, p.y, p.z + 1.2), c, 10 + 4 * pk.ord);
+    // s58: pickup burst fewer + shorter (a cloud of 30+ hid the wizard in the clip)
     sfx.play('pickup', 0.8, 1 + 0.06 * pk.ord); if (pk.ord >= 2) sfx.play('sting_' + def.rarity, 0.6, 1.12);
     game.emit('pickup', { item: def, id: pk.id }); }
   function updatePickups(dt) { const p = game.player;
@@ -187,7 +188,7 @@ export function install(game) {
         pk.gem.position.set((p.x - pk.x) * k, 0.8 + (p.z + 1.2 - pk.z - 0.8) * k, -(p.y - pk.y) * k); pk.gem.visible = pk.halo.visible = k < 1;
         pk.halo.position.copy(pk.gem.position);
         pk.beam.material.opacity = 0.55 * fa; pk.core.material.opacity = 0.12 * fa; pk.pad.material.opacity = 0.7 * fa; pk.ring.material.opacity = 0.5 * fa;
-        pk.beam.scale.x = pk.beam.scale.z = pk.pw * (1 + 0.6 * a);
+        pk.beam.scale.x = pk.beam.scale.z = pk.pw * (1 - 0.8 * a);   // s58: the pillar collapses inward (widening, it engulfed the camera)
         // session 48: the nameplate goes at once on pickup (it used to rise over the player's head and fill a 1st-person view)
         pk.plate.visible = (S.t - pk.got.t) < 0.3; pk.plate.material.opacity = Math.max(0, 1 - (S.t - pk.got.t) / 0.3);
         continue; }

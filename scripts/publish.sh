@@ -21,3 +21,5 @@ gh workflow run pages.yml --ref main
 # session 56: wait (up to 30 min) for a running game_kpi/gameplay run so its snapshot isn't swapped out under it
 for _ in $(seq 180); do [ -d /tmp/wc_game_kpi.lock ] || [ -d /tmp/wc_gameplay_kpi.lock ] || break; sleep 10; done
 rm -rf data/derived/live_site.new && cp -c -R site data/derived/live_site.new && rm -rf data/derived/live_site && mv data/derived/live_site.new data/derived/live_site
+# session 58: the session is over once it publishes; let service.sh score the new live build
+rm -f data/derived/session_active

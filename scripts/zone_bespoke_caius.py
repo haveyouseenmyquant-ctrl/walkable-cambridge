@@ -277,8 +277,9 @@ def waterhouse_wall(w, x0, x1, kind):
     z = WZ
     holes = []
     L = w["length"]
-    if kind == "trinity":
-        xs = [L * (i + 0.5) / 4 for i in range(4)]
+    if kind in ("trinity", "passage"):
+        nb = 4 if kind == "trinity" else 3
+        xs = [L * (i + 0.5) / nb for i in range(nb)]
         for xc in xs:
             holes.append(cross_window(P, xc, 1.55, z["gr0"], z["gr1"], WH, WH_D, WH_L))
             holes.append(cross_window(P, xc, 1.55, z["f10"], z["f11"], WH, WH_D, WH_L))
@@ -313,6 +314,11 @@ def waterhouse_wall(w, x0, x1, kind):
         for xg in (0.6, L / 2, L - 0.6):
             gargoyle(P, xg, z["cor"] + 0.1, WH_L)
         for xc in (L * 1.5 / 4, L * 3.5 / 4):
+            dormer(P, xc, 2.0, z["eave"] + 0.1, WH, WH_D, WH_L)
+    if kind == "passage":
+        for xg in (0.6, L - 0.6):
+            gargoyle(P, xg, z["cor"] + 0.1, WH_L)
+        for xc in (L / 6, L * 5 / 6):
             dormer(P, xc, 2.0, z["eave"] + 0.1, WH, WH_D, WH_L)
     if kind == "splay":
         oriel(P, L / 2, min(2.6, L - 0.1))
@@ -380,8 +386,10 @@ def tower_face(L, full, door=False):
         op = Polygon([(xc - r, 0), (xc + r, 0)] + [(xc + r * math.cos(t), 2.6 + r * math.sin(t))
                                                   for t in np.linspace(0, math.pi, 13)])
         holes.append(op)
-        P.sides_xz(op, YG - 0.02, SK + 0.3, WH_D, inward=True, skip_ground=True, mat="stone")
-        P.face_xz(op, YG - 0.02, F.rgb("#3b2a20"), mat="timber")
+        # leaf 0.12 m behind the face: the OSM line runs up to 0.2 m south of TOWER's y0, so a leaf at YG sat
+        # behind the tile body's wall and the arch showed its grey texture (session 58)
+        P.sides_xz(op, SK - 0.12, SK + 0.3, WH_D, inward=True, skip_ground=True, mat="stone")
+        P.face_xz(op, SK - 0.12, F.rgb("#3b2a20"), mat="timber")
         for k in range(3):
             ring = op.buffer(0.13 * (k + 1)).difference(op.buffer(0.13 * k)).intersection(box(-50, 0, 50, 50))
             P.slab(ring, SK, SK + 0.3 - 0.1 * k, WH_L, mat="stone")
@@ -476,7 +484,29 @@ def build_waterhouse(walls):
         x0, x1 = ext[w["id"]]
         out.append(on_wall(waterhouse_wall(w, x0, x1, k), w, "caius:waterhouse:" + w["id"].split(":")[-1]))
     out += tower()
+    if walls:
+        out.append(passage_wall(PASSAGE, "passage"))
+        out.append(passage_wall(PASSAGE_E, "return"))
     return [o for o in out if o is not None]
+
+
+# session 58: the range continues west of the gate tower along Senate House Passage (way/13864058 edge
+# (-184.4, 94.0) -> (-200.7, 93.5)); outside the 90 m walls.json radius, so it was only the tile body (a grey block
+# with a DSM roof, seen in every view up Senate House Hill). Same three storeys of cross windows as the Trinity
+# Street front (commons_ref "King's Parade - View West into Senate House Passage", CC BY-SA 4.0, layout only).
+PASSAGE = ((-200.7, 93.5), (-190.6, 93.81))   # p0 -> p1 eastward: the wall frame faces south
+
+
+PASSAGE_E = ((-184.4, 94.0), (-182.5, 94.1))   # the 2 m strip between the tower and wall :26, behind the turret
+
+
+def passage_wall(seg, kind):
+    p0, p1 = np.asarray(seg[0]), np.asarray(seg[1])
+    L = float(np.linalg.norm(p1 - p0))
+    w = {"id": "caius:" + kind, "p0": p0.tolist(), "p1": p1.tolist(), "length": L, "ground_z": TOWER_Z0}
+    P = waterhouse_wall(w, 0.0, L, kind)
+    d = (p1 - p0) / L
+    return frame_world(P, p0, d, "caius:waterhouse:passage" + ("" if kind == "passage" else "_e"), TOWER_Z0)
 
 
 # ------------------------------------------------------------------ 1930s Portland-stone block (13864148, 137017433)

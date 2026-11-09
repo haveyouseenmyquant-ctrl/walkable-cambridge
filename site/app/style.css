@@ -85,3 +85,13 @@ body.game-on #menu.open > button[data-open] { display: inline-block; background:
 body.game-on #mode { display: none; }
 #help { transition: opacity 1.2s; }
 body.game-hint-off #help { opacity: 0; }
+/* session 58: action-RPG layout. HP, mana and XP sit in a compact block left of the spell bar (the minimap owns the
+   bottom right), the class tag just above the spell bar: the centre of the screen (the wizard and the fight) stays
+   clear. Narrow screens keep the old stack above the spell bar. */
+@media (min-width: 860px) {
+  .gh-bars { left: calc(50% - 175px); bottom: 36px; width: 230px; transform: translateX(-100%); gap: 4px; }
+  .gh-bar.gh-hp, .gh-bar.gh-mana { height: 18px; border-radius: 9px; border-color: rgba(241,230,204,.4); box-shadow: 0 0 0 2px rgba(0,0,0,.45), 0 2px 8px rgba(0,0,0,.5); }
+  .gh-bar.gh-xp { height: 5px; border-radius: 3px; border-color: rgba(241,230,204,.25); }
+  .gh-hp .gh-txt, .gh-mana .gh-txt { font: 700 11px/18px system-ui, sans-serif; letter-spacing: .03em; }
+  .gh-cls { bottom: 92px; font: 600 12px Georgia, serif; letter-spacing: .06em; color: #f1e6cc !important; opacity: .85; }
+}
