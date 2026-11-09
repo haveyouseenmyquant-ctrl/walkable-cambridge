@@ -2017,3 +2017,37 @@ Next
 1. Read the published scores: gameplay_judged (did the wizard and beams help?), fps_median (s70 trees plus s71 tris), pyro spread.
 2. Ring 2: the Clare and King's college fronts on the Backs side, and the Trinity Street to St John's Street run.
 3. Tree LOD and a leaf atlas, if fps_median drops below 55.
+
+## 2026-11-09 — Session 72: s70/s71 finally live; Clare Old Court + Gibbs (ring 2); pyro fire VFX; low-HP warning
+
+- **Found: sessions 70 and 71 never reached the live site.** The live hash was still 2d9a5402 (s69). s71's publish.sh scored
+  the game KPIs (cd58e844_game.json) and then ran out of session time in ms_bench/gameplay before `git push`/release. This session
+  published first with WC_SKIP_GAME_KPI=1 WC_SKIP_MS_BENCH=1 (world-20261109-1737, carrying s70+s71+s72) and leaves the scoring to
+  service.sh, which scores every new live hash. Live game KPIs right now are those of the s69 build until service.sh catches up:
+  classes 4, mobs 12 + 3 bosses, effects 44, encounter coverage 100, playtest 100, gameplay_judged 47.0.
+- measure.sh had dropped fps_median/load_seconds/site_errors (17:18 reading): service.sh only ran the browser test hourly after the
+  session_active check, so back-to-back sessions starved it. The browser KPIs now carry the build hash, run once per new live hash
+  even during a session, and measure.sh accepts them for that hash regardless of age. First run (on 2d9a5402, during this busy
+  session): load 4.76 s, site_errors 0, fps 54.
+- Realism, ring 2 (subagent): scripts/zone_bespoke_clare.py — **Clare Old Court** east range with the gate tower (arched vaulted
+  gateway, oak gates, superimposed pilasters, niches, attic), the 15-bay river front (balustrade, pilasters, pedimented centre door),
+  and **King's Gibbs Building** west face (rusticated ground storey, great arch, Corinthian pilasters, pediment). Heights from the DSM.
+  14.7k tris. docs/screens/session72_ring_{before,after}_clare_*.jpg. Flaw: on the Clare east front north of the gate, the city skin
+  still shows through (blank windows); the river front's north end also shows ghost skin windows. Bay counts/orders unverified, ELEMENTS={}.
+- Game (subagent): pyromancer fireball reworked to read as fire without filling the screen (centre flash capped 1.6 m, a crown of
+  flame tongues + deep-red heat ring at the blast edge, lingering embers). Low-HP (<30%) heartbeat vignette, "LOW HEALTH" tag,
+  heartbeat sound, death screen names the killer, "You rise again" banner. test_items 44/44 passed; test_classes timed out on both
+  old and new code under machine load (not attributable to the edit; watch the publish scoring).
+  The judge's "screen-filling yellow/black triangles" in boss frames are NOT from fireball code: likely boss part-scatter/death VFX in mobs.js. Fix next.
+- Game balance (subagent): the s70 pyromancer survivability buff never applied: itemdefs starter tuples are [name, staff, hat, robe]
+  and the {maxHp 25, armour 8} sat in the hat slot, which STARTING_GEAR never gives (all classes' hat bonuses are dead data). Moved
+  to the robe. Live logs: pyro dies 3–9 times a run and pumps 1.7–2.9k damage into the 900 HP boss (it heals on player death).
+  4 local runs after the fix (under heavy load) gave no clear gain: TTK 15.6/38.1 passed, 2 runs timed out at 900 s. Unproven; the
+  publish scoring is the real test. playtest.mjs now logs a `deathLog` (time, route leg, bot state) per death.
+
+Next
+1. Read the scores of world-20261109-1737: playtest pass (pyro timeouts?), spread, gameplay_judged, fps_median, market_square_realism.
+   If pyro pass drops, read deathLog and fix where it dies (kiting / defensive Flame Step / boss damage) before anything else.
+2. Remove the boss part-scatter screen-filling shapes (mobs.js), give the starter hats to players (or delete the dead hat data).
+3. Hide the city skin behind the Clare east front; annotate Clare/Gibbs/Christ's ELEMENTS from non-held-out photos.
+4. Publish rule: publish (skip flags) by ~35 min into a session, then let service.sh score. Never leave the push for last.
