@@ -49,7 +49,9 @@ export class Game {
   damageMob(mob, amount, opts = {}) {
     if (!mob || mob.dead) return 0;
     const crit = opts.crit ?? (Math.random() < this.stats.critChance);
-    let dmg = amount * this.stats.power * (crit ? this.stats.critMult : 1) * (mob.damageTaken ?? 1);
+    // s74: direct player hits roll +-12% (mean 1) so damage numbers vary instead of repeating one value
+    const roll = opts.source === 'player' && !opts.noProc ? 0.88 + 0.24 * Math.random() : 1;
+    let dmg = amount * roll * this.stats.power * (crit ? this.stats.critMult : 1) * (mob.damageTaken ?? 1);
     dmg = Math.max(1, Math.round(dmg));
     mob.hp -= dmg; mob.lastHitAt = this.time;
     mob.onHit?.(dmg, opts);

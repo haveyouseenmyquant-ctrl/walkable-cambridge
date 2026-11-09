@@ -5,7 +5,9 @@
   "commons:File:John Lewis - geograph.org.uk - 5231470.jpg",
   "mapillary:516491239375858",
   "mapillary:816161935994269",
-  "mapillary:316038143232136"
+  "mapillary:316038143232136",
+  "commons:File:John Lewis Store - geograph.org.uk - 5560238.jpg",
+  "commons:File:John Lewis - geograph.org.uk - 4840835.jpg"
  ],
  "walls": [
   {
@@ -660,6 +662,157 @@
    ],
    "confidence": "low",
    "notes": "Session 55: east continuation of the Downing St front, from mapillary:316038143232136 (13 m, facing): ground-floor shop glazing between slender columns under dark-glazed upper bays with vertical fins; about two ~5.6 m bays over 11.3 m, same floor bands as wall 0."
+  },
+  {
+   "id": "way/40937939:31",
+   "storeys": 5,
+   "floor_z": [
+    0,
+    4.0,
+    8.0,
+    12.0,
+    16.0
+   ],
+   "material": "stone",
+   "wall_colour": "#d9c9a0",
+   "trim_colour": "#6f7a7c",
+   "cornice": "none",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "cornice_z": 20.0,
+   "elements": [
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 33.5,
+     "w": 2.1,
+     "z": 4.0,
+     "h": 3.7,
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 33.5,
+     "w": 2.1,
+     "z": 8.0,
+     "h": 3.7,
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 33.5,
+     "w": 2.1,
+     "z": 12.0,
+     "h": 3.7,
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 33.5,
+     "w": 2.1,
+     "z": 16.0,
+     "h": 3.7,
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 35.8,
+     "w": 2.1,
+     "z": 4.0,
+     "h": 3.7,
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 35.8,
+     "w": 2.1,
+     "z": 8.0,
+     "h": 3.7,
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 35.8,
+     "w": 2.1,
+     "z": 12.0,
+     "h": 3.7,
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 35.8,
+     "w": 2.1,
+     "z": 16.0,
+     "h": 3.7,
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 38.1,
+     "w": 2.1,
+     "z": 4.0,
+     "h": 3.7,
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 38.1,
+     "w": 2.1,
+     "z": 8.0,
+     "h": 3.7,
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 38.1,
+     "w": 2.1,
+     "z": 12.0,
+     "h": 3.7,
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 38.1,
+     "w": 2.1,
+     "z": 16.0,
+     "h": 3.7,
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "door",
+     "style": "glazed",
+     "x": 35.8,
+     "w": 1.8,
+     "h": 2.6,
+     "surround": "none"
+    }
+   ],
+   "confidence": "low",
+   "notes": "John Lewis (2007), Corn Exchange Street face: blank buff limestone wall, grey metal cladding above, with the fully glazed stair tower at the south (Downing Street) end: curtain wall modelled as 3 columns x 4 tiers of glass panels and a glazed door at its foot. No shopfronts on this face (the model had 6 + 98 windows)."
   }
  ]
 }

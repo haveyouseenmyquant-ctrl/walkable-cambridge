@@ -1,0 +1,207 @@
+{
+ "market_square_realism": 29.88,
+ "n": 40,
+ "model": "claude-opus-5-5",
+ "per_view": {
+  "277070937443210": {
+   "score": 4,
+   "reason": "The layout matches: a stone church on the left, railings, a pale multi-storey block ahead and market stalls on the right. But B's building is flat and boxy where A's has a curved facade, and B is missing the tree, the varied rooflines and the material detail.",
+   "render_side": "B"
+  },
+  "468026810921752": {
+   "score": 4,
+   "reason": "Both show the Guildhall facade with its rows of windows, balcony, clock and a lamp post, but B's framing, colours, left-side building and stall layout differ a lot from A, and B lacks A's umbrellas and street clutter.",
+   "render_side": "B"
+  },
+  "180396463953090": {
+   "score": 4,
+   "reason": "Both pictures show the church on the left, a pale multi-storey block straight ahead, red postboxes, a lamp post and market stalls on the right, but A's church is much less detailed, it is missing B's large trees and its camera is turned somewhat differently.",
+   "render_side": "A"
+  },
+  "491380808879134": {
+   "score": 3,
+   "reason": "B roughly matches A's layout (stone building on the left, tall building in the centre, Gothic church on the right) but the centre building is a plain grey block with none of A's cream facade detail, bay windows, roofline or shopfronts, and the framing differs.",
+   "render_side": "B"
+  },
+  "1106549739756267": {
+   "score": 3,
+   "reason": "Both show a street with buildings on the left, market stalls on the right and the Guildhall at the end, but B's building facades, materials, framing and stall shapes differ a lot from A's and its street furniture is simplified, so only the general layout matches.",
+   "render_side": "B"
+  },
+  "521193072213570": {
+   "score": 4,
+   "reason": "The layouts roughly match: a stone block on the left, a street heading away and white buildings with market stalls on the right, but B's buildings sit at a different angle and scale, and its arcade, building heights, materials and stall details don't match A closely.",
+   "render_side": "B"
+  },
+  "296972198556131": {
+   "score": 3,
+   "reason": "Both show the Guildhall facade on the left and Great St Mary's tower on the right, but B's viewpoint is shifted, its middle building is a plain grey block instead of the ornate white turreted building, and its details and colours are crude.",
+   "render_side": "B"
+  },
+  "204974018125417": {
+   "score": 4,
+   "reason": "The layout roughly matches: a stone building on the left, a lamp post, market stalls on the right and brick buildings in the distance. But the camera position, framing, background buildings, stall details and paving differ a lot, and A's geometry is very simplified.",
+   "render_side": "A"
+  },
+  "172739574639481": {
+   "score": 4,
+   "reason": "The overall layout matches: a street curving left, market stalls on the right and a brick building at the far right. But A's buildings are plain, low-detail blocks whose shapes, colours and window layouts don't match B's white rendered facades, its yellow-brick building on the left and its awnings.",
+   "render_side": "A"
+  },
+  "1070832910107961": {
+   "score": 2,
+   "reason": "Both show a narrow street receding between stone buildings, but A lacks B's distinctive corner pasty-shop building, the white modern block, the balcony and the left-hand sandstone facade, and its framing and proportions differ a lot.",
+   "render_side": "A"
+  },
+  "301846878056526": {
+   "score": 1.5,
+   "reason": "A looks down a street with shopfronts on the right and stalls on the left, while B looks across the market to Great St Mary's church and a white modern block, so the view directions and the main buildings don't match.",
+   "render_side": "A"
+  },
+  "1122780758200173": {
+   "score": 3,
+   "reason": "Both show a narrow brick-paved street with buildings on both sides and green awnings on the right, but B's building shapes, facade colours and materials (white modern block, black timber frame, white Don Pasquale building) do not match A, and B is missing details.",
+   "render_side": "B"
+  },
+  "1572063386478041": {
+   "score": 1,
+   "reason": "B looks out from under a large roof onto a plain grey surface, while A is an open street with brick paving, a stone colonnade on the left and a scaffolded building ahead, so only the generic red-brick facades and striped stalls are shared.",
+   "render_side": "B"
+  },
+  "771240826908964": {
+   "score": 2,
+   "reason": "Both show a colonnade and market stalls, but A looks out from under an arcade to the right, while B looks along a cobbled street with the columns on the left; the buildings, layout and viewpoint don't match.",
+   "render_side": "A"
+  },
+  "891713411375081": {
+   "score": 4,
+   "reason": "Both show the same general layout: a colonnaded building on the left, a row of terraced facades across the square, striped market stalls and a lamp post. But B's facades, colours and rooflines differ a lot from A's, B has a phone box and railings that A doesn't, and the curving kerb and paving don't match.",
+   "render_side": "B"
+  },
+  "267464525111176": {
+   "score": 3,
+   "reason": "Both show the market stalls with Great St Mary's tower behind, but B is blocked by a wall and pole in the foreground, the viewpoint and layout are different, and the buildings and stalls are crude stand-ins.",
+   "render_side": "B"
+  },
+  "370243600994553": {
+   "score": 4,
+   "reason": "The overall layout matches: a stone building on the left, a paved street with a drainage channel, bike racks on the right, and a Gothic church at the right edge. But B is far simpler, with no shopfronts, signs, flags or the dense crowd of bikes, and its paving, materials and building details differ noticeably.",
+   "render_side": "B"
+  },
+  "158147632816182": {
+   "score": 2,
+   "reason": "Both show a paved Cambridge street with parked bikes and shopfronts, but the bike racks are on opposite sides, and the buildings ahead (a white multi-window block and a chapel in A, beige blocks and market stalls in B) and the viewing direction don't match.",
+   "render_side": "B"
+  },
+  "145062297589819": {
+   "score": 5,
+   "reason": "Both show the same layout: a Gothic church with railings on the right, a terraced building on the left, and market buildings at the far end, but B has simplified geometry, the wrong materials (plain beige instead of brick and rubble stone), missing tracery and a different camera height and field of view.",
+   "render_side": "B"
+  },
+  "1342545669504024": {
+   "score": 1,
+   "reason": "A shows plain blocky buildings behind a grassy courtyard, while B shows a curved colonnaded shopfront, a brick street, market stalls and phone boxes, so almost nothing matches.",
+   "render_side": "A"
+  },
+  "126591252762332": {
+   "score": 3,
+   "reason": "Both show a narrow pedestrian shopping street with brick paving and mixed facades, but A's camera is pressed against a right-hand shopfront while B looks down the middle of the street, and the shopfronts, colours and street details don't match.",
+   "render_side": "A"
+  },
+  "443229757448400": {
+   "score": 0.5,
+   "reason": "A shows a street scene with a Gothic church, railings, bicycles and terraced buildings, while B is only a close-up of a stone block wall with no recognisable shared structure or viewpoint.",
+   "render_side": "B"
+  },
+  "290107289372530": {
+   "score": 5,
+   "reason": "Both show the same place, the King's Parade view toward King's College with a brick corner building on the left and bollards, but B's geometry is simplified: it lacks the shopfront detail, the cobbles and the window layout, and its framing and proportions are off.",
+   "render_side": "B"
+  },
+  "2936649343250204": {
+   "score": 2,
+   "reason": "Both show a narrow street with brick paving and shopfronts, but the layout is flipped (A's pavement and shops are on the right, B's on the left), and the building shapes, materials and frontages don't match.",
+   "render_side": "A"
+  },
+  "488544859252847": {
+   "score": 1,
+   "reason": "A is a close-up of a bronze tactile map with people and a white arched shopfront behind it, while B shows a brick building with arched windows, bike racks and railings; no buildings or objects line up.",
+   "render_side": "B"
+  },
+  "1107258099771867": {
+   "score": 1,
+   "reason": "B is a rotated, blurry photo of pedestrians on cobbles beside railings, while A is a render of a paved street with King's College; apart from railings and paving, they share almost no matching structure, and their viewpoints don't line up.",
+   "render_side": "A"
+  },
+  "3892935084089791": {
+   "score": 4,
+   "reason": "The layout is broadly the same: Senate House on the left, the Caius gate tower in the centre and a brick corner building on the right, but B is closer up and much flatter, with no ornate detail, the wrong rooflines and materials, a missing white building and no bollards or other street furniture.",
+   "render_side": "B"
+  },
+  "1634288326741417": {
+   "score": 1,
+   "reason": "A shows a classical stone building with railings and an arched doorway beside a plain stone block, while B looks down Trinity Street with a Gothic college range on the left and red-brick shops on the right, so the buildings, layout and materials don't match.",
+   "render_side": "A"
+  },
+  "248711096940365": {
+   "score": 1,
+   "reason": "A shows Senate House behind railings while B shows Great St Mary's church tower close up, so apart from the black railings and paving the views have almost nothing in common.",
+   "render_side": "A"
+  },
+  "329535215308725": {
+   "score": 1.5,
+   "reason": "Both images show brick walls at a street corner, but A is an open street with a bollard and bicycles, while B is a covered arcade with columns, a shop front and a shutter, so the geometry and layout don't match.",
+   "render_side": "A"
+  },
+  "1916139475191134": {
+   "score": 5,
+   "reason": "Both show the same layout: Senate House with its railings on the left, a Caius-style tower in the centre, and Great St Mary's on the right. But A's tower and facades are simplified and placed differently, the paving and colours don't match B's cobbles, and A has no stalls or street detail.",
+   "render_side": "A"
+  },
+  "459944448440568": {
+   "score": 4,
+   "reason": "Both show King's Parade with railings, bollards, a tree, a red-brick building and King's College, but B has a different viewpoint and a large foreground building, and simplified textures with no stalls, benches or cobbles.",
+   "render_side": "B"
+  },
+  "575990426663881": {
+   "score": 4,
+   "reason": "Both show the same general layout: a red-brick corner building, a black railing on the right, bollards and a street running into the distance. But A's buildings are much simpler, its bollards and paving don't match, the benches, lamp posts and sign are missing, and the viewpoint and scale differ.",
+   "render_side": "A"
+  },
+  "902476263934425": {
+   "score": 4,
+   "reason": "Both show the King's Parade layout, with shopfronts on the left, the King's College screen and gatehouse on the right, and bollards, but B's camera position and road geometry are different, its buildings are simplified and inaccurate (no Tudor timber-framed facades, the gatehouse is far less detailed), and it has a large chapel wall that A doesn't show.",
+   "render_side": "B"
+  },
+  "296788425834515": {
+   "score": 4,
+   "reason": "B shows the same main pieces as A (Senate House with its railings, the Gonville & Caius tower and gate, bollards and brick buildings on the right), but it is viewed from a different position, has no cobbles, no Great St Mary's on the right and much simpler detail and materials.",
+   "render_side": "B"
+  },
+  "283086796812911": {
+   "score": 3,
+   "reason": "Both show a narrow street (Trinity Street) with buildings on either side and a distant gatehouse/chapel spire, but B's building heights, fa\u00e7ades, window layout, materials and street width differ substantially from A.",
+   "render_side": "B"
+  },
+  "792265015045228": {
+   "score": 2,
+   "reason": "Both show a narrow brick-paved shopping street ending in a red-brick building, but B's buildings, shopfronts and viewpoint don't match A: the left glass corner, Caff\u00e8 Nero, the Gothic stone church and the NatWest frontage are all missing or swapped.",
+   "render_side": "B"
+  },
+  "290279696129164": {
+   "score": 3,
+   "reason": "Both show railings, bollards and a tree in front of a classical building with distant towers, but B's camera sits too close to the building, the chapel is missing, the building proportions and the paving differ, and B has a stray pillar and wall.",
+   "render_side": "B"
+  },
+  "312705407030344": {
+   "score": 5,
+   "reason": "Both show the same King's Parade layout: shops on the left, bollards and a lawn wall on the right, and the King's College gatehouse ahead, but B's gatehouse and screen are much simpler and squatter, the pinnacles and tracery are missing, the facades are flat, and the camera is offset.",
+   "render_side": "B"
+  },
+  "458567661904744": {
+   "score": 4,
+   "reason": "Both show the Senate House, Great St Mary's tower and the railings in roughly the same layout, but B's viewpoint is shifted, a brick shopfront blocks the church nave, the road is asphalt instead of cobbles, and the details and materials are much simpler.",
+   "render_side": "B"
+  }
+ }
+}

@@ -5,7 +5,9 @@
   "mapillary:1143583196146420",
   "mapillary:933492514084360",
   "mapillary:376548620288276",
-  "mapillary:290763419315885"
+  "mapillary:290763419315885",
+  "commons:File:Cambridge - Sidney Street - Sussex Street - View WSW on Sidney House 1939 by E.R.Barrow - Neo Georgian Style.jpg",
+  "commons:File:Sussex Street - geograph.org.uk - 4332580.jpg"
  ],
  "walls": [
   {
@@ -836,6 +838,426 @@
    ],
    "confidence": "low",
    "notes": "Hobson Street (west side) red-brick range north of the grey-brick bay beside the Central Cinema colonnade (p0 = south). Interwar neo-Georgian: ground floor of small shop units between stone pilasters (one with a blue roller shutter), first-floor tall round-arched white sashes on ~2.6 m bays, plain sashes above, parapet. Upper two floors cut off in the only oblique view (Mapillary 290763419315885, 2048 px) and assumed from the 18 m height; shop fascias not legible."
+  },
+  {
+   "id": "way/135595983:4",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.3,
+    7.7,
+    10.6
+   ],
+   "material": "brick",
+   "wall_colour": "#9a4a35",
+   "trim_colour": "#f2efe6",
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.3
+   ],
+   "quoins": false,
+   "cornice_z": 13.6,
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.2,
+     "w": 1.3,
+     "z": 4.7,
+     "h": 2.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.2,
+     "w": 1.2,
+     "z": 8.2,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.2,
+     "w": 1.1,
+     "z": 11.0,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.7,
+     "w": 1.3,
+     "z": 4.7,
+     "h": 2.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.7,
+     "w": 1.2,
+     "z": 8.2,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.7,
+     "w": 1.1,
+     "z": 11.0,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.2,
+     "w": 1.3,
+     "z": 4.7,
+     "h": 2.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.2,
+     "w": 1.2,
+     "z": 8.2,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.2,
+     "w": 1.1,
+     "z": 11.0,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 12.7,
+     "w": 1.3,
+     "z": 4.7,
+     "h": 2.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 12.7,
+     "w": 1.2,
+     "z": 8.2,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 12.7,
+     "w": 1.1,
+     "z": 11.0,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 16.2,
+     "w": 1.3,
+     "z": 4.7,
+     "h": 2.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 16.2,
+     "w": 1.2,
+     "z": 8.2,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 16.2,
+     "w": 1.1,
+     "z": 11.0,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 19.7,
+     "w": 1.3,
+     "z": 4.7,
+     "h": 2.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 19.7,
+     "w": 1.2,
+     "z": 8.2,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 19.7,
+     "w": 1.1,
+     "z": 11.0,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 23.2,
+     "w": 1.3,
+     "z": 4.7,
+     "h": 2.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 23.2,
+     "w": 1.2,
+     "z": 8.2,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 23.2,
+     "w": 1.1,
+     "z": 11.0,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 26.7,
+     "w": 1.3,
+     "z": 4.7,
+     "h": 2.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 26.7,
+     "w": 1.2,
+     "z": 8.2,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 26.7,
+     "w": 1.1,
+     "z": 11.0,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 3.9,
+     "w": 1.4,
+     "h": 1.6
+    },
+    {
+     "type": "dormer",
+     "x": 10.9,
+     "w": 1.4,
+     "h": 1.6
+    },
+    {
+     "type": "dormer",
+     "x": 17.9,
+     "w": 1.4,
+     "h": 1.6
+    },
+    {
+     "type": "dormer",
+     "x": 24.9,
+     "w": 1.4,
+     "h": 1.6
+    },
+    {
+     "type": "shopfront",
+     "x0": 0.4,
+     "x1": 9.6,
+     "z1": 4.0,
+     "fascia_text": "",
+     "fascia_colour": "#5a2328",
+     "text_colour": "#f2efe6",
+     "door_x": 5.0,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 10.2,
+     "x1": 19.8,
+     "z1": 4.0,
+     "fascia_text": "",
+     "fascia_colour": "#5a2328",
+     "text_colour": "#f2efe6",
+     "door_x": 15.0,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 20.4,
+     "x1": 30.0,
+     "z1": 4.0,
+     "fascia_text": "Britannia",
+     "fascia_colour": "#5a2328",
+     "text_colour": "#f2efe6",
+     "door_x": 28.0,
+     "stallriser": 0.5,
+     "awning": false
+    }
+   ],
+   "confidence": "low",
+   "notes": "Sidney House (E.R. Barrow, 1939, neo-Georgian), Sussex Street (north side) face: red brick, ground-floor shops with stone fascia, round-headed first-floor windows, sashes on 2nd/3rd floors, dormers in the tiled roof. Bay count/spacing estimated from an oblique view (8 bays over 30 m)."
   }
  ]
 }

@@ -188,7 +188,7 @@ function addOutlines(group, color) {
   });
   for (const [o, h] of list) { const s = new THREE.Mesh(h, mat); s.userData.outline = true; s.castShadow = false; s.receiveShadow = false; o.add(s); }
 }
-const HIT_TINT = new THREE.Color(0xfff4e8), _white = new THREE.Color(0xffffff), _camP = new THREE.Vector3();
+const HIT_TINT = new THREE.Color(0xfff4e8), _white = new THREE.Color(0xffffff), _camP = new THREE.Vector3(), _batP = new THREE.Vector3();
 const TELE_COLOR = 0xff2a10;   // session 52: the one danger colour for every mob / boss telegraph
 // session 46: soft type-coloured ground aura under every mob (reads as a glow pool in still frames; shared per type)
 const auraMats = {};
@@ -1183,14 +1183,17 @@ class MobSystem {
             edgeD = min((1.0 - ax) * 0.5 * uSize.x, min(v, 1.0 - v) * uSize.y); frontD = abs(v - uFill) * uSize.y; inside = step(v, uFill);
             bands = step(0.55, fract((v * uSize.y - ax * uSize.x * 0.35) * 0.8 - uTime * 2.0));   // chevrons pointing along the attack
           }
-          float rim = 1.0 - smoothstep(0.0, 0.32, edgeD), rimGlow = 1.0 - smoothstep(0.0, 0.8, edgeD);   // s61: thicker rim, readable from the 3rd-person camera
-          float front = (1.0 - smoothstep(0.0, 0.22, frontD)) * step(0.02, uFill) * (1.0 - inside * 0.5);
-          float pulse = 0.75 + 0.25 * sin(uTime * (8.0 + 18.0 * uFill));
-          float a = 0.13 + 0.1 * bands * (1.0 - inside) + inside * (0.2 + 0.18 * uFill) + rim * 0.85 * pulse + rimGlow * 0.14 + front * 0.6;
+          // s74: crisp telegraph rings, quiet interiors: a thin bright rim + a second inner guide line and a faint fill
+          // (big boss discs used to read as loud red blobs that hid the fight)
+          float rim = 1.0 - smoothstep(0.12, 0.24, edgeD), rimGlow = 1.0 - smoothstep(0.0, 0.5, edgeD);
+          float guide = (1.0 - smoothstep(0.0, 0.07, abs(edgeD - 0.55))) * 0.5;
+          float front = (1.0 - smoothstep(0.0, 0.14, frontD)) * step(0.02, uFill) * (1.0 - inside * 0.5);
+          float pulse = 0.8 + 0.2 * sin(uTime * (8.0 + 18.0 * uFill));
+          float a = 0.05 + 0.05 * bands * (1.0 - inside) + inside * (0.07 + 0.12 * uFill) + rim * 0.95 * pulse + guide * pulse + rimGlow * 0.06 + front * 0.65;
           vec3 hot = vec3(1.0, 0.82, 0.55);
           vec3 c = mix(uColor * (0.75 + 0.35 * inside), hot, clamp(rim * 0.45 + front * 0.7, 0.0, 1.0));
           c = mix(c, vec3(1.0, 0.96, 0.88), uFlash);
-          gl_FragColor = vec4(c, clamp(a + uFlash * 0.45, 0.0, 1.0) * uOp);
+          gl_FragColor = vec4(c, clamp(a + uFlash * 0.3, 0.0, 1.0) * uOp);
         }` });
     const disc = new THREE.PlaneGeometry(2, 2).rotateX(-Math.PI / 2);
     const pool = [];
@@ -1884,6 +1887,10 @@ class MobSystem {
           b.position.set(Math.cos(a) * r, Math.sin(t * 3 + i * 1.7) * 0.35, Math.sin(a) * r);
           b.rotation.y = -a; const f = Math.sin(t * 24 + i) * 0.8; b.wl.rotation.z = f; b.wr.rotation.z = -f;
         });
+        // s74: bats that wheel close to the third-person camera shrink and vanish (their dark wings used to fill the view)
+        const cam = this.game.camera;
+        if (cam) { cam.getWorldPosition(_camP); P.bats.forEach(b => { b.getWorldPosition(_batP); const d = _batP.distanceTo(_camP);
+          const k = d < 2.6 ? 0 : d < 5 ? (d - 2.6) / 2.4 : 1; b.visible = k > 0.02; b.scale.setScalar(0.35 + 0.65 * k); }); }
         P.rope.rotation.z = Math.sin(t * 1.7) * 0.25 + (st === 'windup' ? Math.sin(t * 30) * 0.2 * wf : 0);
         P.sally.position.x = -Math.sin(P.rope.rotation.z) * 0.55;
         break;

@@ -146,7 +146,7 @@ body.explore #game-hud .gh-loots{display:none}`;
     // instead of a pile of overlapping ticks); crits always get their own number
     const prev = lastNum.get(target);
     if (!crit && prev && prev.life > 0 && prev.tgt === target && !prev.crit && prev.t < 0.45) {
-      prev.sum += amount; prev.t = Math.min(prev.t, 0.05); prev.pop = 0.35; prev.d.textContent = Math.round(prev.sum);
+      prev.sum += amount; prev.t = Math.min(prev.t, 0.05); prev.pop = 0.35; prev.d.textContent = Math.round(prev.sum); prev.sz = Math.min(1.35, 0.82 + prev.sum / 90);
       if (prev.sum >= 40 && !prev.d.classList.contains('big')) prev.d.classList.add('big');
       return;
     }
@@ -156,6 +156,7 @@ body.explore #game-hud .gh-loots{display:none}`;
     const big = !crit && (amount >= 0.12 * (target.maxHp || 1e9) || amount >= 40);
     n.x = target.x + (Math.random() - 0.5) * 0.6; n.y = target.y + (Math.random() - 0.5) * 0.6; n.z = target.z + (target.height ?? 1.6) * (0.75 + Math.random() * 0.4) + 0.2;
     n.t = 0; n.life = crit ? 1.5 : 1.15; n.dx = (Math.random() - 0.5) * 90; n.pop = crit ? 1.1 : big ? 0.7 : 0.45;
+    n.sz = Math.min(1.35, 0.82 + amount / 90);   // s74: number size follows the hit size (small ticks small, heavy hits big)
     n.d.textContent = Math.round(amount); n.d.className = 'gh-num' + (crit ? ' crit' : big ? ' big' : '');
     n.d.style.color = TYPE_COLOR[type] || '#fff'; n.d.style.display = '';
   }));
@@ -184,7 +185,7 @@ body.explore #game-hud .gh-loots{display:none}`;
         if (sy >= top) break;
       }
       placed.push({ x: sx, y: sy, h: lh });
-      n.d.style.transform = `translate(${sx}px, ${sy}px) translate(-50%,-50%) scale(${1 + (1 - Math.min(1, n.t * 7)) * (n.pop ?? 0.5)})`;
+      n.d.style.transform = `translate(${sx}px, ${sy}px) translate(-50%,-50%) scale(${(n.sz ?? 1) * (1 + (1 - Math.min(1, n.t * 7)) * (n.pop ?? 0.5))})`;
     }
   }
 
