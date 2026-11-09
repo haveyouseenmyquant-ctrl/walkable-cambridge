@@ -1,0 +1,303 @@
+{
+ "osm_id": "way/40937938",
+ "sources": [
+  "mapillary:469525937595063"
+ ],
+ "walls": [
+  {
+   "id": "way/40937938:41",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.8
+   ],
+   "material": "brick",
+   "wall_colour": "#8c4a37",
+   "trim_colour": "#e6e1d6",
+   "cornice_z": 7.6,
+   "cornice": "none",
+   "parapet": true,
+   "string_courses": [
+    3.8
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.2,
+    6.7,
+    13.1,
+    19.6,
+    26.0,
+    32.5,
+    38.9,
+    45.4,
+    51.8,
+    58.3,
+    64.7
+   ],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.6,
+     "x1": 5.8,
+     "z1": 3.6,
+     "fascia_text": "",
+     "fascia_colour": "#5a1f24",
+     "text_colour": "#f0e8d8",
+     "door_x": 3.2,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 3.2,
+     "w": 3.4,
+     "z": 4.4,
+     "h": 2.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 7.1,
+     "x1": 12.2,
+     "z1": 3.6,
+     "fascia_text": "",
+     "fascia_colour": "#5a1f24",
+     "text_colour": "#f0e8d8",
+     "door_x": 9.7,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 9.7,
+     "w": 3.4,
+     "z": 4.4,
+     "h": 2.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 13.5,
+     "x1": 18.7,
+     "z1": 3.6,
+     "fascia_text": "",
+     "fascia_colour": "#5a1f24",
+     "text_colour": "#f0e8d8",
+     "door_x": 16.1,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 16.1,
+     "w": 3.4,
+     "z": 4.4,
+     "h": 2.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 19.9,
+     "x1": 25.2,
+     "z1": 3.6,
+     "fascia_text": "",
+     "fascia_colour": "#5a1f24",
+     "text_colour": "#f0e8d8",
+     "door_x": 22.6,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 22.6,
+     "w": 3.4,
+     "z": 4.4,
+     "h": 2.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 26.4,
+     "x1": 31.6,
+     "z1": 3.6,
+     "fascia_text": "",
+     "fascia_colour": "#5a1f24",
+     "text_colour": "#f0e8d8",
+     "door_x": 29.0,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 29.0,
+     "w": 3.4,
+     "z": 4.4,
+     "h": 2.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 32.9,
+     "x1": 38.1,
+     "z1": 3.6,
+     "fascia_text": "",
+     "fascia_colour": "#5a1f24",
+     "text_colour": "#f0e8d8",
+     "door_x": 35.5,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 35.5,
+     "w": 3.4,
+     "z": 4.4,
+     "h": 2.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 39.3,
+     "x1": 44.5,
+     "z1": 3.6,
+     "fascia_text": "",
+     "fascia_colour": "#5a1f24",
+     "text_colour": "#f0e8d8",
+     "door_x": 41.9,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 41.9,
+     "w": 3.4,
+     "z": 4.4,
+     "h": 2.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 45.8,
+     "x1": 51.0,
+     "z1": 3.6,
+     "fascia_text": "",
+     "fascia_colour": "#5a1f24",
+     "text_colour": "#f0e8d8",
+     "door_x": 48.4,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 48.4,
+     "w": 3.4,
+     "z": 4.4,
+     "h": 2.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 52.2,
+     "x1": 57.4,
+     "z1": 3.6,
+     "fascia_text": "",
+     "fascia_colour": "#5a1f24",
+     "text_colour": "#f0e8d8",
+     "door_x": 54.8,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 54.8,
+     "w": 3.4,
+     "z": 4.4,
+     "h": 2.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 58.7,
+     "x1": 63.9,
+     "z1": 3.6,
+     "fascia_text": "",
+     "fascia_colour": "#5a1f24",
+     "text_colour": "#f0e8d8",
+     "door_x": 61.3,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 61.3,
+     "w": 3.4,
+     "z": 4.4,
+     "h": 2.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Lion Yard, Petty Cury frontage (OSM addr St Tibbs Row). 1970s shopping-centre range: ground floor of shop units behind square cream-rendered piers (modelled as pilasters) with projecting hanging signs; above, alternating red-brown brick piers and tall glazed bays set in white frames; flat brick parapet. Only one reference photo (2010, raking view from the east end); bay rhythm (~6.5 m) estimated, fascia text left blank as there are no OSM shop POIs for the individual units."
+  }
+ ]
+}

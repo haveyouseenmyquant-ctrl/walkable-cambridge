@@ -1,0 +1,590 @@
+{
+ "osm_id": "way/40937939",
+ "sources": [
+  "commons:File:Department store, Downing Street, Cambridge - geograph.org.uk - 3265898.jpg",
+  "commons:File:John Lewis - geograph.org.uk - 5231470.jpg",
+  "mapillary:516491239375858",
+  "mapillary:816161935994269"
+ ],
+ "walls": [
+  {
+   "id": "way/40937939:0",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.6,
+    8.8,
+    12.8
+   ],
+   "material": "stone",
+   "wall_colour": "#d9c08a",
+   "trim_colour": "#3e474b",
+   "cornice_z": 18.0,
+   "cornice": "none",
+   "parapet": true,
+   "string_courses": [
+    4.6,
+    12.6
+   ],
+   "quoins": false,
+   "pilasters": [
+    3.0
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 6.3,
+     "w": 5.2,
+     "z": 0.3,
+     "h": 3.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 4.9,
+     "w": 2.4,
+     "z": 4.9,
+     "h": 7.6,
+     "panes": [
+      1,
+      4
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 7.7,
+     "w": 2.4,
+     "z": 4.9,
+     "h": 7.6,
+     "panes": [
+      1,
+      4
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 12.5,
+     "w": 5.2,
+     "z": 0.3,
+     "h": 3.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 11.1,
+     "w": 2.4,
+     "z": 4.9,
+     "h": 7.6,
+     "panes": [
+      1,
+      4
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 13.9,
+     "w": 2.4,
+     "z": 4.9,
+     "h": 7.6,
+     "panes": [
+      1,
+      4
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 18.7,
+     "w": 5.2,
+     "z": 0.3,
+     "h": 3.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 17.3,
+     "w": 2.4,
+     "z": 4.9,
+     "h": 7.6,
+     "panes": [
+      1,
+      4
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 20.1,
+     "w": 2.4,
+     "z": 4.9,
+     "h": 7.6,
+     "panes": [
+      1,
+      4
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 24.9,
+     "w": 5.2,
+     "z": 0.3,
+     "h": 3.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 23.5,
+     "w": 2.4,
+     "z": 4.9,
+     "h": 7.6,
+     "panes": [
+      1,
+      4
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 26.3,
+     "w": 2.4,
+     "z": 4.9,
+     "h": 7.6,
+     "panes": [
+      1,
+      4
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 31.1,
+     "w": 5.2,
+     "z": 0.3,
+     "h": 3.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 29.7,
+     "w": 2.4,
+     "z": 4.9,
+     "h": 7.6,
+     "panes": [
+      1,
+      4
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 32.5,
+     "w": 2.4,
+     "z": 4.9,
+     "h": 7.6,
+     "panes": [
+      1,
+      4
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 37.3,
+     "w": 5.2,
+     "z": 0.3,
+     "h": 3.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 35.9,
+     "w": 2.4,
+     "z": 4.9,
+     "h": 7.6,
+     "panes": [
+      1,
+      4
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 38.7,
+     "w": 2.4,
+     "z": 4.9,
+     "h": 7.6,
+     "panes": [
+      1,
+      4
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 43.5,
+     "w": 5.2,
+     "z": 0.3,
+     "h": 3.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 42.1,
+     "w": 2.4,
+     "z": 4.9,
+     "h": 7.6,
+     "panes": [
+      1,
+      4
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 44.9,
+     "w": 2.4,
+     "z": 4.9,
+     "h": 7.6,
+     "panes": [
+      1,
+      4
+     ],
+     "head": "flat",
+     "sill": false
+    }
+   ],
+   "confidence": "low",
+   "notes": "John Lewis Downing St front (2008). Stone return at the corner (x 0-3), then a long recessed frontage: ground-floor shop glazing behind slender columns (~4.5 m), above it tall dark-glazed bays with vertical fins/mullions in ~6 m bays (~7 bays) up to ~12.5 m, then a plain buff limestone band to ~18 m, with a set-back top storey under projecting roof blades. Bay count and pitch estimated from oblique views."
+  },
+  {
+   "id": "way/40937939:32",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.8,
+    9.6,
+    14.4
+   ],
+   "material": "glass",
+   "wall_colour": "#4d5a5e",
+   "trim_colour": "#d9c08a",
+   "cornice_z": 19.2,
+   "cornice": "none",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [
+    12.5
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 1.6,
+     "w": 3.0,
+     "z": 0.1,
+     "h": 4.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 1.6,
+     "w": 3.0,
+     "z": 4.8,
+     "h": 4.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 1.6,
+     "w": 3.0,
+     "z": 9.6,
+     "h": 4.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 1.6,
+     "w": 3.0,
+     "z": 14.4,
+     "h": 4.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 4.7,
+     "w": 3.0,
+     "z": 0.1,
+     "h": 4.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 4.7,
+     "w": 3.0,
+     "z": 4.8,
+     "h": 4.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 4.7,
+     "w": 3.0,
+     "z": 9.6,
+     "h": 4.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 4.7,
+     "w": 3.0,
+     "z": 14.4,
+     "h": 4.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 7.8,
+     "w": 3.0,
+     "z": 0.1,
+     "h": 4.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 7.8,
+     "w": 3.0,
+     "z": 4.8,
+     "h": 4.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 7.8,
+     "w": 3.0,
+     "z": 9.6,
+     "h": 4.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 7.8,
+     "w": 3.0,
+     "z": 14.4,
+     "h": 4.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 10.9,
+     "w": 3.0,
+     "z": 0.1,
+     "h": 4.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 10.9,
+     "w": 3.0,
+     "z": 4.8,
+     "h": 4.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 10.9,
+     "w": 3.0,
+     "z": 9.6,
+     "h": 4.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 10.9,
+     "w": 3.0,
+     "z": 14.4,
+     "h": 4.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "door",
+     "style": "glazed",
+     "x": 14.9,
+     "w": 1.8,
+     "h": 4.0,
+     "surround": "none"
+    }
+   ],
+   "confidence": "low",
+   "notes": "John Lewis (Grand Arcade) west corner: x 0-12.5 is a full-height glass curtain wall over the stair tower (steel mullions, ~4 x 4 grid); x 12.5-17.75 is a plain buff limestone block with 'John Lewis' incised high up and a tall recessed entrance at ground. Material set to glass for the dominant part; the stone block should read #d9c08a."
+  }
+ ]
+}

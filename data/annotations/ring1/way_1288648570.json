@@ -1,0 +1,155 @@
+{
+ "osm_id": "way/1288648570",
+ "sources": [
+  "commons:File:Harriets Cafe Tearooms - Green Street - geograph.org.uk - 7023899.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1288648570:1",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.6,
+    6.9
+   ],
+   "material": "brick",
+   "wall_colour": "#cdb78f",
+   "trim_colour": "#f2f0ea",
+   "cornice_z": 10.4,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    3.4
+   ],
+   "quoins": false,
+   "pilasters": [
+    3.2,
+    8.0
+   ],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 2.9,
+     "z1": 3.3,
+     "fascia_text": "Cafe au Chocolat",
+     "fascia_colour": "#1b1b1b",
+     "text_colour": "#c9b27a",
+     "door_x": 2.4,
+     "stallriser": 0.6,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 3.5,
+     "x1": 7.6,
+     "z1": 3.3,
+     "fascia_text": "Cafe au Chocolat",
+     "fascia_colour": "#1b1b1b",
+     "text_colour": "#c9b27a",
+     "door_x": 5.4,
+     "stallriser": 0.6,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 8.3,
+     "x1": 14.6,
+     "z1": 3.3,
+     "fascia_text": "Goldrush Vintage",
+     "fascia_colour": "#1b1b1b",
+     "text_colour": "#c9b27a",
+     "door_x": 13.8,
+     "stallriser": 0.6,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.6,
+     "w": 1.3,
+     "z": 4.1,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.6,
+     "w": 1.3,
+     "z": 7.3,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.5,
+     "w": 1.6,
+     "z": 4.1,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.5,
+     "w": 1.6,
+     "z": 7.3,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 11.0,
+     "w": 3.0,
+     "z": 4.1,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 11.0,
+     "w": 3.0,
+     "z": 7.3,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "14-17 Green St: post-war buff/gault brick three-storey range with decorative projecting-brick (dentil/stepped) panels beside the windows and a lead-capped projecting band over the shopfronts. White-framed metal casements, wide over the eastern unit. Ground floor: three dark shopfronts with gold lettering (Harriets Cafe Tearooms in the 2021 photo; OSM POIs now Cafe au Chocolat at 16-17 and Goldrush Vintage at 15). The eastern ~7 m (no. 14, Cloud & Co) is outside the photo and left unannotated. CC BY-SA 2.0 geograph photo."
+  }
+ ]
+}

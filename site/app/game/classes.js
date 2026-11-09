@@ -36,7 +36,7 @@ export const CLASSES = {
   stormcaller: {
     name: 'Stormcaller', color: '#7fd4ff', blurb: 'Lightning and wind. Fast, mobile, chains between foes. Wind Dash goes further on a broom.',
     spells: [
-      { id: 'spark_lance', name: 'Spark Lance', glyph: 'ϟ', kind: 'beam', type: 'storm', mana: 5, cd: 0.4, dmg: 18, range: 40, chain: 1, color: 0xbfe6ff, sfx: 'lance', look: 'lance' },
+      { id: 'spark_lance', name: 'Spark Lance', glyph: 'ϟ', kind: 'beam', type: 'storm', mana: 5, cd: 0.4, dmg: 20, range: 40, chain: 1, color: 0xbfe6ff, sfx: 'lance', look: 'lance' },
       { id: 'arc_chain', name: 'Arc Chain', glyph: '⚡', kind: 'beam', type: 'storm', mana: 14, cd: 4, dmg: 22, range: 30, chain: 4, chainRange: 8, color: 0x8fb8ff, sfx: 'arc', look: 'arc' },
       { id: 'gale_burst', name: 'Gale Burst', glyph: '༄', kind: 'cone', type: 'storm', mana: 12, cd: 6, dmg: 16, range: 10, angle: 0.8, knock: 5, slow: 2, color: 0xd8fff4, sfx: 'gale', look: 'gale' },
       { id: 'wind_dash', name: 'Wind Dash', glyph: '»', kind: 'blink', type: 'storm', mana: 10, cd: 4, dist: 14, broomMult: 1.6, color: 0xc8f0ff, sfx: 'winddash', look: 'winddash' },
@@ -185,7 +185,7 @@ export function install(game) {
     const t = game.time;
     if (sp.slow) m.slowUntil = Math.max(m.slowUntil || 0, t + sp.slow);
     if (sp.stun) m.stunUntil = Math.max(m.stunUntil || 0, t + sp.stun);
-    if (sp.curse) { m.damageTaken = Math.max(m.damageTaken ?? 1, sp.curse); m._curseUntil = t + (sp.curseDur || 5); cursed.add(m); }
+    if (sp.curse) { m.damageTaken = Math.max(m.damageTaken ?? 1, sp.curse); m._curseUntil = t + (sp.curseDur || 5); cursed.add(m); vfx.sigil(m.x, m.y, m.z + mobH(m) + 0.4, 0x70ff90, 0.9, 1.2); }
     if (sp.burn) {
       let d = dots.find(d => d.m === m && d.sp === sp.id);
       if (!d) { d = { m, sp: sp.id, type: sp.type, next: t + 0.5 }; dots.push(d); }
@@ -206,18 +206,47 @@ export function install(game) {
     return n;
   }
 
-  // ---------- per-spell looks (cast + impact VFX) ----------
+  // ---------- per-spell looks (cast + impact VFX; session 46 kit, see vfx.js) ----------
+  // fire = flame tongues + embers + smoke + scorch; storm = branching bolts, wind streaks, sparks;
+  // stone = shards, dust, rock debris, amber runes; hex = purple/green wisps, curse sigils, drain tethers.
+  const nearGround = (x, y, z) => { const g = groundZ(x, y, z); return z - g < 1.6 ? g : null; };
+  const FIRE = { tex: 'flame', color: 0xfff0b0, color2: 0xff2a00 };
+  const SMOKE = { tex: 'smoke', color: 0x3a302a, color2: 0x1a1612, grow: 2.2, drag: 1.5, alpha: 0.5 };
+  const DUST = { tex: 'dust', color: 0xb8a080, color2: 0x8a7860, grow: 2, drag: 2.2, alpha: 0.6 };
+  function fireBlast(x, y, z, r, big) {
+    vfx.burst(x, y, z, big ? 70 : 22, { ...FIRE, speed: r * 2.6, size: big ? 1.3 : 0.6, life: big ? 0.75 : 0.45, drag: 3, up: 1.5, jitter: 0.3 });
+    vfx.burst(x, y, z, big ? 50 : 14, { tex: 'ember', color: 0xffd080, color2: 0xff4000, speed: r * 3.5, size: 0.14, life: big ? 1.4 : 0.8, grav: 7, drag: 1.2, up: 2 });
+    vfx.burst(x, y, z + 0.3, big ? 16 : 5, { ...SMOKE, speed: r * 0.6, size: big ? 2.2 : 1, life: big ? 2 : 1.2, up: 1.4, jitter: r * 0.4 });
+    vfx.core(x, y, z, 0xff7020, big ? 0.4 : 0.2, big ? 0.16 : 0.1);
+    const g = nearGround(x, y, z); if (g != null) { vfx.decal('scorch', x, y, g, r * (big ? 1.1 : 0.9), big ? 6 : 3.5, 0xffffff, 0.85); vfx.ring(x, y, g, 0xff8030, 0.3, r * 1.2, big ? 0.45 : 0.3); }
+    vfx.light(x, y, z + 0.5, 0xff8030, big ? 1.4 : 0.5, big ? 0.5 : 0.25);
+  }
+  function stoneHit(x, y, z, n = 6, floor) {
+    vfx.debris(x, y, z, n, { color: 0x9a8466, speed: 4, size: 0.12, up: 4, floor: floor ?? groundZ(x, y, z), life: 1.2 });
+    vfx.burst(x, y, z, Math.ceil(n * 0.8), { ...DUST, speed: 2, size: 0.9, life: 0.9, up: 0.5 });
+    vfx.burst(x, y, z, n * 2, { tex: 'shard', color: 0xd8c098, speed: 6, size: 0.18, life: 0.5, grav: 14, drag: 1, spin: 6 });
+  }
+  function hexPuff(x, y, z, n, c1 = 0xb070ff, c2 = 0x60ff90) {
+    vfx.burst(x, y, z, n, { tex: 'wisp', color: c1, color2: 0x4010a0, speed: 2.5, size: 0.6, life: 0.7, drag: 3, up: 0.8, spin: 4 });
+    vfx.burst(x, y, z, Math.ceil(n / 2), { tex: 'ember', color: c2, speed: 3.5, size: 0.14, life: 0.6, drag: 2, up: 1 });
+    vfx.burst(x, y, z, Math.ceil(n / 4), { tex: 'smoke', color: 0x2a1040, color2: 0x100818, grow: 2, speed: 0.8, size: 0.9, life: 1, alpha: 0.45 });
+  }
   const LOOK = {
-    ember: { trail: (x, y, z) => vfx.burst(x, y, z, 2, { color: 0xff8a30, speed: 1, size: 0.35, life: 0.35, up: 1 }),
-             impact: (x, y, z) => { vfx.burst(x, y, z, 26, { color: 0xffa040, speed: 6, size: 0.45, life: 0.5, grav: 4 }); vfx.orb(x, y, z, 0xff8030, 1.4, 0.25); } },
-    orb: { trail: (x, y, z) => vfx.burst(x, y, z, 5, { color: 0xff5010, speed: 1.5, size: 0.7, life: 0.6, up: 1.5 }),
-           impact: (x, y, z, sp) => { sfx.play('boom'); vfx.burst(x, y, z, 90, { color: 0xff6a10, speed: 12, size: 0.9, life: 0.9, drag: 2.5 }); vfx.burst(x, y, z, 40, { color: 0xffe080, speed: 5, size: 0.6, life: 0.5 }); vfx.ring(x, y, groundZ(x, y, z), 0xff7020, 0.5, sp.splash, 0.5); vfx.orb(x, y, z, 0xffb050, sp.splash * 1.2, 0.35); } },
-    pebble: { trail: (x, y, z) => vfx.burst(x, y, z, 1, { color: 0xb09070, speed: 0.5, size: 0.2, life: 0.3 }),
-              impact: (x, y, z) => vfx.burst(x, y, z, 18, { color: 0xc8a878, speed: 5, size: 0.3, life: 0.6, grav: 12 }) },
-    dart: { trail: (x, y, z) => vfx.burst(x, y, z, 2, { color: 0xb070ff, speed: 0.6, size: 0.3, life: 0.4 }),
-            impact: (x, y, z) => { vfx.burst(x, y, z, 20, { color: 0xc080ff, speed: 4, size: 0.4, life: 0.5, drag: 3 }); vfx.orb(x, y, z, 0x9050ff, 1, 0.2); } },
-    mark: { trail: (x, y, z) => vfx.burst(x, y, z, 3, { color: 0x60ff80, speed: 0.8, size: 0.35, life: 0.5, up: -0.5 }),
-            impact: (x, y, z) => { vfx.burst(x, y, z, 30, { color: 0x50ff70, speed: 3, size: 0.45, life: 0.9, up: 1.5, drag: 2 }); vfx.ring(x, y, groundZ(x, y, z), 0x60ff90, 0.3, 1.6, 0.6); } },
+    ember: { missile: { coreColor: 0xffe8b0, radius: 0.11, halo: 0.6, width: 0.32, width2: 0.12, trailColor2: 0xffe080 },
+             trail: (x, y, z) => { vfx.burst(x, y, z, 2, { ...FIRE, speed: 0.6, size: 0.42, life: 0.28, up: 1.2, jitter: 0.1 }); if (Math.random() < 0.4) vfx.burst(x, y, z, 1, { tex: 'ember', color: 0xffc060, speed: 1, size: 0.1, life: 0.6, grav: 3 }); },
+             impact: (x, y, z) => fireBlast(x, y, z, 1.2, false) },
+    orb: { missile: { coreColor: 0xfff0c0, radius: 0.26, halo: 1.3, width: 0.75, width2: 0.3, trailColor2: 0xffd060, trailLife: 0.3 },
+           trail: (x, y, z) => { vfx.burst(x, y, z, 4, { ...FIRE, speed: 1.2, size: 0.8, life: 0.35, up: 1.5, jitter: 0.35 }); vfx.burst(x, y, z, 1, { ...SMOKE, speed: 0.4, size: 0.8, life: 0.9, up: 0.8, alpha: 0.35 }); },
+           impact: (x, y, z, sp) => { sfx.play('boom'); fireBlast(x, y, z, sp.splash, true); vfx.ring(x, y, groundZ(x, y, z), 0xffc060, 0.5, sp.splash * 1.4, 0.6, 0.7); } },
+    pebble: { missile: { coreColor: 0xffe8c0, radius: 0.09, halo: 0.35, width: 0.14, trailColor: 0xc8a878, trailLife: 0.18 },
+              trail: (x, y, z) => { if (Math.random() < 0.5) vfx.burst(x, y, z, 1, { ...DUST, speed: 0.3, size: 0.35, life: 0.5, alpha: 0.4 }); },
+              impact: (x, y, z) => { stoneHit(x, y, z, 6); const g = nearGround(x, y, z); if (g != null) vfx.decal('crack', x, y, g, 0.8, 3, 0xffffff, 0.7); } },
+    dart: { missile: { coreColor: 0xf4e0ff, radius: 0.1, halo: 0.6, width: 0.3, width2: 0.1, trailColor2: 0x70ff90, trailLife2: 0.3 },
+            trail: (x, y, z) => vfx.burst(x, y, z, 1, { tex: 'wisp', color: 0xb070ff, color2: 0x301080, speed: 0.4, size: 0.4, life: 0.45, spin: 5 }),
+            impact: (x, y, z) => { hexPuff(x, y, z, 10); vfx.core(x, y, z, 0xb070ff, 0.25, 0.15); } },
+    mark: { missile: { coreColor: 0xe0ffe8, radius: 0.13, halo: 0.7, width: 0.36, trailColor: 0x50ff70, width2: 0.12, trailColor2: 0xb070ff, trailLife: 0.3 },
+            trail: (x, y, z) => vfx.burst(x, y, z, 2, { tex: 'wisp', color: 0x70ff90, color2: 0x104020, speed: 0.6, size: 0.45, life: 0.5, up: -0.4, spin: 5 }),
+            impact: (x, y, z) => { hexPuff(x, y, z, 12, 0x70ff90, 0xb070ff); vfx.sigil(x, y, z + 0.6, 0x70ff90, 1.3, 1.4); const g = nearGround(x, y, z); if (g != null) vfx.decal('rune', x, y, g, 1.4, 1.6, 0x50ff70, 0.8, 1.5); } },
   };
 
   // ---------- projectiles ----------
@@ -226,7 +255,8 @@ export function install(game) {
     const b = projPool.pop() || { hits: new Set() };
     Object.assign(b, { sp, x: A.x, y: A.y, z: A.z, dx: dirx, dy: diry, dz: dirz, trav: 0, vz: 0, pierce: sp.pierce || 0 });
     b.hits.clear();
-    b.orb = vfx.orb(b.x, b.y, b.z, sp.color, (sp.size || 0.6));
+    const ms = LOOK[sp.look]?.missile;
+    b.orb = ms ? vfx.missile(b.x, b.y, b.z, sp.color, ms) : vfx.orb(b.x, b.y, b.z, sp.color, (sp.size || 0.6) * 0.6);
     projs.push(b);
   }
   function explode(b) {
@@ -263,7 +293,7 @@ export function install(game) {
   }
 
   // ---------- zones, summons, delayed events ----------
-  const zones = [], wisps = [], later = [];
+  const zones = [], wisps = [], later = [], meteors = [];
   const after = (s, fn) => later.push({ at: game.time + s, fn });
   function zoneTick(z) {
     const sp = z.sp;
@@ -271,31 +301,52 @@ export function install(game) {
     if (sp.tick === 'field') {
       aoe(z.x, z.y, z.z + 1, sp.radius, sp, 1);
       const a = Math.random() * 6.283, r = Math.random() * sp.radius;
-      if (sp.type === 'storm') { const x = z.x + Math.cos(a) * r, y = z.y + Math.sin(a) * r; vfx.lightning(x, y, z.z + 0.1, x + (Math.random() - 0.5) * 2, y + (Math.random() - 0.5) * 2, z.z + 1.5, 0x88bbff, 0.15, 0.5); }
-      else vfx.burst(z.x, z.y, z.z + 0.3, 30, { color: 0x9030ff, speed: 3, size: 0.6, life: 1, up: 2.5, jitter: sp.radius * 1.4 });
+      if (sp.type === 'storm') {
+        for (let k = 0; k < 2; k++) { const a2 = a + k * 3.1, x = z.x + Math.cos(a2) * r, y = z.y + Math.sin(a2) * r, x2 = z.x + Math.cos(a2 + 0.8) * sp.radius * Math.random(), y2 = z.y + Math.sin(a2 + 0.8) * sp.radius * Math.random();
+          vfx.lightning(x, y, z.z + 0.15, x2, y2, z.z + 0.15 + Math.random() * 1.2, 0x7ab8ff, 0.16, 0.5, { width: 0.6, branches: 1 }); }
+        vfx.burst(z.x, z.y, z.z + 0.2, 8, { tex: 'spark', color: 0xffffff, color2: 0x4080ff, speed: 3, size: 0.14, life: 0.4, up: 2, ring: sp.radius * Math.random() });
+      } else {
+        vfx.burst(z.x, z.y, z.z + 0.3, 14, { tex: 'wisp', color: 0xb060ff, color2: 0x300a60, speed: 0.8, size: 0.9, life: 1.3, up: 2.2, drag: 0.8, spin: 3, jitter: sp.radius * 1.4, jz: 0.3 });
+        vfx.burst(z.x, z.y, z.z + 0.3, 8, { tex: 'ember', color: 0x70ff90, speed: 0.6, size: 0.16, life: 1.2, up: 2.8, drag: 0.6, jitter: sp.radius * 1.5, jz: 0.3 });
+        vfx.burst(z.x, z.y, z.z + 0.2, 4, { tex: 'smoke', color: 0x2a1040, color2: 0x0c0614, grow: 1.6, speed: 0.4, size: 1.8, life: 1.6, up: 0.6, alpha: 0.4, jitter: sp.radius * 1.2, jz: 0.1 });
+        for (const m of game.mobsNear(z.x, z.y, sp.radius)) if (Math.random() < 0.35) vfx.sigil(m.x, m.y, m.z + mobH(m) + 0.5, 0xc080ff, 0.8, 0.8);
+      }
     } else if (sp.tick === 'meteor') {
       const a = Math.random() * 6.283, r = Math.sqrt(Math.random()) * sp.radius, x = z.x + Math.cos(a) * r, y = z.y + Math.sin(a) * r, gz = groundZ(x, y, z.z + 5);
-      vfx.beam(x + 3, y + 3, gz + 25, x, y, gz, 0xffa030, 0.35, 0.35);
-      vfx.orb(x, y, gz + 0.5, 0xffc060, 3, 0.35);
-      after(0.15, () => { vfx.burst(x, y, gz + 0.3, 40, { color: 0xff7020, speed: 9, size: 0.7, life: 0.7, grav: 5 }); vfx.ring(x, y, gz, 0xffa040, 0.3, sp.splash, 0.4); aoe(x, y, gz + 1, sp.splash, sp); sfx.play('boom', 0.6); });
+      const met = vfx.missile(x + 3, y + 3, gz + 25, 0xff8020, { coreColor: 0xfff0c0, radius: 0.35, halo: 1.6, width: 1.1, width2: 0.4, trailColor2: 0xffe080, trailLife: 0.35, trailLife2: 0.5 });
+      meteors.push({ h: met, x0: x + 3, y0: y + 3, z0: gz + 25, x, y, z: gz, t0: game.time });
+      vfx.decal('rune', x, y, gz, sp.splash * 0.8, 0.3, 0xff6010, 0.8);
+      after(0.15, () => { vfx.release(met); fireBlast(x, y, gz + 0.3, sp.splash, true); vfx.debris(x, y, gz + 0.2, 5, { color: 0x3a2a20, speed: 5, size: 0.12, up: 6, floor: gz }); aoe(x, y, gz + 1, sp.splash, sp); sfx.play('boom', 0.6); });
     } else if (sp.tick === 'strike') {
       let m = null, bd = 1e9;
       for (const c of game.mobsNear(z.x, z.y, sp.radius)) { const d = (c._struck || 0) + Math.random(); if (d < bd) { bd = d; m = c; } }
       let x, y, gz;
       if (m) { x = m.x; y = m.y; gz = m.z; m._struck = (m._struck || 0) + 1; }
       else { const a = Math.random() * 6.283, r = Math.random() * sp.radius; x = z.x + Math.cos(a) * r; y = z.y + Math.sin(a) * r; gz = groundZ(x, y, z.z + 5); }
-      vfx.lightning(x + (Math.random() - 0.5) * 4, y + (Math.random() - 0.5) * 4, gz + 22, x, y, gz, 0xe8f4ff, 0.22, 2.2);
-      vfx.burst(x, y, gz + 0.2, 25, { color: 0xbfe0ff, speed: 7, size: 0.4, life: 0.4 });
+      vfx.lightning(x + (Math.random() - 0.5) * 6, y + (Math.random() - 0.5) * 6, gz + 24, x, y, gz, 0xbfdcff, 0.25, 2.4, { width: 1.8, branches: 3 });
+      vfx.burst(x, y, gz + 0.2, 26, { tex: 'spark', color: 0xffffff, color2: 0x5090ff, speed: 9, size: 0.2, life: 0.45, grav: 10, drag: 2, up: 3 });
+      vfx.burst(x, y, gz + 0.2, 6, { tex: 'dust', color: 0x9aa4b0, color2: 0x5a6068, speed: 2.5, size: 1.2, life: 1, grow: 2, alpha: 0.5, up: 0.6 });
+      vfx.core(x, y, gz + 0.4, 0x9ac8ff, 0.5, 0.18);
+      vfx.ring(x, y, gz, 0xa8d0ff, 0.3, 3.2, 0.35); vfx.decal('frost', x, y, gz, 1.6, 2.5, 0x6aa0ff, 0.7);
+      vfx.light(x, y, gz + 2, 0x9ac8ff, 1.6, 0.25, 22);
       sfx.play('thunder', 0.6);
       if (m) hit(m, sp); else aoe(x, y, gz + 1, 1.5, sp);
     } else if (sp.tick === 'spikes') {
       for (let k = 0; k < 16; k++) { const a = Math.random() * 6.283, r = Math.sqrt(Math.random()) * sp.radius, x = z.x + Math.cos(a) * r, y = z.y + Math.sin(a) * r; vfx.spike(x, y, groundZ(x, y, z.z), 1 + Math.random() * 1.4, 1.6); }
-      vfx.burst(z.x, z.y, z.z + 0.2, 40, { color: 0x9a8060, speed: 4, size: 0.5, life: 0.8, grav: 8, up: 3, jitter: sp.radius });
+      vfx.decal('crack', z.x, z.y, z.z, sp.radius * 1.2, 4, 0xffffff, 0.85);
+      vfx.debris(z.x, z.y, z.z + 0.3, 10, { color: 0x8a7458, speed: 4, size: 0.16, up: 6, jitter: sp.radius, floor: z.z });
+      vfx.burst(z.x, z.y, z.z + 0.3, 14, { ...DUST, speed: 2, size: 1.4, life: 1.2, up: 1, jitter: sp.radius * 1.4, jz: 0.2 });
       aoe(z.x, z.y, z.z + 1, sp.radius, sp);
     }
   }
   function stepWorld(dt) {
     const t = game.time;
+    for (let i = meteors.length - 1; i >= 0; i--) {   // Sunfall meteors: fall 25 m in 0.15 s (damage timing is unchanged)
+      const m = meteors[i], k = Math.min(1, (t - m.t0) / 0.15);
+      vfx.moveMissile(m.h, m.x0 + (m.x - m.x0) * k, m.y0 + (m.y - m.y0) * k, m.z0 + (m.z - m.z0) * k);
+      vfx.burst(m.h.x, m.h.y, m.h.z, 2, { ...FIRE, speed: 1, size: 1, life: 0.3, jitter: 0.4 });
+      if (k >= 1) { meteors[i] = meteors[meteors.length - 1]; meteors.pop(); }
+    }
     for (let i = zones.length - 1; i >= 0; i--) {
       const z = zones[i];
       if (t >= z.next) { z.next += z.sp.interval; zoneTick(z); }
@@ -305,13 +356,13 @@ export function install(game) {
       const w = wisps[i]; w.a += dt * 2.2;
       const x = p.x + Math.cos(w.a) * 1.4, y = p.y + Math.sin(w.a) * 1.4, z = p.z + 2 + Math.sin(w.a * 2) * 0.3;
       w.orb.position.set(x, z, -y);
-      if (Math.random() < 0.3) vfx.burst(x, y, z, 1, { color: 0xa0ffd0, speed: 0.3, size: 0.25, life: 0.5 });
+      if (Math.random() < 0.4) vfx.burst(x, y, z, 1, { tex: 'wisp', color: 0xa0ffd0, color2: 0x6020c0, speed: 0.3, size: 0.4, life: 0.6, spin: 4 });
       if (t >= w.next) {
         w.next = t + w.sp.interval;
         const m = game.nearestMob(x, y, w.sp.range);
-        if (m) { vfx.lightning(x, y, z, m.x, m.y, m.z + mobH(m) * 0.5, 0xa0ffd0, 0.15, 0.3); hit(m, w.sp); sfx.play('dart', 0.5); }
+        if (m) { vfx.tether(x, y, z, m.x, m.y, m.z + mobH(m) * 0.5, 0x90ffc8, 0.3, { width: 0.12 }); hexPuff(m.x, m.y, m.z + mobH(m) * 0.5, 5, 0xa0ffd0, 0xb070ff); hit(m, w.sp); sfx.play('dart', 0.5); }
       }
-      if (t >= w.until) { vfx.release(w.orb); vfx.burst(x, y, z, 12, { color: 0xa0ffd0, speed: 2, size: 0.3, life: 0.4 }); wisps[i] = wisps[wisps.length - 1]; wisps.pop(); }
+      if (t >= w.until) { vfx.release(w.orb); hexPuff(x, y, z, 8, 0xa0ffd0, 0xb070ff); wisps[i] = wisps[wisps.length - 1]; wisps.pop(); }
     }
     for (let i = dots.length - 1; i >= 0; i--) {
       const d = dots[i];
@@ -320,7 +371,9 @@ export function install(game) {
         d.next += 0.5;
         const dealt = game.damageMob(d.m, d.dps * 0.5, { type: d.type, spell: d.sp, source: 'player', crit: false, noProc: true });
         if (d.drain && dealt) game.heal(dealt * d.drain);
-        vfx.burst(d.m.x, d.m.y, d.m.z + mobH(d.m) * 0.6, 3, { color: d.type === 'fire' ? 0xff7020 : 0x60ff80, speed: 1, size: 0.3, life: 0.5, up: 1.5, jitter: 0.6 });
+        const dz = d.m.z + mobH(d.m) * 0.6;
+        if (d.type === 'fire') { vfx.burst(d.m.x, d.m.y, dz, 4, { ...FIRE, speed: 0.6, size: 0.6, life: 0.45, up: 2, jitter: 0.6 }); vfx.burst(d.m.x, d.m.y, dz + 0.4, 1, { ...SMOKE, speed: 0.3, size: 0.8, life: 1, up: 1.2, alpha: 0.35 }); }
+        else vfx.burst(d.m.x, d.m.y, dz, 4, { tex: 'wisp', color: 0x60ff80, color2: 0x204010, speed: 0.6, size: 0.5, life: 0.6, up: 1.5, jitter: 0.6, spin: 4 });
       }
     }
     for (const m of cursed) if (m.dead || t > m._curseUntil) { m.damageTaken = 1; cursed.delete(m); }
@@ -348,7 +401,7 @@ export function install(game) {
         const a = (k - (n - 1) / 2) * 0.12, c = Math.cos(a), s = Math.sin(a);
         fireBolt(sp, A.dx * c - A.dy * s, A.dx * s + A.dy * c, A.dz);
       }
-      vfx.burst(A.x, A.y, A.z, 10, { color: sp.color, speed: 3, size: 0.3, life: 0.3, dx: A.dx, dy: A.dy, dz: A.dz });
+      vfx.burst(A.x + A.dx * 0.6, A.y + A.dy * 0.6, A.z + A.dz * 0.6, 8, { tex: sp.type === 'fire' ? 'flame' : sp.type === 'hex' ? 'wisp' : sp.type === 'stone' ? 'shard' : 'spark', color: sp.color, speed: 3, size: 0.22, life: 0.25, dx: A.dx, dy: A.dy, dz: A.dz });
     },
     beam(sp, target) {
       const end = rayPoint(sp.range);
@@ -363,9 +416,18 @@ export function install(game) {
       if (target && !target.dead && !first) first = target;
       const ex = first ? first.x : end.x, ey = first ? first.y : end.y, ez = first ? first.z + mobH(first) * 0.5 : end.z;
       const siphon = sp.look === 'siphon';
-      if (siphon) { vfx.beam(A.x, A.y, A.z - 0.1, ex, ey, ez, sp.color, 0.12, 0.4); vfx.burst(ex, ey, ez, 30, { color: 0xff60ff, speed: 3, size: 0.4, life: 0.6, dx: -A.dx, dy: -A.dy, dz: -A.dz, cone: 0.6 }); }
-      else vfx.lightning(A.x, A.y, A.z - 0.1, ex, ey, ez, sp.color, sp.look === 'arc' ? 0.3 : 0.15, sp.look === 'arc' ? 1 : 0.4);
-      vfx.burst(ex, ey, ez, 14, { color: sp.color, speed: 5, size: 0.3, life: 0.35 });
+      if (siphon) {
+        const tgt = first, ox = A.x, oy = A.y, oz = A.z - 0.3;
+        vfx.tether(ex, ey, ez, ox, oy, oz, sp.color, 0.7, { width: 0.22, from: tgt ? () => [tgt.x, tgt.y, tgt.z + mobH(tgt) * 0.5] : null, to: () => [p.x + A.hx * 0.6, p.y + A.hy * 0.6, p.eye - 0.45] });
+        hexPuff(ex, ey, ez, 16, 0xe070ff, 0x70ff90); vfx.sigil(ex, ey, ez + 1.2, 0xd050ff, 1.1, 0.9);
+        vfx.burst(p.x, p.y, p.z + 0.2, 10, { tex: 'wisp', color: 0x90ffb0, color2: 0xd050ff, speed: 0.5, size: 0.5, life: 0.9, up: 1.6, ring: 0.9, spin: 3 });
+      } else {
+        const arc = sp.look === 'arc';
+        vfx.lightning(A.x, A.y, A.z - 0.1, ex, ey, ez, sp.color, arc ? 0.3 : 0.16, arc ? 1 : 0.45, { width: arc ? 1.2 : 0.75, branches: arc ? -1 : 1 });
+        vfx.core(ex, ey, ez, 0x9ac8ff, arc ? 0.4 : 0.25, 0.14);
+        vfx.burst(ex, ey, ez, arc ? 18 : 10, { tex: 'spark', color: 0xffffff, color2: sp.color, speed: 7, size: 0.16, life: 0.35, grav: 8, drag: 2 });
+        if (arc) vfx.light(ex, ey, ez, 0x9ac8ff, 0.8, 0.2);
+      }
       if (!first) return;
       hit(first, sp);
       // chain to nearby foes
@@ -375,7 +437,7 @@ export function install(game) {
         for (const m of game.mobs) { if (m.dead || done.has(m)) continue; const d = Math.hypot(m.x - from.x, m.y - from.y); if (d < nd) { nd = d; nx = m; } }
         if (!nx) break;
         mult *= 0.8; done.add(nx);
-        vfx.lightning(from.x, from.y, from.z + mobH(from) * 0.5, nx.x, nx.y, nx.z + mobH(nx) * 0.5, sp.color, 0.2, 0.7);
+        vfx.lightning(from.x, from.y, from.z + mobH(from) * 0.5, nx.x, nx.y, nx.z + mobH(nx) * 0.5, sp.color, 0.24, 0.8, { width: 1, branches: 1 });
         hit(nx, sp, mult); from = nx;
       }
     },
@@ -386,23 +448,34 @@ export function install(game) {
         if ((dx * A.hx + dy * A.hy) / l >= cosA && Math.abs(m.z - p.z) < 4) hit(m, sp, 1, p.x, p.y);
       }
       if (sp.look === 'spray') {
-        vfx.burst(A.x, A.y, A.z - 0.2, 110, { color: 0xff8a20, speed: sp.range * 1.3, size: 0.6, life: 0.6, dx: A.hx, dy: A.hy, dz: A.dz * 0.5, cone: 0.55, drag: 2, up: 1 });
-        vfx.burst(A.x, A.y, A.z - 0.2, 40, { color: 0xffe080, speed: sp.range, size: 0.35, life: 0.4, dx: A.hx, dy: A.hy, dz: A.dz * 0.5, cone: 0.4 });
+        const sx = A.x + A.hx * 1.2, sy = A.y + A.hy * 1.2, sz = A.z - 0.35;
+        vfx.burst(sx, sy, sz, 90, { ...FIRE, speed: sp.range * 1.5, size: 0.9, life: 0.55, dx: A.hx, dy: A.hy, dz: A.dz * 0.4, cone: 0.5, drag: 2.4, up: 1.2, jitter: 0.2 });
+        vfx.burst(sx, sy, sz, 30, { tex: 'ember', color: 0xffd080, color2: 0xff3000, speed: sp.range * 1.4, size: 0.13, life: 0.9, dx: A.hx, dy: A.hy, dz: 0.15, cone: 0.6, drag: 1.5, grav: 4 });
+        after(0.2, () => vfx.burst(p.x + A.hx * sp.range * 0.6, p.y + A.hy * sp.range * 0.6, p.z + 1, 8, { ...SMOKE, speed: 1, size: 1.6, life: 1.6, up: 1, jitter: sp.range * 0.4, alpha: 0.35 }));
+        for (let k = 1; k <= 2; k++) { const x = p.x + A.hx * sp.range * k * 0.33, y = p.y + A.hy * sp.range * k * 0.33; vfx.decal('scorch', x, y, groundZ(x, y, p.z), 1 + k * 0.6, 3, 0xffffff, 0.7); }
       } else {
-        vfx.burst(A.x, A.y, A.z - 0.3, 90, { color: 0xd8fff4, speed: sp.range * 1.6, size: 0.5, life: 0.5, dx: A.hx, dy: A.hy, dz: 0, cone: 0.7, drag: 3 });
-        vfx.ring(p.x + A.hx * 2, p.y + A.hy * 2, p.z + 0.5, 0xd8fff4, 0.5, 3, 0.35);
+        for (let k = 0; k < 12; k++) { const a = (Math.random() - 0.5) * sp.angle * 1.8, c = Math.cos(a), s = Math.sin(a);
+          vfx.streak(p.x + A.hx * 1.2 + (Math.random() - 0.5), p.y + A.hy * 1.2 + (Math.random() - 0.5), p.z + 0.4 + Math.random() * 1.6, A.hx * c - A.hy * s, A.hx * s + A.hy * c, 0.05, sp.range * 2.2, 0xe0fff8, 0.45, 0.16, 3); }
+        vfx.burst(p.x + A.hx * 2, p.y + A.hy * 2, p.z + 0.3, 16, { tex: 'dust', color: 0xc8d0c8, color2: 0x8a9090, speed: sp.range * 0.9, size: 1, life: 0.9, dx: A.hx, dy: A.hy, dz: 0.05, cone: 0.6, grow: 1.8, alpha: 0.4 });
+        vfx.burst(p.x + A.hx * 2, p.y + A.hy * 2, p.z + 1, 20, { tex: 'spark', color: 0xffffff, color2: 0x80e0ff, speed: sp.range * 1.4, size: 0.12, life: 0.4, dx: A.hx, dy: A.hy, dz: 0.05, cone: 0.7, drag: 2 });
+        vfx.ring(p.x + A.hx * 3, p.y + A.hy * 3, p.z, 0xd8fff4, 0.5, 4, 0.4, 0.6);
       }
     },
     nova(sp) {
       const gz = p.z;
       aoe(p.x, p.y, gz + 1, sp.radius, sp, 1);
       if (sp.look === 'kindle') {
-        vfx.ring(p.x, p.y, gz, 0xff6a00, 0.5, sp.radius, 0.5); vfx.ring(p.x, p.y, gz + 0.4, 0xffc040, 0.3, sp.radius * 0.8, 0.6);
-        for (let k = 0; k < 24; k++) { const a = k / 24 * 6.283; vfx.burst(p.x + Math.cos(a), p.y + Math.sin(a), gz + 0.5, 4, { color: 0xff7010, speed: sp.radius * 2, size: 0.6, life: 0.5, dx: Math.cos(a), dy: Math.sin(a), dz: 0.1, cone: 0.2, drag: 3, up: 1 }); }
+        vfx.ring(p.x, p.y, gz, 0xff6a00, 0.5, sp.radius * 1.1, 0.5); vfx.ring(p.x, p.y, gz + 0.3, 0xffc040, 0.3, sp.radius * 0.8, 0.6, 0.7);
+        vfx.burst(p.x, p.y, gz + 0.4, 90, { ...FIRE, speed: 1, radial: sp.radius * 2.6, size: 1.1, life: 0.55, ring: 1.2, drag: 3, up: 1.8 });
+        vfx.burst(p.x, p.y, gz + 0.5, 40, { tex: 'ember', color: 0xffd080, color2: 0xff3000, speed: 2, radial: sp.radius * 2.4, size: 0.14, life: 1.1, ring: 1, grav: 5, up: 3 });
+        after(0.25, () => vfx.burst(p.x, p.y, gz + 0.5, 12, { ...SMOKE, speed: 1, size: 1.8, life: 1.6, ring: sp.radius * 0.9, up: 1, alpha: 0.35 }));
+        vfx.decal('scorch', p.x, p.y, gz, sp.radius * 1.05, 5, 0xffffff, 0.8); vfx.light(p.x, p.y, gz + 1.5, 0xff7020, 1.2, 0.5);
       } else {
-        vfx.ring(p.x, p.y, gz, 0xb08850, 0.5, sp.radius, 0.7); vfx.disc(p.x, p.y, gz, 0x806040, sp.radius, 0.5, 0.25);
-        for (let k = 0; k < 10; k++) { const a = Math.random() * 6.283, r = 1 + Math.random() * (sp.radius - 1); vfx.spike(p.x + Math.cos(a) * r, p.y + Math.sin(a) * r, gz, 0.6 + Math.random(), 0.8); }
-        vfx.burst(p.x, p.y, gz + 0.2, 60, { color: 0xa08060, speed: 6, size: 0.5, life: 0.9, grav: 10, up: 4, jitter: sp.radius });
+        vfx.ring(p.x, p.y, gz, 0xd8b070, 0.5, sp.radius * 1.15, 0.6); vfx.ring(p.x, p.y, gz, 0xffd890, 0.3, sp.radius * 0.7, 0.45, 0.6);
+        vfx.decal('crack', p.x, p.y, gz, sp.radius * 1.1, 5, 0xffffff, 0.9); vfx.decal('rune', p.x, p.y, gz, sp.radius * 0.6, 0.9, 0xffb040, 0.8, 2);
+        for (let k = 0; k < 14; k++) { const a = Math.random() * 6.283, r = 1.2 + Math.random() * (sp.radius - 1.2); vfx.spike(p.x + Math.cos(a) * r, p.y + Math.sin(a) * r, gz, 0.6 + Math.random() * 1.1, 0.9); }
+        vfx.debris(p.x, p.y, gz + 0.3, 14, { color: 0x8a7458, speed: sp.radius * 1.2, size: 0.18, up: 7, jitter: 2, floor: gz });
+        vfx.burst(p.x, p.y, gz + 0.3, 30, { ...DUST, speed: 1, radial: sp.radius * 1.6, size: 1.6, life: 1.3, ring: 1.5, up: 0.6 });
       }
     },
     zone(sp, target) {
@@ -412,11 +485,25 @@ export function install(game) {
       else { const e = rayPoint(sp.range); x = e.x; y = e.y; z = groundZ(e.x, e.y, e.z); }
       zones.push({ sp, x, y, z, next: game.time + (sp.tick === 'meteor' ? 0.4 : 0), until: game.time + sp.dur + (sp.tick === 'meteor' ? 0.4 : 0) });
       const dur = Math.max(0.6, sp.dur + 0.4);
-      if (sp.look === 'sunfall') { vfx.disc(x, y, z, 0xff8020, sp.radius, dur, 0.3); vfx.ring(x, y, z, 0xffc040, sp.radius, sp.radius, dur); vfx.orb(x, y, z + 20, 0xffd080, 10, dur); }
-      else if (sp.look === 'static') { vfx.disc(x, y, z, 0x3366ff, sp.radius, dur, 0.25); vfx.ring(x, y, z, 0x88ccff, sp.radius * 0.2, sp.radius, 0.5); }
-      else if (sp.look === 'tempest') { vfx.ring(p.x, p.y, p.z, 0xe0f0ff, 1, sp.radius, 0.8); vfx.burst(p.x, p.y, p.z + 3, 120, { color: 0xc0d8ff, speed: 10, size: 0.5, life: 1.2, drag: 1 }); }
-      else if (sp.look === 'spikes') vfx.ring(x, y, z, 0x9a8a60, 0.5, sp.radius, 0.4);
-      else if (sp.look === 'bloom') { vfx.disc(x, y, z, 0x6020c0, sp.radius, dur, 0.35); vfx.ring(x, y, z, 0xc080ff, 0.5, sp.radius, 0.9); vfx.ring(x, y, z, 0x60ff90, 0.5, sp.radius * 0.7, 1.2); }
+      if (sp.look === 'sunfall') {
+        vfx.decal('rune', x, y, z, sp.radius * 1.1, dur, 0xff7020, 0.9, 0.5); vfx.decal('scorch', x, y, z, sp.radius * 1.2, dur + 4, 0xffffff, 0.6);
+        vfx.ring(x, y, z, 0xffc040, 0.5, sp.radius * 1.1, 0.8); vfx.orb(x, y, z + 22, 0xffd080, 6, dur);
+        vfx.burst(x, y, z + 18, 30, { ...FIRE, speed: 3, size: 3, life: 1.2, jitter: sp.radius, jz: 2, drag: 1 });
+      } else if (sp.look === 'static') {
+        vfx.decal('frost', x, y, z, sp.radius * 1.05, dur, 0x5a90ff, 0.75); vfx.decal('rune', x, y, z, sp.radius, dur, 0x3a70ff, 0.6, -0.6);
+        vfx.ring(x, y, z, 0x88ccff, sp.radius * 0.2, sp.radius, 0.5);
+      } else if (sp.look === 'tempest') {
+        vfx.ring(p.x, p.y, p.z, 0xe0f0ff, 1, sp.radius, 0.8); vfx.ring(p.x, p.y, p.z, 0x80b0ff, 0.5, sp.radius * 0.6, 0.6, 0.6);
+        vfx.burst(p.x, p.y, p.z + 15, 40, { tex: 'smoke', color: 0x3a4250, color2: 0x1a1e26, speed: 1.5, size: 7, life: sp.dur + 1, grow: 0.8, drag: 0.5, alpha: 0.55, jitter: sp.radius * 1.6, jz: 2, fadeIn: 0.15 });
+        for (let k = 0; k < 16; k++) { const a = k / 16 * 6.283; vfx.streak(p.x + Math.cos(a) * 3, p.y + Math.sin(a) * 3, p.z + 0.5 + Math.random() * 3, -Math.sin(a), Math.cos(a), 0.15, 14, 0xd8f0ff, 0.9, 0.14, 2.5); }
+        vfx.decal('frost', p.x, p.y, p.z, sp.radius * 0.7, 2, 0x80b0ff, 0.5);
+      } else if (sp.look === 'spikes') { vfx.ring(x, y, z, 0x9a8a60, 0.5, sp.radius, 0.4); vfx.decal('rune', x, y, z, sp.radius, 0.6, 0xd0a050, 0.8, 2); }
+      else if (sp.look === 'bloom') {
+        vfx.decal('rune', x, y, z, sp.radius * 1.05, dur, 0xa040ff, 0.9, 0.5); vfx.decal('rune', x, y, z, sp.radius * 0.6, dur, 0x50ff80, 0.8, -0.9);
+        vfx.ring(x, y, z, 0xc080ff, 0.5, sp.radius * 1.2, 0.9); vfx.ring(x, y, z, 0x60ff90, 0.5, sp.radius * 0.7, 1.2);
+        for (let k = 0; k < 10; k++) { const a = k / 10 * 6.283; vfx.burst(x + Math.cos(a) * sp.radius * 0.8, y + Math.sin(a) * sp.radius * 0.8, z + 0.2, 6, { tex: 'wisp', color: 0xd090ff, color2: 0x50ff80, speed: 0.6, size: 1.2, life: 1.6, up: 3.5, drag: 0.8, spin: 3, jitter: 0.6 }); }
+        vfx.light(x, y, z + 1.5, 0xa040ff, 1.4, 0.8, 20);
+      }
     },
     blink(sp) {
       const fly = p.flying, x0 = p.x, y0 = p.y, z0 = p.z;
@@ -430,15 +517,21 @@ export function install(game) {
       const steps = Math.max(2, Math.round(moved));
       for (let k = 0; k <= steps; k++) {
         const t = k / steps, x = x0 + (p.x - x0) * t, y = y0 + (p.y - y0) * t, z = z0 + (p.z - z0) * t + 1;
-        vfx.burst(x, y, z, 4, { color: sp.color, speed: 1.2, size: sp.look === 'shade' ? 0.7 : 0.45, life: 0.5, up: sp.look === 'flamestep' ? 2 : 0, jitter: 0.6 });
+        if (sp.look === 'flamestep') vfx.burst(x, y, z - 0.6, 5, { ...FIRE, speed: 0.6, size: 0.9, life: 0.6, up: 2.2, jitter: 0.6 });
+        else if (sp.look === 'shade') { vfx.burst(x, y, z, 2, { tex: 'smoke', color: 0x24102e, color2: 0x0a0410, grow: 1.6, speed: 0.4, size: 1.3, life: 1.1, alpha: 0.55, jitter: 0.6 }); vfx.burst(x, y, z, 2, { tex: 'wisp', color: 0xb070ff, color2: 0x50ff80, speed: 0.6, size: 0.5, life: 0.7, spin: 4, jitter: 0.6 }); }
+        else if (sp.look === 'winddash') vfx.burst(x, y, z, 2, { tex: 'spark', color: 0xffffff, color2: 0x80d0ff, speed: 1.5, size: 0.12, life: 0.4, jitter: 0.8 });
+        else vfx.burst(x, y, z - 0.7, 2, { ...DUST, speed: 0.8, size: 1, life: 0.9, jitter: 0.6 });
       }
-      if (sp.look === 'winddash') vfx.beam(x0, y0, z0 + 1, p.x, p.y, p.z + 1, 0xc8f0ff, 0.3, 0.3);
-      if (sp.look === 'flamestep') { vfx.ring(x0, y0, z0, 0xff9a30, 0.3, sp.radius, 0.4); aoe(x0, y0, z0 + 1, sp.radius, sp); after(0.05, () => { vfx.ring(p.x, p.y, p.z, 0xff6a10, 0.3, sp.radius, 0.4); aoe(p.x, p.y, p.z + 1, sp.radius, sp); }); }
+      if (sp.look === 'winddash') for (let k = 0; k < 8; k++) vfx.streak(x0 + (Math.random() - 0.5) * 1.5, y0 + (Math.random() - 0.5) * 1.5, z0 + 0.3 + Math.random() * 1.6, A.hx, A.hy, 0, Math.max(6, moved * 3), 0xd8f4ff, 0.35, 0.14, 1);
+      if (sp.look === 'shade') vfx.decal('rune', x0, y0, z0, 1.4, 1.2, 0x9040ff, 0.85, 3);
+      if (sp.look === 'flamestep') { vfx.ring(x0, y0, z0, 0xff9a30, 0.3, sp.radius, 0.4); vfx.decal('scorch', x0, y0, z0, sp.radius * 0.8, 3, 0xffffff, 0.75); fireBlast(x0, y0, z0 + 0.4, sp.radius * 0.6, false); aoe(x0, y0, z0 + 1, sp.radius, sp);
+        after(0.05, () => { vfx.ring(p.x, p.y, p.z, 0xff6a10, 0.3, sp.radius, 0.4); vfx.burst(p.x, p.y, p.z + 0.3, 40, { ...FIRE, speed: 1, radial: sp.radius * 2.2, size: 0.9, life: 0.45, ring: 0.8, drag: 3, up: 1.5 }); vfx.decal('scorch', p.x, p.y, p.z, sp.radius * 0.8, 3, 0xffffff, 0.75); aoe(p.x, p.y, p.z + 1, sp.radius, sp); }); }
       if (sp.landing) {
         const land = () => {
-          vfx.ring(p.x, p.y, p.z, 0xc09060, 0.4, sp.radius, 0.5);
-          for (let k = 0; k < 8; k++) { const a = k / 8 * 6.283; vfx.spike(p.x + Math.cos(a) * sp.radius * 0.6, p.y + Math.sin(a) * sp.radius * 0.6, p.z, 0.9, 0.9); }
-          vfx.burst(p.x, p.y, p.z + 0.2, 50, { color: 0xa08060, speed: 6, size: 0.5, life: 0.8, grav: 10, up: 3 });
+          vfx.ring(p.x, p.y, p.z, 0xd8b070, 0.4, sp.radius * 1.2, 0.5); vfx.decal('crack', p.x, p.y, p.z, sp.radius * 1.1, 4, 0xffffff, 0.9);
+          for (let k = 0; k < 8; k++) { const a = k / 8 * 6.283 + Math.random() * 0.3; vfx.spike(p.x + Math.cos(a) * sp.radius * 0.7, p.y + Math.sin(a) * sp.radius * 0.7, p.z, 0.8 + Math.random() * 0.6, 0.9); }
+          vfx.debris(p.x, p.y, p.z + 0.3, 12, { color: 0x8a7458, speed: sp.radius * 1.6, size: 0.16, up: 6, jitter: 1.5, floor: p.z });
+          vfx.burst(p.x, p.y, p.z + 0.3, 26, { ...DUST, speed: 1, radial: sp.radius * 1.8, size: 1.5, life: 1.2, ring: 1.2, up: 0.5 });
           aoe(p.x, p.y, p.z + 1, sp.radius, sp); sfx.play('quake', 0.7);
         };
         const t0 = game.time, wait = () => (p.grounded && game.time - t0 > 0.15) || game.time - t0 > 2 ? land() : after(0.05, wait);
@@ -448,19 +541,26 @@ export function install(game) {
     shield(sp) {
       game.shield = Math.max(game.shield || 0, sp.amount); game.shieldUntil = game.time + sp.dur;
       vfx.dome(sp.color, sp.ult ? 1.8 : 1.4, () => game.shield > 0);
-      vfx.burst(p.x, p.y, p.z + 1, 50, { color: sp.color, speed: 3, size: 0.4, life: 0.8, up: 1 });
+      vfx.burst(p.x, p.y, p.z + 0.3, 24, { tex: 'shard', color: 0xffd890, color2: 0xa07030, speed: 1, radial: 2.5, size: 0.28, life: 0.9, ring: 1.6, up: 3, grav: 4, spin: 5 });
+      vfx.burst(p.x, p.y, p.z + 0.2, 10, { tex: 'rune', color: sp.color, speed: 0, size: 0.5, life: 1.2, ring: 1.5, up: 1.6, drag: 0, spin: 1.5 });
       if (sp.radius) {   // Monolith Ward: stun nova + a ring of standing stones
         aoe(p.x, p.y, p.z + 1, sp.radius, sp);
-        vfx.ring(p.x, p.y, p.z, 0xffd890, 0.5, sp.radius, 0.9);
-        for (let k = 0; k < 12; k++) { const a = k / 12 * 6.283; vfx.spike(p.x + Math.cos(a) * sp.radius * 0.5, p.y + Math.sin(a) * sp.radius * 0.5, p.z, 3, 3, 0xa09070); }
+        vfx.ring(p.x, p.y, p.z, 0xffd890, 0.5, sp.radius * 1.2, 0.9); vfx.ring(p.x, p.y, p.z, 0xffa040, 0.5, sp.radius * 0.8, 0.6, 0.7);
+        vfx.decal('rune', p.x, p.y, p.z, sp.radius * 0.75, 3.5, 0xffb040, 0.95, 0.4); vfx.decal('crack', p.x, p.y, p.z, sp.radius * 1.1, 6, 0xffffff, 0.9);
+        for (let k = 0; k < 12; k++) { const a = k / 12 * 6.283; vfx.spike(p.x + Math.cos(a) * sp.radius * 0.5, p.y + Math.sin(a) * sp.radius * 0.5, p.z, 2.6 + Math.random() * 1.2, 3, 0xa09070); }
+        vfx.debris(p.x, p.y, p.z + 0.3, 20, { color: 0x8a7458, speed: sp.radius * 1.2, size: 0.22, up: 8, jitter: 2, floor: p.z, life: 1.8 });
+        vfx.burst(p.x, p.y, p.z + 0.3, 40, { ...DUST, speed: 1, radial: sp.radius * 1.5, size: 2, life: 1.6, ring: 2, up: 0.8 });
+        for (let k = 0; k < 12; k++) { const a = k / 12 * 6.283; vfx.burst(p.x + Math.cos(a) * sp.radius * 0.5, p.y + Math.sin(a) * sp.radius * 0.5, p.z + 2, 3, { tex: 'rune', color: 0xffc860, speed: 0, size: 0.6, life: 2, up: 1.2, drag: 0, jitter: 0.3, jz: 1.6, spin: 1 }); }
+        vfx.light(p.x, p.y, p.z + 2, 0xffc060, 1.6, 0.8, 20);
       }
     },
     summon(sp) {
       for (let k = 0; k < sp.count; k++) {
-        const o = vfx.orb(p.x, p.y, p.z + 2, sp.color, 0.7); if (!o) break;
+        const o = vfx.missile(p.x, p.y, p.z + 2, sp.color, { coreColor: 0xeafff4, radius: 0.12, halo: 0.6, width: 0.2, trailLife: 0.4, trailColor: 0xb070ff }); if (!o) break;
         wisps.push({ sp, orb: o, a: k / sp.count * 6.283, next: game.time + 0.3 + k * 0.2, until: game.time + sp.dur });
       }
-      vfx.burst(p.x, p.y, p.z + 1.5, 40, { color: sp.color, speed: 3, size: 0.4, life: 0.7 });
+      hexPuff(p.x + A.hx * 1.5, p.y + A.hy * 1.5, p.z + 1.5, 16, 0xa0ffd0, 0xb070ff);
+      vfx.decal('rune', p.x, p.y, p.z, 1.8, 1.4, 0x60ffa0, 0.8, 2);
     },
   };
 

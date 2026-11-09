@@ -1431,3 +1431,15 @@ Next
 2. gameplay_judged 33.9: spell VFX and enemy animation variety score lowest.
 3. Boss TTK balance with 5 runs per class (it read 33% on f60a55).
 4. Realism: ring-1 bespoke landmarks (King's Chapel exterior detail, Trinity Great Gate), market_square_realism.
+
+## 2026-11-09 — Session 46 (entry written in session 47; this session ended without a journal entry)
+
+From commit 6c440c4 and the working tree session 47 found:
+- Realism (committed, **not pushed or published**): the facade KPI counts street-facing walls only (public ways, no
+  party or back walls; scripts/zone_walls.py). Trees have branches, sub-crowns and wind. OSM hedges, instanced grass
+  blades by quality preset, a lawn texture. 4c519e scores: market_square_realism 30.62, gameplay_judged 28.6.
+  Ring 1 now has 851 street-facing walls, 78 of them annotated (8.64%).
+- Game (left **uncommitted**): a new spell VFX kit (pooled particles with a sprite atlas, ribbon trails, branching
+  lightning, drain tethers, shockwaves, ground decals, rock debris, shield); mob rig body language, knockback shove and
+  flinch, three death styles, type-coloured ground auras, roaming patrols, denser packs near the centre; loot toasts on
+  the game clock with effect lines; rarity stings. Screenshots in docs/screens/session46_*.png.

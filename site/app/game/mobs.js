@@ -5,7 +5,20 @@ import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 
 export const ENCOUNTERS = [];
-const SPAWN_R = 120, DESPAWN_R = 200, RESPAWN_S = 90, MAX_LIVE = 24;
+const SPAWN_R = 120, DESPAWN_R = 200, RESPAWN_S = 45, BOSS_RESPAWN_S = 150, MAX_LIVE = 30;
+// session 46: encounter density near the centre (Market Square / ring 1), pack aggro, roaming patrols
+const CENTRE = { x: -105, y: 60 }, DENSE_R = 260, HELP_R = 14, PATROL_SPAWN_R = 110, PATROL_DESPAWN_R = 170, PATROL_SPEED = 2.2;
+// roaming patrol groups between the hand-placed encounters (flyers, so the straight legs between waypoints never jam on walls)
+export const PATROLS = [
+  { id: 'patrol-belfry', name: 'Belfry patrol', mobs: ['gargoyle', 'bell_bats', 'gargoyle'], start: 2,
+    path: [[-96, 104], [-90, 122], [-128, 112], [-150, 88], [-128, 72]] },
+  { id: 'patrol-marsh', name: 'Marsh-light drift', mobs: ['wisp', 'river_wraith', 'wisp'], start: 1,
+    path: [[-84, 52], [-62, 30], [-92, 12], [-118, -8], [-112, 30]] },
+  { id: 'patrol-soot', name: 'Soot flurry', mobs: ['soot_sprite', 'soot_sprite', 'soot_sprite', 'gargoyle'], start: 0,
+    path: [[-148, 40], [-176, 24], [-162, -4], [-134, 8], [-120, 26]] },
+  { id: 'patrol-senate', name: 'Senate House swarm', mobs: ['bell_bats', 'wisp', 'soot_sprite'], start: 3,
+    path: [[-178, 92], [-156, 122], [-122, 140], [-108, 118], [-150, 100]] },
+];
 const TAU = Math.PI * 2;
 const rnd = (a, b) => a + Math.random() * (b - a);
 
@@ -54,7 +67,10 @@ const TEX = (() => {
     x.fillStyle = g; x.fillRect(0, 0, w, h);
   }, true);
   env.mapping = THREE.EquirectangularReflectionMapping;
-  return { grain, scribble, blazer, sally, env };
+  const aura = cv(64, 64, (x, w, h) => { const g = x.createRadialGradient(32, 32, 0, 32, 32, 31);
+    g.addColorStop(0, 'rgba(255,255,255,0.9)'); g.addColorStop(0.45, 'rgba(255,255,255,0.35)'); g.addColorStop(0.8, 'rgba(255,255,255,0.1)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+    x.fillStyle = g; x.fillRect(0, 0, w, h); });
+  return { grain, scribble, blazer, sally, env, aura };
 })();
 
 const std = (o) => new THREE.MeshStandardMaterial(o);
@@ -95,6 +111,9 @@ const BASE = {
 };
 const decalMat = (c) => new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: 0.5, depthWrite: false, side: THREE.DoubleSide, polygonOffset: true, polygonOffsetFactor: -4 });
 const HIT_TINT = new THREE.Color(0xffd8b0);
+// session 46: soft type-coloured ground aura under every mob (reads as a glow pool in still frames; shared per type)
+const auraMats = {};
+const auraMat = c => auraMats[c] ||= new THREE.MeshBasicMaterial({ color: c, map: TEX.aura, transparent: true, opacity: 0.55, depthWrite: false, blending: THREE.AdditiveBlending, polygonOffset: true, polygonOffsetFactor: -2 });
 const boltMats = {};
 const boltMat = c => boltMats[c] ||= new THREE.MeshBasicMaterial({ color: c });
 
@@ -250,11 +269,12 @@ const MODELS = {
         tail: merge(tube([[0, 0, 0], [0, -0.25, -0.3], [0, -0.25, -0.65], [0, -0.05, -0.95], [0, 0.1, -1.08]], 0.1, 0.025, 16, 7),
           xf(new THREE.ConeGeometry(0.11, 0.24, 4), [0, 0.2, -1.15], [-0.5, 0, 0], [1, 1, 0.35])),
         wingMem: w.mem, wingBones: w.bones,
+        rune: merge(tor(0.1, 0.014, [0, -0.08, 0.43], [0, 0, 0], 4, 24), box(0.016, 0.16, 0.02, [0, -0.08, 0.43]), box(0.12, 0.016, 0.02, [0, -0.06, 0.43])),   // session 46: lit chest sigil
       };
     });
     const g = new THREE.Group(), p = {}, stone = m('stone'), dark = m('darkstone'), wing = m('wingStone');
     p.body = pivot(g, 0, 0.9, 0);
-    add(p.body, K.torso, stone); add(p.body, K.ridge, dark);
+    add(p.body, K.torso, stone); add(p.body, K.ridge, dark); add(p.body, K.rune, BASE.eyeglow);
     p.head = pivot(p.body, 0, 0.45, 0.42);
     add(p.head, K.head, stone); add(p.head, K.horns, dark); add(p.head, K.fangs, BASE.bone); add(p.head, K.eyes, BASE.eye);
     p.jaw = pivot(p.head, 0, 0, 0); add(p.jaw, K.jaw, dark);
@@ -307,13 +327,14 @@ const MODELS = {
         arm: merge(sleeve, sph(0.075, [0, -0.98, 0.03], 1, 8, 6)),
         tome: merge(box(0.42, 0.54, 0.13, [0, -1.12, 0.14])),
         pages: box(0.38, 0.5, 0.135, [0.025, -1.12, 0.14]),
+        hemRune: merge(xf(tor(0.5, 0.016, [0, 0.42, 0], [PI / 2, 0, 0], 4, 40), [0, 0, 0], [0, 0, 0], [1, 1, 0.8]), xf(tor(0.42, 0.012, [0, 1.0, 0], [PI / 2, 0, 0], 4, 36), [0, 0, 0], [0, 0, 0], [1, 1, 0.8])),   // session 46: glowing inscription bands
       };
     });
     const g = new THREE.Group(), p = {}, marble = m('marble'), dark = m('darkstone');
     p.body = pivot(g, 0, 0, 0);
     add(p.body, K.plinth, dark); add(p.body, K.rune, BASE.eye);
     p.torso = pivot(p.body, 0, 0.35, 0);
-    add(p.torso, K.robe, marble); add(p.torso, K.stole, dark);
+    add(p.torso, K.robe, marble); add(p.torso, K.stole, dark); add(p.torso, K.hemRune, BASE.eye);
     p.head = pivot(p.torso, 0, 0, 0);
     add(p.head, K.head, marble); add(p.head, K.board, dark); add(p.head, K.eyes, BASE.eye);
     p.armL = pivot(p.torso, -0.46, 1.7, 0); add(p.armL, K.arm, marble);
@@ -719,60 +740,60 @@ const MODELS = {
 // Each: {name, kind, range, windup, cd, dmg, r?, len?, w?, speed?, n?}
 const A = (o) => ({ cd: 3, windup: 0.8, recover: 0.5, ...o });
 
-const D = (o) => ({ hp: 60, speed: 3, radius: 0.5, xp: 15, aggro: 18, leash: 40, flying: false, hover: 0, scale: 1, color: 0xff5040, ...o });
+const D = (o) => ({ hp: 60, speed: 3, radius: 0.5, xp: 15, aggro: 24, leash: 40, flying: false, hover: 0, scale: 1, color: 0xff5040, ...o });
 export const MOB_TYPES = [
-  D({ id: 'gargoyle', name: 'Rooftop Gargoyle', hp: 70, speed: 4.2, radius: 0.6, xp: 22, flying: true, hover: 3.5, color: 0xff8a20,
+  D({ id: 'gargoyle', death: 'crumble', scale: 1.3, name: 'Rooftop Gargoyle', hp: 70, speed: 4.2, radius: 0.6, xp: 22, flying: true, hover: 3.5, color: 0xff8a20,
       loot: [{ rarity: 'common', chance: 0.6 }, { rarity: 'uncommon', chance: 0.25 }, { rarity: 'rare', chance: 0.06 }],
       attacks: [A({ name: 'Swoop', kind: 'charge', range: 11, len: 12, w: 1.8, windup: 0.9, cd: 4, dmg: 14, speed: 18 }),
                 A({ name: 'Rake', kind: 'ring', range: 2.4, r: 2.2, windup: 0.6, cd: 2, dmg: 8, onTarget: false })] }),
-  D({ id: 'wisp', name: "Will-o'-the-Cam", hp: 40, speed: 3.2, radius: 0.45, xp: 18, flying: true, hover: 1.6, keepAway: 7, color: 0x58c8ff,
+  D({ id: 'wisp', death: 'dissolve', scale: 1.4, name: "Will-o'-the-Cam", hp: 40, speed: 3.2, radius: 0.55, xp: 18, flying: true, hover: 1.6, keepAway: 7, color: 0x58c8ff,
       loot: [{ rarity: 'common', chance: 0.5 }, { rarity: 'uncommon', chance: 0.3 }, { rarity: 'rare', chance: 0.08 }],
       attacks: [A({ name: 'Marsh Bolt', kind: 'bolt', range: 14, windup: 0.7, cd: 2.2, dmg: 9, speed: 13 }),
                 A({ name: 'Flicker Nova', kind: 'ring', range: 3.5, r: 3.5, windup: 1.0, cd: 5, dmg: 12 })] }),
-  D({ id: 'statue', name: 'Wakened Founder Statue', hp: 160, speed: 1.6, radius: 0.8, xp: 35, color: 0xffd080, knockResist: 0.8,
+  D({ id: 'statue', death: 'crumble', scale: 1.05, name: 'Wakened Founder Statue', hp: 160, speed: 1.6, radius: 0.8, xp: 35, color: 0xffd080, knockResist: 0.8,
       loot: [{ rarity: 'common', chance: 0.7 }, { rarity: 'uncommon', chance: 0.4 }, { rarity: 'rare', chance: 0.12 }, { rarity: 'epic', chance: 0.02 }],
       attacks: [A({ name: 'Tome Slam', kind: 'ring', range: 3.2, r: 3.6, windup: 1.3, cd: 3.5, dmg: 24, recover: 0.9 }),
                 A({ name: 'Plinth Leap', kind: 'leap', range: 10, minRange: 4, r: 3, windup: 1.2, cd: 7, dmg: 20, recover: 1 })] }),
-  D({ id: 'ink_imp', name: 'Library Ink Imp', hp: 28, speed: 5.6, radius: 0.35, xp: 10, scale: 0.9, color: 0x6060ff,
+  D({ id: 'ink_imp', death: 'dissolve', scale: 1.35, name: 'Library Ink Imp', hp: 28, speed: 5.6, radius: 0.45, xp: 10, color: 0x6060ff,
       loot: [{ rarity: 'common', chance: 0.45 }, { rarity: 'uncommon', chance: 0.12 }],
       attacks: [A({ name: 'Nib Bite', kind: 'line', range: 1.8, len: 2.2, w: 1.2, windup: 0.35, cd: 1.1, dmg: 5, recover: 0.25 }),
                 A({ name: 'Ink Spit', kind: 'bolt', range: 9, minRange: 3, windup: 0.5, cd: 3, dmg: 6, speed: 11, color: 0x30206a })] }),
-  D({ id: 'automaton', name: 'Clockwork Porter', hp: 95, speed: 2.8, radius: 0.6, xp: 26, color: 0xffb040,
+  D({ id: 'automaton', death: 'burst', scale: 1.12, name: 'Clockwork Porter', hp: 95, speed: 2.8, radius: 0.6, xp: 26, color: 0xffb040,
       loot: [{ rarity: 'common', chance: 0.6 }, { rarity: 'uncommon', chance: 0.3 }, { rarity: 'rare', chance: 0.1 }],
       attacks: [A({ name: 'Wound-Spring Charge', kind: 'charge', range: 12, minRange: 3, len: 13, w: 1.6, windup: 1.0, cd: 5, dmg: 18, speed: 16 }),
                 A({ name: 'Gear Whirl', kind: 'ring', range: 2.6, r: 2.8, windup: 0.7, cd: 2.5, dmg: 10 })] }),
   // session 41 regulars; deathColor = second burst on death (splash / soot cloud / moss clods ...)
-  D({ id: 'river_wraith', name: 'Cam Wraith', hp: 55, speed: 3.4, radius: 0.5, xp: 20, flying: true, hover: 1.1, keepAway: 4, color: 0x40d0c0, deathColor: 0x2a6a80,
+  D({ id: 'river_wraith', death: 'dissolve', scale: 1.2, name: 'Cam Wraith', hp: 55, speed: 3.4, radius: 0.5, xp: 20, flying: true, hover: 1.1, keepAway: 4, color: 0x40d0c0, deathColor: 0x2a6a80,
       loot: [{ rarity: 'common', chance: 0.55 }, { rarity: 'uncommon', chance: 0.28 }, { rarity: 'rare', chance: 0.07 }],
       attacks: [A({ name: 'Undertow', kind: 'line', range: 6, len: 7, w: 1.6, windup: 0.85, cd: 3, dmg: 12 }),
                 A({ name: 'Drowning Mist', kind: 'bolt', range: 13, minRange: 2, windup: 0.7, cd: 2.4, dmg: 9, speed: 12, color: 0x40c0b0 })] }),
-  D({ id: 'bog_hag', name: 'Fen Lantern-Hag', hp: 80, speed: 2.4, radius: 0.55, xp: 24, keepAway: 5, color: 0x80ff50, deathColor: 0x4d6b2e,
+  D({ id: 'bog_hag', death: 'dissolve', scale: 1.12, name: 'Fen Lantern-Hag', hp: 80, speed: 2.4, radius: 0.55, xp: 24, keepAway: 5, color: 0x80ff50, deathColor: 0x4d6b2e,
       loot: [{ rarity: 'common', chance: 0.6 }, { rarity: 'uncommon', chance: 0.32 }, { rarity: 'rare', chance: 0.09 }],
       attacks: [A({ name: 'Will-Lantern', kind: 'bolt', range: 13, minRange: 2.5, windup: 0.8, cd: 2.6, dmg: 10, speed: 11, color: 0x90ff60 }),
                 A({ name: 'Sucking Mire', kind: 'ring', range: 3.2, r: 3.2, windup: 1.1, cd: 4, dmg: 14 })] }),
-  D({ id: 'punt_revenant', name: 'Punt-Pole Revenant', hp: 85, speed: 3.0, radius: 0.5, xp: 24, color: 0x9fe8ff, deathColor: 0xcfc6a8,
+  D({ id: 'punt_revenant', death: 'crumble', scale: 1.08, name: 'Punt-Pole Revenant', hp: 85, speed: 3.0, radius: 0.5, xp: 24, color: 0x9fe8ff, deathColor: 0xcfc6a8,
       loot: [{ rarity: 'common', chance: 0.6 }, { rarity: 'uncommon', chance: 0.3 }, { rarity: 'rare', chance: 0.08 }],
       attacks: [A({ name: 'Pole Thrust', kind: 'line', range: 4.5, len: 5, w: 1.0, windup: 0.7, cd: 2.2, dmg: 13 }),
                 A({ name: 'Pole Sweep', kind: 'ring', range: 3.2, r: 3.6, windup: 1.0, cd: 4, dmg: 11 }),
                 A({ name: 'Pole Vault', kind: 'leap', range: 11, minRange: 4, r: 2.6, windup: 1.0, cd: 6, dmg: 16, recover: 0.8 })] }),
-  D({ id: 'bell_bats', name: 'Bell-Rope Bat Swarm', hp: 45, speed: 4.6, radius: 0.7, xp: 16, flying: true, hover: 2.4, color: 0xffb040, deathColor: 0x24221f,
+  D({ id: 'bell_bats', death: 'burst', scale: 1.3, name: 'Bell-Rope Bat Swarm', hp: 45, speed: 4.6, radius: 0.7, xp: 16, flying: true, hover: 2.4, color: 0xffb040, deathColor: 0x24221f,
       loot: [{ rarity: 'common', chance: 0.5 }, { rarity: 'uncommon', chance: 0.2 }, { rarity: 'rare', chance: 0.05 }],
       attacks: [A({ name: 'Swarm Dive', kind: 'charge', range: 10, minRange: 2, len: 11, w: 2.2, windup: 0.8, cd: 3.5, dmg: 10, speed: 15 }),
                 A({ name: 'Shrill Peal', kind: 'ring', range: 3, r: 3, windup: 0.6, cd: 2.5, dmg: 8 })] }),
-  D({ id: 'soot_sprite', name: 'Chimney-Soot Sprite', hp: 30, speed: 5.0, radius: 0.35, xp: 12, flying: true, hover: 0.7, scale: 0.85, color: 0xff6020, deathColor: 0x24221f,
+  D({ id: 'soot_sprite', death: 'burst', scale: 1.3, name: 'Chimney-Soot Sprite', hp: 30, speed: 5.0, radius: 0.45, xp: 12, flying: true, hover: 0.7, color: 0xff6020, deathColor: 0x24221f,
       loot: [{ rarity: 'common', chance: 0.45 }, { rarity: 'uncommon', chance: 0.15 }],
       attacks: [A({ name: 'Cinder Spit', kind: 'bolt', range: 10, minRange: 2.5, windup: 0.5, cd: 2, dmg: 6, speed: 12, color: 0xff6020 }),
                 A({ name: 'Soot Burst', kind: 'ring', range: 2.2, r: 2.4, windup: 0.5, cd: 2, dmg: 7 }),
                 A({ name: 'Ember Scatter', kind: 'nova', range: 9, n: 6, windup: 0.9, cd: 6, dmg: 5, speed: 9, color: 0xff8030 })] }),
-  D({ id: 'crest_griffin', name: 'Gatehouse Crest Griffin', hp: 120, speed: 3.8, radius: 0.7, xp: 32, color: 0xffd040, knockResist: 0.5, deathColor: 0x9a2a26,
+  D({ id: 'crest_griffin', death: 'crumble', scale: 1.15, name: 'Gatehouse Crest Griffin', hp: 120, speed: 3.8, radius: 0.7, xp: 32, color: 0xffd040, knockResist: 0.5, deathColor: 0x9a2a26,
       loot: [{ rarity: 'common', chance: 0.65 }, { rarity: 'uncommon', chance: 0.38 }, { rarity: 'rare', chance: 0.12 }, { rarity: 'epic', chance: 0.02 }],
       attacks: [A({ name: 'Rending Talons', kind: 'line', range: 2.6, len: 3, w: 2, windup: 0.55, cd: 1.8, dmg: 12, recover: 0.4 }),
                 A({ name: 'Heraldic Pounce', kind: 'leap', range: 10, minRange: 3.5, r: 2.4, windup: 0.9, cd: 5, dmg: 18, recover: 0.8 })] }),
-  D({ id: 'bicycle_golem', name: 'Mossbound Bicycle-Golem', hp: 110, speed: 3.4, radius: 0.65, xp: 28, color: 0xc0ff60, knockResist: 0.5, deathColor: 0x4d6b2e,
+  D({ id: 'bicycle_golem', death: 'burst', scale: 1.08, name: 'Mossbound Bicycle-Golem', hp: 110, speed: 3.4, radius: 0.65, xp: 28, color: 0xc0ff60, knockResist: 0.5, deathColor: 0x4d6b2e,
       loot: [{ rarity: 'common', chance: 0.65 }, { rarity: 'uncommon', chance: 0.32 }, { rarity: 'rare', chance: 0.1 }],
       attacks: [A({ name: 'Freewheel Charge', kind: 'charge', range: 13, minRange: 3, len: 14, w: 1.6, windup: 1.0, cd: 4.5, dmg: 16, speed: 17 }),
                 A({ name: 'Chain Lash', kind: 'line', range: 3, len: 3.5, w: 2.6, windup: 0.7, cd: 2.4, dmg: 11 })] }),
-  D({ id: 'bellwarden', name: 'The Bellwarden of Market Hill', boss: true, hp: 900, speed: 2.4, radius: 1.6, xp: 400, scale: 1, aggro: 16, leash: 34,
+  D({ id: 'bellwarden', death: 'crumble', name: 'The Bellwarden of Market Hill', boss: true, hp: 900, speed: 2.4, radius: 1.6, xp: 400, aggro: 16, leash: 34,
       color: 0xffa020, knockResist: 1,
       loot: [{ rarity: 'uncommon', chance: 1 }, { rarity: 'rare', chance: 0.8 }, { rarity: 'epic', chance: 0.4 }, { rarity: 'legendary', chance: 0.12 }],
       phases: [
@@ -785,7 +806,7 @@ export const MOB_TYPES = [
                 A({ id: 'peal', name: 'Peal of Shards', kind: 'nova', range: 18, n: 10, windup: 1.2, cd: 6, dmg: 12, speed: 12 }),
                 A({ id: 'leap', name: 'Belfry Drop', kind: 'leap', range: 16, minRange: 6, r: 4.5, windup: 1.3, cd: 8, dmg: 30, recover: 1.2 }),
                 A({ id: 'cascade', name: 'Change-Ringing Cascade', kind: 'cascade', range: 22, n: 4, r: 2.6, windup: 1.1, cd: 7, dmg: 18 })] }),
-  D({ id: 'chimekeeper', name: "The Chime-keeper of St Mary's", boss: true, hp: 1100, speed: 2.2, radius: 1.5, xp: 480, aggro: 16, leash: 32,
+  D({ id: 'chimekeeper', death: 'crumble', name: "The Chime-keeper of St Mary's", boss: true, hp: 1100, speed: 2.2, radius: 1.5, xp: 480, aggro: 16, leash: 32,
       color: 0xffd060, knockResist: 1, deathDur: 2.2,
       loot: [{ rarity: 'uncommon', chance: 1 }, { rarity: 'rare', chance: 1 }, { rarity: 'epic', chance: 0.5 }, { rarity: 'legendary', chance: 0.15 }],
       phases: [   // I: the quarters; II: the hour strikes (hands race, pendulum swings free); III: curfew (face burns red)
@@ -800,7 +821,7 @@ export const MOB_TYPES = [
                 A({ id: 'pendulum', name: 'Pendulum Swing', kind: 'charge', range: 14, minRange: 4, len: 14, w: 2.4, windup: 1.0, cd: 6, dmg: 24, speed: 15 }),
                 A({ id: 'peal', name: 'Great Peal', kind: 'nova', range: 18, n: 12, windup: 1.1, cd: 7, dmg: 12, speed: 11, color: 0xffe0a0 }),
                 A({ id: 'curfew', name: 'Curfew Bell', kind: 'ring', range: 8, r: 9, windup: 1.8, cd: 9, dmg: 34, recover: 1.2 })] }),
-  D({ id: 'gatehouse_lion', name: "The Gatehouse Lion of King's", boss: true, hp: 1000, speed: 3.6, radius: 1.6, xp: 450, aggro: 17, leash: 34,
+  D({ id: 'gatehouse_lion', death: 'crumble', name: "The Gatehouse Lion of King's", boss: true, hp: 1000, speed: 3.6, radius: 1.6, xp: 450, aggro: 17, leash: 34,
       color: 0xffc040, knockResist: 1, deathDur: 2.0,
       loot: [{ rarity: 'rare', chance: 1 }, { rarity: 'rare', chance: 0.6 }, { rarity: 'epic', chance: 0.5 }, { rarity: 'legendary', chance: 0.18 }],
       phases: [   // I: stone lion (maul, roar, pounce); II: gilded rampant (rush, gilt shower, portcullis fall)
@@ -851,13 +872,19 @@ class MobSystem {
     const mats = [];
     const m = (name) => { const c = BASE[name].clone(); mats.push(c); return c; };
     const { group, parts } = MODELS[type.id](m);
+    // session 46: a 'rig' group between the yawed root and the model takes the shared body-language layer
+    // (breathing, gait bob, wind-up crouch, strike lunge, hit flinch, death poses) on top of the per-type part animation
+    const rig = new THREE.Group(); rig.name = 'rig'; while (group.children.length) rig.add(group.children[0]); group.add(rig);
     group.scale.setScalar(type.scale);
     this.root.add(group);
+    const aura = new THREE.Mesh(G.disc, auraMat(type.color)); aura.renderOrder = 4; aura.scale.setScalar(type.radius * 2.6 * (type.boss ? 1.6 : 1) + 0.6);
+    this.root.add(aura);
     const mob = {
       id: NEXT_ID++, type, name: type.name, boss: !!type.boss, x, y, z, groundZ: z, hp: type.hp, maxHp: type.hp, dead: false,
       radius: type.radius, xp: type.xp, state: 'idle', home: { x, y, z }, yaw: rnd(0, TAU), group, parts, mats,
       attackCd: {}, t: rnd(0, 10), stateT: 0, flashT: 0, glow: 0, phase: 0, encounter: opts.encounter || null,
       patrol: null, idleT: rnd(0.5, 2), hitPlayer: false, damageTaken: 1, slowUntil: 0, stunUntil: 0,
+      rig, aura, flinch: 0, kb: null, roam: opts.roam || null, lastYaw: 0, bank: 0,
     };
     mob.baseEmissive = mats.map(c => ({ c: c.emissive.clone(), i: c.emissiveIntensity }));
     mob.onHit = (dmg, o) => this.onHit(mob, dmg, o);
@@ -868,9 +895,12 @@ class MobSystem {
     return mob;
   }
 
-  place(mob) { mob.group.position.set(mob.x, mob.z, -mob.y); mob.group.rotation.y = mob.yaw; }
+  place(mob) {
+    mob.group.position.set(mob.x, mob.z, -mob.y); mob.group.rotation.y = mob.yaw;
+    if (mob.aura) { const gz = mob.type.flying ? (mob.groundZ ?? mob.z - mob.type.hover) : mob.state === 'active' && mob.attack?.kind === 'leap' ? mob.groundZ : mob.z; mob.aura.position.set(mob.x, gz + 0.06, -mob.y); }
+  }
   remove(mob) {
-    this.root.remove(mob.group); for (const c of mob.mats) c.dispose();
+    this.root.remove(mob.group); if (mob.aura) this.root.remove(mob.aura); for (const c of mob.mats) c.dispose();
     mob.telegraph && this.clearTelegraph(mob);
     const i = this.game.mobs.indexOf(mob); if (i >= 0) this.game.mobs.splice(i, 1);
     mob.removed = true;
@@ -878,14 +908,14 @@ class MobSystem {
 
   onHit(mob, dmg, o) {
     mob.flashT = 0.14;
-    const g = this.game, k = (1 - (mob.type.knockResist ?? 0)) * Math.min(1.2, 0.3 + dmg / 40);
+    const g = this.game, res = mob.type.knockResist ?? 0, k = (1 - res) * Math.min(1.8, 0.4 + dmg / 30);
+    // session 46: knockback is a short decaying shove (0.22 s) instead of a teleport, plus a flinch pose on the rig
+    mob.flinch = 0.22 * (1 - res * 0.6) + (dmg > 25 ? 0.08 : 0);
     if (k > 0.02) {
       const dx = mob.x - g.px, dy = mob.y - g.py, d = Math.hypot(dx, dy) || 1;
-      const nx = mob.x + dx / d * k, ny = mob.y + dy / d * k;
-      if (mob.type.flying) { mob.x = nx; mob.y = ny; }
-      else { const z = this.world.standAt(nx, ny, mob.groundZ); if (z != null) { mob.x = nx; mob.y = ny; mob.groundZ = mob.z = z; } }
+      mob.kb = { x: dx / d, y: dy / d, v: 2 * k / 0.22, t: 0.22 };
     }
-    if (mob.state === 'idle' || mob.state === 'patrol' || mob.state === 'return') mob.state = 'chase';
+    if (mob.state === 'idle' || mob.state === 'patrol' || mob.state === 'return') { mob.state = 'chase'; this.callForHelp(mob); }
     // boss phase changes
     if (mob.type.phases) {
       const f = mob.hp / mob.maxHp;
@@ -901,21 +931,35 @@ class MobSystem {
 
   onDeath(mob) {
     this.clearTelegraph(mob);
-    mob.state = 'dead'; mob.deathT = 0;
-    this.burst(mob.x, mob.y, mob.z + 1 * mob.type.scale * (mob.boss ? 2.5 : 1), mob.type.color, mob.boss ? 40 : 16, mob.boss ? 9 : 5, mob.mats[0]?.color);
+    mob.state = 'dead'; mob.deathT = 0; mob.kb = null;
+    const T = mob.type, cz = mob.z + 1 * T.scale * (mob.boss ? 2.5 : 1), gz = mob.groundZ ?? mob.z;
+    // session 46: three death styles. crumble: stone debris falls + dust ring; dissolve: motes stream upward;
+    // burst: the body swells and pops in a wide spray + flash ring
+    if (T.death === 'crumble') {
+      this.burst(mob.x, mob.y, cz, 0x8a857a, mob.boss ? 46 : 22, mob.boss ? 7 : 4, mob.mats[0]?.color, { size: 2.2, grav: 16, life: 1.6 });
+      this.burst(mob.x, mob.y, cz, T.color, mob.boss ? 24 : 10, mob.boss ? 8 : 5);
+      this.shockwave(mob.x, mob.y, gz, 0xb8ae98, mob.boss ? 9 : 3.5, 0.9);
+    } else if (T.death === 'dissolve') {
+      this.burst(mob.x, mob.y, cz, T.color, 26, 1.6, null, { grav: -2, life: 1.6, size: 0.8, glow: 2 });
+      this.burst(mob.x, mob.y, cz, T.color, 10, 4);
+    } else {
+      mob.popAt = 0.16;
+    }
     if (mob.boss) { this.shockwave(mob.x, mob.y, mob.groundZ ?? mob.z, mob.type.color, 16, 1.1); this.shockwave(mob.x, mob.y, mob.groundZ ?? mob.z, 0xffffff, 9, 0.7); }
     if (mob.type.deathColor) this.burst(mob.x, mob.y, mob.z + 0.5 * mob.type.scale, mob.type.deathColor, 10, 2.5);
     const es = mob.encounter && this.encounterState.get(mob.encounter);
     if (es && es.mobs.every(m => m.dead)) { es.clearedAt = this.game.time; }
+    const ps = mob.roam; if (ps && ps.mobs.every(m => m.dead)) ps.clearedAt = this.game.time;
   }
 
   // shatter particles: shared shard geometry, one material per burst (faded together)
-  burst(x, y, z, color, n, speed, tint) {
-    const mat = new THREE.MeshStandardMaterial({ color: tint ? tint.getHex() : color, emissive: color, emissiveIntensity: 0.8, transparent: true, flatShading: true });
+  burst(x, y, z, color, n, speed, tint, o = {}) {
+    const grav = o.grav ?? 12, life = o.life ?? 1.2, size = o.size ?? 1;
+    const mat = new THREE.MeshStandardMaterial({ color: tint ? tint.getHex() : color, emissive: color, emissiveIntensity: o.glow ?? (tint ? 0.25 : 0.8), transparent: true, flatShading: true });
     const g = new THREE.Group(); this.root.add(g);
     const parts = [];
     for (let i = 0; i < n; i++) {
-      const s = new THREE.Mesh(G.shard, mat); s.position.set(x, z, -y);
+      const s = new THREE.Mesh(G.shard, mat); s.position.set(x, z, -y); if (size !== 1) s.scale.setScalar(size * rnd(0.5, 1.2));
       const a = rnd(0, TAU), up = rnd(0.3, 1);
       parts.push({ s, v: new THREE.Vector3(Math.cos(a) * speed * rnd(0.3, 1), up * speed, Math.sin(a) * speed * rnd(0.3, 1)), r: rnd(-8, 8) });
       g.add(s);
@@ -923,9 +967,9 @@ class MobSystem {
     let t = 0;
     this.fx.push({ update: (dt) => {
       t += dt;
-      for (const p of parts) { p.v.y -= 12 * dt; p.s.position.addScaledVector(p.v, dt); p.s.rotation.x += p.r * dt; p.s.rotation.z += p.r * dt; }
-      mat.opacity = Math.max(0, 1 - t / 1.2);
-      if (t > 1.2) { this.root.remove(g); mat.dispose(); return false; }
+      for (const p of parts) { p.v.y -= grav * dt; p.s.position.addScaledVector(p.v, dt); p.s.rotation.x += p.r * dt; p.s.rotation.z += p.r * dt; }
+      mat.opacity = Math.max(0, 1 - t / life);
+      if (t > life) { this.root.remove(g); mat.dispose(); return false; }
       return true;
     } });
   }
@@ -1004,7 +1048,8 @@ class MobSystem {
       if (!s) { s = { mobs: [], active: false, clearedAt: null, spot: null }; this.encounterState.set(e.id, s); }
       const d = Math.hypot(e.x - g.px, e.y - g.py);
       if (s.active && d > DESPAWN_R) { for (const m of s.mobs) if (!m.removed) this.remove(m); s.mobs = []; s.active = false; continue; }
-      if (s.active && s.clearedAt != null && g.time - s.clearedAt > RESPAWN_S && d > 40) { s.active = false; s.mobs = []; s.clearedAt = null; }
+      // cleared packs come back after a while (once the player is out of sight range)
+      if (s.active && s.clearedAt != null && g.time - s.clearedAt > (e.boss ? BOSS_RESPAWN_S : RESPAWN_S) && d > (e.boss ? 40 : 32)) { s.active = false; s.mobs = []; s.clearedAt = null; }
       if (!this.encountersEnabled || s.active || d > SPAWN_R) continue;
       // session 44: the live cap used to starve near encounters (incl. bosses) once far ring encounters filled it;
       // when full, a closer encounter evicts the farthest calm (no mob fighting) active one at least 30 m farther away
@@ -1021,20 +1066,61 @@ class MobSystem {
       s.mobs = placed.map(([t, p]) => this.spawn(t, p.x, p.y, p.z, { encounter: e.id }));
       s.spot = placed[0][1];
     }
+    if (this.encountersEnabled) this.updatePatrols();
+  }
+
+  // session 46: roaming patrols. Each group has a virtual anchor walking its waypoint loop (also while unspawned);
+  // members follow the anchor in a loose formation and stop to fight when any of them is engaged.
+  patrolState(P) {
+    let s = this.encounterState.get(P.id);
+    if (!s) {
+      const [x, y] = P.path[P.start % P.path.length];
+      s = { patrol: P, mobs: [], active: false, clearedAt: null, wp: (P.start + 1) % P.path.length, x, y, lastT: this.game.time };
+      this.encounterState.set(P.id, s);
+    }
+    return s;
+  }
+  updatePatrols() {
+    const g = this.game;
+    for (const P of PATROLS) {
+      const s = this.patrolState(P), dt = Math.min(2, Math.max(0, g.time - s.lastT)); s.lastT = g.time;
+      const live = s.mobs.filter(m => !m.dead && !m.removed);
+      const engaged = live.some(m => !['idle', 'patrol', 'return'].includes(m.state));
+      const lagging = live.some(m => Math.hypot(m.x - m.home.x, m.y - m.home.y) > 6);
+      if (!engaged && !lagging) {   // advance the anchor along the loop
+        let step = PATROL_SPEED * dt;
+        while (step > 0) {
+          const [tx, ty] = P.path[s.wp], dx = tx - s.x, dy = ty - s.y, d = Math.hypot(dx, dy);
+          if (d <= step) { s.x = tx; s.y = ty; step -= d; s.wp = (s.wp + 1) % P.path.length; }
+          else { s.x += dx / d * step; s.y += dy / d * step; step = 0; }
+        }
+      }
+      live.forEach((m, i) => { const a = i / Math.max(1, live.length) * TAU + 0.6; m.home.x = s.x + Math.cos(a) * 2.2; m.home.y = s.y + Math.sin(a) * 2.2; });
+      const d = Math.hypot(s.x - g.px, s.y - g.py);
+      if (s.active && d > PATROL_DESPAWN_R && !engaged) { for (const m of s.mobs) if (!m.removed) this.remove(m); s.mobs = []; s.active = false; continue; }
+      if (s.active && s.clearedAt != null && g.time - s.clearedAt > RESPAWN_S && d > 32) { s.active = false; s.mobs = []; s.clearedAt = null; }
+      if (s.active || d > PATROL_SPAWN_R || g.mobs.length >= MAX_LIVE || !this.world.covered(s.x, s.y)) continue;
+      const z0 = this.game.groundAt(s.x, s.y, g.pz + 30) ?? g.pz;
+      s.active = true; s.clearedAt = null;
+      s.mobs = P.mobs.map((t, i) => { const a = i / P.mobs.length * TAU + 0.6; return this.spawn(t, s.x + Math.cos(a) * 2.2, s.y + Math.sin(a) * 2.2, z0, { roam: s }); });
+      for (const m of s.mobs) m.state = 'patrol';
+    }
+  }
+
+  // pack aggro: a mob that notices the player (or is hit) pulls its pack and anything idle close by
+  callForHelp(mob) {
+    const g = this.game;
+    for (const m of g.mobs) {
+      if (m === mob || m.dead || !m.type || !['idle', 'patrol'].includes(m.state)) continue;
+      const same = (mob.encounter && m.encounter === mob.encounter) || (mob.roam && m.roam === mob.roam);
+      if (same || Math.hypot(m.x - mob.x, m.y - mob.y) < HELP_R) { m.state = 'chase'; m.alertT = 0.4; }
+    }
   }
 
   updateMob(mob, dt) {
     const g = this.game, T = mob.type, P = mob.parts;
     mob.t += dt;
-    if (mob.state === 'dead') {   // dissolve: sink, shrink, then remove
-      const dur = T.deathDur ?? 0.9;
-      mob.deathT += dt; let f = Math.min(1, mob.deathT / dur);
-      if (T.deathDur) { this.animateDeath(mob, Math.min(1, f / 0.6)); f = Math.max(0, (f - 0.55) / 0.45); }   // pose first, then dissolve
-      mob.group.scale.setScalar(T.scale * (1 - f * 0.9)); mob.group.position.y = mob.z - f * 0.5 * T.scale;
-      for (const c of mob.mats) { c.transparent = true; c.opacity = 1 - f; }
-      if (mob.deathT > dur + 0.1) this.remove(mob);
-      return;
-    }
+    if (mob.state === 'dead') { this.tickDeath(mob, dt); return; }
     // flash + glow
     mob.flashT = Math.max(0, mob.flashT - dt);
     const glow = mob.state === 'windup' ? 0.4 + 0.6 * Math.min(1, 1 - mob.stateT / mob.windupEff) : 0;
@@ -1054,7 +1140,12 @@ class MobSystem {
       if (mob.state === 'windup') { this.clearTelegraph(mob); mob.state = 'chase'; }
     } else switch (mob.state) {
       case 'idle': case 'patrol': {
-        if (dist < T.aggro && g.stats.hp > 0 && Math.abs(g.pz - mob.groundZ) < 8) { mob.state = 'chase'; break; }
+        if (dist < T.aggro && g.stats.hp > 0 && Math.abs(g.pz - mob.groundZ) < 8) { mob.state = 'chase'; mob.alertT = 0.4; this.callForHelp(mob); break; }
+        if (mob.roam) {   // patrol member: keep formation around the moving anchor
+          const hd = Math.hypot(mob.home.x - mob.x, mob.home.y - mob.y); mob.state = 'patrol';
+          if (hd > 0.4) moving = this.moveTo(mob, mob.home.x, mob.home.y, Math.min(T.speed, PATROL_SPEED * 0.8 + hd) * speedMul, dt);
+          break;
+        }
         if (mob.state === 'idle') { mob.idleT -= dt; if (mob.idleT <= 0) { const a = rnd(0, TAU), r = rnd(2, 7); mob.patrol = { x: mob.home.x + Math.cos(a) * r, y: mob.home.y + Math.sin(a) * r }; mob.state = 'patrol'; } }
         else { moving = this.moveTo(mob, mob.patrol.x, mob.patrol.y, T.speed * 0.4 * speedMul, dt); if (!moving || Math.hypot(mob.patrol.x - mob.x, mob.patrol.y - mob.y) < 0.6) { mob.state = 'idle'; mob.idleT = rnd(1.5, 4); } }
         break;
@@ -1087,8 +1178,80 @@ class MobSystem {
       const target = swoop ? g.pz + 0.9 : Math.max(gz, mob.state === 'chase' ? g.pz : gz) + T.hover + Math.sin(mob.t * 2) * 0.25;
       mob.z += (target - mob.z) * Math.min(1, dt * (swoop ? 8 : 2.5));
     } else if (mob.state !== 'active' || mob.attack?.kind !== 'leap') mob.z = mob.groundZ;
+    if (mob.kb) {   // decaying knockback shove
+      const k = mob.kb, step = k.v * (k.t / 0.22) * Math.min(dt, k.t); k.t -= dt;
+      const nx = mob.x + k.x * step, ny = mob.y + k.y * step;
+      if (T.flying) { mob.x = nx; mob.y = ny; }
+      else { const z = this.world.standAt(nx, ny, mob.groundZ); if (z != null && Math.abs(z - mob.groundZ) < 0.6) { mob.x = nx; mob.y = ny; mob.groundZ = mob.z = z; } else k.t = 0; }
+      if (k.t <= 0) mob.kb = null;
+    }
+    mob.flinch = Math.max(0, mob.flinch - dt); mob.alertT = Math.max(0, (mob.alertT || 0) - dt);
     this.animate(mob, dt, moving);
+    this.bodyLanguage(mob, dt, moving);
     this.place(mob);
+  }
+
+  // session 46: shared body-language layer on the rig (on top of the per-type part animation)
+  bodyLanguage(mob, dt, moving) {
+    const R = mob.rig; if (!R) return;
+    const T = mob.type, st = mob.state, t = mob.t, amp = mob.boss ? 0.35 : 1;
+    let sx = 1, sy = 1, rx = 0, rz = 0, py = 0, pz = 0;
+    // yaw rate -> banking for flyers
+    let dy = ((mob.yaw - mob.lastYaw + PI) % TAU + TAU) % TAU - PI; mob.lastYaw = mob.yaw;
+    mob.bank += ((Math.max(-0.6, Math.min(0.6, -dy / Math.max(dt, 1e-3) * 0.12))) - mob.bank) * Math.min(1, dt * 6);
+    if (!moving) { const b = Math.sin(t * 2.1 + mob.id) * 0.03; sy += b; sx -= b * 0.5; }   // idle breathing
+    else if (T.flying) { rx += 0.22; rz += mob.bank; py += Math.sin(t * 5) * 0.08; }       // pitch into flight, bank on turns
+    else {   // walker gait: bob + sway + forward lean, faster and lighter for small mobs
+      const ph = t * T.speed * 2.6; py += Math.abs(Math.sin(ph)) * 0.07 * amp; rz += Math.sin(ph) * 0.05 * amp; rx += 0.07 * amp;
+      if (st === 'chase') rx += 0.06 * amp;
+    }
+    if (mob.alertT > 0) { const a = mob.alertT / 0.4; py += Math.sin(a * PI) * 0.35 * amp; sy += 0.08 * a; }   // noticed the player: a startled hop
+    if (st === 'windup') {   // wind-up: coil (crouch, lean back), tremble just before release
+      const wf = 1 - Math.max(0, mob.stateT) / mob.windupEff;
+      sy -= 0.12 * wf * amp; sx += 0.07 * wf * amp; rx -= 0.22 * wf * amp;
+      if (wf > 0.75) rz += Math.sin(t * 70) * 0.04 * amp;
+    } else if (st === 'active') { rx += 0.3 * amp; sy += 0.05; }   // strike: committed forward lean
+    else if (st === 'recover' && mob.attack) {   // recovery: release lunge decaying back to neutral
+      const f = Math.max(0, mob.stateT) / Math.max(0.05, mob.attack.recover), e = f * f;
+      rx += 0.32 * e * amp; pz += 0.4 * e * amp; sy += 0.08 * e; sx -= 0.04 * e;
+    }
+    if (mob.flinch > 0) { const h = Math.min(1, mob.flinch / 0.22); rx -= 0.4 * h * amp; sy -= 0.1 * h; sx += 0.08 * h; pz -= 0.15 * h * amp; }
+    if (st === 'stagger') rz += Math.sin(t * 30) * 0.07;
+    R.rotation.set(rx, 0, rz); R.scale.set(sx, sy, sx); R.position.set(0, py, pz);
+    if (mob.aura) mob.aura.material.opacity = st === 'windup' ? 0.8 : 0.5;
+  }
+
+  // death: crumble (topple forward, sink, debris), dissolve (rise, stretch, fade), burst (swell then pop); bosses with
+  // deathDur first play their own pose (animateDeath)
+  tickDeath(mob, dt) {
+    const T = mob.type, R = mob.rig, style = T.death || 'dissolve';
+    const dur = T.deathDur ?? (style === 'burst' ? 0.5 : style === 'crumble' ? 1.3 : 1.2);
+    mob.deathT += dt; let f = Math.min(1, mob.deathT / dur);
+    if (T.deathDur) { this.animateDeath(mob, Math.min(1, f / 0.6)); f = Math.max(0, (f - 0.55) / 0.45); }
+    const fade = (a) => { for (const c of mob.mats) { c.transparent = true; c.opacity = Math.max(0, a); } };
+    if (mob.aura) mob.aura.material.opacity = 0.5 * (1 - f);
+    if (style === 'crumble') {
+      if (R && !T.deathDur) { R.rotation.x = Math.min(1.25, f * f * 2.2); R.rotation.z = Math.sin(mob.id) * 0.3 * f; }
+      mob.group.position.y = mob.z - Math.max(0, f - 0.4) * 1.1 * T.scale;
+      mob.group.scale.setScalar(T.scale * (1 - Math.max(0, f - 0.5) * 0.6));
+      fade(1 - Math.max(0, (f - 0.6) / 0.4));
+    } else if (style === 'dissolve') {
+      mob.group.position.y = mob.z + f * 1.2 * T.scale;
+      if (R) R.scale.set(1 - 0.7 * f, 1 + 0.9 * f, 1 - 0.7 * f);
+      fade(1 - f);
+    } else {
+      if (mob.popAt != null && mob.deathT >= mob.popAt) {
+        mob.popAt = null;
+        const cz = mob.z + T.scale * (mob.boss ? 2.5 : 0.8), gz = mob.groundZ ?? mob.z;
+        this.burst(mob.x, mob.y, cz, T.color, 28, 7, null, { size: 1.3, glow: 1.6 });
+        this.burst(mob.x, mob.y, cz, T.deathColor ?? 0x2a2622, 16, 4, mob.mats[0]?.color, { size: 1.8 });
+        this.shockwave(mob.x, mob.y, gz, T.color, 4.5, 0.5);
+      }
+      const sw = mob.deathT < 0.16 ? 1 + mob.deathT / 0.16 * 0.35 : 0;
+      if (R) R.scale.setScalar(sw || 0.001);
+      if (!sw) fade(0);
+    }
+    if (mob.deathT > dur + 0.1) this.remove(mob);
   }
 
   turn(a, b, k) { let d = ((b - a + Math.PI) % TAU + TAU) % TAU - Math.PI; return a + Math.max(-k, Math.min(k, d)); }
@@ -1456,7 +1619,15 @@ class MobSystem {
 export async function loadEncounters() {
   if (ENCOUNTERS.length) return ENCOUNTERS;
   const r = await fetch(new URL('./encounters.json', import.meta.url));
-  ENCOUNTERS.push(...await r.json());
+  const list = await r.json();
+  // session 46: denser packs near the centre (runtime only; encounters.json stays as authored for the KPI tooling)
+  for (const e of list) {
+    if (e.boss) continue;
+    const d = Math.hypot(e.x - CENTRE.x, e.y - CENTRE.y); if (d > DENSE_R) continue;
+    const extra = e.gen ? (d < 150 ? 2 : 1) : 1;
+    for (let i = 0; i < extra; i++) e.mobs = [...e.mobs, e.mobs[i % e.mobs.length]];
+  }
+  ENCOUNTERS.push(...list);
   return ENCOUNTERS;
 }
 

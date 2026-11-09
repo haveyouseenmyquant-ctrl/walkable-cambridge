@@ -1,0 +1,175 @@
+{
+ "osm_id": "way/28343062",
+ "sources": [
+  "mapillary:1169170316934589",
+  "mapillary:801335767172810"
+ ],
+ "walls": [
+  {
+   "id": "way/28343062:1",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    5.2,
+    10.0
+   ],
+   "material": "brick",
+   "wall_colour": "#8a4a36",
+   "trim_colour": "#d6c29a",
+   "cornice_z": 13.0,
+   "cornice": "bracketed",
+   "parapet": false,
+   "string_courses": [
+    0.8,
+    5.0,
+    9.6
+   ],
+   "quoins": true,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.5,
+     "w": 1.8,
+     "z": 0.9,
+     "h": 3.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.5,
+     "w": 1.5,
+     "z": 6.0,
+     "h": 3.2,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "pediment",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 7.45,
+     "w": 1.8,
+     "z": 0.9,
+     "h": 3.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 7.45,
+     "w": 1.5,
+     "z": 6.0,
+     "h": 3.2,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "pediment",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.4,
+     "w": 1.8,
+     "z": 0.9,
+     "h": 3.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.4,
+     "w": 1.5,
+     "z": 6.0,
+     "h": 3.2,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "pediment",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 17.35,
+     "w": 1.8,
+     "z": 0.9,
+     "h": 3.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 17.35,
+     "w": 1.5,
+     "z": 6.0,
+     "h": 3.2,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "pediment",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 22.3,
+     "w": 1.8,
+     "z": 0.9,
+     "h": 3.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 22.3,
+     "w": 1.5,
+     "z": 6.0,
+     "h": 3.2,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "pediment",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Museum of Archaeology and Anthropology, Downing St (east side of the street). Red brick with stone bands and dressings; ground floor of large round-arched windows with stone voussoirs behind railings on a stone plinth; first floor tall mullioned windows with triangular pediments; steep slate roof with dormers above a corbelled brick eaves cornice (not modelled). ~5 bays estimated from oblique views looking north along the street."
+  }
+ ]
+}

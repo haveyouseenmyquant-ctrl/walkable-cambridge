@@ -97,7 +97,7 @@ export function install(game) {
     defs: ITEMS, rarities: RARITY, slots: SLOTS, inventory: sv.inv, equipped: sv.eq, S,
     give(id, { quiet = false } = {}) { const d = ITEMS[id]; if (!d) return null;
       if (S.owns(id)) { if (!quiet) toast(`${d.name} (already owned)`); return d; }
-      sv.inv.push(id); if (!quiet) { if (game.hud?.loot) game.hud.loot(d.name, d.rarity, RARITY[d.rarity].color, sv.eq[d.slot] ? d.slot : `${d.slot} · equipped`); else toast(`Found: ${d.name} [${d.rarity}]`); }
+      sv.inv.push(id); if (!quiet) { if (game.hud?.loot) game.hud.loot(d.name, d.rarity, RARITY[d.rarity].color, sv.eq[d.slot] ? `${d.slot} · in bag` : `${d.slot} · equipped`, [statTxt(d.stats), d.desc].filter(Boolean).join(' · ')); else toast(`Found: ${d.name} [${d.rarity}]`); }
       if (!sv.eq[d.slot]) items.equip(id); else { game.persist(); render(); } return d; },
     equip(id) { const d = ITEMS[id]; if (!d) return false;
       if (sv.eq[d.slot] === id) return true;
@@ -117,58 +117,107 @@ export function install(game) {
   };
   S.drop = (...a) => items.drop(...a);
 
-  // ---------------- pickups: rarity-coloured light pillar (height/width by rarity), pulsing ground glow + ring,
-  // bobbing gem with a halo, drop chime. Geometry/textures shared; per-drop materials are freed on pickup.
-  const pickups = [];
-  const PILLAR = { common: [2.2, 0.1], uncommon: [3.5, 0.13], rare: [6, 0.17], epic: [9, 0.22], legendary: [13, 0.3] };
-  const beamGeo = new T.CylinderGeometry(1, 1, 1, 12, 1, true); beamGeo.translate(0, 0.5, 0);
-  const gemGeo = new T.OctahedronGeometry(0.22);
+  // ---------------- pickups (session 46): the drop bounces out of the corpse on an arc, lands with a rarity sting, then
+  // stands under a tall rarity-coloured light pillar (visible from across the square) with a pulsing ground glow + ring,
+  // a bobbing gem with a halo and a nameplate in rarity colour. On pickup the gem flies to the player while the pillar
+  // and nameplate linger and fade (~2.5 s), so a walk-over pickup still reads in a still frame.
+  const pickups = [], lingering = [];   // live drops / collected drops still fading (not in items.drops)
+  const PILLAR = { common: [6, 0.2], uncommon: [9, 0.26], rare: [14, 0.32], epic: [20, 0.4], legendary: [28, 0.5] };
+  const LINGER = 2.5;
+  const beamGeo = new T.CylinderGeometry(1, 1, 1, 14, 1, true); beamGeo.translate(0, 0.5, 0);
+  const gemGeo = new T.OctahedronGeometry(0.26);
   const padGeo = new T.CircleGeometry(1, 32); padGeo.rotateX(-Math.PI / 2);
   const ringGeo2 = new T.RingGeometry(0.82, 1, 40); ringGeo2.rotateX(-Math.PI / 2);
   // pillar alpha: bright at the base, fading out upwards, with a soft horizontal falloff so it reads as light not a tube
   const pillarTex = canvasTex(32, 128, (g, w, h) => { const v = g.createLinearGradient(0, h, 0, 0);
-    v.addColorStop(0, 'rgba(255,255,255,1)'); v.addColorStop(0.15, 'rgba(255,255,255,0.75)'); v.addColorStop(0.6, 'rgba(255,255,255,0.25)'); v.addColorStop(1, 'rgba(255,255,255,0)');
+    v.addColorStop(0, 'rgba(255,255,255,1)'); v.addColorStop(0.2, 'rgba(255,255,255,0.85)'); v.addColorStop(0.65, 'rgba(255,255,255,0.4)'); v.addColorStop(1, 'rgba(255,255,255,0)');
     g.fillStyle = v; g.fillRect(0, 0, w, h); g.globalCompositeOperation = 'destination-in';
-    const hz = g.createLinearGradient(0, 0, w, 0); hz.addColorStop(0, 'rgba(0,0,0,0.35)'); hz.addColorStop(0.5, 'rgba(0,0,0,1)'); hz.addColorStop(1, 'rgba(0,0,0,0.35)');
+    const hz = g.createLinearGradient(0, 0, w, 0); hz.addColorStop(0, 'rgba(0,0,0,0.45)'); hz.addColorStop(0.5, 'rgba(0,0,0,1)'); hz.addColorStop(1, 'rgba(0,0,0,0.45)');
     g.fillStyle = hz; g.fillRect(0, 0, w, h); });
   const padTex = canvasTex(64, 64, (g) => { const r = g.createRadialGradient(32, 32, 0, 32, 32, 31);
     r.addColorStop(0, 'rgba(255,255,255,0.9)'); r.addColorStop(0.35, 'rgba(255,255,255,0.45)'); r.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = r; g.fillRect(0, 0, 64, 64); });
-  function spawnPickup(id, x, y, z) { const d = ITEMS[id]; if (!d) return null; const col = RARITY[d.rarity].hex, ord = RARITY[d.rarity].order;
+  // nameplate: item name in rarity colour on a dark rounded backdrop with a rarity-coloured underline (one small canvas per drop)
+  function plateTex(d) { const r = RARITY[d.rarity];
+    return canvasTex(512, 112, (g, w, h) => { g.font = '600 40px system-ui,sans-serif'; const tw = Math.min(w - 24, g.measureText(d.name).width + 44), x0 = (w - tw) / 2;
+      g.fillStyle = 'rgba(8,8,14,0.78)'; g.beginPath(); g.roundRect?.(x0, 10, tw, 78, 12); if (!g.roundRect) g.rect(x0, 10, tw, 78); g.fill();
+      g.fillStyle = r.color; g.fillRect(x0 + 10, 80, tw - 20, 5);
+      g.textAlign = 'center'; g.textBaseline = 'middle'; g.shadowColor = r.color; g.shadowBlur = 10; g.fillStyle = r.color; g.fillText(d.name, w / 2, 44);
+      g.shadowBlur = 0; g.font = '500 20px system-ui,sans-serif'; g.fillStyle = 'rgba(230,230,240,0.85)'; g.fillText(d.rarity.toUpperCase() + ' · ' + d.slot, w / 2, 100); }); }
+  // spawnPickup(id, x, y, z, from): with `from` (a corpse / chest position) the drop flies out of it on an arc
+  function spawnPickup(id, x, y, z, from = null) { const d = ITEMS[id]; if (!d) return null; const col = RARITY[d.rarity].hex, ord = RARITY[d.rarity].order;
     const [ph, pw] = PILLAR[d.rarity] || PILLAR.common;
     const g = new T.Group();
-    const beam = new T.Mesh(beamGeo, new T.MeshBasicMaterial(add({ color: col, map: pillarTex, opacity: 0.55, side: T.DoubleSide, fog: false })));
-    beam.scale.set(pw, ph, pw);
-    const core = new T.Mesh(beamGeo, new T.MeshBasicMaterial(add({ color: 0xffffff, map: pillarTex, opacity: 0.18, fog: false })));
-    core.scale.set(pw * 0.3, ph * 0.8, pw * 0.3);
-    const pad = new T.Mesh(padGeo, new T.MeshBasicMaterial(add({ color: col, map: padTex, opacity: 0.7, side: T.DoubleSide })));
-    pad.position.y = 0.04; pad.scale.setScalar(0.9 + 0.2 * ord);
+    const beam = new T.Mesh(beamGeo, new T.MeshBasicMaterial(add({ color: col, map: pillarTex, opacity: 0.95, side: T.DoubleSide, fog: false, premultipliedAlpha: true })));
+    beam.scale.set(pw, 0.01, pw);
+    const core = new T.Mesh(beamGeo, new T.MeshBasicMaterial(add({ color: 0xffffff, map: pillarTex, opacity: 0.3, fog: false, premultipliedAlpha: true })));
+    core.scale.set(pw * 0.3, 0.01, pw * 0.3);
+    const pad = new T.Mesh(padGeo, new T.MeshBasicMaterial(add({ color: col, map: padTex, opacity: 0.8, side: T.DoubleSide, premultipliedAlpha: true })));
+    pad.position.y = 0.04; pad.scale.setScalar(1.1 + 0.25 * ord);
     const ring = new T.Mesh(ringGeo2, new T.MeshBasicMaterial(add({ color: col, opacity: 0.6, side: T.DoubleSide })));
     ring.position.y = 0.06;
     const gem = new T.Mesh(gemGeo, new T.MeshBasicMaterial({ color: col }));
-    const halo = new T.Sprite(new T.SpriteMaterial(add({ color: col, map: padTex, opacity: 0.8 }))); halo.scale.setScalar(0.9 + 0.15 * ord);
+    const halo = new T.Sprite(new T.SpriteMaterial(add({ color: col, map: padTex, opacity: 0.9, premultipliedAlpha: true }))); halo.scale.setScalar(1.1 + 0.2 * ord);
+    const ptex = plateTex(d), plate = new T.Sprite(new T.SpriteMaterial({ map: ptex, transparent: true, depthTest: false, depthWrite: false, fog: false }));
+    plate.scale.set(3.3, 0.72, 1); plate.position.y = 2.1; plate.visible = false; plate.renderOrder = 30;
     for (const o of [beam, core, pad, ring, halo]) o.renderOrder = 6;
-    g.add(beam, core, pad, ring, gem, halo); g.position.copy(v3(x, y, z ?? game.pz)); game.root.add(g);
-    const pk = { id, x, y, z: z ?? game.pz, g, gem, beam, core, pad, ring, halo, ord, ph, rs: 0.9 + 0.25 * ord, t0: S.t }; pickups.push(pk);
-    fx.burst(v3(x, y, pk.z + 0.5), col, 16 + 8 * ord, 3 + ord * 0.5, 0.8); fx.ring(x, y, pk.z + 0.05, col, 1.2 + 0.4 * ord, 0.5);
-    sfx.play(ord >= 3 ? 'drop_big' : 'drop', 0.6 + 0.12 * ord, ord >= 3 ? 1 : 0.9 + ord * 0.08);
+    g.add(beam, core, pad, ring, gem, halo, plate);
+    const z0 = z ?? game.pz, f0 = from ? { x: from.x, y: from.y, z: from.z ?? z0 } : null;
+    g.position.copy(v3(f0 ? f0.x : x, f0 ? f0.y : y, f0 ? f0.z : z0)); game.root.add(g);
+    const pk = { id, d, x, y, z: z0, g, gem, beam, core, pad, ring, halo, plate, ptex, ord, ph, pw, rs: 0.9 + 0.25 * ord, t0: S.t,
+      fly: f0 ? { ...f0, dur: 0.55 } : null, landed: !f0, landT: f0 ? null : S.t, got: null };
+    pickups.push(pk);
+    if (!f0) land(pk); else { fx.burst(v3(f0.x, f0.y, f0.z + 0.8), col, 10 + 4 * ord, 2.5, 0.5); sfx.play('drop_toss', 0.5, 1 + 0.05 * ord); }
     return pk; }
-  function removePickup(pk) { game.root.remove(pk.g); for (const o of [pk.beam, pk.core, pk.pad, pk.ring, pk.gem, pk.halo]) o.material.dispose(); pickups.splice(pickups.indexOf(pk), 1); }
+  function land(pk) { const col = RARITY[pk.d.rarity].hex, ord = pk.ord;
+    pk.landed = true; pk.landT = S.t; pk.plate.visible = true;
+    fx.burst(v3(pk.x, pk.y, pk.z + 0.5), col, 18 + 10 * ord, 3 + ord * 0.6, 0.9); fx.ring(pk.x, pk.y, pk.z + 0.05, col, 1.4 + 0.5 * ord, 0.55);
+    sfx.play(ord >= 3 ? 'drop_big' : 'drop', 0.6 + 0.12 * ord, ord >= 3 ? 1 : 0.9 + ord * 0.08);
+    if (ord >= 1) sfx.play('sting_' + pk.d.rarity, 0.7 + 0.1 * ord, 1); }
+  function removePickup(pk) { game.root.remove(pk.g); for (const o of [pk.beam, pk.core, pk.pad, pk.ring, pk.gem, pk.halo, pk.plate]) o.material.dispose(); pk.ptex.dispose(); for (const a of [pickups, lingering]) { const i = a.indexOf(pk); if (i >= 0) a.splice(i, 1); } }
+  function collect(pk) { const p = game.player, def = items.give(pk.id); const c = RARITY[def.rarity].hex;
+    pk.got = { t: S.t, x: pk.x, y: pk.y, z: pk.z }; pickups.splice(pickups.indexOf(pk), 1); lingering.push(pk);
+    fx.burst(v3(p.x, p.y, p.z + 1), c, 30 + 8 * pk.ord, 3, 0.7); fx.ring(p.x, p.y, p.z + 0.05, c, 1.6 + 0.3 * pk.ord, 0.5); fx.stream(v3(pk.x, pk.y, pk.z + 0.8), v3(p.x, p.y, p.z + 1.2), c, 10 + 4 * pk.ord);
+    sfx.play('pickup', 0.8, 1 + 0.06 * pk.ord); if (pk.ord >= 2) sfx.play('sting_' + def.rarity, 0.6, 1.12);
+    game.emit('pickup', { item: def, id: pk.id }); }
   function updatePickups(dt) { const p = game.player;
-    for (let i = pickups.length - 1; i >= 0; i--) { const pk = pickups[i]; const dx = p.x - pk.x, dy = p.y - pk.y, dz = p.z - pk.z, d = Math.hypot(dx, dy);
+    for (const pk of [...lingering, ...pickups]) {
+      if (pk.got) {   // collected: gem flies to the player, pillar + nameplate linger and fade
+        const a = (S.t - pk.got.t) / LINGER; if (a >= 1 || !pk.d) { removePickup(pk); continue; }
+        const fa = 1 - a, k = Math.min(1, (S.t - pk.got.t) / 0.3);
+        pk.gem.position.set((p.x - pk.x) * k, 0.8 + (p.z + 1.2 - pk.z - 0.8) * k, -(p.y - pk.y) * k); pk.gem.visible = pk.halo.visible = k < 1;
+        pk.halo.position.copy(pk.gem.position);
+        pk.beam.material.opacity = 0.9 * fa; pk.core.material.opacity = 0.3 * fa; pk.pad.material.opacity = 0.7 * fa; pk.ring.material.opacity = 0.5 * fa;
+        pk.beam.scale.x = pk.beam.scale.z = pk.pw * (1 + 0.6 * a);
+        pk.plate.position.y = 2.1 + a * 1.2; pk.plate.material.opacity = Math.min(1, fa * 1.6);
+        continue; }
+      if (pk.fly && !pk.landed) {   // bounce-out arc from the corpse
+        const f = Math.min(1, (S.t - pk.t0) / pk.fly.dur), e = 1 - (1 - f) ** 2;
+        const hx = pk.fly.x + (pk.x - pk.fly.x) * e, hy = pk.fly.y + (pk.y - pk.fly.y) * e, hz = pk.fly.z + (pk.z - pk.fly.z) * f + Math.sin(f * Math.PI) * 1.6;
+        pk.g.position.set(hx, hz, -hy); pk.gem.position.y = pk.halo.position.y = 0.5; pk.gem.rotation.x += dt * 14; pk.gem.rotation.y += dt * 9;
+        if (Math.random() < 0.6) fx.burst(v3(hx, hy, hz + 0.5), RARITY[pk.d.rarity].hex, 1, 0.4, 0.4);
+        if (f >= 1) land(pk); continue; }
+      const dx = p.x - pk.x, dy = p.y - pk.y, dz = p.z - pk.z, d = Math.hypot(dx, dy);
       if (S.magnet && d < S.magnet && d > 0.01 && Math.abs(dz) < 4) { const s = Math.min(d, 8 * dt) / d; pk.x += dx * s; pk.y += dy * s; pk.z += dz * s; }
-      const age = S.t - pk.t0, grow = Math.min(1, age / 0.35);
-      pk.g.position.set(pk.x, pk.z, -pk.y); pk.gem.position.y = pk.halo.position.y = 0.8 + Math.sin(age * 2.5) * 0.15; pk.gem.rotation.y += dt * 2;
-      pk.beam.scale.y = pk.ph * (1 - (1 - grow) ** 3);
-      pk.beam.material.opacity = 0.45 + Math.sin(S.t * 3 + pk.t0) * 0.1; pk.core.material.opacity = 0.14 + Math.sin(S.t * 5 + pk.t0) * 0.05;
-      pk.pad.material.opacity = 0.55 + Math.sin(S.t * 3 + pk.t0) * 0.15;
+      const age = S.t - pk.landT, grow = Math.min(1, age / 0.4);
+      const bounce = age < 0.5 ? Math.abs(Math.sin(age / 0.5 * Math.PI * 2)) * 0.35 * (1 - age / 0.5) : 0;
+      pk.g.position.set(pk.x, pk.z, -pk.y); pk.gem.position.y = pk.halo.position.y = 0.8 + Math.sin(age * 2.5) * 0.15 + bounce; pk.gem.rotation.y += dt * 2;
+      pk.beam.scale.y = pk.ph * (1 - (1 - grow) ** 3); pk.core.scale.y = pk.beam.scale.y * 0.85;
+      pk.beam.scale.x = pk.beam.scale.z = pk.pw * (1 + 0.8 * Math.max(0, 1 - age / 0.4));   // flare wide on landing
+      pk.beam.material.opacity = 0.85 + Math.sin(S.t * 3 + pk.t0) * 0.15; pk.core.material.opacity = 0.35 + Math.sin(S.t * 5 + pk.t0) * 0.08;
+      pk.pad.material.opacity = 0.65 + Math.sin(S.t * 3 + pk.t0) * 0.15;
+      pk.plate.position.y = 2.1 + Math.sin(age * 2) * 0.05;
       const rp = (age * 0.8) % 1; pk.ring.scale.setScalar(pk.rs * (0.3 + rp)); pk.ring.material.opacity = 0.65 * (1 - rp);
-      if (pk.ord >= 3 && Math.random() < dt * (pk.ord === 4 ? 10 : 5)) { const a = Math.random() * 6.283; fx.stream(v3(pk.x + Math.cos(a) * 0.5, pk.y + Math.sin(a) * 0.5, pk.z + 0.1), v3(pk.x, pk.y, pk.z + 2.5), RARITY[ITEMS[pk.id].rarity].hex, 1); }
-      if (d < 1.5 && Math.abs(dz) < 2.5 && S.t - pk.t0 > 0.3) { removePickup(pk); const def = items.give(pk.id); const c = RARITY[def.rarity].hex;
-        fx.burst(v3(p.x, p.y, p.z + 1), c, 30, 3, 0.6); fx.ring(p.x, p.y, p.z + 0.05, c, 1.5, 0.4); sfx.play('pickup', 0.8, 1 + 0.06 * pk.ord); game.emit('pickup', { item: def, id: pk.id }); } } }
+      if (Math.random() < dt * (3 + 3 * pk.ord)) { const a = Math.random() * 6.283; fx.stream(v3(pk.x + Math.cos(a) * 0.5, pk.y + Math.sin(a) * 0.5, pk.z + 0.1), v3(pk.x, pk.y, pk.z + 2.5 + pk.ord), RARITY[pk.d.rarity].hex, 1); }
+      if (d < 1.8 && Math.abs(dz) < 2.5 && age > 0.3) collect(pk); } }
 
   const offLoot = game.on('kill', e => { const m = e.mob; if (!m || m.noLoot) return; const loot = m.type?.loot;
     const rolls = Array.isArray(loot) ? loot : [{ rarity: 'common', chance: 0.4 }];
-    let k = 0; for (const r of rolls) if (Math.random() < (r.chance ?? 0)) { const id = items.roll(r.rarity); if (id) spawnPickup(id, m.x + (k ? Math.cos(k * 2) * 0.8 : 0), m.y + (k ? Math.sin(k * 2) * 0.8 : 0), m.z ?? game.groundAt(m.x, m.y, game.pz + 2) ?? game.pz); k++; } });
+    const gz = (m.type?.flying ? game.groundAt?.(m.x, m.y, (m.z ?? game.pz) + 1) : null) ?? m.groundZ ?? m.z ?? game.pz;
+    let k = 0; for (const r of rolls) if (Math.random() < (r.chance ?? 0)) { const id = items.roll(r.rarity); if (id) {
+      // session 46: drops bounce out 0.7-1.3 m from the corpse (walkable spot, else straight down)
+      const a = Math.random() * 6.283 + k * 2.1, rr = 0.7 + Math.random() * 0.6; let x = m.x + Math.cos(a) * rr, y = m.y + Math.sin(a) * rr, z = W.standAt?.(x, y, gz + 0.5);
+      if (z == null || Math.abs(z - gz) > 0.6) { x = m.x; y = m.y; z = gz; }
+      spawnPickup(id, x, y, z, { x: m.x, y: m.y, z: (m.z ?? gz) + 0.6 }); } k++; } });
 
   // ---------------- chests
   const wood = new T.MeshStandardMaterial({ color: 0x6b4423, roughness: 0.85 }), band = new T.MeshStandardMaterial({ color: 0xc9a13b, roughness: 0.4, metalness: 0.8 });
@@ -193,7 +242,7 @@ export function install(game) {
   function openChest(c) { if (c.opened) return; c.opened = true; c.opening = 0; sv.chests.push(c.id); game.persist();
     const u = Math.random(), rar = u < 0.12 ? 'legendary' : u < 0.42 ? 'epic' : 'rare'; const id = items.roll(rar);
     const f = { x: Math.sin(c.rot) * 1.3, y: Math.cos(c.rot) * 1.3 };  // in front of the lid (local +z)
-    S.after(0.5, () => { if (id) spawnPickup(id, c.x + f.x * 0.9, c.y - f.y * 0.9, c.z); fx.burst(v3(c.x, c.y, c.z + 0.7), RARITY[rar].hex, 50, 4, 1); fx.ring(c.x, c.y, c.z + 0.1, RARITY[rar].hex, 2.5, 0.6); });
+    S.after(0.5, () => { if (id) spawnPickup(id, c.x + f.x * 0.9, c.y - f.y * 0.9, c.z, { x: c.x, y: c.y, z: c.z + 0.6 }); fx.burst(v3(c.x, c.y, c.z + 0.7), RARITY[rar].hex, 50, 4, 1); fx.ring(c.x, c.y, c.z + 0.1, RARITY[rar].hex, 2.5, 0.6); });
     toast('Chest opened!'); game.emit('chestOpen', { id: c.id, item: id }); }
   let chestT = 0;
   function updateChests(dt) { const p = game.player; chestT -= dt;
@@ -273,5 +322,5 @@ export function install(game) {
   window.__itemIds = () => Object.keys(ITEMS).filter(k => ITEMS[k].test);
 
   game.add({ dispose() { offLoot(); offTick(); removeEventListener('keydown', onKey); panel.remove(); style.remove();
-    for (const s of Object.keys(active)) for (const off of active[s].offs) { try { off(); } catch {} } fx.dispose(); beamGeo.dispose(); gemGeo.dispose(); padGeo.dispose(); ringGeo2.dispose(); pillarTex.dispose(); padTex.dispose(); for (const pk of [...pickups]) removePickup(pk); delete window.__itemTest; } });
+    for (const s of Object.keys(active)) for (const off of active[s].offs) { try { off(); } catch {} } fx.dispose(); beamGeo.dispose(); gemGeo.dispose(); padGeo.dispose(); ringGeo2.dispose(); pillarTex.dispose(); padTex.dispose(); for (const pk of [...pickups, ...lingering]) removePickup(pk); delete window.__itemTest; } });
 }

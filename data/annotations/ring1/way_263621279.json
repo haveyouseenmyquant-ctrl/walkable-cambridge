@@ -1,0 +1,59 @@
+{
+ "osm_id": "way/263621279",
+ "sources": [
+  "commons:File:Cambridge - St John's Street - View SE on (Old) School of Divinity 1879 by Basil Champneys.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/263621279:0",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.6
+   ],
+   "material": "brick",
+   "wall_colour": "#a4523b",
+   "trim_colour": "#cdb68c",
+   "cornice_z": 9.8,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.6
+   ],
+   "quoins": true,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 9.4,
+     "w": 2.6,
+     "z": 5.4,
+     "h": 3.6,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 9.4,
+     "w": 2.4,
+     "z": 0.9,
+     "h": 1.7,
+     "panes": [
+      4,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Old Divinity School (Basil Champneys 1879), St John's Street front, north block. Red brick with Ketton-type stone dressings and quoin strips; gabled bay with a large pointed traceried two-light window over a band of carved heraldic shields (string course ~4.6 m), and a four-light stone-mullioned window at ground level. Only the southern ~6 m of this wall (next to the five-bay traceried range, walls :2-:18) is visible in the source photo; the northern part is not described. Gable apex rises above the wall height. Photo is from 2010 with hoarding in front."
+  }
+ ]
+}

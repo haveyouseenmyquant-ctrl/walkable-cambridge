@@ -1,0 +1,93 @@
+{
+ "osm_id": "way/135595981",
+ "sources": [
+  "mapillary:919159848898713",
+  "mapillary:301075494954846"
+ ],
+ "walls": [
+  {
+   "id": "way/135595981:6",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "stone",
+   "wall_colour": "#cdbb92",
+   "trim_colour": "#d8cba8",
+   "cornice_z": 9.4,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    1.2
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.5,
+    7.0,
+    13.5,
+    20.0,
+    26.5
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 3.75,
+     "w": 2.4,
+     "z": 2.6,
+     "h": 5.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 10.25,
+     "w": 2.4,
+     "z": 2.6,
+     "h": 5.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 16.75,
+     "w": 2.4,
+     "z": 2.6,
+     "h": 5.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 23.25,
+     "w": 2.4,
+     "z": 2.6,
+     "h": 5.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "pointed",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "St Andrew the Great, south (St Tibbs Row) side: buff ashlar Gothic Revival (1842-3) with stepped buttresses (as pilasters) dividing four bays, each with a tall pointed three-light traceried window with leaded glazing; plinth with offset at ~1.2 m and a plain parapet. Seen raking from the east end only; bay positions spaced evenly over the wall."
+  }
+ ]
+}

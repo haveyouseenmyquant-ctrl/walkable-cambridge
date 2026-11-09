@@ -29,28 +29,42 @@ export function install(game) {
   const nums = el('div', 'gh-nums', root);
 
   // ---- toast
+  // session 46: toasts and loot toasts live on the game clock (not setTimeout / CSS animations), so a stepped or
+  // hitching sim still shows them for their full duration and a screenshot never catches one mid fade-in.
+  const timed = [];   // {t, at, until, slide}
+  const gameNow = () => game.time ?? performance.now() / 1000;
+  function track(t, s, slide = 0) { const now = gameNow(); timed.push({ t, at: now, until: now + s, slide }); }
+  offs.push(game.on('tick', () => { const now = gameNow();
+    for (let i = timed.length - 1; i >= 0; i--) { const o = timed[i], left = o.until - now, age = now - o.at;
+      if (left <= 0 || !o.t.isConnected || age < -1) { o.t.remove(); timed.splice(i, 1); continue; }
+      const op = Math.min(1, left / 0.5), sl = o.slide ? Math.max(0, 1 - age / 0.15) * o.slide : 0;
+      o.t.style.opacity = op.toFixed(2); o.t.style.transform = sl || op < 1 ? `translateX(${(sl + (1 - op) * 30).toFixed(0)}px)` : ''; } }));
   function toast(text, ms = 2200) {
     const t = el('div', 'gh-toast', toasts); t.textContent = text;
-    setTimeout(() => t.classList.add('out'), ms); setTimeout(() => t.remove(), ms + 500);
+    track(t, Math.max(3, ms / 1000));
     while (toasts.children.length > 4) toasts.firstChild.remove();
     return t;
   }
-  // loot toast: item name in its rarity colour with a matching edge glow; higher rarities linger longer
+  // loot toast: rarity tag, item name in its rarity colour, slot note and an effect line; lingers 4-6 s of game time
   const lootBox = el('div', 'gh-loots', root);
-  function loot(name, rarity, color, note = '') {
-    const big = rarity === 'epic' || rarity === 'legendary', ms = big ? 3600 : 2600;
+  function loot(name, rarity, color, note = '', effect = '') {
+    const big = rarity === 'epic' || rarity === 'legendary';
     const t = el('div', 'gh-loot' + (big ? ' big' : ''), lootBox);
     t.style.setProperty('--rc', color);
-    el('span', 'gh-loot-r', t).textContent = rarity; el('span', 'gh-loot-n', t).textContent = name;
-    if (note) el('span', 'gh-loot-d', t).textContent = note;
-    setTimeout(() => t.classList.add('out'), ms); setTimeout(() => t.remove(), ms + 500);
-    while (lootBox.children.length > 4) lootBox.firstChild.remove();
+    const head = el('div', 'gh-loot-h', t);
+    el('span', 'gh-loot-r', head).textContent = rarity; el('span', 'gh-loot-n', head).textContent = name;
+    if (note) el('span', 'gh-loot-d', head).textContent = note;
+    if (effect) el('div', 'gh-loot-e', t).textContent = effect.length > 90 ? effect.slice(0, 88) + '…' : effect;
+    track(t, big ? 6 : 4.5, 0);
+    while (lootBox.children.length > 3) lootBox.firstChild.remove();
     return t;
   }
   const css = el('style', null, document.head);
-  css.textContent = `#game-hud .gh-loots{position:absolute;right:24px;top:34%;display:flex;flex-direction:column;align-items:flex-end;gap:6px;pointer-events:none}
-#game-hud .gh-loot{--rc:#ccc;display:flex;align-items:baseline;gap:8px;padding:6px 14px 6px 12px;background:linear-gradient(90deg,rgba(10,10,16,.55),rgba(10,10,16,.85));border-right:3px solid var(--rc);border-radius:4px 2px 2px 4px;box-shadow:0 0 14px -4px var(--rc);font:600 15px/1.2 system-ui,sans-serif;color:var(--rc);animation:gh-loot-in .28s cubic-bezier(.2,1.4,.4,1);transition:opacity .5s,transform .5s}
-#game-hud .gh-loot.big{font-size:18px;box-shadow:0 0 22px -2px var(--rc);border-right-width:5px}
+  css.textContent = `#game-hud .gh-loots{position:absolute;right:24px;top:11%;display:flex;flex-direction:column;align-items:flex-end;gap:6px;pointer-events:none}
+#game-hud .gh-loot{--rc:#ccc;display:flex;flex-direction:column;align-items:flex-end;gap:3px;max-width:380px;padding:5px 12px;background:linear-gradient(90deg,rgba(10,10,16,.6),rgba(10,10,16,.9));border-right:4px solid var(--rc);border-radius:4px 2px 2px 4px;box-shadow:0 0 18px -3px var(--rc),inset -40px 0 40px -30px var(--rc);font:700 15px/1.2 system-ui,sans-serif;color:var(--rc);text-shadow:0 0 8px var(--rc)}
+#game-hud .gh-loot-h{display:flex;align-items:baseline;gap:8px}
+#game-hud .gh-loot-e{font:400 11px/1.2 system-ui,sans-serif;color:#d8d8e4;text-shadow:none;text-align:right}
+#game-hud .gh-loot.big{font-size:19px;box-shadow:0 0 28px 0 var(--rc),inset -60px 0 50px -30px var(--rc);border-right-width:6px}
 #game-hud .gh-loot-r{font:500 10px/1 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.12em;opacity:.8}
 #game-hud .gh-loot-d{font:400 11px/1 system-ui,sans-serif;color:#aab}
 #game-hud .gh-loot.out{opacity:0;transform:translateX(30px)}

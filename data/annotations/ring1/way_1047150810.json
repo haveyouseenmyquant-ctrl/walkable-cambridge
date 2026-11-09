@@ -1,0 +1,199 @@
+{
+ "osm_id": "way/1047150810",
+ "sources": [
+  "commons:File:Former Central Cinema - geograph.org.uk - 5029802.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1047150810:6",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    5.0,
+    9.4
+   ],
+   "material": "render",
+   "wall_colour": "#e9e6dc",
+   "trim_colour": "#2a2a2a",
+   "cornice_z": 15.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    5.0
+   ],
+   "quoins": false,
+   "pilasters": [
+    2.3,
+    9.0
+   ],
+   "elements": [
+    {
+     "type": "door",
+     "style": "glazed",
+     "x": 3.4,
+     "w": 2.4,
+     "h": 2.8,
+     "surround": "none"
+    },
+    {
+     "type": "door",
+     "style": "glazed",
+     "x": 6.4,
+     "w": 2.4,
+     "h": 2.8,
+     "surround": "none"
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 12.0,
+     "w": 2.2,
+     "h": 3.4,
+     "surround": "none"
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 15.0,
+     "w": 0.9,
+     "z": 1.8,
+     "h": 1.2,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.0,
+     "w": 0.7,
+     "z": 6.5,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.0,
+     "w": 0.7,
+     "z": 10.0,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 3.6,
+     "w": 0.9,
+     "z": 6.0,
+     "h": 6.0,
+     "panes": [
+      2,
+      8
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 5.0,
+     "w": 0.9,
+     "z": 6.0,
+     "h": 6.0,
+     "panes": [
+      2,
+      8
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 6.4,
+     "w": 0.9,
+     "z": 6.0,
+     "h": 6.0,
+     "panes": [
+      2,
+      8
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 11.3,
+     "w": 1.2,
+     "z": 6.8,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 11.3,
+     "w": 1.2,
+     "z": 10.6,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 14.2,
+     "w": 1.2,
+     "z": 6.8,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 14.2,
+     "w": 1.2,
+     "z": 10.6,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Former Central Cinema (1930 Art Deco), 21 Hobson St: white glazed faience tiling (rendered finish used), dark plinth band. Stepped central frontispiece with three tall vertical window strips, Art Deco reliefs and a raised parapet; projecting flat canopy over the entrance steps and doors; narrow left pier with small windows; right wing with two windows on each upper floor over a tall service door. Photo 2016 (vacant); later refurbishment not checked. Bay positions estimated from one oblique CC BY-SA 2.0 geograph photo."
+  }
+ ]
+}

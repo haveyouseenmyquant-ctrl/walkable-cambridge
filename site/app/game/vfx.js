@@ -1,204 +1,606 @@
-// Spell VFX (session 40): one additive particle system plus small pools of sprites, rings, beams, lightning lines,
-// spikes and domes. Everything is allocated once at install; spawning reuses pool slots, so casting allocates nothing.
+// Spell VFX kit (session 46; replaces session 40's flat sprites/cones). Everything is pooled and allocated at install,
+// so casting allocates nothing:
+//  - two particle systems (additive and alpha-blended) sharing a canvas-generated sprite atlas
+//    (glow, flame, smoke, spark, rune, shard, wisp, ember); per-particle rotation, spin, growth and colour-over-life
+//  - ribbon trails (camera-facing strips) for projectiles and wind streaks
+//  - procedural branching lightning (midpoint displacement, re-strikes, flicker) and wavy drain tethers
+//  - fresnel glow cores for projectiles, noisy shockwave rings, fading ground decals (scorch, frost, rune, crack)
+//  - physical rock debris, jagged stone spikes, an amber runic shield, and a few short-lived point lights (capped)
+// Nothing may cover the camera: particles, trails, bolts, cores and sprites fade out inside ~2.5 m of the camera and
+// particle screen size is capped. ?quality=low halves particle counts and drops the point lights.
 // All positions are given in the collision frame (x east, y north, z up) and converted to three.js (x, z, -y).
 export function createVfx(game) {
   const THREE = game.THREE, root = new THREE.Group(); root.name = 'vfx'; game.root.add(root);
-  const col = new THREE.Color();
+  const col = new THREE.Color(), col2 = new THREE.Color();
+  const QUALITY = (() => { try { return new URLSearchParams(location.search).get('quality') || (matchMedia('(pointer: coarse)').matches ? 'low' : 'high'); } catch { return 'high'; } })();
+  const LOW = QUALITY === 'low', QN = LOW ? 0.5 : 1;
+  const rnd = Math.random, TAU = Math.PI * 2;
+  const canvas = (w, h = w) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return [c, c.getContext('2d')]; };
+  const camPos = new THREE.Vector3();
+  const camera = () => game.camera;
+  function camDist(x, y, z) { return Math.hypot(x - camPos.x, y - camPos.y, z - camPos.z); }   // three.js coords
+  const smooth = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
 
-  // ---- glow texture: soft round falloff (roughly gaussian) so particles read as round motes, never squares
-  const cv = document.createElement('canvas'); cv.width = cv.height = 64;
-  const g2 = cv.getContext('2d'), gr = g2.createRadialGradient(32, 32, 0, 32, 32, 31);
+  // ---------------- textures ----------------
+  // legacy glow (round soft falloff) and star (rayed flash), still exported
+  const [cv, g2] = canvas(64), gr = g2.createRadialGradient(32, 32, 0, 32, 32, 31);
   gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(0.18, 'rgba(255,255,255,0.8)'); gr.addColorStop(0.45, 'rgba(255,255,255,0.32)');
   gr.addColorStop(0.75, 'rgba(255,255,255,0.08)'); gr.addColorStop(1, 'rgba(255,255,255,0)');
   g2.fillStyle = gr; g2.fillRect(0, 0, 64, 64);
   const glow = new THREE.CanvasTexture(cv);
-  // ---- impact flash texture: small hot core with four tapering rays (used for hit flashes)
-  const cs = document.createElement('canvas'); cs.width = cs.height = 64; const s2 = cs.getContext('2d');
+  const [cs, s2] = canvas(64);
   const cg = s2.createRadialGradient(32, 32, 0, 32, 32, 18); cg.addColorStop(0, 'rgba(255,255,255,1)'); cg.addColorStop(0.4, 'rgba(255,255,255,0.45)'); cg.addColorStop(1, 'rgba(255,255,255,0)');
   s2.fillStyle = cg; s2.fillRect(0, 0, 64, 64); s2.globalCompositeOperation = 'lighter';
   for (let k = 0; k < 4; k++) { s2.save(); s2.translate(32, 32); s2.rotate(k * Math.PI / 2 + 0.4);
     const rg = s2.createLinearGradient(0, 0, 31, 0); rg.addColorStop(0, 'rgba(255,255,255,0.9)'); rg.addColorStop(1, 'rgba(255,255,255,0)');
     s2.fillStyle = rg; s2.beginPath(); s2.moveTo(0, -3); s2.lineTo(31, 0); s2.lineTo(0, 3); s2.closePath(); s2.fill(); s2.restore(); }
   const star = new THREE.CanvasTexture(cs);
-  // "screen"-style blend (src + dst*(1-src)): overlapping glows saturate towards their colour instead of clipping
-  // to white the way plain additive does; used for every glow in this module.
-  const SCREEN = { blending: THREE.CustomBlending, blendEquation: THREE.AddEquation, blendSrc: THREE.OneFactor, blendDst: THREE.OneMinusSrcColorFactor };
-  // tone a colour for glow use: cap the brightest channel and keep some saturation, so white-hot cores stay tinted
-  const tone = (c, k = 0.8) => { const m = Math.max(c.r, c.g, c.b, 1e-3); const f = Math.min(1, 0.92 / m) * k; c.r *= f; c.g *= f; c.b *= f; return c; };
 
-  // ---- particles
-  const N = 2400;
-  const pos = new Float32Array(N * 3), clr = new Float32Array(N * 3), size = new Float32Array(N);
-  const vel = new Float32Array(N * 3), base = new Float32Array(N * 3), life = new Float32Array(N), max = new Float32Array(N),
-        grav = new Float32Array(N), drag = new Float32Array(N), size0 = new Float32Array(N);
-  const geo = new THREE.BufferGeometry();
-  const aPos = new THREE.BufferAttribute(pos, 3), aClr = new THREE.BufferAttribute(clr, 3), aSize = new THREE.BufferAttribute(size, 1);
-  aPos.setUsage(THREE.DynamicDrawUsage); aClr.setUsage(THREE.DynamicDrawUsage); aSize.setUsage(THREE.DynamicDrawUsage);
-  geo.setAttribute('position', aPos); geo.setAttribute('color', aClr); geo.setAttribute('size', aSize);
-  const pmat = new THREE.ShaderMaterial({
-    uniforms: { map: { value: glow }, scale: { value: 600 } },
-    vertexShader: `attribute float size; varying vec3 vC;
-      void main(){ vC = color; vec4 mv = modelViewMatrix * vec4(position,1.0); gl_Position = projectionMatrix * mv;
-      gl_PointSize = size * 600.0 / max(0.1, -mv.z); }`,
-    fragmentShader: `uniform sampler2D map; varying vec3 vC;
-      void main(){ vec4 t = texture2D(map, gl_PointCoord); gl_FragColor = vec4(vC * t.a, t.a); }`,
-    vertexColors: true, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+  // particle atlas: 4 x 2 tiles of 64 px. 0 glow, 1 flame, 2 smoke, 3 spark, 4 rune, 5 shard, 6 wisp, 7 ember
+  const TILE = { glow: 0, flame: 1, smoke: 2, spark: 3, rune: 4, shard: 5, wisp: 6, ember: 7, dust: 2 };
+  const [ca, a2] = canvas(256, 128);
+  const blob = (cx, cy, r, a) => { const g = a2.createRadialGradient(cx, cy, 0, cx, cy, r); g.addColorStop(0, `rgba(255,255,255,${a})`); g.addColorStop(1, 'rgba(255,255,255,0)'); a2.fillStyle = g; a2.beginPath(); a2.arc(cx, cy, r, 0, TAU); a2.fill(); };
+  const tile = (i, fn) => { a2.save(); a2.translate((i % 4) * 64, Math.floor(i / 4) * 64); a2.beginPath(); a2.rect(1, 1, 62, 62); a2.clip(); fn(); a2.restore(); };
+  tile(0, () => { const g = a2.createRadialGradient(32, 32, 0, 32, 32, 30); g.addColorStop(0, 'rgba(255,255,255,1)'); g.addColorStop(0.2, 'rgba(255,255,255,0.75)'); g.addColorStop(0.5, 'rgba(255,255,255,0.25)'); g.addColorStop(1, 'rgba(255,255,255,0)'); a2.fillStyle = g; a2.fillRect(0, 0, 64, 64); });
+  tile(1, () => {   // flame tongue: stacked blobs narrowing upwards, flickery edge
+    for (let k = 0; k < 14; k++) { const t = k / 13; blob(32 + Math.sin(t * 9) * 3 * t, 44 - t * 32, 12 * (1 - t * 0.7), 0.42 - t * 0.12); }
+    blob(32, 40, 8, 0.6);
   });
-  const points = new THREE.Points(geo, pmat); points.frustumCulled = false; points.renderOrder = 10; root.add(points);
-  let cursor = 0, alive = 0;
+  tile(2, () => { for (let k = 0; k < 16; k++) { const a = rnd() * TAU, r = rnd() * 13; blob(32 + Math.cos(a) * r * 0.8, 32 + Math.sin(a) * r * 0.8, 8 + rnd() * 8, 0.18 + rnd() * 0.14); } });
+  tile(3, () => { blob(32, 32, 9, 1); a2.globalCompositeOperation = 'lighter';
+    for (let k = 0; k < 4; k++) { a2.save(); a2.translate(32, 32); a2.rotate(k * Math.PI / 2); const g = a2.createLinearGradient(0, 0, 30, 0); g.addColorStop(0, 'rgba(255,255,255,1)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+      a2.fillStyle = g; a2.beginPath(); a2.moveTo(0, -2.2); a2.lineTo(30, 0); a2.lineTo(0, 2.2); a2.fill(); a2.restore(); } });
+  tile(4, () => {   // rune sigil: ring, inner triangle, ticks (original glyph)
+    a2.strokeStyle = 'rgba(255,255,255,1)'; a2.shadowColor = 'white'; a2.shadowBlur = 5; a2.lineWidth = 2.4;
+    a2.beginPath(); a2.arc(32, 32, 24, 0, TAU); a2.stroke();
+    a2.lineWidth = 2; a2.beginPath(); for (let k = 0; k <= 3; k++) { const a = -Math.PI / 2 + k * TAU / 3; a2.lineTo(32 + Math.cos(a) * 18, 32 + Math.sin(a) * 18); } a2.stroke();
+    a2.beginPath(); a2.moveTo(32, 14); a2.lineTo(32, 44); a2.moveTo(24, 36); a2.lineTo(40, 36); a2.stroke();
+    for (let k = 0; k < 8; k++) { const a = k * TAU / 8; a2.beginPath(); a2.moveTo(32 + Math.cos(a) * 24, 32 + Math.sin(a) * 24); a2.lineTo(32 + Math.cos(a) * 29, 32 + Math.sin(a) * 29); a2.stroke(); } });
+  tile(5, () => { a2.fillStyle = 'rgba(255,255,255,0.95)'; a2.beginPath(); a2.moveTo(30, 6); a2.lineTo(44, 26); a2.lineTo(36, 58); a2.lineTo(20, 34); a2.closePath(); a2.fill();
+    a2.fillStyle = 'rgba(120,120,120,0.9)'; a2.beginPath(); a2.moveTo(30, 6); a2.lineTo(36, 58); a2.lineTo(20, 34); a2.fill(); });
+  tile(6, () => { a2.strokeStyle = 'rgba(255,255,255,0.85)'; a2.shadowColor = 'white'; a2.shadowBlur = 8; a2.lineCap = 'round';
+    for (let k = 0; k < 3; k++) { a2.lineWidth = 4 - k; a2.beginPath(); for (let t = 0; t <= 1.001; t += 0.05) { const a = t * 5 + k * 2, r = 4 + t * 20; a2.lineTo(32 + Math.cos(a) * r, 32 + Math.sin(a) * r); } a2.stroke(); }
+    blob(32, 32, 10, 0.8); });
+  tile(7, () => { blob(32, 32, 7, 1); blob(32, 32, 16, 0.35); });
+  const atlas = new THREE.CanvasTexture(ca);
 
-  // burst(x,y,z,n,{color, speed, size, life, grav, drag, up, dx,dy,dz, cone, jitter})
+  // shockwave: noisy band near the edge of a disc
+  const [cr, r2] = canvas(256);
+  r2.translate(128, 128);
+  for (let k = 0; k < 420; k++) { const a = rnd() * TAU, len = 0.05 + rnd() * 0.25, rad = 104 + rnd() * 20, w = 1 + rnd() * 5;
+    r2.strokeStyle = `rgba(255,255,255,${0.1 + rnd() * 0.35})`; r2.lineWidth = w; r2.beginPath(); r2.arc(0, 0, rad, a, a + len); r2.stroke(); }
+  { const g = r2.createRadialGradient(0, 0, 80, 0, 0, 127); g.addColorStop(0, 'rgba(255,255,255,0)'); g.addColorStop(0.75, 'rgba(255,255,255,0.35)'); g.addColorStop(0.88, 'rgba(255,255,255,0.7)'); g.addColorStop(1, 'rgba(255,255,255,0)'); r2.fillStyle = g; r2.fillRect(-128, -128, 256, 256); }
+  const shockTex = new THREE.CanvasTexture(cr);
+
+  // ground decals
+  function decalTex(draw) { const [c, d] = canvas(256); d.translate(128, 128); draw(d); return new THREE.CanvasTexture(c); }
+  const DECAL = {
+    scorch: { blend: 'alpha', tex: decalTex(d => {
+      for (let k = 0; k < 60; k++) { const a = rnd() * TAU, r = rnd() * 70, s = 20 + rnd() * 40, g = d.createRadialGradient(Math.cos(a) * r, Math.sin(a) * r, 0, Math.cos(a) * r, Math.sin(a) * r, s);
+        g.addColorStop(0, 'rgba(18,10,6,0.35)'); g.addColorStop(1, 'rgba(18,10,6,0)'); d.fillStyle = g; d.beginPath(); d.arc(Math.cos(a) * r, Math.sin(a) * r, s, 0, TAU); d.fill(); }
+      d.strokeStyle = 'rgba(10,6,4,0.5)'; d.lineWidth = 2; for (let k = 0; k < 14; k++) { let x = 0, y = 0, a = rnd() * TAU; d.beginPath(); d.moveTo(x, y); for (let s = 0; s < 6; s++) { a += (rnd() - 0.5) * 0.9; x += Math.cos(a) * 16; y += Math.sin(a) * 16; d.lineTo(x, y); } d.stroke(); } }) },
+    frost: { blend: 'add', tex: decalTex(d => {
+      d.strokeStyle = 'rgba(255,255,255,0.7)'; d.shadowColor = 'white'; d.shadowBlur = 6;
+      for (let k = 0; k < 22; k++) { let x = 0, y = 0, a = k / 22 * TAU + rnd() * 0.2; d.lineWidth = 2.5; d.beginPath(); d.moveTo(0, 0);
+        for (let s = 0; s < 7; s++) { a += (rnd() - 0.5) * 0.8; x += Math.cos(a) * 15; y += Math.sin(a) * 15; d.lineTo(x, y);
+          if (rnd() < 0.4) { d.moveTo(x, y); const b = a + (rnd() < 0.5 ? 0.9 : -0.9); d.lineTo(x + Math.cos(b) * 12, y + Math.sin(b) * 12); d.moveTo(x, y); } } d.stroke(); }
+      const g = d.createRadialGradient(0, 0, 0, 0, 0, 120); g.addColorStop(0, 'rgba(255,255,255,0.35)'); g.addColorStop(1, 'rgba(255,255,255,0)'); d.fillStyle = g; d.fillRect(-128, -128, 256, 256); }) },
+    rune: { blend: 'add', tex: decalTex(d => {
+      d.strokeStyle = 'rgba(255,255,255,0.95)'; d.shadowColor = 'white'; d.shadowBlur = 8;
+      d.lineWidth = 5; d.beginPath(); d.arc(0, 0, 118, 0, TAU); d.stroke(); d.lineWidth = 2.5; d.beginPath(); d.arc(0, 0, 100, 0, TAU); d.stroke();
+      d.beginPath(); d.arc(0, 0, 54, 0, TAU); d.stroke();
+      d.lineWidth = 3; d.beginPath(); for (let k = 0; k <= 7; k++) { const a = k * TAU * 3 / 7; d.lineTo(Math.cos(a) * 100, Math.sin(a) * 100); } d.stroke();
+      d.lineWidth = 2.5; for (let k = 0; k < 24; k++) { const a = k * TAU / 24; d.save(); d.rotate(a); d.translate(0, -109); d.beginPath();
+        const v = k % 4; if (v === 0) { d.moveTo(-4, -5); d.lineTo(0, 5); d.lineTo(4, -5); } else if (v === 1) { d.moveTo(-4, 0); d.lineTo(4, 0); d.moveTo(0, -5); d.lineTo(0, 5); } else if (v === 2) { d.arc(0, 0, 4, 0, Math.PI); } else { d.moveTo(-4, 5); d.lineTo(0, -5); d.lineTo(4, 5); d.moveTo(-2, 1); d.lineTo(2, 1); }
+        d.stroke(); d.restore(); } }) },
+    crack: { blend: 'alpha', tex: decalTex(d => {
+      const g = d.createRadialGradient(0, 0, 0, 0, 0, 60); g.addColorStop(0, 'rgba(40,30,20,0.55)'); g.addColorStop(1, 'rgba(40,30,20,0)'); d.fillStyle = g; d.fillRect(-128, -128, 256, 256);
+      d.strokeStyle = 'rgba(25,18,12,0.85)'; d.lineCap = 'round';
+      for (let k = 0; k < 11; k++) { let x = 0, y = 0, a = k / 11 * TAU + rnd() * 0.4, w = 6; d.beginPath(); d.moveTo(0, 0);
+        for (let s = 0; s < 9; s++) { a += (rnd() - 0.5) * 0.7; x += Math.cos(a) * 13; y += Math.sin(a) * 13; d.lineWidth = w; w *= 0.82; d.lineTo(x, y); d.stroke(); d.beginPath(); d.moveTo(x, y);
+          if (rnd() < 0.25) { const b = a + (rnd() - 0.5) * 2; d.lineTo(x + Math.cos(b) * 18, y + Math.sin(b) * 18); d.stroke(); d.beginPath(); d.moveTo(x, y); } } }
+      d.strokeStyle = 'rgba(25,18,12,0.5)'; d.lineWidth = 2; d.beginPath(); d.arc(0, 0, 70 + rnd() * 20, 0, TAU); d.stroke(); }) },
+  };
+
+  // "screen"-style blend kept for legacy sprites
+  const SCREEN = { blending: THREE.CustomBlending, blendEquation: THREE.AddEquation, blendSrc: THREE.OneFactor, blendDst: THREE.OneMinusSrcColorFactor };
+  const tone = (c, k = 0.8) => { const m = Math.max(c.r, c.g, c.b, 1e-3); const f = Math.min(1, 0.92 / m) * k; c.r *= f; c.g *= f; c.b *= f; return c; };
+  const NEAR = 'uniform float uNear0; uniform float uNear1;';   // near-camera fade band (m)
+  const nearU = () => ({ uNear0: { value: 0.7 }, uNear1: { value: 2.6 } });
+
+  // ---------------- particles ----------------
+  let viewH = 720;
+  function makeSys(N, additive) {
+    const S = { N, cursor: 0, alive: 0,
+      pos: new Float32Array(N * 3), c4: new Float32Array(N * 4), misc: new Float32Array(N * 3),
+      vel: new Float32Array(N * 3), base: new Float32Array(N * 3), end: new Float32Array(N * 3), a0: new Float32Array(N),
+      life: new Float32Array(N), max: new Float32Array(N), grav: new Float32Array(N), drag: new Float32Array(N),
+      size0: new Float32Array(N), grow: new Float32Array(N), spin: new Float32Array(N), fadeIn: new Float32Array(N) };
+    const geo = new THREE.BufferGeometry();
+    S.aPos = new THREE.BufferAttribute(S.pos, 3); S.aC = new THREE.BufferAttribute(S.c4, 4); S.aM = new THREE.BufferAttribute(S.misc, 3);
+    for (const a of [S.aPos, S.aC, S.aM]) a.setUsage(THREE.DynamicDrawUsage);
+    geo.setAttribute('position', S.aPos); geo.setAttribute('c4', S.aC); geo.setAttribute('misc', S.aM);
+    S.mat = new THREE.ShaderMaterial({
+      uniforms: { map: { value: atlas }, uH: { value: 720 }, uMax: { value: 160 }, ...nearU() },
+      vertexShader: `attribute vec4 c4; attribute vec3 misc; uniform float uH; uniform float uMax; ${NEAR}
+        varying vec4 vC; varying float vTile; varying float vRot;
+        void main(){ vec4 mv = modelViewMatrix * vec4(position,1.0); gl_Position = projectionMatrix * mv;
+          float d = max(0.05, -mv.z); float px = misc.x * projectionMatrix[1][1] * 0.5 * uH / d;
+          float a = c4.a * smoothstep(uNear0, uNear1, d) * min(1.0, uMax / max(px, 1.0));
+          vC = vec4(c4.rgb, a); vTile = misc.y; vRot = misc.z; gl_PointSize = misc.x <= 0.0 || a < 0.004 ? 0.0 : min(px, uMax); }`,
+      fragmentShader: `uniform sampler2D map; varying vec4 vC; varying float vTile; varying float vRot;
+        void main(){ vec2 p = gl_PointCoord - 0.5; float c = cos(vRot), s = sin(vRot); p = vec2(c*p.x - s*p.y, s*p.x + c*p.y) + 0.5;
+          if (p.x < 0.0 || p.y < 0.0 || p.x > 1.0 || p.y > 1.0) discard;
+          float col = mod(vTile, 4.0), row = floor(vTile / 4.0);
+          vec4 t = texture2D(map, vec2((col + p.x) / 4.0, 1.0 - (row + p.y) / 2.0));
+          ${additive ? 'gl_FragColor = vec4(vC.rgb * t.a * vC.a, t.a * vC.a);' : 'gl_FragColor = vec4(vC.rgb * t.rgb, t.a * vC.a);'} }`,
+      transparent: true, depthWrite: false, blending: additive ? THREE.AdditiveBlending : THREE.NormalBlending,
+    });
+    S.points = new THREE.Points(geo, S.mat); S.points.frustumCulled = false; S.points.renderOrder = additive ? 11 : 10;
+    S.points.onBeforeRender = (r) => { S.mat.uniforms.uH.value = viewH = r.getDrawingBufferSize(tmpV2).y; S.mat.uniforms.uMax.value = viewH * 0.2; };
+    root.add(S.points);
+    return S;
+  }
+  const tmpV2 = new THREE.Vector2();
+  const ADD = makeSys(LOW ? 1600 : 3200, true), ALPHA = makeSys(LOW ? 600 : 1200, false);
+  const ALPHA_TEX = { smoke: 1, dust: 1, shard: 1 };
+
+  // burst(x,y,z,n,{color, color2, speed, size, life, grav, drag, up, dx,dy,dz, cone, jitter, tex, blend, grow, spin, alpha, jz, ring})
+  // tex: glow|flame|smoke|spark|rune|shard|wisp|ember|dust; smoke/dust/shard default to alpha blending (dark-capable).
+  // color2: colour at end of life. grow: size growth over life (smoke). ring: spawn on a horizontal ring of this radius.
   function burst(x, y, z, n, o = {}) {
-    tone(col.set(o.color ?? 0xffaa44), 1);
-    const sp = o.speed ?? 4, sz = o.size ?? 0.4, lf = o.life ?? 0.6, jit = o.jitter ?? 0.2;
+    const texName = o.tex || 'glow', T = TILE[texName] ?? 0, S = (o.blend ? o.blend === 'alpha' : ALPHA_TEX[texName]) ? ALPHA : ADD;
+    n = Math.max(n > 0 ? 1 : 0, Math.round(n * QN));
+    col.set(o.color ?? 0xffaa44); if (S === ADD) tone(col, 1);
+    col2.set(o.color2 ?? o.color ?? 0xffaa44); if (S === ADD) tone(col2, 1);
+    const sp = o.speed ?? 4, sz = o.size ?? 0.4, lf = o.life ?? 0.6, jit = o.jitter ?? 0.2, jz = o.jz ?? jit, alpha = o.alpha ?? 1;
+    const flame = texName === 'flame';
     for (let k = 0; k < n; k++) {
-      const i = cursor; cursor = (cursor + 1) % N; const j = i * 3;
-      pos[j] = x + (Math.random() - 0.5) * jit; pos[j + 1] = z + (Math.random() - 0.5) * jit; pos[j + 2] = -(y + (Math.random() - 0.5) * jit);
-      let vx = Math.random() * 2 - 1, vy = Math.random() * 2 - 1, vz = Math.random() * 2 - 1;
-      const l = Math.hypot(vx, vy, vz) || 1; const s = sp * (0.4 + Math.random() * 0.6) / l;
+      const i = S.cursor; S.cursor = (S.cursor + 1) % S.N; const j = i * 3;
+      let px = x + (rnd() - 0.5) * jit, py = y + (rnd() - 0.5) * jit;
+      if (o.ring) { const a = rnd() * TAU, r = o.ring * (0.85 + rnd() * 0.3); px = x + Math.cos(a) * r; py = y + Math.sin(a) * r; }
+      S.pos[j] = px; S.pos[j + 1] = z + (rnd() - 0.5) * jz; S.pos[j + 2] = -py;
+      let vx = rnd() * 2 - 1, vy = rnd() * 2 - 1, vz = rnd() * 2 - 1;
+      const l = Math.hypot(vx, vy, vz) || 1; const s = sp * (0.4 + rnd() * 0.6) / l;
       vx *= s; vy *= s; vz *= s;
       if (o.dx !== undefined) { const c = o.cone ?? 0.3; vx = vx * c + o.dx * sp; vy = vy * c + o.dy * sp; vz = vz * c + (o.dz ?? 0) * sp; }
+      if (o.radial) { const ex = px - x, ey = py - y, el = Math.hypot(ex, ey) || 1; vx += ex / el * o.radial; vy += ey / el * o.radial; }
       vz += o.up ?? 0;
-      vel[j] = vx; vel[j + 1] = vz; vel[j + 2] = -vy;
-      const v = 0.75 + Math.random() * 0.25;
-      base[j] = col.r * v; base[j + 1] = col.g * v; base[j + 2] = col.b * v;
-      max[i] = life[i] = lf * (0.6 + Math.random() * 0.4);
-      size0[i] = sz * (0.6 + Math.random() * 0.8); grav[i] = o.grav ?? 0; drag[i] = o.drag ?? 1.5;
+      S.vel[j] = vx; S.vel[j + 1] = vz; S.vel[j + 2] = -vy;
+      const v = 0.8 + rnd() * 0.2;
+      S.base[j] = col.r * v; S.base[j + 1] = col.g * v; S.base[j + 2] = col.b * v;
+      S.end[j] = col2.r * v; S.end[j + 1] = col2.g * v; S.end[j + 2] = col2.b * v;
+      S.a0[i] = alpha * (0.75 + rnd() * 0.25);
+      S.max[i] = S.life[i] = lf * (0.6 + rnd() * 0.4);
+      S.size0[i] = sz * (0.6 + rnd() * 0.8); S.grav[i] = o.grav ?? 0; S.drag[i] = o.drag ?? 1.5; S.grow[i] = o.grow ?? 0;
+      S.misc[j + 1] = T; S.misc[j + 2] = flame ? (rnd() - 0.5) * 0.5 : rnd() * TAU; S.spin[i] = (o.spin ?? (flame ? 0 : 1.5)) * (rnd() - 0.5) * 2;
+      S.fadeIn[i] = o.fadeIn ?? (texName === 'smoke' || texName === 'dust' ? 0.25 : 0.06);
+      S.misc[j] = 0.001;
     }
-    alive = N;
+    S.alive = 1;
+  }
+  function stepSys(S, dt) {
+    if (!S.alive) return;
+    let any = 0;
+    const { pos, vel, c4, misc, life, max, drag, grav, base, end, size0, grow, spin, a0, fadeIn } = S;
+    for (let i = 0; i < S.N; i++) {
+      const j = i * 3;
+      if (life[i] <= 0) { if (misc[j] !== 0) { misc[j] = 0; c4[i * 4 + 3] = 0; } continue; }
+      any = 1; life[i] -= dt; const k = Math.max(0, life[i] / max[i]), age = 1 - k;
+      const d = Math.max(0, 1 - drag[i] * dt);
+      vel[j] *= d; vel[j + 1] = vel[j + 1] * d - grav[i] * dt; vel[j + 2] *= d;
+      pos[j] += vel[j] * dt; pos[j + 1] += vel[j + 1] * dt; pos[j + 2] += vel[j + 2] * dt;
+      const q = i * 4;
+      c4[q] = end[j] + (base[j] - end[j]) * k; c4[q + 1] = end[j + 1] + (base[j + 1] - end[j + 1]) * k; c4[q + 2] = end[j + 2] + (base[j + 2] - end[j + 2]) * k;
+      const fi = fadeIn[i] > 0 ? Math.min(1, age / fadeIn[i]) : 1;
+      c4[q + 3] = a0[i] * fi * (grow[i] > 0 ? k : Math.sqrt(k));
+      misc[j] = size0[i] * (grow[i] > 0 ? 0.5 + grow[i] * age : 0.35 + 0.65 * k);
+      misc[j + 2] += spin[i] * dt;
+    }
+    S.aPos.needsUpdate = S.aC.needsUpdate = S.aM.needsUpdate = true;
+    if (!any) S.alive = 0;
   }
 
-  // ---- pooled objects
+  // ---------------- pooled objects ----------------
   const fx = [];   // active: {obj, t, dur, kind, ...}
   function pool(n, make) { const a = []; for (let i = 0; i < n; i++) { const o = make(); o.visible = false; root.add(o); a.push(o); } return a; }
   const take = p => { for (const o of p) if (!o.visible) { o.visible = true; return o; } return null; };
   const addMat = () => ({ transparent: true, depthWrite: false, ...SCREEN, fog: false });
   const sprites = pool(64, () => new THREE.Sprite(new THREE.SpriteMaterial({ map: glow, ...addMat() })));
-  const ringGeo = new THREE.RingGeometry(0.88, 1, 48); ringGeo.rotateX(-Math.PI / 2);
-  const rings = pool(24, () => new THREE.Mesh(ringGeo, new THREE.MeshBasicMaterial({ side: THREE.DoubleSide, ...addMat() })));
-  const discGeo = new THREE.CircleGeometry(1, 40); discGeo.rotateX(-Math.PI / 2);
-  const discs = pool(12, () => new THREE.Mesh(discGeo, new THREE.MeshBasicMaterial({ side: THREE.DoubleSide, ...addMat() })));
-  const beamGeo = new THREE.CylinderGeometry(1, 1, 1, 8, 1, true); beamGeo.translate(0, 0.5, 0);
-  const beams = pool(24, () => new THREE.Mesh(beamGeo, new THREE.MeshBasicMaterial({ ...addMat() })));
-  const spikeGeo = new THREE.ConeGeometry(0.35, 1, 5); spikeGeo.translate(0, 0.5, 0);
-  const spikes = pool(48, () => new THREE.Mesh(spikeGeo, new THREE.MeshLambertMaterial({ color: 0x8a7458, transparent: true })));
-  const domeGeo = new THREE.SphereGeometry(1, 24, 16);
-  const domes = pool(4, () => new THREE.Mesh(domeGeo, new THREE.MeshBasicMaterial({ ...addMat(), opacity: 0.25 })));
-  const SEG = 14;
-  const bolts = pool(16, () => {
-    const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(SEG * 3), 3));
-    const l = new THREE.Line(g, new THREE.LineBasicMaterial({ ...addMat() })); l.frustumCulled = false; return l;
-  });
   const flashes = pool(24, () => new THREE.Sprite(new THREE.SpriteMaterial({ map: star, ...addMat() })));
-  const up = new THREE.Vector3(0, 1, 0), tv = new THREE.Vector3();
-
-  const fxRec = [];   // record pool for fx entries (avoid allocations)
+  const up = new THREE.Vector3(0, 1, 0), tv = new THREE.Vector3(), tv2 = new THREE.Vector3(), tv3 = new THREE.Vector3();
+  const fxRec = [];
   function rec(obj, dur, kind) {
-    const r = fxRec.pop() || {}; r.obj = obj; r.t = 0; r.dur = dur; r.kind = kind; r.follow = null; fx.push(r); return r;
+    const r = fxRec.pop() || {}; r.obj = obj; r.t = 0; r.dur = dur; r.kind = kind; r.follow = null; r.until = null; fx.push(r); return r;
   }
 
+  // shockwave rings (textured plane) and decals
+  const planeGeo = new THREE.PlaneGeometry(2, 2); planeGeo.rotateX(-Math.PI / 2);
+  const shocks = pool(24, () => { const m = new THREE.Mesh(planeGeo, new THREE.MeshBasicMaterial({ map: shockTex, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, fog: false, side: THREE.DoubleSide })); m.renderOrder = 9; return m; });
+  const decals = pool(24, () => { const m = new THREE.Mesh(planeGeo, new THREE.MeshBasicMaterial({ transparent: true, depthWrite: false, fog: false, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -4 })); m.renderOrder = 2; return m; });
+
+  // fresnel glow cores
+  const coreGeo = new THREE.SphereGeometry(1, 16, 12);
+  const coreMat = () => new THREE.ShaderMaterial({
+    uniforms: { uColor: { value: new THREE.Color() }, uOp: { value: 1 }, ...nearU() },
+    vertexShader: `varying vec3 vN; varying vec3 vV; varying float vD; void main(){ vec4 mv = modelViewMatrix * vec4(position,1.0); vN = normalMatrix * normal; vV = -mv.xyz; vD = -mv.z; gl_Position = projectionMatrix * mv; }`,
+    fragmentShader: `uniform vec3 uColor; uniform float uOp; ${NEAR} varying vec3 vN; varying vec3 vV; varying float vD;
+      void main(){ float f = 1.0 - abs(dot(normalize(vN), normalize(vV))); vec3 c = mix(vec3(1.0, 0.98, 0.92), uColor, smoothstep(0.05, 0.75, f)) * (0.9 + 1.4 * f * f);
+        float a = uOp * smoothstep(uNear0, uNear1, vD); gl_FragColor = vec4(c * a, a); }`,
+    transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+  });
+  const cores = pool(40, () => { const m = new THREE.Mesh(coreGeo, coreMat()); m.renderOrder = 12; return m; });
+
+  // ribbon trails
+  const TP = 16;
+  const trailIdx = []; for (let i = 0; i < TP - 1; i++) { const a = i * 2; trailIdx.push(a, a + 1, a + 2, a + 1, a + 3, a + 2); }
+  const ribbonMat = (wavy) => new THREE.ShaderMaterial({
+    uniforms: { uColor: { value: new THREE.Color() }, uOp: { value: 1 }, ...nearU() },
+    vertexShader: `attribute float aA; varying float vA; varying vec2 vUv; varying float vD; void main(){ vA = aA; vUv = uv; vec4 mv = modelViewMatrix * vec4(position,1.0); vD = -mv.z; gl_Position = projectionMatrix * mv; }`,
+    fragmentShader: `uniform vec3 uColor; uniform float uOp; ${NEAR} varying float vA; varying vec2 vUv; varying float vD;
+      void main(){ float x = abs(vUv.y * 2.0 - 1.0); float halo = exp(-x * x * 3.5) * 0.6; float core = exp(-x * x * 30.0);
+        vec3 c = uColor * halo + mix(uColor, vec3(1.0), 0.65) * core; float a = vA * uOp * smoothstep(uNear0, uNear1, vD); gl_FragColor = vec4(c * a, a); }`,
+    transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, side: THREE.DoubleSide,
+  });
+  function makeRibbon(nVerts, idx) {
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(nVerts * 3), 3).setUsage(THREE.DynamicDrawUsage));
+    g.setAttribute('uv', new THREE.BufferAttribute(new Float32Array(nVerts * 2), 2));
+    g.setAttribute('aA', new THREE.BufferAttribute(new Float32Array(nVerts), 1).setUsage(THREE.DynamicDrawUsage));
+    g.setIndex(idx);
+    const m = new THREE.Mesh(g, ribbonMat()); m.frustumCulled = false; m.renderOrder = 11; return m;
+  }
+  const trails = pool(40, () => {
+    const m = makeRibbon(TP * 2, trailIdx); const uv = m.geometry.attributes.uv.array;
+    for (let i = 0; i < TP; i++) { uv[i * 4] = i / (TP - 1); uv[i * 4 + 1] = 0; uv[i * 4 + 2] = i / (TP - 1); uv[i * 4 + 3] = 1; }
+    m.userData.pts = new Float32Array(TP * 3); m.userData.ts = new Float32Array(TP); return m;
+  });
+
+  // lightning / tether ribbons: disjoint camera-facing quads per segment
+  const BS = 96;
+  const boltIdx = []; for (let i = 0; i < BS; i++) { const a = i * 4; boltIdx.push(a, a + 1, a + 2, a + 1, a + 3, a + 2); }
+  const bolts = pool(20, () => {
+    const m = makeRibbon(BS * 4, boltIdx); const uv = m.geometry.attributes.uv.array;
+    for (let i = 0; i < BS; i++) { const q = i * 8; uv[q + 1] = 0; uv[q + 3] = 1; uv[q + 5] = 0; uv[q + 7] = 1; }
+    m.userData.segs = new Float32Array(BS * 7);   // x0,y0,z0,x1,y1,z1,width  (three coords)
+    m.userData.n = 0; return m;
+  });
+
+  // rock debris and spikes (lit, flat-shaded)
+  const rockGeos = [0, 1, 2].map(s => { const g = new THREE.DodecahedronGeometry(1, 0); const p = g.attributes.position;
+    for (let i = 0; i < p.count; i++) p.setXYZ(i, p.getX(i) * (0.7 + ((i * 7 + s * 3) % 5) * 0.12), p.getY(i) * (0.6 + ((i * 3 + s) % 4) * 0.12), p.getZ(i) * (0.8 + ((i + s * 5) % 3) * 0.1));
+    g.computeVertexNormals(); return g; });
+  const rocks = pool(LOW ? 24 : 48, () => { const m = new THREE.Mesh(rockGeos[0], new THREE.MeshLambertMaterial({ color: 0x8a7458, flatShading: true, transparent: true })); return m; });
+  const spikeGeos = [0, 1, 2].map(s => { const g = new THREE.ConeGeometry(0.42, 1, 6, 4); const p = g.attributes.position;
+    for (let i = 0; i < p.count; i++) { const y = p.getY(i), w = 0.75 + Math.sin(i * 12.9898 + s * 78.233) * 0.25; p.setX(i, p.getX(i) * w + Math.sin(y * 7 + s) * 0.05); p.setZ(i, p.getZ(i) * w); }
+    g.translate(0, 0.5, 0); g.computeVertexNormals(); return g; });
+  const spikes = pool(48, () => new THREE.Mesh(spikeGeos[0], new THREE.MeshLambertMaterial({ color: 0x8a7458, flatShading: true, transparent: true })));
+  const crystalGeo = new THREE.OctahedronGeometry(0.22, 0); crystalGeo.scale(0.7, 1.6, 0.7);
+  const crystals = pool(16, () => new THREE.Mesh(crystalGeo, new THREE.MeshBasicMaterial({ color: 0xffc860, transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending, depthWrite: false, fog: false })));
+  const domeMeshes = pool(4, () => { const m = new THREE.Mesh(coreGeo, coreMat()); m.renderOrder = 12; return m; });
+
+  // short-lived point lights (always in the scene at intensity 0, so materials never recompile)
+  const lights = [];
+  for (let i = 0; i < (LOW ? 0 : 2); i++) { const l = new THREE.PointLight(0xffffff, 0, 16, 2); l.castShadow = false; root.add(l); lights.push({ l, t: 0, dur: 0, i0: 0 }); }
+  function light(x, y, z, color, intensity = 1, dur = 0.4, range = 16) {
+    if (!lights.length) return;
+    let best = lights[0]; for (const L of lights) if (L.t >= L.dur) { best = L; break; } else if (L.dur - L.t < best.dur - best.t) best = L;
+    best.l.color.set(color); best.l.distance = range; best.l.position.set(x, z, -y); best.t = 0; best.dur = dur; best.i0 = 60 * intensity;
+  }
+
+  // ---------------- legacy API (kept signatures) ----------------
   // glow sprite at a point; returns the sprite so the caller can move it (dur Infinity = until release())
   function orb(x, y, z, color, scale = 1, dur = Infinity) {
     const s = take(sprites); if (!s) return null;
-    // big glows (explosion flashes) get much less opacity so they tint the scene instead of whiting it out
-    const o0 = scale > 2 ? 0.4 : scale > 1 ? 0.6 : 0.85;
+    const o0 = scale > 2 ? 0.3 : scale > 1 ? 0.5 : 0.75;
     tone(s.material.color.set(color)); s.material.opacity = o0; s.scale.setScalar(scale); s.position.set(x, z, -y);
     const e = rec(s, dur, 'orb'); e.s0 = scale; e.o0 = o0; return s;
   }
-  function release(obj) { if (obj) obj.visible = false; }
-  function ring(x, y, z, color, r0, r1, dur = 0.5) {
-    const m = take(rings); if (!m) return;
-    tone(m.material.color.set(color)); m.material.opacity = 0.85; m.position.set(x, z + 0.15, -y); m.scale.setScalar(r0);
-    const e = rec(m, dur, 'ring'); e.r0 = r0; e.r1 = r1;
+  function release(obj) {
+    if (!obj) return;
+    if (obj.isMissile) { releaseMissile(obj); return; }
+    obj.visible = false;
   }
-  function disc(x, y, z, color, r, dur = 1, opacity = 0.35) {
-    const m = take(discs); if (!m) return;
-    tone(m.material.color.set(color)); m.material.opacity = opacity * 0.8; m.position.set(x, z + 0.1, -y); m.scale.setScalar(r);
-    const e = rec(m, dur, 'disc'); e.o0 = opacity * 0.8;
+  // expanding shockwave ring on the ground: noisy band texture, spins slightly, fades
+  function ring(x, y, z, color, r0, r1, dur = 0.5, opacity = 0.9) {
+    const m = take(shocks); if (!m) return;
+    m.material.color.set(color); m.material.opacity = opacity; m.position.set(x, z + 0.12, -y); m.scale.setScalar(r0); m.rotation.y = rnd() * TAU;
+    const e = rec(m, dur, 'ring'); e.r0 = r0; e.r1 = r1; e.o0 = opacity;
   }
+  // ground decal: type scorch|frost|rune|crack (default: rune tinted by colour). spin rad/s for rune circles
+  function decal(type, x, y, z, r, dur = 3, color = 0xffffff, opacity = 0.9, spin = 0) {
+    const m = take(decals); if (!m) return null;
+    const D = DECAL[type] || DECAL.rune;
+    m.material.map = D.tex; m.material.blending = D.blend === 'add' ? THREE.AdditiveBlending : THREE.NormalBlending;
+    m.material.color.set(color); m.material.opacity = 0; m.material.needsUpdate = true;
+    m.position.set(x, z + 0.06, -y); m.scale.setScalar(r); m.rotation.y = rnd() * TAU;
+    const e = rec(m, dur, 'decal'); e.o0 = opacity; e.spin = spin; return e;
+  }
+  // legacy disc: now a glowing rune circle decal with a soft pulse
+  function disc(x, y, z, color, r, dur = 1, opacity = 0.35) { decal('rune', x, y, z, r, dur, color, Math.min(1, opacity * 2.2), 0.4); }
+  // straight energy beam: a tapered ribbon (bright core, soft halo) plus sparks at the end
   function beam(x0, y0, z0, x1, y1, z1, color, width = 0.1, dur = 0.2) {
-    const m = take(beams); if (!m) return;
-    tone(m.material.color.set(color)); m.material.opacity = 0.8;
-    m.position.set(x0, z0, -y0); tv.set(x1 - x0, z1 - z0, -(y1 - y0)); const L = tv.length() || 0.01;
-    m.quaternion.setFromUnitVectors(up, tv.multiplyScalar(1 / L)); m.scale.set(width, L, width);
-    const e = rec(m, dur, 'beam'); e.w = width;
-  }
-  function lightning(x0, y0, z0, x1, y1, z1, color = 0xcfe8ff, dur = 0.18, jag = 0.6) {
-    const l = take(bolts); if (!l) return;
-    const a = l.geometry.attributes.position.array;
-    for (let i = 0; i < SEG; i++) {
-      const t = i / (SEG - 1), j = (i === 0 || i === SEG - 1) ? 0 : jag;
-      a[i * 3] = x0 + (x1 - x0) * t + (Math.random() - 0.5) * j;
-      a[i * 3 + 1] = z0 + (z1 - z0) * t + (Math.random() - 0.5) * j;
-      a[i * 3 + 2] = -(y0 + (y1 - y0) * t + (Math.random() - 0.5) * j);
+    const m = take(bolts); if (!m) return;
+    m.material.uniforms.uColor.value.set(color);
+    const s = m.userData.segs; let n = 0; const steps = 8;
+    for (let i = 0; i < steps; i++) {
+      const a = i / steps, b = (i + 1) / steps, q = n * 7;
+      s[q] = x0 + (x1 - x0) * a; s[q + 1] = z0 + (z1 - z0) * a; s[q + 2] = -(y0 + (y1 - y0) * a);
+      s[q + 3] = x0 + (x1 - x0) * b; s[q + 4] = z0 + (z1 - z0) * b; s[q + 5] = -(y0 + (y1 - y0) * b);
+      s[q + 6] = Math.max(0.08, width * 2.5); n++;
     }
-    l.geometry.attributes.position.needsUpdate = true;
-    tone(l.material.color.set(color), 0.95); l.material.opacity = 1; rec(l, dur, 'bolt');
-    beam(x0, y0, z0, x1, y1, z1, color, 0.05, dur * 0.7);
+    m.userData.n = n; const e = rec(m, dur, 'bolt'); e.flicker = 0; e.restrike = null; boltGeom(m);
   }
+  // branching lightning with re-strike and flicker; jag = displacement amplitude (m)
+  function lightning(x0, y0, z0, x1, y1, z1, color = 0xcfe8ff, dur = 0.18, jag = 0.6, o = {}) {
+    const m = take(bolts); if (!m) return;
+    m.material.uniforms.uColor.value.set(color);
+    const e = rec(m, Math.max(0.12, dur * 1.3), 'bolt');
+    e.flicker = 1; e.restrike = [x0, y0, z0, x1, y1, z1, jag, o.width ?? 1, o.branches ?? -1]; e.restruck = 0;
+    genBolt(m, e.restrike); boltGeom(m);
+    burst(x1, y1, z1, 6, { tex: 'spark', color: 0xffffff, color2: color, speed: 6, size: 0.18, life: 0.3, drag: 3, grav: 6 });
+  }
+  const P = []; for (let i = 0; i < 40; i++) P.push(new Float32Array(3));
+  function genBolt(m, R) {
+    const [x0, y0, z0, x1, y1, z1, jag, wmul, nbr] = R;
+    const s = m.userData.segs; let n = 0;
+    const path = (ax, ay, az, bx, by, bz, levels, amp, w) => {   // midpoint displacement into P, then emit segments (three coords)
+      let cnt = 2; P[0][0] = ax; P[0][1] = az; P[0][2] = -ay; P[1][0] = bx; P[1][1] = bz; P[1][2] = -by;
+      for (let L = 0; L < levels; L++) {
+        // spread the points to even slots (backwards, so nothing is overwritten before it is read), then fill midpoints
+        const N2 = cnt * 2 - 1; for (let i = cnt - 1; i >= 0; i--) { const src = P[i]; const dst = P[i * 2]; if (dst !== src) { dst[0] = src[0]; dst[1] = src[1]; dst[2] = src[2]; } }
+        for (let i = 1; i < N2; i += 2) { const a = P[i - 1], b = P[i + 1], c = P[i];
+          c[0] = (a[0] + b[0]) / 2 + (rnd() - 0.5) * amp; c[1] = (a[1] + b[1]) / 2 + (rnd() - 0.5) * amp; c[2] = (a[2] + b[2]) / 2 + (rnd() - 0.5) * amp; }
+        cnt = N2; amp *= 0.55;
+      }
+      for (let i = 0; i < cnt - 1 && n < BS; i++) { const q = n * 7, a = P[i], b = P[i + 1];
+        s[q] = a[0]; s[q + 1] = a[1]; s[q + 2] = a[2]; s[q + 3] = b[0]; s[q + 4] = b[1]; s[q + 5] = b[2]; s[q + 6] = w * (1 - 0.5 * i / cnt); n++; }
+      return cnt;
+    };
+    const L = Math.hypot(x1 - x0, y1 - y0, z1 - z0);
+    const levels = L > 10 ? 5 : L > 3 ? 4 : 3;
+    path(x0, y0, z0, x1, y1, z1, levels, jag * 1.4, 0.32 * wmul);
+    // branches from points along the main channel (in three coords)
+    const main = n; const nb = nbr >= 0 ? nbr : Math.min(4, Math.floor(L / 4) + (rnd() < 0.5 ? 1 : 0));
+    for (let b = 0; b < nb && n < BS - 10; b++) {
+      const q = Math.floor((0.2 + rnd() * 0.6) * main) * 7;
+      const sx = s[q], sy = -s[q + 2], sz = s[q + 1];
+      const dx = (x1 - x0) / L, dy = (y1 - y0) / L, dz = (z1 - z0) / L, bl = L * (0.15 + rnd() * 0.25);
+      path(sx, sy, sz, sx + (dx + (rnd() - 0.5) * 1.6) * bl, sy + (dy + (rnd() - 0.5) * 1.6) * bl, sz + (dz + (rnd() - 0.5) * 1.2) * bl, 3, jag * 0.8, 0.14 * wmul);
+    }
+    m.userData.n = n;
+  }
+  function boltGeom(m) {
+    const s = m.userData.segs, n = m.userData.n, pa = m.geometry.attributes.position.array, aa = m.geometry.attributes.aA.array;
+    for (let i = 0; i < n; i++) {
+      const q = i * 7, w = s[q + 6] * 0.5;
+      tv.set(s[q + 3] - s[q], s[q + 4] - s[q + 1], s[q + 5] - s[q + 2]);
+      tv2.set((s[q] + s[q + 3]) / 2 - camPos.x, (s[q + 1] + s[q + 4]) / 2 - camPos.y, (s[q + 2] + s[q + 5]) / 2 - camPos.z);
+      tv3.crossVectors(tv, tv2).normalize().multiplyScalar(w);
+      // extend each quad a little along the segment so joints overlap
+      tv.normalize().multiplyScalar(w * 0.5);
+      const v = i * 12;
+      pa[v] = s[q] - tv.x + tv3.x; pa[v + 1] = s[q + 1] - tv.y + tv3.y; pa[v + 2] = s[q + 2] - tv.z + tv3.z;
+      pa[v + 3] = s[q] - tv.x - tv3.x; pa[v + 4] = s[q + 1] - tv.y - tv3.y; pa[v + 5] = s[q + 2] - tv.z - tv3.z;
+      pa[v + 6] = s[q + 3] + tv.x + tv3.x; pa[v + 7] = s[q + 4] + tv.y + tv3.y; pa[v + 8] = s[q + 5] + tv.z + tv3.z;
+      pa[v + 9] = s[q + 3] + tv.x - tv3.x; pa[v + 10] = s[q + 4] + tv.y - tv3.y; pa[v + 11] = s[q + 5] + tv.z - tv3.z;
+      aa[i * 4] = aa[i * 4 + 1] = aa[i * 4 + 2] = aa[i * 4 + 3] = 1;
+    }
+    m.geometry.setDrawRange(0, n * 6);
+    m.geometry.attributes.position.needsUpdate = m.geometry.attributes.aA.needsUpdate = true;
+  }
+  // drain tether: two wavy strands twisting between two points for dur seconds (endpoints can follow getters)
+  function tether(x0, y0, z0, x1, y1, z1, color = 0xd050ff, dur = 0.5, o = {}) {
+    const m = take(bolts); if (!m) return null;
+    m.material.uniforms.uColor.value.set(color);
+    const e = rec(m, dur, 'tether'); e.a = [x0, y0, z0]; e.b = [x1, y1, z1]; e.from = o.from || null; e.to = o.to || null; e.w = o.width ?? 0.16; e.color = color;
+    return e;
+  }
+  function tetherGeom(m, e) {
+    const s = m.userData.segs; let n = 0;
+    const A = e.from ? e.from() : e.a, B = e.to ? e.to() : e.b;
+    const ax = A[0], ay = A[2], az = -A[1], bx = B[0], by = B[2], bz = -B[1];
+    tv.set(bx - ax, by - ay, bz - az); const L = tv.length() || 1; tv.multiplyScalar(1 / L);
+    tv2.crossVectors(tv, up); if (tv2.lengthSq() < 1e-4) tv2.set(1, 0, 0); tv2.normalize(); tv3.crossVectors(tv, tv2);
+    const steps = 22;
+    for (let strand = 0; strand < 2; strand++) {
+      let px = ax, py = ay, pz = az;
+      for (let i = 1; i <= steps; i++) {
+        const t = i / steps, env = Math.sin(t * Math.PI) * 0.35, ph = t * L * 1.3 - e.t * 9 + strand * Math.PI;
+        const ox = (tv2.x * Math.cos(ph) + tv3.x * Math.sin(ph)) * env, oy = (tv2.y * Math.cos(ph) + tv3.y * Math.sin(ph)) * env, oz = (tv2.z * Math.cos(ph) + tv3.z * Math.sin(ph)) * env;
+        const x = ax + (bx - ax) * t + ox, y = ay + (by - ay) * t + oy, z = az + (bz - az) * t + oz, q = n * 7;
+        s[q] = px; s[q + 1] = py; s[q + 2] = pz; s[q + 3] = x; s[q + 4] = y; s[q + 5] = z; s[q + 6] = e.w * (strand ? 0.7 : 1); n++;
+        px = x; py = y; pz = z;
+      }
+    }
+    m.userData.n = n; boltGeom(m);
+    // motes flowing from the far end back to the caster
+    if (rnd() < 0.6) { const t = rnd(); burst(B[0] + (A[0] - B[0]) * t, B[1] + (A[1] - B[1]) * t, B[2] + (A[2] - B[2]) * t, 1, { tex: 'wisp', color: e.color, speed: 0.3, size: 0.35, life: 0.35, dx: (A[0] - B[0]) / L, dy: (A[1] - B[1]) / L, dz: (A[2] - B[2]) / L, cone: 0.2 }); }
+  }
+  // jagged stone spike rising from the ground, with a dust puff
   function spike(x, y, z, h = 1.6, dur = 1.2, color = 0x8a7458) {
     const m = take(spikes); if (!m) return;
-    m.material.color.set(color); m.material.opacity = 1; m.position.set(x, z - 0.2, -y);
-    m.rotation.set((Math.random() - 0.5) * 0.5, Math.random() * 6, (Math.random() - 0.5) * 0.5); m.scale.set(1, 0.01, 1);
+    m.geometry = spikeGeos[(rnd() * 3) | 0];
+    m.material.color.set(color).offsetHSL(0, 0, (rnd() - 0.5) * 0.08); m.material.opacity = 1; m.position.set(x, z - 0.2, -y);
+    m.rotation.set((rnd() - 0.5) * 0.5, rnd() * 6, (rnd() - 0.5) * 0.5); m.scale.set(1, 0.01, 1);
     const e = rec(m, dur, 'spike'); e.h = h;
+    burst(x, y, z + 0.2, 3, { tex: 'dust', color: 0x9a8a70, speed: 1.2, size: 0.9, life: 0.9, grow: 1.4, drag: 2, up: 0.8, alpha: 0.55 });
   }
-  // dome following the player while fn() is true
+  // rock debris: physical chunks that arc, tumble, bounce on the floor and shrink away
+  function debris(x, y, z, n, o = {}) {
+    n = Math.max(1, Math.round(n * QN));
+    const floor = o.floor ?? z, sp = o.speed ?? 6, sz = o.size ?? 0.18;
+    for (let k = 0; k < n; k++) {
+      const m = take(rocks); if (!m) return;
+      m.geometry = rockGeos[k % 3]; m.material.color.set(o.color ?? 0x8a7458).offsetHSL(0, 0, (rnd() - 0.5) * 0.1); m.material.opacity = 1;
+      m.position.set(x + (rnd() - 0.5) * (o.jitter ?? 0.3), z, -(y + (rnd() - 0.5) * (o.jitter ?? 0.3)));
+      const s = sz * (0.5 + rnd()); m.scale.setScalar(s); m.rotation.set(rnd() * 6, rnd() * 6, rnd() * 6);
+      const e = rec(m, (o.life ?? 1.4) * (0.7 + rnd() * 0.5), 'rock');
+      const a = rnd() * TAU, hs = sp * (0.3 + rnd() * 0.7);
+      e.vx = Math.cos(a) * hs + (o.dx ?? 0) * sp; e.vz = -(Math.sin(a) * hs + (o.dy ?? 0) * sp); e.vy = (o.up ?? 5) * (0.5 + rnd() * 0.7);
+      e.floor = floor; e.s = s; e.wx = (rnd() - 0.5) * 12; e.wy = (rnd() - 0.5) * 12;
+    }
+  }
+  // runic shield following the player while until() is true: rotating rune circle at the feet, orbiting amber
+  // crystals, a fresnel shell (invisible from inside thanks to the near-camera fade) and rising rune motes
   function dome(color, r, until) {
-    const m = take(domes); if (!m) return;
-    tone(m.material.color.set(color), 0.6); m.scale.setScalar(r); const e = rec(m, Infinity, 'dome'); e.until = until; e.r = r;
+    const m = take(domeMeshes); if (!m) return;
+    m.material.uniforms.uColor.value.set(color); m.material.uniforms.uOp.value = 0.35; m.scale.setScalar(r);
+    const e = rec(m, Infinity, 'dome'); e.until = until; e.r = r; e.color = color; e.cr = [];
+    for (let k = 0; k < 4; k++) { const c = take(crystals); if (c) { c.material.color.set(color); e.cr.push(c); } }
+    e.rune = decal('rune', game.player.x, game.player.y, game.player.z, r * 1.25, Infinity, color, 0.85, 0.8);
+    if (e.rune) e.rune.until = until;
   }
 
-  // impact at a hit point: a quick rayed flash, fast sparks thrown back towards the attacker (dx,dy) and a few
-  // slower embers. strength ~1 for normal hits, ~2 for crits/big hits. Uses pooled flashes + the shared particles.
+  // impact at a hit point: rayed flash, sparks thrown back towards the attacker and a few embers
   function impact(x, y, z, color = 0xffffff, strength = 1, dx = 0, dy = 0) {
     const f = take(flashes);
-    if (f) { tone(f.material.color.set(color), 1); f.material.opacity = 0.9; f.material.rotation = Math.random() * 6.28;
-      f.position.set(x, z, -y); const s0 = 0.7 + 0.45 * strength; f.scale.setScalar(s0 * 0.5); const e = rec(f, 0.09 + 0.05 * strength, 'flash'); e.s0 = s0; }
+    if (f) { tone(f.material.color.set(color), 1); f.material.opacity = 0.9; f.material.rotation = rnd() * 6.28;
+      f.position.set(x, z, -y); const s0 = 0.6 + 0.4 * strength; f.scale.setScalar(s0 * 0.5); const e = rec(f, 0.09 + 0.05 * strength, 'flash'); e.s0 = s0; }
     const L = Math.hypot(dx, dy) || 1, n = Math.round(6 + 6 * strength);
-    burst(x, y, z, n, { color, speed: 6 + 3 * strength, size: 0.14, life: 0.28, drag: 5, grav: 9, jitter: 0.1, dx: dx / L, dy: dy / L, dz: 0.35, cone: 0.9 });
-    burst(x, y, z, Math.round(3 * strength), { color: 0xfff0d0, speed: 2.5, size: 0.22, life: 0.35, drag: 3, jitter: 0.2 });
+    burst(x, y, z, n, { tex: 'spark', color: 0xffffff, color2: color, speed: 6 + 3 * strength, size: 0.16, life: 0.3, drag: 5, grav: 9, jitter: 0.1, dx: dx / L, dy: dy / L, dz: 0.35, cone: 0.9 });
+    burst(x, y, z, Math.round(3 * strength), { tex: 'ember', color, speed: 2.5, size: 0.2, life: 0.4, drag: 3, jitter: 0.2 });
     if (strength >= 2) ring(x, y, z - 0.6, color, 0.2, 1.4, 0.25);
   }
 
-  function update(dt) {
-    // particles
-    if (alive) {
-      let any = 0;
-      for (let i = 0; i < N; i++) {
-        if (life[i] <= 0) { if (size[i] !== 0) size[i] = 0; continue; }
-        any = 1; life[i] -= dt; const j = i * 3, k = Math.max(0, life[i] / max[i]);
-        const d = Math.max(0, 1 - drag[i] * dt);
-        vel[j] *= d; vel[j + 1] = vel[j + 1] * d - grav[i] * dt; vel[j + 2] *= d;
-        pos[j] += vel[j] * dt; pos[j + 1] += vel[j + 1] * dt; pos[j + 2] += vel[j + 2] * dt;
-        clr[j] = base[j] * k; clr[j + 1] = base[j + 1] * k; clr[j + 2] = base[j + 2] * k;
-        size[i] = size0[i] * (0.4 + 0.6 * k);
-      }
-      aPos.needsUpdate = aClr.needsUpdate = aSize.needsUpdate = true;
-      if (!any) alive = 0;
+  // ---------------- new kit API ----------------
+  // trail(color, width, life): returns a handle; trailPush(h, x,y,z) each frame; trailEnd(h) lets it fade out
+  function trail(color, width = 0.25, life = 0.25) {
+    const m = take(trails); if (!m) return null;
+    m.material.uniforms.uColor.value.set(color); m.material.uniforms.uOp.value = 1;
+    const e = rec(m, Infinity, 'trail'); e.n = 0; e.width = width; e.life = life; e.ended = false; e.auto = null; m.geometry.setDrawRange(0, 0);
+    return e;
+  }
+  function trailPush(e, x, y, z) {
+    if (!e || e.ended) return;
+    const pts = e.obj.userData.pts, ts = e.obj.userData.ts, X = x, Y = z, Z = -y;
+    if (e.n > 1) { const dx = X - pts[3], dy = Y - pts[4], dz = Z - pts[5]; if (dx * dx + dy * dy + dz * dz < 0.04) { pts[0] = X; pts[1] = Y; pts[2] = Z; ts[0] = e.t; return; } }
+    const n = Math.min(TP, e.n + 1);
+    for (let i = n - 1; i > 0; i--) { pts[i * 3] = pts[i * 3 - 3]; pts[i * 3 + 1] = pts[i * 3 - 2]; pts[i * 3 + 2] = pts[i * 3 - 1]; ts[i] = ts[i - 1]; }
+    pts[0] = X; pts[1] = Y; pts[2] = Z; ts[0] = e.t; e.n = n;
+  }
+  function trailEnd(e) { if (e) e.ended = true; }
+  // wind streak: an auto-moving trail that curls (gale, wind dash, tempest)
+  function streak(x, y, z, dx, dy, dz, speed, color = 0xd8fff4, dur = 0.5, width = 0.12, curl = 2) {
+    const e = trail(color, width, 0.18); if (!e) return;
+    e.auto = { x, y, z, dx, dy, dz, speed, curl: (rnd() - 0.5) * curl, until: dur }; trailPush(e, x, y, z);
+  }
+  function trailGeom(e) {
+    const m = e.obj, pts = m.userData.pts, ts = m.userData.ts, pa = m.geometry.attributes.position.array, aa = m.geometry.attributes.aA.array;
+    // drop expired points from the tail
+    while (e.n > 0 && e.t - ts[e.n - 1] > e.life) e.n--;
+    const n = e.n; if (n < 2) { m.geometry.setDrawRange(0, 0); return; }
+    for (let i = 0; i < n; i++) {
+      const a = Math.max(0, i - 1) * 3, b = Math.min(n - 1, i + 1) * 3;
+      tv.set(pts[a] - pts[b], pts[a + 1] - pts[b + 1], pts[a + 2] - pts[b + 2]);
+      tv2.set(pts[i * 3] - camPos.x, pts[i * 3 + 1] - camPos.y, pts[i * 3 + 2] - camPos.z);
+      const age = Math.min(1, (e.t - ts[i]) / e.life), f = 1 - i / (n - 1);
+      tv3.crossVectors(tv, tv2).normalize().multiplyScalar(e.width * (0.25 + 0.75 * f) * 0.5);
+      const v = i * 6;
+      pa[v] = pts[i * 3] + tv3.x; pa[v + 1] = pts[i * 3 + 1] + tv3.y; pa[v + 2] = pts[i * 3 + 2] + tv3.z;
+      pa[v + 3] = pts[i * 3] - tv3.x; pa[v + 4] = pts[i * 3 + 1] - tv3.y; pa[v + 5] = pts[i * 3 + 2] - tv3.z;
+      aa[i * 2] = aa[i * 2 + 1] = f * (1 - age);
     }
+    m.geometry.setDrawRange(0, (n - 1) * 6);
+    m.geometry.attributes.position.needsUpdate = m.geometry.attributes.aA.needsUpdate = true;
+  }
+  // fresnel glow core (small bright sphere); returns the mesh
+  function core(x, y, z, color, radius = 0.18, dur = Infinity) {
+    const m = take(cores); if (!m) return null;
+    m.material.uniforms.uColor.value.set(color); m.material.uniforms.uOp.value = 1; m.scale.setScalar(radius); m.position.set(x, z, -y);
+    const e = rec(m, dur, 'core'); e.r = radius; return m;
+  }
+  // missile = core + small halo + ribbon trail (+ optional per-frame particle emitter fn(x,y,z)).
+  // Returns a handle with .position.set(x3, y3, z3) (three coords, like the old orb sprite) and release() support.
+  function missile(x, y, z, color, o = {}) {
+    const h = { isMissile: true, visible: true, x, y, z };
+    h.core = core(x, y, z, o.coreColor ?? color, o.radius ?? 0.16);
+    h.halo = orb(x, y, z, color, o.halo ?? 0.9);
+    h.trail = trail(o.trailColor ?? color, o.width ?? 0.3, o.trailLife ?? 0.22);
+    h.trail2 = o.width2 ? trail(o.trailColor2 ?? color, o.width2, o.trailLife2 ?? 0.35) : null;
+    h.halo0 = h.halo ? h.halo.material.opacity : 0;
+    h.position = { set: (X, Y, Z) => moveMissile(h, X, -Z, Y) };
+    trailPush(h.trail, x, y, z); trailPush(h.trail2, x, y, z);
+    return h;
+  }
+  function moveMissile(h, x, y, z) {
+    if (!h || !h.visible) return;
+    h.x = x; h.y = y; h.z = z;
+    h.core?.position.set(x, z, -y);
+    if (h.halo) { h.halo.position.set(x, z, -y); h.halo.material.opacity = h.halo0 * smooth(1.5, 5, camDist(x, z, -y)); }
+    trailPush(h.trail, x, y, z); trailPush(h.trail2, x, y, z);
+  }
+  function releaseMissile(h) {
+    if (!h || !h.visible) return; h.visible = false;
+    if (h.core) h.core.visible = false; if (h.halo) h.halo.visible = false;
+    trailEnd(h.trail); trailEnd(h.trail2);
+  }
+  // floating sigil: a rune sprite that spins and fades above a point (curse marks)
+  function sigil(x, y, z, color, size = 1, dur = 1.2) {
+    burst(x, y, z, 1, { tex: 'rune', color, speed: 0, size, life: dur, drag: 0, up: 0.6, spin: 2, jitter: 0, alpha: 1, fadeIn: 0.15 });
+  }
+
+  // ---------------- update ----------------
+  function update(dt) {
+    const cam = camera(); if (cam) cam.getWorldPosition(camPos);
+    stepSys(ADD, dt); stepSys(ALPHA, dt);
+    for (const L of lights) { if (L.t < L.dur) { L.t += dt; const k = Math.min(1, L.t / L.dur); L.l.intensity = L.i0 * (1 - k) * (1 - k) * (0.85 + 0.15 * rnd()); } else if (L.l.intensity) L.l.intensity = 0; }
     const p = game.player;
     for (let i = fx.length - 1; i >= 0; i--) {
       const e = fx[i], o = e.obj; e.t += dt;
-      const k = e.dur === Infinity ? 0 : e.t / e.dur;
-      if (!o.visible || k >= 1 || (e.kind === 'dome' && !e.until())) {
-        o.visible = false; fx[i] = fx[fx.length - 1]; fx.pop(); fxRec.push(e); continue;
+      let k = e.dur === Infinity ? 0 : e.t / e.dur;
+      if (e.kind === 'trail') {   // trails die when ended and empty, or when the auto streak has finished
+        if (e.auto) { const a = e.auto; a.until -= dt;
+          const c = Math.cos(a.curl * dt), s = Math.sin(a.curl * dt), nx = a.dx * c - a.dy * s, ny = a.dx * s + a.dy * c; a.dx = nx; a.dy = ny;
+          a.x += a.dx * a.speed * dt; a.y += a.dy * a.speed * dt; a.z += a.dz * a.speed * dt; a.speed *= Math.max(0, 1 - 1.5 * dt);
+          if (a.until > 0) trailPush(e, a.x, a.y, a.z); else e.ended = true; }
+        if (o.visible) trailGeom(e);
+        if (e.ended && e.n < 2) k = 1;
+      }
+      const gone = (e.kind === 'dome' || (e.kind === 'decal' && e.until)) && !e.until();
+      if (gone && e.kind === 'decal' && !e.fadeOut) { e.fadeOut = 1; e.dur = e.t + 0.4; k = e.t / e.dur; }
+      if (!o.visible || k >= 1 || (gone && e.kind === 'dome')) {
+        o.visible = false; if (e.cr) { for (const c of e.cr) c.visible = false; e.cr = null; }
+        fx[i] = fx[fx.length - 1]; fx.pop(); fxRec.push(e); e.fadeOut = 0; e.until = null; e.auto = null; continue;
       }
       switch (e.kind) {
-        case 'orb': if (e.dur !== Infinity) { o.material.opacity = e.o0 * (1 - k) * (1 - k); o.scale.setScalar(e.s0 * (1 + k)); } break;
-        case 'flash': o.material.opacity = 0.9 * (1 - k); o.scale.setScalar(e.s0 * (0.5 + 0.8 * Math.sqrt(k))); break;
-        case 'ring': o.scale.setScalar(e.r0 + (e.r1 - e.r0) * Math.sqrt(k)); o.material.opacity = 0.85 * (1 - k); break;
-        case 'disc': o.material.opacity = e.o0 * (k < 0.8 ? 1 : (1 - k) / 0.2) * (0.8 + 0.2 * Math.sin(e.t * 12)); break;
-        case 'beam': o.material.opacity = 0.8 * (1 - k); o.scale.x = o.scale.z = e.w * (1 - k * 0.7); break;
-        case 'bolt': o.material.opacity = (1 - k) * (Math.random() > 0.3 ? 1 : 0.3); break;
-        case 'spike': { const g = Math.min(1, e.t / 0.12), f = k > 0.75 ? (1 - k) / 0.25 : 1; o.scale.set(1, e.h * g * f + 0.01, 1); break; }
-        case 'dome': o.position.set(p.x, p.z + 1, -p.y); o.material.opacity = 0.14 + 0.05 * Math.sin(e.t * 6); o.rotation.y += dt; break;
+        case 'orb': if (e.dur !== Infinity) { o.material.opacity = e.o0 * (1 - k) * (1 - k) * smooth(0.8, 3, o.position.distanceTo(camPos)); o.scale.setScalar(e.s0 * (1 + k)); } break;
+        case 'flash': o.material.opacity = 0.9 * (1 - k) * smooth(0.6, 2.2, o.position.distanceTo(camPos)); o.scale.setScalar(e.s0 * (0.5 + 0.8 * Math.sqrt(k))); break;
+        case 'ring': o.scale.setScalar(e.r0 + (e.r1 - e.r0) * (1 - (1 - k) * (1 - k))); o.material.opacity = e.o0 * (1 - k); o.rotation.y += dt * 0.6; break;
+        case 'decal': {
+          const fin = Math.min(1, e.t / 0.15), fout = e.fadeOut ? Math.max(0, (e.dur - e.t) / 0.4) : e.dur === Infinity ? 1 : k > 0.7 ? (1 - k) / 0.3 : 1;
+          o.material.opacity = e.o0 * fin * fout; if (e.spin) o.rotation.y += e.spin * dt;
+          if (e.until) o.position.set(p.x, p.z + 0.06, -p.y);
+          break; }
+        case 'bolt': {
+          const u = o.material.uniforms;
+          if (e.restrike && !e.restruck && k > 0.45) { e.restruck = 1; genBolt(o, e.restrike); boltGeom(o); }
+          u.uOp.value = e.flicker ? Math.sqrt(1 - k) * (rnd() > 0.2 ? 1 : 0.3) : (1 - k);
+          break; }
+        case 'tether': tetherGeom(o, e); o.material.uniforms.uOp.value = Math.min(1, e.t / 0.06) * (k > 0.75 ? (1 - k) / 0.25 : 1) * (0.8 + 0.2 * Math.sin(e.t * 40)); break;
+        case 'spike': { const g = Math.min(1, e.t / 0.1), f = k > 0.75 ? (1 - k) / 0.25 : 1; o.scale.set(1, e.h * (g < 1 ? g * (2 - g) * 1.1 : 1) * f + 0.01, 1); break; }
+        case 'rock': {
+          e.vy -= 18 * dt; o.position.x += e.vx * dt; o.position.y += e.vy * dt; o.position.z += e.vz * dt;
+          if (o.position.y < e.floor + e.s * 0.5) { o.position.y = e.floor + e.s * 0.5; e.vy = Math.abs(e.vy) * 0.3; e.vx *= 0.6; e.vz *= 0.6; e.wx *= 0.6; e.wy *= 0.6; }
+          o.rotation.x += e.wx * dt; o.rotation.y += e.wy * dt; o.scale.setScalar(e.s * (k > 0.7 ? (1 - k) / 0.3 : 1)); break; }
+        case 'core': if (e.dur !== Infinity) { o.material.uniforms.uOp.value = 1 - k; o.scale.setScalar(e.r * (1 + k * 0.8)); } break;
+        case 'dome': {
+          o.position.set(p.x, p.z + 1, -p.y); o.material.uniforms.uOp.value = 0.22 + 0.06 * Math.sin(e.t * 6);
+          const n = e.cr.length;
+          for (let c = 0; c < n; c++) { const a = e.t * 1.6 + c / n * TAU, cr = e.cr[c];
+            cr.position.set(p.x + Math.cos(a) * e.r * 0.9, p.z + 0.7 + Math.sin(e.t * 3 + c) * 0.25, -(p.y + Math.sin(a) * e.r * 0.9)); cr.rotation.y += dt * 3;
+            cr.material.opacity = 0.9 * smooth(0.5, 1.6, cr.position.distanceTo(camPos)); }
+          if (rnd() < dt * 6) { const a = rnd() * TAU; burst(p.x + Math.cos(a) * e.r, p.y + Math.sin(a) * e.r, p.z + 0.2, 1, { tex: 'rune', color: e.color, speed: 0, size: 0.35, life: 1, up: 1.4, drag: 0, jitter: 0, spin: 1 }); }
+          break; }
       }
     }
   }
   function dispose() {
     game.root.remove(root);
     root.traverse(o => { o.geometry?.dispose?.(); o.material?.dispose?.(); });
-    glow.dispose(); star.dispose();
+    for (const g of [...rockGeos, ...spikeGeos, crystalGeo, coreGeo, planeGeo]) g.dispose();
+    for (const t of [glow, star, atlas, shockTex, ...Object.values(DECAL).map(d => d.tex)]) t.dispose();
   }
-  return { burst, orb, release, ring, disc, beam, lightning, spike, dome, impact, update, dispose, glow, star, SCREEN, root };
+  return { burst, orb, release, ring, disc, beam, lightning, spike, dome, impact, update, dispose, glow, star, SCREEN, root,
+    decal, debris, trail, trailPush, trailEnd, streak, core, missile, moveMissile, releaseMissile, tether, sigil, light, quality: QUALITY };
 }

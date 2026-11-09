@@ -83,6 +83,14 @@ const R = {
   drop:      { o: [{ w: 'sine', f0: 880, t: 0.35, g: 0.12 }, { w: 'sine', f0: 1320, t: 0.45, g: 0.08, d: 0.07 }, { w: 'triangle', f0: 1760, t: 0.5, g: 0.05, d: 0.14 }] },
   drop_big:  { o: [{ w: 'sine', f0: 660, t: 0.5, g: 0.14 }, { w: 'sine', f0: 990, t: 0.6, g: 0.1, d: 0.08 }, { w: 'sine', f0: 1320, t: 0.7, g: 0.08, d: 0.16 }, { w: 'triangle', f0: 1980, t: 0.8, g: 0.05, d: 0.24 }],
                n: [{ type: 'highpass', f0: 6000, t: 0.6, g: 0.06 }] },
+  // session 46: drop toss whoosh + rarity stings (rising arpeggios; longer, brighter and more layered per rarity)
+  drop_toss: { n: [{ type: 'bandpass', f0: 600, f1: 2400, q: 1.5, t: 0.3, g: 0.25 }], o: [{ w: 'sine', f0: 400, f1: 900, t: 0.25, g: 0.06 }] },
+  sting_uncommon: { o: [{ w: 'triangle', f0: 784, t: 0.25, g: 0.12 }, { w: 'triangle', f0: 988, t: 0.35, g: 0.1, d: 0.08 }] },
+  sting_rare: { o: [{ w: 'triangle', f0: 659, t: 0.3, g: 0.13 }, { w: 'triangle', f0: 831, t: 0.3, g: 0.11, d: 0.08 }, { w: 'triangle', f0: 988, t: 0.5, g: 0.11, d: 0.16 }, { w: 'sine', f0: 1976, t: 0.6, g: 0.04, d: 0.16 }] },
+  sting_epic: { o: [{ w: 'sawtooth', f0: 330, t: 0.7, g: 0.04 }, { w: 'triangle', f0: 659, t: 0.3, g: 0.13 }, { w: 'triangle', f0: 784, t: 0.3, g: 0.12, d: 0.09 }, { w: 'triangle', f0: 988, t: 0.3, g: 0.12, d: 0.18 }, { w: 'triangle', f0: 1319, t: 0.8, g: 0.12, d: 0.27 }],
+                n: [{ type: 'highpass', f0: 7000, t: 0.9, g: 0.06, d: 0.2 }] },
+  sting_legendary: { o: [{ w: 'sine', f0: 110, f1: 220, t: 1.2, g: 0.25 }, { w: 'triangle', f0: 523, t: 0.3, g: 0.14 }, { w: 'triangle', f0: 659, t: 0.3, g: 0.14, d: 0.1 }, { w: 'triangle', f0: 784, t: 0.3, g: 0.14, d: 0.2 },
+                       { w: 'triangle', f0: 1047, t: 1.1, g: 0.15, d: 0.3 }, { w: 'sine', f0: 2093, t: 1.2, g: 0.05, d: 0.3 }], n: [{ type: 'highpass', f0: 6000, t: 1.4, g: 0.08, d: 0.25 }] },
   pickup:    { o: [{ w: 'triangle', f0: 700, f1: 1400, t: 0.12, g: 0.15 }, { w: 'sine', f0: 1400, f1: 2100, t: 0.2, g: 0.08, d: 0.06 }] },
   // generic
   hurt:     { o: [{ w: 'square', f0: 200, f1: 90, t: 0.15, g: 0.12 }] },

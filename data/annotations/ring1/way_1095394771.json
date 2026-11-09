@@ -1,0 +1,111 @@
+{
+ "osm_id": "way/1095394771",
+ "sources": [
+  "mapillary:571741803799631"
+ ],
+ "walls": [
+  {
+   "id": "way/1095394771:2",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.6
+   ],
+   "material": "brick",
+   "wall_colour": "#f1efe9",
+   "trim_colour": "#ffffff",
+   "cornice_z": 7.0,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [
+    11.7
+   ],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 5.6,
+     "x1": 11.5,
+     "z1": 3.4,
+     "fascia_text": "Cambridge Live Tickets",
+     "fascia_colour": "#141414",
+     "text_colour": "#f26a1b",
+     "door_x": 10.6,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 11.9,
+     "x1": 17.2,
+     "z1": 3.4,
+     "fascia_text": "Pho",
+     "fascia_colour": "#3a3a3a",
+     "text_colour": "#e03a2f",
+     "door_x": 13.0,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.2,
+     "w": 1.1,
+     "z": 4.1,
+     "h": 1.9,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.8,
+     "w": 1.1,
+     "z": 4.1,
+     "h": 1.9,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 12.6,
+     "w": 1.0,
+     "z": 4.1,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 15.0,
+     "w": 1.0,
+     "z": 4.1,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "1-2 Wheeler St: white-painted brick two-storey frontage under a tiled roof, opposite the Guildhall. Dark timber shopfronts with Cambridge Live Tickets (orange lettering) at no. 2 and Pho (red lettering, hanging sign) at no. 1; first-floor 6/6 sashes over the ticket office and round-headed sashes further along. The Parsons Court corner unit (Steak and Honour, x 0-5) is behind the camera and not annotated. Photo 2016, raking view."
+  }
+ ]
+}

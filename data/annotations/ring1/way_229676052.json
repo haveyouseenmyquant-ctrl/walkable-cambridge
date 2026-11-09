@@ -3,7 +3,9 @@
  "sources": [
   "mapillary:730835867587055",
   "mapillary:1174741026292317",
-  "mapillary:1411014675940100"
+  "mapillary:1411014675940100",
+  "mapillary:485267342792891",
+  "mapillary:3014246225470261"
  ],
  "walls": [
   {
@@ -353,6 +355,249 @@
    ],
    "confidence": "low",
    "notes": "6-11 Sidney St (M&S): Edwardian red-brick upper floors with white stone window architraves and pilaster strips over a modern full-width shopfront (grey stone/glass, recessed entrance) with 'Marks & Spencer' in dark green letters on a grey fascia band. Bay count (11, ~3.1 m pitch) estimated from oblique views; the street photos suggest a further attic storey above the 11.3 m eave (OSM footprint sits ~4 m behind the street line) which is not modelled."
+  },
+  {
+   "id": "way/229676052:5",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.4,
+    8.1
+   ],
+   "material": "brick",
+   "wall_colour": "#8f4535",
+   "trim_colour": "#e3e0d6",
+   "cornice_z": 11.4,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.4,
+    8.1
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 2.4,
+     "w": 2.6,
+     "h": 3.2,
+     "surround": "none"
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 7.0,
+     "w": 2.2,
+     "z": 1.6,
+     "h": 2.2,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 10.8,
+     "w": 2.2,
+     "z": 1.6,
+     "h": 2.2,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 14.6,
+     "w": 2.2,
+     "z": 1.6,
+     "h": 2.2,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.0,
+     "w": 1.2,
+     "z": 5.0,
+     "h": 2.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.0,
+     "w": 1.2,
+     "z": 8.6,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.5,
+     "w": 1.2,
+     "z": 5.0,
+     "h": 2.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.5,
+     "w": 1.2,
+     "z": 8.6,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 13.0,
+     "w": 1.2,
+     "z": 5.0,
+     "h": 2.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 13.0,
+     "w": 1.2,
+     "z": 8.6,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 17.5,
+     "w": 1.2,
+     "z": 5.0,
+     "h": 2.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 17.5,
+     "w": 1.2,
+     "z": 8.6,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 22.0,
+     "w": 1.2,
+     "z": 5.0,
+     "h": 2.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 22.0,
+     "w": 1.2,
+     "z": 8.6,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 26.5,
+     "w": 1.2,
+     "z": 5.0,
+     "h": 2.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 26.5,
+     "w": 1.2,
+     "z": 8.6,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Marks & Spencer rear/service elevation on Hobson St (tagged Sidney St by address). Plain red brick with white painted/stone bands at first- and second-floor level and a projecting eaves gutter; ground floor has recessed blind brick panels with stone sills (modelled as dark low windows) and a service entrance with a Marks & Spencer sign near the south end; tall white-framed multi-pane metal windows on the upper floors. Seen only obliquely, so bay spacing is estimated."
   }
  ]
 }

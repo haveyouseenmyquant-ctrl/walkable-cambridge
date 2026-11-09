@@ -1,0 +1,328 @@
+{
+ "osm_id": "way/1099846442",
+ "sources": [
+  "mapillary:735445347146483",
+  "mapillary:1122692371531759",
+  "mapillary:790863758270642",
+  "mapillary:282869780160744",
+  "mapillary:1143583196146420",
+  "mapillary:165779838815360"
+ ],
+ "walls": [
+  {
+   "id": "way/1099846442:8",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.3,
+    7.8
+   ],
+   "material": "brick",
+   "wall_colour": "#9e4b37",
+   "trim_colour": "#e8e2d4",
+   "cornice_z": 11.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.3
+   ],
+   "quoins": false,
+   "pilasters": [
+    8.6,
+    22.2
+   ],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 8.3,
+     "z1": 4.0,
+     "fascia_text": "Pizza Pilgrims",
+     "fascia_colour": "#1e1e22",
+     "text_colour": "#f2efe6",
+     "door_x": 4.3,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 8.8,
+     "x1": 21.8,
+     "z1": 4.0,
+     "fascia_text": "Superdrug",
+     "fascia_colour": "#1d1d2b",
+     "text_colour": "#ffffff",
+     "door_x": 13.0,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 22.4,
+     "x1": 30.9,
+     "z1": 4.0,
+     "fascia_text": "David Clulow",
+     "fascia_colour": "#2bb39a",
+     "text_colour": "#1c2a28",
+     "door_x": 26.6,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.3,
+     "w": 1.2,
+     "z": 4.8,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.3,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.3,
+     "w": 1.2,
+     "z": 4.8,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.3,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.6,
+     "w": 1.2,
+     "z": 4.8,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.6,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 10.4,
+     "w": 1.5,
+     "z": 4.8,
+     "h": 2.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 10.4,
+     "w": 1.3,
+     "z": 8.3,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 13.6,
+     "w": 1.5,
+     "z": 4.8,
+     "h": 2.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 13.6,
+     "w": 1.3,
+     "z": 8.3,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 16.8,
+     "w": 1.5,
+     "z": 4.8,
+     "h": 2.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 16.8,
+     "w": 1.3,
+     "z": 8.3,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 20.0,
+     "w": 1.5,
+     "z": 4.8,
+     "h": 2.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 20.0,
+     "w": 1.3,
+     "z": 8.3,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 24.8,
+     "w": 1.3,
+     "z": 4.8,
+     "h": 2.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pediment",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 24.8,
+     "w": 1.2,
+     "z": 8.3,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 28.6,
+     "w": 1.3,
+     "z": 4.8,
+     "h": 2.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pediment",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 28.6,
+     "w": 1.2,
+     "z": 8.3,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Joshua Taylor Building, 59 Sidney St (Units A-C). Three fronts under one roof: south unit (ex-Monsoon in photos, OSM POI now Pizza Pilgrims) with large dark-framed plate-glass shopfront and pale upper floors; Superdrug middle unit in red brick with stone dressings, brick pilaster strips and round-arched second-floor windows over a white shopfront with dark fascia; north corner unit (David Clulow) white-painted brick with moulded architraves, cornice hoods on the first-floor windows and arched shopfront glazing under a green fascia. Single wall material can't express the three finishes; red brick chosen as dominant. Window counts per unit estimated from oblique views."
+  }
+ ]
+}

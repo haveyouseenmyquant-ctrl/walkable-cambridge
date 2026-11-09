@@ -1,0 +1,390 @@
+{
+ "osm_id": "way/229676051",
+ "sources": [
+  "mapillary:963502744458175",
+  "mapillary:308354060793368",
+  "mapillary:845903886275109"
+ ],
+ "walls": [
+  {
+   "id": "way/229676051:14",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.4,
+    7.2
+   ],
+   "material": "stone",
+   "wall_colour": "#c9b48e",
+   "trim_colour": "#d8c9a6",
+   "cornice_z": 9.8,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.4
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.4,
+    6.08,
+    11.77,
+    17.45,
+    23.13,
+    28.82,
+    34.5
+   ],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.9,
+     "x1": 34.0,
+     "z1": 3.9,
+     "fascia_text": "Boots",
+     "fascia_colour": "#1c2a6b",
+     "text_colour": "#f2f2f2",
+     "door_x": 6.8,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.1,
+     "w": 1.3,
+     "z": 4.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.1,
+     "w": 1.3,
+     "z": 7.6,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.38,
+     "w": 1.3,
+     "z": 4.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.38,
+     "w": 1.3,
+     "z": 7.6,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 7.79,
+     "w": 1.3,
+     "z": 4.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 7.79,
+     "w": 1.3,
+     "z": 7.6,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 10.06,
+     "w": 1.3,
+     "z": 4.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 10.06,
+     "w": 1.3,
+     "z": 7.6,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 13.47,
+     "w": 1.3,
+     "z": 4.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 13.47,
+     "w": 1.3,
+     "z": 7.6,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 15.75,
+     "w": 1.3,
+     "z": 4.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 15.75,
+     "w": 1.3,
+     "z": 7.6,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 19.16,
+     "w": 1.3,
+     "z": 4.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 19.16,
+     "w": 1.3,
+     "z": 7.6,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 21.43,
+     "w": 1.3,
+     "z": 4.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 21.43,
+     "w": 1.3,
+     "z": 7.6,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 24.84,
+     "w": 1.3,
+     "z": 4.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 24.84,
+     "w": 1.3,
+     "z": 7.6,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 27.11,
+     "w": 1.3,
+     "z": 4.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 27.11,
+     "w": 1.3,
+     "z": 7.6,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 30.52,
+     "w": 1.3,
+     "z": 4.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 30.52,
+     "w": 1.3,
+     "z": 7.6,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 32.8,
+     "w": 1.3,
+     "z": 4.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 32.8,
+     "w": 1.3,
+     "z": 7.6,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "28 Petty Cury (Boots, Lion Yard frontage, 1970s neo-Tudor ashlar). Ground floor is a recessed colonnade: square ashlar piers (pilasters) carrying the upper floors, with the dark-blue Boots shopfront set back behind them (recess not expressible in schema). Upper two floors: stone-mullioned rectangular windows, about two per bay. Bay count (6) and window x positions are estimated from oblique street-level views, not measured; pier spacing may differ. p0 is the east end (next to the arched timber door of the adjoining building)."
+  }
+ ]
+}
