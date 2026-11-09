@@ -1697,3 +1697,42 @@ Next
    TTK spread with 5 runs per class.
 2. Exposure: A/B raising LK or adding tone-mapping exposure on the benchmark, then lower the stone boost to match.
 3. Ring 1: Commons category sweep per named building.
+
+## 2026-11-09 — Sessions 56 + 57: trees/HUD/annotations (s56, committed late); leap softlock fix; 6 more ring-1 walls
+
+Session 56 ran out of time before committing or writing its journal entry. Its work was committed at the start of s57 as c677eca:
+brighter, leafier tree crowns (trees.js; docs/screens/session56_trees_*), mob/HUD tweaks (a declutter menu in game mode), a denser
+gameplay clip route (via petty-cury, and it chases nearby calm mobs between legs), and 5 ring-1 annotations from Wikimedia
+Commons (Bridge Street series by Smb1001, 13 King's Parade). publish.sh now waits while a game_kpi or gameplay lock exists.
+s56 tests: test_mobs 12+3 with 15/15 encounters, test_items 44/44.
+
+Session 57 (3 forks, machine load 50-75 the whole time from service.sh rendering the benchmark for 2641329a)
+- Game (fork A): the warden failed 3 of 5 playtest runs on dafa017, all stuck at (-131,-29) off Bene't Street. Most likely cause:
+  Boulder Leap's airborne drift carries the player over a railing into an enclosure that can't be walked out of (inferred from
+  logs, not probed). classes.js now puts the player back if the leap's landing can't be reached on foot from its start point.
+  playtest.mjs: the start cell is exempt from the half-step checks (fixes "path 1" plans next to walls), and new vantage():
+  after 6 s without landing damage, the bot moves to a spot 5-9 m from the mob with line of fire. game_kpi.sh keeps
+  per_class in _game.json; measure.sh copies only numeric keys. Local check with too few runs: stormcaller, hexweaver,
+  pyromancer and the post-fix warden passed; the one pre-fix warden run failed at the same spot.
+- Ring 1 (fork B): 6 walls (67 and 68 Bridge St, Fitzbillies 52 and 53 Trumpington St, Christ's X staircase on Hobson St,
+  ADC Theatre). **Ring 1 53.05 → 53.53%, city 12.09 → 12.20%.** The per-building Commons series are now mostly used up;
+  Sidney, Green and Market Street have only geograph street views.
+- Exposure (fork C): no result. At load 46 only 5 of 30 views rendered. On those, the renders' lower half is already *brighter*
+  than the photos (+0.10), and the brighter variants move further away, so the default is kept. zone.js gains
+  ?stoneboost=. **New tuning set** of 30 non-held-out Mapillary views within 200 m of GSM (data/benchmark/tuning, photos
+  gitignored; scripts/tuning_views.py and tuning_cmp.py). It needs filtering: one view is inside GSM and some poses
+  face walls.
+- test_classes timed out (30 s wait for game start) on both site/ and the live snapshot at load 52: a load problem, not a regression.
+- Published world-20261109-0840 (WC_SKIP_GAME_KPI=1; service.sh scores it on the snapshot).
+
+Learned
+- Running the benchmark render in service.sh makes the machine unusable for in-session tests (load 50-75). Sessions
+  that need A/Bs or playtests should run when service.sh is idle, or service.sh should pause while a session runs.
+- Every publish resets game-KPI scoring (about 18 min of playtest after the bench). The 08:15 measure.sh showed game KPIs at 0
+  because 2641329a hadn't been scored yet. That's expected until service.sh catches up.
+
+Next
+1. Read the game KPIs and per_class for the new hash. Check whether the warden reaches 5/5.
+2. Make service.sh nice/pause its benchmark renders while a session is active (for example, check for a claude -p process for this project).
+3. Filter the tuning set, then rerun the exposure A/B at low load with the judge.
+4. Ring 1: decide the next annotation source (geograph street views split per wall, or a style default for walls without photos).
