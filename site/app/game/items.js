@@ -208,7 +208,11 @@ export function install(game) {
       pk.pad.material.opacity = 0.65 + Math.sin(S.t * 3 + pk.t0) * 0.15;
       pk.plate.position.y = 2.1 + Math.sin(age * 2) * 0.05;
       { const cp = game.camera?.position, cd = cp ? Math.hypot(cp.x - pk.x, cp.y - pk.z - 2.1, cp.z + pk.y) : 99;   // session 48: fade out up close
-        pk.plate.material.opacity = Math.max(0, Math.min(1, (cd - 3) / 3)); pk.plate.visible = cd > 3; }
+        pk.plate.material.opacity = Math.max(0, Math.min(1, (cd - 3) / 3)); pk.plate.visible = cd > 3;
+        // session 54: the plate keeps a small fixed on-screen size up close (a 2.3 m sprite 4 m away filled the middle of the screen)
+        const ks = Math.min(1, cd / 16); pk.plate.scale.set(2.3 * ks, 0.5 * ks, 1);
+        // session 54: the soft halo sprite fades out near the camera (up close it read as a big flat rarity-coloured disc)
+        pk.halo.material.opacity = 0.9 * Math.max(0, Math.min(1, (cd - 2.5) / 4)); }
       const rp = (age * 0.8) % 1; pk.ring.scale.setScalar(pk.rs * (0.3 + rp)); pk.ring.material.opacity = 0.65 * (1 - rp);
       if (Math.random() < dt * (3 + 3 * pk.ord)) { const a = Math.random() * 6.283; fx.stream(v3(pk.x + Math.cos(a) * 0.5, pk.y + Math.sin(a) * 0.5, pk.z + 0.1), v3(pk.x, pk.y, pk.z + 2.5 + pk.ord), RARITY[pk.d.rarity].hex, 1); }
       if (d < 1.8 && Math.abs(dz) < 2.5 && age > 0.3) collect(pk); } }
@@ -293,7 +297,9 @@ export function install(game) {
   });
   // shield bubble (shown whenever game.shield > 0, whoever granted it)
   const bubble = new T.Mesh(new T.SphereGeometry(0.9, 16, 12), new T.MeshBasicMaterial(add({ color: 0x7ac8ff, opacity: 0.18 }))); bubble.visible = false; game.root.add(bubble);
-  function shieldFx() { const on = (game.shield || 0) > 0; bubble.visible = on; if (on) { bubble.position.copy(S.pp(0.95)); bubble.scale.set(1, 1.15, 1); bubble.material.opacity = 0.12 + Math.sin(S.t * 5) * 0.05 + Math.min(0.15, game.shield / 200); } }
+  function shieldFx() { const on = (game.shield || 0) > 0; bubble.visible = on; if (on) { bubble.position.copy(S.pp(0.95)); bubble.scale.set(1, 1.15, 1); bubble.material.opacity = (0.12 + Math.sin(S.t * 5) * 0.05 + Math.min(0.15, game.shield / 200))
+      // session 54: fades when the (third-person) camera is close, so the bubble never fills the screen as a flat blue wash
+      * Math.max(0.15, Math.min(1, ((game.camera?.position.distanceTo(bubble.position) ?? 9) - 1.5) / 3)); } }
 
   // restore saved equipment
   for (const s of SLOTS) { const id = sv.eq[s]; if (!id) continue; delete sv.eq[s]; if (ITEMS[id]) { sv.inv.push(id); items.equip(id); } }

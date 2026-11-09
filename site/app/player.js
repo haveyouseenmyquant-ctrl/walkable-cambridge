@@ -204,6 +204,15 @@ export class Player {
     // horizontal move in substeps, sliding along walls, stepping up and following the ground down
     const opts = { roofs: true, water: onWater, hi: this.crouching || this.sliding ? HI_CROUCH : BODY_HI };
     let dx = this.vx * dt, dy = this.vy * dt, hitWall = false;
+    // session 54: depenetration. A player standing where standAt says no (overlapping a bollard or railing after a
+    // shove / spell landing) could not take any substep, since every nearby point was blocked too: the route bot
+    // softlocked twice by the King's Parade bollards. Push out to the nearest valid spot within 0.8 m.
+    if (this.grounded && !this.climb && (dx || dy) && w.standAt(this.x, this.y, this.z, opts) == null) {
+      out: for (let r = 0.1; r <= 0.8; r += 0.1) for (let k = 0; k < 16; k++) {
+        const a = k / 16 * 6.283, x = this.x + Math.cos(a) * r, y = this.y + Math.sin(a) * r, g = w.standAt(x, y, this.z, opts);
+        if (g != null && Math.abs(g - this.z) <= STEP) { this.x = x; this.y = y; this.z = g; break out; }
+      }
+    }
     const n = Math.max(1, Math.ceil(Math.hypot(dx, dy) / SUBSTEP));
     dx /= n; dy /= n;
     for (let i = 0; i < n && (dx || dy); i++) {
@@ -297,7 +306,7 @@ export class Player {
   applyCamera3(cam, dt = 1 / 60) {
     const sy = Math.sin(this.yaw), cy = Math.cos(this.yaw), cp = Math.cos(this.pitch), sp = Math.sin(this.pitch);
     const hx = this.x, hy = this.y, hz = this.eye + 0.3;
-    const dmax = this.mode === 'broom' ? 5.5 : 4;
+    const dmax = this.camMax || (this.mode === 'broom' ? 5.5 : 4);   // camMax: optional override (gameplay clip)
     let d = dmax;
     for (let r = 0.5; r <= d; r += 0.25) {
       const x = hx + sy * cp * r, y = hy - cy * cp * r, z = hz - sp * r;

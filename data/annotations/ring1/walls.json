@@ -38749,10 +38749,11 @@
     -311.05
    ],
    "ground_z": 9.06,
-   "eave_z": 15.47,
-   "height": 6.41,
+   "eave_z": 16.23,
+   "height": 7.17,
    "dist_centre": 397.9,
-   "street_facing": true
+   "street_facing": true,
+   "eave_fixed": true
   },
   {
    "id": "way/227825136:10",

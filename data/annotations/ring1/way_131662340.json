@@ -5,7 +5,9 @@
   "mapillary:306074614424249",
   "mapillary:487898735794734",
   "geograph:1111485",
-  "mapillary:1177253932701830"
+  "mapillary:1177253932701830",
+  "mapillary:524354555416399",
+  "mapillary:751816582152941"
  ],
  "walls": [
   {
@@ -1407,6 +1409,322 @@
     }
    ],
    "notes": "Downing Street front of the building at this wall (Edwardian ashlar, banded rustication): basement with grilled lights, raised ground floor of round-arched windows, first floor flat-headed windows with a projecting oriel-like bay at the pedimented centre, lunette under a segmental pediment at top. OSM height (11.5 m) lower than the 4 visible storeys, so storeys compressed. Mapped by projecting a wide-angle Mapillary frame. (length 14.6 m, height 11.5 m from walls.json)"
+  },
+  {
+   "id": "way/131662340:3",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    2.6,
+    6.4,
+    10.2
+   ],
+   "material": "stone",
+   "wall_colour": "#c8ae84",
+   "trim_colour": "#d8c49c",
+   "cornice_z": 13.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    2.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "confidence": "low",
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.3,
+     "w": 0.9,
+     "z": 0.3,
+     "h": 0.9,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.3,
+     "w": 1.4,
+     "z": 3.0,
+     "h": 2.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.3,
+     "w": 1.4,
+     "z": 6.8,
+     "h": 2.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.3,
+     "w": 1.2,
+     "z": 10.6,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.3,
+     "w": 0.9,
+     "z": 0.3,
+     "h": 0.9,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.3,
+     "w": 1.4,
+     "z": 3.0,
+     "h": 2.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.3,
+     "w": 1.4,
+     "z": 6.8,
+     "h": 2.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.3,
+     "w": 1.2,
+     "z": 10.6,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 10.3,
+     "w": 0.9,
+     "z": 0.3,
+     "h": 0.9,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 10.3,
+     "w": 1.4,
+     "z": 3.0,
+     "h": 2.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 10.3,
+     "w": 1.4,
+     "z": 6.8,
+     "h": 2.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 10.3,
+     "w": 1.2,
+     "z": 10.6,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "notes": "Session 54: Downing St return of the Edwardian buff-ashlar range (as wall 26): banded rusticated basement with grilled lights, three bays of tall stone-mullioned windows on the upper floors. Mapillary 524354555416399 (25 m, looking along Downing Place); bay count estimated."
+  },
+  {
+   "id": "way/131662340:5",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.6,
+    7.2
+   ],
+   "cornice_z": 12.6,
+   "string_courses": [
+    3.6,
+    7.2
+   ],
+   "pilasters": [
+    0.3,
+    5.1
+   ],
+   "material": "stone",
+   "wall_colour": "#c9b28a",
+   "trim_colour": "#dccaa2",
+   "cornice": "simple",
+   "parapet": true,
+   "quoins": false,
+   "confidence": "low",
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.7,
+     "w": 1.2,
+     "z": 1.0,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.7,
+     "w": 2.0,
+     "z": 4.2,
+     "h": 2.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.7,
+     "w": 2.8,
+     "z": 7.8,
+     "h": 3.6,
+     "panes": [
+      4,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "notes": "Session 54: the canted corner bay of the Edwardian buff-ashlar range at Downing St / Downing Place: banded rusticated ground storey with one window, a three-light first-floor window, and a tall four-light mullioned and transomed window between engaged columns on the second floor under an entablature and parapet with a cartouche. Mapillary 751816582152941 (17 m, near square-on)."
+  },
+  {
+   "id": "way/131662340:6",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.6,
+    7.2
+   ],
+   "cornice_z": 11.0,
+   "string_courses": [
+    3.6,
+    7.2
+   ],
+   "pilasters": [],
+   "material": "stone",
+   "wall_colour": "#c9b28a",
+   "trim_colour": "#dccaa2",
+   "cornice": "simple",
+   "parapet": true,
+   "quoins": false,
+   "confidence": "low",
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.7,
+     "w": 0.9,
+     "z": 4.4,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.7,
+     "w": 0.9,
+     "z": 7.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "notes": "Session 54: narrow facet beside the corner bay, plain banded ashlar with a single upper window column (blank rusticated ground storey with downpipe). Mapillary 751816582152941."
   }
  ]
 }

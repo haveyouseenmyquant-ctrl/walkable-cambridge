@@ -1604,3 +1604,16 @@ Next
 2. Ring 1: the remaining ~420 walls are harder. Try Geograph and the Commons category per street, and
    aerial/oblique-free sources. Consider a style-guided default for walls that have no photo.
 3. City baseline track: generalise the parts library for unannotated walls (Gaspard's front (a)).
+
+## 2026-11-09 — Session 53 (reconstructed in session 54)
+
+Session 53 ended without a journal entry or a commit. Session 54 committed its work as 2be12d0:
+- Ground: the clay paviors (Market St, Market Hill loop, Trinity St, Sidney St) drew as saturated new red; retoned to the
+  weathered grey-plum seen in non-held-out photos, with grime patches; a sharper brick-weight ramp so 4-6 m brick
+  carriageways reach their kerbs on the 2 m ground grid (docs/screens/session53_ground_{before,after}_*.png).
+- Trees: brighter, fuller crowns (more cards, lighter AO), species-like palettes per crown variant; the LiDAR canopy
+  filter drops tall thin tops (spires and pinnacles were being turned into trees). Tree tiles rebuilt.
+- Game: flyers no longer drift through walls (3 of 20 playtest failures were flyers out of line of sight); bot fixes for
+  partial plans, unreachable loot and leashed mobs; fire burst/ult down, storm lance/ult up (TTK balance).
+- Zone KPI: market stall canopies (building=roof) and vendor trailers aren't counted as facades. St Botolph annotation.
+None of this was published or measured in session 53.

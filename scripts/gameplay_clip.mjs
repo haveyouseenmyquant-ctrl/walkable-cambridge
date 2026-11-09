@@ -64,6 +64,9 @@ function installClip(clipS) {
   const DT = 0.05, ENC = Object.fromEntries(g.encounters.map(e => [e.id, e]));
   // gate the render loop's own clock: only our stepper advances the player and the game
   const pu = P.update.bind(P), gu = window.__gameUpdate;
+  // session 54: an over-the-shoulder third-person camera, pitched a little down, so the frames show the wizard, the
+  // enemies around them and the ground telegraphs (first person at eye height mostly showed walls and the nearest mob)
+  P.view = 3; P.pitch = -0.3; P.camMax = 5.5;
   let stepping = false;
   P.update = dt => { if (stepping) pu(dt); };
   const t0 = g.time, now = () => +(g.time - t0).toFixed(2);
@@ -134,13 +137,23 @@ function installClip(clipS) {
       if (mv < 0.5) { P.keys.add('Space'); st.path = null; } }
     return false;
   }
+  // session 54: a target that takes no damage for 4 s while engaged (a flyer behind a wall, out of every spell's line
+  // of sight) is ignored for 15 s; the clip bot used to stand facing a blank wall for the second half of the clip
+  const lastDmg = new WeakMap(), engagedAt = new WeakMap(), ignore = new WeakMap();
+  offs.push(g.on('hit', e => { if (e.target && e.target.type) lastDmg.set(e.target, g.time); }));
   function target() {   // the current leg's encounter mobs once near it, else anything hostile within 18 m
     const enc = ENC[ROUTE[st.leg]], es = enc && sys.encounterState.get(enc.id);
     const mine = es?.active ? es.mobs.filter(m => !m.dead && !m.removed) : [];
     let best = null, bd = Infinity;
     for (const m of live()) {
+      if ((ignore.get(m) ?? -1) > g.time) continue;
       const d = dist(m), ok = (mine.includes(m) && Math.hypot(enc.x - P.x, enc.y - P.y) < enc.r + 25) || (hostile(m) && d < 18);
       if (ok && d < bd) { bd = d; best = m; }
+    }
+    if (best) {
+      if (st.cur !== best) { st.cur = best; engagedAt.set(best, g.time); }
+      const since = Math.max(engagedAt.get(best) ?? g.time, lastDmg.get(best) ?? -1e9);
+      if (g.time - since > 4) { ignore.set(best, g.time + 15); st.cur = null; return null; }
     }
     return best;
   }
@@ -157,7 +170,20 @@ function installClip(clipS) {
     }
     return false;
   }
+  // session 54: pick the steepest camera pitch whose boom (head -> camera) is clear of stall canopies and facades for
+  // 4.5 m, so the camera does not end up pressed under a canopy looking at its underside
+  let pitchT = 0;
+  function framePitch(dt) {
+    if ((pitchT -= dt) > 0 || !P.camOcclude) return; pitchT = 0.5;
+    const sy = Math.sin(P.yaw), cy = Math.cos(P.yaw);
+    for (const pt of [-0.3, -0.2, -0.1, 0, 0.1]) {
+      const cp = Math.cos(pt), sp = Math.sin(pt);
+      if (P.camOcclude(P.x, P.eye + 0.3, -P.y, sy * cp, -sp, cy * cp, 4.8) >= 4.5) { P.pitch = pt; return; }
+    }
+    P.pitch = -0.3;
+  }
   function step(dt) {
+    framePitch(dt);
     P.keys.clear();
     if (g.stats.hp <= 0 || g.paused) {   // death: the real "Rise again" button
       const btn = document.querySelector('.gh-death button'), shown = btn && !document.querySelector('.gh-death').hidden;
@@ -180,7 +206,7 @@ function installClip(clipS) {
     if (spot) { if (walkTo(spot.x, spot.y, 0.5, dt) || g.time - spot.t > 10) { spot.looted = true; st.path = null; } return; }
     const enc = ENC[ROUTE[st.leg]]; if (!enc) return;
     const es = sys.encounterState.get(enc.id), dEnc = Math.hypot(enc.x - P.x, enc.y - P.y);
-    if (es?.active && es.mobs.length && es.mobs.every(x => x.dead) && dEnc < enc.r + 25) { st.leg++; st.path = null; return; }
+    if (es?.active && es.mobs.length && es.mobs.every(x => x.dead || x.removed || (ignore.get(x) ?? -1) > g.time) && dEnc < enc.r + 25) { st.leg++; st.path = null; return; }
     walkTo(enc.x, enc.y, Math.max(3, enc.r * 0.4), dt);
   }
   const snap = () => ({ t: now(), hp: Math.round(g.stats.hp), maxHp: g.stats.maxHp, mana: Math.round(g.stats.mana), level: g.stats.level,

@@ -1,7 +1,9 @@
 {
  "osm_id": "way/59620751",
  "sources": [
-  "commons:File:Church of Saint Botolph, Cambridge (Southwest View - 01).jpg"
+  "commons:File:Church of Saint Botolph, Cambridge (Southwest View - 01).jpg",
+  "mapillary:2865908173677254",
+  "mapillary:829517581246404"
  ],
  "walls": [
   {
@@ -153,6 +155,39 @@
     }
    ],
    "notes": "South aisle: rubble stone, two large three-light Perpendicular traceried windows, low parapet; south porch/chapel with battlements to the east.",
+   "material": "stone",
+   "wall_colour": "#b9a684",
+   "trim_colour": "#cdbb98",
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "confidence": "low"
+  },
+  {
+   "id": "way/59620751:4",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "cornice_z": 6.6,
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 1.95,
+     "w": 2.0,
+     "z": 1.8,
+     "h": 4.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "pointed",
+     "sill": true
+    }
+   ],
+   "notes": "St Botolph, south aisle/chapel bay towards Trumpington St churchyard: rubble stone with ashlar dressings and a stepped buttress, one large three-light Perpendicular traceried window under a hood mould, parapet. Mapillary 2017 view across Trumpington St (2865908173677254); style as the annotated south aisle (:5).",
    "material": "stone",
    "wall_colour": "#b9a684",
    "trim_colour": "#cdbb98",

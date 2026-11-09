@@ -3,7 +3,8 @@
  "sources": [
   "mapillary:919159848898713",
   "mapillary:301075494954846",
-  "commons:File:Church of St Andrew the Great - geograph.org.uk - 4363662.jpg (CC BY-SA 2.0)"
+  "commons:File:Church of St Andrew the Great - geograph.org.uk - 4363662.jpg (CC BY-SA 2.0)",
+  "mapillary:288790312952123"
  ],
  "walls": [
   {
@@ -127,6 +128,60 @@
    ],
    "confidence": "low",
    "notes": "St Andrew the Great, east end on St Andrew's Street (p0 = south corner): buff ashlar gable with a corner buttress (pilaster) at the south corner and one large pointed Perpendicular east window (about four/five lights, sill ~3.6 m) centred in the wall; plinth offset ~1.2 m. walls.json eave (6.3 m) is below the window head; the real gable is ~10 m+ (eave fix should lift it). From Geograph 4363662."
+  },
+  {
+   "id": "way/135595981:1",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "stone",
+   "wall_colour": "#cdbb92",
+   "trim_colour": "#ddd0ad",
+   "cornice_z": 8.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    1.0
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.2,
+    4.5,
+    8.85
+   ],
+   "confidence": "low",
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.35,
+     "w": 1.8,
+     "z": 2.6,
+     "h": 5.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 6.7,
+     "w": 1.8,
+     "z": 2.6,
+     "h": 5.0,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "pointed",
+     "sill": true
+    }
+   ],
+   "notes": "Session 54: St Andrew the Great, north side towards the Christ's Lane / Lion Yard walk: buff ashlar on a plinth with stepped buttresses, tall pointed two-light leaded windows, a gutter and downpipes at the eaves. Mapillary 288790312952123 (22 m, oblique); two bays over 9 m estimated."
   }
  ]
 }

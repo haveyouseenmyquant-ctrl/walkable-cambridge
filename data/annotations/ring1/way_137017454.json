@@ -1,8 +1,9 @@
 {
  "osm_id": "way/137017454",
  "sources": [
-  "mapillary:4484249121604453",
-  "mapillary:1129882040864714"
+  "mapillary:1129882040864714",
+  "mapillary:142407867788301",
+  "mapillary:4484249121604453"
  ],
  "walls": [
   {
@@ -105,6 +106,325 @@
    ],
    "confidence": "low",
    "notes": "Caius Master's Lodge range seen at the end of the lane: red brick gable with blue-brick diaper pattern, stone quoins and mullioned windows, bracketed oriel sill under the central first-floor window, carved shield in the gable; lower annex with a door at the north end. (length 10.8 m, height 12.3 m from walls.json)"
+  },
+  {
+   "id": "way/137017454:19",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.2,
+    8.2
+   ],
+   "material": "brick",
+   "wall_colour": "#9a7c5a",
+   "trim_colour": "#c9b48a",
+   "cornice_z": 13.2,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    1.6,
+    4.2
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.68,
+     "w": 1.0,
+     "z": 0.5,
+     "h": 0.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.68,
+     "w": 1.2,
+     "z": 5.0,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.68,
+     "w": 1.2,
+     "z": 9.0,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.05,
+     "w": 1.0,
+     "z": 0.5,
+     "h": 0.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.05,
+     "w": 1.2,
+     "z": 5.0,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.05,
+     "w": 1.2,
+     "z": 9.0,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.42,
+     "w": 1.0,
+     "z": 0.5,
+     "h": 0.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.42,
+     "w": 1.2,
+     "z": 5.0,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.42,
+     "w": 1.2,
+     "z": 9.0,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 11.79,
+     "w": 1.0,
+     "z": 0.5,
+     "h": 0.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 11.79,
+     "w": 1.2,
+     "z": 5.0,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 11.79,
+     "w": 1.2,
+     "z": 9.0,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 15.15,
+     "w": 1.0,
+     "z": 0.5,
+     "h": 0.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 15.15,
+     "w": 1.2,
+     "z": 5.0,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 15.15,
+     "w": 1.2,
+     "z": 9.0,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 18.52,
+     "w": 1.0,
+     "z": 0.5,
+     "h": 0.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 18.52,
+     "w": 1.2,
+     "z": 5.0,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 18.52,
+     "w": 1.2,
+     "z": 9.0,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 21.89,
+     "w": 1.0,
+     "z": 0.5,
+     "h": 0.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 21.89,
+     "w": 1.2,
+     "z": 5.0,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 21.89,
+     "w": 1.2,
+     "z": 9.0,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Gonville and Caius, Master's Lodge / Hall range, west side to the Trinity Lane stub north to the Caius Master's Lodge gable: brown-buff brick, heavily stained ashlar plinth (~1.6 m) with low barred grilles, mullioned windows in stone surrounds on the upper floors at a ~3.4 m pitch, stone band at first floor. From a 2015 Mapillary view looking north up the lane (142407867788301, east side of the image); bay count estimated."
   }
  ]
 }

@@ -19,10 +19,10 @@ export const CLASSES = {
     spells: [
       { id: 'ember_bolt', name: 'Ember Bolt', glyph: '✦', kind: 'bolt', type: 'fire', mana: 5, cd: 0.45, dmg: 22, speed: 48, range: 60, splash: 1.2, color: 0xff7a2a, sfx: 'ember', look: 'ember' },
       { id: 'cinder_spray', name: 'Cinder Spray', glyph: '≋', kind: 'cone', type: 'fire', mana: 14, cd: 3, dmg: 14, range: 9, angle: 0.6, burn: { dps: 6, dur: 3 }, color: 0xffa040, sfx: 'spray', look: 'spray' },
-      { id: 'fireburst', name: 'Fireburst Orb', glyph: '◉', kind: 'bolt', type: 'fire', mana: 22, cd: 6, dmg: 48, speed: 22, range: 50, splash: 4.5, color: 0xff5010, sfx: 'orb', look: 'orb', size: 1.6 },
+      { id: 'fireburst', name: 'Fireburst Orb', glyph: '◉', kind: 'bolt', type: 'fire', mana: 22, cd: 6, dmg: 42, speed: 22, range: 50, splash: 4.5, color: 0xff5010, sfx: 'orb', look: 'orb', size: 1.6 },
       { id: 'flame_step', name: 'Flame Step', glyph: '➚', kind: 'blink', type: 'fire', mana: 15, cd: 5, dist: 11, dmg: 18, radius: 3, color: 0xff9a30, sfx: 'flamestep', look: 'flamestep' },
       { id: 'kindle_ring', name: 'Kindle Ring', glyph: '◎', kind: 'nova', type: 'fire', mana: 24, cd: 9, dmg: 30, radius: 5.5, knock: 3, burn: { dps: 5, dur: 3 }, color: 0xff6a00, sfx: 'kindle', look: 'kindle' },
-      { id: 'sunfall', name: 'Sunfall', glyph: '☀', kind: 'zone', type: 'fire', mana: 50, cd: 60, dmg: 28, radius: 7, dur: 3, interval: 0.22, tick: 'meteor', splash: 2.5, range: 40, color: 0xffc040, sfx: 'sunfall', look: 'sunfall', ult: true },
+      { id: 'sunfall', name: 'Sunfall', glyph: '☀', kind: 'zone', type: 'fire', mana: 50, cd: 60, dmg: 17, radius: 7, dur: 3, interval: 0.22, tick: 'meteor', splash: 2.5, range: 40, color: 0xffc040, sfx: 'sunfall', look: 'sunfall', ult: true },
     ],
     talents: [
       [{ name: 'Split Embers', desc: 'Ember Bolt fires 3 bolts in a fan', f: S => { S.ember_bolt.count = 3; } },
@@ -74,12 +74,12 @@ export const CLASSES = {
   hexweaver: {
     name: 'Hex Weaver', color: '#b070ff', blurb: 'Curses, bound wisps and life drain. Weakens foes, feeds on them.',
     spells: [
-      { id: 'hex_dart', name: 'Hex Dart', glyph: '✧', kind: 'bolt', type: 'hex', mana: 5, cd: 0.4, dmg: 16, speed: 40, range: 50, splash: 0, drain: 0.3, color: 0xb070ff, sfx: 'dart', look: 'dart' },
+      { id: 'hex_dart', name: 'Hex Dart', glyph: '✧', kind: 'bolt', type: 'hex', mana: 5, cd: 0.4, dmg: 21, speed: 40, range: 50, splash: 0, drain: 0.3, color: 0xb070ff, sfx: 'dart', look: 'dart' },
       { id: 'withering_mark', name: 'Withering Mark', glyph: '⍟', kind: 'bolt', type: 'hex', mana: 12, cd: 5, dmg: 10, speed: 34, range: 45, splash: 0, curse: 1.35, curseDur: 8, burn: { dps: 5, dur: 8 }, color: 0x70ff90, sfx: 'mark', look: 'mark' },
-      { id: 'soul_siphon', name: 'Soul Siphon', glyph: '♆', kind: 'beam', type: 'hex', mana: 16, cd: 6, dmg: 35, range: 25, chain: 0, drain: 0.5, color: 0xd050ff, sfx: 'siphon', look: 'siphon' },
+      { id: 'soul_siphon', name: 'Soul Siphon', glyph: '♆', kind: 'beam', type: 'hex', mana: 16, cd: 6, dmg: 46, range: 25, chain: 0, drain: 0.5, color: 0xd050ff, sfx: 'siphon', look: 'siphon' },
       { id: 'shade_step', name: 'Shade Step', glyph: '⇢', kind: 'blink', type: 'hex', mana: 12, cd: 5, dist: 12, invuln: 0.5, color: 0x8040c0, sfx: 'shade', look: 'shade' },
       { id: 'bound_wisps', name: 'Bound Wisps', glyph: '❂', kind: 'summon', type: 'hex', mana: 24, cd: 18, dmg: 10, count: 2, dur: 12, interval: 0.8, range: 20, drain: 0.3, color: 0xa0ffd0, sfx: 'wisp', look: 'wisp' },
-      { id: 'night_bloom', name: 'Night Bloom', glyph: '✿', kind: 'zone', type: 'hex', mana: 50, cd: 70, dmg: 20, radius: 8, dur: 4, interval: 0.5, tick: 'field', curse: 1.5, curseDur: 6, drain: 0.25, range: 30, color: 0x9030ff, sfx: 'bloom', look: 'bloom', ult: true },
+      { id: 'night_bloom', name: 'Night Bloom', glyph: '✿', kind: 'zone', type: 'hex', mana: 50, cd: 70, dmg: 28, radius: 8, dur: 4, interval: 0.5, tick: 'field', curse: 1.5, curseDur: 6, drain: 0.25, range: 30, color: 0x9030ff, sfx: 'bloom', look: 'bloom', ult: true },
     ],
     talents: [
       [{ name: 'Gluttony', desc: 'Hex Dart drains 60% of damage dealt', f: S => { S.hex_dart.drain = 0.6; } },

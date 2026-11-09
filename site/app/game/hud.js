@@ -113,7 +113,16 @@ body.explore #game-hud .gh-loots{display:none}`;
   offs.push(game.on('kill', ({ mob }) => { if (mob) sfx.play('kill', mob.boss ? 1.2 : 0.6, 0.9 + Math.random() * 0.2); }));
   offs.push(game.on('hit', ({ target, amount, crit, type }) => {
     if (!target || target === game.player || amount == null) return;
+    // session 54: non-crit hits on a target that still shows a fresh number add into it (one rolling total per target
+    // instead of a pile of overlapping ticks); crits always get their own number
+    const prev = lastNum.get(target);
+    if (!crit && prev && prev.life > 0 && prev.tgt === target && !prev.crit && prev.t < 0.45) {
+      prev.sum += amount; prev.t = Math.min(prev.t, 0.05); prev.pop = 0.35; prev.d.textContent = Math.round(prev.sum);
+      if (prev.sum >= 40 && !prev.d.classList.contains('big')) prev.d.classList.add('big');
+      return;
+    }
     const n = pool[pi]; pi = (pi + 1) % POOL;
+    n.tgt = target; n.crit = !!crit; n.sum = amount; lastNum.set(target, n);
     // session 48: numbers fan out (no stacking on one spot), linger longer and pop; crits get a CRIT tag + gold
     const big = !crit && (amount >= 0.12 * (target.maxHp || 1e9) || amount >= 40);
     n.x = target.x + (Math.random() - 0.5) * 0.6; n.y = target.y + (Math.random() - 0.5) * 0.6; n.z = target.z + (target.height ?? 1.6) * (0.75 + Math.random() * 0.4) + 0.2;
@@ -121,6 +130,7 @@ body.explore #game-hud .gh-loots{display:none}`;
     n.d.textContent = Math.round(amount); n.d.className = 'gh-num' + (crit ? ' crit' : big ? ' big' : '');
     n.d.style.color = TYPE_COLOR[type] || '#fff'; n.d.style.display = '';
   }));
+  const lastNum = new WeakMap();
   function updateNums(dt) {
     const cam = game.camera, W = innerWidth, H = innerHeight;
     for (const n of pool) {

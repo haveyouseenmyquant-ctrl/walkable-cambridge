@@ -1,0 +1,201 @@
+{
+ "osm_id": "way/136330924",
+ "sources": [
+  "mapillary:1116860688798837",
+  "mapillary:1150854562005657"
+ ],
+ "walls": [
+  {
+   "id": "way/136330924:3",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.9
+   ],
+   "cornice_z": 9.2,
+   "string_courses": [
+    1.4,
+    4.9
+   ],
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.81,
+     "w": 1.1,
+     "z": 0.1,
+     "h": 0.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.81,
+     "w": 1.2,
+     "z": 1.9,
+     "h": 2.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.81,
+     "w": 1.2,
+     "z": 5.6,
+     "h": 2.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.42,
+     "w": 1.1,
+     "z": 0.1,
+     "h": 0.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.42,
+     "w": 1.2,
+     "z": 1.9,
+     "h": 2.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.42,
+     "w": 1.2,
+     "z": 5.6,
+     "h": 2.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.04,
+     "w": 1.1,
+     "z": 0.1,
+     "h": 0.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.04,
+     "w": 1.2,
+     "z": 1.9,
+     "h": 2.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.04,
+     "w": 1.2,
+     "z": 5.6,
+     "h": 2.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 12.65,
+     "w": 1.1,
+     "z": 0.1,
+     "h": 0.8,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 12.65,
+     "w": 1.2,
+     "z": 1.9,
+     "h": 2.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 12.65,
+     "w": 1.2,
+     "z": 5.6,
+     "h": 2.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "material": "brick",
+   "wall_colour": "#93503a",
+   "trim_colour": "#e8e2d4",
+   "cornice": "simple",
+   "parapet": false,
+   "quoins": false,
+   "confidence": "low",
+   "notes": "17 Mill Lane block, north side of Pembroke Street: Georgian-style red brick with white-painted 6-over-6 sashes in gauged-brick flat arches on two floors, segmental-arched barred basement lights at pavement level, brick band and a moulded brick eaves cornice. From a 2015 Mapillary view looking ENE along Pembroke St; 4 bays over 14.5 m assumed from the ~3.4 m window pitch seen."
+  }
+ ]
+}

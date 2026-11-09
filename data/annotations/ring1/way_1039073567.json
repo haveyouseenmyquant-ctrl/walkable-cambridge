@@ -6,7 +6,8 @@
   "mapillary:231738802083472",
   "mapillary:766634367235110",
   "mapillary:288246269461526",
-  "mapillary:756448481904233"
+  "mapillary:756448481904233",
+  "mapillary:805337440380095"
  ],
  "walls": [
   {
@@ -1798,6 +1799,163 @@
    ],
    "confidence": "low",
    "notes": "Emmanuel Street north-west side, Christ's Lane development: buff-brick block, shopfronts under a continuous band, three upper storeys of narrow windows on a ~2.2 m rhythm (round-headed on the first floor), simple eaves. Shop order from OSM (Subway 2, Savino's 3, CJ's 4, Coral); dry cleaner from a 2015 view."
+  },
+  {
+   "id": "way/1039073567:5",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.4,
+    7.9,
+    10.9
+   ],
+   "material": "brick",
+   "wall_colour": "#7a4f3c",
+   "trim_colour": "#d8cfc0",
+   "cornice_z": 14.2,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.4
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "confidence": "low",
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 4.07,
+     "z1": 3.3,
+     "fascia_text": "Wendy's",
+     "fascia_colour": "#c8102e",
+     "text_colour": "#ffffff",
+     "door_x": 2.2,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.2,
+     "w": 1.2,
+     "z": 4.9,
+     "h": 2.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.2,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 2.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.2,
+     "w": 1.0,
+     "z": 11.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "notes": "Session 54: splayed corner of the Christ's Lane block at St Andrew's St / Emmanuel St (two 4.4 m facets): stone-clad shop storey (corner unit), one window column per facet on the 2.6 m rhythm of the St Andrew's St front (arched first floor, flat sashes above). Mapillary 805337440380095 (oblique, 17 m)."
+  },
+  {
+   "id": "way/1039073567:6",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.4,
+    7.9,
+    10.9
+   ],
+   "material": "brick",
+   "wall_colour": "#7a4f3c",
+   "trim_colour": "#d8cfc0",
+   "cornice_z": 14.2,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.4
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "confidence": "low",
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 4.23,
+     "z1": 3.3,
+     "fascia_text": "",
+     "fascia_colour": "#c8102e",
+     "text_colour": "#ffffff",
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.3,
+     "w": 1.2,
+     "z": 4.9,
+     "h": 2.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.3,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 2.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.3,
+     "w": 1.0,
+     "z": 11.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "notes": "Session 54: splayed corner of the Christ's Lane block at St Andrew's St / Emmanuel St (two 4.4 m facets): stone-clad shop storey (corner unit), one window column per facet on the 2.6 m rhythm of the St Andrew's St front (arched first floor, flat sashes above). Mapillary 805337440380095 (oblique, 17 m)."
   }
  ]
 }

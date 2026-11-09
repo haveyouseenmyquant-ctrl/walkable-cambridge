@@ -1,7 +1,9 @@
 {
  "osm_id": "way/166155936",
  "sources": [
-  "commons:File:Cmglee Cambridge Trinity College Bishops Hostel.jpg"
+  "commons:File:Cmglee Cambridge Trinity College Bishops Hostel.jpg",
+  "mapillary:1129882040864714",
+  "mapillary:142407867788301"
  ],
  "walls": [
   {
@@ -311,6 +313,91 @@
    ],
    "confidence": "low",
    "notes": "Bishop's Hostel, Trinity (1669-71): red brick with stone quoins, window surrounds and band course; two storeys of stone-mullioned leaded cross windows plus attic dormers in a tiled hipped roof; centre with giant stone pilasters and pediment over a panelled doorcase, flanked by gabled end wings. Commons view is elevated and oblique; matched to this 38 m wall by footprint orientation only, bay positions spread evenly. (length 38.0 m, height 10.0 m from walls.json)"
+  },
+  {
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.3
+   ],
+   "material": "brick",
+   "wall_colour": "#9a5f4a",
+   "trim_colour": "#cdb990",
+   "cornice_z": 7.0,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.3
+   ],
+   "quoins": true,
+   "pilasters": [],
+   "id": "way/166155936:1",
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.58,
+     "w": 1.1,
+     "z": 0.9,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.58,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 1.58,
+     "w": 1.1,
+     "h": 1.2
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.75,
+     "w": 1.1,
+     "z": 0.9,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.75,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Bishop's Hostel (Trinity, 1669-71), range along the lane on its east side: red brick with stone quoins, plinth and storey band, two floors of stone-surrounded cross casements at ~2.6 m pitch, hipped tiled attic with dormers. Layout carried from the annotated courtyard walls (166155937:8 etc.); the lane view (Mapillary 2015 run 142407867788301, 1129882040864714) confirms brick walling with regular stone-dressed windows on two floors. Window count is an estimate."
   }
  ]
 }

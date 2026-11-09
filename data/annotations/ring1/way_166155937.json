@@ -1,7 +1,9 @@
 {
  "osm_id": "way/166155937",
  "sources": [
-  "commons:File:Cmglee Cambridge Trinity College Bishops Hostel.jpg"
+  "commons:File:Cmglee Cambridge Trinity College Bishops Hostel.jpg",
+  "mapillary:1129882040864714",
+  "mapillary:142407867788301"
  ],
  "walls": [
   {
@@ -354,6 +356,249 @@
    ],
    "confidence": "low",
    "notes": "Bishop's Hostel (1669-71), north-facing courtyard: red brick with stone quoins, plinth and storey band, two storeys plus hipped tiled attic with dormers, cross-casement leaded windows in stone surrounds; pedimented stone frontispiece with pilasters in the centre range. Commons 'Cmglee ... Bishops Hostel.jpg' (CC BY-SA 4.0), high oblique view. East wing inner (west) face: hidden in the photo, mirrored from the west wing (symmetry assumed)."
+  },
+  {
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.3
+   ],
+   "material": "brick",
+   "wall_colour": "#9a5f4a",
+   "trim_colour": "#cdb990",
+   "cornice_z": 7.0,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.3
+   ],
+   "quoins": true,
+   "pilasters": [],
+   "id": "way/166155937:6",
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.25,
+     "w": 1.1,
+     "z": 0.9,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.25,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 1.25,
+     "w": 1.1,
+     "h": 1.2
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 3.76,
+     "w": 1.1,
+     "z": 0.9,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 3.76,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.27,
+     "w": 1.1,
+     "z": 0.9,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.27,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 6.27,
+     "w": 1.1,
+     "h": 1.2
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.78,
+     "w": 1.1,
+     "z": 0.9,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.78,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 11.29,
+     "w": 1.1,
+     "z": 0.9,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 11.29,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 11.29,
+     "w": 1.1,
+     "h": 1.2
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 13.8,
+     "w": 1.1,
+     "z": 0.9,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 13.8,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 16.31,
+     "w": 1.1,
+     "z": 0.9,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 16.31,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 16.31,
+     "w": 1.1,
+     "h": 1.2
+    }
+   ],
+   "confidence": "low",
+   "notes": "Bishop's Hostel (Trinity, 1669-71), range along the lane on its east side: red brick with stone quoins, plinth and storey band, two floors of stone-surrounded cross casements at ~2.6 m pitch, hipped tiled attic with dormers. Layout carried from the annotated courtyard walls (166155937:8 etc.); the lane view (Mapillary 2015 run 142407867788301, 1129882040864714) confirms brick walling with regular stone-dressed windows on two floors. Window count is an estimate."
   }
  ]
 }

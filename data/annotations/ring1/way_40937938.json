@@ -531,6 +531,84 @@
    ],
    "confidence": "low",
    "notes": "Lion Yard, St Tibbs Row / Church Walk side by St Andrew the Great (p0 = south). 1970s-2000s shopping-centre block: glazed ground-floor shop units (EAT. and a cafe) under a white rendered band and canopy on tall white columns, first floor of brown brick with large dark-framed glazing. Read from a very oblique Mapillary view (515544902781992); widths approximate."
+  },
+  {
+   "id": "way/40937938:19",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "brick",
+   "wall_colour": "#b98c5c",
+   "trim_colour": "#2a2a2a",
+   "cornice_z": 3.2,
+   "cornice": "none",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "confidence": "low",
+   "elements": [],
+   "notes": "Lion Yard, St Tibbs Row south side by the cycle racks: blank buff-brick wall with a tall blind arched recess (no openings), slate roof behind. Mapillary 490320359088033 (22-30 m, tilted), session 54."
+  },
+  {
+   "id": "way/40937938:18",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "brick",
+   "wall_colour": "#b98c5c",
+   "trim_colour": "#2a2a2a",
+   "cornice_z": 3.2,
+   "cornice": "none",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "confidence": "low",
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.4,
+     "x1": 6.9,
+     "z1": 3.0,
+     "fascia_text": "Terminal D",
+     "fascia_colour": "#ffffff",
+     "text_colour": "#c2185b",
+     "door_x": 6.2,
+     "stallriser": 0.5,
+     "awning": false
+    }
+   ],
+   "notes": "Lion Yard shop unit (Terminal D in the photo): full-width black-framed glazed shopfront on a brick stallriser under the low slate-roof eave, white fascia board. Mapillary 490320359088033 (22-30 m, tilted), session 54."
+  },
+  {
+   "id": "way/40937938:17",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "brick",
+   "wall_colour": "#b98c5c",
+   "trim_colour": "#2a2a2a",
+   "cornice_z": 3.2,
+   "cornice": "none",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "confidence": "low",
+   "elements": [
+    {
+     "type": "door",
+     "style": "glazed",
+     "x": 2.4,
+     "w": 1.8,
+     "h": 2.6
+    }
+   ],
+   "notes": "Lion Yard: recessed glazed entrance bay behind white round columns at the corner of the shop unit, under the slate-roof eave. Mapillary 490320359088033 (22-30 m, tilted), session 54."
   }
  ]
 }
