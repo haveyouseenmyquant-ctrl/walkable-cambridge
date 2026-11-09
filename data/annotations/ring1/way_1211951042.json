@@ -1,0 +1,171 @@
+{
+ "osm_id": "way/1211951042",
+ "sources": [
+  "commons:File:Changing face of Petty Cury - geograph.org.uk - 4353399.jpg",
+  "commons:File:Petty Cury - geograph.org.uk - 4350366.jpg",
+  "commons:File:Petty Cury - geograph.org.uk - 5897664.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1211951042:1",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.4
+   ],
+   "material": "stone",
+   "wall_colour": "#c9b394",
+   "trim_colour": "#d8c6a4",
+   "cornice_z": 9.82,
+   "cornice": "none",
+   "parapet": false,
+   "string_courses": [
+    4.4
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 13.1,
+     "z1": 3.6,
+     "fascia_text": "Superdry Store",
+     "fascia_colour": "#3a3d40",
+     "text_colour": "#e8322b",
+     "door_x": 6.7,
+     "stallriser": 0.2,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.55,
+     "w": 0.7,
+     "z": 4.9,
+     "h": 2.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.4,
+     "w": 0.7,
+     "z": 4.9,
+     "h": 2.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 3.25,
+     "w": 0.7,
+     "z": 4.9,
+     "h": 2.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.15,
+     "w": 0.7,
+     "z": 4.9,
+     "h": 2.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 7.0,
+     "w": 0.7,
+     "z": 4.9,
+     "h": 2.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 7.85,
+     "w": 0.7,
+     "z": 4.9,
+     "h": 2.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 10.35,
+     "w": 0.7,
+     "z": 4.9,
+     "h": 2.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 11.2,
+     "w": 0.7,
+     "z": 4.9,
+     "h": 2.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.05,
+     "w": 0.7,
+     "z": 4.9,
+     "h": 2.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "30-31 Petty Cury (Superdry), north side, faces SSE; x from the west end. 1920s-30s neo-Tudor ashlar range with three steep street gables (apexes rise above the eave; small slit lights in each gable not modelled). Upper storey: three recessed groups of stone-mullioned-and-transomed 3-light windows (lower lights tall, short transom lights above), one per gable. Ground: full-width dark-grey shopfront under a deep plain rendered fascia band with a projecting moulded ledge at ~4.4 m. Group positions estimated from oblique Geograph photos."
+  }
+ ]
+}

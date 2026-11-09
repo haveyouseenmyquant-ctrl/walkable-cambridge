@@ -5,7 +5,8 @@
   "mapillary:256224142867800",
   "mapillary:484666925913106",
   "mapillary:963005101178076",
-  "mapillary:138527544920136"
+  "mapillary:138527544920136",
+  "commons:File:10, Trinity Street.jpg"
  ],
  "walls": [
   {
@@ -107,6 +108,98 @@
    ],
    "confidence": "low",
    "notes": "Victorian Gothic front of yellow gault brick with Ketton-stone dressings (White Stuff: green hanging sign and vertical green banner). Ground floor of tall pointed-arch openings on clustered stone shafts with carved capitals (shop windows plus a pointed-arch entrance at the south end next to Whistles); first floor has a corbelled stone oriel with traceried parapet and lancet lights; pointed lancet sashes above; corbel-table eaves. CAVEAT: the gothic building looks about 10 m wide (it also includes a rounded corner oriel/turret with a conical slate roof at its north end), but this OSM wall is only 6.5 m and there is a 4.5 m gap to wall 13, so the north corner bay probably belongs to the unmapped 11-12; I annotated only the southern bays, so element positions are rough."
+  },
+  {
+   "id": "way/1288644220:2",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.4,
+    5.8
+   ],
+   "material": "brick",
+   "wall_colour": "#cdbf9c",
+   "trim_colour": "#d9b8a0",
+   "cornice_z": 8.0,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 14.6,
+     "w": 1.8,
+     "z": 0.7,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 8.6,
+     "w": 1.6,
+     "z": 0.7,
+     "h": 2.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.0,
+     "w": 0.9,
+     "z": 3.7,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.0,
+     "w": 0.9,
+     "z": 6.1,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 16.9,
+     "w": 1.6,
+     "z": 3.6,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "10 Trinity Street (White Stuff), Green Street return: Victorian Gothic yellow gault brick with pink stone dressings and a corbelled cornice; big pointed-arch shop window near the corner, corner turret with corbelled oriel at x~17, round-arched sashes further east. Eastern ~8 m not visible in the photo, left plain. Commons '10, Trinity Street.jpg' (CC BY-SA 3.0)."
   }
  ]
 }

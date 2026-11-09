@@ -2,7 +2,8 @@
  "osm_id": "relation/3240",
  "sources": [
   "mapillary:909797159588321",
-  "mapillary:166355842062342"
+  "mapillary:166355842062342",
+  "commons:File:All Saints Passage - geograph.org.uk - 1257551.jpg"
  ],
  "walls": [
   {
@@ -169,6 +170,280 @@
    ],
    "confidence": "low",
    "notes": "Whewell's Court (Trinity College, Salvin 1860s) Trinity St front: Gothic-revival ashlar, mullioned windows with hood moulds, corbelled oriel and a corner turret with green copper cap at the north end, Tudor-arched gateway further south. Bay positions estimated from oblique views; no shops."
+  },
+  {
+   "id": "relation/3240:20",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.4,
+    6.6
+   ],
+   "material": "stone",
+   "wall_colour": "#b9ad94",
+   "trim_colour": "#cfc4ab",
+   "cornice_z": 9.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.2,
+     "w": 1.0,
+     "z": 1.0,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 6.2,
+     "w": 1.0,
+     "z": 1.0,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 10.2,
+     "w": 1.0,
+     "z": 1.0,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 14.2,
+     "w": 1.0,
+     "z": 1.0,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 18.2,
+     "w": 1.0,
+     "z": 1.0,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 22.2,
+     "w": 1.0,
+     "z": 1.0,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.2,
+     "w": 1.1,
+     "z": 4.2,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 6.2,
+     "w": 1.1,
+     "z": 4.2,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 10.2,
+     "w": 1.1,
+     "z": 4.2,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 14.2,
+     "w": 1.1,
+     "z": 4.2,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 18.2,
+     "w": 1.1,
+     "z": 4.2,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 22.2,
+     "w": 1.1,
+     "z": 4.2,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.2,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 6.2,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 10.2,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 14.2,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 18.2,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 22.2,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Whewell's Court (Salvin, 1860s) on All Saints Passage: grey ashlar Gothic revival, three storeys, one hood-moulded mullioned window per bay per floor between cast-iron downpipes, corbelled oriel at the corner with Sidney Street end. Geograph 1257551 (CC BY-SA 2.0); 6 bays at ~4 m pitch estimated."
   }
  ]
 }

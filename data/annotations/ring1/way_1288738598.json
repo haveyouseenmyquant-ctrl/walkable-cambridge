@@ -1,0 +1,131 @@
+{
+ "osm_id": "way/1288738598",
+ "sources": [
+  "commons:File:11, St John's Street.jpg",
+  "commons:File:12, St John's Street.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1288738598:5",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.0,
+    7.4,
+    10.6
+   ],
+   "material": "stone",
+   "wall_colour": "#c8a77a",
+   "trim_colour": "#ece4d2",
+   "cornice_z": 13.8,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.0,
+    7.4
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 5.3,
+     "z1": 3.6,
+     "fascia_text": "",
+     "fascia_colour": "#3a2a22",
+     "text_colour": "#f2f2f2",
+     "door_x": 4.4,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.6,
+     "w": 1.6,
+     "z": 4.4,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.0,
+     "w": 1.6,
+     "z": 4.4,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.6,
+     "w": 1.3,
+     "z": 7.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.0,
+     "w": 1.3,
+     "z": 7.9,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.6,
+     "w": 1.1,
+     "z": 11.0,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.0,
+     "w": 1.1,
+     "z": 11.0,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "12 St John's Street: ornate High-Victorian front of buff stone and terracotta with tiled inlaid pilaster strips, bracketed cornices between floors, arched second-floor windows with a carved head in the tympanum; white cast-iron shopfront with consoles, arched glazing and door. Seen only at the edges of Commons '11, St John's Street.jpg' and '12, St John's Street.jpg'; top storey assumed from the 14 m height."
+  }
+ ]
+}

@@ -3,7 +3,11 @@
  "sources": [
   "commons:File:A damp Market Passage - geograph.org.uk - 7102349.jpg",
   "mapillary:1474200122931705",
-  "mapillary:3874123462707371"
+  "mapillary:3874123462707371",
+  "mapillary:707806873958127",
+  "mapillary:291443295793280",
+  "mapillary:862137931312184",
+  "mapillary:795230574437603"
  ],
  "walls": [
   {
@@ -337,6 +341,124 @@
    ],
    "confidence": "low",
    "notes": "10-15 Market Street, north side west of Offspring/FatFace: painted stucco front with pilasters, tall round-headed first-floor windows in moulded surrounds, smaller second-floor sashes under a moulded cornice; two shop units (blue fascia unit to the west). Seen only obliquely looking west down Market Street; which units fall on this 15.5 m wall is estimated."
+  },
+  {
+   "id": "way/1288730358:1",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.2,
+    7.5
+   ],
+   "material": "brick",
+   "wall_colour": "#c9b68e",
+   "trim_colour": "#efebe2",
+   "cornice_z": 10.7,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 8.3,
+     "z1": 3.9,
+     "fascia_text": "WHSmith",
+     "fascia_colour": "#1d2f6f",
+     "text_colour": "#f4f4f4",
+     "door_x": 4.2,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.5,
+     "w": 1.0,
+     "z": 4.6,
+     "h": 2.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.25,
+     "w": 1.0,
+     "z": 4.6,
+     "h": 2.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.0,
+     "w": 1.0,
+     "z": 4.6,
+     "h": 2.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.5,
+     "w": 1.0,
+     "z": 7.9,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.25,
+     "w": 1.0,
+     "z": 7.9,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.0,
+     "w": 1.0,
+     "z": 7.9,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "10-15 Market Street, west end of the frontage (faces SSE onto Market Street; x from the west end): WHSmith unit with deep blue fascia and white stallriser/pier, and the hanging WH S sign; buff gault-brick upper floors with plain sashes and a parapet. Only seen obliquely along the street from the west; bay count (3) and window sizes estimated."
   }
  ]
 }

@@ -276,7 +276,7 @@ body.explore #game-hud .gh-loots{display:none}`;
   const shake = cam => { if (trauma <= 0.001 || window.__cam) return; const s = trauma * trauma, t = game.time * 38;
     cam.rotation.x += 0.022 * s * Math.sin(t * 1.13); cam.rotation.y += 0.026 * s * Math.sin(t * 0.91 + 1.7); cam.rotation.z += 0.018 * s * Math.sin(t * 1.37 + 3.1); };
   if (a1) pl.applyCamera = function (cam) { a1.call(this, cam); shake(cam); };
-  if (a3) pl.applyCamera3 = function (cam) { a3.call(this, cam); shake(cam); };
+  if (a3) pl.applyCamera3 = function (cam, dt) { a3.call(this, cam, dt); shake(cam); };
   offs.push(() => { if (a1) pl.applyCamera = a1; if (a3) pl.applyCamera3 = a3; });
 
   const pv = new THREE.Vector3();

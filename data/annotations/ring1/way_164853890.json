@@ -1,0 +1,224 @@
+{
+ "osm_id": "way/164853890",
+ "sources": [
+  "commons:File:Peas Hill - geograph.org.uk - 7939613.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/164853890:5",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.2,
+    7.5,
+    10.7
+   ],
+   "material": "brick",
+   "wall_colour": "#b7a68a",
+   "trim_colour": "#ece6d6",
+   "cornice_z": 14.4,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.1
+   ],
+   "quoins": false,
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 5.3,
+     "z1": 3.6,
+     "fascia_text": "Maccaruna",
+     "fascia_colour": "#1f3346",
+     "text_colour": "#f2c230",
+     "door_x": 2.6,
+     "stallriser": 0.6,
+     "awning": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 5.5,
+     "x1": 12.4,
+     "z1": 3.8,
+     "fascia_text": "ARK",
+     "fascia_colour": "#2b2a2e",
+     "text_colour": "#e8a3b8",
+     "door_x": 6.2,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "bay",
+     "x": 1.6,
+     "w": 1.4,
+     "z": 4.6,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.0,
+     "w": 1.3,
+     "z": 4.6,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 8.6,
+     "w": 1.5,
+     "z": 4.6,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 11.3,
+     "w": 1.3,
+     "z": 4.6,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "bay",
+     "x": 1.6,
+     "w": 1.4,
+     "z": 7.9,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.0,
+     "w": 1.3,
+     "z": 7.9,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 8.6,
+     "w": 1.5,
+     "z": 7.9,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 11.3,
+     "w": 1.3,
+     "z": 7.9,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "bay",
+     "x": 1.6,
+     "w": 1.4,
+     "z": 11.1,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.0,
+     "w": 1.3,
+     "z": 11.1,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 8.6,
+     "w": 1.5,
+     "z": 11.1,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 11.3,
+     "w": 1.3,
+     "z": 11.1,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Spalding Hostel (King's College), Peas Hill front north of Brewboard: four-storey grey-buff gault brick; ground floor two shopfronts (pasta/gelato shop with yellow awnings under a projecting cream cornice, then the dark ARK gift shop); a full-height canted bay at the south end and plain sashes elsewhere. Upper window positions north of the bay and the top storey are extrapolated from an oblique view. x from the south end."
+  }
+ ]
+}

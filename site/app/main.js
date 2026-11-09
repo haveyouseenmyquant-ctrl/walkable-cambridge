@@ -174,6 +174,31 @@ async function main() {
     place: (x, y, z, yaw) => { player.x = x; player.y = y; player.z = z; player.yaw = yaw; player.vx = player.vy = player.vz = 0; },
   };
 
+  // session 51: third-person camera occlusion against visual-only meshes near the player (zone facades and market
+  // stall canopies have no collision). Candidate list refreshed every 0.5 s by bounding sphere; one ray per frame.
+  {
+    const ray = new THREE.Raycaster(), hits = [], sph = new THREE.Sphere(), o = new THREE.Vector3(), dv = new THREE.Vector3();
+    let near = [], nearT = 0;
+    player.camOcclude = (x, y, z, dx, dy, dz, far) => {
+      const zone = scene.getObjectByName?.('zone');
+      if (!zone) return Infinity;
+      o.set(x, y, z);
+      if ((nearT -= 1) <= 0) {
+        nearT = 30; near = [];
+        zone.traverse(m => {
+          if (!m.isMesh || !m.visible || !m.geometry) return;
+          if (!m.geometry.boundingSphere) m.geometry.computeBoundingSphere();
+          sph.copy(m.geometry.boundingSphere).applyMatrix4(m.matrixWorld);
+          if (sph.center.distanceTo(o) < sph.radius + 12) near.push(m);
+        });
+      }
+      if (!near.length) return Infinity;
+      ray.set(o, dv.set(dx, dy, dz).normalize()); ray.near = 0.1; ray.far = far;
+      hits.length = 0;
+      ray.intersectObjects(near, false, hits);
+      return hits.length ? hits[0].distance : Infinity;
+    };
+  }
   status('Loading tiles…');
   let last = performance.now(), streamT = 0, ready = false, hudT = 0;
   renderer.setAnimationLoop(now => {
@@ -185,7 +210,7 @@ async function main() {
     const fc = window.__cam;   // debug/screenshot hook: {pos:[x,y,z], at:[x,y,z], fov?} in the collision frame
     if (fc && fc.fov && camera.fov !== fc.fov) { camera.fov = fc.fov; camera.updateProjectionMatrix(); }
     if (fc) { camera.position.set(fc.pos[0], fc.pos[2], -fc.pos[1]); camera.lookAt(fc.at[0], fc.at[2], -fc.at[1]); }
-    else if (player.view === 3) player.applyCamera3(camera);
+    else if (player.view === 3) player.applyCamera3(camera, dt);
     else player.applyCamera(camera);
     avatar.update(player, dt, player.view === 3 && !fc);
     if (sun.castShadow) {   // shadow box follows the camera, snapped to shadow texels to avoid shimmering

@@ -6,7 +6,9 @@
   "mapillary:1177659432665774",
   "mapillary:498072817906148",
   "commons:File:David Attenborough Building - geograph.org.uk - 5964101.jpg",
-  "commons:File:The Attenborough Building - geograph.org.uk - 6375781.jpg"
+  "commons:File:The Attenborough Building - geograph.org.uk - 6375781.jpg",
+  "mapillary:759169374775921",
+  "mapillary:815359582718595"
  ],
  "walls": [
   {
@@ -1503,6 +1505,299 @@
    ],
    "confidence": "low",
    "notes": "David Attenborough Building (1970 Arup Building, refurbished 2016), west front to the New Museums Site court: board-marked concrete with three continuous ribbon-window storeys of dark-framed glazing over a recessed undercroft, entrance stairs and a glazed ground-floor cafe on a brick plinth; clad top storey with the building name. Window pitch counted on the geograph views (~1.5 m), band heights estimated from the 22 m eave. (northern continuation)"
+  },
+  {
+   "storeys": 5,
+   "floor_z": [
+    0,
+    7.0,
+    10.6,
+    14.0,
+    17.4
+   ],
+   "material": "brick",
+   "wall_colour": "#6b4a3a",
+   "trim_colour": "#9a9488",
+   "cornice_z": 21.8,
+   "cornice": "none",
+   "parapet": true,
+   "string_courses": [
+    7.0
+   ],
+   "quoins": false,
+   "pilasters": [
+    8.9
+   ],
+   "id": "relation/18902596:28",
+   "elements": [
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 2.69,
+     "w": 4.19,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 7.48,
+     "w": 4.19,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 2.69,
+     "w": 4.19,
+     "z": 11.4,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 7.48,
+     "w": 4.19,
+     "z": 11.4,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 2.69,
+     "w": 4.19,
+     "z": 14.8,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 7.48,
+     "w": 4.19,
+     "z": 14.8,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 2.69,
+     "w": 4.19,
+     "z": 18.2,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 7.48,
+     "w": 4.19,
+     "z": 18.2,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "glazed",
+     "x": 3.2,
+     "w": 1.8,
+     "h": 2.6,
+     "surround": "none"
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 6.6,
+     "w": 2.4,
+     "z": 0.9,
+     "h": 1.9,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    }
+   ],
+   "confidence": "low",
+   "notes": "David Attenborough Building, southern part of the Corn Exchange St (east) side, continuing :30. Dark brown brick ground storey sheltered under a cantilevered first-floor deck carried on a square concrete column (modelled as a pilaster), with an external steel stair, a glazed door and a ground window; above, the refurbished upper floors with continuous ribbon glazing between dark spandrel bands (same 4 bands as :30). Oblique 2016 Mapillary views looking NNW up Corn Exchange St; positions estimated."
+  },
+  {
+   "storeys": 5,
+   "floor_z": [
+    0,
+    7.0,
+    10.6,
+    14.0,
+    17.4
+   ],
+   "material": "brick",
+   "wall_colour": "#6b4a3a",
+   "trim_colour": "#9a9488",
+   "cornice_z": 21.8,
+   "cornice": "none",
+   "parapet": true,
+   "string_courses": [
+    7.0
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "id": "relation/18902596:29",
+   "elements": [
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 2.44,
+     "w": 3.67,
+     "z": 8.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 2.44,
+     "w": 3.67,
+     "z": 11.4,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 2.44,
+     "w": 3.67,
+     "z": 14.8,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 2.44,
+     "w": 3.67,
+     "z": 18.2,
+     "h": 1.9,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "David Attenborough Building, short Corn Exchange St segment between :28 and :30: plain dark brown brick plinth to ~7 m and four ribbon-window bands above, as :30. Oblique 2016 Mapillary views; estimated."
+  },
+  {
+   "id": "relation/18902596:21",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.4
+   ],
+   "material": "brick",
+   "wall_colour": "#6e4636",
+   "trim_colour": "#bdb3a2",
+   "cornice_z": 6.6,
+   "cornice": "none",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "confidence": "low",
+   "elements": [
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 2.6,
+     "w": 1.3,
+     "z": 3.6,
+     "h": 1.5,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 7.0,
+     "w": 1.3,
+     "z": 3.6,
+     "h": 1.5,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "notes": "Low brick block at the Corn Exchange St / Downing St end of the David Attenborough Building: tall plain dark brown-purple brick wall with deep-set square windows in pale stone surrounds high up (one seen, a second assumed). From the 2016 Mapillary view looking NNW at the corner; low confidence."
   }
  ]
 }

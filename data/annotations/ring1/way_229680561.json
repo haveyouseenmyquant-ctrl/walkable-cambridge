@@ -1,0 +1,112 @@
+{
+ "osm_id": "way/229680561",
+ "sources": [
+  "commons:File:Henry Martyn Hall.jpg",
+  "commons:File:Henry Martyn Hall - geograph.org.uk - 5903006.jpg",
+  "mapillary:2949514601996254",
+  "mapillary:935589730615871"
+ ],
+ "walls": [
+  {
+   "id": "way/229680561:2",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.2
+   ],
+   "material": "flint",
+   "wall_colour": "#7a6c5c",
+   "trim_colour": "#cdb48a",
+   "cornice_z": 10.69,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.9
+   ],
+   "quoins": true,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 1.6,
+     "w": 2.4,
+     "z": 4.4,
+     "h": 5.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 3.5,
+     "w": 1.1,
+     "z": 0.9,
+     "h": 2.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "gothic",
+     "x": 6.1,
+     "w": 2.6,
+     "h": 3.7,
+     "surround": "none"
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 8.6,
+     "w": 0.9,
+     "z": 0.9,
+     "h": 2.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 5.9,
+     "w": 1.5,
+     "z": 4.8,
+     "h": 4.9,
+     "panes": [
+      2,
+      4
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.5,
+     "w": 0.6,
+     "z": 6.0,
+     "h": 1.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Henry Martyn Hall, 24 Market Street (1887, Gothic): cobble/flint walling with ashlar bands and dressings, front gable to Market Street (apex above eave). x from p0 at the east (churchyard) corner. Canted stone oriel over the east corner carrying 3-light traceried windows through the upper hall level; ground: chequer-tympanum pointed arch window, large pointed shop arch ('size?'), smaller chequer arch window at west; sloping stone weathering/hood over the ground floor; tall 2-light traceried hall window in the gable centre; small square window near the west edge."
+  }
+ ]
+}

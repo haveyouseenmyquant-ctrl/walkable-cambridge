@@ -1,0 +1,101 @@
+{
+ "osm_id": "way/1211951043",
+ "sources": [
+  "commons:File:Timpson - Petty Cury - geograph.org.uk - 6716291.jpg",
+  "commons:File:Boots, Petty Cury - geograph.org.uk - 5231641.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1211951043:2",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.2,
+    7.2
+   ],
+   "material": "brick",
+   "wall_colour": "#8e5640",
+   "trim_colour": "#d8c9a6",
+   "cornice_z": 11.3,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.2
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 7.4,
+     "z1": 3.9,
+     "fascia_text": "The Body Shop",
+     "fascia_colour": "#10241c",
+     "text_colour": "#ffffff",
+     "door_x": 1.0,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.0,
+     "w": 1.2,
+     "z": 4.6,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.0,
+     "w": 1.1,
+     "z": 7.6,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.6,
+     "w": 1.2,
+     "z": 4.6,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.6,
+     "w": 1.1,
+     "z": 7.6,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "25-27 Petty Cury (The Body Shop in 2020; earlier a blue bank front with ATM): red-brown brick upper floors with stone-surrounded sash windows and a projecting bracket clock over the Boots side (Boots geograph 5231641). Window count (2 per floor) is a guess: only the western window is visible at the left edge of the Timpson photo."
+  }
+ ]
+}

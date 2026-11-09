@@ -1,0 +1,113 @@
+{
+ "osm_id": "way/100322359",
+ "sources": [
+  "mapillary:213604353545145",
+  "mapillary:1099787670527582",
+  "mapillary:318656229851315",
+  "mapillary:834897297112580",
+  "mapillary:1160905621080345",
+  "mapillary:291325972549185"
+ ],
+ "walls": [
+  {
+   "id": "way/100322359:1",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.1,
+    7.0
+   ],
+   "material": "brick",
+   "wall_colour": "#86796a",
+   "trim_colour": "#f0ece2",
+   "cornice_z": 10.2,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 1.67,
+     "w": 1.0,
+     "h": 2.9,
+     "surround": "fanlight"
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.67,
+     "w": 1.1,
+     "z": 4.4,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.67,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.51,
+     "w": 1.1,
+     "z": 1.7,
+     "h": 1.9,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.51,
+     "w": 1.1,
+     "z": 4.4,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.51,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "26 Malcolm Street (west side), early-19th-c. gault-brick terrace house: weathered grey-buff stock brick, raised ground floor over a basement behind area railings, panelled door with rectangular fanlight beside one 6/6 sash, two tall 6/6 sashes on the first floor (iron balconettes on several houses), two shorter sashes on the second floor, plain brick parapet. Layout is the uniform terrace pattern from Mapillary street views; door side (left/right) per house is assumed from paired-mirror houses, not checked one by one."
+  }
+ ]
+}

@@ -1,0 +1,842 @@
+{
+ "osm_id": "way/147456536",
+ "sources": [
+  "mapillary:508189913647844",
+  "mapillary:290763419315885",
+  "mapillary:515015919875305"
+ ],
+ "walls": [
+  {
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.6,
+    8.4,
+    11.8
+   ],
+   "material": "brick",
+   "wall_colour": "#8f4f3c",
+   "trim_colour": "#efe9dc",
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "id": "way/147456536:3",
+   "cornice_z": 15.8,
+   "elements": [
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 2.5,
+     "w": 2.2,
+     "h": 3.6,
+     "surround": "pilastered"
+    },
+    {
+     "type": "shopfront",
+     "x0": 5.0,
+     "x1": 11.6,
+     "z1": 4.0,
+     "fascia_text": "",
+     "fascia_colour": "#e9e4d8",
+     "text_colour": "#333333",
+     "door_x": 6.0,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 12.0,
+     "x1": 19.4,
+     "z1": 4.0,
+     "fascia_text": "",
+     "fascia_colour": "#2d2d2d",
+     "text_colour": "#ffffff",
+     "door_x": 13.0,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.5,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.7,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.5,
+     "w": 1.1,
+     "z": 8.8,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.5,
+     "w": 1.0,
+     "z": 12.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.0,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.7,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.0,
+     "w": 1.1,
+     "z": 8.8,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.0,
+     "w": 1.0,
+     "z": 12.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.4,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.7,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.4,
+     "w": 1.1,
+     "z": 8.8,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.4,
+     "w": 1.0,
+     "z": 12.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 10.8,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.7,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 10.8,
+     "w": 1.1,
+     "z": 8.8,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 10.8,
+     "w": 1.0,
+     "z": 12.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 13.2,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.7,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 13.2,
+     "w": 1.1,
+     "z": 8.8,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 13.2,
+     "w": 1.0,
+     "z": 12.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 15.6,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.7,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 15.6,
+     "w": 1.1,
+     "z": 8.8,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 15.6,
+     "w": 1.0,
+     "z": 12.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 18.0,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.7,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 18.0,
+     "w": 1.1,
+     "z": 8.8,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 18.0,
+     "w": 1.0,
+     "z": 12.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Sussex House, Hobson Street (west side), southern stretch (p0 = south): 1930s neo-Georgian red-brick range of four storeys over ground-floor shops; at the south end a stone ground-floor portico with Tuscan columns and an entablature lettered SUSSEX HOUSE (modelled as a wide pilastered doorway), first-floor windows tall round-arched sashes (some with iron balconettes), plain sashes above, parapet. Bay rhythm (~2.4 m) estimated from oblique Mapillary 508189913647844; shop fascia texts not legible."
+  },
+  {
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.6,
+    8.4,
+    11.8
+   ],
+   "material": "brick",
+   "wall_colour": "#8f4f3c",
+   "trim_colour": "#efe9dc",
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "id": "way/147456536:4",
+   "cornice_z": 15.7,
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 8.2,
+     "z1": 4.0,
+     "fascia_text": "",
+     "fascia_colour": "#1f1f1f",
+     "text_colour": "#ffffff",
+     "door_x": 1.2,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 8.6,
+     "x1": 16.6,
+     "z1": 4.0,
+     "fascia_text": "",
+     "fascia_colour": "#e9e4d8",
+     "text_colour": "#333333",
+     "door_x": 9.5,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 17.0,
+     "x1": 24.8,
+     "z1": 4.0,
+     "fascia_text": "",
+     "fascia_colour": "#2d2d2d",
+     "text_colour": "#ffffff",
+     "door_x": 23.9,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.4,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.7,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.4,
+     "w": 1.1,
+     "z": 8.8,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.4,
+     "w": 1.0,
+     "z": 12.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.8,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.7,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.8,
+     "w": 1.1,
+     "z": 8.8,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.8,
+     "w": 1.0,
+     "z": 12.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.2,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.7,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.2,
+     "w": 1.1,
+     "z": 8.8,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.2,
+     "w": 1.0,
+     "z": 12.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.6,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.7,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.6,
+     "w": 1.1,
+     "z": 8.8,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.6,
+     "w": 1.0,
+     "z": 12.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 11.0,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.7,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 11.0,
+     "w": 1.1,
+     "z": 8.8,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 11.0,
+     "w": 1.0,
+     "z": 12.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 13.4,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.7,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 13.4,
+     "w": 1.1,
+     "z": 8.8,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 13.4,
+     "w": 1.0,
+     "z": 12.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 15.8,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.7,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 15.8,
+     "w": 1.1,
+     "z": 8.8,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 15.8,
+     "w": 1.0,
+     "z": 12.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 18.2,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.7,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 18.2,
+     "w": 1.1,
+     "z": 8.8,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 18.2,
+     "w": 1.0,
+     "z": 12.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 20.6,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.7,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 20.6,
+     "w": 1.1,
+     "z": 8.8,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 20.6,
+     "w": 1.0,
+     "z": 12.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 23.0,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.7,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 23.0,
+     "w": 1.1,
+     "z": 8.8,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 23.0,
+     "w": 1.0,
+     "z": 12.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Sussex House, Hobson Street (west side), northern stretch: continuation of the same 1930s red-brick neo-Georgian range, ground floor of shop units, round-arched first-floor sashes and plain sashes on two floors above, parapet. Seen only obliquely and far away (Mapillary 508189913647844, 515015919875305); bay count assumed from the same ~2.4 m rhythm; number of shop units guessed."
+  }
+ ]
+}

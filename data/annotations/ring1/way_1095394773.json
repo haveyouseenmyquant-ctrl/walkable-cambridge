@@ -1,0 +1,118 @@
+{
+ "osm_id": "way/1095394773",
+ "sources": [
+  "mapillary:506231863733774",
+  "mapillary:480304889904436",
+  "mapillary:1415310862178418"
+ ],
+ "walls": [
+  {
+   "id": "way/1095394773:7",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.6,
+    6.5
+   ],
+   "material": "render",
+   "wall_colour": "#f0eee8",
+   "trim_colour": "#e8e6e0",
+   "cornice_z": 9.3,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.5,
+    6.4
+   ],
+   "quoins": false,
+   "elements": [
+    {
+     "type": "door",
+     "style": "glazed",
+     "x": 0.55,
+     "w": 0.8,
+     "h": 2.3,
+     "surround": "none"
+    },
+    {
+     "type": "shopfront",
+     "x0": 1.0,
+     "x1": 4.7,
+     "z1": 3.3,
+     "fascia_text": "Pho",
+     "fascia_colour": "#3b3a37",
+     "text_colour": "#c8252b",
+     "door_x": 4.1,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "door",
+     "style": "arched",
+     "x": 5.75,
+     "w": 1.1,
+     "h": 2.5,
+     "surround": "pilastered"
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.3,
+     "w": 1.0,
+     "z": 4.1,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.5,
+     "w": 1.0,
+     "z": 4.1,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.3,
+     "w": 1.0,
+     "z": 6.9,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.5,
+     "w": 1.0,
+     "z": 6.9,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "11 Peas Hill: white-rendered three-storey front; dark grey timber shopfront (Pho) with a narrow side door at the east end and a grey boarded arched door in a pilastered surround at the west end; two first-floor sashes with iron balconettes under a run of carved timber brackets, two smaller second-floor sashes. x from the east end. Bracket run modelled as a string course at 6.4 m."
+  }
+ ]
+}

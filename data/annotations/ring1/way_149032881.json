@@ -1,0 +1,219 @@
+{
+ "osm_id": "way/149032881",
+ "sources": [
+  "mapillary:367889704650190",
+  "mapillary:298106528660812"
+ ],
+ "walls": [
+  {
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.3,
+    6.5
+   ],
+   "material": "brick",
+   "wall_colour": "#6f5844",
+   "trim_colour": "#ece8de",
+   "cornice_z": 9.9,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.1
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "id": "way/149032881:1",
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.6,
+     "w": 1.0,
+     "z": 4.1,
+     "h": 1.8,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.6,
+     "w": 1.0,
+     "z": 7.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.9,
+     "w": 1.0,
+     "z": 4.1,
+     "h": 1.8,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.9,
+     "w": 1.0,
+     "z": 7.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.2,
+     "w": 1.0,
+     "z": 4.1,
+     "h": 1.8,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.2,
+     "w": 1.0,
+     "z": 7.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.6,
+     "w": 1.0,
+     "z": 0.9,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 3.9,
+     "w": 1.0,
+     "h": 2.4,
+     "surround": "pilastered"
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.2,
+     "w": 1.0,
+     "z": 0.9,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "54 Trumpington Street (corner of Botolph Lane, 'Espresso Lane' cafe), Georgian three-storey brown/stock brick house with a plain parapet: three bays of 6/6 sashes in white frames on the first and second floors, a continuous pale sill band under the first-floor windows, ground floor with a door in a white doorcase and sash windows. Bay positions estimated from an oblique 2017 Mapillary view looking south along Trumpington St."
+  },
+  {
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.3,
+    6.5
+   ],
+   "material": "brick",
+   "wall_colour": "#6f5844",
+   "trim_colour": "#ece8de",
+   "cornice_z": 9.9,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.1
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "id": "way/149032881:2",
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.7,
+     "w": 1.0,
+     "z": 4.1,
+     "h": 1.8,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.7,
+     "w": 1.0,
+     "z": 7.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.7,
+     "w": 1.0,
+     "z": 0.9,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "54 Trumpington Street, southern continuation of the front (:1): one more bay of 6/6 sashes on each floor; estimated."
+  }
+ ]
+}

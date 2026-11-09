@@ -3,7 +3,11 @@
  "sources": [
   "mapillary:4171158462949779",
   "mapillary:948123169335639",
-  "mapillary:219445912850405"
+  "mapillary:219445912850405",
+  "mapillary:316741473376513",
+  "mapillary:916179375900871",
+  "mapillary:485497869555323",
+  "commons:File:Christ's Lane - geograph.org.uk - 767310.jpg (CC BY-SA 2.0)"
  ],
  "walls": [
   {
@@ -392,6 +396,57 @@
    ],
    "confidence": "medium",
    "notes": "Christ's College, St Andrew's Street front south of the Great Gate (p0 = gate end, p1 = SE corner). Ashlar range of two storeys under a battlemented parapet (parapet from the cornice line ~7.9 m to the eaves). Projecting string course over the ground floor. About 13 regular bays ~2.85 m apart from the SE corner: ground floor two-light stone-mullioned windows with Tudor-arched lights, first floor taller two-light windows; a small corbelled oriel at first floor near mid-length by a downpipe. No street door on this stretch. Bay count read from an oblique view (mapillary 4171158462949779) and checked against 948123169335639; spacing approximate."
+  },
+  {
+   "id": "way/147487949:43",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.0
+   ],
+   "material": "stone",
+   "wall_colour": "#d3c4a0",
+   "trim_colour": "#dccfae",
+   "cornice_z": 7.5,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.7
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 4.2,
+     "w": 2.8,
+     "z": 1.0,
+     "h": 1.9,
+     "panes": [
+      5,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 4.3,
+     "w": 2.8,
+     "z": 4.6,
+     "h": 1.7,
+     "panes": [
+      5,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Christ's College, south gable end of the St Andrew's Street range (p0 = corner with the battlemented street front). Ashlar, two storeys under a coped gable with a chimney: ground-floor three-light stone-mullioned window, moulded string course, and a four-light corbelled oriel at first floor, both slightly left of centre. Read from mapillary 316741473376513 (frontal from the south) and 916179375900871, 485497869555323. Refined with Geograph 767310 (Christ's Lane, frontal): five-light ground window and five-light corbelled oriel, both ~x 4.2; small battlemented turret at the p1 corner (not modelled)."
   }
  ]
 }

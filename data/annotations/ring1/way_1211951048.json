@@ -1,0 +1,242 @@
+{
+ "osm_id": "way/1211951048",
+ "sources": [
+  "commons:File:Timpson - Petty Cury - geograph.org.uk - 6716291.jpg",
+  "commons:File:Petty Cury - geograph.org.uk - 4350366.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1211951048:5",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    3.9,
+    5.8,
+    7.7
+   ],
+   "material": "brick",
+   "wall_colour": "#8c4a38",
+   "trim_colour": "#efe9dc",
+   "cornice_z": 9.2,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    3.9
+   ],
+   "quoins": false,
+   "pilasters": [
+    6.45
+   ],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 6.3,
+     "z1": 3.6,
+     "fascia_text": "Timpson",
+     "fascia_colour": "#c8102e",
+     "text_colour": "#ffffff",
+     "door_x": 4.6,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 6.6,
+     "x1": 10.4,
+     "z1": 3.6,
+     "fascia_text": "Phone World",
+     "fascia_colour": "#d71920",
+     "text_colour": "#ffffff",
+     "door_x": 9.4,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.5,
+     "w": 1.0,
+     "z": 4.1,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.5,
+     "w": 1.0,
+     "z": 6.0,
+     "h": 1.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.5,
+     "w": 0.9,
+     "z": 7.9,
+     "h": 1.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.7,
+     "w": 1.0,
+     "z": 4.1,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.7,
+     "w": 1.0,
+     "z": 6.0,
+     "h": 1.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.7,
+     "w": 0.9,
+     "z": 7.9,
+     "h": 1.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.5,
+     "w": 1.0,
+     "z": 4.1,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.5,
+     "w": 1.0,
+     "z": 6.0,
+     "h": 1.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.5,
+     "w": 0.9,
+     "z": 7.9,
+     "h": 1.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.95,
+     "w": 0.8,
+     "z": 4.2,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.95,
+     "w": 0.7,
+     "z": 6.3,
+     "h": 1.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.0,
+     "w": 0.8,
+     "z": 4.2,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.0,
+     "w": 0.7,
+     "z": 6.3,
+     "h": 1.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "25 Petty Cury, north side, two frontages: west ~6.4 m Timpson, red brick, three bays of sash windows with stone lintels on 3 upper floors; east ~4 m narrow white-rendered house (Pylones in 2015, Phone World in 2020) with paired round-arched windows on the first and second floors under a moulded cornice. Single wall colour (brick) used for both. Assignment of OSM split to shops inferred from widths (25-27 = 7.6 m Body Shop, 25 = 10.6 m Timpson + Phone World, 24 = 6.0 m Halifax). Vertical dimensions squeezed to fit the 9.3 m DSM eave (photo suggests ~11 m)."
+  }
+ ]
+}

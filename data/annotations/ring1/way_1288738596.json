@@ -1,0 +1,87 @@
+{
+ "osm_id": "way/1288738596",
+ "sources": [
+  "commons:File:11, St John's Street.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1288738596:0",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.3,
+    5.8
+   ],
+   "material": "stone",
+   "wall_colour": "#c9b48c",
+   "trim_colour": "#d9c8a2",
+   "cornice_z": 8.0,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [
+    0.35,
+    4.35
+   ],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 4.4,
+     "z1": 3.0,
+     "fascia_text": "Le Patissier",
+     "fascia_colour": "#1e1a16",
+     "text_colour": "#d8b56a",
+     "door_x": 3.5,
+     "stallriser": 0.6,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.3,
+     "w": 1.7,
+     "z": 3.9,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.5,
+     "w": 1.1,
+     "z": 6.2,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 3.3,
+     "w": 1.1,
+     "z": 6.2,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "11 St John's Street (Le Patissier): narrow Bath-stone front with engaged columns at both edges, paired first-floor window flanked by blind panels, two second-floor windows, bracketed cornice and balustraded parapet; cream shopfront with black fascia. Commons '11, St John's Street.jpg' (CC BY-SA 3.0). Heights compressed to the 8.3 m eave in walls.json."
+  }
+ ]
+}

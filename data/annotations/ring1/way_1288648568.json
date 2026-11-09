@@ -1,0 +1,56 @@
+{
+ "osm_id": "way/1288648568",
+ "sources": [
+  "commons:File:Green Street, Cambridge - geograph.org.uk - 3347593.jpg",
+  "commons:File:Green Street, Cambridge - geograph.org.uk - 7416912.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1288648568:2",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.4
+   ],
+   "material": "brick",
+   "wall_colour": "#7d6e5c",
+   "trim_colour": "#ece6da",
+   "cornice_z": 7.1,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 4.9,
+     "z1": 3.2,
+     "fascia_text": "TK Maxx",
+     "fascia_colour": "#b8202b",
+     "text_colour": "#f4f4f4",
+     "door_x": 1.4,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.6,
+     "w": 1.0,
+     "z": 4.0,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "32 Green Street, south side, faces NNW; x from the east end. Narrow gault-brick unit with the red-fascia TK Maxx Green Street entrance on the ground floor and a single sash above. Low confidence: seen only obliquely from a distance."
+  }
+ ]
+}

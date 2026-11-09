@@ -1,0 +1,308 @@
+{
+ "osm_id": "relation/14376982",
+ "sources": [
+  "commons:File:12-15 St Edward's Passage, Cambridge.jpg",
+  "commons:File:St Edward's Passage - geograph.org.uk - 6484127.jpg",
+  "commons:File:Along St Edwards Passage (geograph 6052222).jpg"
+ ],
+ "walls": [
+  {
+   "id": "relation/14376982:19",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.0
+   ],
+   "material": "brick",
+   "wall_colour": "#e9dfb8",
+   "trim_colour": "#f2efe6",
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "cornice_z": 5.4,
+   "elements": [
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 0.9,
+     "w": 1.0,
+     "h": 2.6,
+     "surround": "fanlight"
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.8,
+     "w": 0.9,
+     "z": 0.9,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.8,
+     "w": 0.9,
+     "z": 3.4,
+     "h": 1.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "12 St Edward's Passage (south end of the cream-painted brick terrace 12-15 facing the churchyard path): blue door with transom light, one sash each floor; roof dormers start further north"
+  },
+  {
+   "id": "relation/14376982:0",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.0
+   ],
+   "material": "brick",
+   "wall_colour": "#e9dfb8",
+   "trim_colour": "#f2efe6",
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "cornice_z": 6.3,
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.3,
+     "w": 0.9,
+     "z": 3.4,
+     "h": 1.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 2.4,
+     "w": 0.9,
+     "h": 2.2,
+     "surround": "none"
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 3.5,
+     "w": 0.9,
+     "h": 2.2,
+     "surround": "none"
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.0,
+     "w": 0.9,
+     "z": 0.9,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.0,
+     "w": 0.9,
+     "z": 3.4,
+     "h": 1.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 1.3,
+     "w": 1.0,
+     "h": 1.3
+    },
+    {
+     "type": "dormer",
+     "x": 4.3,
+     "w": 1.0,
+     "h": 1.3
+    }
+   ],
+   "confidence": "medium",
+   "notes": "13: paired blue doors between sash windows, two flat-roofed dormers in the slate roof"
+  },
+  {
+   "id": "relation/14376982:1",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.0
+   ],
+   "material": "brick",
+   "wall_colour": "#e9dfb8",
+   "trim_colour": "#f2efe6",
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "cornice_z": 6.5,
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.9,
+     "w": 0.9,
+     "z": 0.9,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.9,
+     "w": 0.9,
+     "z": 3.4,
+     "h": 1.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 3.2,
+     "w": 0.9,
+     "h": 2.2,
+     "surround": "none"
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.8,
+     "w": 0.9,
+     "z": 3.4,
+     "h": 1.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.0,
+     "w": 0.9,
+     "z": 0.9,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 2.5,
+     "w": 1.0,
+     "h": 1.3
+    }
+   ],
+   "confidence": "low",
+   "notes": "14: sash windows and a blue door, dormer; positions extrapolated from oblique views"
+  },
+  {
+   "id": "relation/14376982:3",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.0
+   ],
+   "material": "brick",
+   "wall_colour": "#e9dfb8",
+   "trim_colour": "#f2efe6",
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "cornice_z": 6.3,
+   "elements": [
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 1.0,
+     "w": 0.9,
+     "h": 2.2,
+     "surround": "none"
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.8,
+     "w": 0.9,
+     "z": 0.9,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.8,
+     "w": 0.9,
+     "z": 3.4,
+     "h": 1.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 2.2,
+     "w": 1.0,
+     "h": 1.3
+    }
+   ],
+   "confidence": "low",
+   "notes": "15 (north end): door, sash windows, dormer; extrapolated from the terrace rhythm, far end of oblique views"
+  }
+ ]
+}

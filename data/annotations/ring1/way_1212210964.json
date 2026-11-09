@@ -1,0 +1,120 @@
+{
+ "osm_id": "way/1212210964",
+ "sources": [
+  "mapillary:139530411485294",
+  "mapillary:214230526817793",
+  "mapillary:936234893778537"
+ ],
+ "walls": [
+  {
+   "id": "way/1212210964:0",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.6,
+    6.4
+   ],
+   "material": "brick",
+   "wall_colour": "#9a5a3e",
+   "trim_colour": "#e8e0cc",
+   "cornice_z": 9.0,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 1.2,
+     "w": 1.1,
+     "h": 2.6,
+     "surround": "pilastered",
+     "colour": "#1f3a30"
+    },
+    {
+     "type": "shopfront",
+     "x0": 2.5,
+     "x1": 7.8,
+     "z1": 3.4,
+     "fascia_text": "Chocolat Chocolat",
+     "fascia_colour": "#9fd3d0",
+     "text_colour": "#3a2a20",
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.7,
+     "w": 1.0,
+     "z": 4.2,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 6.1,
+     "w": 1.0,
+     "z": 4.2,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.7,
+     "w": 1.0,
+     "z": 6.9,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 6.1,
+     "w": 1.0,
+     "z": 6.9,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 2.0,
+     "w": 1.1,
+     "h": 1.3
+    },
+    {
+     "type": "dormer",
+     "x": 6.2,
+     "w": 1.1,
+     "h": 1.3
+    }
+   ],
+   "confidence": "low",
+   "notes": "21 St Andrew's Street (p0 = south end, next to Penhaligon's): three-storey red-brick Victorian front with a brick eaves cornice, two windows per upper floor with a raised panel between them, two white gabled dormers in the slate roof; ground floor a dark pilastered doorway at the south end and the pale-teal Chocolat Chocolat shopfront. Identification of No. 21 from the shop sequence (Penhaligon's -> doorway -> Chocolat Chocolat) in mapillary 936234893778537 and the frontal view 139530411485294; walls.json eave (5.4 m) is below the real ~9 m eave."
+  }
+ ]
+}

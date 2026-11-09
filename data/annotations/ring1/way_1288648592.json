@@ -1,0 +1,232 @@
+{
+ "osm_id": "way/1288648592",
+ "sources": [
+  "commons:File:Knoops - Green Street - geograph.org.uk - 7725454.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1288648592:3",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.6,
+    6.7
+   ],
+   "material": "brick",
+   "wall_colour": "#7a6c58",
+   "trim_colour": "#f2efe8",
+   "cornice_z": 10.0,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 2.6,
+     "x1": 6.95,
+     "z1": 3.0,
+     "fascia_text": "KNOOPS",
+     "fascia_colour": "#1c1c1c",
+     "text_colour": "#ffffff",
+     "door_x": 6.6,
+     "stallriser": 0.6,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.6,
+     "w": 1.0,
+     "z": 4.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.6,
+     "w": 1.0,
+     "z": 4.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.6,
+     "w": 1.0,
+     "z": 7.0,
+     "h": 1.8,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.6,
+     "w": 1.0,
+     "z": 7.0,
+     "h": 1.8,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "28 Green Street (Knoops), Green Street front: grey-buff gault brick, 3 storeys, white sashes under gauged arches, black painted shopfront and brick ground storey curving round the Market Passage corner with the entrance on the splay. Geograph 7725454 (CC BY-SA 2.0)."
+  },
+  {
+   "id": "way/1288648592:4",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.6,
+    6.7
+   ],
+   "material": "brick",
+   "wall_colour": "#7a6c58",
+   "trim_colour": "#f2efe8",
+   "cornice_z": 10.2,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 2.4,
+     "z1": 3.0,
+     "fascia_text": "",
+     "fascia_colour": "#1c1c1c",
+     "text_colour": "#ffffff",
+     "door_x": 0.4,
+     "stallriser": 0.6,
+     "awning": false
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 6.0,
+     "w": 0.9,
+     "h": 2.2,
+     "surround": "none"
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 8.2,
+     "w": 0.9,
+     "h": 2.2,
+     "surround": "none"
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.6,
+     "w": 0.9,
+     "z": 4.0,
+     "h": 1.8,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.6,
+     "w": 0.9,
+     "z": 4.0,
+     "h": 1.8,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 12.6,
+     "w": 0.9,
+     "z": 4.0,
+     "h": 1.8,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.6,
+     "w": 0.9,
+     "z": 7.0,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.6,
+     "w": 0.9,
+     "z": 7.0,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 12.6,
+     "w": 0.9,
+     "z": 7.0,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "28 Green Street, Market Passage flank: plain gault brick with black downpipes, blind recessed windows near the corner, plain dark doors and a few small sashes further south. Very oblique in Geograph 7725454; southern half guessed."
+  }
+ ]
+}

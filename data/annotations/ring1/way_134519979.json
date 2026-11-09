@@ -1,0 +1,234 @@
+{
+ "osm_id": "way/134519979",
+ "sources": [
+  "commons:File:Side entrance - Cambridge Arts Theatre - geograph.org.uk - 972252.jpg",
+  "commons:File:Along St Edwards Passage (geograph 6052222).jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/134519979:3",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.8,
+    6.7
+   ],
+   "material": "brick",
+   "wall_colour": "#b39a6e",
+   "trim_colour": "#d8c7a4",
+   "cornice_z": 9.4,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.6
+   ],
+   "quoins": false,
+   "pilasters": [
+    2.6,
+    5.5,
+    8.4,
+    12.6
+   ],
+   "elements": [
+    {
+     "type": "door",
+     "style": "glazed",
+     "x": 10.8,
+     "w": 2.8,
+     "h": 3.0,
+     "surround": "pilastered"
+    },
+    {
+     "type": "door",
+     "style": "glazed",
+     "x": 7.0,
+     "w": 2.2,
+     "h": 2.6,
+     "surround": "pilastered"
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 3.9,
+     "w": 1.1,
+     "h": 2.6,
+     "surround": "pilastered"
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 3.9,
+     "w": 1.1,
+     "z": 2.9,
+     "h": 0.6,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.8,
+     "w": 1.0,
+     "z": 4.3,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.8,
+     "w": 1.0,
+     "z": 7.1,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 6.4,
+     "w": 1.0,
+     "z": 4.3,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 6.4,
+     "w": 1.0,
+     "z": 7.1,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.7,
+     "w": 1.0,
+     "z": 4.3,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.7,
+     "w": 1.0,
+     "z": 7.1,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 10.0,
+     "w": 1.0,
+     "z": 4.3,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 10.0,
+     "w": 1.0,
+     "z": 7.1,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 11.2,
+     "w": 1.0,
+     "z": 4.3,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 11.2,
+     "w": 1.0,
+     "z": 7.1,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 3.7,
+     "w": 1.1,
+     "h": 1.2
+    },
+    {
+     "type": "dormer",
+     "x": 7.1,
+     "w": 1.1,
+     "h": 1.2
+    },
+    {
+     "type": "dormer",
+     "x": 10.3,
+     "w": 1.1,
+     "h": 1.2
+    }
+   ],
+   "confidence": "low",
+   "notes": "Cambridge Arts Theatre backstage/side range on St Edward's Passage: buff brick, ground floor in stone with pilasters, scene-dock loading door near the west end (opposite the passage branch), glazed theatre side entrance and a pedimented doorway; upper sashes with window boxes, mansard dormers. Upper window positions east of the entrance are inferred."
+  }
+ ]
+}

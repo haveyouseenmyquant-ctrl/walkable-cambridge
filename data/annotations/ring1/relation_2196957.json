@@ -4,7 +4,11 @@
   "commons:File:1 St Mary's Passage, Cambridge.jpg",
   "commons:File:3 St Mary's Passage, Cambridge.jpg",
   "commons:File:St Mary's Street, Cambridge.jpg",
-  "commons:File:St Mary's Street. Cambridge - geograph.org.uk - 7416906.jpg"
+  "commons:File:St Mary's Street. Cambridge - geograph.org.uk - 7416906.jpg",
+  "mapillary:503569794106148",
+  "mapillary:4578468475503054",
+  "mapillary:175375311138294",
+  "mapillary:240231461184449"
  ],
  "walls": [
   {
@@ -791,6 +795,533 @@
    ],
    "confidence": "low",
    "notes": "Market Hostel block, St Mary's Passage frontage facing Great St Mary's (Commons: 1 and 3 St Mary's Passage). From the west end: 1 St Mary's Passage (The Senate) white-rendered, black fascia shopfront, three first-floor sashes with bracketed hoods, three 6-pane second-floor sashes under a dentil cornice; buff-brick house; 3 St Mary's Passage, a narrow white pargetted (fleur-de-lys) front with leaded shop window, jettied three-light oriel and a gabled leaded dormer; eastern part buff gault brick with sashes (not photographed, assumed). Wall colour is the dominant buff brick; positions of the eastern houses are estimates. (length 31.2 m, height 9.5 m from walls.json)"
+  },
+  {
+   "id": "relation/2196957:11",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    3.6,
+    6.4,
+    9.2
+   ],
+   "material": "render",
+   "wall_colour": "#ece8de",
+   "trim_colour": "#f6f4ee",
+   "cornice_z": 12.6,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 7.4,
+     "z1": 3.2,
+     "fascia_text": "",
+     "fascia_colour": "#2b2b2b",
+     "text_colour": "#f2f2f2",
+     "door_x": 6.6,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 7.8,
+     "x1": 15.8,
+     "z1": 3.2,
+     "fascia_text": "Cath Kidston",
+     "fascia_colour": "#f4efe6",
+     "text_colour": "#b0303a",
+     "door_x": 9.0,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 1.6,
+     "w": 1.5,
+     "z": 4.2,
+     "h": 1.7,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 3.8,
+     "w": 1.5,
+     "z": 4.2,
+     "h": 1.7,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 6.0,
+     "w": 1.5,
+     "z": 4.2,
+     "h": 1.7,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 1.6,
+     "w": 1.5,
+     "z": 7.0,
+     "h": 1.7,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 3.8,
+     "w": 1.5,
+     "z": 7.0,
+     "h": 1.7,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 6.0,
+     "w": 1.5,
+     "z": 7.0,
+     "h": 1.7,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 1.6,
+     "w": 1.5,
+     "z": 9.8,
+     "h": 1.7,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 3.8,
+     "w": 1.5,
+     "z": 9.8,
+     "h": 1.7,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 6.0,
+     "w": 1.5,
+     "z": 9.8,
+     "h": 1.7,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 10.2,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pediment",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 13.6,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pediment",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 10.2,
+     "w": 1.0,
+     "z": 7.2,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 13.6,
+     "w": 1.0,
+     "z": 7.2,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 10.2,
+     "w": 1.1,
+     "h": 1.3
+    },
+    {
+     "type": "dormer",
+     "x": 13.6,
+     "w": 1.1,
+     "h": 1.3
+    }
+   ],
+   "confidence": "low",
+   "notes": "West side of Market Hill between St Mary's Street and the projecting corner block. South part: inter-war rendered corner block with dark horizontal banding, shop ground floor, three bays of wide modern windows on three floors. North part: white stucco 3-storey house (Cath Kidston shop) with two pedimented first-floor windows, two second-floor sashes and two gabled dormers. Mapillary 2017 views from Peas Hill, oblique; bay x positions estimated."
+  },
+  {
+   "id": "relation/2196957:12",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    3.6,
+    6.6,
+    9.4
+   ],
+   "material": "stucco",
+   "wall_colour": "#f1eee7",
+   "trim_colour": "#f7f5f0",
+   "cornice_z": 11.6,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 4.2,
+     "z1": 3.2,
+     "fascia_text": "",
+     "fascia_colour": "#1d1d1d",
+     "text_colour": "#f2f2f2",
+     "door_x": 3.5,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.2,
+     "w": 1.0,
+     "z": 4.0,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.2,
+     "w": 1.0,
+     "z": 6.9,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.2,
+     "w": 1.0,
+     "z": 9.4,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "South-facing return of the projecting white stucco corner block (Hugo Boss shop) on Market Hill; one window per floor estimated, black shop canopy returns round the corner."
+  },
+  {
+   "id": "relation/2196957:13",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    3.6,
+    6.6,
+    9.6
+   ],
+   "material": "stucco",
+   "wall_colour": "#f1eee7",
+   "trim_colour": "#f7f5f0",
+   "cornice_z": 13.0,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 14.5,
+     "z1": 3.2,
+     "fascia_text": "BOSS",
+     "fascia_colour": "#ffffff",
+     "text_colour": "#111111",
+     "door_x": 7.5,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.2,
+     "w": 1.2,
+     "z": 4.0,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.6,
+     "w": 1.2,
+     "z": 4.0,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.0,
+     "w": 1.2,
+     "z": 4.0,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.2,
+     "w": 1.1,
+     "z": 7.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.6,
+     "w": 1.1,
+     "z": 7.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.0,
+     "w": 1.1,
+     "z": 7.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.2,
+     "w": 1.1,
+     "z": 10.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.6,
+     "w": 1.1,
+     "z": 10.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.0,
+     "w": 1.1,
+     "z": 10.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 12.9,
+     "w": 1.0,
+     "z": 4.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 12.9,
+     "w": 1.0,
+     "z": 7.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 12.9,
+     "w": 1.0,
+     "z": 10.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 5.6,
+     "w": 2.4,
+     "h": 2.0
+    }
+   ],
+   "confidence": "low",
+   "notes": "Market Hill frontage of the white stucco Victorian block at the St Mary's Passage corner (Hugo Boss shop): full-width black/white shopfront with canopy, round-arched first-floor windows, square sashes above, gabled attic dormer with three lights, octagonal corner turret with a cupola at the north end (window column at x~12.9). Mapillary 2017, oblique; bays estimated."
   }
  ]
 }

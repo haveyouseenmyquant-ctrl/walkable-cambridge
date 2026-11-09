@@ -1,0 +1,69 @@
+{
+ "osm_id": "way/1288648591",
+ "sources": [
+  "commons:File:Green Street, Cambridge - geograph.org.uk - 3347593.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1288648591:3",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.4
+   ],
+   "material": "brick",
+   "wall_colour": "#6f6253",
+   "trim_colour": "#efeae0",
+   "cornice_z": 6.2,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 7.9,
+     "z1": 3.2,
+     "fascia_text": "Bill's",
+     "fascia_colour": "#1f4d3a",
+     "text_colour": "#f2f2ea",
+     "door_x": 3.2,
+     "stallriser": 0.2,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.8,
+     "w": 1.1,
+     "z": 3.8,
+     "h": 1.8,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.6,
+     "w": 1.1,
+     "z": 3.8,
+     "h": 1.8,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "33-35 Green Street (Bill's), south side, faces NNW; x from the east end. Two-storey dark gault brick with small-pane sashes above a full-width dark green fascia and black-framed glazed restaurant front. Only a dusk oblique view; positions estimated."
+  }
+ ]
+}

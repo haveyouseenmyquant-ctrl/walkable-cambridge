@@ -1,0 +1,135 @@
+{
+ "osm_id": "way/1288644222",
+ "sources": [
+  "commons:File:Green Street, Cambridge - geograph.org.uk - 7433649.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1288644222:1",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    3.6,
+    6.6,
+    9.6
+   ],
+   "material": "brick",
+   "wall_colour": "#8c7f6c",
+   "trim_colour": "#efeae0",
+   "cornice_z": 13.0,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 5.8,
+     "z1": 3.3,
+     "fascia_text": "Harriet Kelsall",
+     "fascia_colour": "#3b4046",
+     "text_colour": "#e9e3d4",
+     "door_x": 1.2,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "door",
+     "style": "arched",
+     "x": 6.5,
+     "w": 0.9,
+     "h": 2.6,
+     "surround": "none"
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.9,
+     "w": 1.0,
+     "z": 4.1,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.9,
+     "w": 1.0,
+     "z": 7.1,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.9,
+     "w": 1.0,
+     "z": 10.1,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.2,
+     "w": 1.0,
+     "z": 4.1,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.2,
+     "w": 1.0,
+     "z": 7.1,
+     "h": 1.9,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.2,
+     "w": 1.0,
+     "z": 10.1,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "6-7 Green Street (Harriet Kelsall), north side, faces SSE; x from the west end. Tall four-storey grey-brown gault brick terrace house with two bays of sashes, dark shopfront and an arched white house doorway at the east end. From one oblique Geograph view; bay count estimated."
+  }
+ ]
+}

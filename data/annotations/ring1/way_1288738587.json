@@ -122,6 +122,40 @@
    ],
    "confidence": "high",
    "notes": "38 Trinity St (corner of Trinity Lane): Georgian red-brown brick, 3 bays of white sashes with rubbed-brick flat arches and iron window guards, plain parapet with stone coping; white painted shopfront with leaded transom lights and central recessed door (OSM: Sweaty Betty)."
+  },
+  {
+   "id": "way/1288738587:0",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.6,
+    7.0
+   ],
+   "material": "brick",
+   "wall_colour": "#6b4a38",
+   "trim_colour": "#efe9dc",
+   "cornice_z": 11.3,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 5.0,
+     "x1": 6.35,
+     "z1": 3.2,
+     "fascia_text": "",
+     "fascia_colour": "#f2f0ea",
+     "text_colour": "#333333",
+     "door_x": 5.6,
+     "stallriser": 0.4,
+     "awning": false
+    }
+   ],
+   "confidence": "low",
+   "notes": "38 Trinity Street, Trinity Lane flank: plain brown brick with no visible openings; the white bowed shopfront (Sweaty Betty) returns round the corner for ~1.3 m. Commons '38 Trinity Street, Cambridge.jpg' (CC BY-SA 4.0), very oblique."
   }
  ]
 }

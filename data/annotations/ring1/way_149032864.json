@@ -1,0 +1,152 @@
+{
+ "osm_id": "way/149032864",
+ "sources": [
+  "mapillary:370501040946705"
+ ],
+ "walls": [
+  {
+   "id": "way/149032864:8",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.7,
+    6.9
+   ],
+   "material": "render",
+   "wall_colour": "#ecebe6",
+   "trim_colour": "#f6f5f1",
+   "cornice_z": 10.0,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    3.7
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.0,
+     "w": 1.05,
+     "z": 1.0,
+     "h": 1.8,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 6.2,
+     "w": 1.1,
+     "h": 2.9,
+     "surround": "fanlight"
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.5,
+     "w": 1.05,
+     "z": 1.0,
+     "h": 1.8,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.0,
+     "w": 1.05,
+     "z": 4.3,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.0,
+     "w": 1.05,
+     "z": 7.4,
+     "h": 1.8,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.2,
+     "w": 1.05,
+     "z": 4.3,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.2,
+     "w": 1.05,
+     "z": 7.4,
+     "h": 1.8,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.5,
+     "w": 1.05,
+     "z": 4.3,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.5,
+     "w": 1.05,
+     "z": 7.4,
+     "h": 1.8,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Chris Adams House (formerly Botolph House), 17 Botolph Lane, Pembroke College: Georgian three-bay house, painted white over brick, 6/6 sashes on the first and second floors, a centre door with pilastered doorcase and radial fanlight, ground-floor sashes with louvred shutters (shutters not modelled), green plaque, white band at first-floor level. From a frontal 2017 Mapillary view across the Botolph Lane junction; the facade starts at the east (p0) corner, bay positions scaled from the door width; the west end is hidden behind no. 15."
+  }
+ ]
+}

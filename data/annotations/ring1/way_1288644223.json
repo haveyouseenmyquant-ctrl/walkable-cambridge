@@ -2,7 +2,8 @@
  "osm_id": "way/1288644223",
  "sources": [
   "commons:File:10, Green Street.jpg",
-  "commons:File:Cambridge Gin Laboratory - Green Street - geograph.org.uk - 6714330.jpg"
+  "commons:File:Cambridge Gin Laboratory - Green Street - geograph.org.uk - 6714330.jpg",
+  "commons:File:Green Street, Cambridge - geograph.org.uk - 7433649.jpg"
  ],
  "walls": [
   {
@@ -187,6 +188,68 @@
    ],
    "confidence": "medium",
    "notes": "8-10 Green St (front of 10 and 9): red brick, 3 storeys + lead dormers; 10 has two bays of sashes with window boxes and a mint-teal Cambridge Gin Laboratory shopfront with consoles (Catesbys in older photo), round-arched house door with fanlight; 9 has two bays and a black shopfront (OSM 8-9: Bird and Blend)."
+  },
+  {
+   "id": "way/1288644223:2",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.6,
+    6.9
+   ],
+   "material": "brick",
+   "wall_colour": "#9a5440",
+   "trim_colour": "#efeae0",
+   "cornice_z": 10.0,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.1,
+     "x1": 3.95,
+     "z1": 3.4,
+     "fascia_text": "",
+     "fascia_colour": "#4b5258",
+     "text_colour": "#e9e9e9",
+     "door_x": 1.0,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.0,
+     "w": 1.0,
+     "z": 4.3,
+     "h": 2.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.0,
+     "w": 1.0,
+     "z": 7.5,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "East end of 8-10 Green Street (No. 8), north side, faces SSE: continues the red-brick front of 9 with the grey-painted shopfront (directors, now Bird and Blend); one bay of sashes. Dormer level above the eave not modelled. Estimated from one oblique Geograph view."
   }
  ]
 }

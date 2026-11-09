@@ -1,0 +1,59 @@
+{
+ "osm_id": "relation/18902598",
+ "sources": [
+  "commons:File:University Museum of Zoology, main entrance - geograph.org.uk - 831295.jpg"
+ ],
+ "walls": [
+  {
+   "id": "relation/18902598:0",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    5.0
+   ],
+   "material": "brick",
+   "wall_colour": "#9a5a44",
+   "trim_colour": "#c9c4ba",
+   "cornice_z": 5.2,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.9
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.4
+   ],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.7,
+     "x1": 5.9,
+     "z1": 3.8,
+     "fascia_text": "University Museum of Zoology",
+     "fascia_colour": "#2b2f33",
+     "text_colour": "#e8ecef",
+     "door_x": 4.4,
+     "stallriser": 0.0,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 4.2,
+     "w": 6.5,
+     "z": 6.0,
+     "h": 2.6,
+     "panes": [
+      6,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    }
+   ],
+   "confidence": "low",
+   "notes": "University Museum of Zoology entrance (under the David Attenborough Building deck): a full-height dark-framed glazed screen with glass double doors under a deep red-brick fascia band carrying the museum name sign, a brick pier with a notice board at the south end, a concrete column at the north end (pilaster); above the fascia, a railed deck and the set-back ribbon-glazed upper storey (projected onto this plane). From the Commons/geograph photo of the main entrance (CC BY-SA 2.0); widths estimated."
+  }
+ ]
+}

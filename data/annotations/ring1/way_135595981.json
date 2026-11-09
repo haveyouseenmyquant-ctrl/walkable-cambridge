@@ -2,7 +2,8 @@
  "osm_id": "way/135595981",
  "sources": [
   "mapillary:919159848898713",
-  "mapillary:301075494954846"
+  "mapillary:301075494954846",
+  "commons:File:Church of St Andrew the Great - geograph.org.uk - 4363662.jpg (CC BY-SA 2.0)"
  ],
  "walls": [
   {
@@ -88,6 +89,44 @@
    ],
    "confidence": "low",
    "notes": "St Andrew the Great, south (St Tibbs Row) side: buff ashlar Gothic Revival (1842-3) with stepped buttresses (as pilasters) dividing four bays, each with a tall pointed three-light traceried window with leaded glazing; plinth with offset at ~1.2 m and a plain parapet. Seen raking from the east end only; bay positions spaced evenly over the wall."
+  },
+  {
+   "id": "way/135595981:7",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "stone",
+   "wall_colour": "#cdbb92",
+   "trim_colour": "#d8cba8",
+   "cornice_z": 9.4,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    1.2
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.4
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.9,
+     "w": 2.8,
+     "z": 3.6,
+     "h": 5.6,
+     "panes": [
+      4,
+      4
+     ],
+     "head": "pointed",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "St Andrew the Great, east end on St Andrew's Street (p0 = south corner): buff ashlar gable with a corner buttress (pilaster) at the south corner and one large pointed Perpendicular east window (about four/five lights, sill ~3.6 m) centred in the wall; plinth offset ~1.2 m. walls.json eave (6.3 m) is below the window head; the real gable is ~10 m+ (eave fix should lift it). From Geograph 4363662."
   }
  ]
 }

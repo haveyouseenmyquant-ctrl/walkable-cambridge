@@ -233,17 +233,27 @@ export function install(game) {
   }
   const LOOK = {
     ember: { missile: { coreColor: 0xffe8b0, radius: 0.16, halo: 0.8, width: 0.42, width2: 0.16, trailColor2: 0xffe080, trailLife: 0.28, trailLife2: 0.42 },
-             trail: (x, y, z) => { vfx.burst(x, y, z, 2, { ...FIRE, speed: 0.6, size: 0.42, life: 0.28, up: 1.2, jitter: 0.1 }); if (Math.random() < 0.4) vfx.burst(x, y, z, 1, { tex: 'ember', color: 0xffc060, speed: 1, size: 0.1, life: 0.6, grav: 3 }); },
-             impact: (x, y, z) => { fireBlast(x, y, z, 1.2, false); const g = nearGround(x, y, z); if (g != null) vfx.ring(x, y, g, 0xffa040, 0.2, 1.6, 0.3, 0.6); } },
+             trail: (x, y, z) => {   // session 51: flickering flame head (random size/colour each frame), licking tongues, ember sparks
+               vfx.burst(x, y, z, 1, { tex: 'flame', color: 0xfff0c0, color2: 0xff6010, speed: 0, size: 0.5 + Math.random() * 0.35, life: 0.07, drag: 0, jitter: 0.04, spin: 8 });
+               vfx.burst(x, y, z, 2, { ...FIRE, speed: 0.6, size: 0.42, life: 0.28, up: 1.4, jitter: 0.12 });
+               if (Math.random() < 0.7) vfx.burst(x, y, z, 1, { tex: 'ember', color: 0xffd070, color2: 0xff3000, speed: 1.4, size: 0.1, life: 0.7, grav: 2.5, drag: 0.8, up: 0.6 }); },
+             impact: (x, y, z) => { fireBlast(x, y, z, 1.2, false); vfx.burst(x, y, z, 4, { tex: 'flame', color: 0xffe0a0, color2: 0xff4000, speed: 2.5, size: 0.8, life: 0.3, up: 2, drag: 3 });
+               const g = nearGround(x, y, z); if (g != null) { vfx.ring(x, y, g, 0xffa040, 0.2, 1.6, 0.3, 0.6); vfx.decal('scorch', x, y, g, 1.1, 4, 0xffffff, 0.8); } } },
     orb: { missile: { coreColor: 0xfff0c0, radius: 0.26, halo: 1.3, width: 0.75, width2: 0.3, trailColor2: 0xffd060, trailLife: 0.3 },
            trail: (x, y, z) => { vfx.burst(x, y, z, 4, { ...FIRE, speed: 1.2, size: 0.8, life: 0.35, up: 1.5, jitter: 0.35 }); vfx.burst(x, y, z, 1, { ...SMOKE, speed: 0.4, size: 0.8, life: 0.9, up: 0.8, alpha: 0.35 }); },
            impact: (x, y, z, sp) => { sfx.play('boom'); fireBlast(x, y, z, sp.splash, true); vfx.ring(x, y, groundZ(x, y, z), 0xffc060, 0.5, sp.splash * 1.4, 0.6, 0.7); } },
     pebble: { missile: { coreColor: 0xffe8c0, radius: 0.13, halo: 0.45, width: 0.2, trailColor: 0xc8a878, trailLife: 0.24, width2: 0.08, trailColor2: 0xffe0a0 },
-              trail: (x, y, z) => { if (Math.random() < 0.5) vfx.burst(x, y, z, 1, { ...DUST, speed: 0.3, size: 0.35, life: 0.5, alpha: 0.4 }); },
-              impact: (x, y, z) => { stoneHit(x, y, z, 6); const g = nearGround(x, y, z); if (g != null) vfx.decal('crack', x, y, g, 0.8, 3, 0xffffff, 0.7); } },
+              trail: (x, y, z) => {   // session 51: grit shards shed behind the pebble and a dust wake
+                if (Math.random() < 0.7) vfx.burst(x, y, z, 1, { ...DUST, speed: 0.3, size: 0.45, life: 0.6, alpha: 0.45, grow: 1.5 });
+                if (Math.random() < 0.6) vfx.burst(x, y, z, 1, { tex: 'shard', color: 0xc8a878, speed: 1.5, size: 0.14, life: 0.4, grav: 10, spin: 9 }); },
+              impact: (x, y, z) => { stoneHit(x, y, z, 9); vfx.burst(x, y, z, 6, { tex: 'shard', color: 0xa08860, speed: 4, size: 0.3, life: 0.6, grav: 14, spin: 7, up: 2 }); vfx.burst(x, y, z, 4, { ...DUST, speed: 2.5, size: 1.3, life: 1.1, up: 0.4, alpha: 0.5, grow: 2 }); const g = nearGround(x, y, z); if (g != null) vfx.decal('crack', x, y, g, 0.8, 3, 0xffffff, 0.7); } },
     dart: { missile: { coreColor: 0xf4e0ff, radius: 0.15, halo: 0.8, width: 0.4, width2: 0.14, trailColor2: 0x70ff90, trailLife: 0.28, trailLife2: 0.4 },
-            trail: (x, y, z) => vfx.burst(x, y, z, 1, { tex: 'wisp', color: 0xb070ff, color2: 0x301080, speed: 0.4, size: 0.4, life: 0.45, spin: 5 }),
-            impact: (x, y, z) => { hexPuff(x, y, z, 10); vfx.core(x, y, z, 0xb070ff, 0.25, 0.15); const g = nearGround(x, y, z); if (g != null) vfx.decal('rune', x, y, g, 0.9, 1.2, 0xb070ff, 0.7, 2); } },
+            trail: (x, y, z, b) => {   // session 51: two wisps orbit the dart's path (double helix) and fade behind it
+              const t = (b ? b.trav : 0) * 1.6, nx = b ? -b.dy : 1, ny = b ? b.dx : 0;
+              for (const ph of [0, Math.PI]) { const c = Math.cos(t + ph) * 0.32, sn = Math.sin(t + ph) * 0.32;
+                vfx.burst(x + nx * c, y + ny * c, z + sn, 1, { tex: 'wisp', color: ph ? 0xd890ff : 0x9050ff, color2: 0x301080, speed: 0.1, size: 0.34, life: 0.5, spin: 5, drag: 2, jitter: 0 }); }
+              if (Math.random() < 0.3) vfx.burst(x, y, z, 1, { tex: 'smoke', color: 0x3a1460, color2: 0x100818, speed: 0.2, size: 0.5, life: 0.6, alpha: 0.35, grow: 1.6 }); },
+            impact: (x, y, z) => { hexPuff(x, y, z, 10); vfx.sigil(x, y, z + 0.9, 0xc080ff, 0.9, 0.9); vfx.core(x, y, z, 0xb070ff, 0.25, 0.15); const g = nearGround(x, y, z); if (g != null) vfx.decal('rune', x, y, g, 0.9, 1.2, 0xb070ff, 0.7, 2); } },
     mark: { missile: { coreColor: 0xe0ffe8, radius: 0.17, halo: 0.85, width: 0.44, trailColor: 0x50ff70, width2: 0.12, trailColor2: 0xb070ff, trailLife: 0.3 },
             trail: (x, y, z) => vfx.burst(x, y, z, 2, { tex: 'wisp', color: 0x70ff90, color2: 0x104020, speed: 0.6, size: 0.45, life: 0.5, up: -0.4, spin: 5 }),
             impact: (x, y, z) => { hexPuff(x, y, z, 12, 0x70ff90, 0xb070ff); vfx.sigil(x, y, z + 0.6, 0x70ff90, 1.3, 1.4); const g = nearGround(x, y, z); if (g != null) vfx.decal('rune', x, y, g, 1.4, 1.6, 0x50ff70, 0.8, 1.5); } },
@@ -288,7 +298,7 @@ export function install(game) {
       }
       if (done) { explode(b); vfx.release(b.orb); projs[i] = projs[projs.length - 1]; projs.pop(); projPool.push(b); continue; }
       b.orb?.position.set(b.x, b.z, -b.y);
-      LOOK[sp.look]?.trail(b.x, b.y, b.z);
+      LOOK[sp.look]?.trail(b.x, b.y, b.z, b);
     }
   }
 
@@ -445,10 +455,17 @@ export function install(game) {
         vfx.burst(p.x, p.y, p.z + 0.2, 10, { tex: 'wisp', color: 0x90ffb0, color2: 0xd050ff, speed: 0.5, size: 0.5, life: 0.9, up: 1.6, ring: 0.9, spin: 3 });
       } else {
         const arc = sp.look === 'arc';
-        vfx.lightning(A.x, A.y, A.z - 0.1, ex, ey, ez, sp.color, arc ? 0.3 : 0.16, arc ? 1 : 0.45, { width: arc ? 1.2 : 0.75, branches: arc ? -1 : 1 });
-        vfx.core(ex, ey, ez, 0x9ac8ff, arc ? 0.4 : 0.25, 0.14);
-        vfx.burst(ex, ey, ez, arc ? 18 : 10, { tex: 'spark', color: 0xffffff, color2: sp.color, speed: 7, size: 0.16, life: 0.35, grav: 8, drag: 2 });
-        if (arc) vfx.light(ex, ey, ez, 0x9ac8ff, 0.8, 0.2);
+        // session 51: jagged forked main bolt plus a thinner off-colour twin, a hand flash and an arc flash at the
+        // end (white core, ring, sparks, light), and a small scorch where it strikes the ground
+        vfx.lightning(A.x, A.y, A.z - 0.1, ex, ey, ez, sp.color, arc ? 0.3 : 0.2, arc ? 1.1 : 0.8, { width: arc ? 1.3 : 0.95, branches: arc ? -1 : 3 });
+        vfx.lightning(A.x, A.y, A.z - 0.1, ex, ey, ez, 0x6a8cff, 0.14, arc ? 1.4 : 1.1, { width: 0.45, branches: 1 });
+        vfx.core(A.x, A.y, A.z - 0.1, 0xd8f0ff, 0.12, 0.08);
+        vfx.core(ex, ey, ez, 0xe8f6ff, arc ? 0.5 : 0.36, 0.12);
+        vfx.ring(ex, ey, ez - 0.2, 0xbfe6ff, 0.15, arc ? 1.6 : 1.1, 0.22, 0.8);
+        vfx.burst(ex, ey, ez, arc ? 18 : 12, { tex: 'spark', color: 0xffffff, color2: sp.color, speed: 8, size: 0.16, life: 0.35, grav: 8, drag: 2 });
+        vfx.burst(ex, ey, ez, 3, { tex: 'glow', color: 0xbfe6ff, color2: 0x4060ff, speed: 0.5, size: arc ? 1.6 : 1.1, life: 0.12, drag: 0, jitter: 0 });
+        vfx.light(ex, ey, ez, 0x9ac8ff, arc ? 1 : 0.6, 0.15);
+        if (!first) { const g = nearGround(ex, ey, ez); if (g != null) vfx.decal('scorch', ex, ey, g, 0.7, 2, 0xffffff, 0.6); }
       }
       if (!first) return;
       hit(first, sp);

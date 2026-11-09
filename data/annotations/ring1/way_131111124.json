@@ -1,0 +1,291 @@
+{
+ "osm_id": "way/131111124",
+ "sources": [
+  "commons:File:Laboratory of Physical Chemistry, Free School Lane, Cambridge.jpg",
+  "commons:File:University of Cambridge - Laboratory of Physical Chemistry - geograph.org.uk - 6887754.jpg"
+ ],
+ "walls": [
+  {
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.6
+   ],
+   "material": "brick",
+   "wall_colour": "#7e3f2c",
+   "trim_colour": "#d6c9a8",
+   "cornice_z": 9.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.4
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "id": "way/131111124:4",
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.6,
+     "w": 1.9,
+     "z": 1.3,
+     "h": 2.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.6,
+     "w": 1.9,
+     "z": 5.2,
+     "h": 2.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.8,
+     "w": 1.9,
+     "z": 1.3,
+     "h": 2.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.8,
+     "w": 1.9,
+     "z": 5.2,
+     "h": 2.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.0,
+     "w": 1.9,
+     "z": 1.3,
+     "h": 2.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.0,
+     "w": 1.9,
+     "z": 5.2,
+     "h": 2.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 11.2,
+     "w": 1.9,
+     "z": 1.3,
+     "h": 2.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 11.2,
+     "w": 1.9,
+     "z": 5.2,
+     "h": 2.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 3.2,
+     "w": 1.1,
+     "h": 1.4
+    },
+    {
+     "type": "dormer",
+     "x": 6.4,
+     "w": 1.1,
+     "h": 1.4
+    },
+    {
+     "type": "dormer",
+     "x": 9.6,
+     "w": 1.1,
+     "h": 1.4
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Old Physical Chemistry (Laboratory of Physical Chemistry, now HPS / Whipple Museum), Free School Lane front: red-brown brick Jacobethan range, two tall storeys of stone-mullioned 3-light windows in pale stone surrounds (relieving arches over the upper row), stone sill band, parapet with white segmental-pedimented dormers and a cupola behind. North part: 4 bays (pitch ~3.2 m) and 3 dormers; bay count from the Commons photo (oblique, CC BY-SA 4.0)."
+  },
+  {
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.6
+   ],
+   "material": "brick",
+   "wall_colour": "#7e3f2c",
+   "trim_colour": "#d6c9a8",
+   "cornice_z": 9.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.4
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "id": "way/131111124:5",
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.4,
+     "w": 1.9,
+     "z": 1.3,
+     "h": 2.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.4,
+     "w": 1.9,
+     "z": 5.2,
+     "h": 2.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.0,
+     "w": 2.2,
+     "z": 1.3,
+     "h": 2.6,
+     "panes": [
+      4,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.0,
+     "w": 2.3,
+     "z": 5.0,
+     "h": 3.1,
+     "panes": [
+      4,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "arched",
+     "x": 7.1,
+     "w": 1.6,
+     "h": 3.1,
+     "surround": "pilastered"
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.8,
+     "w": 0.5,
+     "z": 1.2,
+     "h": 2.1,
+     "panes": [
+      1,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.5,
+     "w": 0.5,
+     "z": 1.2,
+     "h": 2.1,
+     "panes": [
+      1,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 7.1,
+     "w": 2.3,
+     "z": 6.4,
+     "h": 2.4,
+     "panes": [
+      4,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Old Physical Chemistry (Laboratory of Physical Chemistry, now HPS / Whipple Museum), Free School Lane front: red-brown brick Jacobethan range, two tall storeys of stone-mullioned 3-light windows in pale stone surrounds (relieving arches over the upper row), stone sill band, parapet with white segmental-pedimented dormers and a cupola behind. South part: one more 3-light bay, a wider 4-light bay, then the stone-dressed entrance bay with an arched oak double door flanked by narrow arched lights, the 'LABORATORY OF PHYSICAL CHEMISTRY' panel with the University arms, and a 4-light window above."
+  }
+ ]
+}

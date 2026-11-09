@@ -960,7 +960,9 @@ class MobSystem {
     // session 46: a 'rig' group between the yawed root and the model takes the shared body-language layer
     // (breathing, gait bob, wind-up crouch, strike lunge, hit flinch, death poses) on top of the per-type part animation
     const rig = new THREE.Group(); rig.name = 'rig'; while (group.children.length) rig.add(group.children[0]); group.add(rig);
-    group.scale.setScalar(type.scale);
+    // session 51: regular mobs draw 15% larger than their collision size so they read at clip distance (radius unchanged)
+    const VIS = type.boss ? 1 : 1.15;
+    group.scale.setScalar(type.scale * VIS);
     this.root.add(group);
     const aura = new THREE.Mesh(G.disc, auraMat(type.color)); aura.renderOrder = 4; aura.scale.setScalar(type.radius * 2.6 * (type.boss ? 1.6 : 1) + 0.6);
     this.root.add(aura);
@@ -1364,7 +1366,7 @@ class MobSystem {
     if (style === 'crumble') {
       if (R && !T.deathDur) { R.rotation.x = Math.min(1.25, f * f * 2.2); R.rotation.z = Math.sin(mob.id) * 0.3 * f; }
       mob.group.position.y = mob.z - Math.max(0, f - 0.4) * 1.1 * T.scale;
-      mob.group.scale.setScalar(T.scale * (1 - Math.max(0, f - 0.5) * 0.6));
+      mob.group.scale.setScalar(T.scale * (mob.boss ? 1 : 1.15) * (1 - Math.max(0, f - 0.5) * 0.6));
       fade(1 - Math.max(0, (f - 0.6) / 0.4));
     } else if (style === 'dissolve') {
       mob.group.position.y = mob.z + f * 1.2 * T.scale;

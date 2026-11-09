@@ -1,0 +1,89 @@
+{
+ "osm_id": "way/1211951050",
+ "sources": [
+  "commons:File:Petty Cury - geograph.org.uk - 4901204.jpg",
+  "commons:File:Petty Cury - geograph.org.uk - 6025074.jpg",
+  "commons:File:Petty Cury - geograph.org.uk - 5897664.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1211951050:1",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.2,
+    7.2,
+    10.0
+   ],
+   "material": "stone",
+   "wall_colour": "#c8b28f",
+   "trim_colour": "#d9c8a6",
+   "cornice_z": 12.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.2
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 4.45,
+     "z1": 3.6,
+     "fascia_text": "Nanna Mexico",
+     "fascia_colour": "#3fa6a0",
+     "text_colour": "#1e2a2c",
+     "door_x": 3.6,
+     "stallriser": 0.2,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 2.3,
+     "w": 2.0,
+     "z": 4.6,
+     "h": 2.0,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 2.3,
+     "w": 2.0,
+     "z": 7.6,
+     "h": 2.0,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.3,
+     "w": 1.6,
+     "z": 10.4,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "29 Petty Cury (Nanna Mexico), north side between Boots and the Superdry gabled range, faces SSE. Narrow buff-stone neo-Tudor front: charcoal shopfront frame with a teal fascia, a stacked canted stone bay/oriel with mullioned lights over the first and second floors, smaller mullioned window above, parapet. Seen only in oblique distant Geograph views; sizes estimated."
+  }
+ ]
+}

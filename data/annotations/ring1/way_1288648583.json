@@ -5,7 +5,8 @@
   "mapillary:256224142867800",
   "mapillary:484666925913106",
   "mapillary:963005101178076",
-  "mapillary:138527544920136"
+  "mapillary:138527544920136",
+  "commons:File:13 Trinity Street, Cambridge.JPG"
  ],
  "walls": [
   {
@@ -163,6 +164,65 @@
    ],
    "confidence": "medium",
    "notes": "13 Trinity Street (number '13' painted over the door), Space NK apothecary. Red brick with rubbed/orange brick flat-arch window heads; ornate white painted shopfront along the whole front: Ionic pilasters, Chinese-fret panels over the doors, main glazed door at the north end (x~1.0), a second narrow glazed door in the 3rd bay (x~6.0) between multi-pane display windows, stone stallriser with basement grilles. First floor: four tall 6/6 sashes with wrought-iron balconettes; second floor: four shorter sashes (top of facade/cornice only partly in frame, so cornice type and top-floor panes are a guess). x=0 is the north end (next to no. 14, dark timber '2648' shopfront); south end abuts the yellow-brick gothic building."
+  },
+  {
+   "id": "way/1288648583:1",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    3.8,
+    6.9,
+    9.6
+   ],
+   "material": "brick",
+   "wall_colour": "#5e4a3c",
+   "trim_colour": "#efe9dc",
+   "cornice_z": 12.2,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.0,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 1.8,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.0,
+     "w": 1.0,
+     "z": 7.6,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "arched",
+     "x": 5.6,
+     "w": 1.2,
+     "h": 2.6,
+     "surround": "none"
+    }
+   ],
+   "confidence": "low",
+   "notes": "Side wall of 13 Trinity Street (Joules/Space NK) along the start of Green Street: plain dark brown brick, a column of white sashes about 2 m behind the front corner, round-arched doorway at the rear of this segment. Very oblique view in Commons '13 Trinity Street, Cambridge.JPG' (CC BY-SA 3.0)."
   }
  ]
 }

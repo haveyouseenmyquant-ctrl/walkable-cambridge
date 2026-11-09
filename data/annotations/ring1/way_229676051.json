@@ -3,7 +3,9 @@
  "sources": [
   "mapillary:963502744458175",
   "mapillary:308354060793368",
-  "mapillary:845903886275109"
+  "mapillary:845903886275109",
+  "commons:File:Boots, Petty Cury - geograph.org.uk - 5231641.jpg",
+  "commons:File:Petty Cury, Cambridge - geograph.org.uk - 1944505.jpg"
  ],
  "walls": [
   {
@@ -385,6 +387,127 @@
    ],
    "confidence": "low",
    "notes": "28 Petty Cury (Boots, Lion Yard frontage, 1970s neo-Tudor ashlar). Ground floor is a recessed colonnade: square ashlar piers (pilasters) carrying the upper floors, with the dark-blue Boots shopfront set back behind them (recess not expressible in schema). Upper two floors: stone-mullioned rectangular windows, about two per bay. Bay count (6) and window x positions are estimated from oblique street-level views, not measured; pier spacing may differ. p0 is the east end (next to the arched timber door of the adjoining building)."
+  },
+  {
+   "id": "way/229676051:2",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.6,
+    8.5
+   ],
+   "material": "stone",
+   "wall_colour": "#c8b28a",
+   "trim_colour": "#d9c8a4",
+   "cornice_z": 13.6,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.5,
+    8.3
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.6,
+     "x1": 14.0,
+     "z1": 4.0,
+     "fascia_text": "Boots",
+     "fascia_colour": "#1b2f6b",
+     "text_colour": "#ffffff",
+     "door_x": 7.3,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.45,
+     "w": 2.6,
+     "z": 5.2,
+     "h": 2.2,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.45,
+     "w": 1.5,
+     "z": 9.0,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 7.3,
+     "w": 2.6,
+     "z": 5.2,
+     "h": 2.2,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 7.3,
+     "w": 1.5,
+     "z": 9.0,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.15,
+     "w": 2.6,
+     "z": 5.2,
+     "h": 2.2,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.15,
+     "w": 1.5,
+     "z": 9.0,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "28 Petty Cury, north side, Boots 'CHEMISTS' range: 1920s-30s neo-Tudor ashlar with three steep coped gables with finials. Ground floor: open colonnade of four square stone piers carrying a carved entablature (lettered CHEMISTS, heraldic shields) at ~4.5 m, dark-blue Boots shopfronts set back behind (piers not modelled as pilasters since they stop at the entablature). First floor: one wide stone-mullioned and transomed leaded window per bay; one 2-light mullioned window in each gable. Bay centres assumed regular (3 x 4.9 m); gable tops above the DSM eave are not representable."
   }
  ]
 }

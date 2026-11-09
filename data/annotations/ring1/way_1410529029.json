@@ -1,0 +1,89 @@
+{
+ "osm_id": "way/1410529029",
+ "sources": [
+  "commons:File:4 And 5, Peas Hill.jpg",
+  "commons:File:Peas Hill - geograph.org.uk - 7939613.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1410529029:0",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.3
+   ],
+   "material": "render",
+   "wall_colour": "#f3f1ec",
+   "trim_colour": "#f6f5f0",
+   "cornice_z": 6.3,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 8.2,
+     "z1": 3.0,
+     "fascia_text": "BREWBOARD",
+     "fascia_colour": "#7d8a6e",
+     "text_colour": "#f4f2ea",
+     "door_x": 1.1,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "door",
+     "style": "glazed",
+     "x": 7.2,
+     "w": 0.9,
+     "h": 2.3,
+     "surround": "none"
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 3.5,
+     "w": 2.2,
+     "z": 3.9,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.7,
+     "w": 0.9,
+     "z": 3.9,
+     "h": 1.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 3.4,
+     "w": 1.6,
+     "h": 1.3
+    },
+    {
+     "type": "dormer",
+     "x": 6.6,
+     "w": 1.6,
+     "h": 1.3
+    }
+   ],
+   "confidence": "medium",
+   "notes": "4-5 Peas Hill (Brewboard tap room, Grade II): white-rendered two storeys plus an old plain-tile roof with two flat-roofed dormers; full-width sage-green shopfront with an open doorway at the south end and a glazed door at the north end; first floor a canted timber oriel (sashes) and one 6/6 sash. NOTE: walls.json gives this wall only 2.8 m height (LiDAR or OSM error; true eave about 6.3 m), so the upper elements will be culled until the height is fixed. x from the south end."
+  }
+ ]
+}

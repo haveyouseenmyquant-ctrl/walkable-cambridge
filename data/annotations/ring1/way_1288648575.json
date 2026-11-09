@@ -1,0 +1,108 @@
+{
+ "osm_id": "way/1288648575",
+ "sources": [
+  "commons:File:Green Street, Cambridge - geograph.org.uk - 7008239.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1288648575:2",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.7,
+    6.6
+   ],
+   "material": "brick",
+   "wall_colour": "#8f7f68",
+   "trim_colour": "#f1eee8",
+   "cornice_z": 9.2,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.7
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 5.6,
+     "z1": 3.5,
+     "fascia_text": "Oden",
+     "fascia_colour": "#e9e8ee",
+     "text_colour": "#4a5aa8",
+     "door_x": 3.0,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 6.3,
+     "w": 0.9,
+     "h": 2.3,
+     "surround": "none"
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.9,
+     "w": 1.2,
+     "z": 4.2,
+     "h": 1.9,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.7,
+     "w": 1.2,
+     "z": 4.2,
+     "h": 1.9,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.9,
+     "w": 1.0,
+     "z": 7.0,
+     "h": 1.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.7,
+     "w": 1.0,
+     "z": 7.0,
+     "h": 1.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "40 Green Street (south side at the Sidney Street end, faces NNW; x from the east end): white-painted timber shopfront with deep fascia (Oden) and a separate white side house door at the west end; brown-grey gault brick above with small-pane Georgian sashes. Second-floor windows assumed (only the first floor is in frame)."
+  }
+ ]
+}

@@ -291,15 +291,25 @@ export class Player {
     cam.rotation.set(this.pitch, this.yaw, 0, 'YXZ');
   }
 
-  // Third-person camera: behind and above the head, pulled in when a wall is in the way.
-  applyCamera3(cam) {
+  // Third-person camera: behind and above the head, pulled in when a wall is in the way. Session 51: the collision
+  // march is backed by one ray against nearby visual-only meshes (zone facades, market stall canopies; this.camOcclude,
+  // set by main.js), and the boom length is smoothed (snaps in at once, eases back out) so it never sits in geometry.
+  applyCamera3(cam, dt = 1 / 60) {
     const sy = Math.sin(this.yaw), cy = Math.cos(this.yaw), cp = Math.cos(this.pitch), sp = Math.sin(this.pitch);
     const hx = this.x, hy = this.y, hz = this.eye + 0.3;
-    let d = this.mode === 'broom' ? 5.5 : 4;
+    const dmax = this.mode === 'broom' ? 5.5 : 4;
+    let d = dmax;
     for (let r = 0.5; r <= d; r += 0.25) {
       const x = hx + sy * cp * r, y = hy - cy * cp * r, z = hz - sp * r;
       if (this.world.blocked(x, y, z - 0.3, 0.2, 0, 0.6) || (this.world.support(x, y, z, true)?.z ?? -1e9) > z - 0.3) { d = Math.max(0.6, r - 0.3); break; }
     }
+    if (this.camOcclude) {   // three.js frame: (x, z, -y); direction from the head back to the camera
+      const hit = this.camOcclude(hx, hz, -hy, sy * cp, -sp, cy * cp, d + 0.3);
+      if (hit < d + 0.3) d = Math.max(0.35, hit - 0.3);
+    }
+    if (this.camD == null || d < this.camD) this.camD = d;   // pull in at once
+    else this.camD += (d - this.camD) * Math.min(1, dt * 4);  // ease back out
+    d = Math.min(this.camD, dmax);
     cam.position.set(hx + sy * cp * d, hz - sp * d, -(hy - cy * cp * d));
     cam.rotation.set(this.pitch, this.yaw, 0, 'YXZ');
   }

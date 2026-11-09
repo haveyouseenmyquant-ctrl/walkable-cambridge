@@ -4,7 +4,8 @@
   "mapillary:952996672184960",
   "mapillary:460794571846485",
   "mapillary:130365975776565",
-  "mapillary:138527544920136"
+  "mapillary:138527544920136",
+  "commons:File:Along Rose Crescent - geograph.org.uk - 7044858.jpg"
  ],
  "walls": [
   {
@@ -152,6 +153,136 @@
    ],
    "confidence": "medium",
    "notes": "9 Trinity Street, Whistles (sign + fascia lettering in photos). Plain Georgian front of brown/buff stock brick, three storeys: painted white timber shopfront with pilasters (wide display window at north end, glazed door in 2nd bay, two narrower windows south), moulded white cornice over fascia; four white-framed 6/6 sashes on each upper floor in plain openings, simple cornice and parapet at top (roof line only partly seen). x=0 is the north end (next to the gothic yellow-brick building), x=7.51 abuts the stone St Michael's Court (Caius) to the south. Window x positions estimated through perspective; brick colour corrected for shade."
+  },
+  {
+   "id": "way/1288730364:2",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.0,
+    7.3
+   ],
+   "material": "brick",
+   "wall_colour": "#a58d68",
+   "trim_colour": "#efe9dc",
+   "cornice_z": 10.6,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 5.6,
+     "z1": 3.4,
+     "fascia_text": "",
+     "fascia_colour": "#2f3a3f",
+     "text_colour": "#eeeeee",
+     "door_x": 2.95,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 5.9,
+     "x1": 11.2,
+     "z1": 3.4,
+     "fascia_text": "",
+     "fascia_colour": "#2f3a3f",
+     "text_colour": "#eeeeee",
+     "door_x": 8.55,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.9,
+     "w": 1.0,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.7,
+     "w": 1.0,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.5,
+     "w": 1.0,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.9,
+     "w": 1.0,
+     "z": 7.6,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.7,
+     "w": 1.0,
+     "z": 7.6,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.5,
+     "w": 1.0,
+     "z": 7.6,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Side (south) wall of 9 Trinity Street facing the west leg of Rose Crescent: buff/brown stock brick, three storeys, Georgian sashes, shopfronts at ground. Seen only distantly along Rose Crescent (Geograph 7044858); 3-bay rhythm assumed."
   }
  ]
 }

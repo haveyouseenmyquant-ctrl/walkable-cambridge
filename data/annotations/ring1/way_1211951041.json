@@ -1,0 +1,107 @@
+{
+ "osm_id": "way/1211951041",
+ "sources": [
+  "commons:File:Petty Cury - geograph.org.uk - 4350366.jpg",
+  "commons:File:Timpson - Petty Cury - geograph.org.uk - 6716291.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1211951041:4",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.0,
+    6.8
+   ],
+   "material": "render",
+   "wall_colour": "#e7e0cd",
+   "trim_colour": "#f4f1ea",
+   "cornice_z": 12.0,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.0
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 5.8,
+     "z1": 3.7,
+     "fascia_text": "Halifax",
+     "fascia_colour": "#1d3c8f",
+     "text_colour": "#ffffff",
+     "door_x": 4.9,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.6,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.6,
+     "w": 1.0,
+     "z": 7.2,
+     "h": 1.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.3,
+     "w": 1.0,
+     "z": 4.5,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.3,
+     "w": 1.0,
+     "z": 7.2,
+     "h": 1.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 3.0,
+     "w": 1.0,
+     "h": 1.2
+    }
+   ],
+   "confidence": "low",
+   "notes": "24 Petty Cury, north side (Halifax): cream-rendered 18th-c style house, three storeys under a tiled roof with a dormer, white sash windows two per floor, moulded string course above the shop, blue Halifax shopfront with fascia. Window x positions approximate; the photo is oblique (Commons geograph 4350366, looking east)."
+  }
+ ]
+}

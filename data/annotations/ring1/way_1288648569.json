@@ -1,0 +1,98 @@
+{
+ "osm_id": "way/1288648569",
+ "sources": [
+  "commons:File:Green Street, Cambridge - geograph.org.uk - 7008239.jpg",
+  "commons:File:Green Street, Cambridge - geograph.org.uk - 7393530.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/1288648569:5",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.6
+   ],
+   "material": "brick",
+   "wall_colour": "#b9a98a",
+   "trim_colour": "#ece6da",
+   "cornice_z": 6.3,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 11.8,
+     "z1": 3.4,
+     "fascia_text": "",
+     "fascia_colour": "#6b2a2c",
+     "text_colour": "#f0e6d2",
+     "door_x": 10.9,
+     "stallriser": 0.6,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.8,
+     "w": 1.4,
+     "z": 4.0,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.6,
+     "w": 1.4,
+     "z": 4.0,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.4,
+     "w": 1.4,
+     "z": 4.0,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 10.2,
+     "w": 1.4,
+     "z": 4.0,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "38-39 Green Street (south side, faces NNW; x from the east end): two-storey building, gault/buff brick first floor with large plain sash windows under a rendered parapet band; full-width deep maroon timber shopfront (Tabanco in the 2019-21 Geograph views, now Yori) with three big timber-framed display windows and the entrance at the west end. Window count upstairs estimated from oblique views."
+  }
+ ]
+}

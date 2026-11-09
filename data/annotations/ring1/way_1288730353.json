@@ -1,7 +1,9 @@
 {
  "osm_id": "way/1288730353",
  "sources": [
-  "commons:File:1-11 Rose Crescent, Cambridge.jpg"
+  "commons:File:1-11 Rose Crescent, Cambridge.jpg",
+  "commons:File:Rose Crescent - geograph.org.uk - 7798651.jpg",
+  "commons:File:Along Rose Crescent - geograph.org.uk - 7044858.jpg"
  ],
  "walls": [
   {
@@ -479,6 +481,134 @@
    ],
    "confidence": "medium",
    "notes": "1-11 Rose Crescent (1826 crescent): gault brick, 3 storeys, regular sashes, painted timber shopfronts. Window pitch from photo; fascias unknown so left blank."
+  },
+  {
+   "id": "way/1288730353:4",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.9,
+    7.1
+   ],
+   "material": "brick",
+   "wall_colour": "#b6a07e",
+   "trim_colour": "#efe9dc",
+   "cornice_z": 10.2,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.9
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 3.53,
+     "z1": 3.6,
+     "fascia_text": "",
+     "fascia_colour": "#8f8478",
+     "text_colour": "#f2ede4",
+     "door_x": 1.92,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.9,
+     "w": 1.0,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.9,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "1-11 Rose Crescent (1826 crescent), short facet of the curved front between :3 and :5: gault brick, 3 storeys, one bay of 9/9-pane-look sashes over a painted shopfront with dark awnings (Cellini / Molton Brown run). Same bay pitch (~3.1 m) and heights as the neighbouring annotated facets."
+  },
+  {
+   "id": "way/1288730353:6",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.9,
+    7.1
+   ],
+   "material": "brick",
+   "wall_colour": "#b6a07e",
+   "trim_colour": "#efe9dc",
+   "cornice_z": 10.2,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.9
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 2.78,
+     "z1": 3.6,
+     "fascia_text": "",
+     "fascia_colour": "#8f8478",
+     "text_colour": "#f2ede4",
+     "door_x": 1.54,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.54,
+     "w": 1.0,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.54,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "1-11 Rose Crescent, short facet of the curved front between :5 and :7: gault brick, 3 storeys, one bay of sashes over a shopfront. Pitch/heights copied from neighbouring facets, consistent with Geograph 7798651/7044858."
   }
  ]
 }

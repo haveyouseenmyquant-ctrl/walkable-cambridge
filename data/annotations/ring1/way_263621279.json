@@ -1,7 +1,9 @@
 {
  "osm_id": "way/263621279",
  "sources": [
-  "commons:File:Cambridge - St John's Street - View SE on (Old) School of Divinity 1879 by Basil Champneys.jpg"
+  "commons:File:Cambridge - St John's Street - View SE on (Old) School of Divinity 1879 by Basil Champneys.jpg",
+  "commons:File:The Old Divinity School in Cambridge - geograph.org.uk - 3928299.jpg",
+  "commons:File:The Old Divinity School in Cambridge - geograph.org.uk - 3928195.jpg"
  ],
  "walls": [
   {
@@ -54,6 +56,161 @@
    ],
    "confidence": "low",
    "notes": "Old Divinity School (Basil Champneys 1879), St John's Street front, north block. Red brick with Ketton-type stone dressings and quoin strips; gabled bay with a large pointed traceried two-light window over a band of carved heraldic shields (string course ~4.6 m), and a four-light stone-mullioned window at ground level. Only the southern ~6 m of this wall (next to the five-bay traceried range, walls :2-:18) is visible in the source photo; the northern part is not described. Gable apex rises above the wall height. Photo is from 2010 with hoarding in front."
+  },
+  {
+   "id": "way/263621279:24",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.0
+   ],
+   "material": "brick",
+   "wall_colour": "#b5553c",
+   "trim_colour": "#d9cdb0",
+   "cornice_z": 9.0,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 1.0,
+     "w": 0.5,
+     "z": 2.6,
+     "h": 1.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 3.2,
+     "w": 1.0,
+     "z": 0.8,
+     "h": 1.4,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 5.2,
+     "w": 1.0,
+     "z": 0.8,
+     "h": 1.4,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "gothic",
+     "x": 7.4,
+     "w": 1.5,
+     "h": 2.8,
+     "surround": "none"
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 10.0,
+     "w": 1.0,
+     "z": 0.8,
+     "h": 1.4,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 12.0,
+     "w": 1.0,
+     "z": 0.8,
+     "h": 1.4,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 3.6,
+     "w": 1.6,
+     "z": 4.6,
+     "h": 3.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 6.0,
+     "w": 1.6,
+     "z": 4.6,
+     "h": 3.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 8.4,
+     "w": 1.6,
+     "z": 4.6,
+     "h": 3.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 11.0,
+     "w": 2.4,
+     "z": 4.8,
+     "h": 2.4,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Old Divinity School (Champneys 1879), south face to All Saints Garden: red brick with chequered stone bands and Ketton dressings, octagonal stone stair turret at the St John's Street corner, three big pointed traceried windows lighting the first-floor hall over a carved string course, small two-light ground windows, pointed-arch doorway, gabled bay with mullioned windows at the east end. walls.json height (3.2 m) is far below the real ~10 m eave (trees in the DSM?), so the upper windows will be culled unless the height is fixed. Geograph 3928299/3928195, 6815564."
   }
  ]
 }

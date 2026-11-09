@@ -1,0 +1,182 @@
+{
+ "osm_id": "way/680923107",
+ "sources": [
+  "commons:File:Trinity Lane - geograph.org.uk - 5557135.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/680923107:32",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.6,
+    6.6
+   ],
+   "material": "stone",
+   "wall_colour": "#a69070",
+   "trim_colour": "#d8ccb0",
+   "cornice_z": 8.6,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 13.5,
+     "w": 1.9,
+     "z": 0.9,
+     "h": 2.0,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 13.5,
+     "w": 1.9,
+     "z": 4.0,
+     "h": 2.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 10.0,
+     "w": 0.7,
+     "z": 0.6,
+     "h": 1.9,
+     "panes": [
+      1,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 9.6,
+     "w": 1.0,
+     "z": 4.3,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 7.0,
+     "w": 1.0,
+     "z": 0.9,
+     "h": 1.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.0,
+     "w": 1.0,
+     "z": 0.9,
+     "h": 1.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.2,
+     "w": 1.0,
+     "z": 0.9,
+     "h": 1.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 7.0,
+     "w": 1.0,
+     "z": 4.2,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.0,
+     "w": 1.0,
+     "z": 4.2,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.2,
+     "w": 1.0,
+     "z": 4.2,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 5.5,
+     "w": 1.2,
+     "h": 1.4
+    },
+    {
+     "type": "dormer",
+     "x": 9.6,
+     "w": 1.2,
+     "h": 1.4
+    }
+   ],
+   "confidence": "low",
+   "notes": "Angel Court (Trinity) frontage on the north side of Trinity Lane next to 38 Trinity Street: rubble stone with ashlar dressings and some brick, big three-light round-headed mullioned windows at the east end behind iron railings, two-light mullioned windows elsewhere, gabled attic dormers and a brick chimney. Geograph 5557135, oblique; positions estimated."
+  }
+ ]
+}
