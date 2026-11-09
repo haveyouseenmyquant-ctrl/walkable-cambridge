@@ -231,6 +231,11 @@ function installClip(clipS) {
       try { while (g.time - t0 < untilS - 1e-6) { step(DT); P.update(DT); g.update(DT); } }
       catch (e) { add('error', { msg: e.message }); }
       finally { stepping = window.__gameStep = false; P.keys.clear(); }
+      // session 59: look at the fight for the captured frame (a player watches the nearest enemy; 5 of 12 frames
+      // used to face a wall or an empty street). Only the view turns: no movement, the next step re-aims anyway.
+      let fm = null, fd = 35;
+      for (const m of live()) { const d = dist(m) - (m.boss ? 15 : 0) - (hostile(m) ? 5 : 0); if (dist(m) < 35 && d < fd) { fd = d; fm = m; } }
+      if (fm) { face(fm.x, fm.y); pitchT = 0; framePitch(0); }
       const s = snap(); add('frame', s); return s;
     },
     dispose() { for (const f of offs) f(); items.roll = roll; P.update = pu; g.update = gu; },
