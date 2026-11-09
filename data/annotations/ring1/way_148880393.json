@@ -1,0 +1,376 @@
+{
+ "osm_id": "way/148880393",
+ "sources": [
+  "mapillary:347396670530528",
+  "commons:File:New Buildings, Corpus Christi College - geograph.org.uk - 4050924.jpg",
+  "commons:File:Corpus Christi College - geograph.org.uk - 3930418.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/148880393:4",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.8,
+    7.4
+   ],
+   "material": "brick",
+   "wall_colour": "#5f5851",
+   "trim_colour": "#a99d86",
+   "cornice_z": 11.2,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    3.8,
+    7.4
+   ],
+   "quoins": false,
+   "pilasters": [
+    3.0,
+    6.6,
+    9.8,
+    13.2,
+    16.6,
+    19.9,
+    23.3,
+    26.7
+   ],
+   "elements": [
+    {
+     "type": "door",
+     "style": "gothic",
+     "x": 1.4,
+     "w": 1.1,
+     "h": 2.7,
+     "surround": "pilastered"
+    },
+    {
+     "type": "window",
+     "style": "bay",
+     "x": 4.6,
+     "w": 2.4,
+     "z": 0.8,
+     "h": 2.5,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 4.6,
+     "w": 2.2,
+     "z": 4.6,
+     "h": 2.1,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.6,
+     "w": 1.6,
+     "z": 8.1,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "bay",
+     "x": 11.4,
+     "w": 2.4,
+     "z": 0.8,
+     "h": 2.5,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 11.4,
+     "w": 2.2,
+     "z": 4.6,
+     "h": 2.1,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 11.4,
+     "w": 1.6,
+     "z": 8.1,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "bay",
+     "x": 18.2,
+     "w": 2.4,
+     "z": 0.8,
+     "h": 2.5,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 18.2,
+     "w": 2.2,
+     "z": 4.6,
+     "h": 2.1,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 18.2,
+     "w": 1.6,
+     "z": 8.1,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "bay",
+     "x": 25.0,
+     "w": 2.4,
+     "z": 0.8,
+     "h": 2.5,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 25.0,
+     "w": 2.2,
+     "z": 4.6,
+     "h": 2.1,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 25.0,
+     "w": 1.6,
+     "z": 8.1,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "gothic",
+     "x": 8.0,
+     "w": 1.1,
+     "h": 2.6,
+     "surround": "none"
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.0,
+     "w": 1.2,
+     "z": 4.7,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.0,
+     "w": 1.3,
+     "z": 8.1,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 14.8,
+     "w": 1.2,
+     "z": 0.9,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 14.8,
+     "w": 1.2,
+     "z": 4.7,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 14.8,
+     "w": 1.3,
+     "z": 8.1,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "gothic",
+     "x": 21.6,
+     "w": 1.1,
+     "h": 2.6,
+     "surround": "none"
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 21.6,
+     "w": 1.2,
+     "z": 4.7,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 21.6,
+     "w": 1.3,
+     "z": 8.1,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 28.4,
+     "w": 1.2,
+     "z": 0.9,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 28.4,
+     "w": 1.2,
+     "z": 4.7,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 28.4,
+     "w": 1.3,
+     "z": 8.1,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Corpus Christi College range on Trumpington Street south of the Taylor Library (former bank): dark grey-brown brick Tudor-Gothic, three storeys with stepped gables and battlemented parapet, stone dressings; four wide bays with two-storey canted bay/oriel windows alternating with narrow bays holding pointed-arched doorways or two-light windows; Gothic doorway at the junction with the bank. Bay rhythm counted from Mapillary 347396670530528 and two geograph views; positions spaced evenly."
+  }
+ ]
+}

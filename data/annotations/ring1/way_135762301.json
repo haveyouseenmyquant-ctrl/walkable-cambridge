@@ -1,0 +1,381 @@
+{
+ "osm_id": "way/135762301",
+ "sources": [
+  "commons:File:Cambridge - Trinity Lane - View South along Old Schools 1890 by Gothic Revival Architect John Loughborough Pearson towards King's College Chapel - On the right- Clare College Chapel 1763 by Sir James Burrough.jpg",
+  "commons:File:Cambridge - Trinity Lane - View SE & Up on Old Schools 1890 by Gothic Revival Architect John Loughborough Pearson.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/135762301:33",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.6,
+    9.4
+   ],
+   "material": "stone",
+   "wall_colour": "#cdb98d",
+   "trim_colour": "#dccaa2",
+   "cornice_z": 15.8,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 1.6,
+     "w": 1.2,
+     "z": 1.6,
+     "h": 2.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 3.0,
+     "w": 1.2,
+     "z": 1.6,
+     "h": 2.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 1.6,
+     "w": 1.2,
+     "z": 5.4,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 3.0,
+     "w": 1.2,
+     "z": 5.4,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 1.6,
+     "w": 1.2,
+     "z": 10.2,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 3.0,
+     "w": 1.2,
+     "z": 10.2,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 6.2,
+     "w": 2.6,
+     "z": 5.6,
+     "h": 3.2,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 6.2,
+     "w": 2.6,
+     "z": 10.0,
+     "h": 3.4,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 11.0,
+     "w": 1.0,
+     "z": 1.4,
+     "h": 2.2,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 13.2,
+     "w": 1.0,
+     "z": 1.4,
+     "h": 2.2,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 11.0,
+     "w": 1.1,
+     "z": 5.4,
+     "h": 2.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 13.2,
+     "w": 1.1,
+     "z": 5.4,
+     "h": 2.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 11.0,
+     "w": 1.1,
+     "z": 10.2,
+     "h": 2.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 13.2,
+     "w": 1.1,
+     "z": 10.2,
+     "h": 2.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "gothic",
+     "x": 6.2,
+     "w": 3.0,
+     "h": 4.2,
+     "surround": "none"
+    }
+   ],
+   "confidence": "low",
+   "notes": "Old Schools west range on Trinity Lane (Pearson 1890 gatehouse; Commons): ashlar Perpendicular Gothic, big four-centred carriage arch with timber doors, stacked carved oriel windows with tracery panels above it, flanking octagonal battlemented turrets, pointed two-light windows, battlemented parapet. Turret positions approximate. (length 14.8 m, height 16.1 m from walls.json)"
+  },
+  {
+   "id": "way/135762301:42",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.6,
+    9.4
+   ],
+   "material": "stone",
+   "wall_colour": "#cdb98d",
+   "trim_colour": "#dccaa2",
+   "cornice_z": 14.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 1.2,
+     "w": 1.0,
+     "z": 1.4,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 4.59,
+     "w": 1.0,
+     "z": 1.4,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 7.99,
+     "w": 1.0,
+     "z": 1.4,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 1.2,
+     "w": 1.2,
+     "z": 5.6,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 4.59,
+     "w": 1.2,
+     "z": 5.6,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 7.99,
+     "w": 1.2,
+     "z": 5.6,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 1.2,
+     "w": 1.2,
+     "z": 10.2,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 4.59,
+     "w": 1.2,
+     "z": 10.2,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 7.99,
+     "w": 1.2,
+     "z": 10.2,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Old Schools west range south of the gatehouse (Scott 1867): plainer ashlar with small square-headed ground windows, tall pointed two-light windows and small round oculi above, battlemented parapet. Bay count estimated. (length 9.2 m, height 15.1 m from walls.json)"
+  }
+ ]
+}

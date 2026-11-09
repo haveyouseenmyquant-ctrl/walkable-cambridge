@@ -1,0 +1,160 @@
+{
+ "osm_id": "way/161131062",
+ "sources": [
+  "mapillary:1276092142786105",
+  "mapillary:164489142190162",
+  "mapillary:964294214333175"
+ ],
+ "walls": [
+  {
+   "id": "way/161131062:6",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.6,
+    9.0
+   ],
+   "material": "stone",
+   "wall_colour": "#d6c29a",
+   "trim_colour": "#e4d6b4",
+   "cornice_z": 12.4,
+   "cornice": "classical",
+   "parapet": true,
+   "string_courses": [
+    4.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.6,
+     "w": 1.1,
+     "z": 1.3,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.8,
+     "w": 1.1,
+     "z": 1.3,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.0,
+     "w": 1.1,
+     "z": 1.3,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.6,
+     "w": 1.1,
+     "z": 5.3,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.8,
+     "w": 1.1,
+     "z": 5.3,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.0,
+     "w": 1.1,
+     "z": 5.3,
+     "h": 2.1,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.6,
+     "w": 1.0,
+     "z": 9.5,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.8,
+     "w": 1.0,
+     "z": 9.5,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.0,
+     "w": 1.0,
+     "z": 9.5,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Emmanuel College west (Essex) front, north end pavilion on St Andrew's Street: three-storey ashlar block, three bays of 12-pane sashes (smaller top row), moulded cornice and parapet. Ground floor partly hidden by the railings; bay count from oblique Mapillary views."
+  }
+ ]
+}

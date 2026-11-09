@@ -1,0 +1,89 @@
+{
+ "osm_id": "way/1206340006",
+ "sources": [
+  "mapillary:1373625636348222",
+  "mapillary:738114823524885"
+ ],
+ "walls": [
+  {
+   "id": "way/1206340006:0",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.3
+   ],
+   "material": "brick",
+   "wall_colour": "#c9b98e",
+   "trim_colour": "#e7e1d2",
+   "cornice_z": 6.9,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.3
+   ],
+   "quoins": false,
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.6,
+     "w": 1.0,
+     "z": 0.9,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.6,
+     "w": 1.0,
+     "z": 4.0,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.0,
+     "w": 1.0,
+     "z": 4.0,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 3.4,
+     "w": 1.0,
+     "h": 2.3,
+     "surround": "none"
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 8.2,
+     "w": 2.6,
+     "h": 2.6,
+     "surround": "none"
+    }
+   ],
+   "confidence": "low",
+   "notes": "Fisher House extension SE of the main house on Guildhall Street (OSM note: now part of Fisher House): gault brick, mostly hidden by scaffolding in the photos; small ground window and door, iron gate to the yard, two first-floor windows. Positions approximate. (length 11.8 m, height 7.2 m from walls.json)"
+  }
+ ]
+}

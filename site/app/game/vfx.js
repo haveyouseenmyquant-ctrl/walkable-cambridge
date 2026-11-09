@@ -196,6 +196,9 @@ export function createVfx(game) {
       c4[q] = end[j] + (base[j] - end[j]) * k; c4[q + 1] = end[j + 1] + (base[j + 1] - end[j + 1]) * k; c4[q + 2] = end[j + 2] + (base[j + 2] - end[j + 2]) * k;
       const fi = fadeIn[i] > 0 ? Math.min(1, age / fadeIn[i]) : 1;
       c4[q + 3] = a0[i] * fi * (grow[i] > 0 ? k : Math.sqrt(k));
+      // session 50: particles fade out within ~2.5 m of the camera so a blast at the player never washes the screen
+      { const cx = pos[j] - camPos.x, cy = pos[j + 1] - camPos.y, cz = pos[j + 2] - camPos.z, cd2 = cx * cx + cy * cy + cz * cz;
+        if (cd2 < 6.25) c4[q + 3] *= cd2 < 0.64 ? 0 : (Math.sqrt(cd2) - 0.8) / 1.7; }
       misc[j] = size0[i] * (grow[i] > 0 ? 0.5 + grow[i] * age : 0.35 + 0.65 * k);
       misc[j + 2] += spin[i] * dt;
     }

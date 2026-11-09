@@ -1,0 +1,28 @@
+{
+ "osm_id": "way/147456528",
+ "sources": [
+  "mapillary:132945848768785",
+  "mapillary:769181043787109"
+ ],
+ "walls": [
+  {
+   "id": "way/147456528:1",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "brick",
+   "wall_colour": "#6f4c3a",
+   "trim_colour": "#8a7a66",
+   "cornice_z": 4.8199999999999985,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [],
+   "confidence": "medium",
+   "notes": "Sidney Sussex College boundary wall on Sidney Street (east side): tall plain dark red-brown brick wall with a coped top and trees behind; no openings on this stretch. The OSM footprint is the college bicycle shelter behind it."
+  }
+ ]
+}

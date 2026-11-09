@@ -1,0 +1,1803 @@
+{
+ "osm_id": "way/1039073567",
+ "sources": [
+  "mapillary:469671364257322",
+  "mapillary:290319896004268",
+  "mapillary:231738802083472",
+  "mapillary:766634367235110",
+  "mapillary:288246269461526",
+  "mapillary:756448481904233"
+ ],
+ "walls": [
+  {
+   "id": "way/1039073567:0",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.4,
+    7.9,
+    10.9
+   ],
+   "material": "brick",
+   "wall_colour": "#7a4f3c",
+   "trim_colour": "#d8cfc0",
+   "cornice_z": 14.2,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.4
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 8.6,
+     "z1": 3.3,
+     "fascia_text": "HSBC UK",
+     "fascia_colour": "#ffffff",
+     "text_colour": "#db0011",
+     "door_x": 4.3,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 8.8,
+     "x1": 14.0,
+     "z1": 3.3,
+     "fascia_text": "Milano",
+     "fascia_colour": "#1d1d1b",
+     "text_colour": "#f2f0ea",
+     "door_x": 11.4,
+     "stallriser": 0.4,
+     "awning": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 14.2,
+     "x1": 18.6,
+     "z1": 3.3,
+     "fascia_text": "Santander",
+     "fascia_colour": "#ec0000",
+     "text_colour": "#ffffff",
+     "door_x": 16.4,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.3,
+     "w": 1.2,
+     "z": 4.9,
+     "h": 2.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.9,
+     "w": 1.2,
+     "z": 4.9,
+     "h": 2.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 6.5,
+     "w": 1.2,
+     "z": 4.9,
+     "h": 2.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.1,
+     "w": 1.2,
+     "z": 4.9,
+     "h": 2.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 11.7,
+     "w": 1.2,
+     "z": 4.9,
+     "h": 2.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 14.3,
+     "w": 1.2,
+     "z": 4.9,
+     "h": 2.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 16.9,
+     "w": 1.2,
+     "z": 4.9,
+     "h": 2.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.3,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 2.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.9,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 2.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 6.5,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 2.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.1,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 2.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 11.7,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 2.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 14.3,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 2.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 16.9,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 2.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.3,
+     "w": 1.0,
+     "z": 11.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.9,
+     "w": 1.0,
+     "z": 11.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 6.5,
+     "w": 1.0,
+     "z": 11.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.1,
+     "w": 1.0,
+     "z": 11.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 11.7,
+     "w": 1.0,
+     "z": 11.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 14.3,
+     "w": 1.0,
+     "z": 11.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 16.9,
+     "w": 1.0,
+     "z": 11.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "St Andrew's Street east side, late-20th-century brown-brick block (Christ's Lane frontage, 56-64): stone-faced shopfront storey under a projecting band, three upper storeys on a 2.6 m bay rhythm (round-headed first-floor windows with balconettes, plain sashes above), glazed mansard behind the eaves. Shops from OSM: HSBC UK 63-64, Milano 62, Santander 60."
+  },
+  {
+   "id": "way/1039073567:1",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.4,
+    7.9,
+    10.9
+   ],
+   "material": "brick",
+   "wall_colour": "#7a4f3c",
+   "trim_colour": "#d8cfc0",
+   "cornice_z": 14.2,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.4
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.1,
+     "x1": 4.6,
+     "z1": 3.3,
+     "fascia_text": "Santander",
+     "fascia_colour": "#ec0000",
+     "text_colour": "#ffffff",
+     "door_x": 2.3,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "door",
+     "style": "glazed",
+     "x": 5.9,
+     "w": 1.6,
+     "h": 2.8
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.3,
+     "w": 1.2,
+     "z": 4.9,
+     "h": 2.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.9,
+     "w": 1.2,
+     "z": 4.9,
+     "h": 2.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 6.5,
+     "w": 1.2,
+     "z": 4.9,
+     "h": 2.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.3,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 2.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.9,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 2.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 6.5,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 2.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.3,
+     "w": 1.0,
+     "z": 11.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.9,
+     "w": 1.0,
+     "z": 11.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 6.5,
+     "w": 1.0,
+     "z": 11.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "St Andrew's Street east side, late-20th-century brown-brick block (Christ's Lane frontage, 56-64): stone-faced shopfront storey under a projecting band, three upper storeys on a 2.6 m bay rhythm (round-headed first-floor windows with balconettes, plain sashes above), glazed mansard behind the eaves. Santander (east bay) and the recessed entrance to St Andrew's House, 59."
+  },
+  {
+   "id": "way/1039073567:2",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.4,
+    7.9,
+    10.9
+   ],
+   "material": "brick",
+   "wall_colour": "#7a4f3c",
+   "trim_colour": "#d8cfc0",
+   "cornice_z": 14.2,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.4
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.6,
+     "x1": 9.6,
+     "z1": 3.3,
+     "fascia_text": "Post Office",
+     "fascia_colour": "#ffffff",
+     "text_colour": "#e4002b",
+     "door_x": 5.1,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.3,
+     "w": 1.2,
+     "z": 4.9,
+     "h": 2.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.9,
+     "w": 1.2,
+     "z": 4.9,
+     "h": 2.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 6.5,
+     "w": 1.2,
+     "z": 4.9,
+     "h": 2.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.1,
+     "w": 1.2,
+     "z": 4.9,
+     "h": 2.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.3,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 2.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.9,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 2.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 6.5,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 2.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.1,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 2.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.3,
+     "w": 1.0,
+     "z": 11.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.9,
+     "w": 1.0,
+     "z": 11.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 6.5,
+     "w": 1.0,
+     "z": 11.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.1,
+     "w": 1.0,
+     "z": 11.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "St Andrew's Street east side, late-20th-century brown-brick block (Christ's Lane frontage, 56-64): stone-faced shopfront storey under a projecting band, three upper storeys on a 2.6 m bay rhythm (round-headed first-floor windows with balconettes, plain sashes above), glazed mansard behind the eaves. Cambridge Central Post Office, 57-58: white fascia, cream stone pilasters."
+  },
+  {
+   "id": "way/1039073567:4",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.4,
+    7.9,
+    10.9
+   ],
+   "material": "brick",
+   "wall_colour": "#7a4f3c",
+   "trim_colour": "#d8cfc0",
+   "cornice_z": 14.2,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.4
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 9.2,
+     "z1": 3.3,
+     "fascia_text": "Wendy's",
+     "fascia_colour": "#c8102e",
+     "text_colour": "#ffffff",
+     "door_x": 4.7,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.3,
+     "w": 1.2,
+     "z": 4.9,
+     "h": 2.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.9,
+     "w": 1.2,
+     "z": 4.9,
+     "h": 2.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 6.5,
+     "w": 1.2,
+     "z": 4.9,
+     "h": 2.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.1,
+     "w": 1.2,
+     "z": 4.9,
+     "h": 2.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.3,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 2.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.9,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 2.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 6.5,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 2.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.1,
+     "w": 1.1,
+     "z": 8.3,
+     "h": 2.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.3,
+     "w": 1.0,
+     "z": 11.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.9,
+     "w": 1.0,
+     "z": 11.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 6.5,
+     "w": 1.0,
+     "z": 11.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.1,
+     "w": 1.0,
+     "z": 11.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "St Andrew's Street east side, late-20th-century brown-brick block (Christ's Lane frontage, 56-64): stone-faced shopfront storey under a projecting band, three upper storeys on a 2.6 m bay rhythm (round-headed first-floor windows with balconettes, plain sashes above), glazed mansard behind the eaves. Corner unit 56 with stone-clad ground floor and a stone corner pier at the Emmanuel Street end (former NatWest; Wendy's per OSM)."
+  },
+  {
+   "id": "way/1039073567:7",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    3.8,
+    6.8,
+    9.8
+   ],
+   "material": "brick",
+   "wall_colour": "#c9b48c",
+   "trim_colour": "#e8e0cc",
+   "cornice_z": 13.67,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 5.6,
+     "z1": 3.3,
+     "fascia_text": "Wendy's",
+     "fascia_colour": "#c8102e",
+     "text_colour": "#ffffff",
+     "door_x": 2.9,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "door",
+     "style": "glazed",
+     "x": 8.6,
+     "w": 1.2,
+     "h": 2.4
+    },
+    {
+     "type": "shopfront",
+     "x0": 12.6,
+     "x1": 18.5,
+     "z1": 3.3,
+     "fascia_text": "Cambridge Local",
+     "fascia_colour": "#1f4e79",
+     "text_colour": "#ffffff",
+     "door_x": 15.55,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.1,
+     "w": 0.95,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.3,
+     "w": 0.95,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.5,
+     "w": 0.95,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.7,
+     "w": 0.95,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.9,
+     "w": 0.95,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 12.1,
+     "w": 0.95,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 14.3,
+     "w": 0.95,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 16.5,
+     "w": 0.95,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.1,
+     "w": 0.95,
+     "z": 7.2,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.3,
+     "w": 0.95,
+     "z": 7.2,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.5,
+     "w": 0.95,
+     "z": 7.2,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.7,
+     "w": 0.95,
+     "z": 7.2,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.9,
+     "w": 0.95,
+     "z": 7.2,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 12.1,
+     "w": 0.95,
+     "z": 7.2,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 14.3,
+     "w": 0.95,
+     "z": 7.2,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 16.5,
+     "w": 0.95,
+     "z": 7.2,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.1,
+     "w": 0.9,
+     "z": 10.2,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.3,
+     "w": 0.9,
+     "z": 10.2,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.5,
+     "w": 0.9,
+     "z": 10.2,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.7,
+     "w": 0.9,
+     "z": 10.2,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.9,
+     "w": 0.9,
+     "z": 10.2,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 12.1,
+     "w": 0.9,
+     "z": 10.2,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 14.3,
+     "w": 0.9,
+     "z": 10.2,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 16.5,
+     "w": 0.9,
+     "z": 10.2,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Emmanuel Street north-west side, Christ's Lane development: buff-brick block, shopfronts under a continuous band, three upper storeys of narrow windows on a ~2.2 m rhythm (round-headed on the first floor), simple eaves. Side of the 56 St Andrew's Street corner unit (Wendy's), an entrance door, then Cambridge Local (1 Emmanuel St)."
+  },
+  {
+   "id": "way/1039073567:8",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    3.8,
+    6.8,
+    9.8
+   ],
+   "material": "brick",
+   "wall_colour": "#c9b48c",
+   "trim_colour": "#e8e0cc",
+   "cornice_z": 12.79,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 3.8,
+     "z1": 3.3,
+     "fascia_text": "Subway",
+     "fascia_colour": "#00843d",
+     "text_colour": "#ffc600",
+     "door_x": 2.0,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 4.0,
+     "x1": 7.6,
+     "z1": 3.3,
+     "fascia_text": "Savino's",
+     "fascia_colour": "#1d1d1b",
+     "text_colour": "#f2f0ea",
+     "door_x": 5.8,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 7.8,
+     "x1": 11.6,
+     "z1": 3.3,
+     "fascia_text": "CJ's Vintage Store",
+     "fascia_colour": "#2b2b2b",
+     "text_colour": "#f2f0ea",
+     "door_x": 9.7,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 11.8,
+     "x1": 15.6,
+     "z1": 3.3,
+     "fascia_text": "Coral",
+     "fascia_colour": "#0050a0",
+     "text_colour": "#ffffff",
+     "door_x": 13.7,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 15.8,
+     "x1": 19.8,
+     "z1": 3.3,
+     "fascia_text": "Dry Cleaning",
+     "fascia_colour": "#1e6b3a",
+     "text_colour": "#ffffff",
+     "door_x": 17.8,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.1,
+     "w": 0.95,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.3,
+     "w": 0.95,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.5,
+     "w": 0.95,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.7,
+     "w": 0.95,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.9,
+     "w": 0.95,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 12.1,
+     "w": 0.95,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 14.3,
+     "w": 0.95,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 16.5,
+     "w": 0.95,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 18.7,
+     "w": 0.95,
+     "z": 4.3,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.1,
+     "w": 0.95,
+     "z": 7.2,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.3,
+     "w": 0.95,
+     "z": 7.2,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.5,
+     "w": 0.95,
+     "z": 7.2,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.7,
+     "w": 0.95,
+     "z": 7.2,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.9,
+     "w": 0.95,
+     "z": 7.2,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 12.1,
+     "w": 0.95,
+     "z": 7.2,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 14.3,
+     "w": 0.95,
+     "z": 7.2,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 16.5,
+     "w": 0.95,
+     "z": 7.2,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 18.7,
+     "w": 0.95,
+     "z": 7.2,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.1,
+     "w": 0.9,
+     "z": 10.2,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 3.3,
+     "w": 0.9,
+     "z": 10.2,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.5,
+     "w": 0.9,
+     "z": 10.2,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.7,
+     "w": 0.9,
+     "z": 10.2,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.9,
+     "w": 0.9,
+     "z": 10.2,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 12.1,
+     "w": 0.9,
+     "z": 10.2,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 14.3,
+     "w": 0.9,
+     "z": 10.2,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 16.5,
+     "w": 0.9,
+     "z": 10.2,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 18.7,
+     "w": 0.9,
+     "z": 10.2,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Emmanuel Street north-west side, Christ's Lane development: buff-brick block, shopfronts under a continuous band, three upper storeys of narrow windows on a ~2.2 m rhythm (round-headed on the first floor), simple eaves. Shop order from OSM (Subway 2, Savino's 3, CJ's 4, Coral); dry cleaner from a 2015 view."
+  }
+ ]
+}

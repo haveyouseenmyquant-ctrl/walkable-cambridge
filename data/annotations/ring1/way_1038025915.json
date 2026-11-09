@@ -1,0 +1,113 @@
+{
+ "osm_id": "way/1038025915",
+ "sources": [
+  "mapillary:291631212546910"
+ ],
+ "walls": [
+  {
+   "id": "way/1038025915:6",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.6
+   ],
+   "material": "brick",
+   "wall_colour": "#6e5a4a",
+   "trim_colour": "#efece4",
+   "cornice_z": 7.4,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.4,
+     "x1": 19.6,
+     "z1": 3.0,
+     "fascia_text": "",
+     "fascia_colour": "#f0ede6",
+     "text_colour": "#2a2a2a",
+     "door_x": 17.5,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.0,
+     "w": 1.0,
+     "z": 4.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 6.0,
+     "w": 1.0,
+     "z": 4.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 10.0,
+     "w": 1.0,
+     "z": 4.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 14.0,
+     "w": 1.0,
+     "z": 4.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 18.0,
+     "w": 1.0,
+     "z": 4.2,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Round Church Street south side, east end: two-storey Victorian stock-brick range, white-painted ground-floor shop/pub front with large windows; first floor round-arched sash windows with white sills at ~4 m centres; chimney stacks on the ridge. Seen from a bus top deck (mapillary 291631212546910); window count over the full 20 m extrapolated."
+  }
+ ]
+}

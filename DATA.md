@@ -43,6 +43,9 @@ Ring-1 facade annotations (session 36, `data/annotations/ring1/`, used by `scrip
 64 non-held-out Mapillary photos (CC BY-SA 4.0, already in `data/raw/mapillary_facade/` and `mapillary_ref/`,
 https://www.mapillary.com/app/?pKey=<id>; ids listed in each annotation's `sources`). Visual references only; no
 pixels from them are in the world. No new Commons downloads.
+Sessions 37-50 extended data/annotations/ring1/ (186 walls by session 50) from further non-held-out Mapillary frames and
+Wikimedia Commons / Geograph photos (CC BY-SA 2.0/3.0/4.0; each file title or geograph id and its licence are listed in the
+annotation's `sources`). Visual references for layout, proportion and colour only; no pixels from them are in the world.
 Bespoke models (session 34, references for shape/proportion/colour only, credited in the module docstrings):
 `scripts/zone_bespoke_caius.py`: Commons "Trinity Street – View SSW along Gonville & Caius…", "King's Parade – View
 West into Senate House Passage…", "King's Parade – View North into Trinity Street…", "Market Hill – View NNW into Rose

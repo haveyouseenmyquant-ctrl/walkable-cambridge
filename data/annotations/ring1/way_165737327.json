@@ -1,0 +1,159 @@
+{
+ "osm_id": "way/165737327",
+ "sources": [
+  "mapillary:739778163335028",
+  "mapillary:297560941977273",
+  "mapillary:449247223041362"
+ ],
+ "walls": [
+  {
+   "id": "way/165737327:3",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.4,
+    6.8
+   ],
+   "material": "brick",
+   "wall_colour": "#9c4c38",
+   "trim_colour": "#5b5650",
+   "cornice_z": 12.5,
+   "cornice": "none",
+   "parapet": false,
+   "string_courses": [
+    3.4
+   ],
+   "quoins": false,
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.4,
+     "w": 1.1,
+     "z": 0.9,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 7.4,
+     "w": 1.1,
+     "z": 0.9,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 1.8,
+     "w": 1.6,
+     "z": 4.0,
+     "h": 2.4,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 4.9,
+     "w": 1.6,
+     "z": 4.0,
+     "h": 2.4,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 8.0,
+     "w": 1.6,
+     "z": 4.0,
+     "h": 2.4,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 2.2,
+     "w": 1.6,
+     "z": 7.4,
+     "h": 2.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 4.9,
+     "w": 1.6,
+     "z": 7.4,
+     "h": 2.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 7.6,
+     "w": 1.6,
+     "z": 7.4,
+     "h": 2.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 4.9,
+     "w": 1.2,
+     "z": 10.3,
+     "h": 1.6,
+     "panes": [
+      2,
+      1
+     ],
+     "head": "pointed",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Jerwood Library (Trinity Hall), west gable to the river and Garret Hostel Bridge: red brick base, upper storeys of oak-framed glazing under a steep gable, tall brick stack. Window grid simplified to bays. (length 9.8 m, height 12.7 m from walls.json)"
+  }
+ ]
+}

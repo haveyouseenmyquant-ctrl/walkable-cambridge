@@ -1,0 +1,271 @@
+{
+ "osm_id": "way/135595261",
+ "sources": [
+  "mapillary:779342842765833",
+  "mapillary:462953148099393"
+ ],
+ "walls": [
+  {
+   "id": "way/135595261:14",
+   "storeys": 5,
+   "floor_z": [
+    0,
+    4.2,
+    7.0,
+    9.8,
+    12.4
+   ],
+   "material": "brick",
+   "wall_colour": "#8f4f3a",
+   "trim_colour": "#e4dccb",
+   "cornice_z": 15.0,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.2
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.5,
+     "w": 1.0,
+     "z": 4.7,
+     "h": 1.8,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.93,
+     "w": 1.0,
+     "z": 4.7,
+     "h": 1.8,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.37,
+     "w": 1.0,
+     "z": 4.7,
+     "h": 1.8,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.8,
+     "w": 1.0,
+     "z": 4.7,
+     "h": 1.8,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.5,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.93,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.37,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.8,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.7,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.5,
+     "w": 1.0,
+     "z": 10.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.93,
+     "w": 1.0,
+     "z": 10.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.37,
+     "w": 1.0,
+     "z": 10.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.8,
+     "w": 1.0,
+     "z": 10.2,
+     "h": 1.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.5,
+     "w": 1.0,
+     "z": 12.8,
+     "h": 1.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.93,
+     "w": 1.0,
+     "z": 12.8,
+     "h": 1.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.37,
+     "w": 1.0,
+     "z": 12.8,
+     "h": 1.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.8,
+     "w": 1.0,
+     "z": 12.8,
+     "h": 1.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "stallriser": 0.3,
+     "awning": false,
+     "x0": 0.3,
+     "x1": 10.0,
+     "z1": 3.9,
+     "fascia_text": "",
+     "fascia_colour": "#d8b23c",
+     "text_colour": "#2b2b2b",
+     "door_x": 5.0
+    }
+   ],
+   "confidence": "low",
+   "notes": "South side of Sussex Street (west end, facing north): 1930s red-brick block with four floors of small-pane sashes (top row round-headed) over yellow-fascia shopfronts with stone surrounds. Seen at a distance looking west along Sussex Street; window count estimated from the spacing."
+  }
+ ]
+}

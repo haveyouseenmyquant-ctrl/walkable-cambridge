@@ -1,0 +1,378 @@
+{
+ "osm_id": "way/13219655",
+ "sources": [
+  "mapillary:307488744108103",
+  "mapillary:306132080921165",
+  "mapillary:880115206053660"
+ ],
+ "walls": [
+  {
+   "id": "way/13219655:23",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.3,
+    6.2
+   ],
+   "material": "brick",
+   "wall_colour": "#b89466",
+   "trim_colour": "#d8c9a8",
+   "cornice_z": 9.38,
+   "cornice": "bracketed",
+   "parapet": false,
+   "string_courses": [
+    3.3
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.4,
+     "x1": 3.74,
+     "z1": 2.9,
+     "fascia_text": "",
+     "fascia_colour": "#2e2f31",
+     "text_colour": "#f0ece4",
+     "door_x": 2.07,
+     "stallriser": 0.2,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "bay",
+     "x": 2.07,
+     "w": 1.8,
+     "z": 3.9,
+     "h": 1.8,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 2.07,
+     "w": 1.0,
+     "z": 6.6,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 4.54,
+     "x1": 7.89,
+     "z1": 2.9,
+     "fascia_text": "",
+     "fascia_colour": "#2e2f31",
+     "text_colour": "#f0ece4",
+     "door_x": 6.22,
+     "stallriser": 0.2,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 6.22,
+     "w": 1.0,
+     "z": 3.9,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 6.22,
+     "w": 1.0,
+     "z": 6.6,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 8.69,
+     "x1": 12.03,
+     "z1": 2.9,
+     "fascia_text": "",
+     "fascia_colour": "#2e2f31",
+     "text_colour": "#f0ece4",
+     "door_x": 10.36,
+     "stallriser": 0.2,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "bay",
+     "x": 10.36,
+     "w": 1.8,
+     "z": 3.9,
+     "h": 1.8,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 10.36,
+     "w": 1.0,
+     "z": 6.6,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 12.83,
+     "x1": 16.18,
+     "z1": 2.9,
+     "fascia_text": "",
+     "fascia_colour": "#2e2f31",
+     "text_colour": "#f0ece4",
+     "door_x": 14.51,
+     "stallriser": 0.2,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 14.51,
+     "w": 1.0,
+     "z": 3.9,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 14.51,
+     "w": 1.0,
+     "z": 6.6,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Round Church Street south side, late-20th-century range: buff brick with reconstituted-stone bands and piers; ground floor shop units behind an arcade of square stone piers (~4 m bays); first floor alternates projecting canted bay windows and single windows; second floor single windows; deep timber eaves. Rhythm read from oblique mapillary views; counts approximate."
+  },
+  {
+   "id": "way/13219655:24",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.3,
+    6.2
+   ],
+   "material": "brick",
+   "wall_colour": "#b89466",
+   "trim_colour": "#d8c9a8",
+   "cornice_z": 8.37,
+   "cornice": "bracketed",
+   "parapet": false,
+   "string_courses": [
+    3.3
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.4,
+     "x1": 3.56,
+     "z1": 2.9,
+     "fascia_text": "",
+     "fascia_colour": "#2e2f31",
+     "text_colour": "#f0ece4",
+     "door_x": 1.98,
+     "stallriser": 0.2,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "bay",
+     "x": 1.98,
+     "w": 1.8,
+     "z": 3.9,
+     "h": 1.8,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 1.98,
+     "w": 1.0,
+     "z": 6.6,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 4.36,
+     "x1": 7.51,
+     "z1": 2.9,
+     "fascia_text": "",
+     "fascia_colour": "#2e2f31",
+     "text_colour": "#f0ece4",
+     "door_x": 5.93,
+     "stallriser": 0.2,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 5.93,
+     "w": 1.0,
+     "z": 3.9,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 5.93,
+     "w": 1.0,
+     "z": 6.6,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 8.31,
+     "x1": 11.46,
+     "z1": 2.9,
+     "fascia_text": "",
+     "fascia_colour": "#2e2f31",
+     "text_colour": "#f0ece4",
+     "door_x": 9.89,
+     "stallriser": 0.2,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "bay",
+     "x": 9.89,
+     "w": 1.8,
+     "z": 3.9,
+     "h": 1.8,
+     "panes": [
+      3,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 9.89,
+     "w": 1.0,
+     "z": 6.6,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "x0": 12.27,
+     "x1": 15.42,
+     "z1": 2.9,
+     "fascia_text": "",
+     "fascia_colour": "#2e2f31",
+     "text_colour": "#f0ece4",
+     "door_x": 13.84,
+     "stallriser": 0.2,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 13.84,
+     "w": 1.0,
+     "z": 3.9,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 13.84,
+     "w": 1.0,
+     "z": 6.6,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Round Church Street south side, late-20th-century range: buff brick with reconstituted-stone bands and piers; ground floor shop units behind an arcade of square stone piers (~4 m bays); first floor alternates projecting canted bay windows and single windows; second floor single windows; deep timber eaves. Rhythm read from oblique mapillary views; counts approximate."
+  }
+ ]
+}

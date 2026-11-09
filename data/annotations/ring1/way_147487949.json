@@ -1,0 +1,397 @@
+{
+ "osm_id": "way/147487949",
+ "sources": [
+  "mapillary:4171158462949779",
+  "mapillary:948123169335639",
+  "mapillary:219445912850405"
+ ],
+ "walls": [
+  {
+   "id": "way/147487949:42",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.1
+   ],
+   "material": "stone",
+   "wall_colour": "#c8bb9a",
+   "trim_colour": "#d9cdae",
+   "cornice_z": 7.9,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.1
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 37.59,
+     "w": 0.95,
+     "z": 1.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 37.59,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.1,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 34.74,
+     "w": 0.95,
+     "z": 1.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 34.74,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.1,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 31.89,
+     "w": 0.95,
+     "z": 1.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 31.89,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.1,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 29.04,
+     "w": 0.95,
+     "z": 1.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 29.04,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.1,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 26.19,
+     "w": 0.95,
+     "z": 1.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 26.19,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.1,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 23.34,
+     "w": 0.95,
+     "z": 1.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 23.34,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.1,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 20.49,
+     "w": 0.95,
+     "z": 1.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 20.49,
+     "w": 1.5,
+     "z": 4.9,
+     "h": 2.2,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 17.64,
+     "w": 0.95,
+     "z": 1.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 17.64,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.1,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 14.79,
+     "w": 0.95,
+     "z": 1.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 14.79,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.1,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 11.94,
+     "w": 0.95,
+     "z": 1.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 11.94,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.1,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 9.09,
+     "w": 0.95,
+     "z": 1.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 9.09,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.1,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 6.24,
+     "w": 0.95,
+     "z": 1.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 6.24,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.1,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 3.39,
+     "w": 0.95,
+     "z": 1.0,
+     "h": 1.8,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 3.39,
+     "w": 1.1,
+     "z": 5.0,
+     "h": 2.1,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Christ's College, St Andrew's Street front south of the Great Gate (p0 = gate end, p1 = SE corner). Ashlar range of two storeys under a battlemented parapet (parapet from the cornice line ~7.9 m to the eaves). Projecting string course over the ground floor. About 13 regular bays ~2.85 m apart from the SE corner: ground floor two-light stone-mullioned windows with Tudor-arched lights, first floor taller two-light windows; a small corbelled oriel at first floor near mid-length by a downpipe. No street door on this stretch. Bay count read from an oblique view (mapillary 4171158462949779) and checked against 948123169335639; spacing approximate."
+  }
+ ]
+}

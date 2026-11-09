@@ -3,7 +3,9 @@
  "sources": [
   "commons:File:Lloyds Bank, Sidney Street, Cambridge - geograph.org.uk - 7254731.jpg",
   "mapillary:309146717240093",
-  "mapillary:475285070488446"
+  "mapillary:475285070488446",
+  "commons:File:Lloyds Bank - Hobson Street - geograph.org.uk - 5293052.jpg",
+  "commons:File:Entrance no longer in use - geograph.org.uk - 1018448.jpg"
  ],
  "walls": [
   {
@@ -409,6 +411,548 @@
    ],
    "confidence": "low",
    "notes": "Tudor-Gothic ashlar range east of the Lloyds clock tower (Commons geograph 7254731, 2022, CC BY-SA 2.0; right edge of the photo): buff stone, stone-mullioned and transomed leaded windows, a 4-light window on the first floor, a steep coped gable with a 3-light attic window (as dormer), cast-iron downpipe. Only partly in frame, so positions are rough (+-1 m) and the bay count could be off by one."
+  },
+  {
+   "id": "way/229676053:7",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.6,
+    8.6
+   ],
+   "material": "stone",
+   "wall_colour": "#cbbd9c",
+   "trim_colour": "#d9cfb6",
+   "cornice_z": 12.6,
+   "cornice": "bracketed",
+   "parapet": true,
+   "string_courses": [
+    4.6,
+    8.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 1.6,
+     "w": 1.2,
+     "h": 2.8,
+     "surround": "pilastered"
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.6,
+     "w": 1.1,
+     "z": 5.2,
+     "h": 2.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.6,
+     "w": 1.0,
+     "z": 9.2,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.19,
+     "w": 1.1,
+     "z": 1.0,
+     "h": 2.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.19,
+     "w": 1.1,
+     "z": 5.2,
+     "h": 2.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.19,
+     "w": 1.0,
+     "z": 9.2,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.78,
+     "w": 1.1,
+     "z": 1.0,
+     "h": 2.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.78,
+     "w": 1.1,
+     "z": 5.2,
+     "h": 2.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.78,
+     "w": 1.0,
+     "z": 9.2,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 9.38,
+     "w": 1.1,
+     "z": 1.0,
+     "h": 2.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 9.38,
+     "w": 1.1,
+     "z": 5.2,
+     "h": 2.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 9.38,
+     "w": 1.0,
+     "z": 9.2,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 11.97,
+     "w": 1.1,
+     "z": 1.0,
+     "h": 2.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 11.97,
+     "w": 1.1,
+     "z": 5.2,
+     "h": 2.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 11.97,
+     "w": 1.0,
+     "z": 9.2,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 14.56,
+     "w": 1.1,
+     "z": 1.0,
+     "h": 2.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 14.56,
+     "w": 1.1,
+     "z": 5.2,
+     "h": 2.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 14.56,
+     "w": 1.0,
+     "z": 9.2,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Lloyds Bank (Alfred Waterhouse, 1891-94), Hobson Street side, southern stretch near the corner turret: ashlar, three storeys under gables, stone-mullioned and transomed windows in regular columns, a pilastered doorway at the corner end. Column count approximate from Commons 'Lloyds Bank - Hobson Street' (geograph 5293052, CC BY-SA 2.0)."
+  },
+  {
+   "id": "way/229676053:8",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.6,
+    8.6
+   ],
+   "material": "brick",
+   "wall_colour": "#a24b33",
+   "trim_colour": "#d9cfb6",
+   "cornice_z": 12.6,
+   "cornice": "bracketed",
+   "parapet": true,
+   "string_courses": [
+    4.6,
+    8.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.6,
+     "w": 1.1,
+     "z": 1.0,
+     "h": 2.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.6,
+     "w": 1.1,
+     "z": 5.2,
+     "h": 2.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.6,
+     "w": 1.0,
+     "z": 9.2,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.3,
+     "w": 1.1,
+     "z": 1.0,
+     "h": 2.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.3,
+     "w": 1.1,
+     "z": 5.2,
+     "h": 2.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.3,
+     "w": 1.0,
+     "z": 9.2,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 7.0,
+     "w": 1.2,
+     "h": 2.8,
+     "surround": "pilastered"
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 7.0,
+     "w": 1.1,
+     "z": 5.2,
+     "h": 2.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 7.0,
+     "w": 1.0,
+     "z": 9.2,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 9.69,
+     "w": 1.1,
+     "z": 1.0,
+     "h": 2.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 9.69,
+     "w": 1.1,
+     "z": 5.2,
+     "h": 2.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 9.69,
+     "w": 1.0,
+     "z": 9.2,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.39,
+     "w": 1.1,
+     "z": 1.0,
+     "h": 2.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.39,
+     "w": 1.1,
+     "z": 5.2,
+     "h": 2.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.39,
+     "w": 1.0,
+     "z": 9.2,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 15.09,
+     "w": 1.1,
+     "z": 1.0,
+     "h": 2.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 15.09,
+     "w": 1.1,
+     "z": 5.2,
+     "h": 2.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 15.09,
+     "w": 1.0,
+     "z": 9.2,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Lloyds Bank, Hobson Street side, northern stretch: red brick banded with Ketton/Bath stone, tall mullioned windows in stone surrounds between stone piers, disused doorway lettered 'LLOYDS BANK LIMITED'. From Commons 'Entrance no longer in use' (geograph 1018448, CC BY-SA 2.0) and mapillary 523973015451124; column count approximate."
   }
  ]
 }

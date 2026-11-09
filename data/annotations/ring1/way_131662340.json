@@ -3,7 +3,8 @@
  "sources": [
   "mapillary:1769022953302671",
   "mapillary:306074614424249",
-  "mapillary:487898735794734"
+  "mapillary:487898735794734",
+  "geograph:1111485"
  ],
  "walls": [
   {
@@ -706,6 +707,537 @@
    ],
    "confidence": "medium",
    "notes": "Buff ashlar 1930s-style front at the bend of Downing St, seen almost square-on from the south. Rusticated raised ground floor over a basement (low arched basement lights), arched-head ground-floor windows; regular ~3 m window grid; two bays (x~10-15 and ~33-37) rise into segmental pediments with a large arched window and a stone oriel at first floor. Railing on the parapet. Right end (x>40) is only seen obliquely; symmetry assumed."
+  },
+  {
+   "id": "way/131662340:19",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    3.1,
+    6.2,
+    9.2
+   ],
+   "material": "brick",
+   "wall_colour": "#8e5a3e",
+   "trim_colour": "#d9d4c8",
+   "cornice_z": 12.0,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.0,
+    6.1,
+    9.1
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 0.61,
+     "w": 0.95,
+     "z": 0.9,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 0.61,
+     "w": 0.95,
+     "z": 4.0,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 0.61,
+     "w": 0.95,
+     "z": 7.1,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 0.61,
+     "w": 0.95,
+     "z": 10.1,
+     "h": 1.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 1.82,
+     "w": 0.95,
+     "z": 0.9,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 1.82,
+     "w": 0.95,
+     "z": 4.0,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 1.82,
+     "w": 0.95,
+     "z": 7.1,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 1.82,
+     "w": 0.95,
+     "z": 10.1,
+     "h": 1.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 3.03,
+     "w": 0.95,
+     "z": 0.9,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 3.03,
+     "w": 0.95,
+     "z": 4.0,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 3.03,
+     "w": 0.95,
+     "z": 7.1,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 3.03,
+     "w": 0.95,
+     "z": 10.1,
+     "h": 1.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 4.25,
+     "w": 0.95,
+     "z": 0.9,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 4.25,
+     "w": 0.95,
+     "z": 4.0,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 4.25,
+     "w": 0.95,
+     "z": 7.1,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 4.25,
+     "w": 0.95,
+     "z": 10.1,
+     "h": 1.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 5.46,
+     "w": 0.95,
+     "z": 0.9,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 5.46,
+     "w": 0.95,
+     "z": 4.0,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 5.46,
+     "w": 0.95,
+     "z": 7.1,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 5.46,
+     "w": 0.95,
+     "z": 10.1,
+     "h": 1.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 6.67,
+     "w": 0.95,
+     "z": 0.9,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 6.67,
+     "w": 0.95,
+     "z": 4.0,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 6.67,
+     "w": 0.95,
+     "z": 7.1,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 6.67,
+     "w": 0.95,
+     "z": 10.1,
+     "h": 1.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 7.89,
+     "w": 0.95,
+     "z": 0.9,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 7.89,
+     "w": 0.95,
+     "z": 4.0,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 7.89,
+     "w": 0.95,
+     "z": 7.1,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 7.89,
+     "w": 0.95,
+     "z": 10.1,
+     "h": 1.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 9.1,
+     "w": 0.95,
+     "z": 0.9,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 9.1,
+     "w": 0.95,
+     "z": 4.0,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 9.1,
+     "w": 0.95,
+     "z": 7.1,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 9.1,
+     "w": 0.95,
+     "z": 10.1,
+     "h": 1.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 10.31,
+     "w": 0.95,
+     "z": 0.9,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 10.31,
+     "w": 0.95,
+     "z": 4.0,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 10.31,
+     "w": 0.95,
+     "z": 7.1,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 10.31,
+     "w": 0.95,
+     "z": 10.1,
+     "h": 1.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "1960s Zoology building, north side to the Downing Site / New Museums Site yard: brown brick with continuous rows of white-framed horizontal-pivot windows (~1.2 m pitch) on every floor, separated by brick spandrel bands. From geograph 1111485 (Zoology Building - Cambridge University); grid applied evenly."
   }
  ]
 }

@@ -2,7 +2,9 @@
  "osm_id": "way/135595983",
  "sources": [
   "mapillary:173478427991149",
-  "mapillary:1143583196146420"
+  "mapillary:1143583196146420",
+  "mapillary:933492514084360",
+  "mapillary:376548620288276"
  ],
  "walls": [
   {
@@ -178,6 +180,375 @@
    ],
    "confidence": "low",
    "notes": "Waterstones, 22 Sidney St: 1930s-style grey/brown brick front over a stone ground storey with dark Waterstones fascia. First floor has three tall multi-pane windows with wrought-iron balconettes and carved stone oval oculi with garlands above them; plainer windows on the upper floors (top floor not visible). North bay has a separate red panelled door (22a, Vinyl) under a small Waterstones sign. Bay x positions estimated; upper floors over the door bay not clear."
+  },
+  {
+   "id": "way/135595983:1",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.8,
+    8.6,
+    12.2
+   ],
+   "material": "brick",
+   "wall_colour": "#8e4f3a",
+   "trim_colour": "#d9c9a4",
+   "cornice_z": 15.6,
+   "cornice": "classical",
+   "parapet": false,
+   "string_courses": [
+    4.8,
+    8.4
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.5,
+     "w": 1.25,
+     "z": 5.3,
+     "h": 2.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.6,
+     "w": 1.25,
+     "z": 5.3,
+     "h": 2.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.8,
+     "w": 1.25,
+     "z": 5.3,
+     "h": 2.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.9,
+     "w": 1.25,
+     "z": 5.3,
+     "h": 2.4,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.5,
+     "w": 1.2,
+     "z": 9.0,
+     "h": 2.1,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.6,
+     "w": 1.2,
+     "z": 9.0,
+     "h": 2.1,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.8,
+     "w": 1.2,
+     "z": 9.0,
+     "h": 2.1,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.9,
+     "w": 1.2,
+     "z": 9.0,
+     "h": 2.1,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.5,
+     "w": 1.1,
+     "z": 12.6,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.6,
+     "w": 1.1,
+     "z": 12.6,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.8,
+     "w": 1.1,
+     "z": 12.6,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.9,
+     "w": 1.1,
+     "z": 12.6,
+     "h": 1.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "stallriser": 0.3,
+     "awning": false,
+     "x0": 0.3,
+     "x1": 9.1,
+     "z1": 4.3,
+     "fascia_text": "",
+     "fascia_colour": "#e9e3d4",
+     "text_colour": "#2b2b2b",
+     "door_x": 4.6
+    }
+   ],
+   "confidence": "low",
+   "notes": "South-facing front on the east-west stretch of Sidney Street, east of Waterstones (former Jack Wills unit): red brick with Portland/Ketton stone window architraves, a stone first-floor balcony with pediment over the centre bay, stone-faced shop storey with large plate-glass windows and pale fascia. Upper-floor count beyond the second floor not visible (assumed one more to the LiDAR eave)."
+  },
+  {
+   "id": "way/135595983:3",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.6,
+    8.2,
+    11.6
+   ],
+   "material": "brick",
+   "wall_colour": "#8a4a36",
+   "trim_colour": "#dccdaa",
+   "cornice_z": 16.89,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.0,
+     "w": 1.3,
+     "z": 5.1,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.55,
+     "w": 1.3,
+     "z": 5.1,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.1,
+     "w": 1.3,
+     "z": 5.1,
+     "h": 2.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.0,
+     "w": 1.25,
+     "z": 8.7,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.55,
+     "w": 1.25,
+     "z": 8.7,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.1,
+     "w": 1.25,
+     "z": 8.7,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.0,
+     "w": 1.15,
+     "z": 12.0,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.55,
+     "w": 1.15,
+     "z": 12.0,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.1,
+     "w": 1.15,
+     "z": 12.0,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "stallriser": 0.2,
+     "awning": false,
+     "x0": 0.3,
+     "x1": 10.8,
+     "z1": 4.2,
+     "fascia_text": "",
+     "fascia_colour": "#f2d13a",
+     "text_colour": "#2b2b2b",
+     "door_x": 5.5
+    }
+   ],
+   "confidence": "low",
+   "notes": "Next unit east on the Sidney Street south-facing stretch: modern shopfront with a yellow fascia panel, red-brick upper storeys with stone architraves around plate-glass sashes. Only the western half seen clearly; window count estimated."
   }
  ]
 }

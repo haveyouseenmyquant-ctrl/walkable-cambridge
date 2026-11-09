@@ -323,6 +323,11 @@ const MODELS = {
       halo: merge(tor(0.85, 0.022, [0, 0, 0], [0, 0, 0], 5, 40), tor(0.72, 0.016, [0, 0, 0], [1.1, 0.4, 0], 5, 36)),
       mote: sph(0.065, [0, 0, 0], 1, 8, 6),
       face: merge(sph(0.06, [0.12, 0.05, 0.25], [0.8, 1.2, 0.5], 8, 6), sph(0.06, [-0.12, 0.05, 0.25], [0.8, 1.2, 0.5], 8, 6), sph(0.05, [0, -0.11, 0.27], [1.3, 0.6, 0.5], 8, 6)),
+      // session 50: a crown of licking flame tongues, three trailing will-tendrils and a cage of dead marsh reeds
+      tongues: merge([0, 1, 2, 3, 4, 5, 6].map(i => { const a = i / 7 * TAU, r = 0.2 + 0.05 * (i % 2); return cone(0.07, 0.34 + 0.12 * (i % 3), [Math.sin(a) * r, 0.62, Math.cos(a) * r], [Math.cos(a) * 0.45, 0, -Math.sin(a) * 0.45], 5); })),
+      tendrils: merge([0, 1, 2].map(i => { const a = i / 3 * TAU + 0.5; return tube([[Math.sin(a) * 0.2, -0.1, Math.cos(a) * 0.2], [Math.sin(a + 0.8) * 0.4, -0.55, Math.cos(a + 0.8) * 0.4 - 0.15], [Math.sin(a + 1.6) * 0.3, -1.0, Math.cos(a + 1.6) * 0.3 - 0.35], [Math.sin(a + 2.2) * 0.12, -1.35, -0.55]], 0.05, 0.004, 12, 5); })),
+      reeds: merge([0, 1, 2, 3, 4].map(i => { const a = i / 5 * TAU + 0.3; return tube([[Math.sin(a) * 0.12, -0.5, Math.cos(a) * 0.12], [Math.sin(a) * 0.52, -0.05, Math.cos(a) * 0.52], [Math.sin(a + 0.25) * 0.5, 0.45, Math.cos(a + 0.25) * 0.5], [Math.sin(a + 0.4) * 0.22, 0.85, Math.cos(a + 0.4) * 0.22]], 0.022, 0.008, 10, 4); }),
+        [0, 1, 2, 3, 4].map(i => { const a = i / 5 * TAU + 0.7; return xf(new THREE.SphereGeometry(0.05, 6, 4), [Math.sin(a) * 0.5, 0.22, Math.cos(a) * 0.5], [0, 0, 0], [0.7, 1.8, 0.7]); })),
     }));
     const g = new THREE.Group(), p = {};
     p.body = pivot(g, 0, 0, 0);
@@ -333,6 +338,9 @@ const MODELS = {
     p.halo = add(p.body, K.halo, BASE.wisp);
     p.motes = [0, 1, 2].map(() => add(p.body, K.mote, BASE.wispCore));
     p.tail = add(p.body, K.tail, m('wisp'));
+    p.crown = add(p.body, K.tongues, BASE.wispShell); p.crown.renderOrder = 3;
+    p.tendrils = add(p.body, K.tendrils, BASE.wisp);
+    p.reeds = add(p.body, K.reeds, m('darkstone'));
     return { group: g, parts: p };
   },
   statue(m) {   // a robed scholar in Portland stone on a moulded plinth: gown folds, stole, mortarboard, stone tome
@@ -353,6 +361,15 @@ const MODELS = {
         arm: merge(sleeve, sph(0.075, [0, -0.98, 0.03], 1, 8, 6)),
         tome: merge(box(0.42, 0.54, 0.13, [0, -1.12, 0.14])),
         pages: box(0.38, 0.5, 0.135, [0.025, -1.12, 0.14]),
+        // session 50: falling bands, open gown fronts, scroll, glowing fault-lines, plinth tablet and moss, gown hood
+        bands: merge(box(0.05, 0.16, 0.02, [0.03, 1.8, 0.27], [0.1, 0, 0]), box(0.05, 0.16, 0.02, [-0.03, 1.8, 0.27], [0.1, 0, 0])),
+        fronts: merge([1, -1].map(s => xf(drape(lathe([[0.0, 0.05], [0.09, 0.05], [0.09, 1.75], [0, 1.78]], 4), 2, 0.2), [s * 0.22, 0, 0.3], [0, 0, 0], [1, 1, 0.35]))),
+        hood: xf(lumpy(new THREE.TorusGeometry(0.3, 0.09, 6, 18, PI * 1.2), 0.02, 10), [0, 1.8, -0.12], [PI / 2 + 0.35, 0, PI * 0.9]),
+        scroll: merge(cyl(0.05, 0.05, 0.42, [0, -0.98, 0.1], [0, 0, PI / 2], 10), cyl(0.065, 0.065, 0.04, [0.22, -0.98, 0.1], [0, 0, PI / 2], 10), cyl(0.065, 0.065, 0.04, [-0.22, -0.98, 0.1], [0, 0, PI / 2], 10)),
+        cracks: merge(tube([[0.18, 1.5, 0.36], [0.1, 1.2, 0.4], [0.2, 0.9, 0.43], [0.12, 0.55, 0.47]], 0.012, 0.004, 8, 3), tube([[-0.25, 1.3, 0.3], [-0.3, 1.0, 0.35], [-0.2, 0.7, 0.42]], 0.01, 0.003, 6, 3),
+          tube([[0.1, 2.32, 0.12], [0.05, 2.2, 0.19], [0.08, 2.08, 0.2]], 0.008, 0.003, 5, 3)),
+        tablet: merge(box(0.6, 0.16, 0.03, [0, 0.19, 0.735]), box(0.66, 0.025, 0.04, [0, 0.285, 0.74]), box(0.66, 0.025, 0.04, [0, 0.095, 0.74])),
+        mossy: merge(lumpy([sph(0.12, [0.68, 0.32, 0.6], [1.4, 0.4, 1]), sph(0.1, [-0.7, 0.33, -0.5], [1.2, 0.4, 1.3]), sph(0.08, [0.72, 0.05, -0.68], [1, 0.6, 1])], 0.03, 12)),
         hemRune: merge(xf(tor(0.5, 0.016, [0, 0.42, 0], [PI / 2, 0, 0], 4, 40), [0, 0, 0], [0, 0, 0], [1, 1, 0.8]), xf(tor(0.42, 0.012, [0, 1.0, 0], [PI / 2, 0, 0], 4, 36), [0, 0, 0], [0, 0, 0], [1, 1, 0.8])),   // session 46: glowing inscription bands
       };
     });
@@ -361,10 +378,13 @@ const MODELS = {
     add(p.body, K.plinth, dark); add(p.body, K.rune, BASE.eye);
     p.torso = pivot(p.body, 0, 0.35, 0);
     add(p.torso, K.robe, marble); add(p.torso, K.stole, dark); add(p.torso, K.hemRune, BASE.eye);
+    add(p.torso, K.bands, marble); add(p.torso, K.fronts, dark); add(p.torso, K.hood, dark); add(p.torso, K.cracks, BASE.eye);
+    add(p.body, K.tablet, dark); add(p.body, K.mossy, BASE.moss);
     p.head = pivot(p.torso, 0, 0, 0);
     add(p.head, K.head, marble); add(p.head, K.board, dark); add(p.head, K.eyes, BASE.eye);
     p.armL = pivot(p.torso, -0.46, 1.7, 0); add(p.armL, K.arm, marble);
     p.armR = pivot(p.torso, 0.46, 1.7, 0); add(p.armR, K.arm, marble); add(p.armR, K.tome, dark); add(p.armR, K.pages, marble);
+    add(p.armL, K.scroll, BASE.bone);
     return { group: g, parts: p };
   },
   ink_imp(m) {   // a glossy blot of library ink with dripping edges, a quill-feather horn, a glowing grin and paper-scrap wings
@@ -461,13 +481,20 @@ const MODELS = {
       eyes: merge(sph(0.035, [0.08, 0.0, 0.27], [1.2, 0.7, 1], 8, 6), sph(0.035, [-0.08, 0.0, 0.27], [1.2, 0.7, 1], 8, 6)),
       sleeve: drape(lathe([[0, -0.72], [0.17, -0.72], [0.15, -0.5], [0.1, -0.2], [0.09, 0], [0, 0.05]], 12), 5, 0.12, y => y < -0.3 ? 1 : 0.2),
       hand: merge([-0.04, 0, 0.04].map(d => tube([[d, -0.7, 0.02], [d * 1.4, -0.82, 0.06], [d * 1.6, -0.93, 0.03]], 0.014, 0.006, 5, 4))),
+      // session 50: a ragged mantle over the shoulders, a crown of broken reeds, dripping hems and a drowned chain + padlock
+      mantle: hem(drape(lathe([[0, 0.86], [0.24, 0.8], [0.44, 0.62], [0.55, 0.4], [0.58, 0.2]], 20), 6, 0.14), 0.28, 9),
+      reeds: merge([0, 1, 2, 3, 4, 5].map(i => { const a = -1.0 + i * 0.4; return tube([[Math.sin(a) * 0.22, 0.18, Math.cos(a) * 0.12 - 0.05], [Math.sin(a) * 0.3, 0.42 + 0.05 * (i % 2), Math.cos(a) * 0.12 - 0.1], [Math.sin(a) * 0.33, 0.62 + 0.08 * (i % 3), Math.cos(a) * 0.1 - 0.18]], 0.018, 0.004, 6, 4); })),
+      drips: merge([0, 1, 2, 3, 4, 5, 6].map(i => { const a = i / 7 * TAU; return xf(new THREE.SphereGeometry(0.035, 6, 5), [Math.sin(a) * 0.5, 0.05 - 0.04 * (i % 3), Math.cos(a) * 0.5], [0, 0, 0], [0.6, 2.2, 0.6]); })),
+      chain: merge([0, 1, 2, 3, 4, 5].map(i => tor(0.045, 0.012, [0.32 - i * 0.11, 0.25 - Math.sin(i / 5 * PI) * 0.18, 0.4], [0, i % 2 ? PI / 2 : 0, 0], 4, 10)),
+        box(0.11, 0.1, 0.05, [-0.08, -0.04, 0.42]), tor(0.035, 0.01, [-0.08, 0.03, 0.42], [0, 0, 0], 4, 10, PI)),
       weed: merge([0, 1, 2].map(i => { const a = i * 2.1; return tube([[Math.sin(a) * 0.06, 0.3, Math.cos(a) * 0.06], [Math.sin(a) * 0.1 + 0.04, 0, Math.cos(a) * 0.1], [Math.sin(a) * 0.06 - 0.05, -0.3, Math.cos(a) * 0.08], [Math.sin(a) * 0.1, -0.55 - i * 0.08, Math.cos(a) * 0.1]], 0.025, 0.004, 10, 4); })),
     }));
     const g = new THREE.Group(), p = {}, water = m('water'), moss = m('moss');
     p.body = pivot(g, 0, 0, 0);
     p.robe = add(p.body, K.robe, water);
     p.head = pivot(p.body, 0, 0.95, 0);
-    add(p.head, K.hood, water); add(p.head, K.void, BASE.ink); add(p.head, K.eyes, BASE.eyeBlue);
+    add(p.head, K.hood, water); add(p.head, K.void, BASE.ink); add(p.head, K.eyes, BASE.eyeBlue); add(p.head, K.reeds, moss);
+    p.mantle = add(p.body, K.mantle, water); add(p.mantle, K.drips, BASE.wisp, 0, 0.18, 0); add(p.body, K.chain, BASE.iron);
     for (const s of [-1, 1]) {
       const a = p[s < 0 ? 'armL' : 'armR'] = pivot(p.body, s * 0.38, 0.6, 0);
       add(a, K.sleeve, water); add(a, K.hand, BASE.bone);
@@ -1331,6 +1358,7 @@ class MobSystem {
     const dur = T.deathDur ?? (style === 'burst' ? 0.5 : style === 'crumble' ? 1.3 : 1.2);
     mob.deathT += dt; let f = Math.min(1, mob.deathT / dur);
     if (T.deathDur) { this.animateDeath(mob, Math.min(1, f / 0.6)); f = Math.max(0, (f - 0.55) / 0.45); }
+    else if (mob.parts) this.animateDeath(mob, f);   // session 50: per-type regular death poses under the shared style
     const fade = (a) => { for (const c of mob.mats) { c.transparent = true; c.opacity = Math.max(0, a); } };
     if (mob.aura) mob.aura.material.opacity = 0.5 * (1 - f);
     if (style === 'crumble') {
@@ -1508,6 +1536,11 @@ class MobSystem {
         P.legL.rotation.x = P.legR.rotation.x = st === 'active' ? 0.9 : Math.sin(t * 1.1) * 0.12;
         P.tail.rotation.y = Math.sin(t * 2.1) * 0.4; P.tail.rotation.x = Math.sin(t * 1.4) * 0.12;
         P.jaw.rotation.x = st === 'windup' ? 0.45 * wf : st === 'active' ? 0.5 : 0.04 + Math.sin(t * 2.3) * 0.04;
+        // session 50: Rake = wings mantle wide and both arms cock back overhead; hit = head snaps back, wings jerk open
+        const hrG = mob.flashT / 0.14;
+        if (mob.attack?.kind === 'ring' && st === 'windup') { P.armL.rotation.x = P.armR.rotation.x = -2.4 * wf; P.armL.rotation.z = -0.9 * wf; P.armR.rotation.z = 0.9 * wf; P.wl.rotation.z = 1.3 * wf; P.wr.rotation.z = -1.3 * wf; P.tail.rotation.x = -0.5 * wf; }
+        else if (mob.attack?.kind === 'ring' && st === 'recover') { P.armL.rotation.x = P.armR.rotation.x = 0.5; P.armL.rotation.z = 0.6; P.armR.rotation.z = -0.6; }
+        P.head.rotation.x -= hrG * 0.6; P.wl.rotation.z += hrG * 0.8; P.wr.rotation.z -= hrG * 0.8;
         break;
       }
       case 'wisp': {
@@ -1517,6 +1550,16 @@ class MobSystem {
         P.tail.rotation.z = Math.sin(t * 3) * 0.3;
         P.shell.scale.set(1 + 0.07 * Math.sin(t * 13) + wf * 0.3, 1 + 0.14 * Math.sin(t * 9 + 1) + wf * 0.3, 1 + 0.07 * Math.sin(t * 11 + 2) + wf * 0.3);
         P.shell.rotation.y = t * 0.8;
+        // session 50: Marsh Bolt = the core draws back and the tongues lean forward into a cone; Flicker Nova = halo flattens and
+        // spins up while the shell swells; hit = the flame gutters (squashes sideways, tongues blown back)
+        const hrW = mob.flashT / 0.14, kW = mob.attack?.kind;
+        P.crown.rotation.y = -t * 1.3; P.crown.scale.set(1, 1 + 0.25 * Math.sin(t * 11), 1);
+        P.tendrils.rotation.y = t * 0.9; P.tendrils.rotation.x = moving ? 0.5 : 0.1;
+        P.reeds.rotation.y = Math.sin(t * 0.5) * 0.3;
+        if (st === 'windup' && kW === 'bolt') { P.core.position.z = -0.3 * wf; P.crown.rotation.x = 1.2 * wf; P.halo.rotation.x = PI / 2; P.halo.rotation.y = 0; P.halo.scale.setScalar(1 - 0.5 * wf); }
+        else if (st === 'windup' && kW === 'ring') { P.halo.rotation.x = PI / 2; P.halo.rotation.z = t * 14 * wf; P.halo.scale.setScalar(1 + 0.9 * wf); P.crown.scale.set(1 + wf, 1 + 1.4 * wf, 1 + wf); P.core.position.z = 0; }
+        else { P.core.position.z = 0; P.crown.rotation.x = 0; P.halo.rotation.z = 0; P.halo.scale.setScalar(st === 'recover' ? 1.4 : 1); }
+        if (hrW > 0) { P.shell.scale.x *= 1 + 0.5 * hrW; P.shell.scale.y *= 1 - 0.4 * hrW; P.crown.rotation.x = -0.9 * hrW; P.core.scale.multiplyScalar(1 - 0.3 * hrW); }
         break;
       }
       case 'statue': {
@@ -1525,6 +1568,15 @@ class MobSystem {
         P.torso.rotation.z = walk * 0.06; P.body.position.y = moving ? Math.abs(walk) * 0.08 : 0;
         P.torso.rotation.x = st === 'windup' ? -0.2 * wf : st === 'recover' ? 0.25 : 0;
         P.head.rotation.y = st === 'windup' ? 0 : Math.sin(t * 0.6) * 0.35;
+        // session 50: a heavy stone gait (torso twists with each grinding step, head stays level); Tome Slam = both arms raise the
+        // tome overhead, then crash down; Plinth Leap = sinks low, arms swept back; hit = a grinding stagger with the head jarred
+        const hrS = mob.flashT / 0.14, kS = mob.attack?.kind;
+        P.torso.rotation.y = moving ? walk * 0.12 : 0; P.armL.rotation.z = P.armR.rotation.z = 0;   // head pivots at the torso base: turn it only about Y
+        if (st === 'windup' && kS === 'ring') { P.armL.rotation.x = -2.7 * wf; P.armL.rotation.z = 0.35 * wf; P.armR.rotation.z = -0.35 * wf; P.torso.rotation.x = -0.3 * wf; }
+        else if (st === 'recover' && kS === 'ring') { P.armL.rotation.x = 0.3; P.armR.rotation.x = 0.4; P.torso.rotation.x = 0.45; }
+        else if (st === 'windup' && kS === 'leap') { P.armL.rotation.x = P.armR.rotation.x = 0.9 * wf; P.torso.rotation.x = 0.4 * wf; P.body.position.y = -0.15 * wf; }
+        else if (st === 'active' && kS === 'leap') { P.armL.rotation.x = P.armR.rotation.x = -2.2; P.torso.rotation.x = -0.2; }
+        if (hrS > 0) { P.torso.rotation.x -= 0.25 * hrS; P.torso.rotation.z += Math.sin(t * 50) * 0.04 * hrS; P.head.rotation.y += Math.sin(t * 50) * 0.3 * hrS; }
         break;
       }
       case 'ink_imp': {
@@ -1532,6 +1584,14 @@ class MobSystem {
         P.body.position.y = 0.45 + Math.abs(Math.sin(t * (moving ? 14 : 4))) * (moving ? 0.25 : 0.06);
         P.blob.scale.set(0.65 + wf * 0.2, 0.55 - wf * 0.15, 0.65 + wf * 0.2);
         P.legL.rotation.z = walk * 0.5; P.legR.rotation.z = -walk * 0.5;
+        // session 50: scuttle (body rolls and yaws with each hop); Nib Bite = stretches forward like a lunging drop; Ink Spit =
+        // swells and leans back, wings flared; hit = splats flat and spreads
+        const hrI = mob.flashT / 0.14, kI = mob.attack?.kind;
+        P.body.rotation.z = moving ? Math.sin(t * 14) * 0.18 : Math.sin(t * 2) * 0.05; P.body.rotation.y = moving ? Math.sin(t * 7) * 0.2 : 0;
+        P.body.rotation.x = st === 'windup' && kI === 'line' ? 0.35 * wf : st === 'windup' && kI === 'bolt' ? -0.45 * wf : st === 'active' ? 0.5 : 0;
+        if (st === 'windup' && kI === 'line') P.blob.scale.set(0.65 - 0.12 * wf, 0.55 - 0.05 * wf, 0.65 + 0.35 * wf);
+        if (st === 'windup' && kI === 'bolt') { P.blob.scale.set(0.65 + 0.25 * wf, 0.55 + 0.2 * wf, 0.65 + 0.1 * wf); P.wl.rotation.z = 0.9 * wf; P.wr.rotation.z = -0.9 * wf; }
+        if (hrI > 0) P.blob.scale.set(P.blob.scale.x * (1 + 0.45 * hrI), P.blob.scale.y * (1 - 0.45 * hrI), P.blob.scale.z * (1 + 0.45 * hrI));
         break;
       }
       case 'automaton': {
@@ -1543,6 +1603,15 @@ class MobSystem {
         else { P.armL.rotation.z = P.armR.rotation.z = 0; P.torso.rotation.y = 0; }
         P.head.rotation.y = Math.sin(t * 0.8) * 0.4;
         P.key.rotation.z += dt * (st === 'windup' ? 14 : moving ? 4 : 1.5);
+        // session 50: stiff clockwork gait (head ticks in steps instead of a smooth turn, arms stop dead at each beat);
+        // Wound-Spring Charge = crouches with shoulders forward, arms pinned back; hit = a jolt, gear jams backwards
+        const hrA = mob.flashT / 0.14, kA = mob.attack?.kind;
+        P.head.rotation.y = Math.round(Math.sin(t * 0.8) * 4) * 0.1;
+        if (moving) { const q = Math.round(walk * 3) / 3; P.armL.rotation.x = -q * 0.4; P.armR.rotation.x = q * 0.4; }
+        if (st === 'windup' && kA === 'charge') { P.armL.rotation.x = P.armR.rotation.x = 0.9 * wf; P.legL.rotation.x = -0.4 * wf; P.legR.rotation.x = 0.3 * wf; P.head.rotation.x = 0.3 * wf; }
+        else if (st === 'active' && kA === 'charge') { P.armL.rotation.x = P.armR.rotation.x = -1.4; P.head.rotation.x = 0.35; }
+        else P.head.rotation.x = 0;
+        if (hrA > 0) { P.torso.rotation.x -= 0.3 * hrA; P.gear.rotation.z -= dt * 30; P.head.rotation.z = Math.sin(t * 60) * 0.15 * hrA; } else P.head.rotation.z = 0;
         break;
       }
       // session 41 regulars; hr = hit-recoil 0..1 (rocks the body back while the white flash shows)
@@ -1555,6 +1624,10 @@ class MobSystem {
         P.armL.rotation.x = P.armR.rotation.x = reach;
         P.armL.rotation.z = k === 'line' && st === 'windup' ? -0.6 * wf : 0; P.armR.rotation.z = -P.armL.rotation.z;
         P.head.rotation.x = st === 'windup' ? -0.3 * wf : Math.sin(t * 0.9) * 0.1;
+        // session 50: the mantle billows, the hood droops when drifting; Drowning Mist = arms spread wide and the head tips back
+        P.mantle.rotation.y = Math.sin(t * 1.3) * 0.25; P.mantle.scale.set(1 + 0.06 * Math.sin(t * 2.7), 1, 1 + 0.06 * Math.sin(t * 2.3 + 1));
+        if (st === 'windup' && k === 'bolt') { P.armL.rotation.z = -1.3 * wf; P.armR.rotation.z = 1.3 * wf; P.armL.rotation.x = P.armR.rotation.x = -0.4 * wf; P.head.rotation.x = -0.6 * wf; P.mantle.scale.set(1 + 0.4 * wf, 1, 1 + 0.4 * wf); }
+        if (hr > 0) { P.robe.rotation.z += Math.sin(t * 40) * 0.2 * hr; P.mantle.scale.y = 1 - 0.3 * hr; }
         break;
       }
       case 'bog_hag': {
@@ -1699,7 +1772,21 @@ class MobSystem {
 
   // boss death poses (f 0..1, before the dissolve)
   animateDeath(mob, f) {
-    const P = mob.parts, t = mob.t;
+    const P = mob.parts, t = mob.t, e = Math.min(1, f * 2.5), set = (o, k, v) => { if (o) o.rotation[k] = v; };
+    switch (mob.type.id) {   // session 50: regular death poses (e = fast-in 0..1)
+      case 'gargoyle': set(P.wl, 'z', -1.2 * e); set(P.wr, 'z', 1.2 * e); set(P.armL, 'x', -2 * e); set(P.armR, 'x', -2 * e); set(P.head, 'x', -0.8 * e); set(P.jaw, 'x', 0.7 * e); break;
+      case 'wisp': P.core.scale.setScalar(0.55 * (1 + 1.5 * e)); P.halo.scale.setScalar(1 + 2.5 * f); P.crown.scale.set(1 + e, 1 + 3 * e, 1 + e); P.reeds.rotation.x = e * 0.8; break;
+      case 'statue': set(P.armL, 'x', 0.3 * e); set(P.armR, 'x', -1.4 * e); set(P.head, 'y', 0.6 * e); set(P.torso, 'z', -0.15 * e); break;
+      case 'ink_imp': P.blob.scale.set(0.65 * (1 + 0.8 * e), 0.55 * (1 - 0.6 * e), 0.65 * (1 + 0.8 * e)); set(P.wl, 'z', -1 * e); set(P.wr, 'z', 1 * e); break;
+      case 'automaton': set(P.head, 'x', 0.7 * e); set(P.head, 'z', 0.3 * e); set(P.armL, 'x', 0.2 * e); set(P.armR, 'x', -0.9 * e); set(P.armR, 'z', 0.5 * e); P.gear.rotation.z += 0.3 * (1 - f); break;
+      case 'river_wraith': set(P.armL, 'x', -2.6 * e); set(P.armR, 'x', -2.6 * e); set(P.head, 'x', -0.7 * e); if (P.mantle) P.mantle.scale.set(1 + e, 1 - 0.4 * e, 1 + e); break;
+      case 'bog_hag': set(P.torso, 'x', 0.9 * e); set(P.crook, 'x', 1.2 * e); set(P.armL, 'x', -1.5 * e); break;
+      case 'punt_revenant': set(P.torso, 'x', -0.5 * e); set(P.pole, 'x', 1.4 * e); set(P.head, 'z', 0.6 * e); set(P.legL, 'x', -0.6 * e); break;
+      case 'bell_bats': P.bats?.forEach((b, i) => { const a = i * TAU / 5; b.position.set(Math.cos(a) * (0.9 + 3 * f), 1.5 * f + Math.sin(i) * 0.3, Math.sin(a) * (0.9 + 3 * f)); }); set(P.rope, 'z', 0.8 * e); break;
+      case 'soot_sprite': P.blob.scale.setScalar(0.6 * (1 + 0.7 * e)); if (P.pot) P.pot.position.y = 0.38 + 1.2 * f; break;
+      case 'crest_griffin': set(P.wl, 'z', 1.4 * e); set(P.wr, 'z', -1.4 * e); set(P.head, 'x', -0.7 * e); set(P.body, 'z', 1.2 * Math.max(0, f - 0.3)); break;
+      case 'bicycle_golem': set(P.frame, 'z', 1.3 * Math.max(0, f - 0.2)); set(P.rider, 'x', -0.7 * e); for (const w of P.wheels || []) w.rotation.x += 0.4 * (1 - f); break;
+    }
     if (mob.type.id === 'chimekeeper') {   // the hands race, the tower tips forward onto its face
       P.minute.rotation.z = -t * 40; P.hour.rotation.z = -t * 12; P.pend.rotation.z = Math.sin(t * 30) * (1 - f);
       P.body.rotation.x = f * f * 1.35; P.armL.rotation.z = -1.2 * f; P.armR.rotation.z = 1.2 * f;

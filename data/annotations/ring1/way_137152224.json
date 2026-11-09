@@ -1,0 +1,253 @@
+{
+ "osm_id": "way/137152224",
+ "sources": [
+  "commons:File:Fisher House and the Chapel of St John Fisher - geograph.org.uk - 6095017.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/137152224:5",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.0
+   ],
+   "material": "brick",
+   "wall_colour": "#c9b48a",
+   "trim_colour": "#6b4a35",
+   "cornice_z": 8.6,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 3.4,
+     "w": 3.0,
+     "z": 3.1,
+     "h": 1.2,
+     "panes": [
+      4,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 1.2,
+     "w": 0.7,
+     "z": 6.0,
+     "h": 0.9,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 2.1,
+     "w": 0.7,
+     "z": 6.0,
+     "h": 0.9,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 3.0,
+     "w": 0.7,
+     "z": 6.0,
+     "h": 0.9,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 3.9,
+     "w": 0.7,
+     "z": 6.0,
+     "h": 0.9,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 4.8,
+     "w": 0.7,
+     "z": 6.0,
+     "h": 0.9,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 5.7,
+     "w": 0.7,
+     "z": 6.0,
+     "h": 0.9,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 8.3,
+     "w": 0.8,
+     "z": 6.9,
+     "h": 1.5,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 9.25,
+     "w": 0.8,
+     "z": 6.9,
+     "h": 1.5,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 10.2,
+     "w": 0.8,
+     "z": 6.9,
+     "h": 1.5,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 11.15,
+     "w": 0.8,
+     "z": 6.9,
+     "h": 1.5,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 12.1,
+     "w": 0.8,
+     "z": 6.9,
+     "h": 1.5,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 13.05,
+     "w": 0.8,
+     "z": 6.9,
+     "h": 1.5,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 14.0,
+     "w": 0.8,
+     "z": 6.9,
+     "h": 1.5,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 14.95,
+     "w": 0.8,
+     "z": 6.9,
+     "h": 1.5,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 15.9,
+     "w": 0.8,
+     "z": 6.9,
+     "h": 1.5,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": false
+    }
+   ],
+   "confidence": "low",
+   "notes": "Chapel of St John Fisher (Catholic Chaplaincy), facing Fisher Square: 1980s buff brick. Left (south-west) part a gabled hall with a dark-framed projecting box window and a strip of small clerestory windows under the eaves; right part the chapel block, blank buff brick below a continuous band of tall timber-framed clerestory glazing under a hipped slate roof with cross finial. Window counts from the geograph view; positions estimated."
+  }
+ ]
+}

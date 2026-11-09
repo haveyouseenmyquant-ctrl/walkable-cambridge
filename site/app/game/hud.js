@@ -199,11 +199,147 @@ body.explore #game-hud .gh-loots{display:none}`;
     if (!game.save.cls && !new URLSearchParams(location.search).has('nopick')) openPick();
   }));
 
+  // ---- session 50: combat readability layer. Enemy plates (health + wind-up cast bar with the attack's name) over
+  // mobs that are fighting, a boss bar (name, phase pips, phase/enrage tag, wind-up bar), a crosshair hit / kill marker,
+  // directional damage arcs and camera shake (trauma model, patched onto the player's camera apply; restored on dispose).
+  const css50 = el('style', null, document.head);
+  css50.textContent = `#game-hud .gh-plates{position:absolute;inset:0;pointer-events:none}
+#game-hud .gh-plate{position:absolute;left:0;top:0;width:64px;transform-origin:50% 100%;display:none}
+#game-hud .gh-plate .pb{height:5px;background:rgba(8,8,12,.75);border:1px solid rgba(0,0,0,.9);border-radius:2px;overflow:hidden;box-shadow:0 0 3px rgba(0,0,0,.6)}
+#game-hud .gh-plate .pf{height:100%;background:linear-gradient(#ff6a5a,#c0281e);transition:width .12s}
+#game-hud .gh-plate .pl{position:absolute;top:0;height:100%;background:rgba(255,240,200,.85);transition:width .5s .25s}
+#game-hud .gh-plate .pc{margin-top:2px;height:4px;background:rgba(8,8,12,.7);border-radius:2px;overflow:hidden;display:none}
+#game-hud .gh-plate .pc i{display:block;height:100%;background:linear-gradient(90deg,#ffb020,#ff4010)}
+#game-hud .gh-plate .pn{font:700 10px/1 system-ui,sans-serif;color:#ffcf6a;text-align:center;text-shadow:0 1px 2px #000;white-space:nowrap;margin-bottom:2px;display:none}
+#game-hud .gh-plate.wind .pc,#game-hud .gh-plate.wind .pn{display:block}
+#game-hud .gh-plate.wind .pb{box-shadow:0 0 6px #ff7020}
+#game-hud .gh-boss{position:absolute;left:50%;top:22px;width:min(560px,70vw);transform:translateX(-50%);display:none;text-align:center}
+#game-hud .gh-boss .bn{font:700 17px/1.1 Georgia,'Times New Roman',serif;letter-spacing:.06em;color:#f3e6c8;text-shadow:0 2px 3px #000,0 0 12px rgba(0,0,0,.8)}
+#game-hud .gh-boss .bt{font:600 10px/1 system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#d8c49a;margin:4px 0 5px}
+#game-hud .gh-boss.enrage .bt{color:#ff6a40;text-shadow:0 0 8px #ff3000}
+#game-hud .gh-boss .bb{position:relative;height:12px;background:rgba(10,8,8,.8);border:1px solid #6b5a3c;border-radius:2px;box-shadow:0 0 0 1px #000,0 2px 8px rgba(0,0,0,.7);overflow:hidden}
+#game-hud .gh-boss .bf{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(#d8402c,#8a160c);transition:width .12s}
+#game-hud .gh-boss .bl{position:absolute;left:0;top:0;bottom:0;background:rgba(255,236,190,.8);transition:width .6s .3s}
+#game-hud .gh-boss.enrage .bf{background:linear-gradient(#ff7a30,#b8200a)}
+#game-hud .gh-boss .bp{position:absolute;top:-2px;bottom:-2px;width:2px;background:#f3e6c8;box-shadow:0 0 3px #000}
+#game-hud .gh-boss .bw{margin:5px auto 0;width:60%;height:6px;background:rgba(10,8,8,.75);border-radius:3px;overflow:hidden;display:none}
+#game-hud .gh-boss .bw i{display:block;height:100%;background:linear-gradient(90deg,#ffc040,#ff3a10)}
+#game-hud .gh-boss .bx{font:700 12px/1 system-ui,sans-serif;color:#ffcf6a;margin-top:4px;text-shadow:0 1px 2px #000;display:none}
+#game-hud .gh-boss.wind .bw,#game-hud .gh-boss.wind .bx{display:block}
+#game-hud .gh-hm{position:absolute;left:50%;top:50%;width:26px;height:26px;margin:-13px 0 0 -13px;opacity:0;pointer-events:none}
+#game-hud .gh-hm::before,#game-hud .gh-hm::after{content:'';position:absolute;left:50%;top:50%;width:18px;height:2px;margin:-1px 0 0 -9px;background:#fff;box-shadow:0 0 2px #000;transform:rotate(45deg)}
+#game-hud .gh-hm::after{transform:rotate(-45deg)}
+#game-hud .gh-hm.kill::before,#game-hud .gh-hm.kill::after{background:#ff4a3a;width:26px;margin-left:-13px}
+#game-hud .gh-hm.crit::before,#game-hud .gh-hm.crit::after{background:#ffe14a}
+#game-hud .gh-arc{position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none}
+#game-hud .gh-arc i{position:absolute;left:-60px;top:-34vh;width:120px;height:26px;border-radius:50% 50% 0 0;background:radial-gradient(ellipse at 50% 100%,rgba(255,40,30,.85),rgba(255,40,30,0) 70%);opacity:0}
+#game-hud .gh-flash{background:radial-gradient(ellipse at center,rgba(255,30,30,0) 55%,rgba(255,30,30,.42) 100%)}
+#game-hud .gh-flash.on-shield{background:radial-gradient(ellipse at center,rgba(255,220,140,0) 55%,rgba(255,220,140,.4) 100%)}
+#game-hud .gh-banner{position:absolute;left:50%;top:18%;transform:translateX(-50%);font:700 26px/1.1 Georgia,serif;letter-spacing:.12em;color:#ffe2b0;text-shadow:0 0 18px #ff6a10,0 3px 4px #000;opacity:0;pointer-events:none;white-space:nowrap}`;
+  offs.push(() => css50.remove());
+  const platesBox = el('div', 'gh-plates', root), PLATES = 16, plates = [];
+  for (let i = 0; i < PLATES; i++) { const p = el('div', 'gh-plate', platesBox); const n = el('div', 'pn', p), b = el('div', 'pb', p);
+    plates.push({ p, n, l: el('div', 'pl', b), f: el('div', 'pf', b), c: el('i', null, el('div', 'pc', p)), m: null }); }
+  const boss = el('div', 'gh-boss', root), bName = el('div', 'bn', boss), bTag = el('div', 'bt', boss), bBar = el('div', 'bb', boss);
+  const bLag = el('div', 'bl', bBar), bFill = el('div', 'bf', bBar), bWind = el('i', null, el('div', 'bw', boss)), bAtk = el('div', 'bx', boss);
+  let bossMob = null, bossPips = [], bossWindLast = false;
+  const hm = el('div', 'gh-hm', root), arcs = [];
+  for (let i = 0; i < 4; i++) { const a = el('div', 'gh-arc', root); arcs.push({ a, i: el('i', null, a), t: 0, ang: 0, src: null }); }
+  const banner = el('div', 'gh-banner', root);
+  let hmT = 0, hmLife = 0.18, bannerT = 0, trauma = 0, arcI = 0;
+  const ROMAN = ['I', 'II', 'III', 'IV'];
+  offs.push(game.on('hit', ({ target, crit, source, amount }) => {
+    if (!target || target === game.player || source === 'mob') return;
+    hm.className = 'gh-hm' + (crit ? ' crit' : ''); hmT = hmLife = 0.16;
+    if (crit) trauma = Math.min(1, trauma + 0.12);
+    else if (amount >= 60) trauma = Math.min(1, trauma + 0.06);
+  }));
+  offs.push(game.on('kill', ({ mob }) => {
+    hm.className = 'gh-hm kill'; hmT = hmLife = 0.32;
+    trauma = Math.min(1, trauma + (mob?.boss ? 0.9 : 0.1));
+    if (mob?.boss) showBanner('Vanquished');
+  }));
+  offs.push(game.on('playerHit', ({ amount, source }) => {
+    if (!(amount > 0)) return;
+    trauma = Math.min(1, trauma + Math.min(0.6, 0.12 + 2.2 * amount / (game.stats.maxHp || 100)));
+    if (source && typeof source.x === 'number') { const a = arcs[arcI]; arcI = (arcI + 1) % arcs.length; a.src = source; a.t = 0.9; }
+  }));
+  offs.push(game.on('bossPhase', ({ mob, phase, enrage }) => {
+    trauma = Math.min(1, trauma + 0.7);
+    sfx.play('phase', 1);
+    showBanner(enrage ? `${shortName(mob)} is enraged` : `Phase ${ROMAN[phase] || phase + 1}`);
+  }));
+  const shortName = m => (m?.name || 'The foe').replace(/ of .*/, '');
+  function showBanner(t) { banner.textContent = t; bannerT = 2.2; }
+  // camera shake: patch the player's camera apply so the offset lands after the camera is placed each frame
+  const pl = game.player, a1 = pl.applyCamera, a3 = pl.applyCamera3;
+  const shake = cam => { if (trauma <= 0.001 || window.__cam) return; const s = trauma * trauma, t = game.time * 38;
+    cam.rotation.x += 0.022 * s * Math.sin(t * 1.13); cam.rotation.y += 0.026 * s * Math.sin(t * 0.91 + 1.7); cam.rotation.z += 0.018 * s * Math.sin(t * 1.37 + 3.1); };
+  if (a1) pl.applyCamera = function (cam) { a1.call(this, cam); shake(cam); };
+  if (a3) pl.applyCamera3 = function (cam) { a3.call(this, cam); shake(cam); };
+  offs.push(() => { if (a1) pl.applyCamera = a1; if (a3) pl.applyCamera3 = a3; });
+
+  const pv = new THREE.Vector3();
+  function updateCombatUi(dt) {
+    trauma = Math.max(0, trauma - dt * 1.6);
+    if (hmT > 0) { hmT -= dt; hm.style.opacity = Math.max(0, hmT / hmLife).toFixed(2); hm.style.transform = `scale(${(1 + 0.5 * (1 - hmT / hmLife)).toFixed(2)})`; }
+    if (bannerT > 0) { bannerT -= dt; const k = bannerT; banner.style.opacity = (k > 1.9 ? (2.2 - k) / 0.3 : Math.min(1, k / 0.6)).toFixed(2); }
+    const yaw = game.player.yaw;
+    for (const a of arcs) { if (a.t <= 0) continue; a.t -= dt;
+      const ang = Math.atan2(a.src.x - game.px, a.src.y - game.py);   // 0 = north, clockwise
+      const rel = ang + yaw;   // facing: yaw 0 = north, positive = left
+      a.a.style.transform = `rotate(${rel.toFixed(3)}rad)`; a.i.style.opacity = Math.max(0, a.t / 0.9).toFixed(2); }
+    // plates: mobs in combat (damaged, winding up or chasing) within 32 m, nearest first; bosses use the boss bar
+    const cam = game.camera, W = innerWidth, H = innerHeight, px = game.px, py = game.py;
+    const list = [];
+    let bb = null, bd = 48;
+    for (const m of game.mobs) {
+      if (m.dead) continue;
+      const d = Math.hypot(m.x - px, m.y - py);
+      if (m.boss) { if (d < bd && (d < 30 || m.hp < m.maxHp)) { bd = d; bb = m; } continue; }
+      if (d > 32) continue;
+      if (m.hp < m.maxHp || m.state === 'windup' || m.state === 'chase' || m.state === 'active') list.push([d, m]);
+    }
+    list.sort((a, b) => a[0] - b[0]);
+    for (let i = 0; i < PLATES; i++) {
+      const P = plates[i], e = list[i];
+      if (!e) { if (P.m) { P.p.style.display = 'none'; P.m = null; } continue; }
+      const [d, m] = e;
+      pv.set(m.x, (m.z ?? 0) + (m.height ?? 1.6) * (m.type?.scale ?? 1) + 0.55, -m.y).project(cam);
+      if (pv.z > 1 || pv.z < -1 || Math.abs(pv.x) > 1.1 || Math.abs(pv.y) > 1.1) { P.p.style.display = 'none'; P.m = null; continue; }
+      if (P.m !== m) { P.m = m; P.p.style.display = 'block'; }
+      const f = Math.max(0, m.hp / m.maxHp), sc = Math.max(0.55, Math.min(1.15, 9 / (d + 4)));
+      P.f.style.width = (f * 100).toFixed(1) + '%'; P.l.style.width = (f * 100).toFixed(1) + '%';
+      const wind = m.state === 'windup' && m.windupEff > 0;
+      P.p.classList.toggle('wind', wind);
+      if (wind) { P.c.style.width = (100 * (1 - Math.max(0, m.stateT) / m.windupEff)).toFixed(0) + '%'; if (P.n.textContent !== m.attack?.name) P.n.textContent = m.attack?.name || ''; }
+      P.p.style.transform = `translate(${((pv.x * 0.5 + 0.5) * W - 32).toFixed(0)}px, ${((-pv.y * 0.5 + 0.5) * H - 8).toFixed(0)}px) scale(${sc.toFixed(2)})`;
+    }
+    // boss bar
+    if (bb !== bossMob) {
+      bossMob = bb; boss.style.display = bb ? 'block' : 'none';
+      for (const p of bossPips) p.remove(); bossPips = [];
+      if (bb) { bName.textContent = bb.name; for (const ph of bb.type.phases || []) if (ph.at < 1) { const p = el('div', 'bp', bBar); p.style.left = (ph.at * 100).toFixed(1) + '%'; bossPips.push(p); } }
+    }
+    if (bb) {
+      const f = Math.max(0, bb.hp / bb.maxHp), n = (bb.type.phases || []).length, enr = !!bb.type.phases?.[bb.phase]?.enrage;
+      bFill.style.width = bLag.style.width = (f * 100).toFixed(1) + '%';
+      const tag = (n > 1 ? `Phase ${ROMAN[bb.phase] || bb.phase + 1} of ${ROMAN[n - 1] || n}` : '') + (enr ? ' · Enraged' : '');
+      if (bTag.textContent !== tag) bTag.textContent = tag;
+      boss.classList.toggle('enrage', enr);
+      const wind = bb.state === 'windup' && bb.windupEff > 0;
+      boss.classList.toggle('wind', wind);
+      if (wind && !bossWindLast) sfx.play('warn', 0.7);
+      bossWindLast = wind;
+      if (wind) { bWind.style.width = (100 * (1 - Math.max(0, bb.stateT) / bb.windupEff)).toFixed(0) + '%'; if (bAtk.textContent !== bb.attack?.name) bAtk.textContent = bb.attack?.name || ''; }
+    }
+  }
+
   // ---- per-frame
   let barT = 0;
   game.add({
     update(dt) {
-      updateNums(dt);
+      updateNums(dt); updateCombatUi(dt);
       if ((barT -= dt) > 0) return; barT = 1 / 30;
       const s = game.stats;
       hpB.f.style.width = (100 * s.hp / s.maxHp).toFixed(1) + '%'; hpB.t.textContent = `${Math.ceil(s.hp)} / ${s.maxHp}`;

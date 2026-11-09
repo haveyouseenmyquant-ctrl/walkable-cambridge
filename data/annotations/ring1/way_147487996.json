@@ -1,0 +1,37 @@
+{
+ "osm_id": "way/147487996",
+ "sources": [
+  "mapillary:523973015451124",
+  "mapillary:581858736108487"
+ ],
+ "walls": [
+  {
+   "id": "way/147487996:1",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "brick",
+   "wall_colour": "#4b3c34",
+   "trim_colour": "#6a5a4e",
+   "cornice_z": 5.6,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 26.0,
+     "w": 1.2,
+     "h": 2.4,
+     "surround": "none"
+    }
+   ],
+   "confidence": "low",
+   "notes": "Christ's College boundary building on Hobson Street (east side): tall dark gault/stock brick wall, single storey with a gabled roof behind, one plain timber door towards the south end, otherwise blank. Mapillary 523973015451124 / 581858736108487; door position estimated."
+  }
+ ]
+}

@@ -1,0 +1,366 @@
+{
+ "osm_id": "way/165737329",
+ "sources": [
+  "mapillary:2041980012611581",
+  "mapillary:366105358127104",
+  "mapillary:200661231695022",
+  "mapillary:2901591450087822"
+ ],
+ "walls": [
+  {
+   "id": "way/165737329:13",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.3,
+    8.6
+   ],
+   "material": "stone",
+   "wall_colour": "#d3c19b",
+   "trim_colour": "#e2d6b8",
+   "cornice_z": 13.2,
+   "cornice": "classical",
+   "parapet": true,
+   "string_courses": [
+    4.3,
+    8.6
+   ],
+   "quoins": false,
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.2,
+     "w": 1.05,
+     "z": 1.4,
+     "h": 2.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.7,
+     "w": 1.05,
+     "z": 1.4,
+     "h": 2.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.2,
+     "w": 1.05,
+     "z": 1.4,
+     "h": 2.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 11.71,
+     "w": 1.05,
+     "z": 1.4,
+     "h": 2.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 15.21,
+     "w": 1.05,
+     "z": 1.4,
+     "h": 2.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 18.71,
+     "w": 1.05,
+     "z": 1.4,
+     "h": 2.5,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.2,
+     "w": 1.05,
+     "z": 5.0,
+     "h": 2.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.7,
+     "w": 1.05,
+     "z": 5.0,
+     "h": 2.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.2,
+     "w": 1.05,
+     "z": 5.0,
+     "h": 2.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 11.71,
+     "w": 1.05,
+     "z": 5.0,
+     "h": 2.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 15.21,
+     "w": 1.05,
+     "z": 5.0,
+     "h": 2.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 18.71,
+     "w": 1.05,
+     "z": 5.0,
+     "h": 2.7,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.2,
+     "w": 1.0,
+     "z": 9.3,
+     "h": 2.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.7,
+     "w": 1.0,
+     "z": 9.3,
+     "h": 2.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.2,
+     "w": 1.0,
+     "z": 9.3,
+     "h": 2.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 11.71,
+     "w": 1.0,
+     "z": 9.3,
+     "h": 2.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 15.21,
+     "w": 1.0,
+     "z": 9.3,
+     "h": 2.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 18.71,
+     "w": 1.0,
+     "z": 9.3,
+     "h": 2.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Trinity Hall range on the west side of Trinity Lane (OSM TRINH010), seen obliquely from the north. Ashlar, rusticated ground storey with round-arched windows, two upper storeys of plain rectangular windows in architraves, string courses, cornice and parapet. Bay count estimated from oblique view. (length 19.9 m, height 14.5 m from walls.json)"
+  },
+  {
+   "id": "way/165737329:10",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.4,
+    8.2
+   ],
+   "material": "stone",
+   "wall_colour": "#cdb98f",
+   "trim_colour": "#ddd0b0",
+   "cornice_z": 13.6,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.4
+   ],
+   "quoins": false,
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 3.2,
+     "w": 2.3,
+     "z": 3.9,
+     "h": 3.6,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.0,
+     "w": 1.5,
+     "z": 3.9,
+     "h": 3.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 3.2,
+     "w": 1.4,
+     "z": 9.0,
+     "h": 2.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 8.0,
+     "w": 1.4,
+     "z": 9.0,
+     "h": 2.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "South end of the Trinity Hall Trinity Lane range at the corner. Rusticated ashlar base to ~3.4 m with a small basement grille; above, one wide gridded window and one narrower architraved window; upper storey assumed to repeat the bays. (length 13.8 m, height 14.6 m from walls.json)"
+  }
+ ]
+}

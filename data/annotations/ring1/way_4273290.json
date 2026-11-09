@@ -1,0 +1,227 @@
+{
+ "osm_id": "way/4273290",
+ "sources": [
+  "mapillary:941221033333012",
+  "mapillary:4232489523430115",
+  "mapillary:948668239220725"
+ ],
+ "walls": [
+  {
+   "id": "way/4273290:22",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.6
+   ],
+   "material": "stone",
+   "wall_colour": "#cdb48c",
+   "trim_colour": "#d8c39d",
+   "cornice_z": 11.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 13.6,
+     "z1": 4.0,
+     "fascia_text": "",
+     "fascia_colour": "#c9b58f",
+     "text_colour": "#2b2b2b",
+     "door_x": 9.0,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 1.6,
+     "w": 1.0,
+     "z": 5.3,
+     "h": 3.4,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 3.75,
+     "w": 1.0,
+     "z": 5.3,
+     "h": 3.4,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 5.9,
+     "w": 1.0,
+     "z": 5.3,
+     "h": 3.4,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 8.05,
+     "w": 1.0,
+     "z": 5.3,
+     "h": 3.4,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 10.2,
+     "w": 1.0,
+     "z": 5.3,
+     "h": 3.4,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 12.35,
+     "w": 1.0,
+     "z": 5.3,
+     "h": 3.4,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Christ's Lane (2006) block, St Andrew's Street front between the Metro Bank corner (p0 end) and the projecting glazed-box block to the SSE. Buff sandstone cladding; ground floor recessed shop glazing behind a colonnade of round stone columns; one tall upper level with a run of narrow full-height windows framed by stone fins; plain parapet band above. Window count (6) read obliquely from mapillary 941221033333012 / 4232489523430115; tenants change, so no fascia text."
+  },
+  {
+   "id": "way/4273290:24",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.8,
+    8.6
+   ],
+   "material": "stone",
+   "wall_colour": "#d9cdb2",
+   "trim_colour": "#e6dfcf",
+   "cornice_z": 13.12,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    4.6
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.2,
+    3.9,
+    7.8,
+    11.7,
+    15.4
+   ],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 15.3,
+     "z1": 4.4,
+     "fascia_text": "Zara",
+     "fascia_colour": "#1a1a1a",
+     "text_colour": "#ffffff",
+     "door_x": 7.8,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 2.0,
+     "w": 2.6,
+     "z": 5.2,
+     "h": 6.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 5.9,
+     "w": 2.6,
+     "z": 5.2,
+     "h": 6.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 9.8,
+     "w": 2.6,
+     "z": 5.2,
+     "h": 6.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 13.7,
+     "w": 2.6,
+     "z": 5.2,
+     "h": 6.4,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "65 St Andrew's Street (Zara), modern pale-stone front of the Christ's Lane development: ground floor colonnade of round columns in front of a recessed shopfront; above, four tall framed glazed bays spanning both upper floors; parapet. Bay count estimated from an oblique view."
+  }
+ ]
+}

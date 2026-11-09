@@ -1,0 +1,108 @@
+{
+ "osm_id": "way/13863738",
+ "sources": [
+  "mapillary:320715256088616",
+  "mapillary:510096993351882"
+ ],
+ "walls": [
+  {
+   "id": "way/13863738:5",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "stone",
+   "wall_colour": "#cbb592",
+   "trim_colour": "#ddd0b2",
+   "cornice_z": 3.9299999999999997,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [
+    0.3,
+    3.3,
+    6.3,
+    9.3,
+    11.6
+   ],
+   "elements": [
+    {
+     "type": "shopfront",
+     "stallriser": 0.3,
+     "awning": false,
+     "x0": 0.5,
+     "x1": 5.8,
+     "z1": 3.3,
+     "fascia_text": "",
+     "fascia_colour": "#2a2c2f",
+     "text_colour": "#f1ece0",
+     "door_x": 3.0
+    },
+    {
+     "type": "shopfront",
+     "stallriser": 0.3,
+     "awning": false,
+     "x0": 6.1,
+     "x1": 11.4,
+     "z1": 3.3,
+     "fascia_text": "",
+     "fascia_colour": "#2a2c2f",
+     "text_colour": "#f1ece0",
+     "door_x": 8.8
+    }
+   ],
+   "confidence": "low",
+   "notes": "Harrington House, Sussex Street south side: the curved 1930s Tuscan stone colonnade (columns modelled as pilasters) with shop units behind it; the LiDAR eave of this footprint wall is only the colonnade height, the brick upper floors with dormers stand on the wall behind."
+  },
+  {
+   "id": "way/13863738:6",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "stone",
+   "wall_colour": "#cbb592",
+   "trim_colour": "#ddd0b2",
+   "cornice_z": 4.43,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [
+    0.3,
+    3.3,
+    6.3,
+    10.0
+   ],
+   "elements": [
+    {
+     "type": "shopfront",
+     "stallriser": 0.3,
+     "awning": false,
+     "x0": 0.5,
+     "x1": 5.0,
+     "z1": 3.6,
+     "fascia_text": "",
+     "fascia_colour": "#2a2c2f",
+     "text_colour": "#f1ece0",
+     "door_x": 2.6
+    },
+    {
+     "type": "shopfront",
+     "stallriser": 0.3,
+     "awning": false,
+     "x0": 5.3,
+     "x1": 9.8,
+     "z1": 3.6,
+     "fascia_text": "",
+     "fascia_colour": "#2a2c2f",
+     "text_colour": "#f1ece0",
+     "door_x": 7.6
+    }
+   ],
+   "confidence": "low",
+   "notes": "Harrington House colonnade continued (see :5)."
+  }
+ ]
+}

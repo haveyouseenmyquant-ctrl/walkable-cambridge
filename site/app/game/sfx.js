@@ -78,6 +78,8 @@ const R = {
   hit_stone: { n: [{ type: 'lowpass', f0: 900, f1: 120, t: 0.12, g: 0.6 }], o: [{ w: 'triangle', f0: 140, f1: 55, t: 0.12, g: 0.35 }] },
   hit_hex:   { n: [{ type: 'bandpass', f0: 1200, f1: 600, q: 3, t: 0.12, g: 0.35 }], o: [{ w: 'sine', f0: 520, f1: 260, t: 0.12, g: 0.12 }, { w: 'sine', f0: 140, f1: 70, t: 0.09, g: 0.2 }] },
   crit:      { o: [{ w: 'triangle', f0: 1800, f1: 900, t: 0.16, g: 0.12 }, { w: 'sine', f0: 90, f1: 40, t: 0.22, g: 0.4 }], n: [{ type: 'lowpass', f0: 3000, f1: 150, t: 0.2, g: 0.5 }] },
+  warn:      { o: [{ w: 'triangle', f0: 520, f1: 470, t: 0.22, g: 0.1 }, { w: 'triangle', f0: 520, f1: 470, t: 0.22, g: 0.08, d: 0.16 }] },   // session 50: boss wind-up cue
+  phase:     { o: [{ w: 'sine', f0: 98, f1: 92, t: 2.2, g: 0.4 }, { w: 'sine', f0: 247, f1: 240, t: 1.8, g: 0.12 }, { w: 'sine', f0: 523, t: 1.2, g: 0.05 }], n: [{ type: 'lowpass', f0: 600, f1: 80, t: 0.6, g: 0.4 }] },   // boss phase gong
   kill:      { o: [{ w: 'sine', f0: 240, f1: 60, t: 0.3, g: 0.3 }], n: [{ type: 'lowpass', f0: 1800, f1: 100, t: 0.3, g: 0.45 }] },
   // loot: drop chime (pitch/length scaled by rarity in items.js) and pickup sparkle
   drop:      { o: [{ w: 'sine', f0: 880, t: 0.35, g: 0.12 }, { w: 'sine', f0: 1320, t: 0.45, g: 0.08, d: 0.07 }, { w: 'triangle', f0: 1760, t: 0.5, g: 0.05, d: 0.14 }] },

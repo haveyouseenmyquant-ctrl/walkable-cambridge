@@ -1,0 +1,72 @@
+{
+ "osm_id": "way/1211951051",
+ "sources": [
+  "mapillary:2182342171917775",
+  "mapillary:745884646375599"
+ ],
+ "walls": [
+  {
+   "id": "way/1211951051:3",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.8
+   ],
+   "material": "render",
+   "wall_colour": "#ecebe6",
+   "trim_colour": "#f4f3ef",
+   "cornice_z": 7.35,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.8
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "bay",
+     "x": 3.2,
+     "w": 1.6,
+     "z": 4.1,
+     "h": 2.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "bay",
+     "x": 9.6,
+     "w": 1.6,
+     "z": 4.1,
+     "h": 2.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "stallriser": 0.35,
+     "awning": false,
+     "x0": 0.4,
+     "x1": 12.4,
+     "z1": 3.6,
+     "fascia_text": "",
+     "fascia_colour": "#3b3f4a",
+     "text_colour": "#f1ece0",
+     "door_x": 2.0
+    }
+   ],
+   "confidence": "low",
+   "notes": "23 Market Street (south side): grey-framed shopfront with tall glazed panels and dark fascia panels, white painted render above with two shallow bay windows at first floor; upper storey above the LiDAR eave not modelled on this wall."
+  }
+ ]
+}

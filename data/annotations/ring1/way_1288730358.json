@@ -1,7 +1,9 @@
 {
  "osm_id": "way/1288730358",
  "sources": [
-  "commons:File:A damp Market Passage - geograph.org.uk - 7102349.jpg"
+  "commons:File:A damp Market Passage - geograph.org.uk - 7102349.jpg",
+  "mapillary:1474200122931705",
+  "mapillary:3874123462707371"
  ],
  "walls": [
   {
@@ -171,6 +173,170 @@
    ],
    "confidence": "low",
    "notes": "Rear/side range of 10-15 Market Street on the southern leg of Market Passage, faces EAST. Ground floor is a run of black-painted shop windows with frosted glazing and plain black fascias (four units); above, buff brick with red-brick polychrome bands and window heads. The photo suggests more storeys behind, but the walls.json eave (6.9 m) is used: one upper row annotated, seven columns estimated (right side of 7102349)."
+  },
+  {
+   "id": "way/1288730358:2",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.9,
+    6.9
+   ],
+   "material": "stucco",
+   "wall_colour": "#e9e5dc",
+   "trim_colour": "#f4f1ea",
+   "cornice_z": 9.6,
+   "cornice": "classical",
+   "parapet": false,
+   "string_courses": [
+    3.9
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.3,
+    7.6,
+    15.2
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.2,
+     "w": 1.2,
+     "z": 4.3,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.5,
+     "w": 1.2,
+     "z": 4.3,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.8,
+     "w": 1.2,
+     "z": 4.3,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 13.1,
+     "w": 1.2,
+     "z": 4.3,
+     "h": 2.2,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.2,
+     "w": 1.1,
+     "z": 7.2,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.5,
+     "w": 1.1,
+     "z": 7.2,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.8,
+     "w": 1.1,
+     "z": 7.2,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 13.1,
+     "w": 1.1,
+     "z": 7.2,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "stallriser": 0.3,
+     "awning": false,
+     "x0": 0.4,
+     "x1": 7.4,
+     "z1": 3.6,
+     "fascia_text": "",
+     "fascia_colour": "#1f5fa0",
+     "text_colour": "#f4f4f4",
+     "door_x": 3.8
+    },
+    {
+     "type": "shopfront",
+     "stallriser": 0.3,
+     "awning": false,
+     "x0": 7.8,
+     "x1": 15.1,
+     "z1": 3.6,
+     "fascia_text": "",
+     "fascia_colour": "#2d3034",
+     "text_colour": "#f1ece0",
+     "door_x": 11.5
+    }
+   ],
+   "confidence": "low",
+   "notes": "10-15 Market Street, north side west of Offspring/FatFace: painted stucco front with pilasters, tall round-headed first-floor windows in moulded surrounds, smaller second-floor sashes under a moulded cornice; two shop units (blue fascia unit to the west). Seen only obliquely looking west down Market Street; which units fall on this 15.5 m wall is estimated."
   }
  ]
 }

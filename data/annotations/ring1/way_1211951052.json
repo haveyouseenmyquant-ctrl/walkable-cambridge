@@ -1,0 +1,101 @@
+{
+ "osm_id": "way/1211951052",
+ "sources": [
+  "mapillary:469525937595063"
+ ],
+ "walls": [
+  {
+   "id": "way/1211951052:5",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.3,
+    7.7
+   ],
+   "material": "stone",
+   "wall_colour": "#c4ad86",
+   "trim_colour": "#d5c29c",
+   "cornice_z": 11.0,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.3,
+    7.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 8.2,
+     "z1": 3.9,
+     "fascia_text": "",
+     "fascia_colour": "#b3271f",
+     "text_colour": "#ffffff",
+     "door_x": 6.8,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.2,
+     "w": 1.5,
+     "z": 5.0,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.2,
+     "w": 1.5,
+     "z": 5.0,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.2,
+     "w": 1.5,
+     "z": 8.4,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.2,
+     "w": 1.5,
+     "z": 8.4,
+     "h": 1.7,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Petty Cury north side, Jacobethan stone range at the east end (shaped gables with finials above the eaves, canted oriel on the corner which is another wall). Ground floor shopfront in a sandstone surround; two stone-mullioned and transomed windows on each of the first and second floors under each gable pair. Seen obliquely in mapillary 469525937595063 (2010s, tenant since changed)."
+  }
+ ]
+}

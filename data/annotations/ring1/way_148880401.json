@@ -1,0 +1,461 @@
+{
+ "osm_id": "way/148880401",
+ "sources": [
+  "mapillary:383912412791671",
+  "mapillary:1703351143192604",
+  "mapillary:944920146310779",
+  "mapillary:4157446024311786"
+ ],
+ "walls": [
+  {
+   "id": "way/148880401:6",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.4,
+    8.4,
+    11.6
+   ],
+   "material": "stone",
+   "wall_colour": "#cfc09c",
+   "trim_colour": "#ddd2b4",
+   "cornice_z": 11.6,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.4,
+    8.4
+   ],
+   "quoins": true,
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 3.0,
+     "w": 0.7,
+     "z": 1.0,
+     "h": 2.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 3.9,
+     "w": 0.7,
+     "z": 1.0,
+     "h": 2.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 8.5,
+     "w": 0.7,
+     "z": 1.0,
+     "h": 2.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 9.4,
+     "w": 0.7,
+     "z": 1.0,
+     "h": 2.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 14.0,
+     "w": 0.7,
+     "z": 1.0,
+     "h": 2.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 14.9,
+     "w": 0.7,
+     "z": 1.0,
+     "h": 2.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 3.0,
+     "w": 0.7,
+     "z": 5.0,
+     "h": 2.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 3.9,
+     "w": 0.7,
+     "z": 5.0,
+     "h": 2.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 8.5,
+     "w": 0.7,
+     "z": 5.0,
+     "h": 2.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 9.4,
+     "w": 0.7,
+     "z": 5.0,
+     "h": 2.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 14.0,
+     "w": 0.7,
+     "z": 5.0,
+     "h": 2.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 14.9,
+     "w": 0.7,
+     "z": 5.0,
+     "h": 2.4,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 3.0,
+     "w": 0.7,
+     "z": 9.0,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 3.9,
+     "w": 0.7,
+     "z": 9.0,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 14.0,
+     "w": 0.7,
+     "z": 9.0,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 14.9,
+     "w": 0.7,
+     "z": 9.0,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 8.95,
+     "w": 0.6,
+     "z": 12.0,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Taylor Library (Corpus, former bank) east end as seen down Bene't Street from the east: buff gault brick and ashlar Gothic Revival, paired round-headed lights in three bays, central gable with tall stone stack. Distant view, bay positions estimated. (length 17.9 m, height 14.7 m from walls.json)"
+  },
+  {
+   "id": "way/148880401:11",
+   "storeys": 5,
+   "floor_z": [
+    0,
+    4.2,
+    7.8,
+    11.2,
+    14.2
+   ],
+   "material": "stone",
+   "wall_colour": "#cbbd98",
+   "trim_colour": "#dcd1b3",
+   "cornice_z": 14.4,
+   "cornice": "bracketed",
+   "parapet": false,
+   "string_courses": [
+    4.2
+   ],
+   "quoins": false,
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 2.6,
+     "w": 1.8,
+     "z": 1.0,
+     "h": 2.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 7.2,
+     "w": 1.8,
+     "z": 1.0,
+     "h": 2.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 2.6,
+     "w": 1.3,
+     "z": 4.8,
+     "h": 2.4,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 7.2,
+     "w": 1.3,
+     "z": 4.8,
+     "h": 2.4,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 11.8,
+     "w": 1.3,
+     "z": 4.8,
+     "h": 2.4,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 2.6,
+     "w": 1.3,
+     "z": 8.4,
+     "h": 2.3,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 7.2,
+     "w": 1.3,
+     "z": 8.4,
+     "h": 2.3,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 11.8,
+     "w": 1.3,
+     "z": 8.4,
+     "h": 2.3,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.6,
+     "w": 1.1,
+     "z": 11.8,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 7.2,
+     "w": 1.1,
+     "z": 11.8,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 11.8,
+     "w": 1.1,
+     "z": 11.8,
+     "h": 2.0,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "arched",
+     "x": 11.8,
+     "w": 1.9,
+     "h": 3.2,
+     "surround": "pilastered"
+    }
+   ],
+   "confidence": "low",
+   "notes": "Taylor Library (Corpus) west face on Trumpington Street, seen obliquely from the Bene't Street corner (Corpus Clock is on the north face): ashlar Gothic Revival behind railings, large round-arched ground windows, canted oriel windows stacked on the upper floors, gabled skyline. Bays estimated. (length 14.5 m, height 17.2 m from walls.json)"
+  }
+ ]
+}

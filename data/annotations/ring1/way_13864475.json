@@ -1,0 +1,888 @@
+{
+ "osm_id": "way/13864475",
+ "sources": [
+  "mapillary:1237969366618132",
+  "mapillary:1268365537017029",
+  "mapillary:505948500533247"
+ ],
+ "walls": [
+  {
+   "id": "way/13864475:0",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.0,
+    7.0,
+    9.6
+   ],
+   "material": "brick",
+   "wall_colour": "#b49d78",
+   "trim_colour": "#e3dccb",
+   "cornice_z": 12.519999999999998,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.0
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.6,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.84,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 8.07,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 11.31,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 14.55,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 17.79,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 21.02,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 24.26,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 27.5,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.6,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.84,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 8.07,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 11.31,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 14.55,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 17.79,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 21.02,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 24.26,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 27.5,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.6,
+     "w": 1.0,
+     "z": 9.9,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.84,
+     "w": 1.0,
+     "z": 9.9,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 8.07,
+     "w": 1.0,
+     "z": 9.9,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 11.31,
+     "w": 1.0,
+     "z": 9.9,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 14.55,
+     "w": 1.0,
+     "z": 9.9,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 17.79,
+     "w": 1.0,
+     "z": 9.9,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 21.02,
+     "w": 1.0,
+     "z": 9.9,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 24.26,
+     "w": 1.0,
+     "z": 9.9,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 27.5,
+     "w": 1.0,
+     "z": 9.9,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "stallriser": 0.4,
+     "awning": false,
+     "x0": 0.3,
+     "x1": 9.5,
+     "z1": 3.7,
+     "fascia_text": "",
+     "fascia_colour": "#2d2f33",
+     "text_colour": "#f1ece0",
+     "door_x": 5.0
+    },
+    {
+     "type": "shopfront",
+     "stallriser": 0.4,
+     "awning": false,
+     "x0": 9.8,
+     "x1": 19.2,
+     "z1": 3.7,
+     "fascia_text": "",
+     "fascia_colour": "#e8e4dc",
+     "text_colour": "#2a2a2a",
+     "door_x": 14.5
+    },
+    {
+     "type": "shopfront",
+     "stallriser": 0.4,
+     "awning": false,
+     "x0": 19.5,
+     "x1": 28.8,
+     "z1": 3.7,
+     "fascia_text": "",
+     "fascia_colour": "#30353a",
+     "text_colour": "#f1ece0",
+     "door_x": 24.0
+    }
+   ],
+   "confidence": "low",
+   "notes": "Blue Boar Court (Trinity), Sidney Street west side: buff gault-brick terrace, four storeys, tall 1-over-2 Victorian-style sashes in regular bays over a row of shopfronts (dark granite-faced units). Seen obliquely from the street; this wall assumed to continue the rhythm of the photographed northern stretch."
+  },
+  {
+   "id": "way/13864475:1",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.0,
+    7.0,
+    9.4
+   ],
+   "material": "brick",
+   "wall_colour": "#b29b77",
+   "trim_colour": "#e3dccb",
+   "cornice_z": 11.96,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.0
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.6,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.72,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.85,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 10.97,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 14.1,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 17.23,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 20.35,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 23.48,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 26.6,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.6,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.72,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.85,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 10.97,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 14.1,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 17.23,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 20.35,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 23.48,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 26.6,
+     "w": 1.0,
+     "z": 7.3,
+     "h": 1.8,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.6,
+     "w": 1.0,
+     "z": 9.8,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 4.72,
+     "w": 1.0,
+     "z": 9.8,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 7.85,
+     "w": 1.0,
+     "z": 9.8,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 10.97,
+     "w": 1.0,
+     "z": 9.8,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 14.1,
+     "w": 1.0,
+     "z": 9.8,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 17.23,
+     "w": 1.0,
+     "z": 9.8,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 20.35,
+     "w": 1.0,
+     "z": 9.8,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 23.48,
+     "w": 1.0,
+     "z": 9.8,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 26.6,
+     "w": 1.0,
+     "z": 9.8,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "stallriser": 0.4,
+     "awning": false,
+     "x0": 0.3,
+     "x1": 9.0,
+     "z1": 3.7,
+     "fascia_text": "Neon Sheep",
+     "fascia_colour": "#e9e6df",
+     "text_colour": "#2a2a2a",
+     "door_x": 4.5
+    },
+    {
+     "type": "shopfront",
+     "stallriser": 0.4,
+     "awning": false,
+     "x0": 9.3,
+     "x1": 19.0,
+     "z1": 3.7,
+     "fascia_text": "",
+     "fascia_colour": "#26292d",
+     "text_colour": "#f1ece0",
+     "door_x": 14.0
+    },
+    {
+     "type": "shopfront",
+     "stallriser": 0.4,
+     "awning": false,
+     "x0": 19.3,
+     "x1": 27.9,
+     "z1": 3.7,
+     "fascia_text": "",
+     "fascia_colour": "#2a2c30",
+     "text_colour": "#f1ece0",
+     "door_x": 23.0
+    }
+   ],
+   "confidence": "low",
+   "notes": "Blue Boar Court (Trinity), Sidney Street west side: buff gault brick, four storeys, regular tall sashes, dark shopfronts with fascias (Fona-type cafe, Neon Sheep). Bay count estimated from an oblique photo."
+  }
+ ]
+}

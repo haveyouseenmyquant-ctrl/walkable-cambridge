@@ -1,0 +1,110 @@
+{
+ "osm_id": "way/137017454",
+ "sources": [
+  "mapillary:4484249121604453",
+  "mapillary:1129882040864714"
+ ],
+ "walls": [
+  {
+   "id": "way/137017454:20",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.2
+   ],
+   "material": "brick",
+   "wall_colour": "#9b4f3a",
+   "trim_colour": "#d9c9a2",
+   "cornice_z": 8.6,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.2,
+    8.6
+   ],
+   "quoins": true,
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.4,
+     "w": 1.0,
+     "z": 1.1,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 6.1,
+     "w": 1.3,
+     "z": 1.1,
+     "h": 1.6,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.4,
+     "w": 0.8,
+     "z": 5.4,
+     "h": 1.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.0,
+     "w": 1.5,
+     "z": 5.4,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 4.0,
+     "w": 0.9,
+     "z": 9.0,
+     "h": 1.3,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 9.6,
+     "w": 1.0,
+     "h": 2.3,
+     "surround": "none"
+    }
+   ],
+   "confidence": "low",
+   "notes": "Caius Master's Lodge range seen at the end of the lane: red brick gable with blue-brick diaper pattern, stone quoins and mullioned windows, bracketed oriel sill under the central first-floor window, carved shield in the gable; lower annex with a door at the north end. (length 10.8 m, height 12.3 m from walls.json)"
+  }
+ ]
+}

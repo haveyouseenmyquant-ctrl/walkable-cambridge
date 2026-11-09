@@ -1,0 +1,418 @@
+{
+ "osm_id": "way/93900090",
+ "sources": [
+  "mapillary:203889871319658",
+  "mapillary:294655105605235"
+ ],
+ "walls": [
+  {
+   "id": "way/93900090:5",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.0,
+    5.6
+   ],
+   "material": "brick",
+   "wall_colour": "#b08a5e",
+   "trim_colour": "#d6cbb4",
+   "cornice_z": 8.1,
+   "cornice": "none",
+   "parapet": false,
+   "string_courses": [
+    3.0,
+    5.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 2.62,
+     "x1": 6.32,
+     "z1": 2.7,
+     "fascia_text": "",
+     "fascia_colour": "#3a3532",
+     "text_colour": "#f0ece4",
+     "door_x": 5.47,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 3.37,
+     "w": 0.95,
+     "z": 3.5,
+     "h": 1.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 5.07,
+     "w": 0.65,
+     "z": 3.5,
+     "h": 1.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 5.87,
+     "w": 0.65,
+     "z": 3.5,
+     "h": 1.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 3.37,
+     "w": 0.95,
+     "z": 6.2,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 5.07,
+     "w": 0.65,
+     "z": 6.2,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 5.87,
+     "w": 0.65,
+     "z": 6.2,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 7.22,
+     "x1": 10.92,
+     "z1": 2.7,
+     "fascia_text": "",
+     "fascia_colour": "#3a3532",
+     "text_colour": "#f0ece4",
+     "door_x": 10.06,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 7.97,
+     "w": 0.95,
+     "z": 3.5,
+     "h": 1.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 9.67,
+     "w": 0.65,
+     "z": 3.5,
+     "h": 1.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 10.46,
+     "w": 0.65,
+     "z": 3.5,
+     "h": 1.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 7.97,
+     "w": 0.95,
+     "z": 6.2,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 9.67,
+     "w": 0.65,
+     "z": 6.2,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 10.46,
+     "w": 0.65,
+     "z": 6.2,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 11.81,
+     "x1": 15.52,
+     "z1": 2.7,
+     "fascia_text": "",
+     "fascia_colour": "#3a3532",
+     "text_colour": "#f0ece4",
+     "door_x": 14.66,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 12.56,
+     "w": 0.95,
+     "z": 3.5,
+     "h": 1.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 14.27,
+     "w": 0.65,
+     "z": 3.5,
+     "h": 1.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 15.07,
+     "w": 0.65,
+     "z": 3.5,
+     "h": 1.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 12.56,
+     "w": 0.95,
+     "z": 6.2,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 14.27,
+     "w": 0.65,
+     "z": 6.2,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 15.07,
+     "w": 0.65,
+     "z": 6.2,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 16.41,
+     "x1": 20.11,
+     "z1": 2.7,
+     "fascia_text": "",
+     "fascia_colour": "#3a3532",
+     "text_colour": "#f0ece4",
+     "door_x": 19.26,
+     "stallriser": 0.3,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 17.16,
+     "w": 0.95,
+     "z": 3.5,
+     "h": 1.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 18.86,
+     "w": 0.65,
+     "z": 3.5,
+     "h": 1.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 19.66,
+     "w": 0.65,
+     "z": 3.5,
+     "h": 1.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 17.16,
+     "w": 0.95,
+     "z": 6.2,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 18.86,
+     "w": 0.65,
+     "z": 6.2,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 19.66,
+     "w": 0.65,
+     "z": 6.2,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": false
+    }
+   ],
+   "confidence": "low",
+   "notes": "Round Church Street north side, 1980s three-storey buff-brick block: ground floor shop units recessed behind square brick piers (an arcade), two upper floors of plain dark-framed windows in a repeating rhythm of one single and one paired window per pier bay (~4.6 m), thin stone band courses at each floor, flat roof behind a plain brick top. Rhythm read from oblique views; bay count approximate. Western part of the same block (mapillary 203889871319658, 294655105605235)."
+  }
+ ]
+}

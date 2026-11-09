@@ -1,7 +1,8 @@
 {
  "osm_id": "way/1095394771",
  "sources": [
-  "mapillary:571741803799631"
+  "mapillary:571741803799631",
+  "mapillary:3038401733104798"
  ],
  "walls": [
   {
@@ -106,6 +107,37 @@
    ],
    "confidence": "low",
    "notes": "1-2 Wheeler St: white-painted brick two-storey frontage under a tiled roof, opposite the Guildhall. Dark timber shopfronts with Cambridge Live Tickets (orange lettering) at no. 2 and Pho (red lettering, hanging sign) at no. 1; first-floor 6/6 sashes over the ticket office and round-headed sashes further along. The Parsons Court corner unit (Steak and Honour, x 0-5) is behind the camera and not annotated. Photo 2016, raking view."
+  },
+  {
+   "id": "way/1095394771:1",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.6
+   ],
+   "material": "brick",
+   "wall_colour": "#3b3633",
+   "trim_colour": "#f1efe9",
+   "cornice_z": 6.6,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.6
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 4.0,
+     "w": 0.95,
+     "h": 2.3,
+     "surround": "none"
+    }
+   ],
+   "confidence": "low",
+   "notes": "Parsons Court side of the 1-2 Wheeler St corner building: ground floor painted near-black with a white panelled door under the Parsons Court street sign, about 2.5 m from the Wheeler St corner; dark brick above with downpipes, no windows visible on this face. From Mapillary 3038401733104798 (looking along Wheeler St)."
   }
  ]
 }

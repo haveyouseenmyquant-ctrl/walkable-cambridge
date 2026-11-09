@@ -1,0 +1,119 @@
+{
+ "osm_id": "way/141330781",
+ "sources": [
+  "mapillary:295448308745927",
+  "mapillary:2992981850979823"
+ ],
+ "walls": [
+  {
+   "id": "way/141330781:5",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "stone",
+   "wall_colour": "#cdb98f",
+   "trim_colour": "#dccaa0",
+   "cornice_z": 12.5,
+   "cornice": "none",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": true,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 4.2,
+     "w": 0.9,
+     "z": 4.0,
+     "h": 6.5,
+     "panes": [
+      1,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 6.7,
+     "w": 0.9,
+     "z": 4.0,
+     "h": 6.5,
+     "panes": [
+      1,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Downing Place United Reformed Church (former St Columba's), 1891 Gothic, west gable end in buff stone: a pair of tall lancets high in the gable, pinnacled corner turret; the lower part is masked by the porch range (wall :2). From an oblique Mapillary view along Downing Street."
+  },
+  {
+   "id": "way/141330781:2",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "material": "stone",
+   "wall_colour": "#cdb98f",
+   "trim_colour": "#dccaa0",
+   "cornice_z": 8.01,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.5,
+     "w": 0.8,
+     "z": 2.6,
+     "h": 2.8,
+     "panes": [
+      1,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 4.95,
+     "w": 0.8,
+     "z": 2.6,
+     "h": 2.8,
+     "panes": [
+      1,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 7.4,
+     "w": 0.8,
+     "z": 2.6,
+     "h": 2.8,
+     "panes": [
+      1,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Low porch/apse range of the Downing Place URC in front of the west gable, pyramid roof, three small lancets; church name painted on the band."
+  }
+ ]
+}

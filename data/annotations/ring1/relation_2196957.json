@@ -1,6 +1,8 @@
 {
  "osm_id": "relation/2196957",
  "sources": [
+  "commons:File:1 St Mary's Passage, Cambridge.jpg",
+  "commons:File:3 St Mary's Passage, Cambridge.jpg",
   "commons:File:St Mary's Street, Cambridge.jpg",
   "commons:File:St Mary's Street. Cambridge - geograph.org.uk - 7416906.jpg"
  ],
@@ -474,6 +476,321 @@
    ],
    "confidence": "low",
    "notes": "White-rendered inter-war block turning the corner of St Mary's Street into Market Hill with a curved corner; horizontal banding and modern windows, colonnaded/recessed ground-floor shop. Seen only end-on and far away (Commons 7416906); window layout schematic."
+  },
+  {
+   "id": "relation/2196957:14",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.6,
+    6.6
+   ],
+   "material": "brick",
+   "wall_colour": "#cbbd98",
+   "trim_colour": "#2a2c2e",
+   "cornice_z": 9.2,
+   "cornice": "bracketed",
+   "parapet": false,
+   "string_courses": [
+    3.6
+   ],
+   "quoins": false,
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 22.590000000000003,
+     "x1": 30.89,
+     "z1": 3.4,
+     "fascia_text": "The Senate",
+     "fascia_colour": "#1f2326",
+     "text_colour": "#c9a95b",
+     "door_x": 29.59,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 12.990000000000002,
+     "x1": 18.19,
+     "z1": 3.2,
+     "fascia_text": "",
+     "fascia_colour": "#d9d6c6",
+     "text_colour": "#333333",
+     "door_x": 13.690000000000001,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 24.19,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 1.8,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 26.79,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 1.8,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 29.290000000000003,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 1.8,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 24.19,
+     "w": 1.1,
+     "z": 6.9,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 26.79,
+     "w": 1.1,
+     "z": 6.9,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 29.290000000000003,
+     "w": 1.1,
+     "z": 6.9,
+     "h": 1.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 15.590000000000002,
+     "w": 2.4,
+     "z": 4.3,
+     "h": 2.0,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 15.590000000000002,
+     "w": 1.1,
+     "z": 7.2,
+     "h": 1.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 19.89,
+     "w": 1.0,
+     "z": 4.0,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.2,
+     "w": 1.0,
+     "z": 4.0,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.0,
+     "w": 1.0,
+     "z": 4.0,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 8.0,
+     "w": 1.0,
+     "z": 4.0,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 11.0,
+     "w": 1.0,
+     "z": 4.0,
+     "h": 1.9,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 19.89,
+     "w": 1.0,
+     "z": 6.9,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 2.2,
+     "w": 1.0,
+     "z": 6.9,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.0,
+     "w": 1.0,
+     "z": 6.9,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 8.0,
+     "w": 1.0,
+     "z": 6.9,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 11.0,
+     "w": 1.0,
+     "z": 6.9,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 19.590000000000003,
+     "w": 1.0,
+     "h": 2.4,
+     "surround": "none"
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 4.0,
+     "w": 1.0,
+     "h": 2.4,
+     "surround": "none"
+    }
+   ],
+   "confidence": "low",
+   "notes": "Market Hostel block, St Mary's Passage frontage facing Great St Mary's (Commons: 1 and 3 St Mary's Passage). From the west end: 1 St Mary's Passage (The Senate) white-rendered, black fascia shopfront, three first-floor sashes with bracketed hoods, three 6-pane second-floor sashes under a dentil cornice; buff-brick house; 3 St Mary's Passage, a narrow white pargetted (fleur-de-lys) front with leaded shop window, jettied three-light oriel and a gabled leaded dormer; eastern part buff gault brick with sashes (not photographed, assumed). Wall colour is the dominant buff brick; positions of the eastern houses are estimates. (length 31.2 m, height 9.5 m from walls.json)"
   }
  ]
 }

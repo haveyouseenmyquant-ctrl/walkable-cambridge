@@ -2645,10 +2645,11 @@
     301.67
    ],
    "ground_z": 9.73,
-   "eave_z": 21.69,
-   "height": 11.95,
+   "eave_z": 22.03,
+   "height": 12.3,
    "dist_centre": 234.5,
-   "street_facing": true
+   "street_facing": true,
+   "eave_fixed": true
   },
   {
    "id": "way/13864475:2",
@@ -18184,10 +18185,11 @@
     198.65
    ],
    "ground_z": 8.84,
-   "eave_z": 19.87,
-   "height": 11.02,
+   "eave_z": 20.35,
+   "height": 11.51,
    "dist_centre": 182.7,
-   "street_facing": true
+   "street_facing": true,
+   "eave_fixed": true
   },
   {
    "id": "way/147456518:4",

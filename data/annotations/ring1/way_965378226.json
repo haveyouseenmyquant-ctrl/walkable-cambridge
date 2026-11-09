@@ -1,0 +1,483 @@
+{
+ "osm_id": "way/965378226",
+ "sources": [
+  "mapillary:140857534678992",
+  "mapillary:136217458426719"
+ ],
+ "walls": [
+  {
+   "id": "way/965378226:1",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.0,
+    7.0,
+    9.6
+   ],
+   "material": "render",
+   "wall_colour": "#ece8dd",
+   "trim_colour": "#f5f2ea",
+   "cornice_z": 12.229999999999999,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    4.0
+   ],
+   "quoins": false,
+   "pilasters": [
+    0.4,
+    4.4,
+    8.4,
+    12.4
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.8,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.06,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 8.31,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 11.57,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 14.82,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 18.08,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 21.33,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 24.59,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 27.84,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 31.1,
+     "w": 1.0,
+     "z": 4.4,
+     "h": 2.0,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.8,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.06,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 8.31,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 11.57,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 14.82,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 18.08,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 21.33,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 24.59,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 27.84,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 31.1,
+     "w": 1.0,
+     "z": 7.4,
+     "h": 1.7,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.8,
+     "w": 1.0,
+     "z": 10.0,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.06,
+     "w": 1.0,
+     "z": 10.0,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 8.31,
+     "w": 1.0,
+     "z": 10.0,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 11.57,
+     "w": 1.0,
+     "z": 10.0,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 14.82,
+     "w": 1.0,
+     "z": 10.0,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 18.08,
+     "w": 1.0,
+     "z": 10.0,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 21.33,
+     "w": 1.0,
+     "z": 10.0,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 24.59,
+     "w": 1.0,
+     "z": 10.0,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 27.84,
+     "w": 1.0,
+     "z": 10.0,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 31.1,
+     "w": 1.0,
+     "z": 10.0,
+     "h": 1.5,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "shopfront",
+     "stallriser": 0.3,
+     "awning": false,
+     "x0": 0.5,
+     "x1": 16.0,
+     "z1": 3.7,
+     "fascia_text": "Cotswold",
+     "fascia_colour": "#b8412f",
+     "text_colour": "#f4f1ea",
+     "door_x": 8.0
+    },
+    {
+     "type": "shopfront",
+     "stallriser": 0.3,
+     "awning": false,
+     "x0": 16.4,
+     "x1": 32.4,
+     "z1": 3.7,
+     "fascia_text": "",
+     "fascia_colour": "#2b2e33",
+     "text_colour": "#f1ece0",
+     "door_x": 24.0
+    }
+   ],
+   "confidence": "low",
+   "notes": "White-painted rendered range (Cotswold outdoor shop at the time of the photo): square stone-coloured columns along the shop storey at its southern end, round-headed first-floor sashes, plain sashes above. Seen from the street looking along it; bay count (10) and the split between units estimated."
+  }
+ ]
+}

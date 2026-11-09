@@ -1,0 +1,257 @@
+{
+ "osm_id": "way/164848658",
+ "sources": [
+  "mapillary:491963245449119",
+  "mapillary:1405763356455517"
+ ],
+ "walls": [
+  {
+   "id": "way/164848658:1",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.8,
+    7.2
+   ],
+   "material": "stone",
+   "wall_colour": "#d6c9a6",
+   "trim_colour": "#e3dabf",
+   "cornice_z": 9.6,
+   "cornice": "simple",
+   "parapet": false,
+   "string_courses": [
+    3.8,
+    7.2
+   ],
+   "quoins": false,
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 3.0,
+     "w": 1.3,
+     "z": 0.9,
+     "h": 2.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 8.4,
+     "w": 1.3,
+     "z": 0.9,
+     "h": 2.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 13.8,
+     "w": 1.3,
+     "z": 0.9,
+     "h": 2.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 3.0,
+     "w": 1.3,
+     "z": 4.4,
+     "h": 2.1,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 8.4,
+     "w": 1.3,
+     "z": 4.4,
+     "h": 2.1,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 13.8,
+     "w": 1.3,
+     "z": 4.4,
+     "h": 2.1,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 0.9,
+     "w": 0.8,
+     "z": 4.4,
+     "h": 2.1,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 3.0,
+     "w": 1.4,
+     "h": 1.6
+    },
+    {
+     "type": "dormer",
+     "x": 8.4,
+     "w": 1.4,
+     "h": 1.6
+    },
+    {
+     "type": "dormer",
+     "x": 13.8,
+     "w": 1.4,
+     "h": 1.6
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Scott's Building (King's, G. G. Scott jr) on Trumpington Street, southern three-gabled part: ashlar Gothic Revival, pointed ground-floor windows, two-light mullioned windows above, three steep gabled dormers with two-light windows, statue niche at the north gable. Taller in reality than walls.json height; elements fitted inside it. (length 16.8 m, height 9.8 m from walls.json)"
+  },
+  {
+   "id": "way/164848658:6",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.8,
+    7.2
+   ],
+   "material": "stone",
+   "wall_colour": "#d4c7a3",
+   "trim_colour": "#e3dabf",
+   "cornice_z": 11.6,
+   "cornice": "classical",
+   "parapet": true,
+   "string_courses": [
+    3.8,
+    7.6
+   ],
+   "quoins": false,
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.7,
+     "w": 1.3,
+     "z": 0.9,
+     "h": 2.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 7.8,
+     "w": 1.3,
+     "z": 0.9,
+     "h": 2.3,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 2.7,
+     "w": 2.6,
+     "z": 4.3,
+     "h": 2.6,
+     "panes": [
+      4,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 7.8,
+     "w": 1.4,
+     "z": 4.3,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 2.7,
+     "w": 2.4,
+     "z": 8.0,
+     "h": 2.6,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 7.8,
+     "w": 1.3,
+     "z": 8.0,
+     "h": 2.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Scott's Building north part: square tower-like bay with stacked carved oriel windows and pierced balustrades, statue niche, pointed ground windows; parapet with pinnacles. (length 10.8 m, height 12.4 m from walls.json)"
+  }
+ ]
+}

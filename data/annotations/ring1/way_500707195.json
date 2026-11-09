@@ -1,0 +1,339 @@
+{
+ "osm_id": "way/500707195",
+ "sources": [
+  "geograph:712963",
+  "commons:File:The Former Cavendish Laborataty, Free School Lane - geograph.org.uk - 5389600.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/500707195:0",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.6
+   ],
+   "material": "brick",
+   "wall_colour": "#8a3f2c",
+   "trim_colour": "#d8c9a6",
+   "cornice_z": 9.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    0.5,
+    4.6,
+    9.0
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.73,
+     "w": 1.9,
+     "z": 1.0,
+     "h": 2.5,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.73,
+     "w": 1.9,
+     "z": 5.4,
+     "h": 2.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.18,
+     "w": 1.9,
+     "z": 1.0,
+     "h": 2.5,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.18,
+     "w": 1.9,
+     "z": 5.4,
+     "h": 2.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.62,
+     "w": 1.9,
+     "z": 1.0,
+     "h": 2.5,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.62,
+     "w": 1.9,
+     "z": 5.4,
+     "h": 2.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.08,
+     "w": 1.9,
+     "z": 1.0,
+     "h": 2.5,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.08,
+     "w": 1.9,
+     "z": 5.4,
+     "h": 2.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 15.53,
+     "w": 1.9,
+     "z": 1.0,
+     "h": 2.5,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 15.53,
+     "w": 1.9,
+     "z": 5.4,
+     "h": 2.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Late-Victorian red-brick laboratory range (Hopkinson/engineering wing, now Social Anthropology / HSPS) on the east side of Free School Lane: two tall storeys of stone-dressed three-light mullion-and-transom windows, first-floor windows under segmental brick relieving arches, stone sill band and parapet. Bay pitch counted from geograph 712963 and the plaque close-up 5389600; same layout applied to both street walls."
+  },
+  {
+   "id": "way/500707195:1",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.6
+   ],
+   "material": "brick",
+   "wall_colour": "#8a3f2c",
+   "trim_colour": "#d8c9a6",
+   "cornice_z": 9.6,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    0.5,
+    4.6,
+    9.0
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.75,
+     "w": 1.9,
+     "z": 1.0,
+     "h": 2.5,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 1.75,
+     "w": 1.9,
+     "z": 5.4,
+     "h": 2.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.26,
+     "w": 1.9,
+     "z": 1.0,
+     "h": 2.5,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.26,
+     "w": 1.9,
+     "z": 5.4,
+     "h": 2.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.77,
+     "w": 1.9,
+     "z": 1.0,
+     "h": 2.5,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 8.77,
+     "w": 1.9,
+     "z": 5.4,
+     "h": 2.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.27,
+     "w": 1.9,
+     "z": 1.0,
+     "h": 2.5,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.27,
+     "w": 1.9,
+     "z": 5.4,
+     "h": 2.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 15.78,
+     "w": 1.9,
+     "z": 1.0,
+     "h": 2.5,
+     "panes": [
+      3,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 15.78,
+     "w": 1.9,
+     "z": 5.4,
+     "h": 2.9,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Late-Victorian red-brick laboratory range (Hopkinson/engineering wing, now Social Anthropology / HSPS) on the east side of Free School Lane: two tall storeys of stone-dressed three-light mullion-and-transom windows, first-floor windows under segmental brick relieving arches, stone sill band and parapet. Bay pitch counted from geograph 712963 and the plaque close-up 5389600; same layout applied to both street walls."
+  }
+ ]
+}

@@ -1,0 +1,303 @@
+{
+ "osm_id": "way/161131042",
+ "sources": [
+  "mapillary:1276092142786105",
+  "mapillary:164489142190162",
+  "mapillary:964294214333175"
+ ],
+ "walls": [
+  {
+   "id": "way/161131042:10",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.6
+   ],
+   "material": "stone",
+   "wall_colour": "#d6c29a",
+   "trim_colour": "#e4d6b4",
+   "cornice_z": 8.7,
+   "cornice": "classical",
+   "parapet": true,
+   "string_courses": [
+    4.4
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.9,
+     "w": 1.1,
+     "z": 1.4,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.7,
+     "w": 1.1,
+     "z": 1.4,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.5,
+     "w": 1.1,
+     "z": 1.4,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.9,
+     "w": 1.1,
+     "z": 5.4,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.7,
+     "w": 1.1,
+     "z": 5.4,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.5,
+     "w": 1.1,
+     "z": 5.4,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Essex front (1770s) north wing between the north pavilion and the pedimented Ionic portico: two storeys of 12-pane sashes in plain ashlar, three bays, band course, cornice and parapet. Railings on a low wall in front."
+  },
+  {
+   "id": "way/161131042:17",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.6
+   ],
+   "material": "stone",
+   "wall_colour": "#d6c29a",
+   "trim_colour": "#e4d6b4",
+   "cornice_z": 8.7,
+   "cornice": "classical",
+   "parapet": true,
+   "string_courses": [
+    4.4
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.7,
+     "w": 1.1,
+     "z": 1.4,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.7,
+     "w": 1.1,
+     "z": 5.4,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Essex front south wing, first bay beside the portico."
+  },
+  {
+   "id": "way/161131042:0",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    4.6
+   ],
+   "material": "stone",
+   "wall_colour": "#d6c29a",
+   "trim_colour": "#e4d6b4",
+   "cornice_z": 8.7,
+   "cornice": "classical",
+   "parapet": true,
+   "string_courses": [
+    4.4
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.2,
+     "w": 1.1,
+     "z": 1.4,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.0,
+     "w": 1.1,
+     "z": 1.4,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.8,
+     "w": 1.1,
+     "z": 1.4,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.5,
+     "w": 1.1,
+     "z": 1.4,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.2,
+     "w": 1.1,
+     "z": 5.4,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.0,
+     "w": 1.1,
+     "z": 5.4,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 6.8,
+     "w": 1.1,
+     "z": 5.4,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.5,
+     "w": 1.1,
+     "z": 5.4,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "confidence": "medium",
+   "notes": "Essex front south wing: two storeys of 12-pane sashes, four bays, band course, cornice and parapet, behind railings."
+  }
+ ]
+}

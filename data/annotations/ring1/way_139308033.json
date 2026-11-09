@@ -1,0 +1,45 @@
+{
+ "osm_id": "way/139308033",
+ "sources": [
+  "commons:File:Cambridge - Trinity Lane - Clare College, founded in 1326 - View NNW on Clare College Chapel 1763 by Sir James Burrough.jpg",
+  "commons:File:Cambridge - Trinity Lane - View South along Old Schools 1890 by Gothic Revival Architect John Loughborough Pearson towards King's College Chapel - On the right- Clare College Chapel 1763 by Sir James Burrough.jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/139308033:5",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.2
+   ],
+   "material": "stone",
+   "wall_colour": "#d2b98c",
+   "trim_colour": "#dcc7a0",
+   "cornice_z": 11.6,
+   "cornice": "classical",
+   "parapet": true,
+   "string_courses": [
+    3.2
+   ],
+   "quoins": false,
+   "elements": [
+    {
+     "type": "window",
+     "style": "glazed",
+     "x": 5.295,
+     "w": 2.6,
+     "z": 3.6,
+     "h": 6.2,
+     "panes": [
+      1,
+      1
+     ],
+     "head": "arched",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Clare College Chapel (Burrough/Essex 1763) east end on Trinity Lane: Ketton ashlar, rusticated base, giant Corinthian pilasters at the corners, one tall round-arched window/niche centred, full entablature and balustraded parapet. Commons views along Trinity Lane (CC BY-SA 4.0). (length 10.6 m, height 13.1 m from walls.json)"
+  }
+ ]
+}
