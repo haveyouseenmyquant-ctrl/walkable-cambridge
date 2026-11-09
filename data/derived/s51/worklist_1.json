@@ -1,0 +1,1334 @@
+[
+ {
+  "id": "relation/18902596:31",
+  "osm_id": "relation/18902596",
+  "name": "David Attenborough Building",
+  "street": "Pembroke Street",
+  "length": 10.63,
+  "dist": 171.1,
+  "mid_local_xy": [
+   -17.6,
+   -91.0
+  ]
+ },
+ {
+  "id": "way/5236376:26",
+  "osm_id": "way/5236376",
+  "name": null,
+  "street": null,
+  "length": 7.52,
+  "dist": 168.8,
+  "mid_local_xy": [
+   -3.0,
+   -78.7
+  ]
+ },
+ {
+  "id": "way/40937938:60",
+  "osm_id": "way/40937938",
+  "name": "Lion Yard",
+  "street": "Staint Tibbs Row",
+  "length": 7.34,
+  "dist": 128.4,
+  "mid_local_xy": [
+   -1.7,
+   -21.6
+  ]
+ },
+ {
+  "id": "way/665152264:0",
+  "osm_id": "way/665152264",
+  "name": "New Wing (Student Services Centre)",
+  "street": null,
+  "length": 5.78,
+  "dist": 177.0,
+  "mid_local_xy": [
+   -66.6,
+   -115.9
+  ]
+ },
+ {
+  "id": "way/5236376:24",
+  "osm_id": "way/5236376",
+  "name": null,
+  "street": null,
+  "length": 5.32,
+  "dist": 158.2,
+  "mid_local_xy": [
+   -8.1,
+   -69.4
+  ]
+ },
+ {
+  "id": "way/665152264:3",
+  "osm_id": "way/665152264",
+  "name": "New Wing (Student Services Centre)",
+  "street": null,
+  "length": 4.94,
+  "dist": 177.5,
+  "mid_local_xy": [
+   -58.0,
+   -114.4
+  ]
+ },
+ {
+  "id": "way/5236376:21",
+  "osm_id": "way/5236376",
+  "name": null,
+  "street": null,
+  "length": 4.39,
+  "dist": 146.9,
+  "mid_local_xy": [
+   -15.7,
+   -60.8
+  ]
+ },
+ {
+  "id": "way/5236376:19",
+  "osm_id": "way/5236376",
+  "name": null,
+  "street": null,
+  "length": 4.32,
+  "dist": 140.1,
+  "mid_local_xy": [
+   -17.0,
+   -53.3
+  ]
+ },
+ {
+  "id": "way/5236376:16",
+  "osm_id": "way/5236376",
+  "name": null,
+  "street": null,
+  "length": 4.32,
+  "dist": 137.6,
+  "mid_local_xy": [
+   -12.6,
+   -46.5
+  ]
+ },
+ {
+  "id": "way/5236376:25",
+  "osm_id": "way/5236376",
+  "name": null,
+  "street": null,
+  "length": 4.28,
+  "dist": 163.0,
+  "mid_local_xy": [
+   -6.0,
+   -73.6
+  ]
+ },
+ {
+  "id": "way/5236376:22",
+  "osm_id": "way/5236376",
+  "name": null,
+  "street": null,
+  "length": 4.21,
+  "dist": 151.2,
+  "mid_local_xy": [
+   -12.9,
+   -64.0
+  ]
+ },
+ {
+  "id": "way/665152264:1",
+  "osm_id": "way/665152264",
+  "name": "New Wing (Student Services Centre)",
+  "street": null,
+  "length": 3.76,
+  "dist": 175.9,
+  "mid_local_xy": [
+   -62.4,
+   -113.8
+  ]
+ },
+ {
+  "id": "way/5236376:20",
+  "osm_id": "way/5236376",
+  "name": null,
+  "street": null,
+  "length": 3.6,
+  "dist": 143.1,
+  "mid_local_xy": [
+   -17.1,
+   -57.2
+  ]
+ },
+ {
+  "id": "way/40937938:63",
+  "osm_id": "way/40937938",
+  "name": "Lion Yard",
+  "street": "Staint Tibbs Row",
+  "length": 3.27,
+  "dist": 136.5,
+  "mid_local_xy": [
+   2.2,
+   -29.7
+  ]
+ },
+ {
+  "id": "way/40937938:64",
+  "osm_id": "way/40937938",
+  "name": "Lion Yard",
+  "street": "Staint Tibbs Row",
+  "length": 3.18,
+  "dist": 137.4,
+  "mid_local_xy": [
+   1.5,
+   -32.0
+  ]
+ },
+ {
+  "id": "way/5236376:17",
+  "osm_id": "way/5236376",
+  "name": null,
+  "street": null,
+  "length": 3.12,
+  "dist": 138.0,
+  "mid_local_xy": [
+   -15.2,
+   -49.1
+  ]
+ },
+ {
+  "id": "way/95412331:15",
+  "osm_id": "way/95412331",
+  "name": "Cockcroft Building",
+  "street": "Pembroke Street",
+  "length": 10.58,
+  "dist": 227.6,
+  "mid_local_xy": [
+   -24.8,
+   -156.5
+  ]
+ },
+ {
+  "id": "relation/18902596:28",
+  "osm_id": "relation/18902596",
+  "name": "David Attenborough Building",
+  "street": "Pembroke Street",
+  "length": 10.17,
+  "dist": 200.5,
+  "mid_local_xy": [
+   -2.8,
+   -116.4
+  ]
+ },
+ {
+  "id": "relation/18902596:21",
+  "osm_id": "relation/18902596",
+  "name": "David Attenborough Building",
+  "street": "Pembroke Street",
+  "length": 9.53,
+  "dist": 216.6,
+  "mid_local_xy": [
+   9.0,
+   -128.1
+  ]
+ },
+ {
+  "id": "way/119578565:2",
+  "osm_id": "way/119578565",
+  "name": "Mond Building",
+  "street": "Pembroke Street",
+  "length": 6.31,
+  "dist": 207.7,
+  "mid_local_xy": [
+   -82.0,
+   -149.3
+  ]
+ },
+ {
+  "id": "relation/18902596:27",
+  "osm_id": "relation/18902596",
+  "name": "David Attenborough Building",
+  "street": "Pembroke Street",
+  "length": 6.3,
+  "dist": 205.9,
+  "mid_local_xy": [
+   1.8,
+   -119.9
+  ]
+ },
+ {
+  "id": "relation/18902596:45",
+  "osm_id": "relation/18902596",
+  "name": "David Attenborough Building",
+  "street": "Pembroke Street",
+  "length": 5.12,
+  "dist": 187.6,
+  "mid_local_xy": [
+   -34.3,
+   -117.2
+  ]
+ },
+ {
+  "id": "relation/18902596:29",
+  "osm_id": "relation/18902596",
+  "name": "David Attenborough Building",
+  "street": "Pembroke Street",
+  "length": 4.87,
+  "dist": 193.1,
+  "mid_local_xy": [
+   -5.3,
+   -109.3
+  ]
+ },
+ {
+  "id": "relation/18902596:16",
+  "osm_id": "relation/18902596",
+  "name": "David Attenborough Building",
+  "street": "Pembroke Street",
+  "length": 4.8,
+  "dist": 226.0,
+  "mid_local_xy": [
+   18.7,
+   -133.2
+  ]
+ },
+ {
+  "id": "relation/18902596:50",
+  "osm_id": "relation/18902596",
+  "name": "David Attenborough Building",
+  "street": "Pembroke Street",
+  "length": 4.0,
+  "dist": 200.7,
+  "mid_local_xy": [
+   -28.4,
+   -129.0
+  ]
+ },
+ {
+  "id": "relation/18902596:47",
+  "osm_id": "relation/18902596",
+  "name": "David Attenborough Building",
+  "street": "Pembroke Street",
+  "length": 3.98,
+  "dist": 197.9,
+  "mid_local_xy": [
+   -29.5,
+   -126.5
+  ]
+ },
+ {
+  "id": "relation/18902596:51",
+  "osm_id": "relation/18902596",
+  "name": "David Attenborough Building",
+  "street": "Pembroke Street",
+  "length": 3.61,
+  "dist": 202.5,
+  "mid_local_xy": [
+   -25.8,
+   -129.9
+  ]
+ },
+ {
+  "id": "way/119578565:1",
+  "osm_id": "way/119578565",
+  "name": "Mond Building",
+  "street": "Pembroke Street",
+  "length": 3.55,
+  "dist": 206.2,
+  "mid_local_xy": [
+   -77.5,
+   -147.3
+  ]
+ },
+ {
+  "id": "relation/18902596:11",
+  "osm_id": "relation/18902596",
+  "name": "David Attenborough Building",
+  "street": "Pembroke Street",
+  "length": 3.5,
+  "dist": 231.3,
+  "mid_local_xy": [
+   16.9,
+   -140.5
+  ]
+ },
+ {
+  "id": "way/95412331:6",
+  "osm_id": "way/95412331",
+  "name": "Cockcroft Building",
+  "street": "Pembroke Street",
+  "length": 3.41,
+  "dist": 238.8,
+  "mid_local_xy": [
+   -43.9,
+   -174.0
+  ]
+ },
+ {
+  "id": "relation/18902596:19",
+  "osm_id": "relation/18902596",
+  "name": "David Attenborough Building",
+  "street": "Pembroke Street",
+  "length": 3.15,
+  "dist": 220.3,
+  "mid_local_xy": [
+   12.9,
+   -130.1
+  ]
+ },
+ {
+  "id": "relation/18902596:44",
+  "osm_id": "relation/18902596",
+  "name": "David Attenborough Building",
+  "street": "Pembroke Street",
+  "length": 3.12,
+  "dist": 189.0,
+  "mid_local_xy": [
+   -36.8,
+   -119.7
+  ]
+ },
+ {
+  "id": "way/131662340:21",
+  "osm_id": "way/131662340",
+  "name": "Zoology Building",
+  "street": "Downing Street",
+  "length": 21.93,
+  "dist": 257.9,
+  "mid_local_xy": [
+   29.1,
+   -164.2
+  ]
+ },
+ {
+  "id": "way/131662314:12",
+  "osm_id": "way/131662314",
+  "name": "Shell Building",
+  "street": "Pembroke Street",
+  "length": 16.86,
+  "dist": 290.2,
+  "mid_local_xy": [
+   -13.6,
+   -218.8
+  ]
+ },
+ {
+  "id": "way/131662309:14",
+  "osm_id": "way/131662309",
+  "name": "Old Metallurgy",
+  "street": null,
+  "length": 16.57,
+  "dist": 292.4,
+  "mid_local_xy": [
+   -28.9,
+   -225.6
+  ]
+ },
+ {
+  "id": "way/131662340:26",
+  "osm_id": "way/131662340",
+  "name": "Zoology Building",
+  "street": "Downing Street",
+  "length": 14.61,
+  "dist": 276.1,
+  "mid_local_xy": [
+   13.0,
+   -193.2
+  ]
+ },
+ {
+  "id": "way/131111124:4",
+  "osm_id": "way/131111124",
+  "name": "Old Physical Chemistry",
+  "street": "Free School Lane",
+  "length": 12.96,
+  "dist": 270.7,
+  "mid_local_xy": [
+   -82.8,
+   -212.6
+  ]
+ },
+ {
+  "id": "way/131662314:13",
+  "osm_id": "way/131662314",
+  "name": "Shell Building",
+  "street": "Pembroke Street",
+  "length": 12.38,
+  "dist": 289.3,
+  "mid_local_xy": [
+   -0.2,
+   -213.1
+  ]
+ },
+ {
+  "id": "relation/18902598:4",
+  "osm_id": "relation/18902598",
+  "name": "Museum of Zoology",
+  "street": "Downing Street",
+  "length": 9.42,
+  "dist": 261.8,
+  "mid_local_xy": [
+   24.9,
+   -171.1
+  ]
+ },
+ {
+  "id": "way/131111124:5",
+  "osm_id": "way/131111124",
+  "name": "Old Physical Chemistry",
+  "street": "Free School Lane",
+  "length": 9.29,
+  "dist": 281.6,
+  "mid_local_xy": [
+   -79.7,
+   -223.2
+  ]
+ },
+ {
+  "id": "relation/18902598:0",
+  "osm_id": "relation/18902598",
+  "name": "Museum of Zoology",
+  "street": "Downing Street",
+  "length": 8.3,
+  "dist": 265.1,
+  "mid_local_xy": [
+   17.8,
+   -178.7
+  ]
+ },
+ {
+  "id": "way/131662309:13",
+  "osm_id": "way/131662309",
+  "name": "Old Metallurgy",
+  "street": null,
+  "length": 7.0,
+  "dist": 294.6,
+  "mid_local_xy": [
+   -39.7,
+   -230.4
+  ]
+ },
+ {
+  "id": "way/131662301:7",
+  "osm_id": "way/131662301",
+  "name": "Heycock Wing",
+  "street": null,
+  "length": 6.64,
+  "dist": 295.9,
+  "mid_local_xy": [
+   -46.0,
+   -233.0
+  ]
+ },
+ {
+  "id": "way/131662301:13",
+  "osm_id": "way/131662301",
+  "name": "Heycock Wing",
+  "street": null,
+  "length": 6.61,
+  "dist": 285.6,
+  "mid_local_xy": [
+   -56.1,
+   -224.4
+  ]
+ },
+ {
+  "id": "way/131662301:0",
+  "osm_id": "way/131662301",
+  "name": "Heycock Wing",
+  "street": null,
+  "length": 6.18,
+  "dist": 297.2,
+  "mid_local_xy": [
+   -67.5,
+   -237.7
+  ]
+ },
+ {
+  "id": "way/131111124:14",
+  "osm_id": "way/131111124",
+  "name": "Old Physical Chemistry",
+  "street": "Free School Lane",
+  "length": 6.06,
+  "dist": 284.6,
+  "mid_local_xy": [
+   -68.2,
+   -225.2
+  ]
+ },
+ {
+  "id": "relation/18902596:59",
+  "osm_id": "relation/18902596",
+  "name": "David Attenborough Building",
+  "street": "Pembroke Street",
+  "length": 6.04,
+  "dist": 249.4,
+  "mid_local_xy": [
+   3.2,
+   -168.3
+  ]
+ },
+ {
+  "id": "way/131662313:0",
+  "osm_id": "way/131662313",
+  "name": "Phoenix Building",
+  "street": "Pembroke Street",
+  "length": 5.9,
+  "dist": 261.5,
+  "mid_local_xy": [
+   -85.7,
+   -203.6
+  ]
+ },
+ {
+  "id": "way/131111124:13",
+  "osm_id": "way/131111124",
+  "name": "Old Physical Chemistry",
+  "street": "Free School Lane",
+  "length": 5.86,
+  "dist": 290.5,
+  "mid_local_xy": [
+   -66.4,
+   -230.8
+  ]
+ },
+ {
+  "id": "relation/18902596:56",
+  "osm_id": "relation/18902596",
+  "name": "David Attenborough Building",
+  "street": "Pembroke Street",
+  "length": 5.12,
+  "dist": 246.0,
+  "mid_local_xy": [
+   -5.6,
+   -168.6
+  ]
+ },
+ {
+  "id": "way/131662313:9",
+  "osm_id": "way/131662313",
+  "name": "Phoenix Building",
+  "street": "Pembroke Street",
+  "length": 4.95,
+  "dist": 256.4,
+  "mid_local_xy": [
+   -87.7,
+   -198.5
+  ]
+ },
+ {
+  "id": "relation/18902598:5",
+  "osm_id": "relation/18902598",
+  "name": "Museum of Zoology",
+  "street": "Downing Street",
+  "length": 4.69,
+  "dist": 254.8,
+  "mid_local_xy": [
+   22.0,
+   -164.7
+  ]
+ },
+ {
+  "id": "way/131662314:15",
+  "osm_id": "way/131662314",
+  "name": "Shell Building",
+  "street": "Pembroke Street",
+  "length": 4.57,
+  "dist": 273.6,
+  "mid_local_xy": [
+   -0.5,
+   -196.3
+  ]
+ },
+ {
+  "id": "relation/18902598:6",
+  "osm_id": "relation/18902598",
+  "name": "Museum of Zoology",
+  "street": "Downing Street",
+  "length": 4.25,
+  "dist": 250.3,
+  "mid_local_xy": [
+   20.1,
+   -160.6
+  ]
+ },
+ {
+  "id": "way/131111124:9",
+  "osm_id": "way/131111124",
+  "name": "Old Physical Chemistry",
+  "street": "Free School Lane",
+  "length": 3.93,
+  "dist": 294.9,
+  "mid_local_xy": [
+   -76.0,
+   -236.3
+  ]
+ },
+ {
+  "id": "way/131111124:8",
+  "osm_id": "way/131111124",
+  "name": "Old Physical Chemistry",
+  "street": "Free School Lane",
+  "length": 3.88,
+  "dist": 291.2,
+  "mid_local_xy": [
+   -77.7,
+   -232.8
+  ]
+ },
+ {
+  "id": "relation/18902598:3",
+  "osm_id": "relation/18902598",
+  "name": "Museum of Zoology",
+  "street": "Downing Street",
+  "length": 3.48,
+  "dist": 268.2,
+  "mid_local_xy": [
+   27.5,
+   -177.0
+  ]
+ },
+ {
+  "id": "way/131111124:6",
+  "osm_id": "way/131111124",
+  "name": "Old Physical Chemistry",
+  "street": "Free School Lane",
+  "length": 3.19,
+  "dist": 287.6,
+  "mid_local_xy": [
+   -77.8,
+   -229.1
+  ]
+ },
+ {
+  "id": "way/136601299:10",
+  "osm_id": "way/136601299",
+  "name": "New Court",
+  "street": null,
+  "length": 51.59,
+  "dist": 304.1,
+  "mid_local_xy": [
+   -19.9,
+   -235.2
+  ]
+ },
+ {
+  "id": "way/136601300:6",
+  "osm_id": "way/136601300",
+  "name": null,
+  "street": null,
+  "length": 36.9,
+  "dist": 318.7,
+  "mid_local_xy": [
+   22.7,
+   -235.5
+  ]
+ },
+ {
+  "id": "way/136601297:6",
+  "osm_id": "way/136601297",
+  "name": null,
+  "street": null,
+  "length": 31.36,
+  "dist": 349.5,
+  "mid_local_xy": [
+   -96.3,
+   -292.1
+  ]
+ },
+ {
+  "id": "relation/1840656:8",
+  "osm_id": "relation/1840656",
+  "name": "Chimney Court",
+  "street": null,
+  "length": 18.23,
+  "dist": 326.9,
+  "mid_local_xy": [
+   -66.6,
+   -267.5
+  ]
+ },
+ {
+  "id": "relation/919869:5",
+  "osm_id": "relation/919869",
+  "name": "Botolph Court",
+  "street": null,
+  "length": 17.59,
+  "dist": 334.7,
+  "mid_local_xy": [
+   -88.7,
+   -277.1
+  ]
+ },
+ {
+  "id": "way/149032884:9",
+  "osm_id": "way/149032884",
+  "name": null,
+  "street": null,
+  "length": 17.28,
+  "dist": 354.4,
+  "mid_local_xy": [
+   -126.3,
+   -296.3
+  ]
+ },
+ {
+  "id": "relation/1840656:1",
+  "osm_id": "relation/1840656",
+  "name": "Chimney Court",
+  "street": null,
+  "length": 16.27,
+  "dist": 332.8,
+  "mid_local_xy": [
+   -39.0,
+   -269.3
+  ]
+ },
+ {
+  "id": "relation/919869:4",
+  "osm_id": "relation/919869",
+  "name": "Botolph Court",
+  "street": null,
+  "length": 15.64,
+  "dist": 343.2,
+  "mid_local_xy": [
+   -102.8,
+   -285.8
+  ]
+ },
+ {
+  "id": "relation/919869:0",
+  "osm_id": "relation/919869",
+  "name": "Botolph Court",
+  "street": null,
+  "length": 15.26,
+  "dist": 326.2,
+  "mid_local_xy": [
+   -109.7,
+   -268.7
+  ]
+ },
+ {
+  "id": "relation/919869:8",
+  "osm_id": "relation/919869",
+  "name": "Botolph Court",
+  "street": null,
+  "length": 14.95,
+  "dist": 321.3,
+  "mid_local_xy": [
+   -95.4,
+   -263.9
+  ]
+ },
+ {
+  "id": "way/131636314:1",
+  "osm_id": "way/131636314",
+  "name": "West Building",
+  "street": "Tennis Court Road",
+  "length": 13.74,
+  "dist": 347.1,
+  "mid_local_xy": [
+   42.4,
+   -257.9
+  ]
+ },
+ {
+  "id": "way/149032875:1",
+  "osm_id": "way/149032875",
+  "name": null,
+  "street": null,
+  "length": 12.98,
+  "dist": 343.0,
+  "mid_local_xy": [
+   -150.9,
+   -282.3
+  ]
+ },
+ {
+  "id": "way/59620751:11",
+  "osm_id": "way/59620751",
+  "name": "St. Botolph",
+  "street": "Trumpington Street",
+  "length": 12.45,
+  "dist": 315.7,
+  "mid_local_xy": [
+   -136.5,
+   -256.5
+  ]
+ },
+ {
+  "id": "way/131662301:6",
+  "osm_id": "way/131662301",
+  "name": "Heycock Wing",
+  "street": null,
+  "length": 11.99,
+  "dist": 300.1,
+  "mid_local_xy": [
+   -53.2,
+   -238.6
+  ]
+ },
+ {
+  "id": "way/149032864:8",
+  "osm_id": "way/149032864",
+  "name": null,
+  "street": "Botolph Lane",
+  "length": 11.25,
+  "dist": 311.6,
+  "mid_local_xy": [
+   -75.9,
+   -253.0
+  ]
+ },
+ {
+  "id": "way/149032871:1",
+  "osm_id": "way/149032871",
+  "name": null,
+  "street": null,
+  "length": 10.77,
+  "dist": 332.7,
+  "mid_local_xy": [
+   -128.4,
+   -274.4
+  ]
+ },
+ {
+  "id": "way/136601355:2",
+  "osm_id": "way/136601355",
+  "name": null,
+  "street": null,
+  "length": 10.75,
+  "dist": 342.4,
+  "mid_local_xy": [
+   33.2,
+   -256.8
+  ]
+ },
+ {
+  "id": "way/59609430:2",
+  "osm_id": "way/59609430",
+  "name": "Conservation",
+  "street": null,
+  "length": 10.21,
+  "dist": 309.4,
+  "mid_local_xy": [
+   -83.7,
+   -251.5
+  ]
+ },
+ {
+  "id": "way/149032864:3",
+  "osm_id": "way/149032864",
+  "name": null,
+  "street": "Botolph Lane",
+  "length": 9.74,
+  "dist": 327.1,
+  "mid_local_xy": [
+   -77.8,
+   -268.8
+  ]
+ },
+ {
+  "id": "relation/1840656:9",
+  "osm_id": "relation/1840656",
+  "name": "Chimney Court",
+  "street": null,
+  "length": 9.6,
+  "dist": 335.8,
+  "mid_local_xy": [
+   -76.4,
+   -277.4
+  ]
+ },
+ {
+  "id": "way/149032872:3",
+  "osm_id": "way/149032872",
+  "name": null,
+  "street": "Botolph Lane",
+  "length": 9.32,
+  "dist": 316.6,
+  "mid_local_xy": [
+   -84.4,
+   -258.8
+  ]
+ },
+ {
+  "id": "way/59620751:5",
+  "osm_id": "way/59620751",
+  "name": "St. Botolph",
+  "street": "Trumpington Street",
+  "length": 8.95,
+  "dist": 325.9,
+  "mid_local_xy": [
+   -157.4,
+   -263.9
+  ]
+ },
+ {
+  "id": "way/131662301:5",
+  "osm_id": "way/131662301",
+  "name": "Heycock Wing",
+  "street": null,
+  "length": 8.75,
+  "dist": 306.4,
+  "mid_local_xy": [
+   -60.3,
+   -246.1
+  ]
+ },
+ {
+  "id": "way/136601300:7",
+  "osm_id": "way/136601300",
+  "name": null,
+  "street": null,
+  "length": 8.31,
+  "dist": 300.5,
+  "mid_local_xy": [
+   10.3,
+   -221.0
+  ]
+ },
+ {
+  "id": "way/149032876:6",
+  "osm_id": "way/149032876",
+  "name": null,
+  "street": null,
+  "length": 8.25,
+  "dist": 348.8,
+  "mid_local_xy": [
+   -113.4,
+   -291.3
+  ]
+ },
+ {
+  "id": "way/149032881:1",
+  "osm_id": "way/149032881",
+  "name": null,
+  "street": "Trumpington Street",
+  "length": 7.8,
+  "dist": 350.2,
+  "mid_local_xy": [
+   -161.3,
+   -288.0
+  ]
+ },
+ {
+  "id": "way/149032874:2",
+  "osm_id": "way/149032874",
+  "name": null,
+  "street": null,
+  "length": 7.47,
+  "dist": 338.3,
+  "mid_local_xy": [
+   -141.2,
+   -278.8
+  ]
+ },
+ {
+  "id": "way/1546255796:3",
+  "osm_id": "way/1546255796",
+  "name": null,
+  "street": null,
+  "length": 6.55,
+  "dist": 329.5,
+  "mid_local_xy": [
+   -120.2,
+   -271.7
+  ]
+ },
+ {
+  "id": "way/131662301:3",
+  "osm_id": "way/131662301",
+  "name": "Heycock Wing",
+  "street": null,
+  "length": 6.23,
+  "dist": 307.0,
+  "mid_local_xy": [
+   -68.2,
+   -247.7
+  ]
+ },
+ {
+  "id": "way/149032864:6",
+  "osm_id": "way/149032864",
+  "name": null,
+  "street": "Botolph Lane",
+  "length": 5.65,
+  "dist": 318.7,
+  "mid_local_xy": [
+   -68.7,
+   -259.5
+  ]
+ },
+ {
+  "id": "way/149032881:0",
+  "osm_id": "way/149032881",
+  "name": null,
+  "street": "Trumpington Street",
+  "length": 5.38,
+  "dist": 345.7,
+  "mid_local_xy": [
+   -160.0,
+   -283.6
+  ]
+ },
+ {
+  "id": "way/149032882:0",
+  "osm_id": "way/149032882",
+  "name": null,
+  "street": "Trumpington Street",
+  "length": 4.82,
+  "dist": 358.8,
+  "mid_local_xy": [
+   -158.1,
+   -297.2
+  ]
+ },
+ {
+  "id": "way/1546255795:3",
+  "osm_id": "way/1546255795",
+  "name": null,
+  "street": null,
+  "length": 4.46,
+  "dist": 335.7,
+  "mid_local_xy": [
+   -135.6,
+   -276.8
+  ]
+ },
+ {
+  "id": "relation/1840656:6",
+  "osm_id": "relation/1840656",
+  "name": "Chimney Court",
+  "street": null,
+  "length": 4.41,
+  "dist": 328.2,
+  "mid_local_xy": [
+   -52.4,
+   -267.0
+  ]
+ },
+ {
+  "id": "way/149032881:2",
+  "osm_id": "way/149032881",
+  "name": null,
+  "street": "Trumpington Street",
+  "length": 3.44,
+  "dist": 355.2,
+  "mid_local_xy": [
+   -159.5,
+   -293.3
+  ]
+ },
+ {
+  "id": "way/136601299:9",
+  "osm_id": "way/136601299",
+  "name": "New Court",
+  "street": null,
+  "length": 3.44,
+  "dist": 300.9,
+  "mid_local_xy": [
+   5.0,
+   -223.6
+  ]
+ },
+ {
+  "id": "way/149032864:5",
+  "osm_id": "way/149032864",
+  "name": null,
+  "street": "Botolph Lane",
+  "length": 3.32,
+  "dist": 321.7,
+  "mid_local_xy": [
+   -71.6,
+   -262.9
+  ]
+ },
+ {
+  "id": "way/140233528:1",
+  "osm_id": "way/140233528",
+  "name": "The Old Library",
+  "street": null,
+  "length": 21.72,
+  "dist": 375.0,
+  "mid_local_xy": [
+   -138.0,
+   -316.0
+  ]
+ },
+ {
+  "id": "way/136601301:4",
+  "osm_id": "way/136601301",
+  "name": null,
+  "street": null,
+  "length": 14.87,
+  "dist": 365.3,
+  "mid_local_xy": [
+   -121.8,
+   -307.5
+  ]
+ },
+ {
+  "id": "way/136330924:3",
+  "osm_id": "way/136330924",
+  "name": "17 Mill Lane",
+  "street": null,
+  "length": 14.46,
+  "dist": 395.9,
+  "mid_local_xy": [
+   -184.3,
+   -330.1
+  ]
+ },
+ {
+  "id": "way/1546255790:1",
+  "osm_id": "way/1546255790",
+  "name": null,
+  "street": "Trumpington Street",
+  "length": 10.66,
+  "dist": 368.7,
+  "mid_local_xy": [
+   -147.5,
+   -308.6
+  ]
+ },
+ {
+  "id": "way/149032878:0",
+  "osm_id": "way/149032878",
+  "name": null,
+  "street": "Trumpington Street",
+  "length": 7.2,
+  "dist": 364.0,
+  "mid_local_xy": [
+   -155.9,
+   -302.7
+  ]
+ },
+ {
+  "id": "way/140233528:2",
+  "osm_id": "way/140233528",
+  "name": "The Old Library",
+  "street": null,
+  "length": 6.92,
+  "dist": 383.8,
+  "mid_local_xy": [
+   -145.9,
+   -324.1
+  ]
+ },
+ {
+  "id": "way/136601303:4",
+  "osm_id": "way/136601303",
+  "name": "Hall and Buttery",
+  "street": null,
+  "length": 6.7,
+  "dist": 360.0,
+  "mid_local_xy": [
+   -112.2,
+   -302.5
+  ]
+ },
+ {
+  "id": "way/1546255792:1",
+  "osm_id": "way/1546255792",
+  "name": null,
+  "street": "Pembroke Street",
+  "length": 6.5,
+  "dist": 361.1,
+  "mid_local_xy": [
+   -136.7,
+   -302.1
+  ]
+ },
+ {
+  "id": "way/1546255790:0",
+  "osm_id": "way/1546255790",
+  "name": null,
+  "street": "Trumpington Street",
+  "length": 5.76,
+  "dist": 369.4,
+  "mid_local_xy": [
+   -153.2,
+   -308.6
+  ]
+ },
+ {
+  "id": "way/1210815327:6",
+  "osm_id": "way/1210815327",
+  "name": "1 Mill Lane",
+  "street": "Mill Lane",
+  "length": 5.54,
+  "dist": 392.5,
+  "mid_local_xy": [
+   -167.6,
+   -329.8
+  ]
+ },
+ {
+  "id": "way/1210815327:0",
+  "osm_id": "way/1210815327",
+  "name": "1 Mill Lane",
+  "street": "Mill Lane",
+  "length": 5.4,
+  "dist": 390.3,
+  "mid_local_xy": [
+   -157.9,
+   -329.0
+  ]
+ },
+ {
+  "id": "way/136330937:20",
+  "osm_id": "way/136330937",
+  "name": "Kenmare House",
+  "street": "Trumpington Street",
+  "length": 4.82,
+  "dist": 394.2,
+  "mid_local_xy": [
+   -155.3,
+   -333.4
+  ]
+ },
+ {
+  "id": "way/1210815327:5",
+  "osm_id": "way/1210815327",
+  "name": "1 Mill Lane",
+  "street": "Mill Lane",
+  "length": 4.45,
+  "dist": 389.6,
+  "mid_local_xy": [
+   -163.2,
+   -327.5
+  ]
+ },
+ {
+  "id": "way/1546255791:1",
+  "osm_id": "way/1546255791",
+  "name": null,
+  "street": "Pembroke Street",
+  "length": 4.0,
+  "dist": 364.2,
+  "mid_local_xy": [
+   -141.2,
+   -304.8
+  ]
+ },
+ {
+  "id": "way/15387748:1",
+  "osm_id": "way/15387748",
+  "name": null,
+  "street": null,
+  "length": 3.62,
+  "dist": 388.1,
+  "mid_local_xy": [
+   -143.3,
+   -328.6
+  ]
+ },
+ {
+  "id": "way/136330937:19",
+  "osm_id": "way/136330937",
+  "name": "Kenmare House",
+  "street": "Trumpington Street",
+  "length": 3.23,
+  "dist": 397.4,
+  "mid_local_xy": [
+   -153.2,
+   -336.8
+  ]
+ }
+]

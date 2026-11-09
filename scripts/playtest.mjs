@@ -134,7 +134,11 @@ function installBot(route, runIdx) {
     if (bot.stuckT > 2) {
       const moved = bot.lastPos ? Math.hypot(P.x - bot.lastPos.x, P.y - bot.lastPos.y) : 9;
       bot.lastPos = { x: P.x, y: P.y }; bot.stuckT = 0;
-      if (moved < 0.5) { bot.replans++; P.keys.add('Space'); setGoal(G.x, G.y, G.tol); if (bot.replans > 8) bot.fail = `softlock: no route progress (leg ${bot.leg} ${route[bot.leg]}, at ${P.x.toFixed(1)},${P.y.toFixed(1)},${P.z.toFixed(1)}, goal ${G.x.toFixed(1)},${G.y.toFixed(1)}, path ${bot.path?.length ?? 0}, engaged ${[...bot.engaged.keys()].map(m => m.type.id).join('/') || 'none'})`; }
+      // session 50: also count it as stuck when 2 s of movement brought it no closer to the goal (a movement spell that lands on
+      // a roof is settled back to its start, so the bot hopped in place for 10+ minutes without tripping the moved check)
+      const dG = Math.hypot(G.x - P.x, G.y - P.y), closer = G.best == null || dG < G.best - 0.5;
+      if (closer) G.best = dG;
+      if (moved < 0.5 || !closer) { bot.replans++; P.keys.add('Space'); setGoal(G.x, G.y, G.tol); bot.goal.best = G.best; if (bot.replans > 8) bot.fail = `softlock: no route progress (leg ${bot.leg} ${route[bot.leg]}, at ${P.x.toFixed(1)},${P.y.toFixed(1)},${P.z.toFixed(1)}, goal ${G.x.toFixed(1)},${G.y.toFixed(1)}, path ${bot.path?.length ?? 0}, engaged ${[...bot.engaged.keys()].map(m => m.type.id).join('/') || 'none'})`; }
       else bot.replans = 0;
     }
     return false;
@@ -207,6 +211,9 @@ function installBot(route, runIdx) {
       return;
     }
     // loot: walk over recent kill spots (drops sit within 0.8 m of the corpse)
+    // session 50: drops more than 20 m away are left behind (with 25 s core respawns and reinforcement waves, walking back
+    // 40-60 m for every old drop pulled the bot into fresh packs forever: 5 of 20 runs timed out at 900 s with 250-470 kills)
+    for (const k of ev.kills) if (!k.looted && Math.hypot(k.x - P.x, k.y - P.y) > 20) k.looted = true;
     const spot = ev.kills.find(k => !k.looted);
     if (spot) {
       bot.why = `loot ${spot.x.toFixed(1)},${spot.y.toFixed(1)}`;

@@ -1,0 +1,67 @@
+{
+ "gameplay_judged": 39.5,
+ "n": 4,
+ "model": "claude-opus-5-5",
+ "hash": "59b6c5724db4165c",
+ "classes": {
+  "hexweaver": {
+   "score": 4.07,
+   "readability_telegraphs": 4.0,
+   "spell_vfx": 4.0,
+   "enemy_animation_variety": 3.0,
+   "hit_feedback": 5.0,
+   "ui_hud_clarity": 5.0,
+   "loot_excitement": 4.0,
+   "polished_arpg_feel": 3.5,
+   "overall": 4
+  },
+  "pyromancer": {
+   "score": 3.71,
+   "readability_telegraphs": 4.0,
+   "spell_vfx": 3.5,
+   "enemy_animation_variety": 3.0,
+   "hit_feedback": 4.0,
+   "ui_hud_clarity": 5.0,
+   "loot_excitement": 3.5,
+   "polished_arpg_feel": 3.0,
+   "overall": 3.5
+  },
+  "stormcaller": {
+   "score": 4.43,
+   "readability_telegraphs": 4.0,
+   "spell_vfx": 4.0,
+   "enemy_animation_variety": 3.0,
+   "hit_feedback": 5.0,
+   "ui_hud_clarity": 6.0,
+   "loot_excitement": 5.0,
+   "polished_arpg_feel": 4.0,
+   "overall": 4.3
+  },
+  "warden": {
+   "score": 3.57,
+   "readability_telegraphs": 3.0,
+   "spell_vfx": 3.0,
+   "enemy_animation_variety": 3.0,
+   "hit_feedback": 4.0,
+   "ui_hud_clarity": 5.0,
+   "loot_excitement": 4.0,
+   "polished_arpg_feel": 3.0,
+   "overall": 3.5
+  }
+ },
+ "by_criterion": {
+  "readability_telegraphs": 3.75,
+  "spell_vfx": 3.62,
+  "enemy_animation_variety": 3.0,
+  "hit_feedback": 4.5,
+  "ui_hud_clarity": 5.25,
+  "loot_excitement": 4.12,
+  "polished_arpg_feel": 3.38
+ },
+ "reasons": {
+  "hexweaver": "The best parts are the boss presentation (a named health bar split into phases, a 'Phase II' banner and a 'Vanquished' banner), the gold crit numbers and the item-pickup cards coloured by rarity. Red ground lanes and an orange ring give some attack warning. The weaknesses are low-detail enemy models that are often tiny or off-screen, and a flat, unlit market scene where spell effects are mostly simple glowing orbs and spheres that cover the action. Loot shows as small floating text labels and faint white beacons with almost no rarity colour, and frames 9\u201311 show no combat at all.",
+  "pyromancer": "Strengths: there's a clear HUD with HP and mana bars, a numbered spell bar with cooldown timers, a minimap, and a boss bar with phase markers and a 'Phase II' banner. Red ground telegraphs and floating damage numbers are visible, and loot comes with rarity-coloured name cards. Weaknesses: about half the frames are faced into flat untextured walls or empty streets with no combat. Spells look like simple glowing spheres and hexagons, enemies are small, low-detail sprite-like models, and loot labels are tiny and easily lost, with no beams or ground glow.",
+  "stormcaller": "The strongest parts are the HUD and the boss presentation: there is a boss bar split into phases with named attacks (Peal of Shards, Great Toll), an enrage banner, readable hp/mana bars, a spell bar with cooldown numbers, rarity-coloured loot toasts and beams, and big crit numbers backed by 644 sound voices. The weakest part is clarity in the fight itself: the boss's red line telegraphs and the giant yellow ribbons cover the screen at close range, enemies are blocky low-poly shapes that are hard to tell apart, and the last third of the clip has no enemies, just empty walls. Spell effects look flat and samey (mostly spark_lance), and loot pillars often fill the view instead of adding excitement.",
+  "warden": "Strengths: the HUD is functional, with HP/mana/XP bars, a numbered spell bar showing cooldowns, a minimap, a boss bar marked by phase, and loot toasts colored by rarity. The log also shows plenty of action: 52 hits, 27 kills, 366 sound voices. Weaknesses: half the frames show no enemies on screen. Enemies are small and hard to see, telegraphs are rare (one red ground marker in frame 2), and spell VFX are faint, simple shapes. Loot appears only as tiny floating text labels with no beams, and the boss stays idle or patrols without engaging, so combat reads poorly."
+ }
+}
