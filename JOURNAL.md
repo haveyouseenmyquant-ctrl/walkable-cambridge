@@ -1989,3 +1989,31 @@ Next
 1. Check the publish scores: pyro pass rate and spread, fps_median (trees), market_square_realism after the colour fixes.
 2. Curved fronts: 15 Market Hill corner and the Guildhall SW corner, as real curved wall geometry.
 3. Trees: a CC0 leaf atlas, smaller edge cards, and distance LOD to win back fps.
+  (Session 70 ended before it could commit or publish. Session 71 committed its work as c57e3c2 and published it together with s71.)
+
+## 2026-11-09 — Session 71: curved corners at the square, Regent Street (ring 2), a real wizard model, rarity loot beams
+
+Three subagents ran in parallel.
+- Realism, Market Square: **curved corners as real geometry.** 15 Market Hill (Franco Manca, way/1288730360). OSM draws its corner
+  as a flat 2.07 m cut-off; it is now a curve that meets both fronts smoothly, with the green bowed fascia, shopfront glazing,
+  door, reveals and cornice bent round it. The Guildhall's NW corner (Market Hill / Peas Hill) is now rounded, radius 1.6 m, with
+  the rusticated ground storey, band, brick, cornice and attic carried round. New reusable helpers: facade_parts `bezier_path`,
+  `bend` and `line_apex`, and zone_build `CURVED`. About +8k tris. docs/screens/session71_ms_{before,after}_{15mh,guildhall}*.jpg.
+  Uncertain: whether the real Guildhall corner is rounded, and its radius (not checked against a photo). Neither curve has upper
+  windows: 15 Market Hill follows its annotation, and at the Guildhall, windows would expose the tile body's square corner.
+- Realism, ring 2: **Regent Street**, scripts/zone_bespoke_regentstreet.py, 33 OSM buildings on both sides (Novi down to 112-116),
+  66 walls with ELEMENTS on 45. It adds single-storey shop extensions over the front gardens, one lettered shopfront per OSM shop,
+  and modern glazing on Essex House, De Luca and Mantle. +15k tris over the city skin. Materials, colours and window counts were
+  not checked against photos. docs/screens/session71_ring_{before,after}_regentst_*.jpg. Zone facade KPI 80.9 (unchanged);
+  ring-1 facade match 51.5.
+- Game: a **per-class animated wizard** (site/app/game/wizard.js, about 2.3k tris). It has a layered robe with a flared hem, cape,
+  bell sleeves, belt and satchel, a crumpled hat, a beard, and a class staff with a glowing focus. It animates a walk cycle, idle
+  breathing, thrust and raise cast poses, hit recoil, a broom seat and death. It takes over Avatar.update only while the game runs;
+  exploration mode keeps the old avatar. **Loot beams by rarity**: colour and height (3.5 m to 30 m) by tier, glow from rare up,
+  a ground rune ring from epic up, sparkles on legendary, and labels backed in the rarity colour. test_classes, test_mobs
+  (12 + 3) and test_items (44) pass. docs/screens/session71_wizard_*.jpg.
+
+Next
+1. Read the published scores: gameplay_judged (did the wizard and beams help?), fps_median (s70 trees plus s71 tris), pyro spread.
+2. Ring 2: the Clare and King's college fronts on the Backs side, and the Trinity Street to St John's Street run.
+3. Tree LOD and a leaf atlas, if fps_median drops below 55.
