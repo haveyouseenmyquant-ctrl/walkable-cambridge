@@ -90,8 +90,10 @@ def bespoke_elements(W, ann):
         except Exception as e:
             print("bespoke module failed:", f, repr(e), file=sys.stderr)
             continue
+        kw = getattr(mod, "KPI_WALLS", {})
         for oid, fn in getattr(mod, "BUILDS", {}).items():
-            ws = by.get(oid, [])
+            # pseudo-keyed builds ("<osm id>:<part>", the building keeps its city skin) count only onto their KPI_WALLS
+            ws = [w for w in by.get(oid.split(":")[0], []) if w["id"] in kw[oid]] if oid in kw else by.get(oid, [])
             if not any(w["id"] in ann for w in ws):
                 continue
             ch._LAST[0] = None
@@ -195,7 +197,7 @@ def main():
         return A[r, c].astype(float)
 
     zone_ids = {w["id"] for w in json.load(open(os.path.join(ROOT, "data/annotations/market_square/walls.json")))["walls"]}
-    bespoke = set(Z.load_bespoke())
+    bespoke = Z.load_bespoke()
     man = json.load(open(os.path.join(ROOT, "site/manifest.json")))
     landmark = {l["osm_id"] for l in man.get("landmarks", []) if l.get("detailed") and l.get("osm_id")}
     skip_b = landmark | Z.PROP_BUILDINGS   # bespoke buildings keep their walls for the KPI rows, but get no city skin
@@ -298,7 +300,14 @@ def main():
                "walls": [{k: v for k, v in w.items() if k != "colour_hint"} for w in W if w["dist_centre"] <= RING1_R]},
               open(os.path.join(ANN_DIRS[0], "walls.json"), "w"), indent=1)
     ext = Z.corner_extents(W)
-    bel = bespoke_elements([w for w in W if w["osm_id"] in bespoke], ann)
+    # pseudo-keyed bespoke fronts (module KPI_WALLS, session 75): the city skin stays (built from the style layout, as
+    # before, since the bespoke front stands proud of it), but the KPI counts the bespoke module's emitted openings
+    kpi_ids = set()
+    for oid in bespoke:
+        if ":" in oid:
+            mod = sys.modules.get(getattr(bespoke[oid], "__module__", ""), None)
+            kpi_ids.update(getattr(mod, "KPI_WALLS", {}).get(oid, []))
+    bel = bespoke_elements([w for w in W if w["osm_id"] in bespoke or w["id"] in kpi_ids], ann)
     by_tile, rows = {}, []
     nstyle = 0
     for w in W:
@@ -310,7 +319,7 @@ def main():
                          "annotated": w["id"] in ann, "street_facing": w["street_facing"],
                          "street": w["tags"].get("addr:street"), "bespoke": True})
             continue
-        lay = ann.get(w["id"])
+        lay = ann.get(w["id"]) if w["id"] not in kpi_ids else None
         if lay is None and S is not None:
             try:
                 lay = S.layout(w); nstyle += 1
@@ -337,7 +346,8 @@ def main():
         area = Lw * H
         rows.append({"id": w["id"], "osm_id": w["osm_id"], "dist_centre": w["dist_centre"], "length": Lw,
                      "height": round(H, 2), "area": round(area, 2), "detail_area": round(min(P.detail_area, area), 2),
-                     "elements": dict(sorted(P.counts.items())), "tris": int(len(Pw)), "tile": tid,
+                     "elements": bel[w["id"]] if w["id"] in kpi_ids else dict(sorted(P.counts.items())),
+                     "tris": int(len(Pw)), "tile": tid, "bespoke": w["id"] in kpi_ids,
                      "colour_hint": w.get("colour_hint"), "annotated": w["id"] in ann, "street_facing": w["street_facing"],
                      "street": w["tags"].get("addr:street")})
     os.makedirs(OUT, exist_ok=True)
