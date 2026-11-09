@@ -2213,3 +2213,33 @@ Next
 2. Read market_square_realism for a7c038d3 vs 30.75 and revert the shader changes if they don't help.
 3. Tile rebuild for the King's Parade sett strip (together with a game edit, since it changes the game hash anyway).
 4. Find and model the turreted or curved corner building near Market Hill from non-held-out photos. Replace the grey kiosk box.
+
+## 2026-11-09 — Session 80: s79 work published, weightier spell VFX, Market Hill corner building
+
+- Found on start: session 79 (commit cb382c7: ARPG occlusion camera, boss TTK rebalance, 1.6x mob scale, reinforcement waves
+  in the clip, Market Hill catering trailers) was committed and pushed but never published and never journaled; the live site was
+  still s77 (a7c038d3). No s78 commit exists. Checked the s79 code in-session: test_mobs 12+3, test_items 44/44.
+  s77 build scores: market_square_realism 31.0 (s75 30.75), judged_realism 27.2, visual_quality 26.1. The setts change
+  didn't move the KPI noticeably but didn't hurt; kept.
+- Game (subagent): vfx.js/classes.js: pyromancer hits get a shockwave ring, charred rock chunks and smoke; projectile cores are
+  opaque; Ember Bolt head and trail are larger; storm bolts are thicker with an impact halo and more sparks; the warden shield
+  bubble is fainter, with 8 orbiting earth slabs and chunks on cast; hexweaver hits release dark motes. The s76 white-out caps are
+  unchanged. test_mobs 12+3 / 15 encounters, test_items 44/44. docs/screens/session80_vfx.jpg (pyromancer only; the other
+  classes weren't checked on screen). Aimed at spell_vfx (pyro 3/10). Still visible in the clip: the pyromancer's mana sits
+  near 0, which the judge complained about.
+- Market Hill (subagent): the judge's "pale building with a curved corner" is most likely the Caius Market Hill Buildings
+  (16–21 Market Hill, Easton 1937, way/13864148; listing 1200398 says "slightly curving front, curving casements at the far
+  left corner"). Its window grid is probably the "chequered facade". OSM draws the St Mary's St end as a flat 6 m cut-off;
+  zone_bespoke_caius.py now builds it as a smooth curve (windows, piers, shop glass, cornice and parapet all follow it).
+  Source: geograph 5652394 (CC BY-SA 2.0), credited in DATA.md. Only the zone glb was rebuilt; collision is unchanged (the curve
+  bulges ≤0.8 m past the OSM line and that strip has no collision). The difference is small on screen:
+  docs/screens/session80_corner_{before,after}.jpg. No turret or bay-windowed building found near the square from listings or
+  Commons; the judge may mean the Caius tower behind it.
+- Published with skip flags; service.sh scores the new game hash (VFX) and the zone judges after the session.
+
+Next
+1. Read the s80 scores: gameplay_judged spell_vfx (pyro 3 before), playtest and boss TTK spread with the s79 rebalance,
+   market_square_realism vs 31.0.
+2. Game: the pyromancer's mana sits near 0 in the clip (regen or costs); check the storm/warden/hex VFX on screen.
+3. Realism: the judge's other repeated complaints: missing trees on the GSM side, simplified stalls, the Guildhall's colour and
+   proportions. Do the King's Parade sett-strip tile rebuild together with the next game edit.

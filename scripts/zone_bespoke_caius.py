@@ -628,6 +628,35 @@ def plain_wall(w, x0, x1, col, h, storey=2.8, z1=3.6):
     return P
 
 
+# s80: the St Mary's Street end of the Market Hill front (:7) is a real curve (Commons "Looking over the market
+# stalls in Cambridge", geograph 5652394, and the listing text "slightly curving front ... curving casements at the
+# far left corner"). OSM draws it as a flat 6 m splay. The skin is built flat on the curve length and bent onto a
+# Bezier through the splay ends: tangent to the Market Hill front (:8) at its end and leaving the St Mary's Street
+# end turned `deg` outwards, so the whole curve bulges outside the splay (stays proud of the tile body).
+ROUND = {"way/13864148:7": 15.0}
+
+
+def round_corner(w, walls, cfg, deg):
+    nb = next((x for x in walls if x["id"] != w["id"] and np.allclose(x["p0"], w["p1"], atol=0.05)), None)
+    if nb is None:
+        return None
+    p0, p1 = np.asarray(w["p0"], float), np.asarray(w["p1"], float)
+    d = (p1 - p0) / w["length"]
+    n = np.array([d[1], -d[0]])
+    a = math.radians(deg)
+    t0 = math.cos(a) * d + math.sin(a) * n
+    db = np.subtract(nb["p1"], nb["p0"]) / nb["length"]
+    apex = F.line_apex(p0, t0, p1, -db)
+    Lc, path = F.bezier_path(p0, apex, p1)
+    wc = dict(w, length=Lc)
+    P = portland_wall(wc, 0.0, Lc, cfg)
+    T, N, C = P.arrays()
+    W3, Nw, C, M = F.bend(T, N, C, P.mats(), Lc, path)
+    W3[..., 2] += w["ground_z"]
+    ELEMENTS[w["id"]] = {k: int(P.counts.get(k, 0)) for k in ("window", "door", "shopfront", "dormer")}
+    return {"name": "caius:portland:" + w["id"], "tris": W3, "col": np.clip(C, 0, 1), "mat": M}
+
+
 def build_portland(walls):
     ext = extents(walls)
     out = []
@@ -635,7 +664,14 @@ def build_portland(walls):
         if w["length"] < 0.5:
             continue
         x0, x1 = ext[w["id"]]
+        if any(r in ROUND and np.allclose(x["p1"], w["p0"], atol=0.05) for x in walls for r in [x["id"]]):
+            x0 = 0.0   # starts where a rounded corner ends tangent to it
         cfg = PORT_CFG.get(w["id"])
+        if w["id"] in ROUND:
+            o = round_corner(w, walls, cfg, ROUND[w["id"]])
+            if o is not None:
+                out.append(o)
+                continue
         if cfg is not None:
             P = portland_wall(w, x0, x1, cfg)
         else:
