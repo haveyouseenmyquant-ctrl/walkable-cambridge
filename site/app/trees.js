@@ -19,26 +19,44 @@ function mulberry(a) {
   return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
 }
 
-// Leaf-cluster texture: small twigs with pointed leaves, lit from the top-left, denser in the middle.
+// Leaf-cluster texture. s56: leaves grow in clumps at the ends of a small branching twig (a clumpy silhouette with
+// sky gaps instead of an even speckle); each leaf has a lighter sunlit half and a midrib; clumps are lit from the top.
 function leafTexture() {
   const S = 512, cv = document.createElement('canvas'); cv.width = cv.height = S;
-  const g = cv.getContext('2d'), rnd = mulberry(5);
-  g.strokeStyle = 'rgb(70,58,40)'; g.lineWidth = 2.5;
-  for (let i = 0; i < 9; i++) {   // twigs
-    const a = rnd() * 6.283; g.beginPath(); g.moveTo(S / 2, S / 2);
-    g.lineTo(S / 2 + Math.cos(a) * S * 0.36, S / 2 + Math.sin(a) * S * 0.36); g.stroke();
+  const g = cv.getContext('2d'), rnd = mulberry(5), R0 = S * 0.46;
+  const tips = [];
+  g.strokeStyle = 'rgb(66,54,38)'; g.lineCap = 'round';
+  for (let i = 0; i < 7; i++) {   // twigs, each forking once; clumps sit along and at the ends
+    const a = i / 7 * 6.283 + rnd() * 0.6, L1 = R0 * (0.45 + 0.2 * rnd());
+    const x1 = S / 2 + Math.cos(a) * L1, y1 = S / 2 + Math.sin(a) * L1;
+    g.lineWidth = 4; g.beginPath(); g.moveTo(S / 2, S / 2); g.lineTo(x1, y1); g.stroke();
+    tips.push([S / 2 + Math.cos(a) * L1 * 0.5, S / 2 + Math.sin(a) * L1 * 0.5, 0.75]);
+    for (const da of [-0.55, 0.5]) {
+      const b = a + da + (rnd() - 0.5) * 0.3, L2 = R0 * (0.3 + 0.15 * rnd());
+      const x2 = x1 + Math.cos(b) * L2, y2 = y1 + Math.sin(b) * L2;
+      g.lineWidth = 2.2; g.beginPath(); g.moveTo(x1, y1); g.lineTo(x2, y2); g.stroke();
+      tips.push([x2, y2, 1]);
+    }
   }
-  for (let i = 0; i < 1500; i++) {
-    const a = rnd() * Math.PI * 2, r = Math.pow(rnd(), 0.6) * S * 0.46;
-    if (rnd() > 1.2 - r / (S * 0.46)) continue;
-    const x = S / 2 + Math.cos(a) * r, y = S / 2 + Math.sin(a) * r, l = 13 + rnd() * 13, ang = a + (rnd() - 0.5) * 1.6;
-    const lum = (0.6 + 0.45 * rnd()) * (1.1 - 0.4 * y / S) * (0.8 + 0.2 * (1 - r / (S * 0.46)));
-    const hue = rnd();
-    const R = (82 + 60 * hue) * lum, G = (138 + 58 * rnd()) * lum, B = (44 + 32 * rnd()) * lum;   // s53: brighter, less near-black
-    g.save(); g.translate(x, y); g.rotate(ang);
-    g.fillStyle = `rgb(${R | 0},${G | 0},${B | 0})`;
-    g.beginPath(); g.moveTo(-l, 0); g.quadraticCurveTo(0, -l * 0.5, l, 0); g.quadraticCurveTo(0, l * 0.5, -l, 0); g.fill();
-    g.restore();
+  tips.push([S / 2, S / 2, 1.1]);
+  for (const [tx, ty, k] of tips) {
+    const n = Math.round(46 * k), cr = 44 * k;
+    for (let i = 0; i < n; i++) {
+      const a = rnd() * 6.283, r = Math.sqrt(rnd()) * cr, x = tx + Math.cos(a) * r, y = ty + Math.sin(a) * r;
+      if (Math.hypot(x - S / 2, y - S / 2) > R0 + 8) continue;
+      const l = 15 + rnd() * 12, ang = a + (rnd() - 0.5) * 1.2;
+      // light from the top-left of the clump: leaves there are lighter and yellower
+      const sun = Math.max(0, ((tx - x) * 0.5 + (ty - y)) / cr + 0.35);
+      const lum = (0.62 + 0.3 * rnd()) * (1.08 - 0.32 * y / S) * (0.82 + 0.35 * Math.min(1, sun));
+      const R = (78 + 55 * rnd() + 25 * sun) * lum, G = (132 + 50 * rnd() + 18 * sun) * lum, B = (42 + 26 * rnd()) * lum;
+      g.save(); g.translate(x, y); g.rotate(ang);
+      g.fillStyle = `rgb(${R | 0},${G | 0},${B | 0})`;
+      g.beginPath(); g.moveTo(-l, 0); g.quadraticCurveTo(0, -l * 0.55, l, 0); g.quadraticCurveTo(0, l * 0.55, -l, 0); g.fill();
+      g.fillStyle = `rgba(255,255,210,0.13)`;   // sunlit half
+      g.beginPath(); g.moveTo(-l, 0); g.quadraticCurveTo(0, -l * 0.55, l, 0); g.closePath(); g.fill();
+      g.strokeStyle = `rgba(30,40,15,0.18)`; g.lineWidth = 1; g.beginPath(); g.moveTo(-l * 0.8, 0); g.lineTo(l * 0.8, 0); g.stroke();
+      g.restore();
+    }
   }
   const t = new THREE.CanvasTexture(cv);
   t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 4;
@@ -78,6 +96,7 @@ function crownGeometries(cl, seed) {
   const P = [], N = [], C = [], U = [], I = [];
   const cp = [], cn = [], cc = [];
   for (const { c, r } of cl) {
+    const hj = 0.92 + 0.16 * rnd(), yj = 0.9 + 0.2 * rnd();   // s56: per-cluster tint (yellower / bluer clumps)
     const nCards = Math.round(24 * CARD_K * (r / 0.48) ** 2);   // s53: fuller crowns
     for (let i = 0; i < nCards; i++) {
       v.set(rnd() * 2 - 1, rnd() * 2 - 1, rnd() * 2 - 1); if (v.lengthSq() > 1 || v.lengthSq() < 1e-3) { i--; continue; }
@@ -93,7 +112,7 @@ function crownGeometries(cl, seed) {
         // AO: darker deep inside the crown and on the underside of each cluster
         const depth = Math.min(1, Math.hypot(p.x, p.z * 1.0, (p.y - 0.1) * 0.8));
         const ao = (0.58 + 0.47 * Math.min(1, Math.max(0, (p.y + 1.0) / 1.8))) * (0.68 + 0.4 * depth) * (0.85 + 0.25 * Math.max(0, (p.y - c.y) / r));
-        C.push(ao, ao, ao); U.push((du + 1) / 2, (dv + 1) / 2);
+        C.push(ao * yj, ao * hj, ao * (2 - yj) * 0.95); U.push((du + 1) / 2, (dv + 1) / 2);
       }
       I.push(b, b + 1, b + 2, b, b + 2, b + 3);
     }
@@ -156,10 +175,29 @@ function windPatch(mat, flutter) {
   return mat;
 }
 
+// s56: foliage lighting. Leaves let light through: wrapped diffuse (the shaded side of a crown isn't black) and a
+// yellow-green glow when the sun is behind the leaves (looking towards the sun through a crown).
+function foliageLight(mat, wrap, trans, gain = 1) {
+  const prev = mat.onBeforeCompile;
+  mat.onBeforeCompile = (sh, r) => {
+    if (prev) prev(sh, r);
+    sh.fragmentShader = sh.fragmentShader.replace('#include <lights_lambert_pars_fragment>',
+      THREE.ShaderChunk.lights_lambert_pars_fragment.replace(
+        'float dotNL = saturate( dot( geometryNormal, directLight.direction ) );',
+        `float dotNL = ${gain.toFixed(2)} * saturate( ( dot( geometryNormal, directLight.direction ) + ${wrap.toFixed(2)} ) / ${(1 + wrap).toFixed(2)} );
+        float bl = pow( saturate( dot( -geometryViewDir, directLight.direction ) ), 3.0 ) * ${trans.toFixed(2)};
+        reflectedLight.directDiffuse += bl * directLight.color * material.diffuseColor * vec3( 0.95, 1.1, 0.45 );`));
+  };
+  const key = mat.customProgramCacheKey();
+  mat.customProgramCacheKey = () => key + '_fol' + wrap + '_' + trans + '_' + gain;
+  return mat;
+}
+
 const LEAF_TEX = FOLIAGE ? leafTexture() : null;
 const cardMat = FOLIAGE ? windPatch(new THREE.MeshLambertMaterial({ map: LEAF_TEX, vertexColors: true, alphaTest: 0.45,
   side: THREE.DoubleSide, alphaToCoverage: true }), true) : null;
-const coreMat = windPatch(new THREE.MeshLambertMaterial({ vertexColors: true }), false);
+if (cardMat) foliageLight(cardMat, 0.5, 0.6, 1.3);
+const coreMat = foliageLight(windPatch(new THREE.MeshLambertMaterial({ vertexColors: true }), false), 0.3, 0.0);
 const barkMat = windPatch(new THREE.MeshLambertMaterial({ color: 0x4f453c, vertexColors: true }), false);
 const trunkMat = new THREE.MeshLambertMaterial({ color: 0x564a3e });
 const TRUNK = new THREE.CylinderGeometry(0.65, 1, 1, 7, 1, true).translate(0, 0.5, 0);
@@ -247,7 +285,7 @@ function hedgeGeometries() {
   return { cards: geo(P, N, C, U, I), core: box };
 }
 const HEDGE = hedgeGeometries();
-const hedgeCoreMat = new THREE.MeshLambertMaterial({ color: 0x2c4422, vertexColors: true });
+const hedgeCoreMat = foliageLight(new THREE.MeshLambertMaterial({ color: 0x3a5a2c, vertexColors: true }), 0.3, 0.0);   // s56: was 0x2c4422 (near-black)
 
 export function makeHedges(buf) {
   const a = new Float32Array(buf), n = a.length / 8 | 0;

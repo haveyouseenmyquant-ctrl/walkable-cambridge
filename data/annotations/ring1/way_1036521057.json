@@ -5,7 +5,8 @@
   "mapillary:2039815249527792",
   "mapillary:291159029735217",
   "mapillary:846715379526459",
-  "mapillary:237815608100302"
+  "mapillary:237815608100302",
+  "commons:File:1099908 II 13, KING'S PARADE Cambridge 20260523 0001.jpg"
  ],
  "walls": [
   {
@@ -146,6 +147,41 @@
    ],
    "confidence": "medium",
    "notes": "13 King's Parade (King's College Visitor Centre). Late-Victorian red brick front with Bath/Ketton-type stone quoin strips at both edges and stone window surrounds/mullions. Street-facing gable with fretted timber bargeboards and finial over the northern ~3.6 m (window triple); the southern ~1.5 m is plain brick under a bracketed eaves/corbel course (cornice_z = bracket line, gable apex rises above wall height). 1st and 2nd floors: triple of tall sashes in a stone frame, each standing on a bracketed stone ledge with iron railing (string_courses). Single sash in the gable. Ground: dark-grey fascia 'King's College Visitor Centre' with stone piers; dark entrance bay at the south end. Vertical scale fitted to walls.json height (photos suggest slightly taller storeys). Pane pattern not resolvable (assumed 1-over-1)."
+  },
+  {
+   "id": "way/1036521057:1",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.5,
+    9.3,
+    13.2
+   ],
+   "material": "brick",
+   "wall_colour": "#96503c",
+   "trim_colour": "#d9c9a3",
+   "string_courses": [],
+   "quoins": true,
+   "pilasters": [],
+   "confidence": "low",
+   "cornice_z": 13.2,
+   "cornice": "simple",
+   "parapet": false,
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.2,
+     "x1": 3.6,
+     "z1": 3.3,
+     "fascia_text": "King's College Visitor Centre",
+     "fascia_colour": "#2b2d30",
+     "text_colour": "#efe9dc",
+     "door_x": null,
+     "stallriser": 0.45,
+     "awning": false
+    }
+   ],
+   "notes": "13 King's Parade, side wall on St Edward's Passage (Commons, Tilman2007, CC BY-SA 4.0, oblique view from King's Parade): red brick with stone quoins at the front corner and eaves brackets; the dark King's College Visitor Centre shopfront (fascia + display window) returns ~3.5 m into the passage; no upper-floor openings visible over the first ~6 m. The rear part of the wall (beyond ~6 m) is not visible in any available photo and is left plain."
   }
  ]
 }

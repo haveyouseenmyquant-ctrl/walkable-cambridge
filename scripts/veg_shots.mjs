@@ -21,6 +21,7 @@ const SPOTS = [
   ['kingsparade', -186, 40, -250, 0, 3.0],  // King's front lawn + Parade trees
   ['market', -118, 52, -152, 62, 5.0],      // from Market Square west towards Great St Mary's
   ['backs', -420, 0, -300, -10, 4.0],       // the Backs lawn towards King's Chapel
+  ['grove', -425, 150, -460, 200, 3.0],     // s56: densest tree group near the centre (Clare/Trinity Hall Backs)
 ];
 const server = http.createServer((req, res) => {
   let p = decodeURIComponent(new URL(req.url, 'http://x').pathname);

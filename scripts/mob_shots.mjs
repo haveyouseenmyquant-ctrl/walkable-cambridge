@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const puppeteer = createRequire(path.join(ROOT, 'tools/'))('puppeteer-core');
-const SRC = path.join(ROOT, 'site'), OUT = process.argv[2] || path.join(ROOT, 'docs/screens/session50_mobs');
+const SRC = process.env.WC_SITE || path.join(ROOT, 'site'), OUT = process.argv[2] || path.join(ROOT, 'docs/screens/session50_mobs');
 const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.glb': 'model/gltf-binary' };
 const server = http.createServer((req, res) => {
   let p = decodeURIComponent(new URL(req.url, 'http://x').pathname); if (p.endsWith('/')) p += 'index.html';

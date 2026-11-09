@@ -124,6 +124,138 @@
    ],
    "confidence": "low",
    "notes": "63-66 Bridge Street: early-19th-century pink-washed stucco block with a curved corner, ruled ashlar lines, white band course under the second floor, multi-pane sashes, first-floor windows with scrolled console hoods, deep dentil cornice; maroon Hardy's sweetshop front with door at the corner and charcoal crepe-cafe front. This is the St John's Street side south of the curve; bay count inferred from Commons '63-65 Bridge Street, Cambridge.jpg' and the left edge of '14 And 15, St John's Street.jpg'."
+  },
+  {
+   "string_courses": [
+    6.5
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "confidence": "low",
+   "id": "way/1288738594:3",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.6,
+    6.6
+   ],
+   "material": "stucco",
+   "wall_colour": "#d6b3a3",
+   "trim_colour": "#f2efe8",
+   "cornice_z": 8.9,
+   "cornice": "classical",
+   "parapet": false,
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 6.3,
+     "z1": 3.4,
+     "fascia_text": "crepeaffaire",
+     "fascia_colour": "#3a3d40",
+     "text_colour": "#f3f0e6",
+     "door_x": 3.3,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 6.5,
+     "x1": 8.5,
+     "z1": 3.4,
+     "fascia_text": "Original Hardys Sweetshop",
+     "fascia_colour": "#5c1f33",
+     "text_colour": "#e6b84a",
+     "door_x": 7.0,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.9,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.6,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 1.9,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.7,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 1.9,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.9,
+     "w": 1.1,
+     "z": 6.9,
+     "h": 1.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.6,
+     "w": 1.1,
+     "z": 6.9,
+     "h": 1.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.7,
+     "w": 1.1,
+     "z": 6.9,
+     "h": 1.5,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "notes": "63-66 Bridge Street, straight Bridge Street front before the curved corner (Commons 63-65 Bridge Street, Smb1001, CC BY-SA 4.0): pink-washed ruled stucco, white band under the second floor, first-floor sashes with console hoods, dentil cornice; dark grey Crepe Affaire front, Hardys maroon front starting at the curve."
   }
  ]
 }

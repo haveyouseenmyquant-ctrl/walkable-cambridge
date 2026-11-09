@@ -117,7 +117,9 @@ function installClip(clipS) {
     const pts = []; for (let i = best; i >= 0; i = from[i]) pts.push({ x: i % nx + x0, y: ((i / nx) | 0) + y0 });
     return pts.reverse();
   }
-  const ROUTE = ['market-north', 'boss-market', 'market-south', 'peas-hill', 'kings-parade', 'senate-house-hill'];
+  // session 56: a denser route (petty-cury is 48 m from market-south; peas-hill was a 70 m empty walk) so fewer frames
+  // fall between fights
+  const ROUTE = ['market-north', 'boss-market', 'market-south', 'petty-cury', 'peas-hill', 'kings-parade', 'senate-house-hill'];
   const order = [0, 1, 2, 3, 4, 5];
   const st = { ptr: 0, nextCast: 0, strafe: 1, strafeT: 0, leg: 0, goal: null, path: null, wp: 0, stuckT: 0, last: null };
   const live = () => g.mobs.filter(m => !m.dead && !m.removed);
@@ -147,7 +149,7 @@ function installClip(clipS) {
     let best = null, bd = Infinity;
     for (const m of live()) {
       if ((ignore.get(m) ?? -1) > g.time) continue;
-      const d = dist(m), ok = (mine.includes(m) && Math.hypot(enc.x - P.x, enc.y - P.y) < enc.r + 25) || (hostile(m) && d < 18);
+      const d = dist(m), ok = (mine.includes(m) && Math.hypot(enc.x - P.x, enc.y - P.y) < enc.r + 25) || (hostile(m) && d < 18) || (m.state !== 'return' && d < 12);
       if (ok && d < bd) { bd = d; best = m; }
     }
     if (best) {
@@ -204,6 +206,16 @@ function installClip(clipS) {
     }
     const spot = kills.find(k => !k.looted);   // loot: walk over recent kill spots
     if (spot) { if (walkTo(spot.x, spot.y, 0.5, dt) || g.time - spot.t > 10) { spot.looted = true; st.path = null; } return; }
+    // session 56: between legs, go after the nearest calm mob within 35 m (patrols, a neighbouring encounter) instead of
+    // walking an empty street; it becomes a target at 12 m (the 4 s no-damage rule drops unreachable ones)
+    // only mobs on the way (no farther from the next route encounter than the player), so the route still advances
+    const nx = ENC[ROUTE[st.leg]], dNx = nx ? Math.hypot(nx.x - P.x, nx.y - P.y) : 0;
+    let near = null, nd = 35;
+    for (const x of live()) { const d = dist(x); if (d < nd && x.state !== 'return' && !((ignore.get(x) ?? -1) > g.time)
+      && (!nx || Math.hypot(nx.x - x.x, nx.y - x.y) < dNx + 3)) { nd = d; near = x; } }
+    if (near && st.seek !== near) { st.seek = near; st.seekT = g.time; }
+    if (near && g.time - st.seekT > 8) { ignore.set(near, g.time + 20); near = null; }   // can't get there: drop it
+    if (near) { walkTo(near.x, near.y, 9, dt); return; }
     const enc = ENC[ROUTE[st.leg]]; if (!enc) return;
     const es = sys.encounterState.get(enc.id), dEnc = Math.hypot(enc.x - P.x, enc.y - P.y);
     if (es?.active && es.mobs.length && es.mobs.every(x => x.dead || x.removed || (ignore.get(x) ?? -1) > g.time) && dEnc < enc.r + 25) { st.leg++; st.path = null; return; }

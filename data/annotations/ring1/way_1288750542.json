@@ -1,0 +1,174 @@
+{
+ "osm_id": "way/1288750542",
+ "sources": [
+  "commons:File:10 Bridge Street, Cambridge.jpg"
+ ],
+ "walls": [
+  {
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "confidence": "low",
+   "id": "way/1288750542:5",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.3
+   ],
+   "material": "render",
+   "wall_colour": "#f0efea",
+   "trim_colour": "#4f5357",
+   "cornice_z": 8.1,
+   "cornice": "none",
+   "parapet": false,
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 9.4,
+     "z1": 3.0,
+     "fascia_text": "",
+     "fascia_colour": "#4a4d50",
+     "text_colour": "#f0f0f0",
+     "door_x": 8.6,
+     "stallriser": 0.5,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "oriel",
+     "x": 5.0,
+     "w": 1.7,
+     "z": 3.9,
+     "h": 1.4,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "notes": "10 Bridge Street gable end (Commons, Smb1001, CC BY-SA 4.0): white roughcast with a gable (dated 1976), grey oriel window on the first floor, full-width grey hairdresser shopfront over buff brick stallrisers."
+  },
+  {
+   "string_courses": [],
+   "quoins": false,
+   "pilasters": [],
+   "confidence": "low",
+   "id": "way/1288750542:6",
+   "storeys": 2,
+   "floor_z": [
+    0,
+    3.3
+   ],
+   "material": "render",
+   "wall_colour": "#f0efea",
+   "trim_colour": "#4f5357",
+   "cornice_z": 7.7,
+   "cornice": "simple",
+   "parapet": false,
+   "elements": [
+    {
+     "type": "shopfront",
+     "x0": 0.3,
+     "x1": 9.9,
+     "z1": 3.0,
+     "fascia_text": "",
+     "fascia_colour": "#4a4d50",
+     "text_colour": "#f0f0f0",
+     "door_x": 1.0,
+     "stallriser": 0.6,
+     "awning": false
+    },
+    {
+     "type": "shopfront",
+     "x0": 10.3,
+     "x1": 15.9,
+     "z1": 3.0,
+     "fascia_text": "",
+     "fascia_colour": "#f0efea",
+     "text_colour": "#333333",
+     "door_x": 14.9,
+     "stallriser": 0.4,
+     "awning": false
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 5.3,
+     "w": 1.0,
+     "z": 3.6,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 7.9,
+     "w": 1.0,
+     "z": 3.6,
+     "h": 1.6,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 12.1,
+     "w": 0.9,
+     "z": 3.5,
+     "h": 1.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "casement",
+     "x": 13.9,
+     "w": 0.9,
+     "z": 3.5,
+     "h": 1.2,
+     "panes": [
+      2,
+      2
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "dormer",
+     "x": 2.6,
+     "w": 1.2,
+     "h": 1.4
+    },
+    {
+     "type": "dormer",
+     "x": 5.6,
+     "w": 1.2,
+     "h": 1.4
+    },
+    {
+     "type": "dormer",
+     "x": 10.8,
+     "w": 1.0,
+     "h": 1.2
+    }
+   ],
+   "notes": "Round Church Street side of 10 Bridge Street incl. 16 Round Church Street (Commons, Smb1001, CC BY-SA 4.0): white render, two shuttered first-floor windows and two dormers on a tiled roof over the grey shopfront; lower cottage to the NE with dormer, two small windows and a caf\u00e9 front. Positions read from an oblique photo."
+  }
+ ]
+}

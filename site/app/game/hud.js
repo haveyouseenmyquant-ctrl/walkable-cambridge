@@ -12,6 +12,21 @@ export function install(game) {
   const offs = [];
   const listen = (t, ev, fn) => { t.addEventListener(ev, fn); offs.push(() => t.removeEventListener(ev, fn)); };
 
+  // session 56: declutter the world UI while the game runs (judges kept calling it "debug-style"): Landmarks/Help/
+  // Credits fold into one menu button, the walk-mode label hides, the controls hint fades after 8 s. Exploration mode
+  // (no game layer) keeps the old UI; everything is undone on dispose.
+  document.body.classList.add('game-on');
+  offs.push(() => document.body.classList.remove('game-on', 'game-hint-off'));
+  const menu = document.getElementById('menu');
+  if (menu) {
+    const mb = el('button', 'gh-menu-btn'); mb.textContent = '\u2630'; mb.title = 'Menu'; menu.prepend(mb);
+    listen(mb, 'click', e => { e.stopPropagation(); menu.classList.toggle('open'); });
+    listen(menu, 'click', e => { if (e.target !== mb && e.target.dataset.open) menu.classList.remove('open'); });
+    offs.push(() => { mb.remove(); menu.classList.remove('open'); });
+  }
+  const hintT = setTimeout(() => document.body.classList.add('game-hint-off'), 8000);
+  offs.push(() => clearTimeout(hintT));
+
   // ---- static parts
   el('div', 'gh-crosshair', root);
   const vignette = el('div', 'gh-vignette', root), flash = el('div', 'gh-flash', root);
@@ -67,8 +82,8 @@ export function install(game) {
 #game-hud .gh-loot.big{font-size:14px;box-shadow:0 0 10px -2px var(--rc),inset -30px 0 30px -20px var(--rc);border-right-width:4px}
 #game-hud .gh-toasts{left:18px;top:34%;transform:none;align-items:flex-start}
 #game-hud .gh-toast{font-size:12px;padding:3px 9px;background:rgba(0,0,0,.45)}
-#game-hud .gh-num{font:900 24px/1 system-ui,sans-serif;letter-spacing:-.02em;-webkit-text-stroke:1px rgba(0,0,0,.85);text-shadow:0 2px 0 #000,0 0 6px rgba(0,0,0,.8)}
-#game-hud .gh-num.big{font-size:30px}
+#game-hud .gh-num{font:900 28px/1 system-ui,sans-serif;letter-spacing:-.02em;-webkit-text-stroke:1px rgba(0,0,0,.85);text-shadow:0 2px 0 #000,0 0 6px rgba(0,0,0,.8)}
+#game-hud .gh-num.big{font-size:34px}
 #game-hud .gh-num.crit{font-size:40px;color:#ffe14a !important;-webkit-text-stroke:1.5px #5a1800;text-shadow:0 0 10px #ff7a00,0 3px 0 #3a1000}
 #game-hud .gh-num.crit::before{content:'CRIT ';font-size:15px;letter-spacing:.08em;vertical-align:middle;color:#fff6c8}
 #game-hud .gh-num.taken{font-size:20px;color:#ff5050 !important}
@@ -130,9 +145,10 @@ body.explore #game-hud .gh-loots{display:none}`;
     n.d.textContent = Math.round(amount); n.d.className = 'gh-num' + (crit ? ' crit' : big ? ' big' : '');
     n.d.style.color = TYPE_COLOR[type] || '#fff'; n.d.style.display = '';
   }));
-  const lastNum = new WeakMap();
+  const lastNum = new WeakMap(), placed = [];
   function updateNums(dt) {
     const cam = game.camera, W = innerWidth, H = innerHeight;
+    placed.length = 0;
     for (const n of pool) {
       if (n.life <= 0) continue;
       n.t += dt;
@@ -141,7 +157,20 @@ body.explore #game-hud .gh-loots{display:none}`;
       if (v.z > 1 || v.z < -1) { n.d.style.opacity = 0; continue; }
       const k = n.t / n.life;
       n.d.style.opacity = k < 0.7 ? 1 : (1 - k) / 0.3;
-      n.d.style.transform = `translate(${(v.x * 0.5 + 0.5) * W + n.dx * Math.sqrt(k)}px, ${(-v.y * 0.5 + 0.5) * H}px) translate(-50%,-50%) scale(${1 + (1 - Math.min(1, n.t * 7)) * (n.pop ?? 0.5)})`;
+      // session 56: stack instead of overlap: a number landing within one line of an already placed one moves up
+      const sx = (v.x * 0.5 + 0.5) * W + n.dx * Math.sqrt(k), lh = n.crit ? 44 : 30;
+      let sy = (-v.y * 0.5 + 0.5) * H;
+      const y0 = sy, top = H * 0.2;   // keep clear of the boss bar: a stack that would climb into it grows downward
+      for (let dir = -1; dir <= 1; dir += 2) {
+        sy = Math.max(y0, dir < 0 ? 0 : top);
+        for (let tries = 0; tries < 6; tries++) {
+          const hit = placed.find(q => Math.abs(q.x - sx) < 56 && Math.abs(q.y - sy) < (q.h + lh) / 2);
+          if (!hit) break; sy = hit.y + dir * (hit.h + lh) / 2;
+        }
+        if (sy >= top) break;
+      }
+      placed.push({ x: sx, y: sy, h: lh });
+      n.d.style.transform = `translate(${sx}px, ${sy}px) translate(-50%,-50%) scale(${1 + (1 - Math.min(1, n.t * 7)) * (n.pop ?? 0.5)})`;
     }
   }
 

@@ -122,6 +122,7 @@ const BASE = {
   sally: std({ color: 0xffffff, map: TEX.sally, roughness: 0.95, bumpMap: TEX.grain, bumpScale: 2 }),
   bogglow: glow(0xb8ff80, 0x60ff40, 2.2),
   ember: glow(0xffa040, 0xff5010, 2.2),
+  shroud: std({ color: 0x2f6e72, emissive: 0x0f3c44, emissiveIntensity: 0.8, roughness: 0.4, transparent: true, opacity: 0.7, depthWrite: false, side: THREE.DoubleSide }),
   smoke: std({ color: 0x55524d, roughness: 1, transparent: true, opacity: 0.55, depthWrite: false }),
 };
 // session 48: fresnel rim light (emissive, type-coloured) injected into the standard shader; one shared program
@@ -417,6 +418,14 @@ const MODELS = {
         tail: merge(tube([[0, -0.15, -0.25], [0, -0.28, -0.45], [0.08, -0.22, -0.68], [0.14, -0.05, -0.8]], 0.06, 0.018, 14, 6)),
         nib: merge(xf(new THREE.ConeGeometry(0.06, 0.2, 4), [0.15, 0.04, -0.84], [0.5, 0, -0.4], [1, 1, 0.3]), cone(0.04, 0.14, [-0.0, 0.62, -0.17], [-0.9, 0, 0], 4)),
         drips: merge([0, 1, 2, 3].map(i => { const a = i / 4 * TAU + 0.9; return limb([[Math.sin(a) * 0.22, -0.2, Math.cos(a) * 0.22], [Math.sin(a) * 0.24, -0.34 - 0.04 * i, Math.cos(a) * 0.24]], 0.035, 0.018, 4, 5); })),
+        // session 56: oversized ink-claw hands, a ragged cape of torn manuscript leaves and a crown of ink droplets,
+        // so the imp reads as a hunched clawed creature rather than a ball at clip distance
+        claws: merge([1, -1].map(s => [-0.05, 0, 0.05].map(d => tube([[s * 0.3 + d, -0.16, 0.3], [s * (0.33 + d * 1.5), -0.24, 0.4], [s * (0.31 + d * 2), -0.36, 0.44]], 0.022, 0.003, 8, 5)))),
+        cape: merge([0, 1, 2, 3, 4].map(i => { const a = (i - 2) * 0.42, L = 0.42 + 0.08 * (i % 2);
+          const g = new THREE.PlaneGeometry(0.2, L, 2, 4), q = g.attributes.position;
+          for (let k = 0; k < q.count; k++) { const y = q.getY(k), x = q.getX(k); q.setZ(k, 0.08 * Math.sin((y + L / 2) * 6 + i) + 0.04 * x * x * 20); if (y < -L / 2 + 1e-3) q.setY(k, y - 0.06 * Math.abs(Math.sin(x * 40 + i))); }
+          g.computeVertexNormals(); return xf(xf(g, [0, -L / 2, 0], [0.35, 0, 0]), [Math.sin(a) * 0.3, 0.18, -Math.cos(a) * 0.3], [0, a + PI, 0]); })),
+        droplets: merge([0, 1, 2, 3, 4].map(i => { const a = i / 5 * TAU; return xf(flameGeo(0.04, 0.14, 6), [Math.sin(a) * 0.42, 0.42 + 0.05 * (i % 2), Math.cos(a) * 0.42], [PI, 0, 0]); })),
       };
     });
     const g = new THREE.Group(), p = {}, ink = m('ink'), paper = m('parchment');
@@ -424,7 +433,9 @@ const MODELS = {
     p.blob = add(p.body, K.blob, ink); p.blob.scale.set(0.65, 0.55, 0.65);
     add(p.body, K.eyes, BASE.eyeBlue); add(p.body, K.teeth, BASE.bone); add(p.body, K.quill, paper);
     add(p.body, K.horns, ink); add(p.body, K.spines, ink); add(p.body, K.brow, ink); add(p.body, K.tail, ink); add(p.body, K.drips, ink); add(p.body, K.nib, BASE.iron);
-    add(p.body, K.arm, ink); add(p.body, K.arm, ink, 0, 0, 0, true);
+    add(p.body, K.arm, ink); add(p.body, K.arm, ink, 0, 0, 0, true); add(p.body, K.claws, BASE.iron);
+    p.cape = add(p.body, K.cape, paper);
+    p.droplets = add(p.body, K.droplets, ink);
     p.wl = pivot(p.body, -0.22, 0.15, -0.12); add(p.wl, K.page, paper, 0, 0, 0, true);
     p.wr = pivot(p.body, 0.22, 0.15, -0.12); add(p.wr, K.page, paper);
     p.legL = pivot(p.body, -0.14, -0.22, 0); add(p.legL, K.leg, ink);
@@ -458,6 +469,15 @@ const MODELS = {
         pipes: merge([1, -1].map(s => tube([[s * 0.1, 0.45, -0.3], [s * 0.3, 0.42, -0.38], [s * 0.42, 0.1, -0.3], [s * 0.36, -0.3, -0.2]], 0.03, 0.03, 12, 6)),
           [1, -1].map(s => tor(0.04, 0.014, [s * 0.42, 0.1, -0.3], [PI / 2, 0, 0], 4, 10))),
         piston: merge(cyl(0.022, 0.022, 0.5, [0.0, -0.32, -0.09], [0, 0, 0], 6), cyl(0.04, 0.04, 0.16, [0, -0.15, -0.09], [0, 0, 0], 8), box(0.17, 0.14, 0.05, [0, -0.32, 0.1], [-0.15, 0, 0])),
+        // session 56: a big exposed escapement wheel on the back with a smaller meshing pinion, a riveted spine frame,
+        // porter's luggage rack and a heavy fist so the silhouette reads as a machine from any side
+        bigGear: merge(extr(gearShape(0.42, 0.36, 20, 0.07, 6), 0.05, 0.01), cyl(0.09, 0.09, 0.12, [0, 0, 0], [PI / 2, 0, 0], 10)),
+        pinion: merge(extr(gearShape(0.2, 0.16, 10, 0.04, 0), 0.05, 0.008)),
+        frame: merge(box(0.08, 0.95, 0.06, [0.22, 0.05, -0.43]), box(0.08, 0.95, 0.06, [-0.22, 0.05, -0.43]), box(0.56, 0.06, 0.06, [0, 0.5, -0.43]), box(0.56, 0.06, 0.06, [0, -0.4, -0.43]),
+          box(0.6, 0.05, 0.36, [0, -0.47, -0.62]), [-0.25, 0, 0.25].map(x => box(0.03, 0.22, 0.03, [x, -0.37, -0.79]))),
+        fist: merge(box(0.17, 0.15, 0.17, [0, -1.0, 0.07]), [-0.06, -0.02, 0.02, 0.06].map(x => box(0.035, 0.05, 0.05, [x, -0.96, 0.17]))),
+        lamp: merge(cyl(0.075, 0.09, 0.1, [0, 0.0, 0.25], [PI / 2, 0, 0], 12), tor(0.085, 0.015, [0, 0, 0.3], [0, 0, 0], 4, 14)),
+        lampGlass: sph(0.062, [0, 0, 0.3], [1, 1, 0.5], 10, 6),
       };
     });
     const g = new THREE.Group(), p = {}, brass = m('brass'), copper = m('copper'), iron = m('iron');
@@ -475,6 +495,9 @@ const MODELS = {
       add(l, K.leg, iron); add(l, K.legBrass, brass); add(l, K.piston, copper);
     }
     add(p.torso, K.gauge, iron); add(p.torso, K.gaugeFace, BASE.eyeglow); add(p.torso, K.pipes, copper);
+    add(p.torso, K.frame, iron); add(p.armR, K.fist, iron); add(p.armL, K.fist, iron);
+    p.bigGear = add(p.torso, K.bigGear, brass, 0, 0.12, -0.5); p.pinion = add(p.torso, K.pinion, copper, 0.47, 0.42, -0.5);
+    add(p.head, K.lamp, iron); add(p.head, K.lampGlass, BASE.eyeglow);
     return { group: g, parts: p };
   },
   // --- session 41 regulars (original Cambridge wizard folklore)
@@ -493,6 +516,11 @@ const MODELS = {
       drips: merge([0, 1, 2, 3, 4, 5, 6].map(i => { const a = i / 7 * TAU; return xf(new THREE.SphereGeometry(0.035, 6, 5), [Math.sin(a) * 0.5, 0.05 - 0.04 * (i % 3), Math.cos(a) * 0.5], [0, 0, 0], [0.6, 2.2, 0.6]); })),
       chain: merge([0, 1, 2, 3, 4, 5].map(i => tor(0.045, 0.012, [0.32 - i * 0.11, 0.25 - Math.sin(i / 5 * PI) * 0.18, 0.4], [0, i % 2 ? PI / 2 : 0, 0], 4, 10)),
         box(0.11, 0.1, 0.05, [-0.08, -0.04, 0.42]), tor(0.035, 0.01, [-0.08, 0.03, 0.42], [0, 0, 0], 4, 10, PI)),
+      // session 56: long tattered streamers trailing behind from the shoulders and hem (wind-torn wet shroud)
+      streamers: merge([0, 1, 2, 3, 4, 5].map(i => { const x = (i - 2.5) * 0.14, L = 1.1 + 0.35 * ((i * 7) % 3) / 2;
+        const g = new THREE.PlaneGeometry(0.13, L, 1, 8), q = g.attributes.position;
+        for (let k = 0; k < q.count; k++) { const y = q.getY(k), u = (L / 2 - y) / L; q.setZ(k, -0.25 * u * u - 0.06 * Math.sin(u * 9 + i)); q.setX(k, q.getX(k) * (1 - 0.7 * u) + 0.05 * Math.sin(u * 7 + i * 2)); }
+        g.computeVertexNormals(); return xf(g, [x, 0.55 - L / 2 - 0.1 * Math.abs(i - 2.5), -0.3], [-0.25, 0, 0]); })),
       weed: merge([0, 1, 2].map(i => { const a = i * 2.1; return tube([[Math.sin(a) * 0.06, 0.3, Math.cos(a) * 0.06], [Math.sin(a) * 0.1 + 0.04, 0, Math.cos(a) * 0.1], [Math.sin(a) * 0.06 - 0.05, -0.3, Math.cos(a) * 0.08], [Math.sin(a) * 0.1, -0.55 - i * 0.08, Math.cos(a) * 0.1]], 0.025, 0.004, 10, 4); })),
     }));
     const g = new THREE.Group(), p = {}, water = m('water'), moss = m('moss');
@@ -500,6 +528,7 @@ const MODELS = {
     p.robe = add(p.body, K.robe, water);
     p.head = pivot(p.body, 0, 0.95, 0);
     add(p.head, K.hood, water); add(p.head, K.void, BASE.ink); add(p.head, K.eyes, BASE.eyeBlue); add(p.head, K.reeds, moss);
+    p.streamers = add(p.body, K.streamers, BASE.shroud); p.streamers.renderOrder = 3;
     p.mantle = add(p.body, K.mantle, water); add(p.mantle, K.drips, BASE.wisp, 0, 0.18, 0); add(p.body, K.chain, BASE.iron);
     for (const s of [-1, 1]) {
       const a = p[s < 0 ? 'armL' : 'armR'] = pivot(p.body, s * 0.38, 0.6, 0);
@@ -835,7 +864,7 @@ export const MOB_TYPES = [
       loot: [{ rarity: 'common', chance: 0.7 }, { rarity: 'uncommon', chance: 0.4 }, { rarity: 'rare', chance: 0.12 }, { rarity: 'epic', chance: 0.02 }],
       attacks: [A({ name: 'Tome Slam', kind: 'ring', range: 3.2, r: 3.6, windup: 1.3, cd: 3.5, dmg: 24, recover: 0.9 }),
                 A({ name: 'Plinth Leap', kind: 'leap', range: 10, minRange: 4, r: 3, windup: 1.2, cd: 7, dmg: 20, recover: 1 })] }),
-  D({ id: 'ink_imp', death: 'dissolve', scale: 1.35, name: 'Library Ink Imp', hp: 28, speed: 5.6, radius: 0.45, xp: 10, color: 0x6060ff,
+  D({ id: 'ink_imp', death: 'dissolve', scale: 1.6, name: 'Library Ink Imp', hp: 28, speed: 5.6, radius: 0.45, xp: 10, color: 0x6060ff,
       loot: [{ rarity: 'common', chance: 0.45 }, { rarity: 'uncommon', chance: 0.12 }],
       attacks: [A({ name: 'Nib Bite', kind: 'line', range: 1.8, len: 2.2, w: 1.2, windup: 0.35, cd: 1.1, dmg: 5, recover: 0.25 }),
                 A({ name: 'Ink Spit', kind: 'bolt', range: 9, minRange: 3, windup: 0.5, cd: 3, dmg: 6, speed: 11, color: 0x30206a })] }),
@@ -861,7 +890,7 @@ export const MOB_TYPES = [
       loot: [{ rarity: 'common', chance: 0.5 }, { rarity: 'uncommon', chance: 0.2 }, { rarity: 'rare', chance: 0.05 }],
       attacks: [A({ name: 'Swarm Dive', kind: 'charge', range: 10, minRange: 2, len: 11, w: 2.2, windup: 0.8, cd: 3.5, dmg: 10, speed: 15 }),
                 A({ name: 'Shrill Peal', kind: 'ring', range: 3, r: 3, windup: 0.6, cd: 2.5, dmg: 8 })] }),
-  D({ id: 'soot_sprite', death: 'burst', scale: 1.3, name: 'Chimney-Soot Sprite', hp: 30, speed: 5.0, radius: 0.45, xp: 12, flying: true, hover: 0.7, color: 0xff6020, deathColor: 0x24221f,
+  D({ id: 'soot_sprite', death: 'burst', scale: 1.5, name: 'Chimney-Soot Sprite', hp: 30, speed: 5.0, radius: 0.45, xp: 12, flying: true, hover: 0.7, color: 0xff6020, deathColor: 0x24221f,
       loot: [{ rarity: 'common', chance: 0.45 }, { rarity: 'uncommon', chance: 0.15 }],
       attacks: [A({ name: 'Cinder Spit', kind: 'bolt', range: 10, minRange: 2.5, windup: 0.5, cd: 2, dmg: 6, speed: 12, color: 0xff6020 }),
                 A({ name: 'Soot Burst', kind: 'ring', range: 2.2, r: 2.4, windup: 0.5, cd: 2, dmg: 7 }),
@@ -1669,6 +1698,7 @@ class MobSystem {
       }
       case 'ink_imp': {
         P.wl.rotation.z = Math.sin(t * 22) * 0.7; P.wr.rotation.z = -P.wl.rotation.z;
+        if (P.droplets) { P.droplets.rotation.y = t * 1.6; P.droplets.position.y = 0.04 * Math.sin(t * 3); P.cape.rotation.x = (moving ? 0.35 : 0.08) + 0.08 * Math.sin(t * 9); }
         P.body.position.y = 0.45 + Math.abs(Math.sin(t * (moving ? 14 : 4))) * (moving ? 0.25 : 0.06);
         P.blob.scale.set(0.65 + wf * 0.2, 0.55 - wf * 0.15, 0.65 + wf * 0.2);
         P.legL.rotation.z = walk * 0.5; P.legR.rotation.z = -walk * 0.5;
@@ -1684,6 +1714,7 @@ class MobSystem {
       }
       case 'automaton': {
         P.gear.rotation.z += dt * (st === 'windup' ? 25 : st === 'active' ? 40 : 2);
+        if (P.bigGear) { P.bigGear.rotation.z -= dt * (st === 'windup' ? 6 : st === 'active' ? 10 : 0.6); P.pinion.rotation.z = -P.bigGear.rotation.z * 2.1; }
         P.legL.rotation.x = walk * 0.5 + (st === 'active' ? Math.sin(t * 30) * 0.7 : 0); P.legR.rotation.x = -P.legL.rotation.x;
         P.armL.rotation.x = -walk * 0.4; P.armR.rotation.x = walk * 0.4;
         P.torso.rotation.x = st === 'windup' ? 0.35 * wf : st === 'active' ? 0.4 : 0;
@@ -1707,6 +1738,7 @@ class MobSystem {
         const hr = mob.flashT / 0.14, k = mob.attack?.kind;
         P.body.rotation.x = -hr * 0.5 + (moving ? 0.25 : 0);
         P.robe.rotation.z = Math.sin(t * 2.2) * 0.12;
+        if (P.streamers) { P.streamers.rotation.x = (moving ? -0.5 : -0.1) + 0.12 * Math.sin(t * 3.1); P.streamers.rotation.z = 0.1 * Math.sin(t * 2.3); }
         P.weedL.rotation.z = Math.sin(t * 3) * 0.4; P.weedR.rotation.z = -Math.sin(t * 3.3) * 0.4;
         const reach = st === 'windup' ? (k === 'line' ? -1.6 * wf : -0.8 * wf) : st === 'recover' ? -1.2 : Math.sin(t * 1.5) * 0.15;
         P.armL.rotation.x = P.armR.rotation.x = reach;

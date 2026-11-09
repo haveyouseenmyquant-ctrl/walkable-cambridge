@@ -1,0 +1,67 @@
+{
+ "gameplay_judged": 39.1,
+ "n": 4,
+ "model": "claude-opus-5-5",
+ "hash": "dafa01750dbd5194",
+ "classes": {
+  "hexweaver": {
+   "score": 4.29,
+   "readability_telegraphs": 4.0,
+   "spell_vfx": 4.0,
+   "enemy_animation_variety": 3.0,
+   "hit_feedback": 5.0,
+   "ui_hud_clarity": 5.0,
+   "loot_excitement": 5.0,
+   "polished_arpg_feel": 4.0,
+   "overall": 4.2
+  },
+  "pyromancer": {
+   "score": 3.86,
+   "readability_telegraphs": 4.0,
+   "spell_vfx": 3.0,
+   "enemy_animation_variety": 3.0,
+   "hit_feedback": 4.0,
+   "ui_hud_clarity": 5.0,
+   "loot_excitement": 5.0,
+   "polished_arpg_feel": 3.0,
+   "overall": 3.5
+  },
+  "stormcaller": {
+   "score": 3.43,
+   "readability_telegraphs": 4.0,
+   "spell_vfx": 3.0,
+   "enemy_animation_variety": 2.0,
+   "hit_feedback": 4.0,
+   "ui_hud_clarity": 5.0,
+   "loot_excitement": 3.0,
+   "polished_arpg_feel": 3.0,
+   "overall": 3.4
+  },
+  "warden": {
+   "score": 4.07,
+   "readability_telegraphs": 5.0,
+   "spell_vfx": 4.0,
+   "enemy_animation_variety": 4.0,
+   "hit_feedback": 4.0,
+   "ui_hud_clarity": 5.0,
+   "loot_excitement": 3.0,
+   "polished_arpg_feel": 3.5,
+   "overall": 4
+  }
+ },
+ "by_criterion": {
+  "readability_telegraphs": 4.25,
+  "spell_vfx": 3.5,
+  "enemy_animation_variety": 3.0,
+  "hit_feedback": 4.25,
+  "ui_hud_clarity": 5.0,
+  "loot_excitement": 4.0,
+  "polished_arpg_feel": 3.38
+ },
+ "reasons": {
+  "hexweaver": "Strengths: the boss has a proper bar with phase markers and an enraged state, crits and damage numbers show up, loot toasts are colour-coded by rarity with stat text, the spell bar shows cooldowns, there is a minimap and a lot of sound (644 voices). Weaknesses: the camera often faces walls or empty streets (5 of 12 frames have no enemies within 30 m), and enemies are small, simple primitive shapes that are hard to read. The only telegraphs are a few red ground markers, spell VFX are basic glowing orbs and sprites, and the HUD sits on top of the action with overlapping text and debug-style help bars.",
+  "pyromancer": "Strengths: a clear boss bar with phase and enrage labels, a large red ground marker telegraphing the boss slam, rarity-coloured loot beams and item toasts, cooldown numbers on the spell bar, and a 'Vanquished' banner. Weaknesses: the spell effects are mostly simple glowing spheres and rings, and the enemies are low-detail primitive-style models. Several frames show empty market stalls or oddly framed shots with little visible combat. Damage numbers are small and overlap, and the screen is cluttered with debug-style UI elements (Landmarks/Help/Credits buttons and a controls hint line).",
+  "stormcaller": "The strengths are the boss presentation and the HUD. The boss has a named health bar with phases, a named attack ('Clapper Sweep') and red ground telegraphs, and the HUD shows HP and mana bars, a spell bar with cooldown numbers, item tooltips, a minimap, and crit-labelled damage numbers. The weaknesses are that enemies are tiny, hard-to-read primitive shapes that are mostly lost behind the oversized market awnings, and spell effects are mostly flat particles and simple beams with little impact. Loot shows only small text labels and toasts, with no drop beams and almost no rarity colour.",
+  "warden": "The best parts are the boss presentation and the telegraphs: the Bellwarden gets a titled health bar with phase and enraged labels, named attacks like Clapper Sweep, and red ground markers, all on top of a working spell bar, cooldown numbers, a minimap and item tooltips. The weak parts: the player's own translucent shield and the wide blue arcs often fill the camera, so the fight is hard to read; enemies are blocky low-poly toys; damage numbers are plain and pile up; and all 21 drops are only common or uncommon, shown with small text labels and a faint beam, so loot isn't exciting. The rough, programmer-art look of the market and 435 sound voices in 60 seconds (likely sound spam) also keep it well short of a commercial ARPG."
+ }
+}

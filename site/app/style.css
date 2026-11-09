@@ -76,3 +76,12 @@ body.explore #game-hud { display: none !important; }
 .gh-talent.on { border-color: #f2d36b; background: rgba(80,65,20,.9); color: #fff; }
 .gh-talent.locked { opacity: .4; cursor: default; }
 .gh-hint { opacity: .6; }
+/* session 56: game mode declutter (hud.js adds body.game-on; exploration mode keeps the plain UI) */
+.gh-menu-btn { display: none; }
+body.game-on .gh-menu-btn { display: inline-block; padding: 4px 9px; font-size: 15px; line-height: 1; background: rgba(12,12,20,.55); color: #f1e6cc; border: 1px solid rgba(241,230,204,.35); }
+body.game-on #menu { flex-direction: column; align-items: flex-end; gap: 4px; }
+body.game-on #menu > button[data-open] { display: none; }
+body.game-on #menu.open > button[data-open] { display: inline-block; background: rgba(12,12,20,.75); color: #f1e6cc; font-size: 12px; }
+body.game-on #mode { display: none; }
+#help { transition: opacity 1.2s; }
+body.game-hint-off #help { opacity: 0; }

@@ -18,4 +18,6 @@ rm -f /tmp/world.tar.gz
 gh workflow run pages.yml --ref main
 # session 55: snapshot the published build (APFS clones, no extra disk) so service.sh can score the game KPIs of the
 # live hash on it even while a session keeps editing site/
+# session 56: wait (up to 30 min) for a running game_kpi/gameplay run so its snapshot isn't swapped out under it
+for _ in $(seq 180); do [ -d /tmp/wc_game_kpi.lock ] || [ -d /tmp/wc_gameplay_kpi.lock ] || break; sleep 10; done
 rm -rf data/derived/live_site.new && cp -c -R site data/derived/live_site.new && rm -rf data/derived/live_site && mv data/derived/live_site.new data/derived/live_site

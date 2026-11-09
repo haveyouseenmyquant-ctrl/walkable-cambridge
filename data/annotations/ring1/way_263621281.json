@@ -1,0 +1,311 @@
+{
+ "osm_id": "way/263621281",
+ "sources": [
+  "commons:File:69 Bridge Street, Cambridge.jpg",
+  "commons:File:68 Bridge Street, Cambridge.jpg"
+ ],
+ "walls": [
+  {
+   "string_courses": [
+    3.6,
+    6.8
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "confidence": "low",
+   "id": "way/263621281:0",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.7,
+    6.9
+   ],
+   "material": "brick",
+   "wall_colour": "#7a4535",
+   "trim_colour": "#f3f1ea",
+   "cornice_z": 10.0,
+   "cornice": "none",
+   "parapet": true,
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.5,
+     "w": 1.1,
+     "z": 0.9,
+     "h": 2.3,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.5,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 1.5,
+     "w": 1.1,
+     "z": 7.2,
+     "h": 1.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.4,
+     "w": 1.1,
+     "z": 0.9,
+     "h": 2.3,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.4,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 4.4,
+     "w": 1.1,
+     "z": 7.2,
+     "h": 1.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 7.3,
+     "w": 1.1,
+     "h": 2.6
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.3,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 7.3,
+     "w": 1.1,
+     "z": 7.2,
+     "h": 1.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.89,
+     "w": 1.1,
+     "z": 0.9,
+     "h": 2.3,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.89,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 9.89,
+     "w": 1.1,
+     "z": 7.2,
+     "h": 1.5,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    }
+   ],
+   "notes": "69 Bridge Street (Commons, Smb1001, CC BY-SA 4.0): 18th-c. red-brown brick, three storeys of white 6/6 sashes in six even bays, brick band courses, plain parapet; pedimented-pilaster doorcase (Scruffs) in the third bay and a second door at the NW end next to 68. Bay spacing assumed even across both OSM walls."
+  },
+  {
+   "string_courses": [
+    3.6,
+    6.8
+   ],
+   "quoins": false,
+   "pilasters": [],
+   "confidence": "low",
+   "id": "way/263621281:1",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    3.7,
+    6.9
+   ],
+   "material": "brick",
+   "wall_colour": "#7a4535",
+   "trim_colour": "#f3f1ea",
+   "cornice_z": 9.1,
+   "cornice": "none",
+   "parapet": true,
+   "elements": [
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.459999999999999,
+     "w": 1.1,
+     "z": 0.9,
+     "h": 2.3,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.459999999999999,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 2.459999999999999,
+     "w": 1.1,
+     "z": 7.2,
+     "h": 1.3,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.359999999999999,
+     "w": 1.1,
+     "z": 0.9,
+     "h": 2.3,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.359999999999999,
+     "w": 1.1,
+     "z": 4.0,
+     "h": 2.0,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_georgian",
+     "x": 5.359999999999999,
+     "w": 1.1,
+     "z": 7.2,
+     "h": 1.3,
+     "panes": [
+      3,
+      3
+     ],
+     "head": "flat",
+     "sill": true
+    },
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 8.259999999999998,
+     "w": 1.0,
+     "h": 2.4
+    }
+   ],
+   "notes": "69 Bridge Street (Commons, Smb1001, CC BY-SA 4.0): 18th-c. red-brown brick, three storeys of white 6/6 sashes in six even bays, brick band courses, plain parapet; pedimented-pilaster doorcase (Scruffs) in the third bay and a second door at the NW end next to 68. Bay spacing assumed even across both OSM walls."
+  }
+ ]
+}
