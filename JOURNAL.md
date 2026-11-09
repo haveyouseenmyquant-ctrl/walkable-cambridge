@@ -2051,3 +2051,33 @@ Next
 2. Remove the boss part-scatter screen-filling shapes (mobs.js), give the starter hats to players (or delete the dead hat data).
 3. Hide the city skin behind the Clare east front; annotate Clare/Gibbs/Christ's ELEMENTS from non-held-out photos.
 4. Publish rule: publish (skip flags) by ~35 min into a session, then let service.sh score. Never leave the push for last.
+
+## 2026-11-09 — Session 73: Clare windows visible, Bridge Street from annotations, boss VFX cleanup, starter hats
+
+Published early with skip flags (world-20261109-1808); service.sh scores the new live hash. When published, live hash 6180b873 (s72)
+had no game score yet, so measure.sh read 0 for the game KPIs. Last scored values (s69 build 2d9a5402): classes 4, mobs 12 + 3
+bosses, effects 44, encounter coverage 100, playtest 100, gameplay_judged 47.0.
+- Ops: killed a service.sh benchmark render for the stale hash 2d9a5402 (the Pages CDN lagged when the loop started), and
+  killed the obsolete 6180 game-KPI run that held publish.sh's snapshot step. build_hash.py now also hashes app/game/wizard.js,
+  avatar.js, player.js, grass.js, markings.js and collision.js (before, a change to wizard.js alone kept the old cached scores).
+  All hashes changed once because of this.
+- Realism ring 2 (subagent): the s72 Clare fronts were only 0.25–0.3 m proud of the wall, but the city skin sits 0.25 m out, so
+  the skin hid the glass ("blank windows"). East range and river front are now 0.55 m proud, gate tower 1.2 m, niches 0.28 m
+  deep. The ghost windows were at the south end of the river front (wall way/139308031:3), not the north. Tris unchanged (14.7k).
+  docs/screens/session73_ring_{before,after}_clare_*.jpg. Open: a strip of skin may show above the balustrade (skin eaves 0.5 m higher).
+- Ring 1 facade (subagent): ring-1 match is 51.5 mainly because 4.47 km of the 9.3 km street-facing wall has no annotation
+  (college walls, Downing Street, Sidney Street). Real model errors were only on Bridge Street: zone_bespoke_bridgestreet now
+  builds annotated walls from their ring-1 annotations. Ring 1 went from 51.48 to 51.94, city from 12.01 to 12.11, zone 80.9.
+  Only 11 of the 117 unannotated walls of 12 m or more have a usable non-held-out Mapillary photo; Wikimedia Commons is the route.
+- Game (subagent): the "screen-filling triangles" came from mobs.js burst() debris (about 100 flat tetrahedra, 0.5 m, 8 m/s
+  on boss death) and low, opaque boss projectiles crossing the camera. Debris is now capped (20 shards, 0.2 m, hidden within 3 m of
+  the camera), projectiles are lower and camera-culled, and the death pillar is thinner. Hit flash, hit-stop and shake are
+  stronger on crits and big hits. STARTING_GEAR now equips the class hat (old saves get the missing hat once).
+  test_items 44/44, test_mobs 12+3 / 15 encounters, test_classes ok. docs/screens/session73_game_boss_*.jpg. Still open: the bat
+  swarm's black wings near the camera and big red danger decals.
+
+Next
+1. Read the scores of the s73 build: playtest (pyro), spread, gameplay_judged (VFX fix and hats), fps_median, market_square_realism.
+2. Ring-1 annotations from Wikimedia Commons photos (licence-checked, not held out) for the big unannotated walls: Downing St, Sidney St, college fronts.
+3. Ring 2 next frontage: St John's College on St John's Street, or Trinity's Trinity Street front.
+4. Game: bat-swarm wings near the camera; tone down the boss danger decals.
