@@ -283,6 +283,9 @@ export function createVfx(game) {
   const crystalGeo = new THREE.OctahedronGeometry(0.22, 0); crystalGeo.scale(0.7, 1.6, 0.7);
   const crystals = pool(16, () => new THREE.Mesh(crystalGeo, new THREE.MeshBasicMaterial({ color: 0xffc860, transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending, depthWrite: false, fog: false })));
   const domeMeshes = pool(4, () => { const m = new THREE.Mesh(coreGeo, coreMat()); m.renderOrder = 12; return m; });
+  // session 52: warden shield lattice (faceted rune shell, glowing edges) and slab plates orbiting it
+  const latticeGeo = new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(1, 1));
+  const lattices = pool(4, () => { const m = new THREE.LineSegments(latticeGeo, new THREE.LineBasicMaterial({ color: 0xffc860, transparent: true, opacity: 0.7, blending: THREE.AdditiveBlending, depthWrite: false, fog: false })); m.renderOrder = 12; return m; });
 
   // short-lived point lights (always in the scene at intensity 0, so materials never recompile)
   const lights = [];
@@ -431,6 +434,21 @@ export function createVfx(game) {
     const e = rec(m, dur, 'spike'); e.h = h;
     burst(x, y, z + 0.2, 3, { tex: 'dust', color: 0x9a8a70, speed: 1.2, size: 0.9, life: 0.9, grow: 1.4, drag: 2, up: 0.8, alpha: 0.55 });
   }
+  // session 52: rising stone shards in an expanding wave (warden): rings of spikes erupt outward from a centre,
+  // each ring a beat later, with a dust skirt, flying grit and a dust shockwave band. delay(s, fn) schedules.
+  function shardWave(x, y, z, r, delay, o = {}) {
+    const rings = o.rings ?? 3, per = o.per ?? 7, h = o.h ?? 1.2, col = o.color ?? 0x8a7458;
+    for (let i = 0; i < rings; i++) {
+      const rr = r * (i + 1) / rings, run = () => {
+        const n = Math.max(3, Math.round(per * (0.6 + 0.4 * (i + 1) / rings) * (LOW ? 0.6 : 1)));
+        for (let k = 0; k < n; k++) { const a = k / n * TAU + i * 0.7 + rnd() * 0.3; spike(x + Math.cos(a) * rr, y + Math.sin(a) * rr, z, h * (1.15 - 0.35 * i / rings) * (0.7 + rnd() * 0.5), 0.75 + 0.1 * i, col); }
+        burst(x, y, z + 0.25, Math.round(10 + 4 * i), { tex: 'dust', color: 0xb8a080, color2: 0x8a7860, grow: 2, drag: 2.2, alpha: 0.55, speed: 0.6, radial: 3 + rr, size: 1.4, life: 1.1, ring: rr, up: 0.6 });
+        burst(x, y, z + 0.3, 6 + 2 * i, { tex: 'shard', color: 0xd8c098, color2: 0x8a7458, speed: 2, size: 0.26, life: 0.7, ring: rr, up: 6, grav: 16, spin: 8 });
+        ring(x, y, z, o.ringColor ?? 0xd8b070, Math.max(0.3, rr - 0.8), rr + 0.6, 0.35, 0.7);
+      };
+      if (i === 0 || !delay) run(); else delay(0.09 * i, run);
+    }
+  }
   // rock debris: physical chunks that arc, tumble, bounce on the floor and shrink away
   function debris(x, y, z, n, o = {}) {
     n = Math.max(1, Math.round(n * QN));
@@ -453,6 +471,9 @@ export function createVfx(game) {
     m.material.uniforms.uColor.value.set(color); m.material.uniforms.uOp.value = 0.35; m.scale.setScalar(r);
     const e = rec(m, Infinity, 'dome'); e.until = until; e.r = r; e.color = color; e.cr = [];
     for (let k = 0; k < 4; k++) { const c = take(crystals); if (c) { c.material.color.set(color); e.cr.push(c); } }
+    e.lat = take(lattices); if (e.lat) { e.lat.material.color.set(color); e.lat.scale.setScalar(0.2); }
+    e.pl = [];   // stone slabs orbiting low around the shell (rock pool, flattened)
+    for (let k = 0; k < (LOW ? 3 : 6); k++) { const s = take(rocks); if (!s) break; s.geometry = rockGeos[k % 3]; s.material.color.set(0x9a8466).offsetHSL(0, 0, (rnd() - 0.5) * 0.08); s.material.opacity = 1; s.scale.set(0.34, 0.5, 0.12); e.pl.push(s); }
     e.rune = decal('rune', game.player.x, game.player.y, game.player.z, r * 1.25, Infinity, color, 0.85, 0.8);
     if (e.rune) e.rune.until = until;
   }
@@ -524,6 +545,9 @@ export function createVfx(game) {
     h.trail = trail(o.trailColor ?? color, o.width ?? 0.3, o.trailLife ?? 0.22);
     h.trail2 = o.width2 ? trail(o.trailColor2 ?? color, o.width2, o.trailLife2 ?? 0.35) : null;
     h.halo0 = h.halo ? h.halo.material.opacity : 0;
+    // session 52: optional tumbling stone in the head (warden pebble), taken from the debris pool and driven here
+    h.rock = o.rock ? take(rocks) : null;
+    if (h.rock) { h.rock.geometry = rockGeos[(rnd() * 3) | 0]; h.rock.material.color.set(o.rockColor ?? 0x9a8466); h.rock.material.opacity = 1; h.rock.scale.setScalar(o.rock); h.rock.position.set(x, z, -y); }
     h.position = { set: (X, Y, Z) => moveMissile(h, X, -Z, Y) };
     trailPush(h.trail, x, y, z); trailPush(h.trail2, x, y, z);
     return h;
@@ -532,12 +556,13 @@ export function createVfx(game) {
     if (!h || !h.visible) return;
     h.x = x; h.y = y; h.z = z;
     h.core?.position.set(x, z, -y);
+    if (h.rock) { h.rock.position.set(x, z, -y); h.rock.rotation.x += 0.35; h.rock.rotation.z += 0.21; }
     if (h.halo) { h.halo.position.set(x, z, -y); h.halo.material.opacity = h.halo0 * smooth(1.5, 5, camDist(x, z, -y)); }
     trailPush(h.trail, x, y, z); trailPush(h.trail2, x, y, z);
   }
   function releaseMissile(h) {
     if (!h || !h.visible) return; h.visible = false;
-    if (h.core) h.core.visible = false; if (h.halo) h.halo.visible = false;
+    if (h.core) h.core.visible = false; if (h.halo) h.halo.visible = false; if (h.rock) { h.rock.visible = false; h.rock = null; }
     trailEnd(h.trail); trailEnd(h.trail2);
   }
   // floating sigil: a rune sprite that spins and fades above a point (curse marks)
@@ -566,6 +591,7 @@ export function createVfx(game) {
       if (gone && e.kind === 'decal' && !e.fadeOut) { e.fadeOut = 1; e.dur = e.t + 0.4; k = e.t / e.dur; }
       if (!o.visible || k >= 1 || (gone && e.kind === 'dome')) {
         o.visible = false; if (e.cr) { for (const c of e.cr) c.visible = false; e.cr = null; }
+        if (e.lat) { e.lat.visible = false; e.lat = null; } if (e.pl) { for (const c of e.pl) c.visible = false; e.pl = null; }
         fx[i] = fx[fx.length - 1]; fx.pop(); fxRec.push(e); e.fadeOut = 0; e.until = null; e.auto = null; continue;
       }
       switch (e.kind) {
@@ -595,6 +621,13 @@ export function createVfx(game) {
           for (let c = 0; c < n; c++) { const a = e.t * 1.6 + c / n * TAU, cr = e.cr[c];
             cr.position.set(p.x + Math.cos(a) * e.r * 0.9, p.z + 0.7 + Math.sin(e.t * 3 + c) * 0.25, -(p.y + Math.sin(a) * e.r * 0.9)); cr.rotation.y += dt * 3;
             cr.material.opacity = 0.9 * smooth(0.5, 1.6, cr.position.distanceTo(camPos)); }
+          if (e.lat) { const g = Math.min(1, e.t / 0.25), s = e.r * (0.25 + 0.8 * g * (2 - g)) * (1 + 0.03 * Math.sin(e.t * 5));
+            e.lat.position.set(p.x, p.z + 1, -p.y); e.lat.scale.set(s, s * 1.05, s); e.lat.rotation.y += dt * 0.5; e.lat.rotation.x = 0.2 * Math.sin(e.t * 0.7);
+            e.lat.material.opacity = (0.35 + 0.15 * Math.sin(e.t * 4) + 0.5 * (1 - g)) * smooth(0.6, 2.2, e.lat.position.distanceTo(camPos)); }
+          if (e.pl) { const m2 = e.pl.length, rise = Math.min(1, e.t / 0.35);
+            for (let c = 0; c < m2; c++) { const a = -e.t * 0.9 + c / m2 * TAU, s = e.pl[c];
+              s.position.set(p.x + Math.cos(a) * e.r * 1.05, p.z - 0.4 + rise * (0.75 + 0.12 * Math.sin(e.t * 2 + c * 1.7)), -(p.y + Math.sin(a) * e.r * 1.05));
+              s.rotation.set(0.15 * Math.sin(e.t + c), -a + Math.PI / 2, 0.1); } }
           if (rnd() < dt * 6) { const a = rnd() * TAU; burst(p.x + Math.cos(a) * e.r, p.y + Math.sin(a) * e.r, p.z + 0.2, 1, { tex: 'rune', color: e.color, speed: 0, size: 0.35, life: 1, up: 1.4, drag: 0, jitter: 0, spin: 1 }); }
           break; }
       }
@@ -603,9 +636,9 @@ export function createVfx(game) {
   function dispose() {
     game.root.remove(root);
     root.traverse(o => { o.geometry?.dispose?.(); o.material?.dispose?.(); });
-    for (const g of [...rockGeos, ...spikeGeos, crystalGeo, coreGeo, planeGeo]) g.dispose();
+    for (const g of [...rockGeos, ...spikeGeos, crystalGeo, coreGeo, planeGeo, latticeGeo]) g.dispose();
     for (const t of [glow, star, atlas, shockTex, ...Object.values(DECAL).map(d => d.tex)]) t.dispose();
   }
   return { burst, orb, release, ring, disc, beam, lightning, spike, dome, impact, update, dispose, glow, star, SCREEN, root,
-    decal, debris, trail, trailPush, trailEnd, streak, core, missile, moveMissile, releaseMissile, tether, sigil, light, quality: QUALITY };
+    decal, debris, shardWave, trail, trailPush, trailEnd, streak, core, missile, moveMissile, releaseMissile, tether, sigil, light, quality: QUALITY };
 }

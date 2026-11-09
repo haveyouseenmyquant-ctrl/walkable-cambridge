@@ -133,6 +133,7 @@ function addRim(mat, color, k) {
 }
 const decalMat = (c) => new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: 0.5, depthWrite: false, side: THREE.DoubleSide, polygonOffset: true, polygonOffsetFactor: -4 });
 const HIT_TINT = new THREE.Color(0xffd8b0);
+const TELE_COLOR = 0xff2a10;   // session 52: the one danger colour for every mob / boss telegraph
 // session 46: soft type-coloured ground aura under every mob (reads as a glow pool in still frames; shared per type)
 const auraMats = {};
 const auraMat = c => auraMats[c] ||= new THREE.MeshBasicMaterial({ color: c, map: TEX.aura, transparent: true, opacity: 0.55, depthWrite: false, blending: THREE.AdditiveBlending, polygonOffset: true, polygonOffsetFactor: -2 });
@@ -1061,35 +1062,64 @@ class MobSystem {
     } });
   }
 
-  // --- telegraphs: ground decals (ring / filled disc that grows, or a strip)
-  // session 43: every wind-up telegraph is a clear red ground decal (bright outline + dim area + growing fill),
-  // drawn over the ground (depthTest off, high renderOrder) so it can't be hidden in the terrain mesh
-  decal(kind, x, y, z, color, a) {
-    const mat = decalMat(0xff2010), edgeMat = decalMat(0xff3020), areaMat = decalMat(0xb00000);
-    for (const m of [mat, edgeMat, areaMat]) m.depthTest = false;
-    edgeMat.opacity = 0.9; areaMat.opacity = 0.18;
-    const grp = new THREE.Group(); grp.position.set(x, z + 0.08, -y); grp.renderOrder = 20; this.root.add(grp);
-    const add = (geo, m, order) => { const o = new THREE.Mesh(geo, m); o.renderOrder = order; grp.add(o); return o; };
-    if (kind === 'ring') {
-      add(G.disc, areaMat, 20).scale.setScalar(a.r);
-      add(G.ring, edgeMat, 22).scale.setScalar(a.r);
-      const fill = add(G.disc, mat, 21); fill.scale.setScalar(0.01);
-      return { grp, mat, edgeMat, areaMat, fill, r: a.r, kind };
+  // --- telegraphs (session 52): one pooled set of ground meshes sharing ONE shader material (per-mesh values are pushed
+  // into the uniforms in onBeforeRender, uniformsNeedUpdate), so a wind-up allocates nothing. Shapes match the real hit
+  // test: 'ring' = disc of radius r (ring / leap / cascade), 'line' = strip w x len from the mob (line / charge / bolt /
+  // nova). Each shows a dim danger area with hazard bands drifting towards the edge, a thick bright rim, and a solid
+  // fill that grows from the source to the rim exactly at the moment of impact (bright leading front); on the strike it
+  // flashes white-hot and fades in 0.25 s. Drawn over the ground (depthTest off) in one consistent danger colour.
+  telePool() {
+    if (this.tele) return this.tele;
+    const u = { uColor: { value: new THREE.Color(TELE_COLOR) }, uFill: { value: 0 }, uOp: { value: 1 }, uTime: { value: 0 }, uShape: { value: 0 }, uFlash: { value: 0 }, uSize: { value: new THREE.Vector2(1, 1) } };
+    const mat = new THREE.ShaderMaterial({ uniforms: u, transparent: true, depthWrite: false, depthTest: false, side: THREE.DoubleSide, fog: false,
+      vertexShader: 'varying vec2 vP; void main(){ vP = position.xz; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+      fragmentShader: `uniform vec3 uColor; uniform float uFill, uOp, uTime, uShape, uFlash; uniform vec2 uSize; varying vec2 vP;
+        void main(){
+          float edgeD, frontD, inside, bands;
+          if (uShape < 0.5) {   // disc: vP in [-1,1]^2, size.x = radius (m)
+            float r = length(vP); if (r > 1.0) discard;
+            edgeD = (1.0 - r) * uSize.x; frontD = abs(r - uFill) * uSize.x; inside = step(r, uFill);
+            bands = step(0.55, fract(r * uSize.x * 0.9 - uTime * 1.6));
+          } else {              // strip: vP.x in [-0.5,0.5] across, vP.y in [0,1] along; size = (w, len)
+            float ax = abs(vP.x) * 2.0, v = vP.y;
+            edgeD = min((1.0 - ax) * 0.5 * uSize.x, min(v, 1.0 - v) * uSize.y); frontD = abs(v - uFill) * uSize.y; inside = step(v, uFill);
+            bands = step(0.55, fract((v * uSize.y - ax * uSize.x * 0.35) * 0.8 - uTime * 2.0));   // chevrons pointing along the attack
+          }
+          float rim = 1.0 - smoothstep(0.0, 0.2, edgeD), rimGlow = 1.0 - smoothstep(0.0, 0.6, edgeD);
+          float front = (1.0 - smoothstep(0.0, 0.22, frontD)) * step(0.02, uFill) * (1.0 - inside * 0.5);
+          float pulse = 0.75 + 0.25 * sin(uTime * (8.0 + 18.0 * uFill));
+          float a = 0.14 + 0.07 * bands * (1.0 - inside) + inside * (0.34 + 0.22 * uFill) + rim * 0.85 * pulse + rimGlow * 0.18 + front * 0.6;
+          vec3 hot = vec3(1.0, 0.82, 0.55);
+          vec3 c = mix(uColor * (0.75 + 0.35 * inside), hot, clamp(rim * 0.45 + front * 0.7, 0.0, 1.0));
+          c = mix(c, vec3(1.0, 0.96, 0.88), uFlash);
+          gl_FragColor = vec4(c, clamp(a + uFlash * 0.45, 0.0, 1.0) * uOp);
+        }` });
+    const disc = new THREE.PlaneGeometry(2, 2).rotateX(-Math.PI / 2);
+    const pool = [];
+    for (let i = 0; i < 64; i++) {
+      const m = new THREE.Mesh(disc, mat); m.visible = false; m.renderOrder = 21; m.frustumCulled = false;
+      const d = m.userData; d.fill = 0; d.op = 1; d.flash = 0; d.shape = 0; d.w = 1; d.len = 1; d.fade = -1;
+      m.onBeforeRender = () => { u.uFill.value = d.fill; u.uOp.value = d.op; u.uFlash.value = d.flash; u.uShape.value = d.shape; u.uSize.value.set(d.w, d.len); u.uTime.value = this.teleT; mat.uniformsNeedUpdate = true; };
+      this.root.add(m); pool.push(m);
     }
-    add(G.rect, areaMat, 20).scale.set(a.w, 1, a.len);
-    const e = 0.12;   // outline: two side rails + end bar
-    add(G.rect, edgeMat, 22).scale.set(e, 1, a.len); grp.children.at(-1).position.x = -a.w / 2;
-    add(G.rect, edgeMat, 22).scale.set(e, 1, a.len); grp.children.at(-1).position.x = a.w / 2;
-    add(G.rect, edgeMat, 22).scale.set(a.w, 1, e); grp.children.at(-1).position.z = a.len - e;
-    const fill = add(G.rect, mat, 21); fill.scale.set(a.w * 0.9, 1, 0.01);
-    grp.rotation.y = a.yaw;
-    return { grp, mat, edgeMat, areaMat, fill, len: a.len, w: a.w, kind };
+    this.teleT = 0; this.teleGeo = { disc, rect: G.rect };
+    return this.tele = { pool, mat, disc };
   }
-  setDecal(d, f) {   // f = wind-up progress 0..1
-    d.mat.opacity = 0.35 + 0.4 * f;
-    if (d.edgeMat) d.edgeMat.opacity = 0.65 + 0.35 * Math.abs(Math.sin(f * Math.PI * (2 + 4 * f)));   // pulses faster near the strike
-    if (d.kind === 'ring') d.fill.scale.setScalar(Math.max(0.01, d.r * f));
-    else d.fill.scale.set(d.w * 0.9, 1, Math.max(0.01, d.len * f));
+  decal(kind, x, y, z, color, a) {
+    const T = this.telePool(), m = T.pool.find(o => !o.visible); if (!m) return null;
+    const d = m.userData; m.visible = true; d.fill = 0; d.op = 1; d.flash = 0; d.fade = -1;
+    m.position.set(x, z + 0.08, -y);
+    if (kind === 'ring') { m.geometry = T.disc; d.shape = 0; d.w = d.len = a.r; m.scale.set(a.r, 1, a.r); m.rotation.y = 0; }
+    else { m.geometry = G.rect; d.shape = 1; d.w = a.w; d.len = Math.max(0.5, a.len); m.scale.set(a.w, 1, d.len); m.rotation.y = a.yaw; }
+    return m;
+  }
+  setDecal(m, f) { if (m) m.userData.fill = Math.min(1, Math.max(0, f)); }   // f = wind-up progress 0..1
+  updateTele(dt) {
+    if (!this.tele) return;
+    this.teleT += dt;
+    for (const m of this.tele.pool) { const d = m.userData; if (!m.visible || d.fade < 0) continue;
+      d.fade += dt; const k = d.fade / 0.25; if (k >= 1) { m.visible = false; d.fade = -1; continue; }
+      d.flash = 1 - k; d.op = 1 - k * k; }
   }
   // expanding ground ring (boss phase change / death)
   shockwave(x, y, z, color, maxR, dur) {
@@ -1102,8 +1132,9 @@ class MobSystem {
       return true;
     } });
   }
-  killDecal(d) { this.root.remove(d.grp); d.mat.dispose(); d.edgeMat?.dispose(); d.areaMat?.dispose(); }
-  clearTelegraph(mob) { for (const d of mob.telegraph || []) this.killDecal(d); mob.telegraph = null; }
+  // strike = the attack landed: flash white-hot and fade out; otherwise (interrupted / mob removed) vanish at once
+  killDecal(m, strike) { if (!m) return; if (strike) { m.userData.fill = 1; m.userData.fade = 0; } else { m.visible = false; m.userData.fade = -1; } }
+  clearTelegraph(mob, strike = false) { for (const d of mob.telegraph || []) this.killDecal(d, strike); mob.telegraph = null; }
 
   // --- per-frame
   update(dt) {
@@ -1112,6 +1143,7 @@ class MobSystem {
     for (const mob of [...g.mobs]) this.updateMob(mob, dt);
     for (let i = this.projectiles.length - 1; i >= 0; i--) if (!this.updateProjectile(this.projectiles[i], dt)) this.projectiles.splice(i, 1);
     for (let i = this.fx.length - 1; i >= 0; i--) if (!this.fx[i].update(dt)) this.fx.splice(i, 1);
+    this.updateTele(dt);
   }
 
   evictFarEncounter(minD) {
@@ -1427,12 +1459,12 @@ class MobSystem {
     const dx = g.px - mob.x, dy = g.py - mob.y;
     const yaw = Math.atan2(dx, -dy); mob.yaw = yaw;
     mob.aim = { x: g.px, y: g.py, z: g.pz, yaw, dir: { x: dx / (Math.hypot(dx, dy) || 1), y: dy / (Math.hypot(dx, dy) || 1) } };
-    const gz = mob.type.flying ? (mob.groundZ ?? g.pz) : mob.z, col = mob.boss ? 0xff3010 : 0xff5030;
+    const gz = mob.type.flying ? (mob.groundZ ?? g.pz) : mob.z, col = TELE_COLOR;
     const t = [];
     if (a.kind === 'ring') t.push(this.decal('ring', mob.x, mob.y, gz, col, { r: a.r }));
     else if (a.kind === 'leap') t.push(this.decal('ring', g.px, g.py, g.pz, col, { r: a.r }));
     else if (a.kind === 'line' || a.kind === 'charge') t.push(this.decal('line', mob.x, mob.y, gz, col, { w: a.w, len: a.len, yaw }));
-    else if (a.kind === 'bolt') t.push(this.decal('line', mob.x, mob.y, Math.min(gz, g.pz), a.color ?? 0x58c8ff, { w: 0.35, len: Math.hypot(dx, dy), yaw }));
+    else if (a.kind === 'bolt') t.push(this.decal('line', mob.x, mob.y, Math.min(gz, g.pz), col, { w: 0.7, len: Math.hypot(dx, dy), yaw }));
     else if (a.kind === 'nova') for (let i = 0; i < a.n; i++) t.push(this.decal('line', mob.x, mob.y, gz, col, { w: 0.6, len: a.range, yaw: yaw + i / a.n * TAU }));
     else if (a.kind === 'cascade') {
       mob.aim.points = [{ x: g.px, y: g.py, z: g.pz }];
@@ -1449,7 +1481,7 @@ class MobSystem {
     for (const d of mob.telegraph || []) this.setDecal(d, f);
     if (mob.stateT > 0) return;
     const g = this.game;
-    this.clearTelegraph(mob);
+    this.clearTelegraph(mob, true);
     if (a.kind === 'ring') {
       this.burst(mob.x, mob.y, mob.type.flying ? mob.groundZ : mob.z, mob.type.color, 8, 4);
       if (Math.hypot(g.px - mob.x, g.py - mob.y) <= a.r + 0.3) this.hit(mob, a.dmg);
@@ -1804,6 +1836,7 @@ class MobSystem {
   dispose() {
     for (const m of [...this.game.mobs]) this.remove(m);
     for (const p of this.projectiles) this.root.remove(p.m);
+    if (this.tele) { this.tele.mat.dispose(); this.tele.disc.dispose(); this.tele = null; }
     this.game.root.remove(this.root);
   }
 }

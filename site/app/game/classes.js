@@ -242,11 +242,14 @@ export function install(game) {
     orb: { missile: { coreColor: 0xfff0c0, radius: 0.26, halo: 1.3, width: 0.75, width2: 0.3, trailColor2: 0xffd060, trailLife: 0.3 },
            trail: (x, y, z) => { vfx.burst(x, y, z, 4, { ...FIRE, speed: 1.2, size: 0.8, life: 0.35, up: 1.5, jitter: 0.35 }); vfx.burst(x, y, z, 1, { ...SMOKE, speed: 0.4, size: 0.8, life: 0.9, up: 0.8, alpha: 0.35 }); },
            impact: (x, y, z, sp) => { sfx.play('boom'); fireBlast(x, y, z, sp.splash, true); vfx.ring(x, y, groundZ(x, y, z), 0xffc060, 0.5, sp.splash * 1.4, 0.6, 0.7); } },
-    pebble: { missile: { coreColor: 0xffe8c0, radius: 0.13, halo: 0.45, width: 0.2, trailColor: 0xc8a878, trailLife: 0.24, width2: 0.08, trailColor2: 0xffe0a0 },
+    pebble: { missile: { coreColor: 0xffd890, radius: 0.1, halo: 0.7, width: 0.3, trailColor: 0xd8a860, trailLife: 0.3, width2: 0.1, trailColor2: 0xffe0a0, rock: 0.2 },   // session 52: tumbling stone head
               trail: (x, y, z) => {   // session 51: grit shards shed behind the pebble and a dust wake
                 if (Math.random() < 0.7) vfx.burst(x, y, z, 1, { ...DUST, speed: 0.3, size: 0.45, life: 0.6, alpha: 0.45, grow: 1.5 });
                 if (Math.random() < 0.6) vfx.burst(x, y, z, 1, { tex: 'shard', color: 0xc8a878, speed: 1.5, size: 0.14, life: 0.4, grav: 10, spin: 9 }); },
-              impact: (x, y, z) => { stoneHit(x, y, z, 9); vfx.burst(x, y, z, 6, { tex: 'shard', color: 0xa08860, speed: 4, size: 0.3, life: 0.6, grav: 14, spin: 7, up: 2 }); vfx.burst(x, y, z, 4, { ...DUST, speed: 2.5, size: 1.3, life: 1.1, up: 0.4, alpha: 0.5, grow: 2 }); const g = nearGround(x, y, z); if (g != null) vfx.decal('crack', x, y, g, 0.8, 3, 0xffffff, 0.7); } },
+              impact: (x, y, z) => { stoneHit(x, y, z, 9); vfx.burst(x, y, z, 6, { tex: 'shard', color: 0xa08860, speed: 4, size: 0.3, life: 0.6, grav: 14, spin: 7, up: 2 }); vfx.burst(x, y, z, 4, { ...DUST, speed: 2.5, size: 1.3, life: 1.1, up: 0.4, alpha: 0.5, grow: 2 });
+                vfx.impact(x, y, z, 0xffc870, 1.2); vfx.core(x, y, z, 0xffb050, 0.3, 0.12);   // session 52: amber crack flash
+                const g = nearGround(x, y, z); if (g != null) { vfx.decal('crack', x, y, g, 1.1, 3, 0xffffff, 0.8); vfx.ring(x, y, g, 0xd8b070, 0.2, 1.8, 0.3, 0.75);
+                  for (let k = 0; k < 3; k++) { const a = Math.random() * 6.283; vfx.spike(x + Math.cos(a) * 0.5, y + Math.sin(a) * 0.5, g, 0.5 + Math.random() * 0.4, 0.55); } } } },
     dart: { missile: { coreColor: 0xf4e0ff, radius: 0.15, halo: 0.8, width: 0.4, width2: 0.14, trailColor2: 0x70ff90, trailLife: 0.28, trailLife2: 0.4 },
             trail: (x, y, z, b) => {   // session 51: two wisps orbit the dart's path (double helix) and fade behind it
               const t = (b ? b.trav : 0) * 1.6, nx = b ? -b.dy : 1, ny = b ? b.dx : 0;
@@ -512,7 +515,10 @@ export function install(game) {
       } else {
         vfx.ring(p.x, p.y, gz, 0xd8b070, 0.5, sp.radius * 1.15, 0.6); vfx.ring(p.x, p.y, gz, 0xffd890, 0.3, sp.radius * 0.7, 0.45, 0.6);
         vfx.decal('crack', p.x, p.y, gz, sp.radius * 1.1, 5, 0xffffff, 0.9); vfx.decal('rune', p.x, p.y, gz, sp.radius * 0.6, 0.9, 0xffb040, 0.8, 2);
-        for (let k = 0; k < 14; k++) { const a = Math.random() * 6.283, r = 1.2 + Math.random() * (sp.radius - 1.2); vfx.spike(p.x + Math.cos(a) * r, p.y + Math.sin(a) * r, gz, 0.6 + Math.random() * 1.1, 0.9); }
+        // session 52: three rings of stone shards erupt outward in sequence, each with a dust shockwave band
+        vfx.shardWave(p.x, p.y, gz, sp.radius, after, { rings: 3, per: 8, h: 1.5 });
+        vfx.burst(p.x, p.y, gz + 0.5, 18, { tex: 'shard', color: 0xffd890, color2: 0x8a7458, speed: 5, size: 0.3, life: 0.9, up: 7, grav: 15, spin: 7, jitter: 1.2 });
+        vfx.light(p.x, p.y, gz + 1, 0xffb050, 1.2, 0.4, 18);
         vfx.debris(p.x, p.y, gz + 0.3, 14, { color: 0x8a7458, speed: sp.radius * 1.2, size: 0.18, up: 7, jitter: 2, floor: gz });
         vfx.burst(p.x, p.y, gz + 0.3, 30, { ...DUST, speed: 1, radial: sp.radius * 1.6, size: 1.6, life: 1.3, ring: 1.5, up: 0.6 });
       }
@@ -536,7 +542,8 @@ export function install(game) {
         vfx.burst(p.x, p.y, p.z + 15, 40, { tex: 'smoke', color: 0x3a4250, color2: 0x1a1e26, speed: 1.5, size: 7, life: sp.dur + 1, grow: 0.8, drag: 0.5, alpha: 0.55, jitter: sp.radius * 1.6, jz: 2, fadeIn: 0.15 });
         for (let k = 0; k < 16; k++) { const a = k / 16 * 6.283; vfx.streak(p.x + Math.cos(a) * 3, p.y + Math.sin(a) * 3, p.z + 0.5 + Math.random() * 3, -Math.sin(a), Math.cos(a), 0.15, 14, 0xd8f0ff, 0.9, 0.14, 2.5); }
         vfx.decal('frost', p.x, p.y, p.z, sp.radius * 0.7, 2, 0x80b0ff, 0.5);
-      } else if (sp.look === 'spikes') { vfx.ring(x, y, z, 0x9a8a60, 0.5, sp.radius, 0.4); vfx.decal('rune', x, y, z, sp.radius, 0.6, 0xd0a050, 0.8, 2); }
+      } else if (sp.look === 'spikes') { vfx.ring(x, y, z, 0x9a8a60, 0.5, sp.radius, 0.4); vfx.decal('rune', x, y, z, sp.radius, 0.6, 0xd0a050, 0.8, 2);
+        vfx.decal('crack', x, y, z, sp.radius * 1.1, 4, 0xffffff, 0.85); vfx.shardWave(x, y, z, sp.radius * 0.9, after, { rings: 2, per: 6, h: 0.9 }); }
       else if (sp.look === 'bloom') {
         vfx.decal('rune', x, y, z, sp.radius * 1.05, dur, 0xa040ff, 0.9, 0.5); vfx.decal('rune', x, y, z, sp.radius * 0.6, dur, 0x50ff80, 0.8, -0.9);
         vfx.ring(x, y, z, 0xc080ff, 0.5, sp.radius * 1.2, 0.9); vfx.ring(x, y, z, 0x60ff90, 0.5, sp.radius * 0.7, 1.2);
@@ -572,7 +579,8 @@ export function install(game) {
       if (sp.landing) {
         const land = () => {
           vfx.ring(p.x, p.y, p.z, 0xd8b070, 0.4, sp.radius * 1.2, 0.5); vfx.decal('crack', p.x, p.y, p.z, sp.radius * 1.1, 4, 0xffffff, 0.9);
-          for (let k = 0; k < 8; k++) { const a = k / 8 * 6.283 + Math.random() * 0.3; vfx.spike(p.x + Math.cos(a) * sp.radius * 0.7, p.y + Math.sin(a) * sp.radius * 0.7, p.z, 0.8 + Math.random() * 0.6, 0.9); }
+          vfx.shardWave(p.x, p.y, p.z, sp.radius, after, { rings: 2, per: 8, h: 1.3 });   // session 52
+          vfx.impact(p.x, p.y, p.z + 0.4, 0xffc870, 2); vfx.light(p.x, p.y, p.z + 1, 0xffb050, 1, 0.35);
           vfx.debris(p.x, p.y, p.z + 0.3, 12, { color: 0x8a7458, speed: sp.radius * 1.6, size: 0.16, up: 6, jitter: 1.5, floor: p.z });
           vfx.burst(p.x, p.y, p.z + 0.3, 26, { ...DUST, speed: 1, radial: sp.radius * 1.8, size: 1.5, life: 1.2, ring: 1.2, up: 0.5 });
           aoe(p.x, p.y, p.z + 1, sp.radius, sp); sfx.play('quake', 0.7);
@@ -584,6 +592,10 @@ export function install(game) {
     shield(sp) {
       game.shield = Math.max(game.shield || 0, sp.amount); game.shieldUntil = game.time + sp.dur;
       vfx.dome(sp.color, sp.ult ? 1.8 : 1.4, () => game.shield > 0);
+      // session 52: a collar of stone shards bursts up around the caster as the rune shell closes, plus a dust skirt
+      for (let k = 0; k < 7; k++) { const a = k / 7 * 6.283 + Math.random() * 0.3; vfx.spike(p.x + Math.cos(a) * 1.6, p.y + Math.sin(a) * 1.6, p.z, 0.9 + Math.random() * 0.5, 0.7, 0xa09070); }
+      vfx.burst(p.x, p.y, p.z + 0.2, 14, { ...DUST, speed: 0.6, radial: 3, size: 1.2, life: 1, ring: 1.4, up: 0.5 });
+      vfx.ring(p.x, p.y, p.z, sp.color, 0.4, 2.6, 0.45, 0.8); vfx.light(p.x, p.y, p.z + 1.2, 0xffc060, 0.8, 0.4);
       vfx.burst(p.x, p.y, p.z + 0.3, 24, { tex: 'shard', color: 0xffd890, color2: 0xa07030, speed: 1, radial: 2.5, size: 0.28, life: 0.9, ring: 1.6, up: 3, grav: 4, spin: 5 });
       vfx.burst(p.x, p.y, p.z + 0.2, 10, { tex: 'rune', color: sp.color, speed: 0, size: 0.5, life: 1.2, ring: 1.5, up: 1.6, drag: 0, spin: 1.5 });
       if (sp.radius) {   // Monolith Ward: stun nova + a ring of standing stones
