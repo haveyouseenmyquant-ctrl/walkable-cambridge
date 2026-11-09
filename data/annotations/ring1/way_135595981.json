@@ -4,7 +4,9 @@
   "mapillary:919159848898713",
   "mapillary:301075494954846",
   "commons:File:Church of St Andrew the Great - geograph.org.uk - 4363662.jpg (CC BY-SA 2.0)",
-  "mapillary:288790312952123"
+  "mapillary:288790312952123",
+  "mapillary:3838125446294031",
+  "mapillary:1390580201307612"
  ],
  "walls": [
   {
@@ -182,6 +184,45 @@
     }
    ],
    "notes": "Session 54: St Andrew the Great, north side towards the Christ's Lane / Lion Yard walk: buff ashlar on a plinth with stepped buttresses, tall pointed two-light leaded windows, a gutter and downpipes at the eaves. Mapillary 288790312952123 (22 m, oblique); two bays over 9 m estimated."
+  },
+  {
+   "material": "stone",
+   "wall_colour": "#cdbb92",
+   "trim_colour": "#d8cba8",
+   "id": "way/135595981:4",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "cornice": "none",
+   "parapet": false,
+   "string_courses": [
+    1.2
+   ],
+   "quoins": false,
+   "pilasters": [
+    4.9
+   ],
+   "elements": [
+    {
+     "type": "door",
+     "style": "panelled",
+     "x": 2.4,
+     "w": 1.6,
+     "h": 2.6,
+     "surround": "plain"
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.4,
+     "w": 1.5,
+     "z": 4.2,
+     "h": 3.6
+    }
+   ],
+   "confidence": "low",
+   "notes": "Session 55: St Andrew the Great, west face of the low projecting bay on the Lion Yard passage (p0 = north). Buff ashlar on a plinth (offset ~1.2 m), a dark timber double door, above it a tall pointed two-light leaded window, a stepped buttress at the south corner. mapillary:3838125446294031 and 1390580201307612 (raking, 8-18 m)."
   }
  ]
 }

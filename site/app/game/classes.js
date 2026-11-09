@@ -19,10 +19,10 @@ export const CLASSES = {
     spells: [
       { id: 'ember_bolt', name: 'Ember Bolt', glyph: '✦', kind: 'bolt', type: 'fire', mana: 5, cd: 0.45, dmg: 22, speed: 48, range: 60, splash: 1.2, color: 0xff7a2a, sfx: 'ember', look: 'ember' },
       { id: 'cinder_spray', name: 'Cinder Spray', glyph: '≋', kind: 'cone', type: 'fire', mana: 14, cd: 3, dmg: 14, range: 9, angle: 0.6, burn: { dps: 6, dur: 3 }, color: 0xffa040, sfx: 'spray', look: 'spray' },
-      { id: 'fireburst', name: 'Fireburst Orb', glyph: '◉', kind: 'bolt', type: 'fire', mana: 22, cd: 6, dmg: 42, speed: 22, range: 50, splash: 4.5, color: 0xff5010, sfx: 'orb', look: 'orb', size: 1.6 },
+      { id: 'fireburst', name: 'Fireburst Orb', glyph: '◉', kind: 'bolt', type: 'fire', mana: 22, cd: 6, dmg: 32, speed: 22, range: 50, splash: 4.5, color: 0xff5010, sfx: 'orb', look: 'orb', size: 1.6 },
       { id: 'flame_step', name: 'Flame Step', glyph: '➚', kind: 'blink', type: 'fire', mana: 15, cd: 5, dist: 11, dmg: 18, radius: 3, color: 0xff9a30, sfx: 'flamestep', look: 'flamestep' },
       { id: 'kindle_ring', name: 'Kindle Ring', glyph: '◎', kind: 'nova', type: 'fire', mana: 24, cd: 9, dmg: 30, radius: 5.5, knock: 3, burn: { dps: 5, dur: 3 }, color: 0xff6a00, sfx: 'kindle', look: 'kindle' },
-      { id: 'sunfall', name: 'Sunfall', glyph: '☀', kind: 'zone', type: 'fire', mana: 50, cd: 60, dmg: 17, radius: 7, dur: 3, interval: 0.22, tick: 'meteor', splash: 2.5, range: 40, color: 0xffc040, sfx: 'sunfall', look: 'sunfall', ult: true },
+      { id: 'sunfall', name: 'Sunfall', glyph: '☀', kind: 'zone', type: 'fire', mana: 50, cd: 60, dmg: 13, radius: 7, dur: 3, interval: 0.22, tick: 'meteor', splash: 2.5, range: 40, color: 0xffc040, sfx: 'sunfall', look: 'sunfall', ult: true },
     ],
     talents: [
       [{ name: 'Split Embers', desc: 'Ember Bolt fires 3 bolts in a fan', f: S => { S.ember_bolt.count = 3; } },

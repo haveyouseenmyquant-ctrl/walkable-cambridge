@@ -43,19 +43,42 @@ async function main() {
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(SKY);
   scene.fog = LOOK2 ? new THREE.Fog(SKY, 150, 560) : new THREE.Fog(SKY, 120, 420);
-  // sky dome: pale hazy horizon to a soft blue zenith (Cambridge summer afternoon), follows the camera
-  const skyDome = new THREE.Mesh(new THREE.SphereGeometry(580, 32, 16), new THREE.ShaderMaterial({
+  // sky dome: pale hazy horizon to a soft blue zenith (Cambridge summer afternoon), follows the camera.
+  // session 55: on by default with drifting fair-weather cloud (fbm), its horizon equal to the fog/background colour so
+  // distant facades still fade into it; the sky stays mostly near-white like the street photos. ?sky=flat: the old flat colour.
+  const HZ = new THREE.Color(SKY);
+  const skyDome = new THREE.Mesh(new THREE.SphereGeometry(580, 48, 24), new THREE.ShaderMaterial({
     side: THREE.BackSide, depthWrite: false, fog: false,
-    uniforms: { sun: { value: new THREE.Vector3(-0.181, 0.848, 0.498).normalize() } },
+    uniforms: { sun: { value: new THREE.Vector3(-0.181, 0.848, 0.498).normalize() }, hz: { value: new THREE.Vector3(HZ.r, HZ.g, HZ.b) },
+      t: { value: 0 }, look2: { value: LOOK2 ? 1 : 0 } },
     vertexShader: 'varying vec3 vd; void main(){ vd = normalize(position); gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
-    fragmentShader: `uniform vec3 sun; varying vec3 vd;
+    fragmentShader: `uniform vec3 sun; uniform vec3 hz; uniform float t; uniform float look2; varying vec3 vd;
+      float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+      float noise(vec2 p){ vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f);
+        return mix(mix(hash(i), hash(i + vec2(1, 0)), f.x), mix(hash(i + vec2(0, 1)), hash(i + vec2(1, 1)), f.x), f.y); }
+      float fbm(vec2 p){ float v = 0.0, a = 0.5; for (int k = 0; k < 5; k++) { v += a * noise(p); p = p * 2.03 + 17.1; a *= 0.5; } return v; }
       void main(){ float h = max(vd.y, 0.0);
-        vec3 c = mix(vec3(0.80, 0.85, 0.89), vec3(0.42, 0.60, 0.82), pow(h, 0.55));
-        c += vec3(1.0, 0.95, 0.85) * 0.25 * pow(max(dot(vd, sun), 0.0), 12.0);
-        if (vd.y < 0.0) c = vec3(0.80, 0.85, 0.89);
+        if (look2 > 0.5) {
+          vec3 c = mix(vec3(0.80, 0.85, 0.89), vec3(0.42, 0.60, 0.82), pow(h, 0.55));
+          c += vec3(1.0, 0.95, 0.85) * 0.25 * pow(max(dot(vd, sun), 0.0), 12.0);
+          if (vd.y < 0.0) c = vec3(0.80, 0.85, 0.89);
+          gl_FragColor = vec4(c, 1.0); return; }
+        float sd = max(dot(vd, sun), 0.0);
+        vec3 c = mix(hz, vec3(0.60, 0.73, 0.88), smoothstep(0.02, 0.75, h));
+        // clouds on a plane ~1.5 km up, drifting from the WSW
+        vec2 uv = vd.xz / (h + 0.12) * 1.4 + vec2(t * 0.004, t * 0.0015);
+        float n = fbm(uv);
+        float cov = smoothstep(0.40, 0.72, n + 0.06 * fbm(uv * 3.7));
+        float base = smoothstep(0.42, 0.85, fbm(uv + vec2(0.07, 0.05)));   // thicker cloud: grey underside
+        vec3 cc = mix(vec3(0.99, 0.985, 0.975), vec3(0.78, 0.80, 0.84), base * 0.75);
+        cc += vec3(1.0, 0.96, 0.88) * 0.18 * pow(sd, 6.0);   // silver lining toward the sun
+        c = mix(c, cc, cov * smoothstep(0.0, 0.18, h) * 0.95);
+        c += vec3(1.0, 0.95, 0.85) * (0.10 * pow(sd, 8.0) + 0.25 * pow(sd, 120.0));   // sun glow
+        c = mix(hz, c, smoothstep(0.0, 0.10, h));   // aerial perspective: fades to the fog colour at the horizon
+        if (vd.y < 0.0) c = hz;
         gl_FragColor = vec4(c, 1.0); }`,
   }));
-  skyDome.renderOrder = -1; skyDome.frustumCulled = false; if (LOOK2) scene.add(skyDome);
+  skyDome.renderOrder = -1; skyDome.frustumCulled = false; if (LOOK2 || SKYMODE !== 'flat') scene.add(skyDome);
   const camera = new THREE.PerspectiveCamera(70, 1, 0.2, LOOK2 ? 1200 : 600);
   if (LOOK2) { renderer.toneMapping = THREE.AgXToneMapping; renderer.toneMappingExposure = 1.15; }
   scene.add(LOOK2 ? new THREE.HemisphereLight(0xc4d8ee, 0x5f584c, 0.75) : new THREE.HemisphereLight(0xdfeaf5, 0x6b6450, (OVERCAST ? 2.3 : 1.6) * LK));
@@ -217,7 +240,7 @@ async function main() {
       const q = 240 / 2048, cx = Math.round(camera.position.x / q) * q, cz = Math.round(camera.position.z / q) * q;
       sun.target.position.set(cx, 0, cz); sun.position.set(cx, 0, cz).addScaledVector(SUN_DIR, 300); sun.target.updateMatrixWorld();
     }
-    skyDome.position.copy(camera.position);
+    skyDome.position.copy(camera.position); skyDome.material.uniforms.t.value = performance.now() / 1000;
     if (composer) composer.render(dt); else renderer.render(scene, camera);
     if (!ready && !player.pendingPlace && tiles.readyAt(player.x, player.y)) {
       ready = true; window.__walkReadyAt = performance.now(); window.__walkReady = true;

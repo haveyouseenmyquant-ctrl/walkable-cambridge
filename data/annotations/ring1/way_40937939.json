@@ -4,7 +4,8 @@
   "commons:File:Department store, Downing Street, Cambridge - geograph.org.uk - 3265898.jpg",
   "commons:File:John Lewis - geograph.org.uk - 5231470.jpg",
   "mapillary:516491239375858",
-  "mapillary:816161935994269"
+  "mapillary:816161935994269",
+  "mapillary:316038143232136"
  ],
  "walls": [
   {
@@ -585,6 +586,80 @@
    ],
    "confidence": "low",
    "notes": "John Lewis (Grand Arcade) west corner: x 0-12.5 is a full-height glass curtain wall over the stair tower (steel mullions, ~4 x 4 grid); x 12.5-17.75 is a plain buff limestone block with 'John Lewis' incised high up and a tall recessed entrance at ground. Material set to glass for the dominant part; the stone block should read #d9c08a."
+  },
+  {
+   "storeys": 4,
+   "floor_z": [
+    0,
+    4.6,
+    8.8,
+    12.8
+   ],
+   "material": "stone",
+   "wall_colour": "#d9c08a",
+   "trim_colour": "#3e474b",
+   "cornice_z": 18.0,
+   "cornice": "none",
+   "parapet": true,
+   "string_courses": [
+    4.6,
+    12.6
+   ],
+   "quoins": false,
+   "id": "way/40937939:4",
+   "pilasters": [],
+   "elements": [
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 2.8,
+     "w": 5.0,
+     "z": 0.3,
+     "h": 3.9
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 8.5,
+     "w": 5.0,
+     "z": 0.3,
+     "h": 3.9
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 1.4,
+     "w": 2.4,
+     "z": 4.9,
+     "h": 7.6
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 4.2,
+     "w": 2.4,
+     "z": 4.9,
+     "h": 7.6
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 7.1,
+     "w": 2.4,
+     "z": 4.9,
+     "h": 7.6
+    },
+    {
+     "type": "window",
+     "style": "modern",
+     "x": 9.9,
+     "w": 2.4,
+     "z": 4.9,
+     "h": 7.6
+    }
+   ],
+   "confidence": "low",
+   "notes": "Session 55: east continuation of the Downing St front, from mapillary:316038143232136 (13 m, facing): ground-floor shop glazing between slender columns under dark-glazed upper bays with vertical fins; about two ~5.6 m bays over 11.3 m, same floor bands as wall 0."
   }
  ]
 }

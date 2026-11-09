@@ -125,6 +125,9 @@ function installBot(route, runIdx) {
       }
     }
     bot.noPathT = 0;
+    // session 55: escape manoeuvre. A warden stood 16 s at -131,-29 with a 1-cell plan, walking into the same wall toward
+    // the goal; after repeated failed replans walk 1.5 s in a random direction (jumping) before replanning again
+    if (bot.escapeT > 0) { bot.escapeT -= dt; P.yaw = bot.escapeYaw; P.keys.add('KeyW'); P.keys.add('Space'); if (bot.escapeT <= 0) setGoal(G.x, G.y, G.tol); return false; }
     let q = bot.path[bot.wp];
     while (Math.hypot(q.x - P.x, q.y - P.y) < 0.9 && bot.wp < bot.path.length - 1) q = bot.path[++bot.wp];
     if (bot.wp >= bot.path.length - 1 && Math.hypot(q.x - P.x, q.y - P.y) < 0.9) {
@@ -147,7 +150,7 @@ function installBot(route, runIdx) {
       // session 53: loot is optional; a kill spot the bot cannot get onto (corpse against bollards/railings) is skipped
       // instead of failing the run as a softlock (a really stuck player still fails on the next travel leg)
       if ((moved < 0.5 || !closer) && G.loot && bot.replans >= 3) { G.loot.looted = true; bot.goal = null; bot.path = null; bot.replans = 0; return false; }
-      if (moved < 0.5 || !closer) { bot.replans++; P.keys.add('Space'); setGoal(G.x, G.y, G.tol); bot.goal.best = G.best; bot.goal.loot = G.loot; bot.goal.enc = G.enc; if (bot.replans > 8) bot.fail = `softlock: no route progress (leg ${bot.leg} ${route[bot.leg]}, at ${P.x.toFixed(1)},${P.y.toFixed(1)},${P.z.toFixed(1)}, goal ${G.x.toFixed(1)},${G.y.toFixed(1)}, path ${bot.path?.length ?? 0}, engaged ${[...bot.engaged.keys()].map(m => m.type.id).join('/') || 'none'})`; }
+      if (moved < 0.5 || !closer) { bot.replans++; P.keys.add('Space'); if (bot.replans >= 3) { bot.escapeT = 1.5; bot.escapeYaw = Math.random() * 6.283; } setGoal(G.x, G.y, G.tol); bot.goal.best = G.best; bot.goal.loot = G.loot; bot.goal.enc = G.enc; if (bot.replans > 8) bot.fail = `softlock: no route progress (leg ${bot.leg} ${route[bot.leg]}, at ${P.x.toFixed(1)},${P.y.toFixed(1)},${P.z.toFixed(1)}, goal ${G.x.toFixed(1)},${G.y.toFixed(1)}, path ${bot.path?.length ?? 0}, engaged ${[...bot.engaged.keys()].map(m => m.type.id).join('/') || 'none'})`; }
       else bot.replans = 0;
     }
     return false;
@@ -190,10 +193,10 @@ function installBot(route, runIdx) {
     for (const [m, e] of bot.engaged) {
       if (m.dead) { if (m.type.id === ROUTE_BOSS && bot.bossStart != null && bot.bossTtk == null) bot.bossTtk = g.time - bot.bossStart; bot.engaged.delete(m); continue; }
       if (m.removed) { bot.engaged.delete(m); continue; }
-      if (!hostile(m) && dist(m) > 25) { bot.engaged.delete(m); continue; }   // session 53: leashed home, out of the fight
+      if (!hostile(m) && (dist(m) > 25 || m.state === 'return')) { bot.engaged.delete(m); continue; }   // session 53: leashed home, out of the fight (s55: any distance once it is walking home)
       if (m.hp < e.hp) e.lastDmg = g.time;   // session 44: only damage counts as progress (leash regen used to reset it)
       e.hp = m.hp;
-      if (g.time - e.lastDmg > 30) { bot.fail = `stuck mob: ${m.type.id} not damaged for 30 s`; return; }
+      if (g.time - e.lastDmg > 30) { bot.fail = `stuck mob: ${m.type.id} not damaged for 30 s (mob ${m.x.toFixed(1)},${m.y.toFixed(1)},${m.z.toFixed(1)} ${m.state}, player ${P.x.toFixed(1)},${P.y.toFixed(1)},${P.z.toFixed(1)}, why ${bot.why})`; return; }
       if (g.time - e.t > (m.boss ? 360 : 120)) { bot.fail = `stuck mob: ${m.type.id} not killed within ${m.boss ? 360 : 120} s`; return; }
     }
     for (const id of route) { const s = sys.encounterState.get(id); if (s?.active && s.mobs.length && s.mobs.every(m => m.dead)) bot.clearedEnc.add(id); }

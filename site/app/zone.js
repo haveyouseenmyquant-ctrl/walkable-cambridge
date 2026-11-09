@@ -84,6 +84,15 @@ const COLOR = `
     diffuseColor.rgb = zc * (0.985 + 0.03 * zn(zp * 6.0));
     zSpec = 0.06; zShin = 30.0;
   }
+  // session 55: pale freestone (Ketton / Clipsham / Portland ashlar and dressings: King's Chapel, Senate House, Great
+  // St Mary's...) rendered mid-grey: the lights are scaled to LK 0.45 for the whole city, so a 0.89 albedo came out at
+  // ~0.17 linear radiance, darker than in photos. Lift pale ashlar/trim towards the warm cream seen in non-held-out
+  // photos; brick, render, timber and dark stone keep their colour.
+  if (zm > 1.5 && zm < 2.5 || zm > 6.5) {
+    float zl = dot(zc, vec3(0.299, 0.587, 0.114));
+    float zg = smoothstep(0.55, 0.75, zl);
+    diffuseColor.rgb *= mix(vec3(1.0), vec3(1.85, 1.74, 1.50), zg);
+  }
 `;
 
 const LIGHTS = `
@@ -118,7 +127,7 @@ function makeMat() {
       .replace('#include <lights_phong_fragment>', '#include <lights_phong_fragment>\n' + LIGHTS)
       .replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\n' + EMIT);
   };
-  m.customProgramCacheKey = () => 'wc_zone_mat1';
+  m.customProgramCacheKey = () => 'wc_zone_mat2';
   return m;
 }
 export const zoneMat = makeMat();

@@ -4864,10 +4864,11 @@
     -125.55
    ],
    "ground_z": 11.5,
-   "eave_z": 24.78,
-   "height": 13.28,
+   "eave_z": 25.27,
+   "height": 13.77,
    "dist_centre": 347.3,
-   "street_facing": true
+   "street_facing": true,
+   "eave_fixed": true
   },
   {
    "id": "way/40937939:31",

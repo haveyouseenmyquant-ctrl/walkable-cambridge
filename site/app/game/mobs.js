@@ -1075,11 +1075,12 @@ class MobSystem {
   // test: 'ring' = disc of radius r (ring / leap / cascade), 'line' = strip w x len from the mob (line / charge / bolt /
   // nova). Each shows a dim danger area with hazard bands drifting towards the edge, a thick bright rim, and a solid
   // fill that grows from the source to the rim exactly at the moment of impact (bright leading front); on the strike it
-  // flashes white-hot and fades in 0.25 s. Drawn over the ground (depthTest off) in one consistent danger colour.
+  // flashes white-hot and fades in 0.25 s. One consistent danger colour. Session 55: depth-tested (polygon offset over the
+  // ground) so mob and player bodies are no longer painted over, and a lighter fill: boss rings used to wash out the clip frame.
   telePool() {
     if (this.tele) return this.tele;
     const u = { uColor: { value: new THREE.Color(TELE_COLOR) }, uFill: { value: 0 }, uOp: { value: 1 }, uTime: { value: 0 }, uShape: { value: 0 }, uFlash: { value: 0 }, uSize: { value: new THREE.Vector2(1, 1) } };
-    const mat = new THREE.ShaderMaterial({ uniforms: u, transparent: true, depthWrite: false, depthTest: false, side: THREE.DoubleSide, fog: false,
+    const mat = new THREE.ShaderMaterial({ uniforms: u, transparent: true, depthWrite: false, depthTest: true, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -8, side: THREE.DoubleSide, fog: false,
       vertexShader: 'varying vec2 vP; void main(){ vP = position.xz; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
       fragmentShader: `uniform vec3 uColor; uniform float uFill, uOp, uTime, uShape, uFlash; uniform vec2 uSize; varying vec2 vP;
         void main(){
@@ -1096,7 +1097,7 @@ class MobSystem {
           float rim = 1.0 - smoothstep(0.0, 0.2, edgeD), rimGlow = 1.0 - smoothstep(0.0, 0.6, edgeD);
           float front = (1.0 - smoothstep(0.0, 0.22, frontD)) * step(0.02, uFill) * (1.0 - inside * 0.5);
           float pulse = 0.75 + 0.25 * sin(uTime * (8.0 + 18.0 * uFill));
-          float a = 0.14 + 0.07 * bands * (1.0 - inside) + inside * (0.34 + 0.22 * uFill) + rim * 0.85 * pulse + rimGlow * 0.18 + front * 0.6;
+          float a = 0.08 + 0.06 * bands * (1.0 - inside) + inside * (0.2 + 0.18 * uFill) + rim * 0.85 * pulse + rimGlow * 0.14 + front * 0.6;
           vec3 hot = vec3(1.0, 0.82, 0.55);
           vec3 c = mix(uColor * (0.75 + 0.35 * inside), hot, clamp(rim * 0.45 + front * 0.7, 0.0, 1.0));
           c = mix(c, vec3(1.0, 0.96, 0.88), uFlash);
@@ -1116,7 +1117,7 @@ class MobSystem {
   decal(kind, x, y, z, color, a) {
     const T = this.telePool(), m = T.pool.find(o => !o.visible); if (!m) return null;
     const d = m.userData; m.visible = true; d.fill = 0; d.op = 1; d.flash = 0; d.fade = -1;
-    m.position.set(x, z + 0.08, -y);
+    m.position.set(x, z + 0.12, -y);
     if (kind === 'ring') { m.geometry = T.disc; d.shape = 0; d.w = d.len = a.r; m.scale.set(a.r, 1, a.r); m.rotation.y = 0; }
     else { m.geometry = G.rect; d.shape = 1; d.w = a.w; d.len = Math.max(0.5, a.len); m.scale.set(a.w, 1, d.len); m.rotation.y = a.yaw; }
     return m;
@@ -1337,7 +1338,11 @@ class MobSystem {
       case 'chase': {
         if (homeD > T.leash || dist > T.leash * 1.4 || g.stats.hp <= 0) { mob.state = 'return'; break; }
         const atk = this.pickAttack(mob, dist);
-        if (atk) { this.beginAttack(mob, atk); break; }
+        if (atk) { mob.chaseNoGainT = 0; mob.chaseBest = dist; this.beginAttack(mob, atk); break; }
+        // session 55: evade. A walker that cannot close on the player (cornered behind bollards / railings: a statue
+        // stood 30 s in 'chase' 18 m away, out of reach of both sides) gives up after 6 s and walks home
+        if (!(dist < (mob.chaseBest ?? Infinity) - 0.5)) mob.chaseNoGainT = (mob.chaseNoGainT || 0) + dt; else { mob.chaseBest = dist; mob.chaseNoGainT = 0; }
+        if (!mob.boss && mob.chaseNoGainT > 6 && dist > Math.max(T.keepAway ?? 0, mob.radius + 1.2) + 2) { mob.chaseNoGainT = 0; mob.chaseBest = Infinity; mob.state = 'return'; break; }
         const keep = T.keepAway ?? 0;
         if (keep && dist < keep - 1) moving = this.moveTo(mob, mob.x - dx, mob.y - dy, T.speed * speedMul, dt);
         else if (dist > Math.max(keep, mob.radius + 1.2)) moving = this.moveTo(mob, g.px, g.py, T.speed * speedMul, dt);
