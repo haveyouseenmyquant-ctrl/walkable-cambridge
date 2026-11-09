@@ -1,0 +1,67 @@
+{
+ "gameplay_judged": 52.1,
+ "n": 4,
+ "model": "claude-opus-5-5",
+ "hash": "232f1909f9c5edac",
+ "classes": {
+  "hexweaver": {
+   "score": 5.14,
+   "readability_telegraphs": 5.0,
+   "spell_vfx": 5.0,
+   "enemy_animation_variety": 4.0,
+   "hit_feedback": 5.5,
+   "ui_hud_clarity": 6.0,
+   "loot_excitement": 6.0,
+   "polished_arpg_feel": 4.5,
+   "overall": 5
+  },
+  "pyromancer": {
+   "score": 5.29,
+   "readability_telegraphs": 5.0,
+   "spell_vfx": 5.0,
+   "enemy_animation_variety": 4.0,
+   "hit_feedback": 6.0,
+   "ui_hud_clarity": 6.0,
+   "loot_excitement": 6.0,
+   "polished_arpg_feel": 5.0,
+   "overall": 5
+  },
+  "stormcaller": {
+   "score": 4.86,
+   "readability_telegraphs": 5.0,
+   "spell_vfx": 5.0,
+   "enemy_animation_variety": 4.0,
+   "hit_feedback": 5.0,
+   "ui_hud_clarity": 6.0,
+   "loot_excitement": 5.0,
+   "polished_arpg_feel": 4.0,
+   "overall": 4.5
+  },
+  "warden": {
+   "score": 5.57,
+   "readability_telegraphs": 5.0,
+   "spell_vfx": 6.0,
+   "enemy_animation_variety": 5.0,
+   "hit_feedback": 6.0,
+   "ui_hud_clarity": 6.0,
+   "loot_excitement": 6.0,
+   "polished_arpg_feel": 5.0,
+   "overall": 5.5
+  }
+ },
+ "by_criterion": {
+  "readability_telegraphs": 5.0,
+  "spell_vfx": 5.25,
+  "enemy_animation_variety": 4.25,
+  "hit_feedback": 5.62,
+  "ui_hud_clarity": 6.0,
+  "loot_excitement": 5.75,
+  "polished_arpg_feel": 4.62
+ },
+ "reasons": {
+  "hexweaver": "The boss encounter is well framed, with a named health bar, phase pips, an enrage banner, ground rings and a wind-up label. The HUD, cooldown bar, minimap and gold crit numbers are clean, and loot gets rarity-coloured beams, labels and toasts, with an epic purple pillar. Most frames are almost empty, though: the enemies are small, simple primitive-style models, and the spell effects are mostly generic glowing orbs and bloom blobs that wash out the scene. Telegraphs for ordinary enemies are barely visible, so overall it reads as a capable prototype, not a polished ARPG.",
+  "pyromancer": "The boss fight is the strongest part: a named boss bar with three phases, ability names like Great Toll and Peal of Shards, red ground rings for telegraphs, and big gold crit numbers. Loot beams use rarity colours and come with item toasts. The weaknesses are blocky, low-detail enemies and a cluttered scene, and spell effects that turn into overexposed glowing blobs; in later frames the boss attacks are hard to read. Mana stays near zero for most of the fight, which leaves the spell bar greyed out.",
+  "stormcaller": "Strengths: a clear boss bar with phase labels and enrage banners, a solid HUD with numbered cooldowns, a minimap, a low-health vignette, and loot shown with rarity-coloured names, a light beam and pickup toasts. Weaknesses: the boss fight is a busy jumble of overlapping translucent effects, item labels and damage numbers, with only a few ground telegraphs. The enemies are blocky primitive shapes, and the second half of the clip is empty traversal with no combat at all.",
+  "warden": "Strengths: the boss fight has real presentation, with a named health bar split into phases, 'Phase II', 'enraged' and 'Vanquished' banners, and a purple beam on the epic drop. Loot toasts use rarity colours and show stats, crits get bold yellow numbers, and the bellwarden and gargoyle-bat models look distinctive. Weaknesses: the warden's granite-skin bubble and rune circle cover the middle of the screen in most frames, so clustered effects and stacked damage numbers make fights hard to read. Only a few red ground markers telegraph attacks, the town and stall art is flat low-poly, and the ability bar shows bare cooldown numbers without clear icons."
+ }
+}

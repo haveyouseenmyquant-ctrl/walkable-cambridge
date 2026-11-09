@@ -2138,8 +2138,15 @@ Published world-20261109-1902 with skip flags; Pages run ok. Live build f16b1a43
   is unchanged at 80.9. These walls lie within the 400 m ring-1 radius, so there is no separate ring-2 number yet.
   Unverified: the north-range window positions and the dormer count.
 
+- Live game scores (39645f15, scored in-session before the session ended): classes 4, mobs 12 + 3 bosses, effects 44,
+  encounter coverage 100, playtest 90 (stormcaller 4/5 timeout; warden 4/5 softlock at leg 4 senate-house-hill
+  -169.5,27.0), boss TTK spread 24.5% (first time within ±25%; median 18.9 s), gameplay_judged 50.5 (s74 was not scored;
+  s73 was 50.2). Judge notes: damage numbers overlap into strings like "31144", some spell VFX white out the screen, and
+  a third of the frames show an empty square.
+
 Next
-1. Read the 39645f15 game scores (playtest, spread, gameplay_judged: did the animation variety rise?) and the s75 msjudge.
+1. Fix the warden softlock at leg 4 (-169.5,27 -> -182,68) and the stormcaller timeout, to get playtest back to 100.
+   Gameplay: stack and offset the damage numbers, cap the spell-VFX white-out, cut the empty frames in the clip.
 2. Annotate the Clare and King's Gibbs fronts from Commons and feed them into the KPI, the same way as St John's.
 3. More ring-1 Commons annotations: Downing St and Sidney St college walls (3 s pacing, no 429s this time).
 4. Boss TTK spread (51.9% at s72): rebalance once a fresh playtest reading is in.
