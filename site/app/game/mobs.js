@@ -129,6 +129,8 @@ const BASE = {
 };
 // session 48: fresnel rim light (emissive, type-coloured) injected into the standard shader; one shared program
 const hash01 = (str) => { let h = 2166136261; for (let i = 0; i < str.length; i++) h = Math.imul(h ^ str.charCodeAt(i), 16777619); return ((h >>> 0) % 10007) / 10007; };
+const HIT_T = 0.36;   // s69: part-recoil duration (held at full for the first half, then eases out)
+const SCATTER_SKIP = new Set(['body', 'torso', 'robe', 'core', 'shell', 'pot', 'blob', 'sally', 'frame', 'halo', 'tail', 'crown', 'tendrils', 'reeds']);
 const MOB_VIS = 1.45;   // s66: 1.3 -> 1.45 (judge: 'small figures, hard to read')
 function addRim(mat, color, k) {
   const u = { uRim: { value: new THREE.Color(color).multiplyScalar(k) } };
@@ -916,7 +918,7 @@ export const MOB_TYPES = [
       loot: [{ rarity: 'common', chance: 0.45 }, { rarity: 'uncommon', chance: 0.12 }],
       attacks: [A({ name: 'Nib Bite', kind: 'line', range: 1.8, len: 2.2, w: 1.2, windup: 0.35, cd: 1.1, dmg: 5, recover: 0.25 }),
                 A({ name: 'Ink Spit', kind: 'bolt', range: 9, minRange: 3, windup: 0.5, cd: 3, dmg: 6, speed: 11, color: 0x30206a })] }),
-  D({ id: 'automaton', death: 'burst', scale: 1.12, name: 'Clockwork Porter', hp: 95, speed: 2.8, radius: 0.6, xp: 26, color: 0xffb040,
+  D({ id: 'automaton', death: 'crumble', scale: 1.12, name: 'Clockwork Porter', hp: 95, speed: 2.8, radius: 0.6, xp: 26, color: 0xffb040,
       loot: [{ rarity: 'common', chance: 0.6 }, { rarity: 'uncommon', chance: 0.3 }, { rarity: 'rare', chance: 0.1 }],
       attacks: [A({ name: 'Wound-Spring Charge', kind: 'charge', range: 12, minRange: 3, len: 13, w: 1.6, windup: 1.0, cd: 5, dmg: 18, speed: 16 }),
                 A({ name: 'Gear Whirl', kind: 'ring', range: 2.6, r: 2.8, windup: 0.7, cd: 2.5, dmg: 10 })] }),
@@ -947,7 +949,7 @@ export const MOB_TYPES = [
       loot: [{ rarity: 'common', chance: 0.65 }, { rarity: 'uncommon', chance: 0.38 }, { rarity: 'rare', chance: 0.12 }, { rarity: 'epic', chance: 0.02 }],
       attacks: [A({ name: 'Rending Talons', kind: 'line', range: 2.6, len: 3, w: 2, windup: 0.55, cd: 1.8, dmg: 12, recover: 0.4 }),
                 A({ name: 'Heraldic Pounce', kind: 'leap', range: 10, minRange: 3.5, r: 2.4, windup: 0.9, cd: 5, dmg: 18, recover: 0.8 })] }),
-  D({ id: 'bicycle_golem', death: 'burst', scale: 1.08, name: 'Mossbound Bicycle-Golem', hp: 110, speed: 3.4, radius: 0.65, xp: 28, color: 0xc0ff60, knockResist: 0.5, deathColor: 0x4d6b2e,
+  D({ id: 'bicycle_golem', death: 'crumble', scale: 1.08, name: 'Mossbound Bicycle-Golem', hp: 110, speed: 3.4, radius: 0.65, xp: 28, color: 0xc0ff60, knockResist: 0.5, deathColor: 0x4d6b2e,
       loot: [{ rarity: 'common', chance: 0.65 }, { rarity: 'uncommon', chance: 0.32 }, { rarity: 'rare', chance: 0.1 }],
       attacks: [A({ name: 'Freewheel Charge', kind: 'charge', range: 13, minRange: 3, len: 14, w: 1.6, windup: 1.0, cd: 4.5, dmg: 16, speed: 17 }),
                 A({ name: 'Chain Lash', kind: 'line', range: 3, len: 3.5, w: 2.6, windup: 0.7, cd: 2.4, dmg: 11 })] }),
@@ -1080,7 +1082,7 @@ class MobSystem {
   }
 
   onHit(mob, dmg, o) {
-    mob.flashT = 0.14;
+    mob.flashT = 0.14; mob.hitT = HIT_T;   // s69: per-part recoil outlasts the 0.14 s flash so it shows in still frames
     const g = this.game, res = mob.type.knockResist ?? 0, k = (1 - res) * Math.min(1.8, 0.4 + dmg / 30);
     // session 46: knockback is a short decaying shove (0.22 s) instead of a teleport, plus a flinch pose on the rig
     mob.flinch = 0.22 * (1 - res * 0.6) + (dmg > 25 ? 0.08 : 0);
@@ -1419,7 +1421,7 @@ class MobSystem {
     if (mob.state === 'dead') { this.tickDeath(mob, dt); return; }
     if (mob.boss && !['idle', 'patrol', 'return'].includes(mob.state) && this.game.stats.hp > 0) this.bossAdds(mob, dt);
     // flash + glow
-    mob.flashT = Math.max(0, mob.flashT - dt);
+    mob.flashT = Math.max(0, mob.flashT - dt); mob.hitT = Math.max(0, (mob.hitT || 0) - dt);
     const glow = mob.state === 'windup' ? 0.4 + 0.6 * Math.min(1, 1 - mob.stateT / mob.windupEff) : 0;
     this.chargeOrb(mob, mob.state === 'windup' ? Math.min(1, 1 - mob.stateT / mob.windupEff) : 0);
     mob.mats.forEach((c, i) => {
@@ -1550,7 +1552,7 @@ class MobSystem {
     const dur = T.deathDur ?? (style === 'burst' ? 0.5 : style === 'crumble' ? 1.3 : 1.2);
     mob.deathT += dt; let f = Math.min(1, mob.deathT / dur);
     if (T.deathDur) { this.animateDeath(mob, Math.min(1, f / 0.6)); f = Math.max(0, (f - 0.55) / 0.45); }
-    else if (mob.parts) this.animateDeath(mob, f);   // session 50: per-type regular death poses under the shared style
+    else if (mob.parts) { this.animateDeath(mob, f); if (style !== 'burst') this.scatterParts(mob, f, style); }   // session 50: per-type regular death poses under the shared style
     const fade = (a) => {
       if (a < 0.98 && !mob.outlinesOff) { mob.outlinesOff = true; mob.group.traverse(o => { if (o.userData.outline) o.visible = false; }); }   // s66: the ink shell can't fade
       for (const c of mob.mats) { c.transparent = true; c.opacity = Math.max(0, a); }
@@ -1731,6 +1733,7 @@ class MobSystem {
   animate(mob, dt, moving) {
     const P = mob.parts, t = mob.t, st = mob.state, wf = st === 'windup' ? 1 - mob.stateT / mob.windupEff : 0;
     const walk = moving ? Math.sin(t * (mob.type.speed * 2.5)) : 0;
+    mob.hr = mob.hitT > 0 ? Math.min(1, mob.hitT / HIT_T * 2) : 0;   // s69: hit recoil 0..1
     switch (mob.type.id) {
       case 'gargoyle': {
         const flap = Math.sin(t * (st === 'active' ? 4 : 9)) * (st === 'active' ? 0.2 : 0.6);
@@ -1745,7 +1748,7 @@ class MobSystem {
         P.tail.rotation.y = Math.sin(t * 2.1) * 0.4; P.tail.rotation.x = Math.sin(t * 1.4) * 0.12;
         P.jaw.rotation.x = st === 'windup' ? 0.45 * wf : st === 'active' ? 0.5 : 0.04 + Math.sin(t * 2.3) * 0.04;
         // session 50: Rake = wings mantle wide and both arms cock back overhead; hit = head snaps back, wings jerk open
-        const hrG = mob.flashT / 0.14;
+        const hrG = mob.hr;
         if (mob.attack?.kind === 'ring' && st === 'windup') { P.armL.rotation.x = P.armR.rotation.x = -2.4 * wf; P.armL.rotation.z = -0.9 * wf; P.armR.rotation.z = 0.9 * wf; P.wl.rotation.z = 1.3 * wf; P.wr.rotation.z = -1.3 * wf; P.tail.rotation.x = -0.5 * wf; }
         else if (mob.attack?.kind === 'ring' && st === 'recover') { P.armL.rotation.x = P.armR.rotation.x = 0.5; P.armL.rotation.z = 0.6; P.armR.rotation.z = -0.6; }
         P.head.rotation.x -= hrG * 0.6; P.wl.rotation.z += hrG * 0.8; P.wr.rotation.z -= hrG * 0.8;
@@ -1760,7 +1763,7 @@ class MobSystem {
         P.shell.rotation.y = t * 0.8;
         // session 50: Marsh Bolt = the core draws back and the tongues lean forward into a cone; Flicker Nova = halo flattens and
         // spins up while the shell swells; hit = the flame gutters (squashes sideways, tongues blown back)
-        const hrW = mob.flashT / 0.14, kW = mob.attack?.kind;
+        const hrW = mob.hr, kW = mob.attack?.kind;
         P.crown.rotation.y = -t * 1.3; P.crown.scale.set(1, 1 + 0.25 * Math.sin(t * 11), 1);
         P.tendrils.rotation.y = t * 0.9; P.tendrils.rotation.x = moving ? 0.5 : 0.1;
         P.reeds.rotation.y = Math.sin(t * 0.5) * 0.3;
@@ -1771,15 +1774,15 @@ class MobSystem {
         break;
       }
       case 'statue': {
-        P.armL.rotation.x = walk * 0.3; P.armR.rotation.x = st === 'windup' ? -2.6 * wf : -walk * 0.3;
+        P.armL.rotation.x = walk * 0.65; P.armR.rotation.x = st === 'windup' ? -2.6 * wf : -walk * 0.65;
         if (st === 'recover' && mob.attack?.kind === 'ring') P.armR.rotation.x = 0.4;
-        P.torso.rotation.z = walk * 0.06; P.body.position.y = moving ? Math.abs(walk) * 0.08 : 0;
+        P.torso.rotation.z = walk * 0.1; P.body.position.y = moving ? Math.abs(walk) * 0.2 : 0;   // s69: the plinth hops with each stride
         P.torso.rotation.x = st === 'windup' ? -0.2 * wf : st === 'recover' ? 0.25 : 0;
         P.head.rotation.y = st === 'windup' ? 0 : Math.sin(t * 0.6) * 0.35;
         // session 50: a heavy stone gait (torso twists with each grinding step, head stays level); Tome Slam = both arms raise the
         // tome overhead, then crash down; Plinth Leap = sinks low, arms swept back; hit = a grinding stagger with the head jarred
-        const hrS = mob.flashT / 0.14, kS = mob.attack?.kind;
-        P.torso.rotation.y = moving ? walk * 0.12 : 0; P.armL.rotation.z = P.armR.rotation.z = 0;   // head pivots at the torso base: turn it only about Y
+        const hrS = mob.hr, kS = mob.attack?.kind;
+        P.torso.rotation.y = moving ? walk * 0.22 : 0; P.armL.rotation.z = P.armR.rotation.z = 0;   // head pivots at the torso base: turn it only about Y
         if (st === 'windup' && kS === 'ring') { P.armL.rotation.x = -2.7 * wf; P.armL.rotation.z = 0.35 * wf; P.armR.rotation.z = -0.35 * wf; P.torso.rotation.x = -0.3 * wf; }
         else if (st === 'recover' && kS === 'ring') { P.armL.rotation.x = 0.3; P.armR.rotation.x = 0.4; P.torso.rotation.x = 0.45; }
         else if (st === 'windup' && kS === 'leap') { P.armL.rotation.x = P.armR.rotation.x = 0.9 * wf; P.torso.rotation.x = 0.4 * wf; P.body.position.y = -0.15 * wf; }
@@ -1792,10 +1795,10 @@ class MobSystem {
         if (P.droplets) { P.droplets.rotation.y = t * 1.6; P.droplets.position.y = 0.04 * Math.sin(t * 3); P.cape.rotation.x = (moving ? 0.35 : 0.08) + 0.08 * Math.sin(t * 9); }
         P.body.position.y = 0.45 + Math.abs(Math.sin(t * (moving ? 14 : 4))) * (moving ? 0.25 : 0.06);
         P.blob.scale.set(0.65 + wf * 0.2, 0.55 - wf * 0.15, 0.65 + wf * 0.2);
-        P.legL.rotation.z = walk * 0.5; P.legR.rotation.z = -walk * 0.5;
+        P.legL.rotation.z = walk * 0.9; P.legR.rotation.z = -walk * 0.9; P.legL.rotation.x = walk * 0.8; P.legR.rotation.x = -walk * 0.8;
         // session 50: scuttle (body rolls and yaws with each hop); Nib Bite = stretches forward like a lunging drop; Ink Spit =
         // swells and leans back, wings flared; hit = splats flat and spreads
-        const hrI = mob.flashT / 0.14, kI = mob.attack?.kind;
+        const hrI = mob.hr, kI = mob.attack?.kind;
         P.body.rotation.z = moving ? Math.sin(t * 14) * 0.18 : Math.sin(t * 2) * 0.05; P.body.rotation.y = moving ? Math.sin(t * 7) * 0.2 : 0;
         P.body.rotation.x = st === 'windup' && kI === 'line' ? 0.35 * wf : st === 'windup' && kI === 'bolt' ? -0.45 * wf : st === 'active' ? 0.5 : 0;
         if (st === 'windup' && kI === 'line') P.blob.scale.set(0.65 - 0.12 * wf, 0.55 - 0.05 * wf, 0.65 + 0.35 * wf);
@@ -1806,7 +1809,7 @@ class MobSystem {
       case 'automaton': {
         P.gear.rotation.z += dt * (st === 'windup' ? 25 : st === 'active' ? 40 : 2);
         if (P.bigGear) { P.bigGear.rotation.z -= dt * (st === 'windup' ? 6 : st === 'active' ? 10 : 0.6); P.pinion.rotation.z = -P.bigGear.rotation.z * 2.1; }
-        P.legL.rotation.x = walk * 0.5 + (st === 'active' ? Math.sin(t * 30) * 0.7 : 0); P.legR.rotation.x = -P.legL.rotation.x;
+        P.legL.rotation.x = walk * 0.8 + (st === 'active' ? Math.sin(t * 30) * 0.7 : 0); P.legR.rotation.x = -P.legL.rotation.x;
         P.armL.rotation.x = -walk * 0.4; P.armR.rotation.x = walk * 0.4;
         P.torso.rotation.x = st === 'windup' ? 0.35 * wf : st === 'active' ? 0.4 : 0;
         if (st === 'windup' && mob.attack.kind === 'ring') { P.armL.rotation.z = -1.3 * wf; P.armR.rotation.z = 1.3 * wf; P.torso.rotation.y = wf * 6; }
@@ -1815,9 +1818,9 @@ class MobSystem {
         P.key.rotation.z += dt * (st === 'windup' ? 14 : moving ? 4 : 1.5);
         // session 50: stiff clockwork gait (head ticks in steps instead of a smooth turn, arms stop dead at each beat);
         // Wound-Spring Charge = crouches with shoulders forward, arms pinned back; hit = a jolt, gear jams backwards
-        const hrA = mob.flashT / 0.14, kA = mob.attack?.kind;
+        const hrA = mob.hr, kA = mob.attack?.kind;
         P.head.rotation.y = Math.round(Math.sin(t * 0.8) * 4) * 0.1;
-        if (moving) { const q = Math.round(walk * 3) / 3; P.armL.rotation.x = -q * 0.4; P.armR.rotation.x = q * 0.4; }
+        if (moving) { const q = Math.round(walk * 3) / 3; P.armL.rotation.x = -q * 0.75; P.armR.rotation.x = q * 0.75; }
         if (st === 'windup' && kA === 'charge') { P.armL.rotation.x = P.armR.rotation.x = 0.9 * wf; P.legL.rotation.x = -0.4 * wf; P.legR.rotation.x = 0.3 * wf; P.head.rotation.x = 0.3 * wf; }
         else if (st === 'active' && kA === 'charge') { P.armL.rotation.x = P.armR.rotation.x = -1.4; P.head.rotation.x = 0.35; }
         else P.head.rotation.x = 0;
@@ -1826,12 +1829,12 @@ class MobSystem {
       }
       // session 41 regulars; hr = hit-recoil 0..1 (rocks the body back while the white flash shows)
       case 'river_wraith': {
-        const hr = mob.flashT / 0.14, k = mob.attack?.kind;
+        const hr = mob.hr, k = mob.attack?.kind;
         P.body.rotation.x = -hr * 0.5 + (moving ? 0.25 : 0);
         P.robe.rotation.z = Math.sin(t * 2.2) * 0.12;
         if (P.streamers) { P.streamers.rotation.x = (moving ? -0.5 : -0.1) + 0.12 * Math.sin(t * 3.1); P.streamers.rotation.z = 0.1 * Math.sin(t * 2.3); }
         P.weedL.rotation.z = Math.sin(t * 3) * 0.4; P.weedR.rotation.z = -Math.sin(t * 3.3) * 0.4;
-        const reach = st === 'windup' ? (k === 'line' ? -1.6 * wf : -0.8 * wf) : st === 'recover' ? -1.2 : Math.sin(t * 1.5) * 0.15;
+        const reach = st === 'windup' ? (k === 'line' ? -1.6 * wf : -0.8 * wf) : st === 'recover' ? -1.2 : moving ? 0.75 + Math.sin(t * 2.5) * 0.2 : Math.sin(t * 1.5) * 0.15;   // s69: arms trail behind in flight
         P.armL.rotation.x = P.armR.rotation.x = reach;
         P.armL.rotation.z = k === 'line' && st === 'windup' ? -0.6 * wf : 0; P.armR.rotation.z = -P.armL.rotation.z;
         P.head.rotation.x = st === 'windup' ? -0.3 * wf : Math.sin(t * 0.9) * 0.1;
@@ -1842,21 +1845,21 @@ class MobSystem {
         break;
       }
       case 'bog_hag': {
-        const hr = mob.flashT / 0.14, k = mob.attack?.kind;
+        const hr = mob.hr, k = mob.attack?.kind;
         P.torso.rotation.x = 0.35 - hr * 0.4 + (moving ? Math.abs(walk) * 0.1 : 0);
-        P.torso.rotation.z = walk * 0.12;
+        P.torso.rotation.z = walk * 0.22; P.torso.rotation.y = walk * 0.15;
         P.head.rotation.y = Math.sin(t * 0.7) * 0.5;
-        P.crook.rotation.x = st === 'windup' && k === 'bolt' ? -1.2 * wf : st === 'windup' ? 0 : -0.15 + walk * 0.2;
+        P.crook.rotation.x = st === 'windup' && k === 'bolt' ? -1.2 * wf : st === 'windup' ? 0 : -0.15 + walk * 0.45;
         P.armR.rotation.x = st === 'windup' && k === 'ring' ? -2.2 * wf : st === 'recover' && k === 'ring' ? 0.3 : 0;
-        P.armL.rotation.x = st === 'windup' && k === 'ring' ? -2.2 * wf : -walk * 0.3;
+        P.armL.rotation.x = st === 'windup' && k === 'ring' ? -2.2 * wf : -walk * 0.7;
         P.lantern.rotation.y = t * 1.5;
         P.lantern.scale.setScalar(0.3 + 0.04 * Math.sin(t * 7) + (st === 'windup' ? 0.15 * wf : 0));
         break;
       }
       case 'punt_revenant': {
-        const hr = mob.flashT / 0.14, k = mob.attack?.kind;
-        P.legL.rotation.x = walk * 0.6; P.legR.rotation.x = -walk * 0.6;
-        P.armL.rotation.x = -walk * 0.4;
+        const hr = mob.hr, k = mob.attack?.kind;
+        P.legL.rotation.x = walk * 0.85; P.legR.rotation.x = -walk * 0.85;
+        P.armL.rotation.x = -walk * 0.8;
         P.torso.rotation.x = -hr * 0.35; P.torso.rotation.y = 0; P.pole.rotation.x = 0.35; P.pole.position.z = 0.3;
         if (st === 'windup' && k === 'line') { P.pole.position.z = 0.3 - 0.8 * wf; P.pole.rotation.x = 0.1; P.torso.rotation.y = -0.4 * wf; }
         else if (st === 'recover' && k === 'line') { P.pole.position.z = 1.1; P.pole.rotation.x = 0.1; }
@@ -1866,7 +1869,7 @@ class MobSystem {
         break;
       }
       case 'bell_bats': {
-        const hr = mob.flashT / 0.14, tight = st === 'windup' ? 1 - 0.6 * wf : st === 'active' ? 0.35 : 1;
+        const hr = mob.hr, tight = st === 'windup' ? 1 - 0.6 * wf : st === 'active' ? 0.35 : 1;
         P.bats.forEach((b, i) => {
           const a = t * (st === 'windup' ? 5 : 2.6) + i * TAU / 5, r = (0.9 + 0.25 * Math.sin(t * 2 + i)) * tight + hr * 0.6;
           b.position.set(Math.cos(a) * r, Math.sin(t * 3 + i * 1.7) * 0.35, Math.sin(a) * r);
@@ -1877,7 +1880,7 @@ class MobSystem {
         break;
       }
       case 'soot_sprite': {
-        const hr = mob.flashT / 0.14, k = mob.attack?.kind;
+        const hr = mob.hr, k = mob.attack?.kind;
         const sq = st === 'windup' ? wf : 0;
         P.blob.scale.set(0.6 * (1 + sq * 0.35 + hr * 0.2), 0.6 * (1 - sq * 0.25 - hr * 0.2), 0.6 * (1 + sq * 0.35 + hr * 0.2));
         P.body.rotation.y = st === 'windup' && k === 'nova' ? wf * 8 : 0;
@@ -1887,8 +1890,8 @@ class MobSystem {
         break;
       }
       case 'crest_griffin': {
-        const hr = mob.flashT / 0.14, k = mob.attack?.kind, gait = moving ? Math.sin(t * 10) : 0;
-        P.legs.forEach((l, i) => { l.rotation.x = gait * 0.6 * (i === 0 || i === 3 ? 1 : -1); });
+        const hr = mob.hr, k = mob.attack?.kind, gait = moving ? Math.sin(t * 10) : 0;
+        P.legs.forEach((l, i) => { l.rotation.x = gait * 0.85 * (i === 0 || i === 3 ? 1 : -1); });
         P.wl.rotation.z = 0.25 + (st === 'windup' ? 1.1 * wf : st === 'active' ? Math.sin(t * 18) * 0.6 : Math.sin(t * 1.3) * 0.08); P.wr.rotation.z = -P.wl.rotation.z;
         P.body.rotation.x = -hr * 0.3 + (st === 'windup' ? (k === 'leap' ? 0.35 * wf : -0.5 * wf) : st === 'active' ? -0.3 : st === 'recover' && k === 'line' ? 0.3 : 0);
         P.head.rotation.x = st === 'windup' && k === 'line' ? -0.5 * wf : Math.sin(t * 1.4) * 0.12;
@@ -1897,7 +1900,7 @@ class MobSystem {
         break;
       }
       case 'bicycle_golem': {
-        const hr = mob.flashT / 0.14, k = mob.attack?.kind;
+        const hr = mob.hr, k = mob.attack?.kind;
         const spin = st === 'active' ? 30 : st === 'windup' && k === 'charge' ? 18 * wf : moving ? mob.type.speed * 2.4 : 0;
         for (const w of P.wheels) w.rotation.x += dt * spin;
         P.frame.rotation.z = Math.sin(t * 3) * 0.04 * (moving ? 1 : 0.3) - hr * 0.2;
@@ -1928,7 +1931,7 @@ class MobSystem {
         break;
       }
       case 'chimekeeper': {
-        const ph = mob.phase, k = mob.attack?.kind, hitK = mob.flashT / 0.14;
+        const ph = mob.phase, k = mob.attack?.kind, hitK = mob.hr;
         P.minute.rotation.z = -t * [0.5, 3, 9][ph]; P.hour.rotation.z = -t * [0.04, 0.25, 0.75][ph];
         P.pend.rotation.z = Math.sin(t * (ph ? 4 : 2)) * (ph ? 0.7 : 0.35);
         P.pend.rotation.x = 0;
@@ -1952,7 +1955,7 @@ class MobSystem {
         break;
       }
       case 'gatehouse_lion': {
-        const gilt = mob.phase > 0, k = mob.attack?.kind, hitK = mob.flashT / 0.14;
+        const gilt = mob.phase > 0, k = mob.attack?.kind, hitK = mob.hr;
         if (P.gilded !== gilt) {   // phase II: the stone gilds itself
           P.gilded = gilt; P.hide.color.setHex(gilt ? 0xd8a83a : 0x8d8a80); P.hide.metalness = gilt ? 0.85 : 0; P.hide.roughness = gilt ? 0.3 : 0.95;
         }
@@ -1978,6 +1981,27 @@ class MobSystem {
         P.eye.material.emissive.setHex(gilt ? 0xff3000 : 0xff8a00);
         break;
       }
+    }
+  }
+
+  // s69: regular mobs come apart on death: head, limbs, wings, wheels and props fly off their joints and tumble
+  // (crumble: thrown outward and dropped; dissolve: drift outward and up), so a still frame reads as 'destroyed'
+  scatterParts(mob, f, style) {
+    let S = mob.scatter;
+    if (!S) {
+      S = mob.scatter = [];
+      for (const [k, o] of Object.entries(mob.parts)) {
+        if (!o?.isObject3D || SCATTER_SKIP.has(k) || o === mob.rig) continue;
+        const p = o.position, d = Math.hypot(p.x, p.z) || 1, h = hash01(mob.id + k);
+        S.push({ o, p0: p.clone(), r0: null, vx: p.x / d * (0.8 + h), vz: p.z / d * (0.8 + h) + (h - 0.5) * 0.6, vy: style === 'crumble' ? 1.2 + h : 0.4 + h * 0.6, spin: (h - 0.5) * 9 });
+      }
+    }
+    const u = Math.max(0, f - 0.22) * 1.6; if (!u) return;
+    for (const q of S) {
+      const fall = style === 'crumble' ? 3.2 * u * u : -0.3 * u * u;
+      q.o.position.set(q.p0.x + q.vx * u, q.p0.y + q.vy * u - fall, q.p0.z + q.vz * u);
+      q.r0 ||= q.o.rotation.clone();   // keep the death pose the part had when it broke off, then tumble from there
+      q.o.rotation.set(q.r0.x + q.spin * u, q.r0.y + q.spin * 0.5 * u, q.r0.z + q.spin * 0.7 * u);
     }
   }
 

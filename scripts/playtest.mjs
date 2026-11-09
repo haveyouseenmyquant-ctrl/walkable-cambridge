@@ -66,6 +66,9 @@ function installBot(route, runIdx) {
   // boss time-to-kill: from the first damage the boss takes to its death
   // session 44: only the route's boss (the Bellwarden) counts; other bosses met on the way used to pollute the TTK
   offs.push(g.on('hit', e => { if (e.target?.type?.id === ROUTE_BOSS && bot.bossStart == null) bot.bossStart = g.time; }));
+  // session 69: boss damage by spell/source (balance diagnostics; logged per run)
+  ev.bossDmg = {};
+  offs.push(g.on('hit', e => { if (e.target?.type?.id === ROUTE_BOSS) { const k = e.spell?.id || e.spell || e.source || '?'; ev.bossDmg[k] = (ev.bossDmg[k] || 0) + e.amount; } }));
   // session 53: a death respawns the player far away; fights left behind are not 'stuck mobs'
   offs.push(g.on('playerDeath', () => { ev.deaths++; bot.engaged.clear(); }));
   offs.push(g.on('levelup', () => {
@@ -181,8 +184,13 @@ function installBot(route, runIdx) {
     const needCurse = !(m._curseUntil > g.time + 1);
     const prio = s => (s.ult ? 2 : 0) + (s.curse && needCurse ? 1 : 0);
     const order = sp.map((s, i) => [s, i]).sort((a, b) => (prio(b[0]) - prio(a[0])) || ((b[0].dmg || 0) - (a[0].dmg || 0)));
+    // session 69: keep mana for the bigger spells. Basic-attack spam (5 mana per 0.4 s vs 8/s regen) pinned mana near 5,
+    // so hexweaver's siphon / curse / wisps never went out on the boss (all 903 boss damage in a run came from Hex Dart).
+    // A filler cast must leave enough for the dearest damage spell coming off cooldown within 1.5 s.
+    const reserve = Math.max(0, ...sp.filter(s => !s.ult && s.kind !== 'blink' && s.mana > 6 && (s.dmg || s.curse || s.amount) && s.readyAt - g.time < 1.5).map(s => s.mana));
     for (const [s, i] of order) {
       if (g.time < s.readyAt || g.stats.mana < s.mana) continue;
+      if (s.mana <= 6 && !s.ult && g.stats.mana - s.mana < reserve) continue;
       if (s.kind === 'blink') continue;                                      // movement spell: used for travel
       if (s.ult && !(m.boss || nearby >= 3)) continue;
       if (s.kind === 'shield' && !(m.boss || g.stats.hp < g.stats.maxHp * 0.7) && !s.dmg) continue;
@@ -363,7 +371,7 @@ try {
       }
       const ev = await page.evaluate(() => { const b = window.__bot; b.dispose(); const e = b.ev;
         return { bossTtk: b.bossTtk, kills: e.kills.length, bossKilled: e.kills.some(k => k.type === 'bellwarden'), pickups: e.pickups, equips: e.equips,
-          deaths: e.deaths, casts: e.casts, talents: e.talents, equipped: Object.keys(window.__game.items.equipped).length }; });
+          deaths: e.deaths, casts: e.casts, talents: e.talents, bossDmg: e.bossDmg, equipped: Object.keys(window.__game.items.equipped).length }; });
       const perr = errors.slice(e0);
       rec = { ...rec, ...ev, gameS: st.t, fail: st.fail || (perr.length ? 'page error: ' + perr[0] : null) || (!st.done ? 'not finished' : null) || (!ev.bossKilled ? 'boss not killed' : null) };
     } catch (e) {
@@ -375,7 +383,7 @@ try {
     rec.pass = !rec.fail; rec.wallS = +((Date.now() - w0) / 1000).toFixed(0);
     pageErrorsTotal += errors.length - e0;
     res.runs.push(rec); runs.push(rec);
-    log(cls, r, rec.pass ? 'PASS' : 'FAIL ' + rec.fail, `boss ${rec.bossTtk?.toFixed?.(1)}s game ${rec.gameS}s wall ${rec.wallS}s kills ${rec.kills} pickups ${rec.pickups} deaths ${rec.deaths}`);
+    log(cls, r, rec.pass ? 'PASS' : 'FAIL ' + rec.fail, `boss ${rec.bossTtk?.toFixed?.(1)}s game ${rec.gameS}s wall ${rec.wallS}s kills ${rec.kills} pickups ${rec.pickups} deaths ${rec.deaths} bossDmg ${JSON.stringify(rec.bossDmg)}`);
   }
   await Promise.all(Array.from({ length: Math.min(jobs.length, WORKERS * clsList.length) }, async (_, w) => {
     await new Promise(ok => setTimeout(ok, w * 8000));   // stagger the page loads

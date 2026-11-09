@@ -27,7 +27,7 @@ try {
   page.on('pageerror', e => errors.push(String(e))); page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
   await page.goto(`http://127.0.0.1:${server.address().port}/?debug`, { waitUntil: 'domcontentloaded', timeout: 300000 });
   await page.waitForFunction('window.__walkReady === true && window.__game && window.__game.mobSystem', { timeout: 300000, polling: 500 });
-  const SHOTS = [
+  const SHOTS = process.env.MOB_SHOTS ? JSON.parse(process.env.MOB_SHOTS) : [
     { types: ['gargoyle', 'wisp', 'statue', 'ink_imp'] },
     { types: ['automaton', 'river_wraith', 'bog_hag', 'punt_revenant'] },
     { types: ['bell_bats', 'soot_sprite', 'crest_griffin', 'bicycle_golem'] },
@@ -47,14 +47,17 @@ try {
       });
       sys.update = (dt) => { for (const m of shot) {
         m.t += dt;
+        if (S.pose === 'death') { if (m.state !== 'dead') { m.dead = true; sys.onDeath(m); } m.deathT = (S.deathT ?? 0.6) - dt; sys.tickDeath(m, dt); continue; }
         if (S.pose === 'windup') { const a = m.type.attacks[Math.min(S.attack || 0, m.type.attacks.length - 1)]; m.attack = a; m.windupEff = a.windup; m.state = 'windup'; m.stateT = a.windup * 0.2; }
-        else m.state = 'idle';
-        sys.animate(m, dt, 0); sys.bodyLanguage(m, dt, 0); sys.place(m);
+        else if (S.pose === 'hit') { m.state = 'chase'; if ((m.t % 0.9) < dt) sys.onHit(m, 30, {}); m.kb = null; m.flashT = Math.max(0, m.flashT - dt); m.flinch = Math.max(0, m.flinch - dt); m.hitT = Math.max(0, (m.hitT || 0) - dt); }
+        else m.state = S.pose === 'walk' ? 'chase' : 'idle';
+        const mv = S.pose === 'walk' ? 1 : 0;
+        sys.animate(m, dt, mv); sys.bodyLanguage(m, dt, mv); sys.place(m);
       } };
       const mid = shot[Math.floor(shot.length / 2)];
       const gz = mid.groundZ ?? mid.z; window.__cam = { pos: [X0 + 6.5, Y0 + 5.1 - 3.5, gz + 2.6], at: [X0, Y0 + 5.1, gz + 1.2], fov: 60 };
       await new Promise(r => setTimeout(r, 2500));
     }, SHOTS[i]);
-    await page.screenshot({ path: `${OUT}_${i + 1}.png` });
+    await page.screenshot({ path: `${OUT}_${SHOTS[i].name || i + 1}.${process.env.MOB_JPG ? 'jpg' : 'png'}`, ...(process.env.MOB_JPG ? { type: 'jpeg', quality: 85 } : {}) });
   }
 } finally { console.log(JSON.stringify({ errors })); await browser.close(); server.close(); }
