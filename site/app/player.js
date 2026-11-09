@@ -307,16 +307,24 @@ export class Player {
     const sy = Math.sin(this.yaw), cy = Math.cos(this.yaw);
     const hx = this.x, hy = this.y, hz0 = this.eye + 0.3;
     const dmax = this.camMax || (this.mode === 'broom' ? 5.5 : 4);   // camMax: optional override (gameplay clip)
+    // session 78: game (combat) mode gets an ARPG occlusion camera (main.js sets combatCam; exploration is unchanged):
+    // a thick boom (0.3 m collision probe + side rays at the near-plane half-width) so an oblique wall can't slip
+    // between the ray and the near plane, 0.45 m clearance, a slower ease-out, and when the boom is squeezed (< 70% of its
+    // length) it may also rise over the player (steeper, higher pivot) instead of collapsing into the head facing the wall.
+    const C = !!this.combatCam, clr = C ? 0.45 : 0.3, pr = C ? 0.3 : 0.2, rx = cy, rz = -sy;   // rx/rz: camera right (three.js frame)
     const boom = (bp, hz) => {   // free boom length behind the head for boom pitch bp
       const cp = Math.cos(bp), sp = Math.sin(bp);
+      if (C && hz > hz0 + 0.05 && (this.world.blocked(hx, hy, hz - 0.3, 0.25, 0, 0.6) || (this.world.support(hx, hy, hz + 0.3, true)?.z ?? -1e9) > hz - 0.3)) return 0;   // raised pivot inside a ceiling
       let d = dmax;
       for (let r = 0.5; r <= d; r += 0.25) {
         const x = hx + sy * cp * r, y = hy - cy * cp * r, z = hz - sp * r;
-        if (this.world.blocked(x, y, z - 0.3, 0.2, 0, 0.6) || (this.world.support(x, y, z, true)?.z ?? -1e9) > z - 0.3) { d = Math.max(0.6, r - 0.3); break; }
+        if (this.world.blocked(x, y, z - 0.3, pr, 0, 0.6) || (this.world.support(x, y, z, true)?.z ?? -1e9) > z - 0.3) { d = Math.max(0.6, r - clr); break; }
       }
       if (this.camOcclude) {   // three.js frame: (x, z, -y); direction from the head back to the camera
-        const hit = this.camOcclude(hx, hz, -hy, sy * cp, -sp, cy * cp, d + 0.3);
-        if (hit < d + 0.3) d = Math.max(0.35, hit - 0.3);
+        const dx = sy * cp, dy = -sp, dz = cy * cp;
+        let hit = this.camOcclude(hx, hz, -hy, dx, dy, dz, d + clr);
+        if (C) for (const o of [-0.28, 0.28]) hit = Math.min(hit, this.camOcclude(hx + rx * o, hz, -hy + rz * o, dx, dy, dz, d + clr));
+        if (hit < d + clr) d = Math.max(0.35, hit - clr);
       }
       return d;
     };
@@ -325,7 +333,9 @@ export class Player {
     // the canopy and keeps the fight in view; the boom pitch is eased so the swing never pops.
     let want = this.pitch, wantHz = hz0, best = boom(this.pitch, hz0);
     if (best < dmax * 0.7) {
-      for (const [bp, hz] of [[Math.min(this.pitch + 0.3, 0.15), hz0 - 0.25], [Math.min(this.pitch + 0.55, 0.25), hz0 - 0.5]]) {
+      const alts = [[Math.min(this.pitch + 0.3, 0.15), hz0 - 0.25], [Math.min(this.pitch + 0.55, 0.25), hz0 - 0.5]];
+      if (C) alts.push([Math.max(-1.1, Math.min(this.pitch, -0.3) - 0.45), hz0 + 0.4], [-1.1, hz0 + 0.8]);   // s78: rise over the wall
+      for (const [bp, hz] of alts) {
         const d = boom(bp, hz); if (d > best + 0.8) { best = d; want = bp; wantHz = hz; }
       }
     }
@@ -335,7 +345,7 @@ export class Player {
     const hz = this.camHz, bp = this.camP, cp = Math.cos(bp), sp = Math.sin(bp);
     let d = Math.abs(bp - want) < 0.02 ? best : boom(bp, hz);
     if (this.camD == null || d < this.camD) this.camD = d;   // pull in at once
-    else this.camD += (d - this.camD) * Math.min(1, dt * 4);  // ease back out
+    else this.camD += (d - this.camD) * Math.min(1, dt * (C ? 2.5 : 4));  // ease back out
     d = Math.min(this.camD, dmax);
     cam.position.set(hx + sy * cp * d, hz - sp * d, -(hy - cy * cp * d));
     // aim at the player's look direction, tilted by however far the boom swung below the player's pitch

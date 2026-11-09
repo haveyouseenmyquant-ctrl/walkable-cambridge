@@ -135,7 +135,7 @@ const FAMILY = { gargoyle: 'stone', statue: 'stone', crest_griffin: 'stone', pun
   automaton: 'clockwork', bicycle_golem: 'clockwork', bell_bats: 'swarm', soot_sprite: 'swarm' };
 const HIT_T = 0.36;   // s69: part-recoil duration (held at full for the first half, then eases out)
 const SCATTER_SKIP = new Set(['body', 'torso', 'robe', 'core', 'shell', 'pot', 'blob', 'sally', 'frame', 'halo', 'tail', 'crown', 'tendrils', 'reeds']);
-const MOB_VIS = 1.45;   // s66: 1.3 -> 1.45 (judge: 'small figures, hard to read')
+const MOB_VIS = 1.6;   // s66: 1.3 -> 1.45 (judge: 'small figures, hard to read'); s78: 1.6 (same complaint, gameplay clip s77)
 function addRim(mat, color, k) {
   const u = { uRim: { value: new THREE.Color(color).multiplyScalar(k) } };
   mat.userData.rim = u.uRim; mat.userData.rimBase = u.uRim.value.clone();

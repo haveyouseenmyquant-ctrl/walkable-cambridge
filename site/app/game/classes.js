@@ -17,10 +17,13 @@ export const CLASSES = {
   pyromancer: {
     // session 70: no boss damage nerf (s66 had 0.86). Its slow kills were deaths: the boss heals to full whenever the
     // player dies, and the glass-cannon pyro died 4-10 times a run. So: tougher starter robe, and Flame Step dodges.
-    bossMult: 1,
+    // session 78: boss median TTK 30.3 s vs an all-class median of ~18 s (stormcaller 14.9, warden 18.0, hexweaver 18.2).
+    // Ember Bolt was the weakest filler by far (16 dmg / 5 mana = 3.2 dmg per mana vs 5-7 for the other classes), so it
+    // goes to 19 (all fights), and boss damage gets x1.3 (boss fights only); together ~x1.45 on the boss -> ~20 s.
+    bossMult: 1.3,
     name: 'Pyromancer', color: '#ff7a2a', blurb: 'Fire and burst damage. Burns linger, explosions stack, and Ember Bolt cauterises your wounds.',
     spells: [
-      { id: 'ember_bolt', name: 'Ember Bolt', glyph: '✦', kind: 'bolt', type: 'fire', mana: 5, cd: 0.45, dmg: 16, speed: 48, range: 45, splash: 1.2, drain: 0.1, color: 0xff7a2a, sfx: 'ember', look: 'ember' },
+      { id: 'ember_bolt', name: 'Ember Bolt', glyph: '✦', kind: 'bolt', type: 'fire', mana: 5, cd: 0.45, dmg: 19, speed: 48, range: 45, splash: 1.2, drain: 0.1, color: 0xff7a2a, sfx: 'ember', look: 'ember' },
       { id: 'cinder_spray', name: 'Cinder Spray', glyph: '≋', kind: 'cone', type: 'fire', mana: 14, cd: 3, dmg: 14, range: 9, angle: 0.6, burn: { dps: 6, dur: 3 }, color: 0xffa040, sfx: 'spray', look: 'spray' },
       { id: 'fireburst', name: 'Fireburst Orb', glyph: '◉', kind: 'bolt', type: 'fire', mana: 22, cd: 6, dmg: 24, speed: 22, range: 50, splash: 4.5, color: 0xff5010, sfx: 'orb', look: 'orb', size: 1.6 },
       { id: 'flame_step', name: 'Flame Step', glyph: '➚', kind: 'blink', type: 'fire', mana: 15, cd: 5, dist: 11, invuln: 0.4, dmg: 18, radius: 3, color: 0xff9a30, sfx: 'flamestep', look: 'flamestep' },
@@ -37,6 +40,7 @@ export const CLASSES = {
     ],
   },
   stormcaller: {
+    bossMult: 0.88,   // session 78: boss median TTK 14.9 s, fastest class; x0.88 -> ~17 s, toward the ~18 s median
     name: 'Stormcaller', color: '#7fd4ff', blurb: 'Lightning and wind. Fast, mobile, chains between foes. Wind Dash goes further on a broom.',
     spells: [
       { id: 'spark_lance', name: 'Spark Lance', glyph: 'ϟ', kind: 'beam', type: 'storm', mana: 5, cd: 0.4, dmg: 26, range: 40, chain: 1, color: 0xbfe6ff, sfx: 'lance', look: 'lance' },

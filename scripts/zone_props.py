@@ -29,8 +29,10 @@ E0, N0 = 545000.0, 258400.0
 DTM = os.path.join(ROOT, "data/lidar/dtm_1m.tif")
 
 STALL_ROOFS = list(range(400160678, 400160686))
-HIDE_TILE = [f"way/{w}" for w in STALL_ROOFS]   # zone_build: viewer hides the tile's single wide canopy slab
 TRAILERS = {400160677: "Trailer of Life", 400160686: "Frank's Burgers"}
+# zone_build: viewer hides the tile's single wide canopy slab; s78: and the trailers' tile bodies (a 3 m grey LiDAR-roofed
+# box that hid the zone trailer and read as a "grey kiosk box / placeholder"; the collision box stays)
+HIDE_TILE = [f"way/{w}" for w in STALL_ROOFS] + [f"way/{w}" for w in TRAILERS]
 FOUNTAIN_FALLBACK = (-96.3, 65.2)
 
 WHITE = (0.92, 0.92, 0.89)
@@ -373,19 +375,131 @@ def fountain(m, g, cx, cy):
 
 
 def trailer(m, g, poly):
+    """s78: catering trailer (the old one was a cream box with a red band, read by the judge as a grey placeholder).
+    The OSM footprint is the trailer plus its drawbar; the vans trade 19:00-03:00 (OSM opening_hours), so in daytime
+    views they stand shut: serving hatch closed under its top-hinged flap, steadies down, drawbar on the jockey wheel.
+    Parts: box body on a skirted chassis with rounded (chamfered) roof edges, recessed hatch panel with frame and
+    counter shelf on the long side facing the square's centre, side door with step, small end windows, tandem axle
+    with wheel arches, A-frame drawbar + jockey wheel at the north-east end, corner steadies, roof vents, gas
+    bottle locker. Colours (cream body, red band) kept from the previous model: not checked against a photo."""
     rect = np.array(poly.buffer(0.08, join_style=2).minimum_rotated_rectangle.exterior.coords)[:4]
     e1, e2 = rect[1] - rect[0], rect[3] - rect[0]
-    o = rect[0]
-    if np.cross(e1, e2) < 0:
+    if np.linalg.norm(e1) < np.linalg.norm(e2):
         e1, e2 = e2, e1
-    zc = g(*rect.mean(0))
-    up = np.array([0, 0, 1.0])
-    O = np.array([*o, zc])
-    E1, E2 = np.array([*e1, 0]), np.array([*e2, 0])
-    m.box(O + up * 0.0, E1, E2, up * 0.45, POST)                       # chassis / wheels skirt
-    m.box(O + up * 0.45, E1, E2, up * 2.15, (0.85, 0.83, 0.78), top=(0.6, 0.6, 0.6))
-    # red band along the body
-    m.box(O + up * 1.0 - E2 * 0.005 - E1 * 0.005, E1 * 1.01, E2 * 1.01, up * 0.25, (0.70, 0.12, 0.10))
+    o = rect[0]
+    L, W = np.linalg.norm(e1), np.linalg.norm(e2)
+    ux, uy = e1 / L, e2 / W
+    ctr = rect.mean(0)
+    # hatch side: the long side facing the square's centre (fountain)
+    if np.dot(np.array(FOUNTAIN_FALLBACK) - ctr, uy) > 0:
+        o, uy = o + e2, -uy           # flip so +uy points away from the square; side y=0 faces it
+    if np.cross(ux, uy) < 0:          # keep (ux, uy, up) right-handed: mirror along x
+        o, ux = o + ux * L, -ux
+    zc = g(*ctr)
+    Z = np.array([0, 0, 1.0])
+
+    def P(x, y, z):
+        q = o + ux * x + uy * y
+        return np.array([q[0], q[1], zc + z])
+
+    def bx(x0, x1, y0, y1, z0, z1, col, top=None):
+        m.box(P(x0, y0, z0), np.array([*(ux * (x1 - x0)), 0]), np.array([*(uy * (y1 - y0)), 0]), Z * (z1 - z0), col, top=top)
+
+    BODY = (0.90, 0.88, 0.82)
+    BODY_SH = (0.80, 0.78, 0.72)
+    RED = (0.70, 0.12, 0.10)
+    STEEL = (0.62, 0.63, 0.64)
+    DARK = (0.10, 0.10, 0.11)
+    GLASS = (0.20, 0.24, 0.27)
+    TYRE = (0.07, 0.07, 0.08)
+    bar = min(1.6, 0.18 * L)          # drawbar length inside the footprint
+    x0, x1 = bar, L - 0.05            # body
+    yb0, yb1 = 0.12, W - 0.12
+    zb0, zb1 = 0.62, 2.85             # body floor / roof
+    ch = 0.12                         # roof edge chamfer
+    # chassis rails and skirt
+    bx(x0 + 0.2, x1 - 0.2, yb0 + 0.25, yb0 + 0.35, 0.38, 0.55, DARK)
+    bx(x0 + 0.2, x1 - 0.2, yb1 - 0.35, yb1 - 0.25, 0.38, 0.55, DARK)
+    bx(x0, x1, yb0 + 0.02, yb1 - 0.02, 0.50, zb0, BODY_SH)
+    # body box with chamfered roof edges
+    bx(x0, x1, yb0, yb1, zb0, zb1 - ch, BODY, top=BODY)
+    bx(x0 + ch, x1 - ch, yb0 + ch, yb1 - ch, zb1 - ch, zb1, BODY)
+    for (a, b, c, d) in (((x0, yb0), (x1, yb0), (x1 - ch, yb0 + ch), (x0 + ch, yb0 + ch)),
+                         ((x1, yb1), (x0, yb1), (x0 + ch, yb1 - ch), (x1 - ch, yb1 - ch)),
+                         ((x1, yb0), (x1, yb1), (x1 - ch, yb1 - ch), (x1 - ch, yb0 + ch)),
+                         ((x0, yb1), (x0, yb0), (x0 + ch, yb0 + ch), (x0 + ch, yb1 - ch))):
+        m.quad(P(*a, zb1 - ch), P(*b, zb1 - ch), P(*c, zb1), P(*d, zb1), BODY)
+    # red band round the body (proud 15 mm) under the hatch
+    t = 0.015
+    bx(x0 - t, x1 + t, yb0 - t, yb1 + t, 0.95, 1.12, RED)
+    bx(x0 - t, x1 + t, yb0 - t, yb1 + t, zb1 - ch - 0.10, zb1 - ch - 0.04, RED)
+    # serving hatch on the square side (y = yb0): frame, closed flap (slightly proud), counter shelf folded down
+    hx0, hx1 = x0 + 0.55, x1 - 2.0
+    hz0, hz1 = 1.20, 2.35
+    bx(hx0 - 0.06, hx1 + 0.06, yb0 - 0.03, yb0, hz0 - 0.06, hz1 + 0.06, STEEL)
+    bx(hx0, hx1, yb0 - 0.05, yb0 - 0.03, hz0, hz1, BODY_SH)
+    for k in range(1, 4):   # flap stiffening ribs
+        xr = hx0 + (hx1 - hx0) * k / 4
+        bx(xr - 0.02, xr + 0.02, yb0 - 0.065, yb0 - 0.05, hz0 + 0.04, hz1 - 0.04, BODY)
+    bx(hx0, hx1, yb0 - 0.09, yb0 - 0.03, hz0 - 0.28, hz0 - 0.06, STEEL)   # folded counter
+    for xs in (hx0 + 0.3, hx1 - 0.3):   # gas struts / flap catches
+        bx(xs - 0.02, xs + 0.02, yb0 - 0.09, yb0 - 0.05, hz1 - 0.25, hz1 + 0.02, DARK)
+    # side door (square side, rear end) with window and step
+    dx0, dx1 = x1 - 1.6, x1 - 0.8
+    bx(dx0, dx1, yb0 - 0.03, yb0, zb0 + 0.05, 2.45, BODY_SH)
+    bx(dx0 + 0.15, dx1 - 0.15, yb0 - 0.05, yb0 - 0.03, 1.75, 2.25, GLASS)
+    bx(dx1 - 0.14, dx1 - 0.08, yb0 - 0.07, yb0 - 0.03, 1.30, 1.36, STEEL)   # handle
+    bx(dx0 - 0.05, dx1 + 0.05, yb0 - 0.35, yb0, 0.30, 0.36, STEEL)          # step
+    # back-side window pair and end windows
+    for xw in (x0 + 1.2, x0 + 3.2):
+        bx(xw, xw + 1.1, yb1, yb1 + 0.03, 1.70, 2.30, STEEL)
+        bx(xw + 0.05, xw + 1.05, yb1 + 0.03, yb1 + 0.05, 1.75, 2.25, GLASS)
+    yw0, yw1 = yb0 + 0.45, yb1 - 0.45
+    bx(x1, x1 + 0.03, yw0, yw1, 1.70, 2.30, STEEL)
+    bx(x1 + 0.03, x1 + 0.05, yw0 + 0.05, yw1 - 0.05, 1.75, 2.25, GLASS)
+    # front (drawbar end): gas bottle locker
+    bx(x0 - 0.35, x0, yb0 + 0.25, yb1 - 0.25, zb0, zb0 + 0.75, BODY_SH, top=STEEL)
+    # tandem axle: wheels + arches on both sides
+    xm = (x0 + x1) / 2
+    for xa in (xm - 0.42, xm + 0.42):
+        for (yw, s) in ((yb0 - 0.02, -1), (yb1 + 0.02, 1)):
+            r = 0.30
+            ang = np.arange(10) * 2 * np.pi / 10
+            ring = [(xa + r * np.cos(a), 0.31 + r * np.sin(a)) for a in ang]
+            yi, yo = yw - s * 0.05, yw + s * 0.17
+            for i in range(10):
+                (ax, az), (cx_, cz) = ring[i], ring[(i + 1) % 10]
+                a, b = P(ax, yo, az), P(cx_, yo, cz)
+                c, d = P(cx_, yi, cz), P(ax, yi, az)
+                m.quad(a, b, c, d, TYRE, two=True)
+                m.tri(P(xa, yo, 0.31), b, a, STEEL if i % 2 else TYRE)   # outer hub face
+                m.tri(P(xa, yo, 0.31), a, b, STEEL if i % 2 else TYRE)
+    for (yw, s) in ((yb0, -1), (yb1, 1)):   # mudguards over both wheels
+        ya, yc = (yw - 0.24, yw) if s < 0 else (yw, yw + 0.24)
+        bx(xm - 0.85, xm + 0.85, ya, yc, 0.66, 0.72, DARK)
+        for xe in (xm - 0.85, xm + 0.81):
+            bx(xe, xe + 0.04, ya, yc, 0.40, 0.66, DARK)
+    # A-frame drawbar, hitch and jockey wheel
+    yc = W / 2
+    for ys in (yb0 + 0.35, yb1 - 0.35):
+        a0, a1 = P(x0, ys, 0.42), P(0.15, yc, 0.42)
+        d = a1 - a0
+        n = np.cross(d, Z); n = n / np.linalg.norm(n) * 0.05
+        m.box(a0 - n / 2, d, n, Z * 0.08, DARK)
+    bx(0.0, 0.3, yc - 0.06, yc + 0.06, 0.40, 0.52, STEEL)               # hitch head
+    bx(0.55, 0.61, yc - 0.03, yc + 0.03, 0.12, 0.70, STEEL)             # jockey post
+    bx(0.48, 0.68, yc - 0.03, yc + 0.03, 0.0, 0.14, TYRE)               # jockey wheel
+    # corner steadies
+    for xs in (x0 + 0.15, x1 - 0.2):
+        for ys in (yb0 + 0.15, yb1 - 0.2):
+            bx(xs, xs + 0.05, ys, ys + 0.05, 0.0, zb0 - 0.1, DARK)
+            bx(xs - 0.07, xs + 0.12, ys - 0.07, ys + 0.12, 0.0, 0.02, DARK)
+    # roof: two mushroom vents + extractor cowl over the cooking end
+    for xv in (x0 + 1.2, x1 - 1.4):
+        m.prism(*P(xv, yc, 0)[:2], zc + zb1, zc + zb1 + 0.12, 0.10, 8, STEEL)
+        m.prism(*P(xv, yc, 0)[:2], zc + zb1 + 0.12, zc + zb1 + 0.17, 0.18, 8, STEEL)
+    bx(x0 + 2.4, x0 + 3.0, yc - 0.3, yc + 0.3, zb1, zb1 + 0.30, STEEL)
+    bx(x0 + 2.35, x0 + 3.05, yc - 0.35, yc + 0.35, zb1 + 0.30, zb1 + 0.36, STEEL)
 
 
 def build():
