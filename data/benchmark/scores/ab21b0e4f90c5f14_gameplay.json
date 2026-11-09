@@ -1,0 +1,67 @@
+{
+ "gameplay_judged": 45.4,
+ "n": 4,
+ "model": "claude-opus-5-5",
+ "hash": "ab21b0e4f90c5f14",
+ "classes": {
+  "hexweaver": {
+   "score": 4.86,
+   "readability_telegraphs": 5.0,
+   "spell_vfx": 5.0,
+   "enemy_animation_variety": 4.0,
+   "hit_feedback": 5.0,
+   "ui_hud_clarity": 6.0,
+   "loot_excitement": 5.0,
+   "polished_arpg_feel": 4.0,
+   "overall": 4.8
+  },
+  "pyromancer": {
+   "score": 3.57,
+   "readability_telegraphs": 3.0,
+   "spell_vfx": 3.0,
+   "enemy_animation_variety": 2.0,
+   "hit_feedback": 4.0,
+   "ui_hud_clarity": 5.0,
+   "loot_excitement": 5.0,
+   "polished_arpg_feel": 3.0,
+   "overall": 3
+  },
+  "stormcaller": {
+   "score": 5.0,
+   "readability_telegraphs": 5.0,
+   "spell_vfx": 5.0,
+   "enemy_animation_variety": 4.0,
+   "hit_feedback": 5.0,
+   "ui_hud_clarity": 6.0,
+   "loot_excitement": 6.0,
+   "polished_arpg_feel": 4.0,
+   "overall": 5
+  },
+  "warden": {
+   "score": 4.71,
+   "readability_telegraphs": 4.0,
+   "spell_vfx": 5.0,
+   "enemy_animation_variety": 3.0,
+   "hit_feedback": 5.0,
+   "ui_hud_clarity": 6.0,
+   "loot_excitement": 6.0,
+   "polished_arpg_feel": 4.0,
+   "overall": 4.5
+  }
+ },
+ "by_criterion": {
+  "readability_telegraphs": 4.25,
+  "spell_vfx": 4.5,
+  "enemy_animation_variety": 3.25,
+  "hit_feedback": 4.75,
+  "ui_hud_clarity": 5.75,
+  "loot_excitement": 5.5,
+  "polished_arpg_feel": 3.75
+ },
+ "reasons": {
+  "hexweaver": "The best parts are the boss fight: a named health bar with phases, an 'enraged' banner, an orange ground telegraph for the Great Toll attack, a few light-beam effects, and big floating crit numbers. HUD feedback is decent too, with cooldown numbers on the spell bar, rarity-coloured loot toasts and a minimap. The weak parts: enemies are simple primitive-like models that are small and hard to read; spell effects are mostly flat translucent shapes; the camera often clips into walls or faces empty streets; mana sits near zero for long stretches; and most loot isn't picked up (8 of 20), so the second half of the clip feels empty and unpolished.",
+  "pyromancer": "The HUD is coherent: it has HP and mana bars, a spell bar with cooldown numbers, a minimap, a boss bar, enemy cast-name bars and loot toasts. Loot gets green beams, name labels and rarity-tagged toasts, and the opening frames show chunky floating damage numbers and one red ground telegraph. Weaknesses: from frame 4 to 10 the camera is stuck behind or against blank walls with mana near zero, so combat is mostly hidden. Spell effects are sparse and generic, enemies are tiny, barely readable primitive shapes, and the low-detail environment makes the whole thing feel like a prototype.",
+  "stormcaller": "The strengths are a solid ARPG HUD, a framework with boss bar, named phases and attack names, red ground telegraphs, loot beams coloured by rarity, item toasts, and crit numbers that are large and easy to read. The weaknesses: enemies are simple low-poly primitives that are hard to tell apart, spell effects are thin translucent sheets and lightning lines with little weight, and camera clipping and wall occlusion often hide the action. The last third of the clip has no combat at all, and the boss fight seems to end without a visible kill (the log records 1 bellwarden kill but nothing on screen shows it).",
+  "warden": "The HUD is solid, with HP and mana bars, a numbered spell bar with cooldowns, a minimap, a boss bar with phase markers and item toasts, and loot gets rarity-coloured beams and labels. The weaknesses are on screen: the warden's own model, a granite shell and nearby terrain often block the camera (frames 1, 6 and 7), and enemies are simple, low-detail shapes that are hard to tell apart in the clutter. There are no ground-marker telegraphs to see, and the boss stays idle or patrolling the whole clip, so combat feels sparse and the effects are mostly a reused blue shield bubble and gold sparkles."
+ }
+}

@@ -2183,3 +2183,33 @@ Next
    missing and the stalls are simplified. Next session: model those white frontages bespoke from non-held-out photos.
 - Publish: world-20261109-1942. The Pages deploy was "cancelled" twice (a GitHub-side failure), and a fresh workflow_dispatch went
   through (run 42688057936). Late s75 scores: judged_realism 26.6, visual_quality 26.56.
+
+## 2026-11-09 — Session 77: setts render as setts, pale renders no longer grey (Market Hill), live game scores
+
+Published world-20261109-2010 (commit 2a715af, Pages run ok). Full hash a7c038d3, game hash ab21b0e4 (unchanged: no game edits
+this session, so service.sh's in-flight game run stayed valid).
+- Ground (subagent): OSM has Market Square (relation 8117433, listed), Senate House Hill and Trinity Lane as surface=sett; the
+  build already classed them, but the ground shader diluted them. The sett key colour sits close to the slab/steps colours, so
+  a sett vertex drew ~half slabs, and sett/asphalt edges fell into a no-match flat grey band. They also faded to grey within
+  a few metres. materials.js now weights setts along the colour line between each neighbour class and the sett key, and fades
+  later to a speckled field. surfaces.json: King's Parade east sett strip extended south to y≈-97 from 2 Commons photos (CC BY-SA,
+  in DATA.md). That strip needs a full tile rebuild (it also rewrites collision -> new game hash), so it isn't live yet.
+  The 13 OSM trees within 150 m of GSM are all present; OSM maps no trees on Market Hill.
+  Screens: docs/screens/session77_setts_{before,after}.jpg (King's Parade).
+- Market Hill (subagent): the judge's "grey placeholder" white block is 12 Market Hill (Market House, Don Pasquale). Its annotation
+  was correct (#eeebe2 render), but zone.js's s55 pale-colour lift only covered stone, so near-white render read mid-grey under
+  the 0.45 city light. The lift now also covers very pale render/stucco. Screens: docs/screens/session77_markethill_{before,after}.jpg.
+  Not found: the "turreted corner / curved facade" building (probably the Market St / Sidney St or Rose Crescent corner).
+  No Subway in OSM near the square. A grey kiosk box with a red stripe in front of 12 Market Hill may also read as a placeholder.
+- Live game scores (ab21b0e4 = s76 game code, scored by service.sh): classes 4, mobs 12 + 3 bosses, effects 44, encounter
+  coverage 100, playtest 100 (20/20; the s76 retrace and anti-farm fixes work), boss TTK median 18.1 s but spread 67.4%
+  (pyromancer 30.3 s vs stormcaller 14.9 s), gameplay_judged 45.4 (s75 50.5). The judge's main complaint in all 4 clips: the camera
+  clips into or sits behind walls, so combat is hidden; also tiny primitive-looking enemies, and empty second halves.
+- market_square_realism for a7c038d3 isn't scored yet; service.sh runs it now that publish cleared session_active.
+
+Next
+1. Game: gameplay camera collision (pull the camera in front of walls, as an ARPG camera does), bigger and more readable mobs in
+   the clip, and keep the clip in combat. Then rebalance the pyromancer boss TTK (30 s vs 18 s median).
+2. Read market_square_realism for a7c038d3 vs 30.75 and revert the shader changes if they don't help.
+3. Tile rebuild for the King's Parade sett strip (together with a game edit, since it changes the game hash anyway).
+4. Find and model the turreted or curved corner building near Market Hill from non-held-out photos. Replace the grey kiosk box.
