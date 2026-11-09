@@ -1736,3 +1736,39 @@ Next
 2. Make service.sh nice/pause its benchmark renders while a session is active (for example, check for a claude -p process for this project).
 3. Filter the tuning set, then rerun the exposure A/B at low load with the judge.
 4. Ring 1: decide the next annotation source (geograph street views split per wall, or a style default for walls without photos).
+
+## 2026-11-09 — Session 59: session 58 committed and published; game KPIs stay measured during sessions; clip framing
+
+Session 58 ended without committing, publishing or writing a journal entry. Its work is in 8d0138e: the Caius Waterhouse range
+continued west along Senate House Passage with 3 bays of cross windows, gargoyles and dormers; the gate-arch leaf moved
+0.12 m behind the face so the tile texture no longer shows through; an action-RPG HUD layout with HP and mana left of the
+spell bar; smaller pickup bursts with the loot pillar collapsing inward; bench.sh and ms_bench.sh render only the views the
+judges use, since photo_match/DINOv2 is retired; and service.sh pauses while `session_active` exists.
+docs/screens/session58_ms_* (shh_north_after shows the passage range next to the Caius tower).
+
+- **Why the game KPIs read 0 since 07:52:** live build 1a6052 was never game-scored. Session 58 touched session_active and
+  never published, so service.sh skipped everything for 75 min. Then this session touched it again. **Fix:** service.sh
+  now runs game_kpi/gameplay_kpi (one headless browser, on the live snapshot) even while a session is active. Only
+  ms_bench, bench and the browser tests pause.
+- Game fork: scripts/gameplay_clip.mjs turns the camera to the nearest live mob within 35 m before each captured frame.
+  It prefers bosses and hostile mobs, and combat is unchanged. A canopy fade that stopped the third-person camera
+  sinking under stall canopies was tried and reverted, because overlapping faded canopies looked ghostly.
+  docs/screens/session59_game_clip_{before,after}.jpg. The judge hasn't scored it yet.
+- Realism forks found nothing to build. All 96 counted Market Square walls already have geometry: the figure of 59
+  counts only generic walls, and the rest are bespoke. facade_geometry_match_pct (80.9) is held down by bespoke walls
+  with no annotation: the Guildhall east side on Guildhall Street (way/5094872:8/:9, 42 m), St Edward's north side
+  (26344576:5-7), Great St Mary's, Spalding Hostel and the Caius Portland block. 16 geograph/Commons photos were checked,
+  and none clearly shows the Guildhall east side or St Edward's north side, so nothing was annotated.
+- The mob rim light already exists (session 48: fresnel rim, wind-up heat, hit flash), so no change there.
+- Published world-20261109-0921 (hash 274747eb). The in-flight playtest for 1a6052 was stopped so service.sh starts on
+  the new hash. Game KPIs read 0 until it finishes, about 1 h with 20 routes run one after another.
+
+Learned
+- Each publish means about 1 h of game-KPI scoring (20 playtest runs one after another, about 170 s each). Publishing
+  late in a session plus pausing service.sh is what kept zeroing the six game KPIs on the charts.
+
+Next
+1. Check the game KPIs and per_class for 274747eb (warden 5/5?), and gameplay_judged with the new clip framing.
+2. Speed up playtest.mjs by running 2 workers in parallel, so a publish gets scored in about 30 min.
+3. Third-person camera under the stall canopies: try raising the pitch rather than fading.
+4. Annotations: find a Mapillary sequence (not held out) for St Edward's Passage and Guildhall Street.

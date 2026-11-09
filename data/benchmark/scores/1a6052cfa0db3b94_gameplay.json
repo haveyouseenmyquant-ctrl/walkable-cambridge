@@ -1,0 +1,67 @@
+{
+ "gameplay_judged": 41.4,
+ "n": 4,
+ "model": "claude-opus-5-5",
+ "hash": "1a6052cfa0db3b94",
+ "classes": {
+  "hexweaver": {
+   "score": 4.07,
+   "readability_telegraphs": 4.0,
+   "spell_vfx": 3.0,
+   "enemy_animation_variety": 3.0,
+   "hit_feedback": 5.0,
+   "ui_hud_clarity": 6.0,
+   "loot_excitement": 4.0,
+   "polished_arpg_feel": 3.5,
+   "overall": 4
+  },
+  "pyromancer": {
+   "score": 4.21,
+   "readability_telegraphs": 4.0,
+   "spell_vfx": 3.5,
+   "enemy_animation_variety": 3.0,
+   "hit_feedback": 4.5,
+   "ui_hud_clarity": 5.5,
+   "loot_excitement": 5.0,
+   "polished_arpg_feel": 4.0,
+   "overall": 4
+  },
+  "stormcaller": {
+   "score": 4.43,
+   "readability_telegraphs": 4.0,
+   "spell_vfx": 5.0,
+   "enemy_animation_variety": 3.0,
+   "hit_feedback": 5.0,
+   "ui_hud_clarity": 6.0,
+   "loot_excitement": 4.0,
+   "polished_arpg_feel": 4.0,
+   "overall": 4.3
+  },
+  "warden": {
+   "score": 3.86,
+   "readability_telegraphs": 3.0,
+   "spell_vfx": 4.0,
+   "enemy_animation_variety": 3.0,
+   "hit_feedback": 5.0,
+   "ui_hud_clarity": 5.0,
+   "loot_excitement": 4.0,
+   "polished_arpg_feel": 3.0,
+   "overall": 3.8
+  }
+ },
+ "by_criterion": {
+  "readability_telegraphs": 3.75,
+  "spell_vfx": 3.88,
+  "enemy_animation_variety": 3.0,
+  "hit_feedback": 4.88,
+  "ui_hud_clarity": 5.62,
+  "loot_excitement": 4.25,
+  "polished_arpg_feel": 3.62
+ },
+ "reasons": {
+  "hexweaver": "The HUD holds up well: there's a boss bar with phase and enrage labels, hp/mana/xp bars, a skill bar with cooldown numbers, a minimap and tooltips that compare items. Damage numbers have crit styling, and some red ground telegraphs are visible. The camera often ends up clipped inside market-stall awnings or the boss model, which hides the fight. Spells look like plain glowing spheres, enemies are hard to read and simply modelled, and loot shows only small labels and a faint beam. The last third of the clip is empty wall-facing footage with no combat.",
+  "pyromancer": "Strengths: a boss bar with phase and enrage banners, crit-tagged damage numbers, rarity-coloured item toasts, loot beams, a minimap and a spell bar with cooldowns give it a recognisable ARPG structure. Weaknesses: there are almost no visible ground telegraphs, and the player's model and stall canopies often block the view of combat. Spell effects are mostly flat glowing spheres and blobs, enemies are crude, hard-to-read low-poly shapes, and overlapping toasts and stacked pickup labels clutter the screen.",
+  "stormcaller": "The strongest parts are the HUD and the boss presentation: the frames show a boss bar with phase labels, a named 'Clapper Sweep' wind-up, an 'enraged' banner, a skill bar with cooldown numbers, a minimap and item tooltips, plus crit damage numbers and some bright lightning and arcane effects. The weaknesses are the low-poly, flat-shaded art, few enemies on screen and a cluttered close-up camera that makes fights hard to read. Loot shows up only as small text labels and plain orbs with no beams or strong rarity colours, and half the clip shows no combat at all.",
+  "warden": "The HUD is well put together: there's a boss bar with phase and enrage labels, cooldown numbers on the skill bar, a minimap, and crit damage numbers that pop, plus loot cards and a 'Vanquished' banner. But the camera keeps clipping into market-stall awnings, and translucent spell blobs fill much of the screen, so the combat is often hard to read. Enemies are small, low-poly and barely visible, and no ground telegraphs are visible. Loot shows up as small text labels and a few light pillars rather than exciting beams or strong rarity colours."
+ }
+}
