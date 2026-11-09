@@ -116,7 +116,7 @@ export function createVfx(game) {
   const SCREEN = { blending: THREE.CustomBlending, blendEquation: THREE.AddEquation, blendSrc: THREE.OneFactor, blendDst: THREE.OneMinusSrcColorFactor };
   const tone = (c, k = 0.8) => { const m = Math.max(c.r, c.g, c.b, 1e-3); const f = Math.min(1, 0.92 / m) * k; c.r *= f; c.g *= f; c.b *= f; return c; };
   const NEAR = 'uniform float uNear0; uniform float uNear1;';   // near-camera fade band (m)
-  const nearU = () => ({ uNear0: { value: 0.7 }, uNear1: { value: 2.6 } });
+  const nearU = () => ({ uNear0: { value: 1.2 }, uNear1: { value: 4.0 } });   // s76: was 0.7-2.6 m; spells cast at the camera whited out the screen
 
   // ---------------- particles ----------------
   let viewH = 720;
@@ -137,6 +137,7 @@ export function createVfx(game) {
         void main(){ vec4 mv = modelViewMatrix * vec4(position,1.0); gl_Position = projectionMatrix * mv;
           float d = max(0.05, -mv.z); float px = misc.x * projectionMatrix[1][1] * 0.5 * uH / d;
           float a = c4.a * smoothstep(uNear0, uNear1, d) * min(1.0, uMax / max(px, 1.0));
+          ${additive ? 'a = min(a, 0.75) * mix(1.0, 0.4, smoothstep(0.03 * uH, 0.12 * uH, px));' : ''}   // s76: big (near) additive sprites dimmer, alpha capped
           vC = vec4(c4.rgb, a); vTile = misc.y; vRot = misc.z; gl_PointSize = misc.x <= 0.0 || a < 0.004 ? 0.0 : min(px, uMax); }`,
       fragmentShader: `uniform sampler2D map; varying vec4 vC; varying float vTile; varying float vRot;
         void main(){ vec2 p = gl_PointCoord - 0.5; float c = cos(vRot), s = sin(vRot); p = vec2(c*p.x - s*p.y, s*p.x + c*p.y) + 0.5;
@@ -224,6 +225,8 @@ export function createVfx(game) {
   const addMat = () => ({ transparent: true, depthWrite: false, ...SCREEN, fog: false });
   const sprites = pool(64, () => new THREE.Sprite(new THREE.SpriteMaterial({ map: glow, ...addMat() })));
   const flashes = pool(24, () => new THREE.Sprite(new THREE.SpriteMaterial({ map: star, ...addMat() })));
+  // s76: at most 8 rayed flashes at once (a multi-hit spell stacked 20+ screen-blended flashes into a white frame)
+  const takeFlash = () => { let n = 0; for (const o of flashes) if (o.visible && ++n >= 8) return null; return take(flashes); };
   const up = new THREE.Vector3(0, 1, 0), tv = new THREE.Vector3(), tv2 = new THREE.Vector3(), tv3 = new THREE.Vector3();
   const fxRec = [];
   function rec(obj, dur, kind) {
@@ -493,7 +496,7 @@ export function createVfx(game) {
 
   // impact at a hit point: rayed flash, sparks thrown back towards the attacker and a few embers
   function impact(x, y, z, color = 0xffffff, strength = 1, dx = 0, dy = 0) {
-    const f = take(flashes);
+    const f = takeFlash();
     if (f) { tone(f.material.color.set(color), 1); f.material.opacity = 0.65; f.material.rotation = rnd() * 6.28;
       f.position.set(x, z, -y); const s0 = 0.6 + 0.4 * strength; f.scale.setScalar(s0 * 0.5); const e = rec(f, 0.09 + 0.05 * strength, 'flash'); e.s0 = s0; }
     const L = Math.hypot(dx, dy) || 1, n = Math.round(6 + 6 * strength);
@@ -533,7 +536,7 @@ export function createVfx(game) {
   // so mobs inside stay visible. Flames grade white-yellow -> orange -> deep red, then dark smoke rises late.
   function fireball(x, y, z, r, level = 1, ground = null) {
     const big = level >= 2, mid = level === 1, near = camDist(x, z, -y), nf = smooth(2.5, 9, near);   // close to the camera: dimmer core
-    const f = take(flashes);
+    const f = takeFlash();
     if (f) { f.material.color.setRGB(1, 0.78, 0.42); f.material.opacity = 0.55 * nf + 0.1; f.material.rotation = rnd() * 6.28; f.position.set(x, z, -y); const s0 = Math.min(big ? 1.6 : 1.1, r * 0.7); f.scale.setScalar(s0 * 0.5); const e = rec(f, big ? 0.12 : 0.08, 'flash'); e.s0 = s0; e.o0f = f.material.opacity; }
     const c0 = core(x, y, z, 0xffd070, Math.min(0.55, r * (big ? 0.16 : 0.13)), big ? 0.14 : 0.09); if (c0) c0.material.uniforms.uOp.value = 0.85;
     if (big) { const sh = core(x, y, z + 0.2, 0xff4a10, Math.min(1, r * 0.22), 0.26); if (sh) sh.material.uniforms.uOp.value = 0.35 * nf; }
@@ -643,7 +646,7 @@ export function createVfx(game) {
     if (h.env) h.env.material.uniforms.uOp.value = 0.55;
     h.cry = o.crystal ? take(crystals) : null;
     if (h.cry) { h.cry.material.color.set(o.crystal); h.cry.material.opacity = 0.95; h.cry.scale.setScalar(o.crystalSize ?? 1); h.cry.position.set(x, z, -y); }
-    const f = take(flashes);
+    const f = takeFlash();
     if (f) { tone(f.material.color.set(color), 1); f.material.opacity = 0.7; f.material.rotation = rnd() * 6.28; f.position.set(x, z, -y); f.scale.setScalar(0.3); const e = rec(f, 0.1, 'flash'); e.s0 = 0.75; }
     burst(x, y, z, 5, { tex: 'spark', color: 0xffffff, color2: color, speed: 3.5, size: 0.1, life: 0.2, drag: 6, jitter: 0.05 });
     h.position = { set: (X, Y, Z) => moveMissile(h, X, -Z, Y) };
@@ -707,7 +710,7 @@ export function createVfx(game) {
       switch (e.kind) {
         case 'orb': if (e.dur !== Infinity) { o.material.opacity = e.o0 * (1 - k) * (1 - k) * smooth(0.8, 3, o.position.distanceTo(camPos)); o.scale.setScalar(e.s0 * (1 + k)); } else o.material.opacity = e.o0 * smooth(0.8, 3, o.position.distanceTo(camPos)); break;
         case 'flash': o.material.opacity = (e.o0f || 0.9) * (1 - k) * smooth(0.6, 2.2, o.position.distanceTo(camPos)); o.scale.setScalar(e.s0 * (0.5 + 0.8 * Math.sqrt(k))); break;
-        case 'ring': o.scale.setScalar(e.r0 + (e.r1 - e.r0) * (1 - (1 - k) * (1 - k))); o.material.opacity = e.o0 * (1 - k); o.rotation.y += dt * 0.6; break;
+        case 'ring': o.scale.setScalar(e.r0 + (e.r1 - e.r0) * (1 - (1 - k) * (1 - k))); o.material.opacity = e.o0 * (1 - k) * smooth(1, 4, o.position.distanceTo(camPos)); o.rotation.y += dt * 0.6; break;
         case 'decal': {
           const fin = Math.min(1, e.t / 0.15), fout = e.fadeOut ? Math.max(0, (e.dur - e.t) / 0.4) : e.dur === Infinity ? 1 : k > 0.7 ? (1 - k) / 0.3 : 1;
           o.material.opacity = e.o0 * fin * fout; if (e.spin) o.rotation.y += e.spin * dt;

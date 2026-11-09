@@ -71,7 +71,7 @@ function installBot(route, runIdx) {
   offs.push(g.on('hit', e => { if (e.target?.type?.id === ROUTE_BOSS) { const k = e.spell?.id || e.spell || e.source || '?'; ev.bossDmg[k] = (ev.bossDmg[k] || 0) + e.amount; } }));
   // session 53: a death respawns the player far away; fights left behind are not 'stuck mobs'
   // session 72: where each death happened (game time, route leg, what the bot was doing)
-  offs.push(g.on('playerDeath', () => { ev.deaths++; (ev.deathLog ||= []).push(`${(g.time - bot.t0).toFixed(0)}s L${bot.leg} ${bot.why || ''}`.slice(0, 90)); bot.engaged.clear(); }));
+  offs.push(g.on('playerDeath', () => { ev.deaths++; (ev.deathLog ||= []).push(`${(g.time - bot.t0).toFixed(0)}s L${bot.leg} ${bot.why || ''}`.slice(0, 90)); bot.engaged.clear(); bot.trail.length = 0; bot.retrace = null; }));
   offs.push(g.on('levelup', () => {
     for (let t = 0; t < 3; t++) if (C.picks[t] == null && g.stats.level >= C.talentLevels[t]) { if (C.pickTalent(t, (runIdx + t) % 2)) ev.talents++; }
   }));
@@ -115,7 +115,7 @@ function installBot(route, runIdx) {
   const bot = window.__bot = {
     ev, route, leg: 0, state: 'go', path: null, wp: 0, goal: null, stuckT: 0, lastPos: null, replans: 0,
     engaged: new Map(), loot: [], arriveT: null, bossStart: null, bossTtk: null, fail: null, done: false,
-    t0: g.time, maxT: 900, noSpawnT: 0, clearedEnc: new Set(),
+    t0: g.time, maxT: 900, noSpawnT: 0, clearedEnc: new Set(), trail: [], retrace: null, retraceN: 0, legT: 0,
     dispose() { for (const f of offs) f(); },
   };
   const live = () => g.mobs.filter(m => !m.dead);
@@ -136,6 +136,21 @@ function installBot(route, runIdx) {
     bot.noPathT = 0;
     // session 55: escape manoeuvre. A warden stood 16 s at -131,-29 with a 1-cell plan, walking into the same wall toward
     // the goal; after repeated failed replans walk 1.5 s in a random direction (jumping) before replanning again
+    // session 76: retrace. A plan that cannot reach the goal (G.miss large) from where the player stands means the 1 m planner
+    // grid has lost the way out of a pocket the real player walked into (warden: Great St Mary's railings, -169.5,27, a 12-cell
+    // partial plan for 160 s). Walk back along the bot's own trail (spots the player really stood on) until a plan from there
+    // reaches the goal, then resume. Each retrace drops the trail it used, so the next one goes further back.
+    if (bot.retrace) {
+      const R = bot.retrace, tr = bot.trail; R.t -= dt; R.chk -= dt;
+      let q = tr[R.i];
+      while (q && Math.hypot(q.x - P.x, q.y - P.y) < 0.7) q = tr[--R.i];
+      let done = !q || R.t <= 0;
+      if (!done && R.chk <= 0) { R.chk = 1; const r = plan(P.x, P.y, P.z, G.x, G.y, G.tol); if (r.pts.length > 1 && !(r.miss > G.tol + 1)) done = true; }
+      if (done) { tr.length = Math.max(0, R.i); bot.retrace = null; bot.replans = 0; bot.stuckT = 0; const k = { best: G.best, loot: G.loot, enc: G.enc, vant: G.vant }; setGoal(G.x, G.y, G.tol); Object.assign(bot.goal, k); return false; }
+      P.yaw = Math.atan2(-(q.x - P.x), q.y - P.y); P.keys.add('KeyW'); P.keys.add('ShiftLeft');
+      if (R.t < R.t0 - 3 && Math.random() < 0.05) P.keys.add('Space');
+      return false;
+    }
     if (bot.escapeT > 0) { bot.escapeT -= dt; P.yaw = bot.escapeYaw; P.keys.add('KeyW'); P.keys.add('Space'); if (bot.escapeT <= 0) setGoal(G.x, G.y, G.tol); return false; }
     let q = bot.path[bot.wp];
     while (Math.hypot(q.x - P.x, q.y - P.y) < 0.9 && bot.wp < bot.path.length - 1) q = bot.path[++bot.wp];
@@ -159,6 +174,10 @@ function installBot(route, runIdx) {
       // session 53: loot is optional; a kill spot the bot cannot get onto (corpse against bollards/railings) is skipped
       // instead of failing the run as a softlock (a really stuck player still fails on the next travel leg)
       if ((moved < 0.5 || !closer) && G.loot && bot.replans >= 3) { G.loot.looted = true; bot.goal = null; bot.path = null; bot.replans = 0; return false; }
+      if ((moved < 0.5 || !closer) && !G.loot && bot.replans >= 2 && (bot.retraceN || 0) < 6 && bot.trail.length > 3) {
+        const r = plan(P.x, P.y, P.z, G.x, G.y, G.tol);
+        if (!r.pts.length || r.miss > G.tol + 1) { bot.retraceN = (bot.retraceN || 0) + 1; bot.retrace = { i: bot.trail.length - 1, t: 30, t0: 30, chk: 2 }; return false; }
+      }
       if (moved < 0.5 || !closer) { bot.replans++; P.keys.add('Space'); if (bot.replans >= 3) { bot.escapeT = 1.5; bot.escapeYaw = Math.random() * 6.283; } setGoal(G.x, G.y, G.tol); bot.goal.best = G.best; bot.goal.loot = G.loot; bot.goal.enc = G.enc; if (bot.replans > 8) bot.fail = `softlock: no route progress (leg ${bot.leg} ${route[bot.leg]}, at ${P.x.toFixed(1)},${P.y.toFixed(1)},${P.z.toFixed(1)}, goal ${G.x.toFixed(1)},${G.y.toFixed(1)}, path ${bot.path?.length ?? 0}, engaged ${[...bot.engaged.keys()].map(m => m.type.id).join('/') || 'none'})`; }
       else bot.replans = 0;
     }
@@ -214,6 +233,9 @@ function installBot(route, runIdx) {
     if (bot.done || bot.fail) return;
     if (g.time - bot.t0 > bot.maxT) { bot.fail = 'timeout: route not finished'; return; }
     P.keys.clear();
+    // session 76: breadcrumb trail of spots the player really stood on (for retrace), 1 m apart, not while retracing
+    if (!bot.retrace && g.stats.hp > 0) { const L = bot.trail[bot.trail.length - 1]; if (!L || Math.hypot(L.x - P.x, L.y - P.y) > 1) { bot.trail.push({ x: P.x, y: P.y }); if (bot.trail.length > 600) bot.trail.splice(0, 100); } }
+    if (bot.leg !== bot.legSeen) { bot.legSeen = bot.leg; bot.legT = 0; bot.retraceN = 0; } bot.legT += dt;
     // death: use the real "Rise again" button
     if (g.stats.hp <= 0 || g.paused) {
       bot.why = `dead/paused hp ${Math.round(g.stats.hp)} paused ${!!g.paused}`;
@@ -240,7 +262,7 @@ function installBot(route, runIdx) {
     for (const m of live()) {
       const d = dist(m), mine = encMobs.includes(m) && Math.hypot(enc.x - P.x, enc.y - P.y) < enc.r + 25;
       if (m.boss && encId !== 'boss-market' && !hostile(m)) continue;
-      if ((mine || (hostile(m) && d < 18)) && d < bd) { bd = d; tgt = m; }
+      if ((mine || (hostile(m) && d < (bot.legT > 150 ? 8 : 18))) && d < bd) { bd = d; tgt = m; }
     }
     if (tgt) {
       if (!bot.engaged.has(tgt)) bot.engaged.set(tgt, { t: g.time, hp: tgt.hp, lastDmg: g.time });
@@ -271,6 +293,9 @@ function installBot(route, runIdx) {
     // session 50: drops more than 20 m away are left behind (with 25 s core respawns and reinforcement waves, walking back
     // 40-60 m for every old drop pulled the bot into fresh packs forever: 5 of 20 runs timed out at 900 s with 250-470 kills)
     for (const k of ev.kills) if (!k.looted && Math.hypot(k.x - P.x, k.y - P.y) > 20) k.looted = true;
+    // session 76: a leg that has run 150 s+ stops looting and only fights mobs within 8 m (stormcaller farmed a respawning
+    // pack near -124,-29 for 600 s on leg 3: fight 18 m out, loot, re-aggro, repeat, then timed out at 900 s)
+    if (bot.legT > 150) for (const k of ev.kills) k.looted = true;
     const spot = ev.kills.find(k => !k.looted);
     if (spot) {
       bot.why = `loot ${spot.x.toFixed(1)},${spot.y.toFixed(1)}`;

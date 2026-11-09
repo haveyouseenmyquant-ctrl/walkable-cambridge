@@ -145,7 +145,7 @@ body.explore #game-hud .gh-loots{display:none}`;
     // session 54: non-crit hits on a target that still shows a fresh number add into it (one rolling total per target
     // instead of a pile of overlapping ticks); crits always get their own number
     const prev = lastNum.get(target);
-    if (!crit && prev && prev.life > 0 && prev.tgt === target && !prev.crit && prev.t < 0.45) {
+    if (!crit && prev && prev.life > 0 && prev.tgt === target && !prev.crit && prev.t < 0.6) {   // s76: 0.45 -> 0.6 s window
       prev.sum += amount; prev.t = Math.min(prev.t, 0.05); prev.pop = 0.35; prev.d.textContent = Math.round(prev.sum); prev.sz = Math.min(1.35, 0.82 + prev.sum / 90);
       if (prev.sum >= 40 && !prev.d.classList.contains('big')) prev.d.classList.add('big');
       return;
@@ -155,16 +155,22 @@ body.explore #game-hud .gh-loots{display:none}`;
     // session 48: numbers fan out (no stacking on one spot), linger longer and pop; crits get a CRIT tag + gold
     const big = !crit && (amount >= 0.12 * (target.maxHp || 1e9) || amount >= 40);
     n.x = target.x + (Math.random() - 0.5) * 0.6; n.y = target.y + (Math.random() - 0.5) * 0.6; n.z = target.z + (target.height ?? 1.6) * (0.75 + Math.random() * 0.4) + 0.2;
-    n.t = 0; n.life = crit ? 1.5 : 1.15; n.dx = (Math.random() - 0.5) * 90; n.pop = crit ? 1.1 : big ? 0.7 : 0.45;
+    n.t = 0; n.life = crit ? 1.5 : 1.15; n.dx = (Math.random() - 0.5) * 50; n.jx = (Math.random() - 0.5) * 24; n.born = ++numSeq; n.pop = crit ? 1.1 : big ? 0.7 : 0.45;
     n.sz = Math.min(1.35, 0.82 + amount / 90);   // s74: number size follows the hit size (small ticks small, heavy hits big)
     n.d.textContent = Math.round(amount); n.d.className = 'gh-num' + (crit ? ' crit' : big ? ' big' : '');
     n.d.style.color = TYPE_COLOR[type] || '#fff'; n.d.style.display = '';
   }));
-  const lastNum = new WeakMap(), placed = [];
+  const lastNum = new WeakMap(), placed = [], live = [];
+  let numSeq = 0;
   function updateNums(dt) {
     const cam = game.camera, W = innerWidth, H = innerHeight;
-    placed.length = 0;
-    for (const n of pool) {
+    placed.length = 0; live.length = 0;
+    // s76: place oldest first so settled numbers keep their spot and new ones stack around them (pool order flipped
+    // stacks every frame); the overlap test uses each number's real on-screen box (digits x font x scale) instead of a
+    // fixed 56 px, so '31' and '144' side by side can no longer read as '31144'
+    for (const n of pool) if (n.life > 0) live.push(n);
+    live.sort((a, b) => (a.born || 0) - (b.born || 0));
+    for (const n of live) {
       if (n.life <= 0) continue;
       n.t += dt;
       if (n.t >= n.life) { n.life = 0; n.d.style.display = 'none'; continue; }
@@ -173,19 +179,22 @@ body.explore #game-hud .gh-loots{display:none}`;
       const k = n.t / n.life;
       n.d.style.opacity = k < 0.7 ? 1 : (1 - k) / 0.3;
       // session 56: stack instead of overlap: a number landing within one line of an already placed one moves up
-      const sx = (v.x * 0.5 + 0.5) * W + n.dx * Math.sqrt(k), lh = n.crit ? 44 : 30;
+      const sc = (n.sz ?? 1) * (1 + (1 - Math.min(1, n.t * 7)) * (n.pop ?? 0.5));
+      const fpx = n.crit ? 40 : n.d.classList.contains('big') ? 34 : 28, chars = String(n.d.textContent).length + (n.crit ? 2.2 : 0);
+      const lw = (chars * 0.6 * fpx + 10) * sc, lh = (fpx + 4) * Math.min(sc, 1.6);
+      const sx = (v.x * 0.5 + 0.5) * W + n.dx * Math.sqrt(k) + (n.jx || 0);
       let sy = (-v.y * 0.5 + 0.5) * H;
       const y0 = sy, top = H * 0.2;   // keep clear of the boss bar: a stack that would climb into it grows downward
       for (let dir = -1; dir <= 1; dir += 2) {
         sy = Math.max(y0, dir < 0 ? 0 : top);
-        for (let tries = 0; tries < 6; tries++) {
-          const hit = placed.find(q => Math.abs(q.x - sx) < 56 && Math.abs(q.y - sy) < (q.h + lh) / 2);
+        for (let tries = 0; tries < 10; tries++) {
+          const hit = placed.find(q => Math.abs(q.x - sx) < (q.w + lw) / 2 && Math.abs(q.y - sy) < (q.h + lh) / 2);
           if (!hit) break; sy = hit.y + dir * (hit.h + lh) / 2;
         }
         if (sy >= top) break;
       }
-      placed.push({ x: sx, y: sy, h: lh });
-      n.d.style.transform = `translate(${sx}px, ${sy}px) translate(-50%,-50%) scale(${(n.sz ?? 1) * (1 + (1 - Math.min(1, n.t * 7)) * (n.pop ?? 0.5))})`;
+      placed.push({ x: sx, y: sy, h: lh, w: lw });
+      n.d.style.transform = `translate(${sx}px, ${sy}px) translate(-50%,-50%) scale(${sc})`;
     }
   }
 
