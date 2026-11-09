@@ -202,8 +202,18 @@ function installClip(clipS) {
     for (let d = 0.6; d < L - (m.radius || 0.5); d += 0.5) { const f = d / L; if (W.blocked(P.x + (m.x - P.x) * f, P.y + (m.y - P.y) * f, ez + (cz - ez) * f - 0.2, 0.1, 0, 0.4)) return false; }
     return true;
   }
+  // session 82: move on as soon as the current leg's encounter is cleared, wherever the player is (a boss killed from
+  // the market-north leg used to leave the bot on that leg for the rest of the clip: the second half was empty)
+  function advanceLeg() {
+    for (let e; (e = ENC[ROUTE[st.leg]]);) {
+      const es = sys.encounterState.get(e.id);
+      if (!es || !(es.clearedAt != null || (es.active && es.mobs.length && es.mobs.every(x => x.dead || x.removed)))) break;
+      st.leg++; st.path = null; idleT = Math.max(idleT, 2); add('leg', { leg: ROUTE[st.leg] || 'done' });
+    }
+  }
   function step(dt) {
     framePitch(dt);
+    advanceLeg();
     P.keys.clear();
     if (g.stats.hp <= 0 || g.paused) {   // death: the real "Rise again" button
       const btn = document.querySelector('.gh-death button'), shown = btn && !document.querySelector('.gh-death').hidden;

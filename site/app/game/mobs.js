@@ -192,6 +192,7 @@ function addOutlines(group, color) {
   });
   for (const [o, h] of list) { const s = new THREE.Mesh(h, mat); s.userData.outline = true; s.castShadow = false; s.receiveShadow = false; o.add(s); }
 }
+const _camBox = new THREE.Box3(), _camS = new THREE.Vector3();
 const HIT_TINT = new THREE.Color(0xfff4e8), _white = new THREE.Color(0xffffff), _camP = new THREE.Vector3(), _batP = new THREE.Vector3();
 const TELE_COLOR = 0xff2a10;   // session 52: the one danger colour for every mob / boss telegraph
 // session 46: soft type-coloured ground aura under every mob (reads as a glow pool in still frames; shared per type)
@@ -1296,6 +1297,38 @@ class MobSystem {
     for (let i = this.projectiles.length - 1; i >= 0; i--) if (!this.updateProjectile(this.projectiles[i], dt)) this.projectiles.splice(i, 1);
     for (let i = this.fx.length - 1; i >= 0; i--) if (!this.fx[i].update(dt)) this.fx.splice(i, 1);
     this.updateTele(dt);
+  }
+
+  // s82: the third-person camera must never sit inside a mob or boss body (the s81 clip had the camera inside the dying
+  // Bellwarden's bell). Called by main.js every rendered frame after the camera is placed: a body the camera is in or
+  // about to enter fades out, and is hidden outright once the camera is inside it; it comes back as the camera leaves.
+  camClear(cam) {
+    if (!cam) return;
+    cam.getWorldPosition(_camP);
+    for (const mob of this.game.mobs) {
+      const grp = mob.group; if (!grp || mob.removed) continue;
+      let B = mob.camBody;
+      if (!B) {   // body sphere, measured once from the spawned model (offset from the group origin, radius)
+        const bb = _camBox.setFromObject(grp), c = bb.getCenter(_batP), sz = bb.getSize(_camS);
+        B = mob.camBody = { oy: c.y - grp.position.y, r: Math.max(0.6, Math.min(sz.x, sz.z) * 0.5, sz.y * 0.4) };
+      }
+      const d = Math.hypot(_camP.x - mob.x, _camP.y - (grp.position.y + B.oy), _camP.z + mob.y);
+      const a = Math.max(0, Math.min(1, (d - B.r * 0.85) / (B.r * 0.6)));
+      if (a >= 1) {
+        if (mob.camFaded) {
+          mob.camFaded = false; grp.visible = true;
+          if (!mob.dead) { mob.mats.forEach((c, i) => { const b = mob.matBase[i]; c.transparent = b[0]; c.opacity = b[1]; });
+            if (!mob.outlinesOff) grp.traverse(o => { if (o.userData.outline) o.visible = true; }); }
+        }
+        continue;
+      }
+      if (!mob.camFaded) {
+        mob.camFaded = true; if (!mob.matBase) mob.matBase = mob.mats.map(c => [c.transparent, c.opacity]);
+        grp.traverse(o => { if (o.userData.outline) o.visible = false; });   // the ink shell can't fade
+      }
+      grp.visible = a > 0.12;
+      for (const c of mob.mats) { c.transparent = true; c.opacity = Math.min(mob.dead ? c.opacity : 1, a); }
+    }
   }
 
   evictFarEncounter(minD) {

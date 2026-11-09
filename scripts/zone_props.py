@@ -41,11 +41,12 @@ STRIPE_W = 0.52      # canvas stripe width along the row (m; GSM tower views: ~6
 EAVE = 2.3           # canopy eave above the strip's median ground (m)
 RISE = 0.55          # eave -> ridge rise of each back-to-back canopy (m)
 BAY = 3.0            # stall bay pitch along the row (m)
-FRAME = (0.58, 0.60, 0.61)   # galvanised scaffold tube
+FRAME = (0.36, 0.37, 0.38)   # s82: dark grey steel tube (Commons "Cambridge Market stalls at lunchtime", 2024)
 CLOTHS = [(0.12, 0.45, 0.28), (0.12, 0.45, 0.28), (0.10, 0.10, 0.11), (0.85, 0.85, 0.82), (0.55, 0.12, 0.14),
           (0.16, 0.22, 0.45), (0.45, 0.62, 0.30)]
 SHEETS = [(0.13, 0.20, 0.15), (0.12, 0.14, 0.24), (0.17, 0.17, 0.18), (0.13, 0.20, 0.15), (0.30, 0.10, 0.11),
-          (0.12, 0.14, 0.24)]   # s38: darker tarps (photos: dark green / navy / grey backs, few bright ones)
+          (0.12, 0.14, 0.24), (0.72, 0.10, 0.13), (0.72, 0.10, 0.13), (0.10, 0.42, 0.24)]
+# s38: darker tarps; s82: plus the bright red / green PVC back+side sheets of the 2024 Commons photo
 CRATE = (0.55, 0.42, 0.28)
 GOODS = [(0.80, 0.20, 0.12), (0.92, 0.62, 0.15), (0.35, 0.55, 0.20), (0.85, 0.75, 0.45), (0.55, 0.30, 0.45),
          (0.75, 0.68, 0.55), (0.30, 0.35, 0.55), (0.90, 0.85, 0.70)]
@@ -208,10 +209,14 @@ def stall_strip(m, B, g, gB, centre, seed, base=None):
                     dz = [0.0, 0.07, 0.07, 0.0]
                     for ua, ub, da, db in zip(arc[:-1], arc[1:], dz[:-1], dz[1:]):
                         m.quad(P3(ua, te, zl - da), P3(ub, te, zl - db), P3(ub, te, zl), P3(ua, te, zl), col, two=True)
-        # gable end triangles (white canvas)
-        for s_ in (0.0, L):
-            m.tri(P3(s_, e0, ze - 0.02), P3(s_, e1, ze - 0.02), P3(s_, tm, ze + RISE), WHITE)
-            m.tri(P3(s_, e0, ze - 0.02), P3(s_, tm, ze + RISE), P3(s_, e1, ze - 0.02), WHITE)
+        # s82: open gable ends (2024 Commons photo: the row ends show the striped canopy edge and its frame, no solid
+        # white canvas triangle); a 0.22 m striped edge flap follows each end rafter instead
+        for s_, kc in ((0.0, 0), (L, nb - 1)):
+            ec = cols[(kc // 2) % len(cols)] if kc % 2 else cols[0]
+            for ta, tb in ((e0, tm), (tm, e1)):
+                za = ze - 0.02 if ta != tm else ze + RISE
+                zb2 = ze - 0.02 if tb != tm else ze + RISE
+                m.quad(P3(s_, ta, za - 0.22), P3(s_, tb, zb2 - 0.22), P3(s_, tb, zb2), P3(s_, ta, za), ec, two=True)
     loc = lambda q: q + [E0, N0]  # noqa: E731
     # --- bays, frame and stalls
     nst = max(1, int(round(L / BAY)))
@@ -237,6 +242,14 @@ def stall_strip(m, B, g, gB, centre, seed, base=None):
             if inn((q0 + q1) / 2, 0.1):
                 zr = ze + hgt([(q0 + q1) / 2])[0] - off - 0.06
                 m.box(np.array([*(q0 - nr * 0.025), zr]), A3 * bw, N3 * 0.05, up * 0.05, FRAME)
+    # s82: horizontal mid rails at ~1.35 m and ~2.0 m between the eave-line posts (2024 photo: two tube rails per bay)
+    for i in range(nst):
+        for t in [x for sp in spans for x in (sp[0] + 0.1, sp[1] - 0.1)]:
+            q0, q1 = o + ax * bw * i + nr * t, o + ax * bw * (i + 1) + nr * t
+            if inn((q0 + q1) / 2, 0.1):
+                z0 = g(*((q0 + q1) / 2))
+                for hh in (1.35, 2.0):
+                    m.box(np.array([*(q0 - nr * 0.02), z0 + hh]), A3 * bw, N3 * 0.04, up * 0.04, FRAME)
     # stalls
     if W >= 6.0:
         rows = [(W / 4, -nr, W / 2), (3 * W / 4, nr, W / 2)]
@@ -284,7 +297,15 @@ def stall(m, g, c, ax, front, depth, width, rng, ze, hgt, off):
         # cloth skirt on the front, hanging to ~0.3 m (thin), sometimes striped
         sk = cloth if rng.random() < 0.6 else SKIRTS[rng.integers(len(SKIRTS))]
         skirt_bot = rng.uniform(0.22, 0.45)
-        m.box(P(-tw / 2, fy - 0.01, skirt_bot), A3 * tw, F3 * 0.015, up * (th - skirt_bot), tuple(x * 0.85 for x in sk))
+        if rng.random() < 0.4:   # s82: vertical green/red/blue-and-white striped counter skirt (2024 photo, right row)
+            sc2 = SKIRTS[rng.integers(len(SKIRTS))]
+            ns = max(2, int(round(tw / 0.12)))
+            for j in range(ns):
+                a_, b_ = -tw / 2 + tw * j / ns, -tw / 2 + tw * (j + 1) / ns
+                m.quad(P(a_, fy + 0.005, skirt_bot), P(b_, fy + 0.005, skirt_bot), P(b_, fy + 0.005, th),
+                       P(a_, fy + 0.005, th), sc2 if j % 2 else (0.93, 0.93, 0.90), two=True)
+        else:
+            m.box(P(-tw / 2, fy - 0.01, skirt_bot), A3 * tw, F3 * 0.015, up * (th - skirt_bot), tuple(x * 0.85 for x in sk))
         # crates / boxes under the table (visible below the skirt)
         for k in range(int(rng.integers(1, 4))):
             s0 = rng.uniform(-tw / 2 + 0.05, tw / 2 - 0.55)
@@ -323,6 +344,10 @@ def stall(m, g, c, ax, front, depth, width, rng, ze, hgt, off):
         q = c - front * (hd - 0.04)
         zt = ze + hgt([q])[0] - off - 0.02
         m.box(np.array([*(q - ax * (hw - 0.05)), z + 0.05]), A3 * (width - 0.1), F3 * 0.02, up * (zt - z - 0.05), sc)
+        if rng.random() < 0.35:   # s82: one side sheet from the back sheet to ~0.4 m short of the table front
+            sd = -1 if rng.random() < 0.5 else 1
+            q2 = c + ax * sd * (hw - 0.04) - front * (hd - 0.06)
+            m.box(np.array([*q2, z + 0.05]), F3 * (depth - 0.6), A3 * 0.02, up * (ze - z - 0.25), sc)
     # hanging goods on the front eave rail (non-food stalls mostly) or on the back sheet
     if (not food and rng.random() < 0.8) or rng.random() < 0.15:
         q = c + front * (hd - 0.1)

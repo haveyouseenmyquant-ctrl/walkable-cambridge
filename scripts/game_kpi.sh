@@ -31,4 +31,6 @@ try:
     if p.get("classes"): out["per_class"] = {c: {"pass": v.get("pass"), "playable": v.get("playable"), "boss_ttk_median_s": v.get("boss_ttk_median_s"), "fails": v.get("fails", [])} for c, v in p["classes"].items()}
 except Exception: pass
 print(json.dumps(out))' "$M" "$I" "$P" | tee "$OUT.tmp"
+# session 82: a Chrome crash ('Connection closed') is a harness failure, not a game result: don't cache it, service.sh retries
+grep -q 'Connection closed' "$OUT.tmp" && { rm -f "$OUT.tmp"; exit 0; }
 grep -q '[0-9]' "$OUT.tmp" && mv "$OUT.tmp" "$OUT" || rm -f "$OUT.tmp"

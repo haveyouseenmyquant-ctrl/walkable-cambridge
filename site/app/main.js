@@ -236,6 +236,7 @@ async function main() {
     if (fc) { camera.position.set(fc.pos[0], fc.pos[2], -fc.pos[1]); camera.lookAt(fc.at[0], fc.at[2], -fc.at[1]); }
     else if (player.view === 3) { player.combatCam = !!(window.__game && !window.__explore); player.applyCamera3(camera, dt); }   // s78: ARPG occlusion camera in game mode only
     else player.applyCamera(camera);
+    if (window.__game && !window.__explore) window.__game.mobSystem?.camClear?.(camera);   // s82: never render the camera inside a mob body
     // s62: game-mode third-person roof cutaway over the market stalls (no cut in exploration mode / first person)
     if (player.view === 3 && !fc && window.__game && !window.__explore) zoneCut.value.set(player.x, player.z + 1.9, -player.y, 8);
     else zoneCut.value.w = 0;

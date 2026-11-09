@@ -1,0 +1,67 @@
+{
+ "gameplay_judged": 47.9,
+ "n": 4,
+ "model": "claude-opus-5-5",
+ "hash": "3f7cce29a66631cf",
+ "classes": {
+  "hexweaver": {
+   "score": 5.0,
+   "readability_telegraphs": 5.0,
+   "spell_vfx": 5.0,
+   "enemy_animation_variety": 5.0,
+   "hit_feedback": 5.0,
+   "ui_hud_clarity": 5.0,
+   "loot_excitement": 6.0,
+   "polished_arpg_feel": 4.0,
+   "overall": 5
+  },
+  "pyromancer": {
+   "score": 4.86,
+   "readability_telegraphs": 4.5,
+   "spell_vfx": 4.5,
+   "enemy_animation_variety": 4.0,
+   "hit_feedback": 5.5,
+   "ui_hud_clarity": 6.0,
+   "loot_excitement": 5.0,
+   "polished_arpg_feel": 4.5,
+   "overall": 4.8
+  },
+  "stormcaller": {
+   "score": 4.43,
+   "readability_telegraphs": 4.0,
+   "spell_vfx": 4.0,
+   "enemy_animation_variety": 4.0,
+   "hit_feedback": 5.0,
+   "ui_hud_clarity": 6.0,
+   "loot_excitement": 4.0,
+   "polished_arpg_feel": 4.0,
+   "overall": 4.3
+  },
+  "warden": {
+   "score": 4.86,
+   "readability_telegraphs": 4.0,
+   "spell_vfx": 4.5,
+   "enemy_animation_variety": 4.5,
+   "hit_feedback": 5.0,
+   "ui_hud_clarity": 5.5,
+   "loot_excitement": 6.0,
+   "polished_arpg_feel": 4.5,
+   "overall": 4.8
+  }
+ },
+ "by_criterion": {
+  "readability_telegraphs": 4.38,
+  "spell_vfx": 4.5,
+  "enemy_animation_variety": 4.38,
+  "hit_feedback": 5.12,
+  "ui_hud_clarity": 5.62,
+  "loot_excitement": 5.25,
+  "polished_arpg_feel": 4.25
+ },
+ "reasons": {
+  "hexweaver": "Strengths: there is a real boss presentation (named health bar with phase pips, an 'enraged' banner, a 'Vanquished' card), and the red ground markers are clear. Loot has rarity colours, beams, toasts and pickup notices, and the crit numbers are big and readable. Weaknesses: the view is third-person over the shoulder, not first-person. The wizard model often hides the action, and the spell effects are mostly generic glowing orbs and rings, so the screen gets cluttered and the labels pile up. The enemies are simple low-poly models, mana often sits near empty, and the HUD is small and plain next to commercial ARPGs.",
+  "pyromancer": "Strengths: a clear boss bar with phase and enrage banners, readable crit numbers, a tidy HUD with cooldown timers and a minimap, and loot shown with rarity colours, light beams and item toasts. Weaknesses: the camera is third-person, not the first-person view described, and frames are often cluttered by large translucent effects and market-stall geometry. Telegraphs are limited to a few red ground markers, enemies are simple low-poly props, and the fire spells look like generic orange blobs, so impact and polish fall well short of commercial ARPGs.",
+  "stormcaller": "The HUD is clean and readable. It has HP and mana bars, a 6-slot spell bar with cooldown numbers, a minimap, a boss bar with phase banners ('Phase II', 'enraged'), bold crit numbers and rarity-coloured loot toasts. However, enemies are hard to see: they're small, blocky and often off-screen, and the camera keeps ending up staring at walls (frames 9-12). The only telegraph shown is a red ground circle. Spell effects are mostly thin blue glows and bolts with little impact, and loot drops have no beams or ground presence, so even epic and legendary drops are just text toasts.",
+  "warden": "The strongest parts are loot and HUD. Drops have rarity-coloured light beams, nameplates and pickup toasts, and the boss bar, crit numbers, spell bar with cooldowns and minimap look good. The weak spots are readability and telegraphs. The frames show no ground markers or wind-ups, and the big translucent blue shield bubble and white flashes often cover the player character and enemies (frames 1, 9, 10). Spells are mostly generic orbs and flashes. The enemies are simple low-poly models, so the frames look more like a capable prototype than a polished commercial ARPG."
+ }
+}

@@ -39,11 +39,20 @@ const server = http.createServer((req, res) => {
 });
 await new Promise(ok => server.listen(0, '127.0.0.1', ok));
 const URL0 = `http://127.0.0.1:${server.address().port}/?debug&nopick`;
-const browser = await puppeteer.launch({
+const launch = () => puppeteer.launch({
   executablePath: CHROME, headless: true, protocolTimeout: 0,
   args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist', '--window-size=480,270'],
   defaultViewport: { width: 480, height: 270 },   // small canvas: swiftshader frames between sim chunks stay cheap
 });
+let browser = await launch();
+// session 82: the s81 live run lost Chrome at 304 s ('Connection closed') and every later run failed against the dead
+// browser (playable_classes 0). Relaunch once per crash; runs in flight on the old browser retry as harness errors.
+let relaunching = null;
+async function ensureBrowser() {
+  if (browser.connected) return;
+  relaunching ||= (async () => { log('browser', 'disconnected, relaunching'); await browser.close().catch(() => {}); browser = await launch(); })().finally(() => { relaunching = null; });
+  await relaunching;
+}
 
 // ---------------- the in-page bot (installed as window.__bot)
 function installBot(route, runIdx) {
@@ -362,7 +371,7 @@ try {
     let ctx, page;
     const made = mkLock.then(async () => {
       for (let k = 0; ; k++) {
-        try { ctx = await browser.createBrowserContext(); page = await ctx.newPage(); await page.goto('about:blank'); return; }
+        try { await ensureBrowser(); ctx = await browser.createBrowserContext(); page = await ctx.newPage(); await page.goto('about:blank'); return; }
         catch (e) { await ctx?.close().catch(() => {}); if (k >= 4) throw e; log(cls, r, 'newPage retry:', e.message); await new Promise(ok => setTimeout(ok, 2000 * (k + 1))); }
       }
     });
