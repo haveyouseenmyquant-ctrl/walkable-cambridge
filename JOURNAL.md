@@ -1933,3 +1933,32 @@ Next
    damage about ×1.4 against bosses, or fix the whiffing. Goal: spread ≤25%.
 2. Annotate the bespoke walls (Christ's, Sidney, St John's gate, Round Church) from non-held-out photos so the ring facade KPI counts them.
 3. gameplay_judged: the judge keeps saying "enemies are primitive, little visible animation" (4.0) and "VFX clutter". Next game work: mob limb animation.
+
+## 2026-11-09 — Session 69: Trinity Street terraces (ring 1); mob animation; the hexweaver's slow kills were a playtest-bot mana bug
+
+- Game, balance diagnosis: playtest.mjs now logs boss damage per spell (`bossDmg` on each run line). A hexweaver run showed
+  **all 903 boss damage came from Hex Dart**. Basic-spell spam (5 mana per 0.4 s, which is 12.5/s against 8/s regen) kept mana
+  pinned near 5, so Soul Siphon (54 dmg), Withering Mark, Bound Wisps and Night Bloom never fired. This also explains the bimodal
+  kill times: runs that reached the boss with full mana were fast. The bot now keeps a mana reserve: a filler spell (≤6 mana) is
+  skipped if it would leave less than the cost of the dearest damage, curse or shield spell coming off cooldown within 1.5 s.
+  After the fix, stormcaller and warden runs spread damage over 4-5 spells. No game balance change.
+- Game (subagent): the 12 regular mobs' animation is amplified so it reads in a still. Limb swing is about doubled, there is a
+  0.36 s hit-recoil timer separate from the white flash, and a new `scatterParts` death throws the head, limbs, wings and gears
+  off their joints. The automaton and bicycle golem now crumble instead of popping. No new meshes.
+  docs/screens/session69_mobs_*.jpg. test_mobs: 12 + 3 bosses pass.
+- Realism, ring 1 (subagent): **Trinity Street terraces**, scripts/zone_bespoke_trinitystreet.py. It covers 19 OSM buildings:
+  east side Nos 9-24 including the Green St returns, and west side Nos 26-38. It is keyed on the real OSM ids, so it replaces the
+  city skin and rebuilds all 54 walls. It adds raised fascia lettering with the real shop names (Heffers, Cubitts, Aesop, The Ivy…),
+  21 chimney stacks where the DSM shows a peak behind a party wall, and eave gutters. 36.9k tris, net about +5k over the city skin.
+  The ring-1 facade KPI is unchanged (the annotations were already there); ring-1 bespoke walls went from 26 to 56.
+  docs/screens/session69_ring_{before,after}_trinityst_*.jpg. The visible change is mostly the lettering, because the city skin
+  already used the same annotations. Uncertain: some shop names may be out of date (30-31 Jaeger vs SageBrown in OSM). Nos 11,
+  12, 17 and 25 have no OSM building.
+- Lesson: when a class's balance looks noisy, log damage per spell before tuning numbers. Three sessions went on sampling and
+  nerfs when the cause was the bot's mana use.
+
+Next
+1. Check the publish scoring of the kill-time spread with the mana-reserve bot. All classes now kill faster; retune the pyromancer
+   bossMult (0.86) if it is now the outlier.
+2. Annotate the Christ's, Sidney, St John's gate and Round Church walls from non-held-out photos (ELEMENTS={}).
+3. Ring 2: Bridge Street frontages; Trinity Street fascia contrast (Free People).
