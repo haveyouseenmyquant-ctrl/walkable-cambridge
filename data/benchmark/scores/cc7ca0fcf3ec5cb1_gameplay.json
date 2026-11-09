@@ -1,0 +1,67 @@
+{
+ "gameplay_judged": 44.6,
+ "n": 4,
+ "model": "claude-opus-5-5",
+ "hash": "cc7ca0fcf3ec5cb1",
+ "classes": {
+  "hexweaver": {
+   "score": 4.43,
+   "readability_telegraphs": 4.0,
+   "spell_vfx": 4.0,
+   "enemy_animation_variety": 3.0,
+   "hit_feedback": 5.0,
+   "ui_hud_clarity": 6.0,
+   "loot_excitement": 5.0,
+   "polished_arpg_feel": 4.0,
+   "overall": 4
+  },
+  "pyromancer": {
+   "score": 4.5,
+   "readability_telegraphs": 5.0,
+   "spell_vfx": 3.5,
+   "enemy_animation_variety": 3.5,
+   "hit_feedback": 4.5,
+   "ui_hud_clarity": 6.0,
+   "loot_excitement": 5.0,
+   "polished_arpg_feel": 4.0,
+   "overall": 4.3
+  },
+  "stormcaller": {
+   "score": 4.79,
+   "readability_telegraphs": 5.0,
+   "spell_vfx": 4.5,
+   "enemy_animation_variety": 3.5,
+   "hit_feedback": 5.0,
+   "ui_hud_clarity": 6.0,
+   "loot_excitement": 5.5,
+   "polished_arpg_feel": 4.0,
+   "overall": 4.5
+  },
+  "warden": {
+   "score": 4.14,
+   "readability_telegraphs": 4.5,
+   "spell_vfx": 4.0,
+   "enemy_animation_variety": 3.5,
+   "hit_feedback": 4.0,
+   "ui_hud_clarity": 5.0,
+   "loot_excitement": 4.5,
+   "polished_arpg_feel": 3.5,
+   "overall": 4
+  }
+ },
+ "by_criterion": {
+  "readability_telegraphs": 4.62,
+  "spell_vfx": 4.0,
+  "enemy_animation_variety": 3.38,
+  "hit_feedback": 4.62,
+  "ui_hud_clarity": 5.75,
+  "loot_excitement": 5.0,
+  "polished_arpg_feel": 3.88
+ },
+ "reasons": {
+  "hexweaver": "The HUD is the strongest part: it has a boss bar with phase ticks, a spell bar with cooldown numbers, hp and mana bars, a minimap and item tooltip cards. Damage numbers with CRIT tags, the Vanquished burst and rarity-coloured loot beams also give clear feedback. The weaknesses are small, hard-to-read low-poly enemies with little visible animation, generic glowing orbs as spell effects, and few visible enemy telegraphs apart from red ground lines. Several frames show empty streets or the camera facing a wall, so the 60-second clip has long stretches with no combat.",
+  "pyromancer": "Biggest strengths: the boss fight has a clear structure, with a named boss bar, phase labels, named attack wind-ups ('Belfry Drop', 'Clapper Sweep') and red ground circles. The HUD is complete (HP/mana bars, cooldown numbers, minimap) and loot shows beams, rarity-coloured toasts and level-up messages. Biggest weaknesses: the fire spells are sparse and generic, with few visible ember bolts despite 71 casts. Enemies are mostly simple blocky or glowing shapes, the camera often faces walls or empty streets, mana sits near-empty for long stretches, and the low-res placeholder town art keeps it far from commercial polish.",
+  "stormcaller": "Strengths: there's a clear boss bar with phase markers, red ground telegraphs, rarity-coloured loot beams with tooltips, floating damage numbers with crits, and a clean HUD with cooldowns and a minimap. Weaknesses: the art is simple low-poly with few enemy types shown, the spell effects are mostly flat rune circles and lightning lines, and half the clip (t=27\u201352s) has no enemies at all. The camera sometimes clips into the boss or walls, and the low pickup rate (6 of 18 drops) and 530 sound voices suggest weak loot follow-through and noisy audio.",
+  "warden": "The UI is a real strength: there's a boss bar with phase markers and a named attack callout ('Great Toll'), the boss's orange ground telegraph is visible, and the HUD has bars, cooldowns, a minimap, and loot beams and toasts in rarity colours. The weaknesses are the art and the pacing. The flat, low-poly town and placeholder-looking enemies (spiky brown shards, a simple bell automaton) lack detail, the spell effects are mostly a translucent blue granite-skin bubble and some gold sparkles with little impact, and the damage numbers are plain, mostly identical '31's. The last 15 s have no enemies at all, and most drops are commons with low-key effects."
+ }
+}
