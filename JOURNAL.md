@@ -1772,3 +1772,33 @@ Next
 2. Speed up playtest.mjs by running 2 workers in parallel, so a publish gets scored in about 30 min.
 3. Third-person camera under the stall canopies: try raising the pitch rather than fading.
 4. Annotations: find a Mapillary sequence (not held out) for St Edward's Passage and Guildhall Street.
+
+## 2026-11-09 — Session 61: s60 committed; boss rebalance; Holy Trinity Church (ring 1)
+
+Session 60 ended without committing again. Its work is in be5bef3:
+- the Gate of Honour (scripts/zone_bespoke_honour.py; docs/screens/session60_ring_*_goh_*);
+- shaped spell heads: comet stretch, flame envelope, hex crystal and muzzle flash (vfx.js/classes.js);
+- the third-person boom now swings lower and flatter under stall canopies, and the avatar hides when the boom is squeezed (player.js/main.js);
+- playtest.mjs runs as a job queue with 2 workers per class and a fresh context per run.
+
+Live 274747eb game KPIs (5 runs per class): playable_classes 4, mob_types 12 (+3 bosses), equipment_effects 44, encounter_coverage 100,
+playtest_pass 100 (20/20), gameplay_judged 41.1. Boss kill time: pyro 5.7, warden 11, storm 18.5, hex 20.3 s (spread 61%).
+
+- Game fork: rebalanced spell damage in classes.js. Pyro Ember 22→16, Orb 32→24, Kindle 30→24, Sunfall 13→11. Storm Lance 22→26,
+  Arc 22→28, Static 12→16. Hex Dart 21→25, Siphon 46→54. Local playtest at 2 runs per class: 8/8 pass, kill times pyro 16.2, storm 14.5,
+  warden 11.8, hex 13.7 s, **spread 16%** (noisy, so the 5-run score on the live build decides). Boss ground telegraphs in mobs.js
+  are brighter, with a thicker rim and stronger fill. Not checked visually.
+- Ring fork: **Holy Trinity Church** (way/26269190, Market St and Sidney St) in scripts/zone_bespoke_holytrinity.py. Per-edge DSM heights,
+  buttresses, battlements, Perpendicular windows, clerestory, west door; about 25k tris.
+  docs/screens/session61_ring_{before,after}_ht_*.jpg (the junction view is the clear win). No facade KPI change, because there is no annotation.
+- **Known issues:** (1) the tower walls (tower0-3, z 19-27.5 m in the mesh data) don't render. Neither the junction nor
+  the Market St view shows a tower; reversing the corner order changed nothing, and the tower's lead flat has been removed. (2) A dark
+  floating slab at tree-crown height in the Market St view (session61_ring_fix_ht_marketst.jpg) is new against the live build, but it
+  isn't the tower flat. Its source is unknown. Check the zone node list near (-30..-20, 118..126).
+- Annotation sources for ring 1 are used up (fork B checked the tuning photos). New non-held-out photos are needed.
+- Published world-20261109-1034 with WC_SKIP_GAME_KPI=1. service.sh scores it.
+
+Next
+1. Fix the Holy Trinity tower rendering and the floating slab.
+2. Read the 5-run kill-time spread and gameplay_judged for the new hash, which has the s60 camera and VFX changes.
+3. Ring 1: new photo sources (Mapillary sequences that aren't held out) for annotations.
