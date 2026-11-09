@@ -4,7 +4,7 @@ import { CollisionWorld } from './collision.js';
 import { TileManager } from './tiles.js';
 import { Player } from './player.js';
 import { Avatar } from './avatar.js';
-import { loadZone } from './zone.js';
+import { loadZone, zoneCut, zoneMatCut } from './zone.js';
 import { GrassField } from './grass.js';
 import { Minimap, renderTileMap, initLandmarks, mergeLandmarks, initOverlays } from './ui.js';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
@@ -210,6 +210,7 @@ async function main() {
         nearT = 30; near = [];
         zone.traverse(m => {
           if (!m.isMesh || !m.visible || !m.geometry) return;
+          if (m.material === zoneMatCut && zoneCut.value.w > 0) return;   // s62: canopy cut away around the player
           if (!m.geometry.boundingSphere) m.geometry.computeBoundingSphere();
           sph.copy(m.geometry.boundingSphere).applyMatrix4(m.matrixWorld);
           if (sph.center.distanceTo(o) < sph.radius + 12) near.push(m);
@@ -235,6 +236,9 @@ async function main() {
     if (fc) { camera.position.set(fc.pos[0], fc.pos[2], -fc.pos[1]); camera.lookAt(fc.at[0], fc.at[2], -fc.at[1]); }
     else if (player.view === 3) player.applyCamera3(camera, dt);
     else player.applyCamera(camera);
+    // s62: game-mode third-person roof cutaway over the market stalls (no cut in exploration mode / first person)
+    if (player.view === 3 && !fc && window.__game && !window.__explore) zoneCut.value.set(player.x, player.z + 1.9, -player.y, 8);
+    else zoneCut.value.w = 0;
     avatar.update(player, dt, player.view === 3 && !fc && !(player.camD < 0.8));   // s60: hide the avatar when the boom is squeezed into it
     if (sun.castShadow) {   // shadow box follows the camera, snapped to shadow texels to avoid shimmering
       const q = 240 / 2048, cx = Math.round(camera.position.x / q) * q, cz = Math.round(camera.position.z / q) * q;

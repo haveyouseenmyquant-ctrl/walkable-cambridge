@@ -127,6 +127,7 @@ const BASE = {
 };
 // session 48: fresnel rim light (emissive, type-coloured) injected into the standard shader; one shared program
 const hash01 = (str) => { let h = 2166136261; for (let i = 0; i < str.length; i++) h = Math.imul(h ^ str.charCodeAt(i), 16777619); return ((h >>> 0) % 10007) / 10007; };
+const MOB_VIS = 1.3;
 function addRim(mat, color, k) {
   const u = { uRim: { value: new THREE.Color(color).multiplyScalar(k) } };
   mat.userData.rim = u.uRim; mat.userData.rimBase = u.uRim.value.clone();
@@ -995,8 +996,9 @@ class MobSystem {
     // session 46: a 'rig' group between the yawed root and the model takes the shared body-language layer
     // (breathing, gait bob, wind-up crouch, strike lunge, hit flinch, death poses) on top of the per-type part animation
     const rig = new THREE.Group(); rig.name = 'rig'; while (group.children.length) rig.add(group.children[0]); group.add(rig);
-    // session 51: regular mobs draw 15% larger than their collision size so they read at clip distance (radius unchanged)
-    const VIS = type.boss ? 1 : 1.15;
+    // session 51: regular mobs draw larger than their collision size so they read at clip distance (radius unchanged);
+    // session 62: 1.15 -> 1.3 (judge: 'enemies small and hard to read')
+    const VIS = type.boss ? 1 : MOB_VIS;
     group.scale.setScalar(type.scale * VIS);
     this.root.add(group);
     const aura = new THREE.Mesh(G.disc, auraMat(type.color)); aura.renderOrder = 4; aura.scale.setScalar(type.radius * 2.6 * (type.boss ? 1.6 : 1) + 0.6);
@@ -1472,7 +1474,7 @@ class MobSystem {
     if (style === 'crumble') {
       if (R && !T.deathDur) { R.rotation.x = Math.min(1.25, f * f * 2.2); R.rotation.z = Math.sin(mob.id) * 0.3 * f; }
       mob.group.position.y = mob.z - Math.max(0, f - 0.4) * 1.1 * T.scale;
-      mob.group.scale.setScalar(T.scale * (mob.boss ? 1 : 1.15) * (1 - Math.max(0, f - 0.5) * 0.6));
+      mob.group.scale.setScalar(T.scale * (mob.boss ? 1 : MOB_VIS) * (1 - Math.max(0, f - 0.5) * 0.6));
       fade(1 - Math.max(0, (f - 0.6) / 0.4));
     } else if (style === 'dissolve') {
       mob.group.position.y = mob.z + f * 1.2 * T.scale;

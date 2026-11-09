@@ -115,7 +115,16 @@ const EMIT = `
   }
 `;
 
-function makeMat() {
+// session 62: game-mode roof cutaway for the market stall canopies (third-person camera). Stall meshes get a second
+// program that discards fragments above the player's head inside a disc around the player (zoneCut = x, y_cut, z, r in
+// the three.js frame); r = 0 (exploration mode, first person) never discards, so the image there is unchanged.
+export const zoneCut = { value: new THREE.Vector4(0, 0, 0, 0) };
+window.__zoneCut = zoneCut;   // debug hook
+const CUT = `
+  if (zCut.w > 0.0 && zWP.y > zCut.y && length(zWP.xz - zCut.xz) < zCut.w + 0.6 * zn(zWP.xz * 1.3)) discard;
+`;
+
+function makeMat(cut = false) {
   if (Q.get('zmat') === '0') return new THREE.MeshLambertMaterial({ color: 0xffffff, vertexColors: true });
   const m = new THREE.MeshPhongMaterial({ color: 0xffffff, vertexColors: true, specular: 0xffffff, shininess: 30 });
   m.onBeforeCompile = sh => {
@@ -124,15 +133,21 @@ function makeMat() {
       .replace('#include <worldpos_vertex>', `#include <worldpos_vertex>
         zWP = (modelMatrix * vec4(transformed, 1.0)).xyz; zWN = normalize(mat3(modelMatrix) * objectNormal); zMat = _mat;`);
     sh.fragmentShader = sh.fragmentShader
-      .replace('#include <common>', '#include <common>\n' + PARS)
-      .replace('#include <color_fragment>', '#include <color_fragment>\n' + COLOR)
+      .replace('#include <common>', '#include <common>\n' + PARS + (cut ? 'uniform vec4 zCut;\n' : ''))
+      .replace('#include <color_fragment>', (cut ? CUT : '') + '#include <color_fragment>\n' + COLOR)
       .replace('#include <lights_phong_fragment>', '#include <lights_phong_fragment>\n' + LIGHTS)
       .replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\n' + EMIT);
   };
-  m.customProgramCacheKey = () => 'wc_zone_mat2';
+  m.customProgramCacheKey = () => cut ? 'wc_zone_mat2cut' : 'wc_zone_mat2';
+  if (cut) {
+    const ob = m.onBeforeCompile;
+    m.onBeforeCompile = sh => { sh.uniforms.zCut = zoneCut; ob(sh); };
+  }
   return m;
 }
 export const zoneMat = makeMat();
+export const zoneMatCut = makeMat(true);
+const isStall = o => /^market_stalls/.test(o.name) || /^market_stalls/.test(o.parent?.name || '');   // GLTFLoader strips the ':' and '/'
 
 export async function loadZone(base, scene) {
   window.__zoneReady = false;
@@ -147,7 +162,7 @@ export async function loadZone(base, scene) {
     root.traverse(o => {
       if (!o.isMesh) return;
       o.material?.dispose?.();
-      o.material = zoneMat;
+      o.material = isStall(o) ? zoneMatCut : zoneMat;
       const g = o.geometry;
       if (!g.getAttribute('_mat')) {   // older GLBs without material ids: everything plain
         g.setAttribute('_mat', new THREE.BufferAttribute(new Float32Array(g.getAttribute('position').count), 1));

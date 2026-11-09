@@ -7,8 +7,8 @@ aisled nave with a clerestory, transepts, a chancel, embattled parapets over low
 three/four-light Perpendicular windows between buttresses, and a west tower with a belfry stage, battlements, corner
 pinnacles and a short lead spire.
 
-Heights come from the LiDAR DSM (data/lidar/dsm_1m.tif) sampled along each footprint edge 1.5 m inside the wall
-(aisle parapets ~6 m, nave / transepts / chancel ~10.6 m above Z0 = 8.8). The DSM peak (33.6 m) sits over the west
+Heights come from the LiDAR DSM (data/lidar/dsm_1m.tif), read on a grid over the footprint in s62 (aisle parapets ~6 m,
+nave / transepts / chancel ~10.6 m above Z0 = 8.8); each wall takes the height of the roof region behind it. The DSM peak (33.6 m) sits over the west
 end at about (-26.6, 122.5): tower ~5.4 m square, battlements at 17.4 m, spire tip 24.8 m. The model keeps the OSM
 outline (tile collision); the tower is set into the west end of the nave.
 """
@@ -36,17 +36,6 @@ Z_TW, Z_SPIRE = 17.4, 24.8
 DOORS = {9: 0.45}   # edge index -> door position (fraction along): west door on Market Street side of the tower
 
 
-def _dsm():
-    try:
-        import rasterio
-        r = rasterio.open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data/lidar/dsm_1m.tif"))
-        a = r.read(1)
-        E0, N0 = 545000.0, 258400.0
-        return lambda x, y: float(a[r.index(x + E0, y + N0)])
-    except Exception:
-        return None
-
-
 def build(walls=None):
     pal = Pal("#cdbf9f", "#ddd2b6", "#7d8387")
     pts = [np.asarray(p, float) for p in PTS]
@@ -55,9 +44,17 @@ def build(walls=None):
         pts = pts[::-1]
     U = (np.asarray(PTS[11]) - np.asarray(PTS[10]))
     C = Church("holytrinity", PTS[9], U, Z0, pal)
-    dsm = _dsm()
-    tower = Polygon([C.w(s, t) for s, t in ((-0.3, 5.4), (TOWER_W - 0.3, 5.4), (TOWER_W - 0.3, 5.4 + TOWER_W),
-                                            (-0.3, 5.4 + TOWER_W))])
+    # roof regions (local s, t; DSM grid checked in s62): the nave band T_S..T_N between the tower and the crossing
+    # (s 12.2) is high (clerestory); the transepts and chancel east of the crossing are high, and so is the south
+    # transept's west bay (s 8.8-12.2, t < T_S); the aisles either side of the nave and the tower's flanks are low
+    loc = [tuple(np.linalg.solve(np.c_[C.U, C.V], np.asarray(p) - C.O)) for p in PTS]
+    lpoly = Polygon(loc)
+    T_S, T_N = 4.2, 14.2          # nave clerestory band (aisles are t < 4.2 and t > 14.2 west of the transepts)
+    S_X = loc[11][0]              # crossing / north transept west wall (12.2)
+    S_ST = loc[7][0]              # south transept west wall (8.8)
+    high = unary_union([lpoly.intersection(box(TOWER_W - 0.3, T_S, S_X + 0.01, T_N)),
+                        lpoly.intersection(box(S_X, -5, 60, 40)), lpoly.intersection(box(S_ST, -5, S_X + 0.01, T_S))])
+    low = lpoly.difference(high)
     n = len(pts)
     edges = []
     for i in range(n):
@@ -65,13 +62,10 @@ def build(walls=None):
         L = float(np.linalg.norm(b - a))
         d = (b - a) / L
         inn = np.array([-d[1], d[0]])        # left of a counter-clockwise walk = inside
-        hs = []
-        for f in np.linspace(0.15, 0.85, 7):
-            p = a + d * L * f + inn * 1.5
-            if dsm and not tower.contains(Point(*p)):
-                hs.append(dsm(*p) - Z0)
-        h = float(np.median(hs)) if hs else 6.0
-        h = 10.6 if h > 8.0 else 6.0
+        # s62: wall height follows the roof region behind it (1 m inside the midpoint), so no lead flat overhangs a
+        # lower wall; per-edge DSM medians misread the short transept walls and the tree-shaded north transept end
+        m = a + d * L / 2 + inn * 1.0
+        h = 10.6 if high.contains(Point(*np.linalg.solve(np.c_[C.U, C.V], m - C.O))) else 6.0
         edges.append((a, b, L, h))
     # walls: Perpendicular windows between buttresses, embattled parapet
     for i, (a, b, L, h) in enumerate(edges):
@@ -105,14 +99,7 @@ def build(walls=None):
               "w%d" % i)
     # clerestory: the nave / transept / chancel core is the footprint minus the low aisle strips; its walls stand on
     # the boundary between the two roof levels, with windows, and carry a parapet at 10.6
-    loc = [tuple(np.linalg.solve(np.c_[C.U, C.V], np.asarray(p) - C.O)) for p in PTS]
-    lpoly = Polygon(loc)
-    T_S, T_N = 4.2, 14.2          # nave clerestory band (aisles are t < 4.2 and t > 14.2 west of the transepts)
-    s_tr = min(p[0] for p in loc if p[1] > 19.5 or p[1] < -0.5) if any(p[1] > 19.5 or p[1] < -0.5 for p in loc) else 13
-    s_tr = 8.6 if not (5 < s_tr < 14) else s_tr
-    high = unary_union([lpoly.intersection(box(-1, T_S, s_tr + 0.01, T_N)), lpoly.intersection(box(s_tr, -5, 60, 40))])
-    low = lpoly.difference(high)
-    for t, (A, B) in ((T_S, ((TOWER_W - 0.3, T_S), (s_tr, T_S))), (T_N, ((s_tr, T_N), (TOWER_W - 0.3, T_N)))):
+    for t, (A, B) in ((T_S, ((TOWER_W - 0.3, T_S), (S_ST, T_S))), (T_N, ((S_X, T_N), (TOWER_W - 0.3, T_N)))):
         P = C.P()
         L = abs(B[0] - A[0])
         holes = [window(P, pal, x, 1.6, 6.6, 9.0, 3) for x in np.arange(1.2, L - 0.8, 2.6)]
@@ -120,6 +107,14 @@ def build(walls=None):
         P.face_xz(g, Y, pal.wall, mat="stone")
         parapet(P, pal, -0.1, L + 0.1, 9.7, 10.6, embattled=True)
         C.put(P, A, B, "clere%d" % int(t))
+    # s62: clerestory west ends either side of the tower (nave roof edge above the aisle roofs)
+    for A, B in (((TOWER_W - 0.3, T_S), (TOWER_W - 0.3, 5.4)), ((TOWER_W - 0.3, 5.4 + TOWER_W), (TOWER_W - 0.3, T_N)),
+                 ((S_ST, loc[8][1]), (S_ST, T_S)), ((S_X, T_N), (S_X, loc[11][1]))):   # + transept west walls over the aisles
+        P = C.P()
+        L = math.dist(A, B)
+        P.face_xz(box(-0.05, 5.0, L + 0.05, 9.7), Y, pal.wall, mat="stone")
+        parapet(P, pal, -0.1, L + 0.1, 9.7, 10.6, embattled=True)
+        C.put(P, B, A, "clerew%d_%d" % (int(A[0]), int(A[1])))
     # roofs: low-pitched lead, laid flat just under the parapet tops (the pitch is hidden behind the battlements)
     for g, z in ((low, 5.2), (high, 9.8)):
         for part in getattr(g, "geoms", [g]):
@@ -137,7 +132,7 @@ def build(walls=None):
         L = math.dist(A, B)
         P = C.P()
         holes = [window(P, pal, L / 2, 1.7, 12.0, 15.2, 2, louvre=True)]
-        zlow = 0.0 if i == 0 else 10.2
+        zlow = (0.0, 5.0, 9.6, 5.0)[i]    # s62: down to the aisle roofs (5.2) N/S, the nave roof (9.8) E
         if i == 0:
             holes.append(window(P, pal, L / 2, 1.6, 6.2, 9.4, 3))
         g = box(-0.08, zlow, L + 0.08, zb0).difference(unary_union(holes))
@@ -157,7 +152,7 @@ def build(walls=None):
     tris = [[(*ring[k], zs), (*ring[(k + 1) % 8], zs), apex] for k in range(8)]
     C.out.append({"name": "holytrinity:spire", "tris": np.asarray(tris), "col": np.asarray([F.shade(LEAD, 0.95)] * 8),
                   "mat": "plain"})
-    # s61: tower roof flat removed: the tower walls do not render yet (TODO), and the flat alone showed as a floating slab
+    C.flat(s0, s1, t0, t1, zb0 - 0.05)   # tower roof under the spire (s62: walls do render; the s61 slab was the nave roof)
     return C.done()
 
 

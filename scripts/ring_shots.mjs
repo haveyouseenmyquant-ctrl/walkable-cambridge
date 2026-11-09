@@ -33,9 +33,9 @@ const browser = await puppeteer.launch({
   defaultViewport: { width: 1280, height: 720 },
 });
 try {
-  const page = await browser.newPage();
+  const page = await browser.newPage(); page.on('console', m => { if (m.type() === 'error' || m.type() === 'warning') console.error('[page]', m.text()); }); page.on('pageerror', e => console.error('[pageerror]', e.message));
   await page.goto(`http://127.0.0.1:${server.address().port}/?debug&explore`, { waitUntil: 'domcontentloaded' });
-  await page.waitForFunction('window.__walkReady === true', { timeout: 60000 });
+  await page.waitForFunction('window.__walkReady === true', { timeout: 180000 });
   // eye-level views: --views JSON [{name, pos:[E,N,z], at:[E,N,z]}], --out prefix
   const vi = argv.indexOf('--views');
   const views = JSON.parse(fs.readFileSync(argv[vi + 1]));
