@@ -1831,3 +1831,23 @@ Next
 1. Read the 5-run scores for the new build: did stormcaller pass, the kill-time spread after the s61 rebalance, and gameplay_judged with the cutaway.
 2. Fix the ring-1 facade KPI so it counts bespoke elements, as zone_kpi does for the square.
 3. Ring 1: more bespoke landmarks or frontages (Sidney St, Trinity St shopfronts); new non-held-out annotation photos.
+
+## 2026-11-09 — Session 63: Round Church (ring 1/2 edge); publish now scores the game KPIs before going live
+
+- Why the game KPIs kept reading 0: every session published with WC_SKIP_GAME_KPI=1, or called game_kpi.sh while service.sh
+  held /tmp/wc_game_kpi.lock. In that case game_kpi.sh returns {} at once, so the new live hash went out unscored, and scoring
+  takes about 15-30 min under load. publish.sh now waits for the lock (up to 45 min) and scores the new build *before* the
+  push. If a session is cut short, nothing is pushed and the old live build keeps its scores.
+- Ring fork: **Round Church** (Holy Sepulchre, way/92878394, Bridge St; about 370 m from GSM, on the ring 1/2 edge),
+  scripts/zone_bespoke_roundchurch.py. It has a circular ambulatory with Norman windows, pilasters and a west door with
+  three recessed arches, a ring roof, a drum with a clerestory, and a cone with heights from the DSM (15.4 m). The east
+  chancel and north aisle have gables, and there is a north-west annex. About 11k tris.
+  docs/screens/session63_ring_{before,after}_rc_{bridgest,sw}.jpg. Before, it was a textured drum with a floating slab.
+  The lead-grey roof colour is unverified, and the LiDAR cone peak sits about 3 m south-west of the OSM centroid (OSM was kept).
+- Publish (world-20261109-…) runs in the background at session end. It waits for cc7ca0fc's scoring, then scores the new
+  build, then pushes.
+
+Next
+1. Check that the new live hash has _game.json, and read per_class and the kill-time spread after the s61 rebalance.
+2. Ring-1 facade KPI: count bespoke elements, as zone_kpi does.
+3. Make the playtest faster (load 45-60 slows a run from 170 to 480 s of wall time), or key the game scores to the game inputs.
