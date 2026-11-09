@@ -15,9 +15,16 @@ for f in $(find site/app -name '*.js'); do cp "$f" /tmp/wc_check.mjs; node --che
 # live build goes out unscored (measure.sh then reads 0 for all six game KPIs until service.sh catches up)
 [ -n "${WC_SKIP_GAME_KPI:-}" ] || for _ in $(seq 270); do [ -d /tmp/wc_game_kpi.lock ] || break; sleep 10; done
 [ -n "${WC_SKIP_GAME_KPI:-}" ] || scripts/game_kpi.sh || echo "game_kpi.sh failed (service.sh retries for the live hash)"
+# session 66: market_square_realism (main realism KPI) for the new build too, alongside the gameplay clip: sessions run
+# back to back and service.sh pauses renders while one is active, so live builds were going out with no realism score
+MSP=
+if [ -z "${WC_SKIP_MS_BENCH:-}" ] && [ -f data/benchmark/market_square.json ]; then
+  scripts/ms_bench.sh site > /tmp/wc_publish_ms.log 2>&1 & MSP=$!
+fi
 # session 64: gameplay_judged too (12-frame clip per class + judge), else measure.sh reads it as 0 until service.sh catches up
 [ -n "${WC_SKIP_GAME_KPI:-}" ] || for _ in $(seq 180); do [ -d /tmp/wc_gameplay_kpi.lock ] || break; sleep 10; done
 [ -n "${WC_SKIP_GAME_KPI:-}" ] || scripts/gameplay_kpi.sh || echo "gameplay_kpi.sh failed (service.sh retries for the live hash)"
+[ -n "$MSP" ] && { wait $MSP && tail -n1 /tmp/wc_publish_ms.log || echo "ms_bench.sh failed (service.sh retries): $(tail -n2 /tmp/wc_publish_ms.log)"; }
 # session 65: never push a build whose game layer is broken (game KPIs scored but mob_types 0)
 if [ -z "${WC_SKIP_GAME_KPI:-}" ]; then
   GK=data/benchmark/scores/$(.venv/bin/python -I scripts/build_hash.py site)_game.json

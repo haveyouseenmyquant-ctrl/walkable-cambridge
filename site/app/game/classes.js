@@ -15,6 +15,8 @@ export const STARTING_GEAR = {
 
 export const CLASSES = {
   pyromancer: {
+    // session 66: bossMult = spell damage vs bosses (s65 kill times: pyro 7.6 s vs all-class median 11.3 s, spread 33%)
+    bossMult: 0.86,
     name: 'Pyromancer', color: '#ff7a2a', blurb: 'Fire and burst damage. Burns linger, explosions stack.',
     spells: [
       { id: 'ember_bolt', name: 'Ember Bolt', glyph: '✦', kind: 'bolt', type: 'fire', mana: 5, cd: 0.45, dmg: 16, speed: 48, range: 60, splash: 1.2, color: 0xff7a2a, sfx: 'ember', look: 'ember' },
@@ -175,6 +177,7 @@ export function install(game) {
   const dots = [], cursed = new Set();
   function hit(m, sp, mult = 1, ox, oy) {
     if (!m || m.dead) return 0;
+    if (m.boss) mult *= CLASSES[caster.cls]?.bossMult ?? 1;
     const dealt = game.damageMob(m, (sp.dmg || 0) * mult, { type: sp.type, spell: sp.id, source: 'player' });
     status(m, sp, ox, oy);
     if (sp.drain && dealt) game.heal(dealt * sp.drain);
@@ -382,7 +385,7 @@ export function install(game) {
       if (d.m.dead || t > d.until) { dots[i] = dots[dots.length - 1]; dots.pop(); continue; }
       if (t >= d.next) {
         d.next += 0.5;
-        const dealt = game.damageMob(d.m, d.dps * 0.5, { type: d.type, spell: d.sp, source: 'player', crit: false, noProc: true });
+        const dealt = game.damageMob(d.m, d.dps * 0.5 * (d.m.boss ? CLASSES[caster.cls]?.bossMult ?? 1 : 1), { type: d.type, spell: d.sp, source: 'player', crit: false, noProc: true });
         if (d.drain && dealt) game.heal(dealt * d.drain);
         const dz = d.m.z + mobH(d.m) * 0.6;
         if (d.type === 'fire') { vfx.burst(d.m.x, d.m.y, dz, 4, { ...FIRE, speed: 0.6, size: 0.6, life: 0.45, up: 2, jitter: 0.6 }); vfx.burst(d.m.x, d.m.y, dz + 0.4, 1, { ...SMOKE, speed: 0.3, size: 0.8, life: 1, up: 1.2, alpha: 0.35 }); }

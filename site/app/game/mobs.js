@@ -2,7 +2,7 @@
 // Frames: collision x east, y north, z up; three.js position = (x, z, -y). Models face local +Z (yaw = atan2(dx, -dy)).
 // Encounter data lives in encounters.json (read by tooling too). Honours mob.slowUntil / mob.stunUntil / mob.damageTaken.
 import * as THREE from 'three';
-import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+import { mergeGeometries, mergeVertices } from 'three/addons/utils/BufferGeometryUtils.js';
 
 export const ENCOUNTERS = [];
 const SPAWN_R = 120, DESPAWN_R = 200, RESPAWN_S = 45, BOSS_RESPAWN_S = 150, MAX_LIVE = 32;
@@ -129,7 +129,7 @@ const BASE = {
 };
 // session 48: fresnel rim light (emissive, type-coloured) injected into the standard shader; one shared program
 const hash01 = (str) => { let h = 2166136261; for (let i = 0; i < str.length; i++) h = Math.imul(h ^ str.charCodeAt(i), 16777619); return ((h >>> 0) % 10007) / 10007; };
-const MOB_VIS = 1.3;
+const MOB_VIS = 1.45;   // s66: 1.3 -> 1.45 (judge: 'small figures, hard to read')
 function addRim(mat, color, k) {
   const u = { uRim: { value: new THREE.Color(color).multiplyScalar(k) } };
   mat.userData.rim = u.uRim; mat.userData.rimBase = u.uRim.value.clone();
@@ -141,6 +141,51 @@ function addRim(mat, color, k) {
   mat.customProgramCacheKey = () => 'mobrim';
 }
 const decalMat = (c) => new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: 0.5, depthWrite: false, side: THREE.DoubleSide, polygonOffset: true, polygonOffsetFactor: -4 });
+// session 66: ink outline shell (inverted hull) on the bigger parts of regular mobs, so the silhouette reads against
+// the busy stalls and stone (judge: 'crude low-poly primitives, small, hard to read'). The hull is pushed out along
+// smoothed normals (welded copy of each shared kit geometry, cached) so flat-shaded parts get an unbroken line.
+// One material per type colour; back faces only, so it costs one extra draw per outlined part.
+const OUTLINE_W = 0.03, OUTLINE_MIN_R = 0.14;
+const _hulls = new WeakMap(), _outlineMats = new Map();
+function hullGeo(g) {
+  let h = _hulls.get(g);
+  if (h === undefined) {
+    h = null;
+    if (g.attributes.position) {
+      const c = new THREE.BufferGeometry(); c.setAttribute('position', g.attributes.position.clone());
+      if (g.index) c.setIndex(g.index.clone());
+      h = mergeVertices(c, 1e-4); h.computeVertexNormals(); h.computeBoundingSphere(); c.dispose();
+    }
+    _hulls.set(g, h);
+  }
+  return h;
+}
+function outlineMat(color) {
+  let m = _outlineMats.get(color);
+  if (!m) {
+    const c = new THREE.Color(color).multiplyScalar(0.22);
+    m = new THREE.ShaderMaterial({
+      uniforms: { uColor: { value: c }, uW: { value: OUTLINE_W } }, side: THREE.BackSide, fog: false,
+      vertexShader: 'uniform float uW; void main() { vec4 mv = modelViewMatrix * vec4(position, 1.0); vec3 n = normalize(normalMatrix * normal);' +
+        ' mv.xyz += n * uW * clamp(-mv.z * 0.06, 1.0, 3.0); gl_Position = projectionMatrix * mv; }',   // view-space push, thickens a little with distance
+      fragmentShader: 'uniform vec3 uColor; void main() { gl_FragColor = vec4(uColor, 1.0); }',
+    });
+    _outlineMats.set(color, m);
+  }
+  return m;
+}
+function addOutlines(group, color) {
+  const mat = outlineMat(color), list = [];
+  group.traverse(o => {
+    if (!o.isMesh || o.userData.outline) return;
+    const mm = o.material; if (!mm || mm.transparent || mm.emissiveIntensity >= 1 || mm.side === THREE.DoubleSide) return;
+    if (!o.geometry.boundingSphere) o.geometry.computeBoundingSphere();
+    if (o.geometry.boundingSphere.radius < OUTLINE_MIN_R) return;
+    const h = hullGeo(o.geometry); if (!h) return;
+    list.push([o, h]);
+  });
+  for (const [o, h] of list) { const s = new THREE.Mesh(h, mat); s.userData.outline = true; s.castShadow = false; s.receiveShadow = false; o.add(s); }
+}
 const HIT_TINT = new THREE.Color(0xffd8b0), _white = new THREE.Color(0xffffff);
 const TELE_COLOR = 0xff2a10;   // session 52: the one danger colour for every mob / boss telegraph
 // session 46: soft type-coloured ground aura under every mob (reads as a glow pool in still frames; shared per type)
@@ -995,6 +1040,7 @@ class MobSystem {
       return c;
     };
     const { group, parts } = MODELS[type.id](m);
+    if (!type.boss) addOutlines(group, type.color);
     // session 46: a 'rig' group between the yawed root and the model takes the shared body-language layer
     // (breathing, gait bob, wind-up crouch, strike lunge, hit flinch, death poses) on top of the per-type part animation
     const rig = new THREE.Group(); rig.name = 'rig'; while (group.children.length) rig.add(group.children[0]); group.add(rig);
@@ -1505,7 +1551,10 @@ class MobSystem {
     mob.deathT += dt; let f = Math.min(1, mob.deathT / dur);
     if (T.deathDur) { this.animateDeath(mob, Math.min(1, f / 0.6)); f = Math.max(0, (f - 0.55) / 0.45); }
     else if (mob.parts) this.animateDeath(mob, f);   // session 50: per-type regular death poses under the shared style
-    const fade = (a) => { for (const c of mob.mats) { c.transparent = true; c.opacity = Math.max(0, a); } };
+    const fade = (a) => {
+      if (a < 0.98 && !mob.outlinesOff) { mob.outlinesOff = true; mob.group.traverse(o => { if (o.userData.outline) o.visible = false; }); }   // s66: the ink shell can't fade
+      for (const c of mob.mats) { c.transparent = true; c.opacity = Math.max(0, a); }
+    };
     if (mob.aura) mob.aura.material.opacity = 0.5 * (1 - f);
     if (style === 'crumble') {
       if (R && !T.deathDur) { R.rotation.x = Math.min(1.25, f * f * 2.2); R.rotation.z = Math.sin(mob.id) * 0.3 * f; }
