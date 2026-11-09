@@ -5,6 +5,7 @@ import { TileManager } from './tiles.js';
 import { Player } from './player.js';
 import { Avatar } from './avatar.js';
 import { loadZone } from './zone.js';
+import { GrassField } from './grass.js';
 import { Minimap, renderTileMap, initLandmarks, mergeLandmarks, initOverlays } from './ui.js';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
@@ -111,6 +112,8 @@ async function main() {
   });
 
   player.canPlace = (x, y) => tiles.settled(x, y);
+  const grass = new GrassField(world);   // session 46: blade field over lawns near the camera (off on quality=low)
+  if (grass.mesh) scene.add(grass.mesh);
   // detailed facade zone (site/zone/zone.json, optional; ?zone=0 off): streamed in once the spawn tiles are walkable
   // (session 34), so its download/parse doesn't hold up the collision tiles
   window.__zoneReady = false;

@@ -11,6 +11,9 @@ OSM trees win: LiDAR tops within an OSM tree's crown are dropped; OSM trees take
 from the CHM around them.
 Output: <out>/trees/<tile>.bin, float32 records [x, y, z_ground, height, crown_r, seed] (collision frame, FORMAT.md);
 manifest tiles get "trees": "trees/<tile>.bin" and "ntrees".
+Session 46: OSM barrier=hedge ways, cut into <= 2 m segments: <out>/trees/<tile>.hedge.bin, float32 records
+[x0, y0, z0, x1, y1, z1, height, width] (collision frame; z = DTM ground), manifest "hedges" / "nhedges".
+Height / width from the tags, else 1.6 m / 1.0 m.
 """
 import json, os, sys
 import numpy as np
@@ -38,7 +41,7 @@ def main():
     pen = uniform_filter(np.where(ok, F - LAST, 0).clip(0, 10), 5)
 
     nodes, ways, rels, pnodes = B.load_osm()
-    blds, water, osm_trees = [], [], []
+    blds, water, osm_trees, hedges = [], [], [], []
     for w in ways.values():
         t = w.get("tags", {})
         if "building" in t and t["building"] != "no":
@@ -47,6 +50,9 @@ def main():
         if t.get("natural") == "water" or t.get("waterway") == "riverbank":
             g = B.way_area(w, nodes)
             if g is not None: water.append(g)
+        if t.get("barrier") == "hedge":
+            c = B.coords(w, nodes)
+            if c and len(c) >= 2: hedges.append((c, t))
         if t.get("natural") == "tree_row":   # one tree every 8 m along the row
             c = B.coords(w, nodes)
             if c and len(c) >= 2:
@@ -126,6 +132,32 @@ def main():
             p = "trees/%s.bin" % tile["id"]
             rec[sel].tofile(os.path.join(OUT, p))
             tile["trees"], tile["ntrees"] = p, int(sel.sum()); total += int(sel.sum())
+    # hedges: <= 2 m segments with ground heights at both ends
+    seg = []
+    for c, t in hedges:
+        hh = float(np.clip(num(t.get("height")) or 1.6, 0.6, 4.0)); ww = float(np.clip(num(t.get("width")) or 1.0, 0.5, 3.0))
+        for (xa, ya), (xb, yb) in zip(c[:-1], c[1:]):
+            k = max(1, int(np.ceil(np.hypot(xb - xa, yb - ya) / 2.0)))
+            for i in range(k):
+                seg.append((xa + (xb - xa) * i / k, ya + (yb - ya) * i / k, xa + (xb - xa) * (i + 1) / k, ya + (yb - ya) * (i + 1) / k, hh, ww))
+    seg = np.array(seg, np.float64).reshape(-1, 6)
+    def ground(e, n):
+        r = ((n - tf.f) / tf.e).astype(int).clip(0, shp[0] - 1); c = ((e - tf.c) / tf.a).astype(int).clip(0, shp[1] - 1)
+        return DTM[r, c]
+    z0, z1 = ground(seg[:, 0], seg[:, 1]), ground(seg[:, 2], seg[:, 3])
+    hx0, hy0, hx1, hy1 = seg[:, 0] - B.E0, seg[:, 1] - B.N0, seg[:, 2] - B.E0, seg[:, 3] - B.N0
+    hrec = np.stack([hx0, hy0, z0, hx1, hy1, z1, seg[:, 4], seg[:, 5]], 1).astype(np.float32)
+    mx, my = (hx0 + hx1) / 2, (hy0 + hy1) / 2
+    nh = 0
+    for tile in man["tiles"]:
+        x0, y0, x1, y1 = tile["bounds"]
+        sel = (mx >= x0) & (mx < x1) & (my >= y0) & (my < y1) & (z0 > -100) & (z1 > -100)
+        tile.pop("hedges", None); tile.pop("nhedges", None)
+        if sel.any():
+            p = "trees/%s.hedge.bin" % tile["id"]
+            hrec[sel].tofile(os.path.join(OUT, p))
+            tile["hedges"], tile["nhedges"] = p, int(sel.sum()); nh += int(sel.sum())
+    print("hedge segments", nh, "from", len(hedges), "ways", flush=True)
     json.dump(man, open(man_p, "w"), separators=(",", ":"))
     print("trees written", total, "(osm", len(osm_trees), ")", flush=True)
 

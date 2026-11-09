@@ -80,6 +80,15 @@ vec3 settPave(vec2 gp, float px) {
   col = mix(col, vec3(0.07, 0.065, 0.06), joint(e, 0.006, px) * 0.85);
   return mix(col, vec3(0.19, 0.18, 0.17) * (0.85 + 0.3 * vnoise(gp * 0.5)), smoothstep(0.03, 0.09, px));
 }
+// Session 46: lawn colour on top of the grass texture (two scales, so it doesn't tile): patchy hue / wear at
+// 3-15 m and faint 1.5 m mowing stripes, which fade once a stripe is under ~4 px; returns a multiplier
+vec3 grassLawn(vec2 gp, float px, vec3 tex) {
+  float n1 = vnoise(gp * 0.07), n2 = vnoise(gp * 0.31 + 4.0);
+  vec3 m = tex * mix(vec3(0.86, 0.9, 0.84), vec3(1.12, 1.06, 0.86), n1) * (0.9 + 0.2 * n2);
+  float stripe = step(0.5, fract(gp.x / 3.0 + 0.04 * sin(gp.y * 0.05)));
+  m *= mix(1.0, mix(0.93, 1.06, stripe), 1.0 - smoothstep(0.2, 0.6, px));
+  return m;
+}
 // rectangular slabs 600 x 900 mm in offset courses; returns a multiplier on the class colour
 vec3 slabPave(vec2 gp, float px) {
   float row = floor(gp.y / 0.6);
@@ -112,7 +121,7 @@ const groundFrag = `
   if (wsum > 0.02) {
     vec3 base = diffuseColor.rgb, acc = vec3(0.0);
     if (wr > 0.01) acc += wr * base * lumDetail(detail(t_road, gp / ${sizes.road}));
-    if (wg > 0.01) acc += wg * base * lumDetail(detail(t_grass, gp / ${sizes.grass}));
+    if (wg > 0.01) acc += wg * base * grassLawn(gp, px, lumDetail(detail(t_grass, gp / ${sizes.grass})) * lumDetail(detail(t_grass, gp / ${sizes.grass} * 0.23 + 0.37)));
     if (we > 0.01) acc += we * base * lumDetail(detail(t_earth, gp / ${sizes.earth}));
     if (wp > 0.01) acc += wp * base * slabPave(gp, px);
     if (wc > 0.01) acc += wc * settPave(gp, px) * 1.05;

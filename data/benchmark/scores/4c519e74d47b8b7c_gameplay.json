@@ -1,0 +1,68 @@
+{
+ "gameplay_judged": 28.6,
+ "n": 4,
+ "model": "claude-opus-5-5",
+ "hash": "4c519e74d47b8b7c",
+ "classes": {
+  "hexweaver": {
+   "score": 2.57,
+   "readability_telegraphs": 3.0,
+   "spell_vfx": 3.0,
+   "enemy_animation_variety": 2.0,
+   "hit_feedback": 3.0,
+   "ui_hud_clarity": 4.0,
+   "loot_excitement": 1.0,
+   "polished_arpg_feel": 2.0,
+   "overall": 2.5
+  },
+  "pyromancer": {
+   "score": 3.14,
+   "readability_telegraphs": 3.0,
+   "spell_vfx": 3.0,
+   "enemy_animation_variety": 2.0,
+   "hit_feedback": 4.0,
+   "ui_hud_clarity": 5.0,
+   "loot_excitement": 2.0,
+   "polished_arpg_feel": 3.0,
+   "overall": 3
+  },
+  "stormcaller": {
+   "score": 3.14,
+   "readability_telegraphs": 3.0,
+   "spell_vfx": 2.0,
+   "enemy_animation_variety": 3.0,
+   "hit_feedback": 3.0,
+   "ui_hud_clarity": 5.0,
+   "loot_excitement": 4.0,
+   "polished_arpg_feel": 2.0,
+   "overall": 3
+  },
+  "warden": {
+   "score": 2.57,
+   "readability_telegraphs": 3.0,
+   "spell_vfx": 3.0,
+   "enemy_animation_variety": 2.0,
+   "hit_feedback": 3.0,
+   "ui_hud_clarity": 4.0,
+   "loot_excitement": 1.0,
+   "polished_arpg_feel": 2.0,
+   "overall": 2.5
+  }
+ },
+ "by_criterion": {
+  "readability_telegraphs": 3.0,
+  "spell_vfx": 2.75,
+  "enemy_animation_variety": 2.25,
+  "hit_feedback": 3.25,
+  "ui_hud_clarity": 4.5,
+  "loot_excitement": 2.0,
+  "polished_arpg_feel": 2.25
+ },
+ "reasons": {
+  "hexweaver": "The HUD is tidy, with health and mana bars, a cooldown spell bar, a minimap and floating damage and crit numbers. The bellwarden boss has a ground ring and a red windup marker. Weaknesses: half the clip has no enemies, the spell effects are flat flat-shaded spheres and cones that cover the screen, the enemies are simple primitive models, and none of the 12 loot drops shows a visible beam, rarity colour or pickup toast.",
+  "pyromancer": "The HUD works: it has clear HP/mana/XP bars, a numbered spell bar with cooldown timers and a minimap, and the bellwarden boss explosion plus floating crit numbers ('43!') give some punch. Most spell effects are flat orange discs, big blocky 2D sprites or untextured red wedges that block the view, and enemies are simple primitive-built models. There's no visible telegraph, loot beam, rarity colour or pickup toast, and half the clip is empty street with no combat.",
+  "stormcaller": "In frame 2 there is a red ground marker under the boss wind-up, the boss is a big, readable bell golem, and loot shows up as rarity-coloured toasts and vertical light beams. The HUD is clean, with health and mana bars and a numbered spell bar that shows cooldowns. Spell effects are close to invisible: 32 spark lances produce only small glows, and the hits show plain numbers with no flash or impact. Half the clip has no enemies at all, the camera often clips into stall geometry and shows dark walls, and the visuals overall are basic primitives.",
+  "warden": "The HUD is clean and readable: HP/mana bars, a numbered spell bar with cooldown timers and a minimap. The boss wind-up shows red line telegraphs, and crits get large yellow damage numbers. Weaknesses: half the clip shows empty streets with no combat, enemies are simple primitive or static models, and the spell VFX are flat translucent shapes. The log shows 8 drops but no frame shows a loot beam, rarity colour or pickup toast."
+ },
+ "note": "session 46: recorded on a snapshot of the live 4c519e app code; snapshot hash 2128efd137660802 differed only by a regenerated cityfac/index.json (same geometry)"
+}

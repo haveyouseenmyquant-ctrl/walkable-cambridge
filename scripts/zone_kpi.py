@@ -2,7 +2,11 @@
 
     .venv/bin/python -I scripts/zone_kpi.py [site_dir]
 
-Walls: data/annotations/market_square/walls.json (street-facing walls within 90 m of 52.2053N 0.1190E).
+Walls: data/annotations/market_square/walls.json (walls within 90 m of 52.2053N 0.1190E that face a walk sample),
+filtered to STREET-FACING walls by zone_walls.faces_street (session 46, the KPI's written definition): length >= 3 m,
+the outward normal reaches a PUBLIC walkable way (not access/foot=private/no) within 25 m before crossing any other
+footprint (no party walls, no walls behind a neighbour). Gated college courts, private yards and stubs < 3 m no
+longer count; the full list is still built. painted_detail_pct still runs over the full list.
 - facade_geometry_match_pct: per wall, agreement between the annotation (data/annotations/market_square/way_*.json,
   made from non-held-out photos) and the 3D elements the build actually emitted (site/zone/zone.json "walls"):
   mean over [window, door, shopfront, dormer] (storeys not yet counted separately) of min(model, annot) / max(model, annot) (1 if both 0).
@@ -20,6 +24,9 @@ import sys
 
 import numpy as np
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import zone_walls as ZW  # noqa: E402
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, "site")
 A = os.path.join(ROOT, "data/annotations/market_square")
@@ -29,6 +36,7 @@ SKIP = [(-102.9, 57.4, 100.0), (-213.3, 80.3, 20.0)]   # keep in step with site/
 
 def main():
     walls = json.load(open(os.path.join(A, "walls.json")))["walls"]
+    street = ZW.street_facing_ids(walls)
     ann = {}
     for f in glob.glob(os.path.join(A, "way_*.json")):
         try:
@@ -66,13 +74,15 @@ def main():
             mc = m.get("counts", {})
             parts = [(ac[t], mc.get(t, 0)) for t in TYPES]
             score = float(np.mean([1.0 if x == y == 0 else min(x, y) / max(x, y) for x, y in parts]))
-        num += score * L; den += L
+        if w["id"] in street:
+            num += score * L; den += L
         area += L * H
         if not (m and m.get("skin")) and len(Q):
             v = Q - p0
             along, off = v[:, 0] * d[0] + v[:, 1] * d[1], np.abs(v[:, 0] * d[1] - v[:, 1] * d[0])
             if np.any((along > 0) & (along < L) & (off < 0.6)):
                 painted += L * H
+    print("street-facing walls: %d of %d" % (len(street), len(walls)), file=sys.stderr)
     print(json.dumps({"facade_geometry_match_pct": round(100 * num / max(den, 1e-9), 2),
                       "painted_detail_pct": round(100 * painted / max(area, 1e-9), 2)}))
 

@@ -1,127 +1,267 @@
 // Trees (scripts/trees.py): per tile, float32 records [x, y, z_ground, height, crown_r, seed] in the collision frame.
-// Drawn as two InstancedMeshes per tile: trunks and lumpy crowns (a cluster of blobs, normals pointing out of the
-// crown so the foliage shades softly; darker underneath as cheap ambient occlusion).
-// Session 18: the crown is a darker, slightly smaller blob core wrapped in alpha-tested leaf cards (a procedural
-// leaf-cluster texture drawn once on a canvas), so the silhouette breaks up into leaves. ?foliage=0: blobs only.
+// Session 46: each tree is one of 3 crown variants (round, tall oval, spreading) built from 5-9 sub-crowns (branch
+// clusters). A sub-crown is a dark low-poly core wrapped in alpha-tested leaf cards whose normals blend the cluster's and
+// the crown's outward direction (soft, lumpy shading; darker inside and underneath as cheap AO). Main branches run from
+// the trunk top to every cluster, so trunk and limbs show through the gaps. Colour and silhouette vary by seed; leaves
+// and crowns sway gently in the vertex shader (uniform time, phase from the instance position).
+// Hedges (barrier=hedge, trees/<tile>.hedge.bin [x0,y0,z0,x1,y1,z1,h,w]) use the same leaf cards on a box core.
+// ?foliage=0: cores only (no cards). ?wind=0: no sway.
 import * as THREE from 'three';
 
-const FOLIAGE = new URLSearchParams(location.search).get('foliage') !== '0';
+const Q = new URLSearchParams(location.search);
+const FOLIAGE = Q.get('foliage') !== '0';
+const WIND = Q.get('wind') !== '0';
+const QUAL = Q.get('quality') || (matchMedia('(pointer: coarse)').matches ? 'low' : 'high');
+const CARD_K = QUAL === 'low' ? 0.55 : QUAL === 'ultra' ? 1.3 : 1;   // leaf-card density per preset
+export const uTime = { value: 0 };
 
+function mulberry(a) {
+  return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+}
+
+// Leaf-cluster texture: small twigs with pointed leaves, lit from the top-left, denser in the middle.
 function leafTexture() {
-  const S = 256, cv = document.createElement('canvas'); cv.width = cv.height = S;
+  const S = 512, cv = document.createElement('canvas'); cv.width = cv.height = S;
   const g = cv.getContext('2d'), rnd = mulberry(5);
-  for (let i = 0; i < 1400; i++) {
-    // denser towards the middle of the card so the card edges don't show
-    const a = rnd() * Math.PI * 2, r = Math.sqrt(rnd()) * S * 0.47;
-    if (rnd() > 1.15 - r / (S * 0.47)) continue;
-    const x = S / 2 + Math.cos(a) * r, y = S / 2 + Math.sin(a) * r, l = 5 + rnd() * 6;
-    const lum = 0.55 + 0.45 * rnd() * (1 - 0.4 * y / S);   // lighter leaves towards the top of the card
-    g.fillStyle = `rgb(${(95 + 60 * rnd()) * lum | 0},${(140 + 50 * rnd()) * lum | 0},${(60 + 30 * rnd()) * lum | 0})`;
-    g.beginPath(); g.ellipse(x, y, l, l * 0.45, rnd() * Math.PI, 0, Math.PI * 2); g.fill();
+  g.strokeStyle = 'rgb(70,58,40)'; g.lineWidth = 2.5;
+  for (let i = 0; i < 9; i++) {   // twigs
+    const a = rnd() * 6.283; g.beginPath(); g.moveTo(S / 2, S / 2);
+    g.lineTo(S / 2 + Math.cos(a) * S * 0.36, S / 2 + Math.sin(a) * S * 0.36); g.stroke();
+  }
+  for (let i = 0; i < 1500; i++) {
+    const a = rnd() * Math.PI * 2, r = Math.pow(rnd(), 0.6) * S * 0.46;
+    if (rnd() > 1.2 - r / (S * 0.46)) continue;
+    const x = S / 2 + Math.cos(a) * r, y = S / 2 + Math.sin(a) * r, l = 13 + rnd() * 13, ang = a + (rnd() - 0.5) * 1.6;
+    const lum = (0.5 + 0.5 * rnd()) * (1.08 - 0.45 * y / S) * (0.75 + 0.25 * (1 - r / (S * 0.46)));
+    const hue = rnd();
+    const R = (70 + 55 * hue) * lum, G = (118 + 52 * rnd()) * lum, B = (38 + 30 * rnd()) * lum;
+    g.save(); g.translate(x, y); g.rotate(ang);
+    g.fillStyle = `rgb(${R | 0},${G | 0},${B | 0})`;
+    g.beginPath(); g.moveTo(-l, 0); g.quadraticCurveTo(0, -l * 0.5, l, 0); g.quadraticCurveTo(0, l * 0.5, -l, 0); g.fill();
+    g.restore();
   }
   const t = new THREE.CanvasTexture(cv);
   t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 4;
   return t;
 }
 
-function cardGeometry(n) {
-  const rnd = mulberry(23), pos = [], nor = [], col = [], uv = [], idx = [];
-  const v = new THREE.Vector3(), q = new THREE.Quaternion(), e = new THREE.Euler();
-  for (let i = 0; i < n; i++) {
-    // card centres near the crown surface (unit sphere), random orientation
-    v.set(rnd() * 2 - 1, rnd() * 2 - 1, rnd() * 2 - 1); if (v.lengthSq() > 1 || v.lengthSq() < 1e-3) { i--; continue; }
-    v.normalize().multiplyScalar(0.62 + 0.4 * rnd());
-    const c = v.clone(), sz = 0.42 + 0.2 * rnd();
-    q.setFromEuler(e.set(rnd() * 6.28, rnd() * 6.28, rnd() * 6.28));
-    const b = pos.length / 3;
-    for (const [du, dv] of [[-1, -1], [1, -1], [1, 1], [-1, 1]]) {
-      const p = new THREE.Vector3(du * sz, dv * sz, 0).applyQuaternion(q).add(c);
-      pos.push(p.x, p.y, p.z);
-      const nn = new THREE.Vector3(p.x, p.y * 0.8 + 0.25, p.z).normalize(); nor.push(nn.x, nn.y, nn.z);
-      const ao = 0.6 + 0.5 * Math.min(1, Math.max(0, (p.y + 0.9) / 1.7)); col.push(ao, ao, ao);
-      uv.push((du + 1) / 2, (dv + 1) / 2);
-    }
-    idx.push(b, b + 1, b + 2, b, b + 2, b + 3);
+// Crown variants in crown space: x/z in units of the crown radius, y in [-1, 1] over the crown height.
+const VARIANTS = [
+  { n: 7, shell: 0.5, up: [-0.35, 0.55], rs: [0.42, 0.55], top: 0.5 },     // round (lime, oak)
+  { n: 8, shell: 0.42, up: [-0.55, 0.7], rs: [0.38, 0.5], top: 0.62 },     // tall oval (plane, lime avenues)
+  { n: 6, shell: 0.6, up: [-0.15, 0.4], rs: [0.42, 0.56], top: 0.38 },     // spreading (horse chestnut, willow-ish)
+];
+
+function clusters(v, seed) {
+  const rnd = mulberry(seed), out = [{ c: new THREE.Vector3(0, v.top, 0), r: v.rs[1] }];
+  for (let i = 0; i < v.n; i++) {
+    const a = i / v.n * 6.283 + rnd() * 0.7, d = v.shell * (0.8 + 0.4 * rnd());
+    const y = v.up[0] + (v.up[1] - v.up[0]) * ((i * 0.618 + rnd() * 0.4) % 1);
+    out.push({ c: new THREE.Vector3(Math.cos(a) * d, y, Math.sin(a) * d), r: v.rs[0] + (v.rs[1] - v.rs[0]) * rnd() });
   }
+  return out;
+}
+
+function geo(pos, nor, col, uv, idx) {
   const g = new THREE.BufferGeometry();
   g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
   g.setAttribute('normal', new THREE.Float32BufferAttribute(nor, 3));
   g.setAttribute('color', new THREE.Float32BufferAttribute(col, 3));
-  g.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));
-  g.setIndex(idx);
+  if (uv) g.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));
+  if (idx) g.setIndex(idx);
   return g;
 }
 
-function crownGeometry(lumps, detail) {
-  const parts = [], rnd = mulberry(11);
-  for (let i = 0; i < lumps; i++) {
-    const a = i / lumps * Math.PI * 2 + rnd() * 0.6, up = i === 0 ? 0.45 : (rnd() - 0.4) * 0.6;
-    const d = i === 0 ? 0 : 0.42 + rnd() * 0.12, s = i === 0 ? 0.62 : 0.48 + rnd() * 0.12;
-    const g = new THREE.IcosahedronGeometry(s, detail);
-    g.translate(Math.cos(a) * d, up, Math.sin(a) * d);
-    parts.push(g);
-  }
-  const pos = [], nor = [], col = [];
-  for (const g of parts) {
-    const p = g.attributes.position;
-    for (let i = 0; i < p.count; i++) {
-      let x = p.getX(i), y = p.getY(i), z = p.getZ(i);
-      const j = 1 + 0.1 * Math.sin(x * 9.1 + y * 7.3) * Math.cos(z * 8.7 - y * 5.1);   // leafy jitter
-      x *= j; y *= j; z *= j;
-      pos.push(x, y, z);
-      const n = new THREE.Vector3(x, y * 0.8 + 0.25, z).normalize();
-      nor.push(n.x, n.y, n.z);
-      const ao = 0.55 + 0.45 * Math.min(1, Math.max(0, (y + 0.9) / 1.6));
-      col.push(ao, ao, ao);
+// Leaf cards around each cluster (shell of the cluster sphere), plus the clusters' dark cores.
+function crownGeometries(cl, seed) {
+  const rnd = mulberry(seed * 7 + 1), q = new THREE.Quaternion(), e = new THREE.Euler(), v = new THREE.Vector3();
+  const P = [], N = [], C = [], U = [], I = [];
+  const cp = [], cn = [], cc = [];
+  for (const { c, r } of cl) {
+    const nCards = Math.round(19 * CARD_K * (r / 0.48) ** 2);
+    for (let i = 0; i < nCards; i++) {
+      v.set(rnd() * 2 - 1, rnd() * 2 - 1, rnd() * 2 - 1); if (v.lengthSq() > 1 || v.lengthSq() < 1e-3) { i--; continue; }
+      v.normalize(); if (v.y < -0.3 && rnd() < 0.5) v.y *= 0.4;   // fewer cards under the cluster
+      const ctr = v.clone().multiplyScalar(r * (0.6 + 0.4 * rnd())).add(c), sz = r * (0.5 + 0.25 * rnd());
+      q.setFromEuler(e.set(rnd() * 6.28, rnd() * 6.28, rnd() * 6.28));
+      const b = P.length / 3;
+      for (const [du, dv] of [[-1, -1], [1, -1], [1, 1], [-1, 1]]) {
+        const p = new THREE.Vector3(du * sz, dv * sz, 0).applyQuaternion(q).add(ctr);
+        P.push(p.x, p.y, p.z);
+        const nl = p.clone().sub(c).normalize(), ng = new THREE.Vector3(p.x, p.y * 0.7 + 0.3, p.z).normalize();
+        const nn = nl.multiplyScalar(0.55).add(ng.multiplyScalar(0.45)).normalize(); N.push(nn.x, nn.y, nn.z);
+        // AO: darker deep inside the crown and on the underside of each cluster
+        const depth = Math.min(1, Math.hypot(p.x, p.z * 1.0, (p.y - 0.1) * 0.8));
+        const ao = (0.45 + 0.55 * Math.min(1, Math.max(0, (p.y + 1.0) / 1.8))) * (0.6 + 0.45 * depth) * (0.85 + 0.25 * Math.max(0, (p.y - c.y) / r));
+        C.push(ao, ao, ao); U.push((du + 1) / 2, (dv + 1) / 2);
+      }
+      I.push(b, b + 1, b + 2, b, b + 2, b + 3);
+    }
+    const ico = new THREE.IcosahedronGeometry(r * 0.38, 1), ip = ico.attributes.position;
+    for (let i = 0; i < ip.count; i++) {
+      const x = ip.getX(i) + c.x, y = ip.getY(i) + c.y, z = ip.getZ(i) + c.z;
+      cp.push(x, y, z);
+      const n = new THREE.Vector3(ip.getX(i), ip.getY(i), ip.getZ(i)).normalize().multiplyScalar(0.6)
+        .add(new THREE.Vector3(x, y * 0.7 + 0.3, z).normalize().multiplyScalar(0.4)).normalize();
+      cn.push(n.x, n.y, n.z);
+      const ao = 0.6 + 0.4 * Math.min(1, Math.max(0, (y + 1.0) / 1.8)); cc.push(ao, ao, ao);
     }
   }
-  const g = new THREE.BufferGeometry();
-  g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
-  g.setAttribute('normal', new THREE.Float32BufferAttribute(nor, 3));
-  g.setAttribute('color', new THREE.Float32BufferAttribute(col, 3));
-  return g;
+  return { cards: geo(P, N, C, U, I), core: geo(cp, cn, cc) };
 }
 
-function mulberry(a) {
-  return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+// Main limbs: tapered 5-sided tubes from the trunk top (crown space y = -1.05) to each cluster centre.
+function branchGeometry(cl) {
+  const P = [], N = [], C = [], up = new THREE.Vector3(0, 1, 0);
+  const tube = (a, b, r0, r1) => {
+    const d = b.clone().sub(a), L = d.length(); d.normalize();
+    const s = new THREE.Vector3().crossVectors(d, Math.abs(d.y) > 0.9 ? new THREE.Vector3(1, 0, 0) : up).normalize();
+    const t = new THREE.Vector3().crossVectors(d, s);
+    const ring = (o, r, k) => { const ang = k / 5 * 6.283; return s.clone().multiplyScalar(Math.cos(ang) * r).addScaledVector(t, Math.sin(ang) * r).add(o); };
+    for (let k = 0; k < 5; k++) {
+      const q = [ring(a, r0, k), ring(a, r0, k + 1), ring(b, r1, k + 1), ring(a, r0, k), ring(b, r1, k + 1), ring(b, r1, k)];
+      const ks = [k, k + 1, k + 1, k, k + 1, k];
+      q.forEach((p, j) => {
+        P.push(p.x, p.y, p.z);
+        const ang = ks[j] / 5 * 6.283, n = s.clone().multiplyScalar(Math.cos(ang)).addScaledVector(t, Math.sin(ang));
+        N.push(n.x, n.y, n.z); const ao = 0.7 + 0.3 * Math.min(1, Math.max(0, (p.y + 1) / 2)); C.push(ao, ao, ao);
+      });
+    }
+    return L;
+  };
+  const root = new THREE.Vector3(0, -1.05, 0);
+  for (const { c } of cl) {
+    const mid = root.clone().lerp(c, 0.55).add(new THREE.Vector3(c.x * 0.15, 0.1, c.z * 0.15));   // limbs bow outwards
+    tube(root, mid, 0.05, 0.032); tube(mid, c, 0.032, 0.012);
+  }
+  return geo(P, N, C);
 }
 
-const CROWN = crownGeometry(7, 1);
-const TRUNK = new THREE.CylinderGeometry(0.7, 1, 1, 6, 1, true).translate(0, 0.5, 0);
-const crownMat = new THREE.MeshLambertMaterial({ vertexColors: true });
-const trunkMat = new THREE.MeshLambertMaterial({ color: 0x5a4a3c });
-const CARDS = FOLIAGE ? cardGeometry(56) : null;
-const cardMat = FOLIAGE ? new THREE.MeshLambertMaterial({ map: leafTexture(), vertexColors: true, alphaTest: 0.5,
-  side: THREE.DoubleSide, alphaToCoverage: true }) : null;
-const GREENS = [0x4d6b32, 0x5b7a38, 0x3f5d2c, 0x667f3e, 0x56703a, 0x48663a].map(c => new THREE.Color(c));
+// Wind: sway grows with height in the crown (local y), phase from the instance position; cards also flutter.
+function windPatch(mat, flutter) {
+  if (!WIND) return mat;
+  mat.onBeforeCompile = sh => {
+    sh.uniforms.uTime = uTime;
+    sh.vertexShader = sh.vertexShader.replace('#include <common>', '#include <common>\nuniform float uTime;')
+      .replace('#include <begin_vertex>', `#include <begin_vertex>
+      #ifdef USE_INSTANCING
+        vec3 iw = instanceMatrix[3].xyz; float ph = dot(iw.xz, vec2(0.13, 0.17));
+        float k = clamp((transformed.y + 1.1) * 0.5, 0.0, 1.2); k *= k;
+        float sw = sin(uTime * 1.1 + ph) * 0.6 + sin(uTime * 2.3 + ph * 1.7) * 0.25;
+        transformed.x += sw * 0.035 * k; transformed.z += cos(uTime * 0.9 + ph) * 0.025 * k;
+        ${flutter ? 'transformed += normal * 0.02 * sin(uTime * 6.0 + dot(position, vec3(13.1, 7.7, 11.3)) + ph) * k;' : ''}
+      #endif`);
+  };
+  mat.customProgramCacheKey = () => 'tree_wind_' + flutter;
+  return mat;
+}
+
+const LEAF_TEX = FOLIAGE ? leafTexture() : null;
+const cardMat = FOLIAGE ? windPatch(new THREE.MeshLambertMaterial({ map: LEAF_TEX, vertexColors: true, alphaTest: 0.45,
+  side: THREE.DoubleSide, alphaToCoverage: true }), true) : null;
+const coreMat = windPatch(new THREE.MeshLambertMaterial({ vertexColors: true }), false);
+const barkMat = windPatch(new THREE.MeshLambertMaterial({ color: 0x4f453c, vertexColors: true }), false);
+const trunkMat = new THREE.MeshLambertMaterial({ color: 0x564a3e });
+const TRUNK = new THREE.CylinderGeometry(0.65, 1, 1, 7, 1, true).translate(0, 0.5, 0);
+const GEOS = VARIANTS.map((v, i) => {
+  const cl = clusters(v, 31 + i * 17), g = crownGeometries(cl, 3 + i);
+  return { ...g, branches: branchGeometry(cl) };
+});
+// summer greens from yellow-green limes to dark blue-green yews/hollies
+const GREENS = [0x4d6b32, 0x5b7a38, 0x3f5d2c, 0x6a8540, 0x56703a, 0x48663a, 0x3a5530, 0x627a34, 0x51683e]
+  .map(c => new THREE.Color(c));
+
+function stamp(o) {
+  o.castShadow = true; o.receiveShadow = true; o.computeBoundingSphere(); o.userData.ownMat = false; o.matrixAutoUpdate = false;
+  o.onBeforeRender = () => { uTime.value = performance.now() / 1000; };
+  return o;
+}
 
 export function makeTrees(buf) {
   const a = new Float32Array(buf), n = a.length / 6 | 0;
-  const crowns = new THREE.InstancedMesh(CROWN, crownMat, n), trunks = new THREE.InstancedMesh(TRUNK, trunkMat, n);
-  const cards = FOLIAGE ? new THREE.InstancedMesh(CARDS, cardMat, n) : null;
+  const vi = new Uint8Array(n), cnt = [0, 0, 0];
+  for (let i = 0; i < n; i++) {
+    const h = a[i * 6 + 3], r = a[i * 6 + 4], seed = a[i * 6 + 5];
+    vi[i] = h / Math.max(r, 0.5) > 3.2 ? 1 : seed < 0.3 ? 2 : seed < 0.62 ? 0 : 1;
+    cnt[vi[i]]++;
+  }
+  const g = new THREE.Group(); g.name = 'trees';
+  const meshes = GEOS.map((G, k) => cnt[k] ? {
+    core: new THREE.InstancedMesh(G.core, coreMat, cnt[k]),
+    cards: FOLIAGE ? new THREE.InstancedMesh(G.cards, cardMat, cnt[k]) : null,
+    br: new THREE.InstancedMesh(G.branches, barkMat, cnt[k]), j: 0,
+  } : null);
+  const trunks = new THREE.InstancedMesh(TRUNK, trunkMat, n);
+  const m = new THREE.Matrix4(), q = new THREE.Quaternion(), s = new THREE.Vector3(), p = new THREE.Vector3(), Y = new THREE.Vector3(0, 1, 0);
+  const c = new THREE.Color(), cc = new THREE.Color();
+  for (let i = 0; i < n; i++) {
+    const [x, y, zg, h, r, seed] = a.subarray(i * 6, i * 6 + 6);
+    const M = meshes[vi[i]], j = M.j++;
+    const base = h * (0.24 + 0.12 * seed), cv = (h - base) / 2;   // crown from base to the top
+    q.setFromAxisAngle(Y, seed * 6.283);
+    p.set(x, zg + base + cv, -y); s.set(r, cv, r * (0.88 + 0.24 * ((seed * 53) % 1)));
+    m.compose(p, q, s);
+    c.copy(GREENS[(seed * 997 | 0) % GREENS.length]).multiplyScalar(0.85 + 0.3 * ((seed * 131) % 1));
+    if (M.cards) {
+      M.cards.setMatrixAt(j, m);   // texture is green: tint stays near white, nudged towards the tree's green
+      cc.setRGB(0.8 + 0.5 * c.r / (c.g || 1), 0.95 + 0.12 * ((seed * 71) % 1), 0.75 + 0.5 * c.b / (c.g || 1)); M.cards.setColorAt(j, cc);
+    }
+    M.core.setMatrixAt(j, m); M.core.setColorAt(j, cc.copy(c).multiplyScalar(0.85));
+    M.br.setMatrixAt(j, m);
+    M.br.setColorAt(j, cc.setScalar(0.85 + 0.3 * ((seed * 211) % 1)));
+    const tr = 0.14 + h * 0.013;
+    p.set(x, zg - 0.2, -y); s.set(tr, base + cv * 0.15 + 0.2, tr);
+    trunks.setMatrixAt(i, m.compose(p, q, s));
+  }
+  for (const M of meshes) if (M) for (const o of [M.core, M.cards, M.br]) if (o) g.add(stamp(o));
+  g.add(stamp(trunks));
+  return g;
+}
+
+// Hedge segment: unit box core (x along the hedge -0.5..0.5, y 0..1, z -0.5..0.5) wrapped in leaf cards.
+function hedgeGeometries() {
+  const rnd = mulberry(77), q = new THREE.Quaternion(), e = new THREE.Euler();
+  const P = [], N = [], C = [], U = [], I = [];
+  const nC = Math.round(60 * CARD_K);
+  for (let i = 0; i < nC; i++) {
+    const face = rnd(), u = rnd() - 0.5, w = rnd();
+    let ctr, nrm;
+    if (face < 0.3) { ctr = new THREE.Vector3(u * 1.1, 0.95 + 0.05 * rnd(), (w - 0.5) * 0.9); nrm = new THREE.Vector3(0, 1, 0); }
+    else { const sd = face < 0.65 ? 1 : -1; ctr = new THREE.Vector3(u * 1.1, 0.05 + 0.9 * w, sd * (0.42 + 0.08 * rnd())); nrm = new THREE.Vector3(0, 0.3, sd).normalize(); }
+    const sz = 0.22 + 0.1 * rnd();
+    q.setFromEuler(e.set(rnd() * 6.28, rnd() * 6.28, rnd() * 6.28));
+    const b = P.length / 3;
+    for (const [du, dv] of [[-1, -1], [1, -1], [1, 1], [-1, 1]]) {
+      const p = new THREE.Vector3(du * sz, dv * sz * 0.8, 0).applyQuaternion(q).add(ctr);
+      P.push(p.x, p.y, p.z); N.push(nrm.x, nrm.y, nrm.z);
+      const ao = 0.5 + 0.5 * Math.min(1, Math.max(0, p.y)); C.push(ao, ao, ao); U.push((du + 1) / 2, (dv + 1) / 2);
+    }
+    I.push(b, b + 1, b + 2, b, b + 2, b + 3);
+  }
+  const box = new THREE.BoxGeometry(1.02, 0.92, 0.82).translate(0, 0.46, 0).toNonIndexed();
+  const bc = []; for (let i = 0; i < box.attributes.position.count; i++) { const ao = 0.45 + 0.4 * (box.attributes.position.getY(i)); bc.push(ao, ao, ao); }
+  box.setAttribute('color', new THREE.Float32BufferAttribute(bc, 3)); box.deleteAttribute('uv');
+  return { cards: geo(P, N, C, U, I), core: box };
+}
+const HEDGE = hedgeGeometries();
+const hedgeCoreMat = new THREE.MeshLambertMaterial({ color: 0x2c4422, vertexColors: true });
+
+export function makeHedges(buf) {
+  const a = new Float32Array(buf), n = a.length / 8 | 0;
+  const core = new THREE.InstancedMesh(HEDGE.core, hedgeCoreMat, n);
+  const cards = FOLIAGE ? new THREE.InstancedMesh(HEDGE.cards, cardMat, n) : null;
   const m = new THREE.Matrix4(), q = new THREE.Quaternion(), s = new THREE.Vector3(), p = new THREE.Vector3(), Y = new THREE.Vector3(0, 1, 0);
   const c = new THREE.Color();
   for (let i = 0; i < n; i++) {
-    const [x, y, zg, h, r, seed] = a.subarray(i * 6, i * 6 + 6);
-    const base = h * (0.22 + 0.12 * seed), cv = (h - base) / 2;   // crown from base to the top
-    q.setFromAxisAngle(Y, seed * 6.283);
-    p.set(x, zg + base + cv, -y); s.set(r, cv * 1.05, r * (0.9 + 0.2 * seed));
-    c.copy(GREENS[(seed * 997 | 0) % GREENS.length]).multiplyScalar(0.85 + 0.3 * ((seed * 131) % 1));
-    if (cards) {
-      cards.setMatrixAt(i, m.compose(p, q, s)); cards.setColorAt(i, c);   // texture is green: tint stays near white
-      cards.instanceColor.setXYZ(i, 0.75 + 0.5 * c.r / (c.g || 1), 0.95 + 0.1 * seed, 0.8 + 0.4 * c.b / (c.g || 1));
-      s.multiplyScalar(0.84); c.multiplyScalar(0.72);
-    }
-    crowns.setMatrixAt(i, m.compose(p, q, s));
-    crowns.setColorAt(i, c);
-    const tr = 0.12 + h * 0.012;
-    p.set(x, zg - 0.2, -y); s.set(tr, base + cv, tr);
-    trunks.setMatrixAt(i, m.compose(p, q, s));
+    const [x0, y0, z0, x1, y1, z1, h, w] = a.subarray(i * 8, i * 8 + 8);
+    const L = Math.hypot(x1 - x0, y1 - y0);
+    q.setFromAxisAngle(Y, Math.atan2(y1 - y0, x1 - x0));   // local x -> (dx, 0, -dy)
+    p.set((x0 + x1) / 2, Math.min(z0, z1) - 0.05, -(y0 + y1) / 2); s.set(L + 0.15, h, w);
+    m.compose(p, q, s);
+    core.setMatrixAt(i, m);
+    if (cards) { cards.setMatrixAt(i, m); const k = 0.8 + 0.15 * Math.sin(i * 1.7); cards.setColorAt(i, c.setRGB(k * 0.85, k, k * 0.8)); }
   }
-  const g = new THREE.Group(); g.name = 'trees';
-  for (const o of cards ? [crowns, cards, trunks] : [crowns, trunks]) {
-    o.castShadow = true; o.receiveShadow = true; o.computeBoundingSphere(); o.userData.ownMat = false;
-    o.matrixAutoUpdate = false; g.add(o);
-  }
+  const g = new THREE.Group(); g.name = 'hedges';
+  for (const o of cards ? [core, cards] : [core]) g.add(stamp(o));
   return g;
 }

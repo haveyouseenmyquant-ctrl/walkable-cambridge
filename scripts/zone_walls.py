@@ -9,6 +9,15 @@ outside on the right), ground z (DTM 1.5 m outside), eave z (median DSM 1-2.5 m 
 reference photos: cached non-held-out Mapillary photos (data/raw/mapillary_facade) whose camera is 4-35 m in front of
 the wall and looks at it. Held out: data/benchmark/heldout.json + heldout_ms.json (never offered as references).
 Writes data/annotations/market_square/walls.json.
+
+Street-facing rule for facade_geometry_match_pct (session 46; used by zone_kpi.py and city_facades.py, see
+faces_street()): the KPI's written definition counts STREET-FACING facades only. The wall lists above (built with
+every walk sample, so they also hold college-court, back-yard and private-path walls, which still get built) are
+filtered for the KPI by: wall length >= 3 m; along the outward normal, probing 2, 5, 9, 14, 20, 25 m out, the first
+probe point within 3 m of a PUBLIC walk sample is reached before any other building footprint crosses the line
+from 0.3 m out (so party walls and walls hidden behind a neighbour fail). Public walk sample: an osm_targets walk
+sample whose OSM way is not access=private/no (unless foot=yes/designated/permissive) and not foot=private/no;
+this drops the gated college courts, private yards and staircases (their paths are access=private in OSM).
 """
 import json
 import math
@@ -31,6 +40,73 @@ CENTRE = (0.1190, 52.2053)
 R = 90.0
 OUT = os.path.join(ROOT, "data/annotations/market_square/walls.json")
 REF = os.path.join(ROOT, "data/raw/mapillary_ref")   # 1024 px thumbnails of non-held-out reference photos
+
+
+STREET_MIN_LEN = 3.0
+PROBES = (2, 5, 9, 14, 20, 25)
+_NOACC = ("private", "no")
+
+
+def is_public(tags):
+    """A walkable OSM way the public can use (not a gated court / private path)."""
+    if tags.get("foot") in _NOACC:
+        return False
+    return not (tags.get("access") in _NOACC and tags.get("foot") not in ("yes", "designated", "permissive"))
+
+
+def public_walk_tree(ways, tg=None):
+    """cKDTree of the osm_targets walk samples on public ways (BNG metres)."""
+    if tg is None:
+        tg = json.load(open(os.path.join(ROOT, "data/derived/osm_targets.json")))
+    pts = [(s[0], s[1]) for s in tg["walk"]["samples"] if is_public(ways.get(int(s[2]), {}).get("tags", {}))]
+    return cKDTree(np.array(pts))
+
+
+def faces_street(m, nrm, L, g, geoms, tree, pub):
+    """Street-facing test (module docstring): wall midpoint m, unit outward normal nrm (BNG), length L, own footprint g,
+    all footprints geoms with their STRtree, public walk sample tree pub."""
+    if L < STREET_MIN_LEN:
+        return False
+    m, nrm = np.asarray(m, float), np.asarray(nrm, float)
+    for s in PROBES:
+        seg = LineString([m + nrm * 0.3, m + nrm * s])
+        if any(geoms[i] is not g and geoms[i].intersects(seg) for i in tree.query(seg)):
+            return False
+        if pub.query(m + nrm * s)[0] < 3:
+            return True
+    return False
+
+
+def street_facing_ids(walls):
+    """ids of the walls (zone/ring walls.json rows: osm_id, p0/p1 in the collision frame, length) that pass faces_street."""
+    nodes, ways, rels, _ = B.load_osm()
+    geoms, own = [], {}
+    for w in ways.values():
+        if "building" in w.get("tags", {}):
+            g = B.way_area(w, nodes)
+            if g is not None and not g.is_empty:
+                for p in B.polys_of(g):
+                    geoms.append(p); own.setdefault("way/%d" % w["id"], []).append(p)
+    for r in rels:
+        if "building" in r.get("tags", {}):
+            try:
+                g = B.rel_area(r, ways, nodes)
+            except Exception:
+                g = None
+            if g is not None and not g.is_empty:
+                for p in B.polys_of(g):
+                    geoms.append(p); own.setdefault("relation/%d" % r["id"], []).append(p)
+    tree = STRtree(geoms)
+    pub = public_walk_tree(ways)
+    out = set()
+    for w in walls:
+        p0 = np.add(w["p0"], [B.E0, B.N0]); p1 = np.add(w["p1"], [B.E0, B.N0])
+        d = (p1 - p0) / w["length"]; nrm = np.array([d[1], -d[0]]); m = (p0 + p1) / 2
+        cands = own.get(w["osm_id"], [])
+        g = min(cands, key=lambda p: p.exterior.distance(Point(*m))) if cands else None
+        if faces_street(m, nrm, w["length"], g, geoms, tree, pub):
+            out.add(w["id"])
+    return out
 
 
 def heldout():

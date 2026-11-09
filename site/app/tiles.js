@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from '../vendor/meshoptimizer/meshopt_decoder.module.js';
 import { parseCol, ColTile } from './collision.js';
-import { makeTrees } from './trees.js';
+import { makeTrees, makeHedges } from './trees.js';
 import { makeObjects } from './objects.js';
 import { makeFacades } from './facades.js';
 import { makeMarkings } from './markings.js';
@@ -111,9 +111,10 @@ export class TileManager {
     t.state = 'loading'; const gen = ++t.gen; this.jobs++;
     try {
       const bin = p => fetch(this.base + p).then(r => { if (!r.ok) throw new Error(`${r.status} ${p}`); return r.arrayBuffer(); });
-      const [gltf, buf, tbuf, obuf, mbuf] = await Promise.all([
+      const [gltf, buf, tbuf, obuf, mbuf, hbuf] = await Promise.all([
         this.loader.loadAsync(this.base + t.m.glb), bin(t.m.collision), this.trees && t.m.trees ? bin(t.m.trees) : null,
         this.objects && t.m.objects ? bin(t.m.objects) : null, this.markings && t.m.markings ? bin(t.m.markings) : null,
+        this.trees && t.m.hedges ? bin(t.m.hedges) : null,
       ]);
       if (gen !== t.gen) return; // unloaded meanwhile
       const t0 = performance.now();
@@ -122,6 +123,7 @@ export class TileManager {
       const t1 = performance.now();
       t.group = this.prepare(gltf.scene, col);
       if (tbuf) t.group.add(makeTrees(tbuf));
+      if (hbuf) t.group.add(makeHedges(hbuf));
       if (obuf) t.group.add(makeObjects(obuf));
       if (mbuf) t.group.add(makeMarkings(mbuf, col));
       this.scene.add(t.group);
