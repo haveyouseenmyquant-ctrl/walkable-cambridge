@@ -1617,3 +1617,42 @@ Session 53 ended without a journal entry or a commit. Session 54 committed its w
   partial plans, unreachable loot and leashed mobs; fire burst/ult down, storm lance/ult up (TTK balance).
 - Zone KPI: market stall canopies (building=roof) and vendor trailers aren't counted as facades. St Botolph annotation.
 None of this was published or measured in session 53.
+
+## 2026-11-09 — Session 54: King's College Chapel; 17 ring-1 annotations; mob animation + clip fixes; TTK retune
+
+Start: committed session 53's leftovers (2be12d0, entry above). Live 8b314e game KPIs: playable_classes 4, mob_types 12 + 3
+bosses, equipment_effects 44, encounter_coverage_pct 100, playtest_pass_pct 80 (TTK spread 56.5%), gameplay_judged 39.6.
+
+Done (6 parallel forks)
+- King's College Chapel (scripts/zone_bespoke_kingschapel.py, new): it had been the generic detail.py box, a grey block
+  from King's Parade. Now: 12 bays a side with five-light transomed windows set in reveals, 22 stepped buttresses with
+  crocketed pinnacles, chantry chapels, pierced battlemented parapet, nine-light east/west windows, four octagonal
+  corner turrets with ogee caps (~43 m above ground; 2023 LiDAR). 49k tris (zone 447k → 496k).
+  docs/screens/session54_kingschapel_{before,after}*.png. The stone still renders mid-grey, not pale cream (the gatehouse too).
+- Ring 1: 17 walls (Mill Lane 16/17, Zoology, Lion Yard, St Andrew the Great, Christ's Lane corner, Bishop's Hostel,
+  Caius lodge, St Botolph aisle). **Ring-1 facade match 49.5 → 52.0%** (360 of 851), city 11.28 → 11.84%.
+  scripts/ann_candidates.py: candidate photos per wall (excludes held-out and same-sequence frames, checks for occlusion).
+- Mobs (mobs.js): stronger rim light that flares on hits and heats on wind-up; idle/walk/attack/hit poses about twice as
+  large; death light column and spark spiral. test_mobs 12+3, 15/15 encounters, 0 errors.
+- Gameplay clip (gameplay_clip.mjs): the bot froze for half the clip, firing at a gargoyle behind a wall (frames 6-12 were
+  a grey wall). Targets that take no damage for 4 s are now ignored for 15 s. The clip uses the third-person camera
+  with canopy/facade clearance. The warden shield's wireframe lattice (the judges' "stray wireframe lines") is gone;
+  bubbles, halos and orbs fade near the camera; missiles shed embers and flash a point light on hit; non-crit
+  numbers merge; loot plates scale with distance. Clip kills 14 → 28. test_items 44/44, test_classes ok.
+  NB: the clip script changed (third-person camera), so gameplay_judged isn't strictly comparable with earlier builds.
+- Playtest: the local baseline on s53's code was 75% (stormcaller 2/5, a softlock inside bollard/railing collision on
+  King's Parade at -182,-28). player.js now pushes a grounded player out of an invalid spot (within 0.8 m).
+  Fire burst/ult down, hex damage up. Not re-measured; service.sh scores the new hash.
+- Published world-20261109-0720 (WC_SKIP_GAME_KPI=1).
+
+Learned
+- Annotation yield is ~4 walls per worker-round now. Only 117 of the 353 east walls have ≥2 facing non-held-out photos,
+  and Mapillary poses are often several metres off. Ring 1 at 70% needs another source: a style-guided default
+  for the photo-less walls, or extending sibling walls of buildings that are already annotated.
+- Playtest takes ~18 min at load 25, too long to finish inside a session together with the merge.
+
+Next
+1. Read the game KPIs for the new hash (playtest per class, TTK spread, gameplay_judged); fix the x≈-124 softlocks.
+2. Stone tone: King's limestone renders grey; check the stone material/tone mapping against non-held-out photos.
+3. Boss telegraphs cover too much of the frame; canopy planes in the clip.
+4. Ring 1: generalise sibling-wall annotation and use a style default for walls without photos.
