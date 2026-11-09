@@ -1443,3 +1443,39 @@ From commit 6c440c4 and the working tree session 47 found:
   lightning, drain tethers, shockwaves, ground decals, rock debris, shield); mob rig body language, knockback shove and
   flinch, three death styles, type-coloured ground auras, roaming patrols, denser packs near the centre; loot toasts on
   the game clock with effect lines; rarity stings. Screenshots in docs/screens/session46_*.png.
+
+## 2026-11-09 — Session 47: publish session 46; 15 ring-1 street-front annotations; balance check
+
+Start state: session 46's commit was never pushed or published, and its game work was uncommitted (entry above).
+Live was still 4c519e. Its service scores: judged_realism 26.6, visual_quality 25.54, market_square_realism 30.62,
+gameplay_judged 28.6. Game KPIs: playable_classes 4, mob_types 12 (+3 bosses), equipment_effects 44,
+encounter_coverage_pct 100, playtest_pass_pct 95, boss TTK spread 28.7%.
+
+Done
+- Tested session 46's game edits before committing: test_items 44/44, test_mobs 12 regular + 3 bosses,
+  15/15 encounters, 0 console errors. The test ran at 0.6 fps because of machine load (~44), not the build.
+- 3 parallel annotation subagents, one per street group, for ring-1 street-facing walls, using non-held-out
+  Mapillary and Commons photos only. 15 new walls: Joshua Taylor Building, Waterstones 22 Sidney St, M&S Hobson St
+  side, St Andrew the Great (St Tibbs Row), Lion Yard (Petty Cury), Boots (Petty Cury), 14-17 Green St, former
+  Central Cinema, 1-2 Wheeler St, Old Divinity School, Hilton (Corn Exchange St), Zoology, John Lewis (2 walls), MAA.
+  Most are low confidence. Ring-1 facade match **8.64 → 13.85%** (93 of 851 walls); city 1.97 → 3.16%; zone 69.32.
+- Balance subagent: 2 runs per class are too noisy to tune with (one class's runs range from 4 to 17 s).
+  Spark Lance 18 → 20 (stormcaller sustained DPS 45 → 50, in line with the others' 49-56). One warden run
+  softlocked: "no route progress" 1.7 m from a goal at (-182.4, -27.5, z 10.4) on the way to King's Parade.
+  Probably Boulder Leap landing on raised geometry; not fixed.
+- Published world-20261109-0047. Live hash **afef094044af4e89** (verified, = local). service.sh computes the game KPIs
+  and gameplay_judged for it; until then measure.sh prints them as 0.
+
+Learned
+- Annotation subagents stop after about 5 min unless told to keep going; resuming them doubled the output.
+  Commons rate-limits (HTTP 429) after a few dozen downloads; spread those across agents or pace them.
+- Many "street" labels in facade_geometry_city.json are the nearest named way, not the street the wall faces
+  (Hilton "Downing St" faces Corn Exchange St; Lion Yard "St Tibbs Row" faces Petty Cury).
+
+Next
+1. Warden softlock at (-182.4, -27.5): check what stands there; stop Boulder Leap landing on roofs or wall tops,
+   or have the bot drop unreachable loot spots before the stuck check.
+2. Balance with 5 runs per class (service computes it for afef09); tune only on 5-run medians.
+3. More ring-1 annotations: Green Street (Commons photos are already listed), Town and Gown (check its orientation),
+   the Cambridge Union, Clare Chapel on Trinity Lane, Sedgwick, Botany and Free School Lane.
+4. Check fps_median with session 46's denser packs and the new VFX once service measures afef09.
