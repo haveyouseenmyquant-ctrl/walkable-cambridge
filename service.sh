@@ -14,10 +14,15 @@ while true; do
   # the browser checks hourly, then the 200-view benchmark
   # session 42 (Gaspard): game KPIs + gameplay_judged for each new live hash. The tests run on local site/, which
   # equals the live build after publish.sh; only run when the hashes agree so the cache is keyed to the live build.
-  LH=$(.venv/bin/python -I scripts/build_hash.py "$SRC" 2>/dev/null); SH=$(.venv/bin/python -I scripts/build_hash.py site 2>/dev/null)
+  # session 55: prefer data/derived/live_site (publish.sh's APFS-clone snapshot of the published build), so sessions
+  # editing site/ no longer block the live build's game scores
+  LH=$(.venv/bin/python -I scripts/build_hash.py "$SRC" 2>/dev/null)
+  GS=site
+  [ -d data/derived/live_site ] && [ "$(.venv/bin/python -I scripts/build_hash.py data/derived/live_site 2>/dev/null)" = "$LH" ] && GS=data/derived/live_site
+  SH=$(.venv/bin/python -I scripts/build_hash.py $GS 2>/dev/null)
   if [ -n "$LH" ] && [ "$LH" = "$SH" ]; then
-    [ -s data/benchmark/scores/${LH}_game.json ] || scripts/game_kpi.sh 2>&1 | tail -n1
-    [ -x scripts/gameplay_kpi.sh ] && [ ! -s data/benchmark/scores/${LH}_gameplay.json ] && scripts/gameplay_kpi.sh 2>&1 | tail -n1
+    [ -s data/benchmark/scores/${LH}_game.json ] || WC_SITE=$GS scripts/game_kpi.sh 2>&1 | tail -n1
+    [ -x scripts/gameplay_kpi.sh ] && [ ! -s data/benchmark/scores/${LH}_gameplay.json ] && WC_SITE=$GS scripts/gameplay_kpi.sh 2>&1 | tail -n1
   fi
   [ -f data/benchmark/market_square.json ] && scripts/ms_bench.sh "$SRC" 2>&1 | tail -n2
   if [ $(( $(date +%s) - LAST )) -lt 3300 ]; then
