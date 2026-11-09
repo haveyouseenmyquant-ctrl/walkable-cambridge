@@ -1,0 +1,67 @@
+{
+ "gameplay_judged": 37.1,
+ "n": 4,
+ "model": "claude-opus-5-5",
+ "hash": "afef094044af4e89",
+ "classes": {
+  "hexweaver": {
+   "score": 3.29,
+   "readability_telegraphs": 3.0,
+   "spell_vfx": 3.0,
+   "enemy_animation_variety": 2.0,
+   "hit_feedback": 3.0,
+   "ui_hud_clarity": 5.0,
+   "loot_excitement": 4.0,
+   "polished_arpg_feel": 3.0,
+   "overall": 3
+  },
+  "pyromancer": {
+   "score": 3.86,
+   "readability_telegraphs": 4.0,
+   "spell_vfx": 3.0,
+   "enemy_animation_variety": 3.0,
+   "hit_feedback": 4.0,
+   "ui_hud_clarity": 5.0,
+   "loot_excitement": 5.0,
+   "polished_arpg_feel": 3.0,
+   "overall": 3.5
+  },
+  "stormcaller": {
+   "score": 3.71,
+   "readability_telegraphs": 3.0,
+   "spell_vfx": 3.5,
+   "enemy_animation_variety": 3.0,
+   "hit_feedback": 3.5,
+   "ui_hud_clarity": 5.0,
+   "loot_excitement": 5.0,
+   "polished_arpg_feel": 3.0,
+   "overall": 3.5
+  },
+  "warden": {
+   "score": 4.0,
+   "readability_telegraphs": 4.0,
+   "spell_vfx": 4.0,
+   "enemy_animation_variety": 4.0,
+   "hit_feedback": 3.0,
+   "ui_hud_clarity": 5.0,
+   "loot_excitement": 5.0,
+   "polished_arpg_feel": 3.0,
+   "overall": 4
+  }
+ },
+ "by_criterion": {
+  "readability_telegraphs": 3.5,
+  "spell_vfx": 3.38,
+  "enemy_animation_variety": 3.0,
+  "hit_feedback": 3.38,
+  "ui_hud_clarity": 5.0,
+  "loot_excitement": 4.75,
+  "polished_arpg_feel": 3.0
+ },
+ "reasons": {
+  "hexweaver": "The HUD is the strongest part: health and mana bars, a spell bar with cooldown numbers, a minimap and loot toasts coloured by rarity all read clearly, and the loot names have real flavour. The weaknesses are crude, untextured blob models (the bellwarden boss is a flat-shaded shape that fills the camera), plain sphere and line spell effects, and a boss windup marked only by red lines. Hit feedback is sparse, just a few floating numbers, and the last third of the clip has no enemies in it at all.",
+  "pyromancer": "Loot presentation is the strongest part: light beams, large rarity-coloured name banners and stacked pickup toasts with affix text (including a purple epic) make drops easy to see. The HUD is functional, with HP/mana bars, a numbered spell bar with cooldown timers and a minimap. The boss slam has red ground-line telegraphs, but large banners and white blooms often cover the action. Spell effects are mostly small orange sprites and flat fire, enemies are simple blocky models, and many frames show empty market stalls with no combat. Damage numbers are small and sparse, and nothing shows hit-stop or knockback.",
+  "stormcaller": "Loot is the strongest system: rarity-coloured item toasts, a big pickup banner and level-up text, with a clean HUD that has HP/mana bars, a numbered spell bar with cooldowns and a minimap. Combat reads poorly. Enemies are crude primitive shapes (a bell-headed boss, spiked balls), there are no visible ground telegraphs or wind-up markers, and spell VFX are thin lightning streaks and flat glowing blobs that sometimes cover the screen. Five of the 12 frames show no enemies within 30 m, and many show empty streets or plain grey geometry, so pacing and impact fall well short of a commercial ARPG.",
+  "warden": "The best parts are the loot presentation (rarity-coloured pickup cards, light beams, big item-name text) and the boss's red ground-line telegraph in frame 5. A tidy HUD with bars, a cooldown bar and a minimap helps too. The weaknesses are crude, flat-shaded low-poly assets, oversized rock and glow VFX that fill the screen and hide the action in frames 6\u20138, and few, small damage numbers. Combat is also sparse: half the frames have no enemies, and overlapping loot text clutters the screen."
+ }
+}
