@@ -1,0 +1,67 @@
+{
+ "gameplay_judged": 41.1,
+ "n": 4,
+ "model": "claude-opus-5-5",
+ "hash": "274747eb9c68566c",
+ "classes": {
+  "hexweaver": {
+   "score": 3.86,
+   "readability_telegraphs": 3.0,
+   "spell_vfx": 3.5,
+   "enemy_animation_variety": 3.0,
+   "hit_feedback": 3.5,
+   "ui_hud_clarity": 5.5,
+   "loot_excitement": 5.0,
+   "polished_arpg_feel": 3.5,
+   "overall": 3.5
+  },
+  "pyromancer": {
+   "score": 3.71,
+   "readability_telegraphs": 4.0,
+   "spell_vfx": 3.0,
+   "enemy_animation_variety": 3.0,
+   "hit_feedback": 4.0,
+   "ui_hud_clarity": 5.0,
+   "loot_excitement": 4.0,
+   "polished_arpg_feel": 3.0,
+   "overall": 3.5
+  },
+  "stormcaller": {
+   "score": 4.43,
+   "readability_telegraphs": 4.0,
+   "spell_vfx": 4.0,
+   "enemy_animation_variety": 3.0,
+   "hit_feedback": 5.0,
+   "ui_hud_clarity": 6.0,
+   "loot_excitement": 5.0,
+   "polished_arpg_feel": 4.0,
+   "overall": 4.3
+  },
+  "warden": {
+   "score": 4.43,
+   "readability_telegraphs": 4.0,
+   "spell_vfx": 5.0,
+   "enemy_animation_variety": 3.0,
+   "hit_feedback": 5.0,
+   "ui_hud_clarity": 6.0,
+   "loot_excitement": 4.0,
+   "polished_arpg_feel": 4.0,
+   "overall": 4.3
+  }
+ },
+ "by_criterion": {
+  "readability_telegraphs": 3.75,
+  "spell_vfx": 3.88,
+  "enemy_animation_variety": 3.0,
+  "hit_feedback": 4.38,
+  "ui_hud_clarity": 5.62,
+  "loot_excitement": 4.5,
+  "polished_arpg_feel": 3.62
+ },
+ "reasons": {
+  "hexweaver": "The HUD is the strongest part: a boss bar with phase ticks, spell cooldown numbers on the hotbar, a minimap, and loot toasts colour-coded by rarity, while the green light beams make drops easy to spot. The camera often clips into or is blocked by market stall roofs (frames 3, 4, 8, 12), enemies are small, low-poly and rarely on screen, and the only visible telegraphs are faint white ground rings. The spell effects are mostly the same generic green and white orbs, and hit feedback is limited to sparse damage numbers and one small CRIT label, with no visible hit flashes or impact effects.",
+  "pyromancer": "Strengths: the boss has a segmented phase bar, banners for phase changes and enrage, and red ground markers before attacks. The spell bar shows cooldowns, damage numbers appear on hits (crits included), and loot has light beams, rarity-tagged toasts and a lot of sounds. Weaknesses: the assets are flat-shaded, low-poly primitives, and the market stall awnings often hide the fight or fill the screen. Spell effects look like generic orange smears and white blobs with little weight, enemies are hard to read in the clutter, and the loot is mostly common and lacks spectacle.",
+  "stormcaller": "The HUD is the strongest part: it has health and mana bars, numbered cooldown slots, a minimap, a boss bar split into phases with an 'ENRAGED' state, loot toasts with rarity labels, and crit-tagged damage numbers. There are also coloured loot beams and a 'Vanquished' banner. The weaknesses are blocky, low-detail enemies that are hard to see, often hidden behind market stalls; translucent shapes and particle blobs that cover the screen and make the action hard to read; only one visible boss telegraph ('Peal of Shards'); and about half the clip passing with no combat at all.",
+  "warden": "Strengths: there is a full boss presentation (named health bar, phase dividers, 'enraged' and 'Vanquished' banners), the HUD is coherent with a cooldown bar, minimap and level display, damage numbers are scaled and crits are stamped, and the earth shard and golden bell effects have some punch. Weaknesses: the enemies are simple low-poly shapes, often hidden by awnings or the camera, and almost no ground telegraphs are visible despite the boss windups. Loot shows only as small text toasts with rarity colouring, with no beams or ground drops even for the legendary, and large stretches of the clip are empty market stalls with no combat."
+ }
+}

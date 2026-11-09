@@ -304,23 +304,42 @@ export class Player {
   // march is backed by one ray against nearby visual-only meshes (zone facades, market stall canopies; this.camOcclude,
   // set by main.js), and the boom length is smoothed (snaps in at once, eases back out) so it never sits in geometry.
   applyCamera3(cam, dt = 1 / 60) {
-    const sy = Math.sin(this.yaw), cy = Math.cos(this.yaw), cp = Math.cos(this.pitch), sp = Math.sin(this.pitch);
-    const hx = this.x, hy = this.y, hz = this.eye + 0.3;
+    const sy = Math.sin(this.yaw), cy = Math.cos(this.yaw);
+    const hx = this.x, hy = this.y, hz0 = this.eye + 0.3;
     const dmax = this.camMax || (this.mode === 'broom' ? 5.5 : 4);   // camMax: optional override (gameplay clip)
-    let d = dmax;
-    for (let r = 0.5; r <= d; r += 0.25) {
-      const x = hx + sy * cp * r, y = hy - cy * cp * r, z = hz - sp * r;
-      if (this.world.blocked(x, y, z - 0.3, 0.2, 0, 0.6) || (this.world.support(x, y, z, true)?.z ?? -1e9) > z - 0.3) { d = Math.max(0.6, r - 0.3); break; }
+    const boom = (bp, hz) => {   // free boom length behind the head for boom pitch bp
+      const cp = Math.cos(bp), sp = Math.sin(bp);
+      let d = dmax;
+      for (let r = 0.5; r <= d; r += 0.25) {
+        const x = hx + sy * cp * r, y = hy - cy * cp * r, z = hz - sp * r;
+        if (this.world.blocked(x, y, z - 0.3, 0.2, 0, 0.6) || (this.world.support(x, y, z, true)?.z ?? -1e9) > z - 0.3) { d = Math.max(0.6, r - 0.3); break; }
+      }
+      if (this.camOcclude) {   // three.js frame: (x, z, -y); direction from the head back to the camera
+        const hit = this.camOcclude(hx, hz, -hy, sy * cp, -sp, cy * cp, d + 0.3);
+        if (hit < d + 0.3) d = Math.max(0.35, hit - 0.3);
+      }
+      return d;
+    };
+    // session 60: under a stall canopy / next to a boss the boom used to collapse to 0.35 m, inside the canopy or the
+    // avatar. When the normal boom is short, swing it lower and flatter (and drop the pivot) so the camera slides under
+    // the canopy and keeps the fight in view; the boom pitch is eased so the swing never pops.
+    let want = this.pitch, wantHz = hz0, best = boom(this.pitch, hz0);
+    if (best < dmax * 0.7) {
+      for (const [bp, hz] of [[Math.min(this.pitch + 0.3, 0.15), hz0 - 0.25], [Math.min(this.pitch + 0.55, 0.25), hz0 - 0.5]]) {
+        const d = boom(bp, hz); if (d > best + 0.8) { best = d; want = bp; wantHz = hz; }
+      }
     }
-    if (this.camOcclude) {   // three.js frame: (x, z, -y); direction from the head back to the camera
-      const hit = this.camOcclude(hx, hz, -hy, sy * cp, -sp, cy * cp, d + 0.3);
-      if (hit < d + 0.3) d = Math.max(0.35, hit - 0.3);
-    }
+    if (this.camP == null) { this.camP = want; this.camHz = wantHz; }
+    const k = Math.min(1, dt * 6);
+    this.camP += (want - this.camP) * k; this.camHz += (wantHz - this.camHz) * k;
+    const hz = this.camHz, bp = this.camP, cp = Math.cos(bp), sp = Math.sin(bp);
+    let d = Math.abs(bp - want) < 0.02 ? best : boom(bp, hz);
     if (this.camD == null || d < this.camD) this.camD = d;   // pull in at once
     else this.camD += (d - this.camD) * Math.min(1, dt * 4);  // ease back out
     d = Math.min(this.camD, dmax);
     cam.position.set(hx + sy * cp * d, hz - sp * d, -(hy - cy * cp * d));
-    cam.rotation.set(this.pitch, this.yaw, 0, 'YXZ');
+    // aim at the player's look direction, tilted by however far the boom swung below the player's pitch
+    cam.rotation.set(this.pitch + (bp - this.pitch) * 0.6, this.yaw, 0, 'YXZ');
   }
 
   look(dx, dy) {

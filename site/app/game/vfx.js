@@ -551,14 +551,33 @@ export function createVfx(game) {
     // session 52: optional tumbling stone in the head (warden pebble), taken from the debris pool and driven here
     h.rock = o.rock ? take(rocks) : null;
     if (h.rock) { h.rock.geometry = rockGeos[(rnd() * 3) | 0]; h.rock.material.color.set(o.rockColor ?? 0x9a8466); h.rock.material.opacity = 1; h.rock.scale.setScalar(o.rock); h.rock.position.set(x, z, -y); }
+    // session 60: shaped heads. The core is stretched along the flight direction (comet/teardrop instead of a ball);
+    // o.envelope adds a larger, softer outer core in the trail colour (flame sheath); o.crystal adds a spinning
+    // additive crystal (hex dart); a muzzle flash and spark ring mark the cast point.
+    h.stretch = o.stretch ?? 2.6;
+    h.env = o.envelope ? core(x, y, z, o.envelope, (o.radius ?? 0.16) * 1.9) : null;
+    if (h.env) h.env.material.uniforms.uOp.value = 0.55;
+    h.cry = o.crystal ? take(crystals) : null;
+    if (h.cry) { h.cry.material.color.set(o.crystal); h.cry.material.opacity = 0.95; h.cry.scale.setScalar(o.crystalSize ?? 1); h.cry.position.set(x, z, -y); }
+    const f = take(flashes);
+    if (f) { tone(f.material.color.set(color), 1); f.material.opacity = 0.7; f.material.rotation = rnd() * 6.28; f.position.set(x, z, -y); f.scale.setScalar(0.3); const e = rec(f, 0.1, 'flash'); e.s0 = 0.75; }
+    burst(x, y, z, 5, { tex: 'spark', color: 0xffffff, color2: color, speed: 3.5, size: 0.1, life: 0.2, drag: 6, jitter: 0.05 });
     h.position = { set: (X, Y, Z) => moveMissile(h, X, -Z, Y) };
     trailPush(h.trail, x, y, z); trailPush(h.trail2, x, y, z);
     return h;
   }
   function moveMissile(h, x, y, z) {
     if (!h || !h.visible) return;
+    const mx = x - h.x, my = y - h.y, mz = z - h.z, moved = mx * mx + my * my + mz * mz > 1e-6;
     h.x = x; h.y = y; h.z = z;
-    h.core?.position.set(x, z, -y);
+    for (const c of [h.core, h.env]) { if (!c) continue;
+      if (moved) { tv.set(x + mx, z + mz, -(y + my)); c.position.set(x, z, -y); c.lookAt(tv);
+        const r = c === h.env ? (h.core ? h.core.scale.x * 1.9 : 0.3) : c.scale.x, fl = 0.9 + 0.2 * rnd();
+        c.scale.set(r, r, r * h.stretch * (c === h.env ? 1.25 : 1) * fl);
+        // pull the stretched shape back so its bright nose sits at the true position and the tail trails behind
+        c.position.addScaledVector(tv.sub(c.position).normalize(), -r * (h.stretch - 1) * 0.6); }
+      else c.position.set(x, z, -y); }
+    if (h.cry) { h.cry.position.set(x, z, -y); if (moved) { tv.set(x + mx, z + mz, -(y + my)); h.cry.lookAt(tv); h.cry.rotateX(Math.PI / 2); } h.spin = (h.spin || 0) + 0.45; h.cry.rotateY(h.spin); }
     if (h.rock) { h.rock.position.set(x, z, -y); h.rock.rotation.x += 0.35; h.rock.rotation.z += 0.21; }
     if (h.halo) { h.halo.position.set(x, z, -y); h.halo.material.opacity = h.halo0 * smooth(2, 6, camDist(x, z, -y)); }
     trailPush(h.trail, x, y, z); trailPush(h.trail2, x, y, z);
@@ -568,6 +587,7 @@ export function createVfx(game) {
   function releaseMissile(h) {
     if (!h || !h.visible) return; h.visible = false;
     if (h.core) h.core.visible = false; if (h.halo) h.halo.visible = false; if (h.rock) { h.rock.visible = false; h.rock = null; }
+    if (h.env) h.env.visible = false; if (h.cry) { h.cry.visible = false; h.cry = null; }
     trailEnd(h.trail); trailEnd(h.trail2);
   }
   // floating sigil: a rune sprite that spins and fades above a point (curse marks)

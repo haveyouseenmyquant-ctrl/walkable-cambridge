@@ -235,7 +235,7 @@ async function main() {
     if (fc) { camera.position.set(fc.pos[0], fc.pos[2], -fc.pos[1]); camera.lookAt(fc.at[0], fc.at[2], -fc.at[1]); }
     else if (player.view === 3) player.applyCamera3(camera, dt);
     else player.applyCamera(camera);
-    avatar.update(player, dt, player.view === 3 && !fc);
+    avatar.update(player, dt, player.view === 3 && !fc && !(player.camD < 0.8));   // s60: hide the avatar when the boom is squeezed into it
     if (sun.castShadow) {   // shadow box follows the camera, snapped to shadow texels to avoid shimmering
       const q = 240 / 2048, cx = Math.round(camera.position.x / q) * q, cz = Math.round(camera.position.z / q) * q;
       sun.target.position.set(cx, 0, cz); sun.position.set(cx, 0, cz).addScaledVector(SUN_DIR, 300); sun.target.updateMatrixWorld();

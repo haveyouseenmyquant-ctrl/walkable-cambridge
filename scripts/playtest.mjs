@@ -6,7 +6,7 @@
 // game.caster.cast, walks over kill spots to pick up loot (items.js pickup radius), equips better drops, picks talents
 // at level-ups and uses the real death screen button if it dies. The game clock is stepped deterministically
 // (player.update + game.update at 20 Hz from page.evaluate), a few seconds of game time per evaluate.
-// Classes run in parallel (one browser context each, fresh localStorage); each run reloads the page.
+// Runs are a job queue over WC_PLAYTEST_WORKERS pages per class (default 2), each run in a fresh browser context.
 // playable = class data ok (>=6 spells incl. a blink + an ult, >=3 talent choices) and >= half its runs pass.
 //   node scripts/playtest.mjs [site_dir] [runs_per_class=5]
 // Last stdout line: {playable_classes, playtest_pass_pct, boss_ttk_median_s, boss_ttk_spread_pct, classes, runs, ...}
@@ -310,54 +310,74 @@ try {
     talentChoices: (c.talents || []).reduce((n, t) => n + t.length, 0), talentTiers: (c.talents || []).length }])));
   await ctx0.close();
   log('classes', JSON.stringify(classData));
-  await Promise.all(Object.keys(classData).filter(c => !ONLY || ONLY.includes(c)).map(async cls => {
-    const res = classResults[cls] = { ...classData[cls], runs: [] };
-    const ctx = await browser.createBrowserContext();   // fresh localStorage per class
-    const page = await ctx.newPage();
+  // session 60: runs are a job queue served by WORKERS pages per class (WC_PLAYTEST_WORKERS, default 3), each run in its own
+  // fresh browser context (fresh localStorage; a crashed page no longer fails every later run of its class with 'detached Frame')
+  const WORKERS = Math.max(1, +(process.env.WC_PLAYTEST_WORKERS || 2));
+  const clsList = Object.keys(classData).filter(c => !ONLY || ONLY.includes(c));
+  for (const cls of clsList) classResults[cls] = { ...classData[cls], runs: [] };
+  const jobs = [];
+  for (let r = 0; r < RUNS; r++) for (const cls of clsList) jobs.push({ cls, r, retried: 0 });
+  let mkLock = Promise.resolve();
+  async function runOne(job) {
+    const { cls, r } = job, res = classResults[cls];
+    // context/page creation is serialised (12 concurrent newPage calls raced: 'Requesting main frame too early!')
+    let ctx, page;
+    const made = mkLock.then(async () => {
+      for (let k = 0; ; k++) {
+        try { ctx = await browser.createBrowserContext(); page = await ctx.newPage(); await page.goto('about:blank'); return; }
+        catch (e) { await ctx?.close().catch(() => {}); if (k >= 4) throw e; log(cls, r, 'newPage retry:', e.message); await new Promise(ok => setTimeout(ok, 2000 * (k + 1))); }
+      }
+    });
+    mkLock = made.catch(() => {});
+    try { await made; } catch (e) {
+      const rec = { cls, run: r, fail: 'harness: ' + e.message, pass: false, wallS: 0 };
+      res.runs.push(rec); runs.push(rec); log(cls, r, 'FAIL', rec.fail); return;
+    }
     const errors = [];
     page.on('pageerror', e => errors.push('pageerror: ' + (e.stack || e.message).split('\n').slice(0, 2).join(' | ')));
     page.on('console', m => { const t = m.text(); if (m.type() === 'error' && !/404|Failed to load resource/.test(t)) errors.push(t);
       if (m.type() === 'warning' && /^\[(game|classes|items|mobs)\]/.test(t)) errors.push(t); });
-    for (let r = 0, retried = 0; r < RUNS; r++) {
-      const e0 = errors.length, w0 = Date.now();
-      let rec = { cls, run: r };
-      try {
-        await page.evaluate(() => { try { localStorage.clear(); } catch {} });
-        await page.goto(URL0, { waitUntil: 'domcontentloaded', timeout: 300000 });
-        await page.waitForFunction('window.__walkReady === true', { timeout: 300000 });
-        await page.waitForFunction('window.__game && window.__game.caster && window.__game.mobSystem && window.__game.items', { timeout: 300000, polling: 250 });
-        await page.evaluate(c => { const g = window.__game; g.caster.setClass(c); g.save.cls = c; g.persist(); g.paused = false; }, cls);
-        // wait for the tiles along the route to stream in around the start
-        await page.evaluate(() => window.__player.teleport(-108.1, 93.97));
-        await page.waitForFunction('!window.__player.pendingPlace && window.__player.settled(160)', { timeout: 300000, polling: 500 });
-        await page.evaluate(installBot, ROUTE, r);
-        // session 44: the run limit is game time (bot.maxT, checked in bot.step); chunks are stepped until the bot is
-        // done/failed, with only a wall-clock safety cap so a heavily loaded machine cannot turn into 'not finished'
-        let st;
-        for (let k = 0; ; k++) {
-          st = await page.evaluate(() => window.__bot.chunk(6, 4000));
-          if (st.done || st.fail || errors.length > e0) break;
-          if (Date.now() - w0 > RUN_WALL_S * 1000) { st.fail = `harness: wall-clock safety cap ${RUN_WALL_S} s at game ${st.t} s`; break; }
-          if (k % 10 === 9) log(cls, r, JSON.stringify(st));
-        }
-        const ev = await page.evaluate(() => { const b = window.__bot; b.dispose(); const e = b.ev;
-          return { bossTtk: b.bossTtk, kills: e.kills.length, bossKilled: e.kills.some(k => k.type === 'bellwarden'), pickups: e.pickups, equips: e.equips,
-            deaths: e.deaths, casts: e.casts, talents: e.talents, equipped: Object.keys(window.__game.items.equipped).length }; });
-        const perr = errors.slice(e0);
-        rec = { ...rec, ...ev, gameS: st.t, fail: st.fail || (perr.length ? 'page error: ' + perr[0] : null) || (!st.done ? 'not finished' : null) || (!ev.bossKilled ? 'boss not killed' : null) };
-      } catch (e) {
-        rec.fail = 'harness: ' + e.message;
-        // a page that did not load in time under CPU contention is a harness problem, not a game failure: retry once
-        if (!retried++ && !/bot|stuck|softlock/.test(e.message)) { log(cls, r, 'harness retry:', e.message); r--; continue; }
+    const e0 = 0, w0 = Date.now();
+    let rec = { cls, run: r };
+    try {
+      await page.goto(URL0, { waitUntil: 'domcontentloaded', timeout: 300000 });
+      await page.waitForFunction('window.__walkReady === true', { timeout: 300000 });
+      await page.waitForFunction('window.__game && window.__game.caster && window.__game.mobSystem && window.__game.items', { timeout: 300000, polling: 250 });
+      await page.evaluate(c => { const g = window.__game; g.caster.setClass(c); g.save.cls = c; g.persist(); g.paused = false; }, cls);
+      // wait for the tiles along the route to stream in around the start
+      await page.evaluate(() => window.__player.teleport(-108.1, 93.97));
+      await page.waitForFunction('!window.__player.pendingPlace && window.__player.settled(160)', { timeout: 300000, polling: 500 });
+      await page.evaluate(installBot, ROUTE, r);
+      // session 44: the run limit is game time (bot.maxT, checked in bot.step); chunks are stepped until the bot is
+      // done/failed, with only a wall-clock safety cap so a heavily loaded machine cannot turn into 'not finished'
+      let st;
+      for (let k = 0; ; k++) {
+        st = await page.evaluate(() => window.__bot.chunk(6, 4000));
+        if (st.done || st.fail || errors.length > e0) break;
+        if (Date.now() - w0 > RUN_WALL_S * 1000) { st.fail = `harness: wall-clock safety cap ${RUN_WALL_S} s at game ${st.t} s`; break; }
+        if (k % 10 === 9) log(cls, r, JSON.stringify(st));
       }
-      retried = 0;
-      rec.pass = !rec.fail; rec.wallS = +((Date.now() - w0) / 1000).toFixed(0);
-      pageErrorsTotal += errors.length - e0;
-      res.runs.push(rec); runs.push(rec);
-      log(cls, r, rec.pass ? 'PASS' : 'FAIL ' + rec.fail, `boss ${rec.bossTtk?.toFixed?.(1)}s game ${rec.gameS}s wall ${rec.wallS}s kills ${rec.kills} pickups ${rec.pickups} deaths ${rec.deaths}`);
+      const ev = await page.evaluate(() => { const b = window.__bot; b.dispose(); const e = b.ev;
+        return { bossTtk: b.bossTtk, kills: e.kills.length, bossKilled: e.kills.some(k => k.type === 'bellwarden'), pickups: e.pickups, equips: e.equips,
+          deaths: e.deaths, casts: e.casts, talents: e.talents, equipped: Object.keys(window.__game.items.equipped).length }; });
+      const perr = errors.slice(e0);
+      rec = { ...rec, ...ev, gameS: st.t, fail: st.fail || (perr.length ? 'page error: ' + perr[0] : null) || (!st.done ? 'not finished' : null) || (!ev.bossKilled ? 'boss not killed' : null) };
+    } catch (e) {
+      rec.fail = 'harness: ' + e.message;
+      // a page that did not load in time under CPU contention is a harness problem, not a game failure: retry (up to 3x)
+      if ((job.retried || 0) < 3 && !/bot|stuck|softlock/.test(e.message)) { log(cls, r, 'harness retry:', e.message); job.retried = (job.retried || 0) + 1; await ctx.close().catch(() => {}); return runOne(job); }
     }
-    await ctx.close();
+    await ctx.close().catch(() => {});
+    rec.pass = !rec.fail; rec.wallS = +((Date.now() - w0) / 1000).toFixed(0);
+    pageErrorsTotal += errors.length - e0;
+    res.runs.push(rec); runs.push(rec);
+    log(cls, r, rec.pass ? 'PASS' : 'FAIL ' + rec.fail, `boss ${rec.bossTtk?.toFixed?.(1)}s game ${rec.gameS}s wall ${rec.wallS}s kills ${rec.kills} pickups ${rec.pickups} deaths ${rec.deaths}`);
+  }
+  await Promise.all(Array.from({ length: Math.min(jobs.length, WORKERS * clsList.length) }, async (_, w) => {
+    await new Promise(ok => setTimeout(ok, w * 8000));   // stagger the page loads
+    for (let job; (job = jobs.shift());) await runOne(job);
   }));
+  for (const cls of clsList) classResults[cls].runs.sort((a, b) => a.run - b.run);
 } catch (e) { log('fatal', e.stack || e.message); }
 finally { await browser.close(); server.close(); }
 

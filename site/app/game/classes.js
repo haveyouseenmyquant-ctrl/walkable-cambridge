@@ -232,17 +232,17 @@ export function install(game) {
     vfx.burst(x, y, z, Math.ceil(n / 4), { tex: 'smoke', color: 0x2a1040, color2: 0x100818, grow: 2, speed: 0.8, size: 0.9, life: 1, alpha: 0.45 });
   }
   const LOOK = {
-    ember: { missile: { coreColor: 0xffe8b0, radius: 0.16, halo: 0.8, width: 0.42, width2: 0.16, trailColor2: 0xffe080, trailLife: 0.28, trailLife2: 0.42 },
+    ember: { missile: { envelope: 0xff6a18, stretch: 3, coreColor: 0xffe8b0, radius: 0.16, halo: 0.8, width: 0.42, width2: 0.16, trailColor2: 0xffe080, trailLife: 0.28, trailLife2: 0.42 },
              trail: (x, y, z) => {   // session 51: flickering flame head (random size/colour each frame), licking tongues, ember sparks
                vfx.burst(x, y, z, 1, { tex: 'flame', color: 0xfff0c0, color2: 0xff6010, speed: 0, size: 0.5 + Math.random() * 0.35, life: 0.07, drag: 0, jitter: 0.04, spin: 8 });
                vfx.burst(x, y, z, 2, { ...FIRE, speed: 0.6, size: 0.42, life: 0.28, up: 1.4, jitter: 0.12 });
                if (Math.random() < 0.7) vfx.burst(x, y, z, 1, { tex: 'ember', color: 0xffd070, color2: 0xff3000, speed: 1.4, size: 0.1, life: 0.7, grav: 2.5, drag: 0.8, up: 0.6 }); },
              impact: (x, y, z) => { fireBlast(x, y, z, 1.2, false); vfx.burst(x, y, z, 4, { tex: 'flame', color: 0xffe0a0, color2: 0xff4000, speed: 2.5, size: 0.8, life: 0.3, up: 2, drag: 3 });
                const g = nearGround(x, y, z); if (g != null) { vfx.ring(x, y, g, 0xffa040, 0.2, 1.6, 0.3, 0.6); vfx.decal('scorch', x, y, g, 1.1, 4, 0xffffff, 0.8); } } },
-    orb: { missile: { coreColor: 0xfff0c0, radius: 0.26, halo: 1.3, width: 0.75, width2: 0.3, trailColor2: 0xffd060, trailLife: 0.3 },
+    orb: { missile: { envelope: 0xff4a10, stretch: 1.8, coreColor: 0xfff0c0, radius: 0.26, halo: 1.3, width: 0.75, width2: 0.3, trailColor2: 0xffd060, trailLife: 0.3 },
            trail: (x, y, z) => { vfx.burst(x, y, z, 4, { ...FIRE, speed: 1.2, size: 0.8, life: 0.35, up: 1.5, jitter: 0.35 }); vfx.burst(x, y, z, 1, { ...SMOKE, speed: 0.4, size: 0.8, life: 0.9, up: 0.8, alpha: 0.35 }); },
            impact: (x, y, z, sp) => { sfx.play('boom'); fireBlast(x, y, z, sp.splash, true); vfx.ring(x, y, groundZ(x, y, z), 0xffc060, 0.5, sp.splash * 1.4, 0.6, 0.7); } },
-    pebble: { missile: { coreColor: 0xffd890, radius: 0.1, halo: 0.7, width: 0.3, trailColor: 0xd8a860, trailLife: 0.3, width2: 0.1, trailColor2: 0xffe0a0, rock: 0.2 },   // session 52: tumbling stone head
+    pebble: { missile: { stretch: 1.8, coreColor: 0xffd890, radius: 0.1, halo: 0.7, width: 0.3, trailColor: 0xd8a860, trailLife: 0.3, width2: 0.1, trailColor2: 0xffe0a0, rock: 0.2 },   // session 52: tumbling stone head
               trail: (x, y, z) => {   // session 51: grit shards shed behind the pebble and a dust wake
                 if (Math.random() < 0.7) vfx.burst(x, y, z, 1, { ...DUST, speed: 0.3, size: 0.45, life: 0.6, alpha: 0.45, grow: 1.5 });
                 if (Math.random() < 0.6) vfx.burst(x, y, z, 1, { tex: 'shard', color: 0xc8a878, speed: 1.5, size: 0.14, life: 0.4, grav: 10, spin: 9 }); },
@@ -250,14 +250,14 @@ export function install(game) {
                 vfx.impact(x, y, z, 0xffc870, 1.2); vfx.core(x, y, z, 0xffb050, 0.3, 0.12);   // session 52: amber crack flash
                 const g = nearGround(x, y, z); if (g != null) { vfx.decal('crack', x, y, g, 1.1, 3, 0xffffff, 0.8); vfx.ring(x, y, g, 0xd8b070, 0.2, 1.8, 0.3, 0.75);
                   for (let k = 0; k < 3; k++) { const a = Math.random() * 6.283; vfx.spike(x + Math.cos(a) * 0.5, y + Math.sin(a) * 0.5, g, 0.5 + Math.random() * 0.4, 0.55); } } } },
-    dart: { missile: { coreColor: 0xf4e0ff, radius: 0.15, halo: 0.8, width: 0.4, width2: 0.14, trailColor2: 0x70ff90, trailLife: 0.28, trailLife2: 0.4 },
+    dart: { missile: { crystal: 0xb070ff, crystalSize: 1.1, stretch: 3.2, coreColor: 0xf4e0ff, radius: 0.15, halo: 0.8, width: 0.4, width2: 0.14, trailColor2: 0x70ff90, trailLife: 0.28, trailLife2: 0.4 },
             trail: (x, y, z, b) => {   // session 51: two wisps orbit the dart's path (double helix) and fade behind it
               const t = (b ? b.trav : 0) * 1.6, nx = b ? -b.dy : 1, ny = b ? b.dx : 0;
               for (const ph of [0, Math.PI]) { const c = Math.cos(t + ph) * 0.32, sn = Math.sin(t + ph) * 0.32;
                 vfx.burst(x + nx * c, y + ny * c, z + sn, 1, { tex: 'wisp', color: ph ? 0xd890ff : 0x9050ff, color2: 0x301080, speed: 0.1, size: 0.34, life: 0.5, spin: 5, drag: 2, jitter: 0 }); }
               if (Math.random() < 0.3) vfx.burst(x, y, z, 1, { tex: 'smoke', color: 0x3a1460, color2: 0x100818, speed: 0.2, size: 0.5, life: 0.6, alpha: 0.35, grow: 1.6 }); },
             impact: (x, y, z) => { hexPuff(x, y, z, 10); vfx.sigil(x, y, z + 0.9, 0xc080ff, 0.9, 0.9); vfx.core(x, y, z, 0xb070ff, 0.25, 0.15); const g = nearGround(x, y, z); if (g != null) vfx.decal('rune', x, y, g, 0.9, 1.2, 0xb070ff, 0.7, 2); } },
-    mark: { missile: { coreColor: 0xe0ffe8, radius: 0.17, halo: 0.85, width: 0.44, trailColor: 0x50ff70, width2: 0.12, trailColor2: 0xb070ff, trailLife: 0.3 },
+    mark: { missile: { crystal: 0x60ff80, crystalSize: 1.3, stretch: 2.4, coreColor: 0xe0ffe8, radius: 0.17, halo: 0.85, width: 0.44, trailColor: 0x50ff70, width2: 0.12, trailColor2: 0xb070ff, trailLife: 0.3 },
             trail: (x, y, z) => vfx.burst(x, y, z, 2, { tex: 'wisp', color: 0x70ff90, color2: 0x104020, speed: 0.6, size: 0.45, life: 0.5, up: -0.4, spin: 5 }),
             impact: (x, y, z) => { hexPuff(x, y, z, 12, 0x70ff90, 0xb070ff); vfx.sigil(x, y, z + 0.6, 0x70ff90, 1.3, 1.4); const g = nearGround(x, y, z); if (g != null) vfx.decal('rune', x, y, g, 1.4, 1.6, 0x50ff70, 0.8, 1.5); } },
   };
