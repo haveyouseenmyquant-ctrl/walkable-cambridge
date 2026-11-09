@@ -1,0 +1,67 @@
+{
+ "gameplay_judged": 49.5,
+ "n": 4,
+ "model": "claude-opus-5-5",
+ "hash": "e5aa7869a517fc3f",
+ "classes": {
+  "hexweaver": {
+   "score": 4.57,
+   "readability_telegraphs": 5.0,
+   "spell_vfx": 4.0,
+   "enemy_animation_variety": 4.0,
+   "hit_feedback": 5.0,
+   "ui_hud_clarity": 5.0,
+   "loot_excitement": 5.0,
+   "polished_arpg_feel": 4.0,
+   "overall": 4.5
+  },
+  "pyromancer": {
+   "score": 5.07,
+   "readability_telegraphs": 5.0,
+   "spell_vfx": 4.5,
+   "enemy_animation_variety": 4.0,
+   "hit_feedback": 5.5,
+   "ui_hud_clarity": 6.0,
+   "loot_excitement": 6.0,
+   "polished_arpg_feel": 4.5,
+   "overall": 5
+  },
+  "stormcaller": {
+   "score": 5.07,
+   "readability_telegraphs": 5.0,
+   "spell_vfx": 5.0,
+   "enemy_animation_variety": 4.0,
+   "hit_feedback": 5.0,
+   "ui_hud_clarity": 6.0,
+   "loot_excitement": 6.0,
+   "polished_arpg_feel": 4.5,
+   "overall": 5
+  },
+  "warden": {
+   "score": 5.07,
+   "readability_telegraphs": 5.0,
+   "spell_vfx": 5.0,
+   "enemy_animation_variety": 4.0,
+   "hit_feedback": 5.0,
+   "ui_hud_clarity": 6.0,
+   "loot_excitement": 6.0,
+   "polished_arpg_feel": 4.5,
+   "overall": 5
+  }
+ },
+ "by_criterion": {
+  "readability_telegraphs": 5.0,
+  "spell_vfx": 4.62,
+  "enemy_animation_variety": 4.0,
+  "hit_feedback": 5.12,
+  "ui_hud_clarity": 5.75,
+  "loot_excitement": 5.75,
+  "polished_arpg_feel": 4.38
+ },
+ "reasons": {
+  "hexweaver": "Strengths: the boss fight has a phased health bar, named attacks like Clapper Sweep and Great Toll, and red ground telegraphs. Loot uses light beams, rarity-coloured labels and item toasts, and there are plenty of floating crit numbers backed by heavy sound use. Weaknesses: the spells are mostly generic glowing orbs and particles, the enemies are simple low-poly props with little visible animation, the fights cluster into short bursts with long empty stretches (frames 7\u20139 and 12), and dense text overlaps and clutters the screen during combat.",
+  "pyromancer": "The strongest parts are the HUD and loot: there's a boss bar with phase markers, phase and 'Vanquished' banners, a spell bar with cooldowns, a minimap, rarity-coloured loot beams and item toasts, and 537 sound voices with crit-tagged damage numbers. The weak parts are the visuals: spell effects are mostly flat low-poly confetti and white rings that clutter fights (frame 6 is an unreadable mess). Enemies are simple primitive-built models with little visible animation, and the only clear telegraph is one red ground lane in frame 12. The camera is third-person, not first-person, and many frames show no combat at all.",
+  "stormcaller": "The strongest parts are the HUD and the loot. The HUD has a boss bar with phase markers, enrage and 'Vanquished' banners, and a cooldown spell bar. Loot gets rarity-coloured beams and item toasts, and crits show as yellow numbers. The weak parts are the low-poly enemies and environment, and some spell effects that just look like white blobs. Frames 8\u201311 are mostly empty walking with no combat, and only a few enemy attacks are clearly telegraphed, such as the red ground markers on the boss.",
+  "warden": "Strengths: the boss has a named health bar with phase pips, an enrage tag and named attacks such as Clapper Sweep and Great Toll. There are red ground telegraphs, loot beams with rarity-coloured toasts and tooltips, plus a clean HUD with a cooldown spell bar and a minimap. Weaknesses: the enemies are simple primitive-built models and the town is flat blocky geometry. The spell effects lean on generic bubbles and glyph circles, and when they stack up close (frames 1 and 8) they bury the action. Hit feedback is mostly modest damage numbers, with only 3 crits and little visible flash or knockback."
+ }
+}

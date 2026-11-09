@@ -176,7 +176,11 @@ function installBot(route, runIdx) {
   }
   function castAt(m) {
     const d = dist(m), sp = C.spells, nearby = live().filter(o => Math.hypot(o.x - m.x, o.y - m.y) < 7).length;
-    const order = sp.map((s, i) => [s, i]).sort((a, b) => (b[0].ult - a[0].ult) || ((b[0].dmg || 0) - (a[0].dmg || 0)));
+    // session 68: a curse (damage-taken debuff) goes first when the target isn't cursed or the curse is about to lapse,
+    // as a player would open with it; sorting by raw damage left Withering Mark almost unused and hexweaver boss kill times swung 12-37 s
+    const needCurse = !(m._curseUntil > g.time + 1);
+    const prio = s => (s.ult ? 2 : 0) + (s.curse && needCurse ? 1 : 0);
+    const order = sp.map((s, i) => [s, i]).sort((a, b) => (prio(b[0]) - prio(a[0])) || ((b[0].dmg || 0) - (a[0].dmg || 0)));
     for (const [s, i] of order) {
       if (g.time < s.readyAt || g.stats.mana < s.mana) continue;
       if (s.kind === 'blink') continue;                                      // movement spell: used for travel
