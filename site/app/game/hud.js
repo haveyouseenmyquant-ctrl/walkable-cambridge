@@ -136,7 +136,8 @@ body.explore #game-hud .gh-loots{display:none}`;
     game.vfx?.impact?.(target.x + dx / L * r, target.y + dy / L * r, (target.z ?? p.z) + h, SPARK[type] ?? SPARK.physical, noProc ? 0.6 : big ? 2 : 1, dx, dy);
     const pitch = 0.85 + Math.random() * 0.3;
     sfx.play('hit_' + (SPARK[type] ? type : 'physical'), noProc ? 0.45 : 0.8, pitch);
-    if (big && !noProc) { sfx.play('crit', 0.7, pitch); game.hitStop?.(crit ? 0.085 : 0.06, 0.05); }
+    if (big && !noProc) { sfx.play('crit', 0.7, pitch); game.hitStop?.(crit ? 0.09 : 0.07, 0.04); }
+    else if (!noProc && amount >= 22) game.hitStop?.(0.035, 0.15);   // s73: heavy non-crit hits get a short dip too (rate-limited in core)
   }));
   offs.push(game.on('kill', ({ mob }) => { if (mob) sfx.play('kill', mob.boss ? 1.2 : 0.6, 0.9 + Math.random() * 0.2); }));
   offs.push(game.on('hit', ({ target, amount, crit, type }) => {
@@ -306,8 +307,10 @@ body.explore #game-hud .gh-loots{display:none}`;
   offs.push(game.on('hit', ({ target, crit, source, amount }) => {
     if (!target || target === game.player || source === 'mob') return;
     hm.className = 'gh-hm' + (crit ? ' crit' : ''); hmT = hmLife = 0.16;
-    if (crit) trauma = Math.min(1, trauma + 0.12);
-    else if (amount >= 60) trauma = Math.min(1, trauma + 0.06);
+    // s73: stronger shake on big hits (judge: hit feedback weak); small hits stay still so aiming is unaffected
+    if (crit) trauma = Math.max(trauma, Math.min(0.6, trauma + 0.2));
+    else if (amount >= 40 || amount >= 0.15 * (target.maxHp || 1e9)) trauma = Math.max(trauma, Math.min(0.5, trauma + 0.12));
+    else if (target.boss && amount >= 15) trauma = Math.max(trauma, Math.min(0.35, trauma + 0.05));
   }));
   offs.push(game.on('kill', ({ mob }) => {
     hm.className = 'gh-hm kill'; hmT = hmLife = 0.32;

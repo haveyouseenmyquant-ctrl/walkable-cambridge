@@ -266,19 +266,73 @@ def _ops(w, lay, P, L):
             _OPS.append((kind, float(pt[0]), float(pt[1])))
 
 
+def _annotations():
+    """Ring-1 facade annotations (data/annotations/ring1/<osm>.json, from non-held-out photos) by wall id. Session 73:
+    an annotated wall is built from its annotation (as city_facades.py does for non-bespoke walls) rather than the
+    regular SPEC bay rhythm, so its storeys, windows, doors, shopfronts and dormers are the ones seen in the photos."""
+    if "ann" not in _CACHE:
+        import glob
+        a = {}
+        for f in glob.glob(os.path.join(ROOT, "data/annotations/ring1/*.json")):
+            if f.endswith("walls.json"):
+                continue
+            try:
+                for w in json.load(open(f)).get("walls", []):
+                    a[w["id"]] = w
+            except Exception:
+                pass
+        _CACHE["ann"] = a
+    return _CACHE["ann"]
+
+
+def _ann_layout(w, sp, a, shop_names, fascias):
+    """The wall's annotation as its layout, with the SPEC material colours and shop lettering filled in where the
+    annotation leaves them out."""
+    import copy
+    lay = copy.deepcopy(a)
+    lay.setdefault("wall_colour", sp["col"])
+    lay.setdefault("trim_colour", sp["trim"])
+    lay.setdefault("material", sp["mat"])
+    k = 0
+    for e in lay.get("elements", []):
+        if e.get("type") == "shopfront" and not e.get("fascia_text") and k < len(shop_names) and shop_names[k]:
+            e["fascia_text"] = shop_names[k]
+            e.setdefault("fascia_colour", fascias[min(k, len(fascias) - 1)])
+            k += 1
+    floors = [float(z) for z in (lay.get("floor_z") or [0.0])]
+    return lay, floors
+
+
 def build_building(oid):
     C = _walls()
     sp = SPEC[oid]
     ws = C["by"].get(oid, [])
     street = sorted([w for w in ws if w["bridge_st"]], key=lambda w: -w["length"])
     named = {street[0]["id"]: True} if street else {}
+    ann = _annotations()
     out = []
     for w in ws:
         L = float(w["length"])
         if L < 0.3:
             continue
         x0s, x1s = C["ext"].get(w["id"], (0.0, L))
-        if w["bridge_st"]:
+        if w["id"] in ann:
+            names = sp["shops"] if (w["id"] in named or not street) else [""]
+            lay, floors = _ann_layout(w, sp, ann[w["id"]], names, sp["fas"])
+            H = max(w["eave_z"] - w["ground_z"], floors[-1] + 2.0)
+            P = F.wall_facade(L, H, lay, x0s, x1s)
+            for e in lay["elements"]:
+                if e["type"] == "shopfront" and e.get("fascia_text") and \
+                        min(e["x1"], x1s - 0.05) - max(e["x0"], x0s + 0.05) >= 1.0:
+                    lettering(P, dict(e, x0=max(e["x0"], x0s + 0.05), x1=min(e["x1"], x1s - 0.05)), H)
+            if sp.get("jetty") and len(floors) > 1:
+                jetty_beam(P, L, floors[1])
+            gutter(P, H, x0s, x1s)
+            if L >= 3.0:
+                chimneys(P, w, H, L)
+            _ops(w, lay, P, L)
+            ELEMENTS[w["id"]] = {k: P.counts.get(k, 0) for k in ("window", "door", "shopfront", "dormer")}
+        elif w["bridge_st"]:
             names = sp["shops"] if w["id"] in named else [""]
             lay, floors, fh, xs = _layout(w, sp, names, sp["fas"])
             H = max(w["eave_z"] - w["ground_z"], floors[-1] + 2.0)

@@ -7,10 +7,10 @@ import * as sfx from './sfx.js';
 import { createVfx } from './vfx.js';
 
 export const STARTING_GEAR = {
-  pyromancer: ['starter_pyromancer_staff', 'starter_pyromancer_robe'],
-  stormcaller: ['starter_stormcaller_staff', 'starter_stormcaller_robe'],
-  warden: ['starter_warden_staff', 'starter_warden_robe'],
-  hexweaver: ['starter_hexweaver_staff', 'starter_hexweaver_robe'],
+  pyromancer: ['starter_pyromancer_staff', 'starter_pyromancer_hat', 'starter_pyromancer_robe'],
+  stormcaller: ['starter_stormcaller_staff', 'starter_stormcaller_hat', 'starter_stormcaller_robe'],
+  warden: ['starter_warden_staff', 'starter_warden_hat', 'starter_warden_robe'],
+  hexweaver: ['starter_hexweaver_staff', 'starter_hexweaver_hat', 'starter_hexweaver_robe'],
 };
 
 export const CLASSES = {
@@ -137,9 +137,12 @@ export function install(game) {
   function giveGear() {
     if (!game.items?.give || !caster.cls) return;
     const given = (game.save.gearGiven ||= {});
-    if (given[caster.cls]) return;
-    for (const id of STARTING_GEAR[caster.cls]) { try { game.items.give(id); } catch (e) { console.warn('[classes] give', id, e.message); } }
-    given[caster.cls] = true; game.persist();
+    // session 73: starting gear now includes the class hat (its stats were dead data). given[cls] === 2 means staff, hat
+    // and robe were granted; older saves (true) get only the missing hat, quietly
+    if (given[caster.cls] === 2) return;
+    const ids = given[caster.cls] ? [`starter_${caster.cls}_hat`] : STARTING_GEAR[caster.cls];
+    for (const id of ids) { try { game.items.give(id, { quiet: !!given[caster.cls] }); } catch (e) { console.warn('[classes] give', id, e.message); } }
+    given[caster.cls] = 2; game.persist();
   }
   offs.push(game.on('ready', giveGear));
   offs.push(game.on('levelup', () => { rebuild(); sfx.play('levelup'); }));

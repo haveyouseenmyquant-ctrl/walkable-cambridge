@@ -124,8 +124,8 @@ def balustrade(P, x0, x1, z, y, col, h=0.95, gap_w=0.26, pitch=0.5):
 def niche(P, xc, z0, z1, w, y, col, holes):
     op = arch(xc, w, z0, z1)
     holes.append(op)
-    P.sides_xz(op, y - 0.45, y, F.shade(col, 0.82), inward=True)
-    P.face_xz(op, y - 0.45, F.shade(col, 0.78))
+    P.sides_xz(op, y - 0.28, y, F.shade(col, 0.82), inward=True)
+    P.face_xz(op, y - 0.28, F.shade(col, 0.78))
     P.slab(op.buffer(0.1, join_style=2).difference(op), y, y + 0.05, F.shade(col, 1.06))
 
 
@@ -214,7 +214,7 @@ def build_clare_east():
     a, d, L = _frame(E_A, E_B)
     col = ASHLAR
     P = F.Parts(mat="stone", wall_col=col)
-    Y, YG = 0.3, 0.9
+    Y, YG = 0.55, 1.2           # s73: glass (Y - 0.22) and niche backs (YG - 0.28) clear the city skin (<= 0.25 m proud of walls :14/:15, 0.88 at the step wall :17)
     Z_COR, Z_PT = 10.6, 11.65                 # cornice; balustrade top (DSM parapet line ~20.3 over Z0 8.7)
     AX, GW = 24.1, 6.6
     floors = [(0.9, 2.9), (4.2, 6.3), (7.4, 9.3)]
@@ -234,7 +234,7 @@ def build_clare_west():
     a, d, L = _frame(W_A, W_B)
     col = ASHLAR
     P = F.Parts(mat="stone", wall_col=col)
-    Y = 0.25
+    Y = 0.55                  # s73: glass at Y - 0.22 clears the city skin of CLARE011 wall :3 (up to 0.27 m proud of this line)
     Z_COR, Z_PT = 12.15, 13.2
     floors = [(1.6, 3.9), (5.2, 7.6), (8.8, 10.9)]
     nb = 15

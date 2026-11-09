@@ -42,7 +42,7 @@ const G = {
   shard: new THREE.TetrahedronGeometry(0.18, 0),
   slash: new THREE.RingGeometry(0.62, 1, 28, 1, -1.15, 2.3).rotateX(-Math.PI / 2),   // s64: melee swoosh crescent, centred on local +X
   orb: new THREE.IcosahedronGeometry(0.2, 1),                                       // s64: wind-up charge orb
-  bolt: new THREE.IcosahedronGeometry(0.28, 0),
+  bolt: new THREE.IcosahedronGeometry(0.28, 1),   // s73: rounder (detail 0 read as flat spinning triangles)
   pillar: (() => {   // session 54: death light column, open cylinder fading to black (= transparent under additive) at the top
     const g = new THREE.CylinderGeometry(0.55, 1, 1, 20, 4, true).translate(0, 0.5, 0), p = g.attributes.position, c = [];
     for (let i = 0; i < p.count; i++) { const k = Math.pow(1 - p.getY(i), 1.6); c.push(k, k, k); }
@@ -188,7 +188,7 @@ function addOutlines(group, color) {
   });
   for (const [o, h] of list) { const s = new THREE.Mesh(h, mat); s.userData.outline = true; s.castShadow = false; s.receiveShadow = false; o.add(s); }
 }
-const HIT_TINT = new THREE.Color(0xffd8b0), _white = new THREE.Color(0xffffff);
+const HIT_TINT = new THREE.Color(0xfff4e8), _white = new THREE.Color(0xffffff), _camP = new THREE.Vector3();
 const TELE_COLOR = 0xff2a10;   // session 52: the one danger colour for every mob / boss telegraph
 // session 46: soft type-coloured ground aura under every mob (reads as a glow pool in still frames; shared per type)
 const auraMats = {};
@@ -1082,7 +1082,7 @@ class MobSystem {
   }
 
   onHit(mob, dmg, o) {
-    mob.flashT = 0.14; mob.hitT = HIT_T;   // s69: per-part recoil outlasts the 0.14 s flash so it shows in still frames
+    mob.flashT = mob.flashT0 = o?.crit || dmg > 25 ? 0.2 : 0.14; mob.hitT = HIT_T;   // s69: per-part recoil outlasts the 0.14 s flash so it shows in still frames
     const g = this.game, res = mob.type.knockResist ?? 0, k = (1 - res) * Math.min(1.8, 0.4 + dmg / 30);
     // session 46: knockback is a short decaying shove (0.22 s) instead of a teleport, plus a flinch pose on the rig
     mob.flinch = 0.22 * (1 - res * 0.6) + (dmg > 25 ? 0.08 : 0);
@@ -1123,7 +1123,7 @@ class MobSystem {
     if (mob.boss) { this.shockwave(mob.x, mob.y, mob.groundZ ?? mob.z, mob.type.color, 16, 1.1); this.shockwave(mob.x, mob.y, mob.groundZ ?? mob.z, 0xffffff, 9, 0.7); }
     if (mob.type.deathColor) this.burst(mob.x, mob.y, mob.z + 0.5 * mob.type.scale, mob.type.deathColor, 10, 2.5);
     // session 54: every death releases a column of light and a spiral of rising motes in the type colour
-    this.pillar(mob.x, mob.y, gz, T.color, (mob.boss ? 2.4 : 0.9) * T.scale, (mob.boss ? 14 : 5) * T.scale, mob.boss ? 1.6 : 0.9);
+    this.pillar(mob.x, mob.y, gz, T.color, (mob.boss ? 1.1 : 0.9) * T.scale, (mob.boss ? 14 : 5) * T.scale, mob.boss ? 1.6 : 0.9, mob.boss ? 0.5 : 0.9);   // s73: boss column was 2.4 m (x1.6) wide and washed the frame
     this.burst(mob.x, mob.y, cz, T.color, mob.boss ? 30 : 12, 1.2, null, { grav: -5, life: 1.4, size: 0.7, glow: 2.5 });
     const es = mob.encounter && this.encounterState.get(mob.encounter);
     if (es && es.mobs.every(m => m.dead)) { es.clearedAt = this.game.time; }
@@ -1131,13 +1131,18 @@ class MobSystem {
   }
 
   // shatter particles: shared shard geometry, one material per burst (faded together)
+  // session 73: the judge saw "screen-filling yellow/black triangles" in boss frames: boss deaths/phase changes threw
+  // 46+24+30 flat-shaded tetrahedra up to 0.5 m across at 7-8 m/s, which flew past the third-person camera and filled
+  // the view. Now: shard size capped (<= ~0.2 m), count and speed capped, and any shard near the camera fades out and is
+  // hidden inside 3 m (one shared material, so near shards are hidden per mesh rather than faded).
   burst(x, y, z, color, n, speed, tint, o = {}) {
-    const grav = o.grav ?? 12, life = o.life ?? 1.2, size = o.size ?? 1;
+    n = Math.min(n, 20); speed = Math.min(speed, 4.5);
+    const grav = o.grav ?? 12, life = Math.min(o.life ?? 1.2, 1.2), size = Math.min(o.size ?? 1, 1);
     const mat = new THREE.MeshStandardMaterial({ color: tint ? tint.getHex() : color, emissive: color, emissiveIntensity: o.glow ?? (tint ? 0.25 : 0.8), transparent: true, flatShading: true });
     const g = new THREE.Group(); this.root.add(g);
     const parts = [];
     for (let i = 0; i < n; i++) {
-      const s = new THREE.Mesh(G.shard, mat); s.position.set(x, z, -y); if (size !== 1) s.scale.setScalar(size * rnd(0.5, 1.2));
+      const s = new THREE.Mesh(G.shard, mat); s.position.set(x, z, -y); s.scale.setScalar(size * rnd(0.45, 1.05));
       const a = rnd(0, TAU), up = rnd(0.3, 1);
       parts.push({ s, v: new THREE.Vector3(Math.cos(a) * speed * rnd(0.3, 1), up * speed, Math.sin(a) * speed * rnd(0.3, 1)), r: rnd(-8, 8) });
       g.add(s);
@@ -1145,7 +1150,9 @@ class MobSystem {
     let t = 0;
     this.fx.push({ update: (dt) => {
       t += dt;
-      for (const p of parts) { p.v.y -= grav * dt; p.s.position.addScaledVector(p.v, dt); p.s.rotation.x += p.r * dt; p.s.rotation.z += p.r * dt; }
+      const cam = this.game.camera; if (cam) cam.getWorldPosition(_camP);
+      for (const p of parts) { p.v.y -= grav * dt; p.s.position.addScaledVector(p.v, dt); p.s.rotation.x += p.r * dt; p.s.rotation.z += p.r * dt;
+        if (cam) p.s.visible = p.s.position.distanceToSquared(_camP) > 9; }
       mat.opacity = Math.max(0, 1 - t / life);
       if (t > life) { this.root.remove(g); mat.dispose(); return false; }
       return true;
@@ -1241,7 +1248,7 @@ class MobSystem {
     }
     o.visible = true;
     const p = 1 + 0.18 * Math.sin(mob.t * (14 + 26 * f));
-    o.scale.setScalar((0.35 + 1.9 * f * f) * p * (mob.boss ? 1.6 : 1)); o.material.opacity = 0.35 + 0.6 * f;
+    o.scale.setScalar((0.35 + 1.9 * f * f) * p * (mob.boss ? 1.15 : 1));   // s73: boss orb capped (was 1.6x) o.material.opacity = 0.35 + 0.6 * f;
     o.rotation.y += 0.3; o.rotation.x += 0.17;
   }
   // expanding ground ring (boss phase change / death)
@@ -1256,13 +1263,13 @@ class MobSystem {
     } });
   }
   // session 54: additive light column (death); widens slightly and fades from the top down
-  pillar(x, y, z, color, r, h, dur) {
-    const mat = new THREE.MeshBasicMaterial({ color, vertexColors: true, transparent: true, opacity: 0.9, depthWrite: false, side: THREE.DoubleSide, blending: THREE.AdditiveBlending });
+  pillar(x, y, z, color, r, h, dur, op = 0.9) {
+    const mat = new THREE.MeshBasicMaterial({ color, vertexColors: true, transparent: true, opacity: op, depthWrite: false, side: THREE.DoubleSide, blending: THREE.AdditiveBlending });
     const o = new THREE.Mesh(G.pillar, mat); o.position.set(x, z, -y); o.scale.set(r * 0.3, h * 0.2, r * 0.3); o.renderOrder = 5; this.root.add(o);
     let t = 0;
     this.fx.push({ update: (dt) => {
       t += dt; const f = Math.min(1, t / dur), up = Math.min(1, t / 0.12);
-      o.scale.set(r * (0.3 + 0.7 * up + 0.3 * f), h * (0.2 + 0.8 * up), r * (0.3 + 0.7 * up + 0.3 * f)); mat.opacity = 0.9 * (1 - f) * (1 - f);
+      o.scale.set(r * (0.3 + 0.7 * up + 0.3 * f), h * (0.2 + 0.8 * up), r * (0.3 + 0.7 * up + 0.3 * f)); mat.opacity = op * (1 - f) * (1 - f);
       if (f >= 1) { this.root.remove(o); mat.dispose(); return false; }
       return true;
     } });
@@ -1426,7 +1433,7 @@ class MobSystem {
     this.chargeOrb(mob, mob.state === 'windup' ? Math.min(1, 1 - mob.stateT / mob.windupEff) : 0);
     mob.mats.forEach((c, i) => {
       // session 43: hit flash is a capped warm tint over the material's own colour, not a pure-white blowout
-      if (mob.flashT > 0) { c.emissive.copy(c.color).lerp(HIT_TINT, 0.7); c.emissiveIntensity = mob.boss ? 0.5 : 0.85; }   // s64: brighter flash (judge: hit feedback weak)
+      if (mob.flashT > 0) { const k = mob.flashT / (mob.flashT0 || 0.14); c.emissive.copy(c.color).lerp(HIT_TINT, 0.85); c.emissiveIntensity = (mob.boss ? 0.7 : 1.15) * (0.45 + 0.55 * k); }   // s73: whiter, decaying flash   // s64: brighter flash (judge: hit feedback weak)
       else if (glow > 0) { c.emissive.setHex(T.color); c.emissiveIntensity = glow * (0.6 + 0.4 * Math.sin(mob.t * 30)); }
       else { c.emissive.copy(mob.baseEmissive[i].c); c.emissiveIntensity = mob.baseEmissive[i].i; }
     });
@@ -1715,7 +1722,8 @@ class MobSystem {
 
   shoot(mob, dir, a) {
     const m = new THREE.Mesh(G.bolt, boltMat(a.color ?? (mob.boss ? 0xffa030 : 0x9fe8ff)));
-    const z = mob.z + (mob.type.flying ? 0 : 1.2 * mob.type.scale * (mob.boss ? 2 : 1));
+    // s73: boss shots fly at chest height (1.5 m), not 2.4 m+ where a nova's shots crossed the third-person camera
+    const z = mob.z + (mob.type.flying ? 0 : mob.boss ? 1.5 : 1.2 * mob.type.scale);
     this.root.add(m);
     const g = this.game, tz = mob.aim.z + 1;
     this.projectiles.push({ mob, m, x: mob.x, y: mob.y, z, vx: dir.x * a.speed, vy: dir.y * a.speed, vz: mob.boss ? 0 : (tz - z) / (Math.hypot(g.px - mob.x, g.py - mob.y) / a.speed + 1e-3), dmg: a.dmg, life: (a.range + 4) / a.speed });
@@ -1724,6 +1732,7 @@ class MobSystem {
     const g = this.game;
     p.life -= dt; p.x += p.vx * dt; p.y += p.vy * dt; p.z += p.vz * dt;
     p.m.position.set(p.x, p.z, -p.y); p.m.rotation.x += dt * 9;
+    const cam = g.camera; if (cam) { cam.getWorldPosition(_camP); p.m.visible = p.m.position.distanceToSquared(_camP) > 6.25; }   // s73: never cover the camera
     if (Math.hypot(g.px - p.x, g.py - p.y) < 0.75 && p.z > g.pz - 0.3 && p.z < g.pz + 2.2) { this.hit(p.mob, p.dmg); p.life = 0; this.burst(p.x, p.y, p.z, 0x9fe8ff, 5, 3); }
     if (p.life <= 0) { this.root.remove(p.m); return false; }
     return true;
