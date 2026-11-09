@@ -1,0 +1,2018 @@
+[
+ {
+  "id": "way/147456518:3",
+  "osm_id": "way/147456518",
+  "name": "Montagu House",
+  "street": null,
+  "length": 37.39,
+  "dist": 182.7,
+  "mid_local_xy": [
+   -10.9,
+   215.2
+  ]
+ },
+ {
+  "id": "way/147456534:3",
+  "osm_id": "way/147456534",
+  "name": "South Court",
+  "street": null,
+  "length": 36.08,
+  "dist": 210.5,
+  "mid_local_xy": [
+   21.5,
+   227.2
+  ]
+ },
+ {
+  "id": "way/135595983:4",
+  "osm_id": "way/135595983",
+  "name": null,
+  "street": "Sidney Street",
+  "length": 30.61,
+  "dist": 199.2,
+  "mid_local_xy": [
+   47.5,
+   187.9
+  ]
+ },
+ {
+  "id": "way/13864475:0",
+  "osm_id": "way/13864475",
+  "name": "Blue Boar I to N",
+  "street": null,
+  "length": 29.05,
+  "dist": 213.5,
+  "mid_local_xy": [
+   -53.1,
+   265.0
+  ]
+ },
+ {
+  "id": "way/13864475:1",
+  "osm_id": "way/13864475",
+  "name": "Blue Boar I to N",
+  "street": null,
+  "length": 28.22,
+  "dist": 234.5,
+  "mid_local_xy": [
+   -68.1,
+   289.3
+  ]
+ },
+ {
+  "id": "way/137017440:9",
+  "osm_id": "way/137017440",
+  "name": null,
+  "street": null,
+  "length": 28.05,
+  "dist": 175.8,
+  "mid_local_xy": [
+   -236.3,
+   171.8
+  ]
+ },
+ {
+  "id": "way/147456536:4",
+  "osm_id": "way/147456536",
+  "name": "Sussex House",
+  "street": null,
+  "length": 25.13,
+  "dist": 234.3,
+  "mid_local_xy": [
+   50.8,
+   234.2
+  ]
+ },
+ {
+  "id": "relation/3240:20",
+  "osm_id": "relation/3240",
+  "name": "Whewell's Courts A to F",
+  "street": null,
+  "length": 24.31,
+  "dist": 233.5,
+  "mid_local_xy": [
+   -160.8,
+   283.5
+  ]
+ },
+ {
+  "id": "way/147487988:9",
+  "osm_id": "way/147487988",
+  "name": "Todd Building (Z staircase)",
+  "street": null,
+  "length": 23.45,
+  "dist": 244.7,
+  "mid_local_xy": [
+   61.5,
+   238.7
+  ]
+ },
+ {
+  "id": "way/137017443:4",
+  "osm_id": "way/137017443",
+  "name": null,
+  "street": null,
+  "length": 22.42,
+  "dist": 149.5,
+  "mid_local_xy": [
+   -204.2,
+   167.3
+  ]
+ },
+ {
+  "id": "way/13864474:21",
+  "osm_id": "way/13864474",
+  "name": "Blue Boar A to H",
+  "street": null,
+  "length": 21.09,
+  "dist": 185.8,
+  "mid_local_xy": [
+   -136.1,
+   240.1
+  ]
+ },
+ {
+  "id": "way/1047150810:8",
+  "osm_id": "way/1047150810",
+  "name": "Central Cinema",
+  "street": "Hobson Street",
+  "length": 20.63,
+  "dist": 188.9,
+  "mid_local_xy": [
+   39.3,
+   181.8
+  ]
+ },
+ {
+  "id": "way/147456536:3",
+  "osm_id": "way/147456536",
+  "name": "Sussex House",
+  "street": null,
+  "length": 19.76,
+  "dist": 222.5,
+  "mid_local_xy": [
+   56.6,
+   212.5
+  ]
+ },
+ {
+  "id": "way/680923107:31",
+  "osm_id": "way/680923107",
+  "name": "Angel Court",
+  "street": null,
+  "length": 19.55,
+  "dist": 149.4,
+  "mid_local_xy": [
+   -198.0,
+   172.5
+  ]
+ },
+ {
+  "id": "way/166139209:30",
+  "osm_id": "way/166139209",
+  "name": null,
+  "street": null,
+  "length": 19.19,
+  "dist": 191.6,
+  "mid_local_xy": [
+   -52.3,
+   242.1
+  ]
+ },
+ {
+  "id": "way/1211951045:1",
+  "osm_id": "way/1211951045",
+  "name": null,
+  "street": "Sidney Street",
+  "length": 18.33,
+  "dist": 124.7,
+  "mid_local_xy": [
+   7.8,
+   114.6
+  ]
+ },
+ {
+  "id": "way/1288644220:2",
+  "osm_id": "way/1288644220",
+  "name": null,
+  "street": "Trinity Street",
+  "length": 17.47,
+  "dist": 134.6,
+  "mid_local_xy": [
+   -147.9,
+   184.2
+  ]
+ },
+ {
+  "id": "way/1047150809:1",
+  "osm_id": "way/1047150809",
+  "name": null,
+  "street": "Sidney Street",
+  "length": 17.25,
+  "dist": 171.2,
+  "mid_local_xy": [
+   21.6,
+   174.9
+  ]
+ },
+ {
+  "id": "way/229676051:18",
+  "osm_id": "way/229676051",
+  "name": "Boots",
+  "street": "Petty Cury",
+  "length": 16.55,
+  "dist": 98.8,
+  "mid_local_xy": [
+   -17.2,
+   106.5
+  ]
+ },
+ {
+  "id": "way/1288648592:4",
+  "osm_id": "way/1288648592",
+  "name": null,
+  "street": "Green Street",
+  "length": 16.05,
+  "dist": 132.7,
+  "mid_local_xy": [
+   -106.3,
+   190.0
+  ]
+ },
+ {
+  "id": "way/680923107:32",
+  "osm_id": "way/680923107",
+  "name": "Angel Court",
+  "street": null,
+  "length": 15.71,
+  "dist": 135.3,
+  "mid_local_xy": [
+   -181.0,
+   167.8
+  ]
+ },
+ {
+  "id": "way/1288730358:2",
+  "osm_id": "way/1288730358",
+  "name": null,
+  "street": "Market Street",
+  "length": 15.47,
+  "dist": 100.6,
+  "mid_local_xy": [
+   -46.7,
+   140.7
+  ]
+ },
+ {
+  "id": "way/166155967:1",
+  "osm_id": "way/166155967",
+  "name": "Great Court L, M, N, O, P and Q",
+  "street": null,
+  "length": 14.63,
+  "dist": 170.0,
+  "mid_local_xy": [
+   -223.6,
+   177.1
+  ]
+ },
+ {
+  "id": "way/229676051:2",
+  "osm_id": "way/229676051",
+  "name": "Boots",
+  "street": "Petty Cury",
+  "length": 14.62,
+  "dist": 111.3,
+  "mid_local_xy": [
+   8.3,
+   54.9
+  ]
+ },
+ {
+  "id": "way/1288644219:1",
+  "osm_id": "way/1288644219",
+  "name": null,
+  "street": "Green Street",
+  "length": 14.34,
+  "dist": 179.6,
+  "mid_local_xy": [
+   -66.5,
+   233.2
+  ]
+ },
+ {
+  "id": "way/1047150810:7",
+  "osm_id": "way/1047150810",
+  "name": "Central Cinema",
+  "street": "Hobson Street",
+  "length": 14.32,
+  "dist": 205.2,
+  "mid_local_xy": [
+   55.8,
+   187.4
+  ]
+ },
+ {
+  "id": "way/1211951042:1",
+  "osm_id": "way/1211951042",
+  "name": null,
+  "street": "Petty Cury",
+  "length": 13.45,
+  "dist": 94.2,
+  "mid_local_xy": [
+   -9.2,
+   48.4
+  ]
+ },
+ {
+  "id": "way/1288644224:5",
+  "osm_id": "way/1288644224",
+  "name": null,
+  "street": "Green Street",
+  "length": 13.12,
+  "dist": 132.5,
+  "mid_local_xy": [
+   -109.7,
+   189.7
+  ]
+ },
+ {
+  "id": "way/1288648571:3",
+  "osm_id": "way/1288648571",
+  "name": null,
+  "street": "Trinity Street",
+  "length": 12.89,
+  "dist": 140.0,
+  "mid_local_xy": [
+   -129.4,
+   194.8
+  ]
+ },
+ {
+  "id": "way/1211951051:3",
+  "osm_id": "way/1211951051",
+  "name": null,
+  "street": "Market Street",
+  "length": 12.82,
+  "dist": 90.4,
+  "mid_local_xy": [
+   -47.7,
+   129.0
+  ]
+ },
+ {
+  "id": "way/147456534:5",
+  "osm_id": "way/147456534",
+  "name": "South Court",
+  "street": null,
+  "length": 12.4,
+  "dist": 237.7,
+  "mid_local_xy": [
+   37.7,
+   249.0
+  ]
+ },
+ {
+  "id": "way/1288648569:5",
+  "osm_id": "way/1288648569",
+  "name": null,
+  "street": "Green Street",
+  "length": 12.09,
+  "dist": 175.2,
+  "mid_local_xy": [
+   -62.4,
+   227.8
+  ]
+ },
+ {
+  "id": "way/13863738:5",
+  "osm_id": "way/13863738",
+  "name": "Harrington House",
+  "street": null,
+  "length": 11.93,
+  "dist": 217.6,
+  "mid_local_xy": [
+   37.7,
+   223.4
+  ]
+ },
+ {
+  "id": "way/1288730364:2",
+  "osm_id": "way/1288730364",
+  "name": null,
+  "street": "Trinity Street",
+  "length": 11.47,
+  "dist": 119.7,
+  "mid_local_xy": [
+   -150.6,
+   167.1
+  ]
+ },
+ {
+  "id": "way/13858373:3",
+  "osm_id": "way/13858373",
+  "name": "Trinity College Chapel",
+  "street": "Trinity Street",
+  "length": 11.27,
+  "dist": 249.1,
+  "mid_local_xy": [
+   -187.7,
+   291.6
+  ]
+ },
+ {
+  "id": "way/135595983:5",
+  "osm_id": "way/135595983",
+  "name": null,
+  "street": "Sidney Street",
+  "length": 11.14,
+  "dist": 215.4,
+  "mid_local_xy": [
+   60.6,
+   197.6
+  ]
+ },
+ {
+  "id": "way/135595983:3",
+  "osm_id": "way/135595983",
+  "name": null,
+  "street": "Sidney Street",
+  "length": 11.09,
+  "dist": 180.1,
+  "mid_local_xy": [
+   27.7,
+   181.3
+  ]
+ },
+ {
+  "id": "way/1047162156:1",
+  "osm_id": "way/1047162156",
+  "name": "X staircase",
+  "street": "Hobson Street",
+  "length": 10.88,
+  "dist": 236.3,
+  "mid_local_xy": [
+   66.4,
+   222.2
+  ]
+ },
+ {
+  "id": "way/1288730358:21",
+  "osm_id": "way/1288730358",
+  "name": null,
+  "street": "Market Street",
+  "length": 10.82,
+  "dist": 121.6,
+  "mid_local_xy": [
+   -98.4,
+   178.9
+  ]
+ },
+ {
+  "id": "way/135595261:14",
+  "osm_id": "way/135595261",
+  "name": null,
+  "street": null,
+  "length": 10.33,
+  "dist": 176.7,
+  "mid_local_xy": [
+   5.0,
+   197.3
+  ]
+ },
+ {
+  "id": "way/13863738:6",
+  "osm_id": "way/13863738",
+  "name": "Harrington House",
+  "street": null,
+  "length": 10.3,
+  "dist": 206.5,
+  "mid_local_xy": [
+   31.0,
+   214.5
+  ]
+ },
+ {
+  "id": "way/147456518:5",
+  "osm_id": "way/147456518",
+  "name": "Montagu House",
+  "street": null,
+  "length": 10.16,
+  "dist": 183.8,
+  "mid_local_xy": [
+   5.6,
+   205.6
+  ]
+ },
+ {
+  "id": "way/1288730353:17",
+  "osm_id": "way/1288730353",
+  "name": null,
+  "street": "Rose Crescent",
+  "length": 9.68,
+  "dist": 116.4,
+  "mid_local_xy": [
+   -111.4,
+   173.5
+  ]
+ },
+ {
+  "id": "way/13864474:6",
+  "osm_id": "way/13864474",
+  "name": "Blue Boar A to H",
+  "street": null,
+  "length": 9.64,
+  "dist": 169.8,
+  "mid_local_xy": [
+   -120.0,
+   226.3
+  ]
+ },
+ {
+  "id": "way/229680561:2",
+  "osm_id": "way/229680561",
+  "name": "Henry Martyn Memorial Hall",
+  "street": "Market Street",
+  "length": 9.61,
+  "dist": 100.4,
+  "mid_local_xy": [
+   -37.5,
+   133.5
+  ]
+ },
+ {
+  "id": "way/135595261:16",
+  "osm_id": "way/135595261",
+  "name": null,
+  "street": null,
+  "length": 9.45,
+  "dist": 166.9,
+  "mid_local_xy": [
+   1.2,
+   187.8
+  ]
+ },
+ {
+  "id": "way/135595983:1",
+  "osm_id": "way/135595983",
+  "name": null,
+  "street": "Sidney Street",
+  "length": 9.4,
+  "dist": 168.7,
+  "mid_local_xy": [
+   17.2,
+   175.8
+  ]
+ },
+ {
+  "id": "way/1288730354:8",
+  "osm_id": "way/1288730354",
+  "name": null,
+  "street": "Market Street",
+  "length": 8.85,
+  "dist": 114.4,
+  "mid_local_xy": [
+   -41.0,
+   153.6
+  ]
+ },
+ {
+  "id": "way/1288730358:1",
+  "osm_id": "way/1288730358",
+  "name": null,
+  "street": "Market Street",
+  "length": 8.52,
+  "dist": 90.1,
+  "mid_local_xy": [
+   -57.2,
+   135.1
+  ]
+ },
+ {
+  "id": "way/1288648583:2",
+  "osm_id": "way/1288648583",
+  "name": null,
+  "street": "Trinity Street",
+  "length": 8.49,
+  "dist": 137.8,
+  "mid_local_xy": [
+   -146.4,
+   188.1
+  ]
+ },
+ {
+  "id": "way/147456529:7",
+  "osm_id": "way/147456529",
+  "name": null,
+  "street": null,
+  "length": 8.36,
+  "dist": 197.4,
+  "mid_local_xy": [
+   -23.8,
+   238.2
+  ]
+ },
+ {
+  "id": "way/1288648591:3",
+  "osm_id": "way/1288648591",
+  "name": null,
+  "street": "Green Street",
+  "length": 8.08,
+  "dist": 158.5,
+  "mid_local_xy": [
+   -83.1,
+   214.6
+  ]
+ },
+ {
+  "id": "way/229676051:16",
+  "osm_id": "way/229676051",
+  "name": "Boots",
+  "street": "Petty Cury",
+  "length": 8.04,
+  "dist": 110.4,
+  "mid_local_xy": [
+   -3.2,
+   104.7
+  ]
+ },
+ {
+  "id": "way/147456536:6",
+  "osm_id": "way/147456536",
+  "name": "Sussex House",
+  "street": null,
+  "length": 7.95,
+  "dist": 235.7,
+  "mid_local_xy": [
+   41.5,
+   243.7
+  ]
+ },
+ {
+  "id": "way/135595261:13",
+  "osm_id": "way/135595261",
+  "name": null,
+  "street": null,
+  "length": 7.71,
+  "dist": 185.3,
+  "mid_local_xy": [
+   11.8,
+   202.9
+  ]
+ },
+ {
+  "id": "way/1211951043:2",
+  "osm_id": "way/1211951043",
+  "name": null,
+  "street": "Petty Cury",
+  "length": 7.57,
+  "dist": 121.6,
+  "mid_local_xy": [
+   18.7,
+   59.0
+  ]
+ },
+ {
+  "id": "way/1047150811:1",
+  "osm_id": "way/1047150811",
+  "name": null,
+  "street": null,
+  "length": 7.54,
+  "dist": 97.3,
+  "mid_local_xy": [
+   -20.0,
+   108.2
+  ]
+ },
+ {
+  "id": "way/147456527:10",
+  "osm_id": "way/147456527",
+  "name": null,
+  "street": null,
+  "length": 7.36,
+  "dist": 236.8,
+  "mid_local_xy": [
+   -58.1,
+   289.9
+  ]
+ },
+ {
+  "id": "way/137017440:8",
+  "osm_id": "way/137017440",
+  "name": null,
+  "street": null,
+  "length": 7.27,
+  "dist": 161.8,
+  "mid_local_xy": [
+   -218.8,
+   170.3
+  ]
+ },
+ {
+  "id": "way/1288648575:2",
+  "osm_id": "way/1288648575",
+  "name": null,
+  "street": "Green Street",
+  "length": 7.2,
+  "dist": 182.3,
+  "mid_local_xy": [
+   -54.3,
+   233.0
+  ]
+ },
+ {
+  "id": "way/1288644222:1",
+  "osm_id": "way/1288644222",
+  "name": null,
+  "street": "Green Street",
+  "length": 7.15,
+  "dist": 171.9,
+  "mid_local_xy": [
+   -76.2,
+   227.1
+  ]
+ },
+ {
+  "id": "way/1288648571:2",
+  "osm_id": "way/1288648571",
+  "name": null,
+  "street": "Trinity Street",
+  "length": 7.09,
+  "dist": 138.7,
+  "mid_local_xy": [
+   -138.6,
+   191.4
+  ]
+ },
+ {
+  "id": "way/1288648592:3",
+  "osm_id": "way/1288648592",
+  "name": null,
+  "street": "Green Street",
+  "length": 7.06,
+  "dist": 141.8,
+  "mid_local_xy": [
+   -106.8,
+   199.1
+  ]
+ },
+ {
+  "id": "way/135558509:1",
+  "osm_id": "way/135558509",
+  "name": "Wolfson Building",
+  "street": null,
+  "length": 6.92,
+  "dist": 195.3,
+  "mid_local_xy": [
+   -140.1,
+   249.0
+  ]
+ },
+ {
+  "id": "way/13864474:7",
+  "osm_id": "way/13864474",
+  "name": "Blue Boar A to H",
+  "street": null,
+  "length": 6.84,
+  "dist": 166.5,
+  "mid_local_xy": [
+   -127.1,
+   222.1
+  ]
+ },
+ {
+  "id": "way/1288730358:5",
+  "osm_id": "way/1288730358",
+  "name": null,
+  "street": "Market Street",
+  "length": 6.51,
+  "dist": 125.4,
+  "mid_local_xy": [
+   -53.5,
+   172.6
+  ]
+ },
+ {
+  "id": "way/1288738587:0",
+  "osm_id": "way/1288738587",
+  "name": null,
+  "street": "Trinity Street",
+  "length": 6.45,
+  "dist": 127.0,
+  "mid_local_xy": [
+   -170.3,
+   165.0
+  ]
+ },
+ {
+  "id": "way/1288648583:1",
+  "osm_id": "way/1288648583",
+  "name": null,
+  "street": "Trinity Street",
+  "length": 6.36,
+  "dist": 139.8,
+  "mid_local_xy": [
+   -153.8,
+   187.6
+  ]
+ },
+ {
+  "id": "relation/3240:19",
+  "osm_id": "relation/3240",
+  "name": "Whewell's Courts A to F",
+  "street": null,
+  "length": 6.35,
+  "dist": 237.3,
+  "mid_local_xy": [
+   -147.3,
+   290.5
+  ]
+ },
+ {
+  "id": "way/135558509:5",
+  "osm_id": "way/135558509",
+  "name": "Wolfson Building",
+  "street": null,
+  "length": 6.3,
+  "dist": 194.0,
+  "mid_local_xy": [
+   -128.7,
+   249.7
+  ]
+ },
+ {
+  "id": "relation/2214089:2",
+  "osm_id": "relation/2214089",
+  "name": "Whewell's Court G to P",
+  "street": null,
+  "length": 6.17,
+  "dist": 244.1,
+  "mid_local_xy": [
+   -136.2,
+   299.2
+  ]
+ },
+ {
+  "id": "way/229898939:3",
+  "osm_id": "way/229898939",
+  "name": "Pearce Hostel",
+  "street": null,
+  "length": 36.86,
+  "dist": 337.9,
+  "mid_local_xy": [
+   -96.6,
+   395.1
+  ]
+ },
+ {
+  "id": "way/147456528:1",
+  "osm_id": "way/147456528",
+  "name": null,
+  "street": null,
+  "length": 33.72,
+  "dist": 253.8,
+  "mid_local_xy": [
+   -67.6,
+   308.7
+  ]
+ },
+ {
+  "id": "way/965378226:1",
+  "osm_id": "way/965378226",
+  "name": null,
+  "street": null,
+  "length": 32.88,
+  "dist": 273.6,
+  "mid_local_xy": [
+   -114.8,
+   330.7
+  ]
+ },
+ {
+  "id": "relation/2214089:17",
+  "osm_id": "relation/2214089",
+  "name": "Whewell's Court G to P",
+  "street": null,
+  "length": 26.1,
+  "dist": 272.7,
+  "mid_local_xy": [
+   -109.3,
+   330.0
+  ]
+ },
+ {
+  "id": "way/132297255:25",
+  "osm_id": "way/132297255",
+  "name": "Cambridge Union Society",
+  "street": "Bridge Street",
+  "length": 24.15,
+  "dist": 382.0,
+  "mid_local_xy": [
+   -111.7,
+   439.2
+  ]
+ },
+ {
+  "id": "way/158913878:3",
+  "osm_id": "way/158913878",
+  "name": null,
+  "street": null,
+  "length": 22.43,
+  "dist": 273.3,
+  "mid_local_xy": [
+   -195.4,
+   314.5
+  ]
+ },
+ {
+  "id": "way/1038002873:2",
+  "osm_id": "way/1038002873",
+  "name": null,
+  "street": null,
+  "length": 21.14,
+  "dist": 257.0,
+  "mid_local_xy": [
+   55.2,
+   260.0
+  ]
+ },
+ {
+  "id": "way/158913900:11",
+  "osm_id": "way/158913900",
+  "name": null,
+  "street": null,
+  "length": 20.9,
+  "dist": 373.9,
+  "mid_local_xy": [
+   -178.4,
+   423.6
+  ]
+ },
+ {
+  "id": "way/103654296:9",
+  "osm_id": "way/103654296",
+  "name": null,
+  "street": null,
+  "length": 20.05,
+  "dist": 397.5,
+  "mid_local_xy": [
+   28.3,
+   432.6
+  ]
+ },
+ {
+  "id": "way/59294560:14",
+  "osm_id": "way/59294560",
+  "name": "Sidney Sussex Library",
+  "street": null,
+  "length": 19.61,
+  "dist": 278.6,
+  "mid_local_xy": [
+   43.1,
+   294.7
+  ]
+ },
+ {
+  "id": "way/965378227:6",
+  "osm_id": "way/965378227",
+  "name": null,
+  "street": null,
+  "length": 19.55,
+  "dist": 292.1,
+  "mid_local_xy": [
+   -74.5,
+   348.1
+  ]
+ },
+ {
+  "id": "way/158913908:6",
+  "osm_id": "way/158913908",
+  "name": null,
+  "street": null,
+  "length": 18.82,
+  "dist": 382.1,
+  "mid_local_xy": [
+   -328.2,
+   366.0
+  ]
+ },
+ {
+  "id": "way/166155941:6",
+  "osm_id": "way/166155941",
+  "name": "The Hall",
+  "street": null,
+  "length": 17.29,
+  "dist": 271.1,
+  "mid_local_xy": [
+   -312.2,
+   229.6
+  ]
+ },
+ {
+  "id": "way/965378227:7",
+  "osm_id": "way/965378227",
+  "name": null,
+  "street": null,
+  "length": 16.67,
+  "dist": 306.1,
+  "mid_local_xy": [
+   -61.6,
+   360.7
+  ]
+ },
+ {
+  "id": "way/965378225:20",
+  "osm_id": "way/965378225",
+  "name": null,
+  "street": null,
+  "length": 16.56,
+  "dist": 299.5,
+  "mid_local_xy": [
+   -106.4,
+   356.9
+  ]
+ },
+ {
+  "id": "way/965378229:5",
+  "osm_id": "way/965378229",
+  "name": null,
+  "street": "Bridge Street",
+  "length": 16.3,
+  "dist": 332.9,
+  "mid_local_xy": [
+   -120.6,
+   389.8
+  ]
+ },
+ {
+  "id": "way/1288750542:6",
+  "osm_id": "way/1288750542",
+  "name": null,
+  "street": "Bridge Street",
+  "length": 16.3,
+  "dist": 365.5,
+  "mid_local_xy": [
+   -140.1,
+   421.0
+  ]
+ },
+ {
+  "id": "way/965378223:2",
+  "osm_id": "way/965378223",
+  "name": null,
+  "street": null,
+  "length": 15.49,
+  "dist": 326.9,
+  "mid_local_xy": [
+   -43.1,
+   378.8
+  ]
+ },
+ {
+  "id": "way/158913878:18",
+  "osm_id": "way/158913878",
+  "name": null,
+  "street": null,
+  "length": 15.13,
+  "dist": 295.5,
+  "mid_local_xy": [
+   -183.4,
+   341.7
+  ]
+ },
+ {
+  "id": "way/229898939:5",
+  "osm_id": "way/229898939",
+  "name": "Pearce Hostel",
+  "street": null,
+  "length": 15.03,
+  "dist": 312.8,
+  "mid_local_xy": [
+   -115.3,
+   369.9
+  ]
+ },
+ {
+  "id": "way/103654296:8",
+  "osm_id": "way/103654296",
+  "name": null,
+  "street": null,
+  "length": 14.76,
+  "dist": 385.5,
+  "mid_local_xy": [
+   12.6,
+   425.1
+  ]
+ },
+ {
+  "id": "way/191541100:5",
+  "osm_id": "way/191541100",
+  "name": null,
+  "street": "Bridge Street",
+  "length": 14.02,
+  "dist": 398.4,
+  "mid_local_xy": [
+   -156.3,
+   452.1
+  ]
+ },
+ {
+  "id": "relation/2214089:16",
+  "osm_id": "relation/2214089",
+  "name": "Whewell's Court G to P",
+  "street": null,
+  "length": 13.95,
+  "dist": 275.1,
+  "mid_local_xy": [
+   -95.0,
+   332.4
+  ]
+ },
+ {
+  "id": "way/132297255:15",
+  "osm_id": "way/132297255",
+  "name": "Cambridge Union Society",
+  "street": "Bridge Street",
+  "length": 13.76,
+  "dist": 385.2,
+  "mid_local_xy": [
+   -51.2,
+   439.0
+  ]
+ },
+ {
+  "id": "way/263621279:24",
+  "osm_id": "way/263621279",
+  "name": "Old Divinity School",
+  "street": "St John's Street",
+  "length": 13.52,
+  "dist": 269.8,
+  "mid_local_xy": [
+   -167.2,
+   319.3
+  ]
+ },
+ {
+  "id": "relation/2214089:18",
+  "osm_id": "relation/2214089",
+  "name": "Whewell's Court G to P",
+  "street": null,
+  "length": 12.97,
+  "dist": 260.6,
+  "mid_local_xy": [
+   -123.9,
+   317.1
+  ]
+ },
+ {
+  "id": "relation/2214089:0",
+  "osm_id": "relation/2214089",
+  "name": "Whewell's Court G to P",
+  "street": null,
+  "length": 12.78,
+  "dist": 252.1,
+  "mid_local_xy": [
+   -132.7,
+   307.7
+  ]
+ },
+ {
+  "id": "way/132297255:1",
+  "osm_id": "way/132297255",
+  "name": "Cambridge Union Society",
+  "street": "Bridge Street",
+  "length": 12.77,
+  "dist": 367.9,
+  "mid_local_xy": [
+   -106.4,
+   425.2
+  ]
+ },
+ {
+  "id": "way/965378222:7",
+  "osm_id": "way/965378222",
+  "name": null,
+  "street": null,
+  "length": 12.73,
+  "dist": 356.0,
+  "mid_local_xy": [
+   -34.4,
+   406.7
+  ]
+ },
+ {
+  "id": "way/1288750541:28",
+  "osm_id": "way/1288750541",
+  "name": null,
+  "street": null,
+  "length": 12.71,
+  "dist": 395.1,
+  "mid_local_xy": [
+   -154.6,
+   449.0
+  ]
+ },
+ {
+  "id": "way/132297255:0",
+  "osm_id": "way/132297255",
+  "name": "Cambridge Union Society",
+  "street": "Bridge Street",
+  "length": 12.59,
+  "dist": 369.4,
+  "mid_local_xy": [
+   -116.3,
+   426.6
+  ]
+ },
+ {
+  "id": "way/112080980:1",
+  "osm_id": "way/112080980",
+  "name": "Little Trinity",
+  "street": "Jesus Lane",
+  "length": 12.55,
+  "dist": 383.8,
+  "mid_local_xy": [
+   -29.3,
+   434.1
+  ]
+ },
+ {
+  "id": "way/59294560:12",
+  "osm_id": "way/59294560",
+  "name": "Sidney Sussex Library",
+  "street": null,
+  "length": 12.19,
+  "dist": 263.0,
+  "mid_local_xy": [
+   34.6,
+   281.6
+  ]
+ },
+ {
+  "id": "way/965378229:0",
+  "osm_id": "way/965378229",
+  "name": null,
+  "street": "Bridge Street",
+  "length": 11.69,
+  "dist": 323.7,
+  "mid_local_xy": [
+   -123.4,
+   380.5
+  ]
+ },
+ {
+  "id": "way/147456505:2",
+  "osm_id": "way/147456505",
+  "name": "Hobson Court",
+  "street": null,
+  "length": 11.47,
+  "dist": 255.5,
+  "mid_local_xy": [
+   44.1,
+   266.4
+  ]
+ },
+ {
+  "id": "way/191541100:2",
+  "osm_id": "way/191541100",
+  "name": null,
+  "street": "Bridge Street",
+  "length": 11.47,
+  "dist": 395.8,
+  "mid_local_xy": [
+   -172.8,
+   446.9
+  ]
+ },
+ {
+  "id": "way/103654295:6",
+  "osm_id": "way/103654295",
+  "name": null,
+  "street": "Jesus Lane",
+  "length": 11.43,
+  "dist": 376.0,
+  "mid_local_xy": [
+   1.2,
+   418.6
+  ]
+ },
+ {
+  "id": "way/965378225:21",
+  "osm_id": "way/965378225",
+  "name": null,
+  "street": null,
+  "length": 11.34,
+  "dist": 288.4,
+  "mid_local_xy": [
+   -98.1,
+   345.7
+  ]
+ },
+ {
+  "id": "way/135711702:0",
+  "osm_id": "way/135711702",
+  "name": "Squash Court",
+  "street": null,
+  "length": 11.33,
+  "dist": 339.3,
+  "mid_local_xy": [
+   -21.6,
+   386.7
+  ]
+ },
+ {
+  "id": "way/1288738593:5",
+  "osm_id": "way/1288738593",
+  "name": null,
+  "street": "St John's Street",
+  "length": 11.1,
+  "dist": 325.8,
+  "mid_local_xy": [
+   -157.2,
+   378.6
+  ]
+ },
+ {
+  "id": "way/151527561:0",
+  "osm_id": "way/151527561",
+  "name": "ADC Theatre",
+  "street": "Park Street",
+  "length": 10.91,
+  "dist": 367.0,
+  "mid_local_xy": [
+   -39.3,
+   418.8
+  ]
+ },
+ {
+  "id": "way/158913900:9",
+  "osm_id": "way/158913900",
+  "name": null,
+  "street": null,
+  "length": 10.77,
+  "dist": 357.8,
+  "mid_local_xy": [
+   -167.2,
+   409.4
+  ]
+ },
+ {
+  "id": "way/1037990957:3",
+  "osm_id": "way/1037990957",
+  "name": null,
+  "street": null,
+  "length": 10.68,
+  "dist": 290.9,
+  "mid_local_xy": [
+   80.1,
+   283.5
+  ]
+ },
+ {
+  "id": "way/263621281:0",
+  "osm_id": "way/263621281",
+  "name": null,
+  "street": "Bridge Street",
+  "length": 10.64,
+  "dist": 302.8,
+  "mid_local_xy": [
+   -116.3,
+   359.9
+  ]
+ },
+ {
+  "id": "way/263621283:7",
+  "osm_id": "way/263621283",
+  "name": null,
+  "street": null,
+  "length": 9.88,
+  "dist": 257.6,
+  "mid_local_xy": [
+   -146.9,
+   311.2
+  ]
+ },
+ {
+  "id": "way/263621283:8",
+  "osm_id": "way/263621283",
+  "name": null,
+  "street": null,
+  "length": 9.85,
+  "dist": 257.4,
+  "mid_local_xy": [
+   -139.5,
+   312.1
+  ]
+ },
+ {
+  "id": "way/263621281:1",
+  "osm_id": "way/263621281",
+  "name": null,
+  "street": "Bridge Street",
+  "length": 9.81,
+  "dist": 311.2,
+  "mid_local_xy": [
+   -122.6,
+   368.0
+  ]
+ },
+ {
+  "id": "way/965378224:3",
+  "osm_id": "way/965378224",
+  "name": null,
+  "street": "Jesus Lane",
+  "length": 9.78,
+  "dist": 316.7,
+  "mid_local_xy": [
+   -52.1,
+   369.9
+  ]
+ },
+ {
+  "id": "way/1288750541:9",
+  "osm_id": "way/1288750541",
+  "name": null,
+  "street": null,
+  "length": 9.71,
+  "dist": 380.6,
+  "mid_local_xy": [
+   -122.5,
+   437.5
+  ]
+ },
+ {
+  "id": "way/1288750542:5",
+  "osm_id": "way/1288750542",
+  "name": null,
+  "street": "Bridge Street",
+  "length": 9.67,
+  "dist": 365.4,
+  "mid_local_xy": [
+   -149.6,
+   419.8
+  ]
+ },
+ {
+  "id": "way/1038002873:1",
+  "osm_id": "way/1038002873",
+  "name": null,
+  "street": null,
+  "length": 9.6,
+  "dist": 267.5,
+  "mid_local_xy": [
+   56.5,
+   272.2
+  ]
+ },
+ {
+  "id": "way/965378226:2",
+  "osm_id": "way/965378226",
+  "name": null,
+  "street": null,
+  "length": 9.57,
+  "dist": 287.4,
+  "mid_local_xy": [
+   -104.8,
+   344.8
+  ]
+ },
+ {
+  "id": "way/135711701:0",
+  "osm_id": "way/135711701",
+  "name": null,
+  "street": null,
+  "length": 9.39,
+  "dist": 324.6,
+  "mid_local_xy": [
+   -34.0,
+   374.6
+  ]
+ },
+ {
+  "id": "way/166155984:27",
+  "osm_id": "way/166155984",
+  "name": "Nevile's Court F, G, H, I, K, L and M",
+  "street": null,
+  "length": 9.15,
+  "dist": 292.0,
+  "mid_local_xy": [
+   -317.7,
+   255.2
+  ]
+ },
+ {
+  "id": "way/965378230:2",
+  "osm_id": "way/965378230",
+  "name": null,
+  "street": null,
+  "length": 8.98,
+  "dist": 261.3,
+  "mid_local_xy": [
+   -130.6,
+   317.1
+  ]
+ },
+ {
+  "id": "way/1288750541:12",
+  "osm_id": "way/1288750541",
+  "name": null,
+  "street": null,
+  "length": 8.87,
+  "dist": 390.2,
+  "mid_local_xy": [
+   -112.4,
+   447.5
+  ]
+ },
+ {
+  "id": "way/1288738594:3",
+  "osm_id": "way/1288738594",
+  "name": null,
+  "street": "Bridge Street",
+  "length": 8.75,
+  "dist": 332.0,
+  "mid_local_xy": [
+   -137.4,
+   387.6
+  ]
+ },
+ {
+  "id": "way/13863631:23",
+  "osm_id": "way/13863631",
+  "name": "Cloister Court",
+  "street": null,
+  "length": 8.27,
+  "dist": 303.6,
+  "mid_local_xy": [
+   -41.6,
+   354.7
+  ]
+ },
+ {
+  "id": "way/100322366:0",
+  "osm_id": "way/100322366",
+  "name": null,
+  "street": "Malcolm Street",
+  "length": 8.11,
+  "dist": 353.9,
+  "mid_local_xy": [
+   103.2,
+   345.0
+  ]
+ },
+ {
+  "id": "way/263621279:20",
+  "osm_id": "way/263621279",
+  "name": "Old Divinity School",
+  "street": "St John's Street",
+  "length": 8.02,
+  "dist": 278.4,
+  "mid_local_xy": [
+   -175.0,
+   326.2
+  ]
+ },
+ {
+  "id": "way/263621284:1",
+  "osm_id": "way/263621284",
+  "name": null,
+  "street": null,
+  "length": 7.86,
+  "dist": 281.3,
+  "mid_local_xy": [
+   -144.3,
+   335.6
+  ]
+ },
+ {
+  "id": "way/1288738594:9",
+  "osm_id": "way/1288738594",
+  "name": null,
+  "street": "Bridge Street",
+  "length": 7.82,
+  "dist": 332.5,
+  "mid_local_xy": [
+   -151.6,
+   386.2
+  ]
+ },
+ {
+  "id": "way/1288750539:8",
+  "osm_id": "way/1288750539",
+  "name": null,
+  "street": "Bridge Street",
+  "length": 7.81,
+  "dist": 386.6,
+  "mid_local_xy": [
+   -164.8,
+   438.9
+  ]
+ },
+ {
+  "id": "way/1288738590:3",
+  "osm_id": "way/1288738590",
+  "name": null,
+  "street": "Bridge Street",
+  "length": 7.51,
+  "dist": 294.3,
+  "mid_local_xy": [
+   -109.9,
+   351.6
+  ]
+ },
+ {
+  "id": "way/158913900:13",
+  "osm_id": "way/158913900",
+  "name": null,
+  "street": null,
+  "length": 7.37,
+  "dist": 385.5,
+  "mid_local_xy": [
+   -195.3,
+   431.6
+  ]
+ },
+ {
+  "id": "way/158913878:20",
+  "osm_id": "way/158913878",
+  "name": null,
+  "street": null,
+  "length": 7.16,
+  "dist": 304.7,
+  "mid_local_xy": [
+   -179.6,
+   352.2
+  ]
+ },
+ {
+  "id": "way/1288738599:8",
+  "osm_id": "way/1288738599",
+  "name": null,
+  "street": "Bridge Street",
+  "length": 7.07,
+  "dist": 322.6,
+  "mid_local_xy": [
+   -130.7,
+   378.8
+  ]
+ },
+ {
+  "id": "way/147456496:33",
+  "osm_id": "way/147456496",
+  "name": "Blundell Court",
+  "street": null,
+  "length": 6.96,
+  "dist": 324.9,
+  "mid_local_xy": [
+   86.8,
+   321.2
+  ]
+ },
+ {
+  "id": "way/965378222:0",
+  "osm_id": "way/965378222",
+  "name": null,
+  "street": null,
+  "length": 6.84,
+  "dist": 336.1,
+  "mid_local_xy": [
+   -35.1,
+   386.6
+  ]
+ },
+ {
+  "id": "way/132297255:4",
+  "osm_id": "way/132297255",
+  "name": "Cambridge Union Society",
+  "street": "Bridge Street",
+  "length": 6.77,
+  "dist": 368.3,
+  "mid_local_xy": [
+   -89.0,
+   425.4
+  ]
+ },
+ {
+  "id": "way/965378222:5",
+  "osm_id": "way/965378222",
+  "name": null,
+  "street": null,
+  "length": 6.58,
+  "dist": 346.7,
+  "mid_local_xy": [
+   -29.9,
+   396.3
+  ]
+ },
+ {
+  "id": "way/158913900:14",
+  "osm_id": "way/158913900",
+  "name": null,
+  "street": null,
+  "length": 6.51,
+  "dist": 389.9,
+  "mid_local_xy": [
+   -201.6,
+   434.6
+  ]
+ },
+ {
+  "id": "way/100322391:2",
+  "osm_id": "way/100322391",
+  "name": null,
+  "street": "Malcolm Street",
+  "length": 6.47,
+  "dist": 336.9,
+  "mid_local_xy": [
+   91.1,
+   332.8
+  ]
+ },
+ {
+  "id": "way/158913900:10",
+  "osm_id": "way/158913900",
+  "name": null,
+  "street": null,
+  "length": 6.35,
+  "dist": 365.0,
+  "mid_local_xy": [
+   -166.9,
+   416.7
+  ]
+ },
+ {
+  "id": "way/100322365:0",
+  "osm_id": "way/100322365",
+  "name": null,
+  "street": "Malcolm Street",
+  "length": 6.19,
+  "dist": 373.6,
+  "mid_local_xy": [
+   100.7,
+   370.6
+  ]
+ },
+ {
+  "id": "way/100322370:1",
+  "osm_id": "way/100322370",
+  "name": null,
+  "street": "Malcolm Street",
+  "length": 6.19,
+  "dist": 364.0,
+  "mid_local_xy": [
+   101.9,
+   358.3
+  ]
+ },
+ {
+  "id": "way/100322359:1",
+  "osm_id": "way/100322359",
+  "name": null,
+  "street": "Malcolm Street",
+  "length": 6.18,
+  "dist": 380.6,
+  "mid_local_xy": [
+   99.8,
+   379.5
+  ]
+ },
+ {
+  "id": "way/100322361:1",
+  "osm_id": "way/100322361",
+  "name": null,
+  "street": "Malcolm Street",
+  "length": 6.18,
+  "dist": 390.4,
+  "mid_local_xy": [
+   98.5,
+   391.8
+  ]
+ },
+ {
+  "id": "way/100322369:1",
+  "osm_id": "way/100322369",
+  "name": null,
+  "street": "Malcolm Street",
+  "length": 6.18,
+  "dist": 359.3,
+  "mid_local_xy": [
+   102.5,
+   352.1
+  ]
+ },
+ {
+  "id": "way/100322371:1",
+  "osm_id": "way/100322371",
+  "name": null,
+  "street": "Malcolm Street",
+  "length": 6.18,
+  "dist": 368.8,
+  "mid_local_xy": [
+   101.3,
+   364.4
+  ]
+ },
+ {
+  "id": "way/100322355:0",
+  "osm_id": "way/100322355",
+  "name": null,
+  "street": "Malcolm Street",
+  "length": 6.17,
+  "dist": 395.3,
+  "mid_local_xy": [
+   97.8,
+   398.0
+  ]
+ },
+ {
+  "id": "way/100322360:1",
+  "osm_id": "way/100322360",
+  "name": null,
+  "street": "Malcolm Street",
+  "length": 6.17,
+  "dist": 385.5,
+  "mid_local_xy": [
+   99.1,
+   385.7
+  ]
+ },
+ {
+  "id": "way/100322395:3",
+  "osm_id": "way/100322395",
+  "name": null,
+  "street": "Malcolm Street",
+  "length": 6.17,
+  "dist": 350.7,
+  "mid_local_xy": [
+   92.8,
+   348.4
+  ]
+ },
+ {
+  "id": "way/100322389:2",
+  "osm_id": "way/100322389",
+  "name": null,
+  "street": "Malcolm Street",
+  "length": 6.16,
+  "dist": 360.3,
+  "mid_local_xy": [
+   91.6,
+   360.7
+  ]
+ },
+ {
+  "id": "way/100322391:3",
+  "osm_id": "way/100322391",
+  "name": null,
+  "street": "Malcolm Street",
+  "length": 6.16,
+  "dist": 341.3,
+  "mid_local_xy": [
+   94.0,
+   336.2
+  ]
+ },
+ {
+  "id": "way/100322394:3",
+  "osm_id": "way/100322394",
+  "name": null,
+  "street": "Malcolm Street",
+  "length": 6.16,
+  "dist": 346.0,
+  "mid_local_xy": [
+   93.4,
+   342.3
+  ]
+ },
+ {
+  "id": "way/100322397:3",
+  "osm_id": "way/100322397",
+  "name": null,
+  "street": "Malcolm Street",
+  "length": 6.16,
+  "dist": 355.5,
+  "mid_local_xy": [
+   92.2,
+   354.6
+  ]
+ },
+ {
+  "id": "way/132297255:2",
+  "osm_id": "way/132297255",
+  "name": "Cambridge Union Society",
+  "street": "Bridge Street",
+  "length": 6.16,
+  "dist": 369.2,
+  "mid_local_xy": [
+   -98.5,
+   426.5
+  ]
+ },
+ {
+  "id": "way/100322373:2",
+  "osm_id": "way/100322373",
+  "name": null,
+  "street": "Malcolm Street",
+  "length": 6.15,
+  "dist": 392.0,
+  "mid_local_xy": [
+   87.4,
+   400.0
+  ]
+ },
+ {
+  "id": "way/100322378:3",
+  "osm_id": "way/100322378",
+  "name": null,
+  "street": "Malcolm Street",
+  "length": 6.15,
+  "dist": 367.2,
+  "mid_local_xy": [
+   90.5,
+   369.5
+  ]
+ },
+ {
+  "id": "way/100322379:3",
+  "osm_id": "way/100322379",
+  "name": null,
+  "street": "Malcolm Street",
+  "length": 6.15,
+  "dist": 372.1,
+  "mid_local_xy": [
+   89.9,
+   375.6
+  ]
+ },
+ {
+  "id": "way/100322383:3",
+  "osm_id": "way/100322383",
+  "name": null,
+  "street": "Malcolm Street",
+  "length": 6.15,
+  "dist": 377.0,
+  "mid_local_xy": [
+   89.3,
+   381.7
+  ]
+ },
+ {
+  "id": "way/100322384:3",
+  "osm_id": "way/100322384",
+  "name": null,
+  "street": "Malcolm Street",
+  "length": 6.15,
+  "dist": 382.0,
+  "mid_local_xy": [
+   88.7,
+   387.8
+  ]
+ },
+ {
+  "id": "way/100322385:3",
+  "osm_id": "way/100322385",
+  "name": null,
+  "street": "Malcolm Street",
+  "length": 6.15,
+  "dist": 387.0,
+  "mid_local_xy": [
+   88.0,
+   393.9
+  ]
+ },
+ {
+  "id": "way/132297255:3",
+  "osm_id": "way/132297255",
+  "name": "Cambridge Union Society",
+  "street": "Bridge Street",
+  "length": 6.08,
+  "dist": 369.1,
+  "mid_local_xy": [
+   -93.6,
+   426.3
+  ]
+ },
+ {
+  "id": "way/100322368:0",
+  "osm_id": "way/100322368",
+  "name": null,
+  "street": "Malcolm Street",
+  "length": 6.07,
+  "dist": 348.5,
+  "mid_local_xy": [
+   103.8,
+   338.0
+  ]
+ },
+ {
+  "id": "way/100322372:0",
+  "osm_id": "way/100322372",
+  "name": null,
+  "street": "Malcolm Street",
+  "length": 6.07,
+  "dist": 344.1,
+  "mid_local_xy": [
+   104.4,
+   331.9
+  ]
+ }
+]

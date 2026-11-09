@@ -1521,3 +1521,45 @@ Next
 1. Read gameplay_judged for this build (service.sh), and check boss TTK spread and fps with the bigger packs and adds.
 2. Ring 1: Clare Chapel, King's Parade shops, Bene't St; a Commons-led pass for Downing St.
 3. More mob model detail for the remaining types (wisp, statue, river wraith) and clearer telegraphs.
+
+## 2026-11-09 — Session 50: 73 ring-1 wall annotations (5 parallel sectors); mob detail + animation; boss/enemy HUD
+
+Start: live 75b216 (session 49); service.sh had not yet scored its game KPIs (latest game KPIs, from afef09:
+playable_classes 4, mob_types 12 + 3 bosses, equipment_effects 44, encounter_coverage_pct 100, playtest_pass_pct 95,
+gameplay_judged 37.1).
+
+Done (7 parallel subagents)
+- Ring 1, now at scale: data/derived/s50/worklist_<0-4>.json split the unannotated street-facing ring-1 walls into
+  5 angular sectors (near first, then longest). One fork per sector, resumed once each. 73 new walls: Christ's
+  St Andrew's St front and Hobson St wall, Round Church St blocks, Lloyds Hobson St side, Montagu House, South Court,
+  Blue Boar, Sussex St, Trinity Hall, Taylor Library, Scott's Building, Fisher House, New Court (Garret Hostel Lane,
+  68 m), Dokett, Market Hostel (St Mary's Passage), Clare Chapel east end, Old Schools west, Corpus Trumpington St range,
+  Attenborough west, Free School Lane (Social Anthropology, Rayleigh, Zoology), Emmanuel Essex front, St Andrew's St
+  56-64 and Emmanuel St shops, Downing Place URC. Most are low confidence.
+  **Ring-1 facade match 18.2 → 32.2%** (184 of 851 walls), city 4.15 → 7.34%, zone 69.32 (unchanged).
+  DATA.md notes the CC BY-SA Commons/Geograph references (reference only, listed per file).
+- Mobs (mobs.js): wisp flame crown, tendrils, reed cage; statue gown, scroll, tablet, cracks; wraith ragged cape, reed
+  crown, chain. Per-type windup poses, hit reactions and gaits; all 12 regular types have their own death pose.
+  test_mobs 12 + 3 bosses, 15/15 encounters, 0 errors. Montage: docs/screens/session50_mobs_1-5.png
+  (scripts/mob_shots.mjs).
+- HUD (hud.js, sfx.js, vfx.js): boss bar with name, phase markers, phase/enrage line and attack cast bar; phase banners;
+  health and cast bars over up to 16 nearby mobs; crosshair hit/crit/kill markers; red edge arcs toward attackers;
+  camera shake (off for scripted cameras); the red hit flash is now edge-only; particles fade near the camera.
+  test_classes ok, test_items 44/44, 0 errors. docs/screens/session50_hud_*.jpg.
+- Published world-20261109-0248 (WC_SKIP_GAME_KPI=1; service.sh runs the game KPIs and gameplay_judged for the new hash).
+
+Learned
+- Annotation forks stop after 4-8 min. Resuming them once roughly doubles their output. 5 sectors × ~15 walls is
+  about 70 walls a session. 667 street-facing ring-1 walls remain, so reaching 70% in ring 1 needs about 5 more
+  sessions like this.
+- Machine load reached ~55 (other projects too). The 40-view A/B render within 400 m got only 30 views done in 10 min,
+  so this session has no benchmark before/after. Rely on service.sh's per-build judged_realism and ring report.
+- The gameplay clip camera sometimes ends up inside a market stall canopy (session50_hud_toll.jpg), which hurts
+  gameplay_judged. Make the clip camera avoid geometry.
+
+Next
+1. Read the new build's gameplay_judged, playtest and fps from service.sh; compare with 37.1.
+2. Clip camera: keep it out of stall canopies and walls (raycast and pull in).
+3. Ring 1: another 5-sector annotation round (regenerate the worklists from facade_geometry_city.json).
+   Commons rate-limits, so give each sector its own Commons budget.
+4. Ring-report per-ring judged_realism for the new build.

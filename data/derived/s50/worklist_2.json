@@ -1,0 +1,902 @@
+[
+ {
+  "id": "way/166155936:0",
+  "osm_id": "way/166155936",
+  "name": "Bishop's Hostel",
+  "street": null,
+  "length": 38.02,
+  "dist": 222.8,
+  "mid_local_xy": [
+   -309.3,
+   141.3
+  ]
+ },
+ {
+  "id": "way/166155967:0",
+  "osm_id": "way/166155967",
+  "name": "Great Court L, M, N, O, P and Q",
+  "street": null,
+  "length": 32.02,
+  "dist": 187.6,
+  "mid_local_xy": [
+   -246.9,
+   177.5
+  ]
+ },
+ {
+  "id": "relation/2196957:14",
+  "osm_id": "relation/2196957",
+  "name": "Market Hostel (King's College)",
+  "street": null,
+  "length": 31.19,
+  "dist": 41.4,
+  "mid_local_xy": [
+   -137.2,
+   34.1
+  ]
+ },
+ {
+  "id": "way/137017454:17",
+  "osm_id": "way/137017454",
+  "name": "Master's Lodge, Hall and Buttery",
+  "street": null,
+  "length": 24.4,
+  "dist": 201.8,
+  "mid_local_xy": [
+   -269.4,
+   171.4
+  ]
+ },
+ {
+  "id": "way/137017454:19",
+  "osm_id": "way/137017454",
+  "name": "Master's Lodge, Hall and Buttery",
+  "street": null,
+  "length": 23.57,
+  "dist": 206.2,
+  "mid_local_xy": [
+   -284.4,
+   155.2
+  ]
+ },
+ {
+  "id": "way/165737329:13",
+  "osm_id": "way/165737329",
+  "name": null,
+  "street": null,
+  "length": 19.91,
+  "dist": 198.4,
+  "mid_local_xy": [
+   -293.8,
+   111.5
+  ]
+ },
+ {
+  "id": "way/148880401:6",
+  "osm_id": "way/148880401",
+  "name": "Taylor Library",
+  "street": null,
+  "length": 17.92,
+  "dist": 186.2,
+  "mid_local_xy": [
+   -167.7,
+   -117.2
+  ]
+ },
+ {
+  "id": "way/166155937:6",
+  "osm_id": "way/166155937",
+  "name": "Bishop's Hostel A, B, C",
+  "street": null,
+  "length": 17.56,
+  "dist": 213.6,
+  "mid_local_xy": [
+   -289.8,
+   160.7
+  ]
+ },
+ {
+  "id": "way/166155967:31",
+  "osm_id": "way/166155967",
+  "name": "Great Court L, M, N, O, P and Q",
+  "street": null,
+  "length": 17.35,
+  "dist": 214.6,
+  "mid_local_xy": [
+   -280.5,
+   177.9
+  ]
+ },
+ {
+  "id": "way/164848658:1",
+  "osm_id": "way/164848658",
+  "name": "Scott's Building",
+  "street": null,
+  "length": 16.79,
+  "dist": 204.9,
+  "mid_local_xy": [
+   -208.0,
+   -118.5
+  ]
+ },
+ {
+  "id": "relation/2196957:11",
+  "osm_id": "relation/2196957",
+  "name": "Market Hostel (King's College)",
+  "street": null,
+  "length": 16.07,
+  "dist": 48.0,
+  "mid_local_xy": [
+   -123.2,
+   13.9
+  ]
+ },
+ {
+  "id": "way/139308028:14",
+  "osm_id": "way/139308028",
+  "name": null,
+  "street": null,
+  "length": 15.04,
+  "dist": 229.5,
+  "mid_local_xy": [
+   -328.0,
+   12.4
+  ]
+ },
+ {
+  "id": "relation/2196957:13",
+  "osm_id": "relation/2196957",
+  "name": "Market Hostel (King's College)",
+  "street": null,
+  "length": 14.83,
+  "dist": 32.7,
+  "mid_local_xy": [
+   -120.9,
+   30.0
+  ]
+ },
+ {
+  "id": "way/135762301:33",
+  "osm_id": "way/135762301",
+  "name": "The Old Schools",
+  "street": null,
+  "length": 14.82,
+  "dist": 197.3,
+  "mid_local_xy": [
+   -300.2,
+   55.0
+  ]
+ },
+ {
+  "id": "way/165737334:0",
+  "osm_id": "way/165737334",
+  "name": null,
+  "street": null,
+  "length": 14.59,
+  "dist": 201.8,
+  "mid_local_xy": [
+   -291.7,
+   128.6
+  ]
+ },
+ {
+  "id": "way/164830069:8",
+  "osm_id": "way/164830069",
+  "name": "Scott's Building",
+  "street": null,
+  "length": 14.53,
+  "dist": 236.4,
+  "mid_local_xy": [
+   -227.7,
+   -143.4
+  ]
+ },
+ {
+  "id": "way/148880401:11",
+  "osm_id": "way/148880401",
+  "name": "Taylor Library",
+  "street": null,
+  "length": 14.48,
+  "dist": 202.3,
+  "mid_local_xy": [
+   -188.5,
+   -125.9
+  ]
+ },
+ {
+  "id": "way/134519979:3",
+  "osm_id": "way/134519979",
+  "name": null,
+  "street": "St Edward's Passage",
+  "length": 13.83,
+  "dist": 96.1,
+  "mid_local_xy": [
+   -148.1,
+   -27.5
+  ]
+ },
+ {
+  "id": "way/165737329:10",
+  "osm_id": "way/165737329",
+  "name": null,
+  "street": null,
+  "length": 13.81,
+  "dist": 196.2,
+  "mid_local_xy": [
+   -295.8,
+   92.9
+  ]
+ },
+ {
+  "id": "way/157588902:1",
+  "osm_id": "way/157588902",
+  "name": "Shakeshaft Library",
+  "street": null,
+  "length": 13.28,
+  "dist": 239.9,
+  "mid_local_xy": [
+   -227.9,
+   -147.4
+  ]
+ },
+ {
+  "id": "way/134519982:4",
+  "osm_id": "way/134519982",
+  "name": "Spalding Hostel (King's College)",
+  "street": null,
+  "length": 13.17,
+  "dist": 132.0,
+  "mid_local_xy": [
+   -120.6,
+   -73.4
+  ]
+ },
+ {
+  "id": "way/164853890:5",
+  "osm_id": "way/164853890",
+  "name": "Spalding Hostel (King's College)",
+  "street": null,
+  "length": 12.7,
+  "dist": 91.6,
+  "mid_local_xy": [
+   -114.9,
+   -33.5
+  ]
+ },
+ {
+  "id": "way/1036521057:1",
+  "osm_id": "way/1036521057",
+  "name": null,
+  "street": "King's Parade",
+  "length": 12.67,
+  "dist": 111.7,
+  "mid_local_xy": [
+   -177.8,
+   -25.5
+  ]
+ },
+ {
+  "id": "way/1206340006:0",
+  "osm_id": "way/1206340006",
+  "name": null,
+  "street": "Guildhall Street",
+  "length": 11.76,
+  "dist": 103.9,
+  "mid_local_xy": [
+   -30.4,
+   -17.0
+  ]
+ },
+ {
+  "id": "way/164848658:6",
+  "osm_id": "way/164848658",
+  "name": "Scott's Building",
+  "street": null,
+  "length": 10.78,
+  "dist": 191.9,
+  "mid_local_xy": [
+   -209.6,
+   -102.2
+  ]
+ },
+ {
+  "id": "way/137017454:20",
+  "osm_id": "way/137017454",
+  "name": "Master's Lodge, Hall and Buttery",
+  "street": null,
+  "length": 10.76,
+  "dist": 199.0,
+  "mid_local_xy": [
+   -284.8,
+   138.1
+  ]
+ },
+ {
+  "id": "way/139308033:5",
+  "osm_id": "way/139308033",
+  "name": "Clare College Chapel",
+  "street": "Trinity Lane",
+  "length": 10.59,
+  "dist": 207.1,
+  "mid_local_xy": [
+   -309.9,
+   53.8
+  ]
+ },
+ {
+  "id": "relation/14376982:18",
+  "osm_id": "relation/14376982",
+  "name": null,
+  "street": null,
+  "length": 10.12,
+  "dist": 95.2,
+  "mid_local_xy": [
+   -158.5,
+   -19.9
+  ]
+ },
+ {
+  "id": "way/137152220:0",
+  "osm_id": "way/137152220",
+  "name": null,
+  "street": "Guildhall Street",
+  "length": 9.9,
+  "dist": 93.0,
+  "mid_local_xy": [
+   -37.6,
+   -8.8
+  ]
+ },
+ {
+  "id": "way/165737339:12",
+  "osm_id": "way/165737339",
+  "name": null,
+  "street": null,
+  "length": 9.86,
+  "dist": 207.3,
+  "mid_local_xy": [
+   -309.4,
+   75.1
+  ]
+ },
+ {
+  "id": "way/134519979:2",
+  "osm_id": "way/134519979",
+  "name": null,
+  "street": "St Edward's Passage",
+  "length": 9.54,
+  "dist": 90.7,
+  "mid_local_xy": [
+   -136.4,
+   -26.9
+  ]
+ },
+ {
+  "id": "way/135762301:42",
+  "osm_id": "way/135762301",
+  "name": "The Old Schools",
+  "street": null,
+  "length": 9.19,
+  "dist": 196.6,
+  "mid_local_xy": [
+   -298.5,
+   37.5
+  ]
+ },
+ {
+  "id": "way/137152219:4",
+  "osm_id": "way/137152219",
+  "name": null,
+  "street": null,
+  "length": 8.98,
+  "dist": 100.9,
+  "mid_local_xy": [
+   -41.3,
+   -22.5
+  ]
+ },
+ {
+  "id": "way/137017426:2",
+  "osm_id": "way/137017426",
+  "name": "Bateman Auditorium",
+  "street": null,
+  "length": 8.87,
+  "dist": 185.6,
+  "mid_local_xy": [
+   -285.3,
+   91.5
+  ]
+ },
+ {
+  "id": "way/137152219:0",
+  "osm_id": "way/137152219",
+  "name": null,
+  "street": null,
+  "length": 8.73,
+  "dist": 105.4,
+  "mid_local_xy": [
+   -32.5,
+   -21.0
+  ]
+ },
+ {
+  "id": "way/1410529029:0",
+  "osm_id": "way/1410529029",
+  "name": null,
+  "street": "Peas Hill",
+  "length": 8.48,
+  "dist": 101.4,
+  "mid_local_xy": [
+   -111.9,
+   -43.6
+  ]
+ },
+ {
+  "id": "way/166155937:8",
+  "osm_id": "way/166155937",
+  "name": "Bishop's Hostel A, B, C",
+  "street": null,
+  "length": 8.29,
+  "dist": 221.9,
+  "mid_local_xy": [
+   -296.6,
+   165.6
+  ]
+ },
+ {
+  "id": "way/1036521057:2",
+  "osm_id": "way/1036521057",
+  "name": null,
+  "street": "King's Parade",
+  "length": 8.21,
+  "dist": 104.6,
+  "mid_local_xy": [
+   -167.4,
+   -24.9
+  ]
+ },
+ {
+  "id": "way/137017439:0",
+  "osm_id": "way/137017439",
+  "name": null,
+  "street": null,
+  "length": 7.86,
+  "dist": 121.9,
+  "mid_local_xy": [
+   -219.8,
+   92.0
+  ]
+ },
+ {
+  "id": "way/134519982:5",
+  "osm_id": "way/134519982",
+  "name": "Spalding Hostel (King's College)",
+  "street": null,
+  "length": 7.7,
+  "dist": 126.4,
+  "mid_local_xy": [
+   -111.2,
+   -68.8
+  ]
+ },
+ {
+  "id": "way/165737330:0",
+  "osm_id": "way/165737330",
+  "name": null,
+  "street": null,
+  "length": 7.52,
+  "dist": 204.1,
+  "mid_local_xy": [
+   -305.8,
+   80.0
+  ]
+ },
+ {
+  "id": "way/1095394773:7",
+  "osm_id": "way/1095394773",
+  "name": null,
+  "street": "Peas Hill",
+  "length": 7.45,
+  "dist": 115.1,
+  "mid_local_xy": [
+   -87.0,
+   -56.7
+  ]
+ },
+ {
+  "id": "way/135762301:46",
+  "osm_id": "way/135762301",
+  "name": "The Old Schools",
+  "street": null,
+  "length": 7.24,
+  "dist": 196.8,
+  "mid_local_xy": [
+   -297.5,
+   28.2
+  ]
+ },
+ {
+  "id": "way/137017454:16",
+  "osm_id": "way/137017454",
+  "name": "Master's Lodge, Hall and Buttery",
+  "street": null,
+  "length": 6.92,
+  "dist": 189.9,
+  "mid_local_xy": [
+   -253.8,
+   172.7
+  ]
+ },
+ {
+  "id": "way/164830069:9",
+  "osm_id": "way/164830069",
+  "name": "Scott's Building",
+  "street": null,
+  "length": 6.76,
+  "dist": 229.9,
+  "mid_local_xy": [
+   -217.2,
+   -142.1
+  ]
+ },
+ {
+  "id": "way/139308028:13",
+  "osm_id": "way/139308028",
+  "name": null,
+  "street": null,
+  "length": 6.71,
+  "dist": 233.2,
+  "mid_local_xy": [
+   -330.0,
+   4.6
+  ]
+ },
+ {
+  "id": "way/151527568:4",
+  "osm_id": "way/151527568",
+  "name": "10 Peas Hill",
+  "street": "Peas Hill",
+  "length": 6.38,
+  "dist": 117.9,
+  "mid_local_xy": [
+   -93.0,
+   -60.1
+  ]
+ },
+ {
+  "id": "way/149032866:7",
+  "osm_id": "way/149032866",
+  "name": "The Eagle",
+  "street": "Bene't Street",
+  "length": 6.34,
+  "dist": 148.3,
+  "mid_local_xy": [
+   -165.3,
+   -77.1
+  ]
+ },
+ {
+  "id": "way/166155936:1",
+  "osm_id": "way/166155936",
+  "name": "Bishop's Hostel",
+  "street": null,
+  "length": 6.33,
+  "dist": 205.8,
+  "mid_local_xy": [
+   -290.3,
+   142.5
+  ]
+ },
+ {
+  "id": "relation/14376982:1",
+  "osm_id": "relation/14376982",
+  "name": null,
+  "street": null,
+  "length": 6.06,
+  "dist": 81.0,
+  "mid_local_xy": [
+   -151.6,
+   -7.4
+  ]
+ },
+ {
+  "id": "relation/9449789:38",
+  "osm_id": "relation/9449789",
+  "name": "New Court",
+  "street": null,
+  "length": 68.22,
+  "dist": 277.7,
+  "mid_local_xy": [
+   -365.7,
+   147.2
+  ]
+ },
+ {
+  "id": "way/148215548:0",
+  "osm_id": "way/148215548",
+  "name": "Dokett Building",
+  "street": null,
+  "length": 25.74,
+  "dist": 305.7,
+  "mid_local_xy": [
+   -292.7,
+   -182.2
+  ]
+ },
+ {
+  "id": "way/166155989:7",
+  "osm_id": "way/166155989",
+  "name": "The Brewhouse",
+  "street": null,
+  "length": 23.06,
+  "dist": 334.3,
+  "mid_local_xy": [
+   -424.8,
+   147.7
+  ]
+ },
+ {
+  "id": "way/157588876:0",
+  "osm_id": "way/157588876",
+  "name": "Dining Hall",
+  "street": null,
+  "length": 19.85,
+  "dist": 296.4,
+  "mid_local_xy": [
+   -283.4,
+   -177.7
+  ]
+ },
+ {
+  "id": "way/165737342:12",
+  "osm_id": "way/165737342",
+  "name": "Thornton Building",
+  "street": null,
+  "length": 18.87,
+  "dist": 328.2,
+  "mid_local_xy": [
+   -425.1,
+   119.7
+  ]
+ },
+ {
+  "id": "way/164848659:16",
+  "osm_id": "way/164848659",
+  "name": "Webb's Building",
+  "street": null,
+  "length": 14.42,
+  "dist": 272.1,
+  "mid_local_xy": [
+   -277.9,
+   -151.0
+  ]
+ },
+ {
+  "id": "way/164830068:21",
+  "osm_id": "way/164830068",
+  "name": "Old Lodge",
+  "street": null,
+  "length": 13.78,
+  "dist": 279.0,
+  "mid_local_xy": [
+   -312.7,
+   -126.5
+  ]
+ },
+ {
+  "id": "way/157588865:17",
+  "osm_id": "way/157588865",
+  "name": null,
+  "street": null,
+  "length": 12.21,
+  "dist": 308.0,
+  "mid_local_xy": [
+   -281.4,
+   -193.6
+  ]
+ },
+ {
+  "id": "relation/9449789:33",
+  "osm_id": "relation/9449789",
+  "name": "New Court",
+  "street": null,
+  "length": 12.13,
+  "dist": 324.0,
+  "mid_local_xy": [
+   -393.1,
+   201.6
+  ]
+ },
+ {
+  "id": "way/166155989:5",
+  "osm_id": "way/166155989",
+  "name": "The Brewhouse",
+  "street": null,
+  "length": 12.11,
+  "dist": 327.3,
+  "mid_local_xy": [
+   -419.2,
+   141.4
+  ]
+ },
+ {
+  "id": "way/166155989:4",
+  "osm_id": "way/166155989",
+  "name": "The Brewhouse",
+  "street": null,
+  "length": 11.94,
+  "dist": 331.6,
+  "mid_local_xy": [
+   -425.2,
+   135.3
+  ]
+ },
+ {
+  "id": "way/165737342:10",
+  "osm_id": "way/165737342",
+  "name": "Thornton Building",
+  "street": null,
+  "length": 11.91,
+  "dist": 316.4,
+  "mid_local_xy": [
+   -411.5,
+   127.2
+  ]
+ },
+ {
+  "id": "way/164848659:8",
+  "osm_id": "way/164848659",
+  "name": "Webb's Building",
+  "street": null,
+  "length": 11.16,
+  "dist": 289.8,
+  "mid_local_xy": [
+   -308.8,
+   -146.5
+  ]
+ },
+ {
+  "id": "way/166155984:18",
+  "osm_id": "way/166155984",
+  "name": "Nevile's Court F, G, H, I, K, L and M",
+  "street": null,
+  "length": 10.95,
+  "dist": 355.9,
+  "mid_local_xy": [
+   -384.4,
+   275.2
+  ]
+ },
+ {
+  "id": "way/165737327:3",
+  "osm_id": "way/165737327",
+  "name": "Jerwood Library",
+  "street": null,
+  "length": 9.84,
+  "dist": 339.1,
+  "mid_local_xy": [
+   -438.4,
+   106.7
+  ]
+ },
+ {
+  "id": "way/165737340:5",
+  "osm_id": "way/165737340",
+  "name": null,
+  "street": null,
+  "length": 8.91,
+  "dist": 302.9,
+  "mid_local_xy": [
+   -394.8,
+   138.1
+  ]
+ },
+ {
+  "id": "way/164848641:14",
+  "osm_id": "way/164848641",
+  "name": "Keynes' Building",
+  "street": null,
+  "length": 8.22,
+  "dist": 263.6,
+  "mid_local_xy": [
+   -266.7,
+   -149.2
+  ]
+ },
+ {
+  "id": "way/166155974:4",
+  "osm_id": "way/166155974",
+  "name": "Great court R and S",
+  "street": null,
+  "length": 8.04,
+  "dist": 264.9,
+  "mid_local_xy": [
+   -319.1,
+   210.4
+  ]
+ },
+ {
+  "id": "way/166155974:3",
+  "osm_id": "way/166155974",
+  "name": "Great court R and S",
+  "street": null,
+  "length": 7.98,
+  "dist": 263.2,
+  "mid_local_xy": [
+   -314.6,
+   213.8
+  ]
+ },
+ {
+  "id": "way/166155989:8",
+  "osm_id": "way/166155989",
+  "name": "The Brewhouse",
+  "street": null,
+  "length": 6.57,
+  "dist": 344.5,
+  "mid_local_xy": [
+   -436.2,
+   144.4
+  ]
+ },
+ {
+  "id": "way/148215548:13",
+  "osm_id": "way/148215548",
+  "name": "Dokett Building",
+  "street": null,
+  "length": 6.39,
+  "dist": 316.6,
+  "mid_local_xy": [
+   -289.9,
+   -198.1
+  ]
+ },
+ {
+  "id": "way/165737327:2",
+  "osm_id": "way/165737327",
+  "name": "Jerwood Library",
+  "street": null,
+  "length": 6.39,
+  "dist": 337.9,
+  "mid_local_xy": [
+   -436.1,
+   113.5
+  ]
+ },
+ {
+  "id": "way/166155989:6",
+  "osm_id": "way/166155989",
+  "name": "The Brewhouse",
+  "street": null,
+  "length": 6.28,
+  "dist": 322.3,
+  "mid_local_xy": [
+   -413.2,
+   144.6
+  ]
+ },
+ {
+  "id": "way/148215548:2",
+  "osm_id": "way/148215548",
+  "name": "Dokett Building",
+  "street": null,
+  "length": 6.22,
+  "dist": 293.3,
+  "mid_local_xy": [
+   -292.7,
+   -166.2
+  ]
+ },
+ {
+  "id": "way/164848659:9",
+  "osm_id": "way/164848659",
+  "name": "Webb's Building",
+  "street": null,
+  "length": 6.04,
+  "dist": 296.8,
+  "mid_local_xy": [
+   -317.4,
+   -147.8
+  ]
+ }
+]
