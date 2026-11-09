@@ -2084,3 +2084,29 @@ Next
 - Publish note: the first Pages run (42671631864) failed with "workflow file issue" (transient). publish.sh doesn't check the
   run result, so a build can be released but not live. A rerun went through; live hash be82cce5 = data/derived/live_site.
   TODO: make publish.sh watch the Pages run and retry once on failure.
+
+## 2026-11-09 — Session 74: St John's First Court front (ring 2), Commons annotations (ring 1), crisper telegraphs
+
+Published world-20261109-1846 with skip flags; Pages run ok. service.sh scores the new hash.
+- Why the 18:25 reading had game KPIs at 0: the s73 hash be82cce5 got gameplay_judged 50.2 (up from 47.0), but its
+  playtest run died at 889 s ("Connection closed", Chrome went away when the s73 session ended), so no _game.json was
+  written. measure.sh prints 0 for a live hash with no game score, as Gaspard asked.
+- Ops: publish.sh now watches the Pages run and reruns it once if it fails (the s73 TODO).
+- Ring 2 (subagent): scripts/zone_bespoke_stjohnsfirst.py builds St John's First Court east range on St John's Street,
+  either side of the Great Gate: south 22.4 m, north 15.1 m, stepped north end. Brick, 3 storeys of stone two-light mullioned
+  windows with hoods, string courses, battlements, a door, chimneys, heights from the LiDAR, 0.65 m proud so the skin
+  doesn't show through. About 10.8k tris. docs/screens/session74_ring_{before,after}_sjc_*.jpg. The bay rhythm comes from
+  general knowledge and isn't checked against photos. It isn't fed into the facade KPI.
+- Ring 1 (subagent): annotations from Wikimedia Commons photos (CC BY-SA, licence checked, not held out, credited in
+  DATA.md) for Sidney House's Sussex St face and John Lewis's Corn Exchange St face. city_facades.py builds geometry from them.
+  Ring 1 went from 51.94 to 52.70 and the city from 12.11 to 12.29. Commons rate-limited downloads (HTTP 429).
+- Game (subagent): bats shrink or hide within 5 m of the camera; the boss telegraph decals have a crisp rim, a faint
+  interior and a guide ring; player hit damage varies ±12%, and damage-number size follows hit size. test_mobs 12+3 and
+  test_items 44/44 pass; test_classes was not run. docs/screens/session74_game_*.jpg.
+
+Next
+1. Read the scores of the s74 build: gameplay_judged (telegraphs), playtest, fps (+10.8k tris).
+2. Game: enemy_animation_variety (4.0) is the weakest gameplay subscore: give mobs distinct attack wind-ups, hit
+   reactions and deaths.
+3. Annotate the St John's and Clare fronts from non-held-out photos and feed them into the facade KPI.
+4. More ring-1 Commons annotations (pace the downloads to avoid 429s): Downing St, then the college walls.
