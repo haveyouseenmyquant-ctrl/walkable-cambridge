@@ -1,0 +1,67 @@
+{
+ "gameplay_judged": 50.2,
+ "n": 4,
+ "model": "claude-opus-5-5",
+ "hash": "be82cce5b5c3d63a",
+ "classes": {
+  "hexweaver": {
+   "score": 5.14,
+   "readability_telegraphs": 6.0,
+   "spell_vfx": 4.5,
+   "enemy_animation_variety": 4.0,
+   "hit_feedback": 5.5,
+   "ui_hud_clarity": 6.0,
+   "loot_excitement": 5.5,
+   "polished_arpg_feel": 4.5,
+   "overall": 5
+  },
+  "pyromancer": {
+   "score": 4.86,
+   "readability_telegraphs": 5.0,
+   "spell_vfx": 5.0,
+   "enemy_animation_variety": 4.0,
+   "hit_feedback": 5.0,
+   "ui_hud_clarity": 6.0,
+   "loot_excitement": 5.0,
+   "polished_arpg_feel": 4.0,
+   "overall": 4.5
+  },
+  "stormcaller": {
+   "score": 5.0,
+   "readability_telegraphs": 6.0,
+   "spell_vfx": 5.0,
+   "enemy_animation_variety": 4.0,
+   "hit_feedback": 5.0,
+   "ui_hud_clarity": 6.0,
+   "loot_excitement": 5.0,
+   "polished_arpg_feel": 4.0,
+   "overall": 5
+  },
+  "warden": {
+   "score": 5.07,
+   "readability_telegraphs": 6.0,
+   "spell_vfx": 5.0,
+   "enemy_animation_variety": 4.0,
+   "hit_feedback": 4.0,
+   "ui_hud_clarity": 6.0,
+   "loot_excitement": 6.0,
+   "polished_arpg_feel": 4.5,
+   "overall": 5
+  }
+ },
+ "by_criterion": {
+  "readability_telegraphs": 5.75,
+  "spell_vfx": 4.88,
+  "enemy_animation_variety": 4.0,
+  "hit_feedback": 4.88,
+  "ui_hud_clarity": 6.0,
+  "loot_excitement": 5.38,
+  "polished_arpg_feel": 4.25
+ },
+ "reasons": {
+  "hexweaver": "The boss encounter has strong framing: a named boss bar with phase ticks, 'Phase II' and 'Enraged' banners, and named attacks like Clapper Sweep with red ground-wedge telegraphs. Damage numbers, crits, loot beams and rarity-coloured toasts are present, and the HUD reads cleanly. The weaknesses are simple low-poly enemies, plain small-orb spell effects that barely differ from one another, a crowded mid-fight HUD, and a back half that is mostly empty wandering, ending with the camera clipping into a wall and the wizard's hat.",
+  "pyromancer": "Strengths: there is a clear boss framework (named health bar with phase pips, phase banners, ability names like 'Peal of Shards' and 'Clapper Sweep', a red sweep marker), plus readable floating damage and crit numbers, loot beams, rarity-coloured toasts and a tidy HUD with cooldowns and a minimap. Weaknesses: the art is low-poly and placeholder-like, with flat grey rock props and simple enemy models, and the camera is a third-person view rather than the stated first-person. Spell effects are often either bright bloom washes that hide the fight (frame 6) or almost nothing, mana sits near zero for much of the clip, and about 20 s with little combat (frames 3-5, 12) hurts the pacing.",
+  "stormcaller": "The boss fight is the strongest part: it has a named health bar with phase pips, labelled attacks (Clapper Sweep, Great Toll) and red ground markers, plus crit-coloured damage numbers, a spell bar with cooldowns, loot beams and item toasts. The spell effects are mostly flat blue rune circles and thin lightning, and the enemies are simple low-poly models with no visible animation. Half the clip is empty wandering with no enemies, and loot labels cluster into clutter, so it falls well short of a polished commercial ARPG.",
+  "warden": "The boss fight reads well: there's a named boss bar with phase markers, named attack windups (Clapper Sweep, Great Toll), red ground telegraphs, a Phase II banner and rarity-coloured loot beams with labels and stat toasts. The weaknesses are low-poly blocky enemies and VFX that are often plain translucent shapes, plus damage numbers that are flat and repetitive (mostly '31') with little visible hit-stop or crit punch. The HUD and the busy third-person camera also look prototype-grade, and the floor clutter and overlapping effects sometimes hide the action."
+ }
+}
