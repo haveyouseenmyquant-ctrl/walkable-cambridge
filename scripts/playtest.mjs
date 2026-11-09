@@ -66,7 +66,8 @@ function installBot(route, runIdx) {
   // boss time-to-kill: from the first damage the boss takes to its death
   // session 44: only the route's boss (the Bellwarden) counts; other bosses met on the way used to pollute the TTK
   offs.push(g.on('hit', e => { if (e.target?.type?.id === ROUTE_BOSS && bot.bossStart == null) bot.bossStart = g.time; }));
-  offs.push(g.on('playerDeath', () => ev.deaths++));
+  // session 53: a death respawns the player far away; fights left behind are not 'stuck mobs'
+  offs.push(g.on('playerDeath', () => { ev.deaths++; bot.engaged.clear(); }));
   offs.push(g.on('levelup', () => {
     for (let t = 0; t < 3; t++) if (C.picks[t] == null && g.stats.level >= C.talentLevels[t]) { if (C.pickTalent(t, (runIdx + t) % 2)) ev.talents++; }
   }));
@@ -111,7 +112,7 @@ function installBot(route, runIdx) {
   const live = () => g.mobs.filter(m => !m.dead);
   const hostile = m => !['idle', 'patrol', 'return', 'dead'].includes(m.state);
   const dist = m => Math.hypot(m.x - P.x, m.y - P.y);
-  function setGoal(x, y, tol = 1.5) { bot.goal = { x, y, tol }; bot.path = plan(P.x, P.y, P.z, x, y, tol).pts; bot.wp = 0; }
+  function setGoal(x, y, tol = 1.5) { bot.goal = { x, y, tol }; const r = plan(P.x, P.y, P.z, x, y, tol); bot.path = r.pts; bot.goal.miss = r.miss; bot.wp = 0; }
   function steer(dt) {   // hold W (+Shift) toward the next waypoint; returns true when the goal is reached
     const G = bot.goal; if (!G) return true;
     if (Math.hypot(G.x - P.x, G.y - P.y) <= G.tol + 0.3) { bot.path = null; bot.goal = null; return true; }
@@ -126,7 +127,12 @@ function installBot(route, runIdx) {
     bot.noPathT = 0;
     let q = bot.path[bot.wp];
     while (Math.hypot(q.x - P.x, q.y - P.y) < 0.9 && bot.wp < bot.path.length - 1) q = bot.path[++bot.wp];
-    if (bot.wp >= bot.path.length - 1 && Math.hypot(q.x - P.x, q.y - P.y) < 0.9) { bot.path = null; bot.goal = null; return true; }
+    if (bot.wp >= bot.path.length - 1 && Math.hypot(q.x - P.x, q.y - P.y) < 0.9) {
+      // session 53: the end of a partial plan is not the goal (a stormcaller stood 800 s on a ledge 'arriving' at its own cell);
+      // walk straight at the goal with jumps and let the stuck check below replan or fail
+      if (!(G.miss > G.tol + 1)) { bot.path = null; bot.goal = null; return true; }
+      q = G; P.keys.add('Space');
+    }
     P.yaw = Math.atan2(-(q.x - P.x), q.y - P.y);
     P.keys.add('KeyW'); P.keys.add('ShiftLeft');
     // stuck detection: no progress for 2 s -> jump, then replan
@@ -138,7 +144,10 @@ function installBot(route, runIdx) {
       // a roof is settled back to its start, so the bot hopped in place for 10+ minutes without tripping the moved check)
       const dG = Math.hypot(G.x - P.x, G.y - P.y), closer = G.best == null || dG < G.best - 0.5;
       if (closer) G.best = dG;
-      if (moved < 0.5 || !closer) { bot.replans++; P.keys.add('Space'); setGoal(G.x, G.y, G.tol); bot.goal.best = G.best; if (bot.replans > 8) bot.fail = `softlock: no route progress (leg ${bot.leg} ${route[bot.leg]}, at ${P.x.toFixed(1)},${P.y.toFixed(1)},${P.z.toFixed(1)}, goal ${G.x.toFixed(1)},${G.y.toFixed(1)}, path ${bot.path?.length ?? 0}, engaged ${[...bot.engaged.keys()].map(m => m.type.id).join('/') || 'none'})`; }
+      // session 53: loot is optional; a kill spot the bot cannot get onto (corpse against bollards/railings) is skipped
+      // instead of failing the run as a softlock (a really stuck player still fails on the next travel leg)
+      if ((moved < 0.5 || !closer) && G.loot && bot.replans >= 3) { G.loot.looted = true; bot.goal = null; bot.path = null; bot.replans = 0; return false; }
+      if (moved < 0.5 || !closer) { bot.replans++; P.keys.add('Space'); setGoal(G.x, G.y, G.tol); bot.goal.best = G.best; bot.goal.loot = G.loot; bot.goal.enc = G.enc; if (bot.replans > 8) bot.fail = `softlock: no route progress (leg ${bot.leg} ${route[bot.leg]}, at ${P.x.toFixed(1)},${P.y.toFixed(1)},${P.z.toFixed(1)}, goal ${G.x.toFixed(1)},${G.y.toFixed(1)}, path ${bot.path?.length ?? 0}, engaged ${[...bot.engaged.keys()].map(m => m.type.id).join('/') || 'none'})`; }
       else bot.replans = 0;
     }
     return false;
@@ -181,6 +190,7 @@ function installBot(route, runIdx) {
     for (const [m, e] of bot.engaged) {
       if (m.dead) { if (m.type.id === ROUTE_BOSS && bot.bossStart != null && bot.bossTtk == null) bot.bossTtk = g.time - bot.bossStart; bot.engaged.delete(m); continue; }
       if (m.removed) { bot.engaged.delete(m); continue; }
+      if (!hostile(m) && dist(m) > 25) { bot.engaged.delete(m); continue; }   // session 53: leashed home, out of the fight
       if (m.hp < e.hp) e.lastDmg = g.time;   // session 44: only damage counts as progress (leash regen used to reset it)
       e.hp = m.hp;
       if (g.time - e.lastDmg > 30) { bot.fail = `stuck mob: ${m.type.id} not damaged for 30 s`; return; }

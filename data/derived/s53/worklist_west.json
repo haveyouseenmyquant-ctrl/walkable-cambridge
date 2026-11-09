@@ -1,0 +1,2056 @@
+[
+{
+"id": "relation/14376982:18",
+"osm_id": "relation/14376982",
+"name": null,
+"street": null,
+"length": 10.12,
+"dist": 95.2,
+"bearing": 187,
+"mid_local_xy": [
+-158.5,
+-19.9
+]
+},
+{
+"id": "way/1036521057:3",
+"osm_id": "way/1036521057",
+"name": null,
+"street": "King's Parade",
+"length": 4.46,
+"dist": 100.1,
+"bearing": 191,
+"mid_local_xy": [
+-163.4,
+-22.4
+]
+},
+{
+"id": "way/1036521057:2",
+"osm_id": "way/1036521057",
+"name": null,
+"street": "King's Parade",
+"length": 8.21,
+"dist": 104.6,
+"bearing": 194,
+"mid_local_xy": [
+-167.4,
+-24.9
+]
+},
+{
+"id": "way/1036521057:1",
+"osm_id": "way/1036521057",
+"name": null,
+"street": "King's Parade",
+"length": 12.67,
+"dist": 111.7,
+"bearing": 201,
+"mid_local_xy": [
+-177.8,
+-25.5
+]
+},
+{
+"id": "way/134519873:3",
+"osm_id": "way/134519873",
+"name": null,
+"street": "King's Parade",
+"length": 5.85,
+"dist": 114.1,
+"bearing": 201,
+"mid_local_xy": [
+-178.9,
+-27.7
+]
+},
+{
+"id": "way/137017439:0",
+"osm_id": "way/137017439",
+"name": null,
+"street": null,
+"length": 7.86,
+"dist": 121.9,
+"bearing": 304,
+"mid_local_xy": [
+-219.8,
+92.0
+]
+},
+{
+"id": "way/149032866:7",
+"osm_id": "way/149032866",
+"name": "The Eagle",
+"street": "Bene't Street",
+"length": 6.34,
+"dist": 148.3,
+"bearing": 187,
+"mid_local_xy": [
+-165.3,
+-77.1
+]
+},
+{
+"id": "way/680923107:31",
+"osm_id": "way/680923107",
+"name": "Angel Court",
+"street": null,
+"length": 19.55,
+"dist": 149.4,
+"bearing": 340,
+"mid_local_xy": [
+-198.0,
+172.5
+]
+},
+{
+"id": "way/137017443:4",
+"osm_id": "way/137017443",
+"name": null,
+"street": null,
+"length": 22.42,
+"dist": 149.5,
+"bearing": 336,
+"mid_local_xy": [
+-204.2,
+167.3
+]
+},
+{
+"id": "way/134519866:3",
+"osm_id": "way/134519866",
+"name": "Bene't Hostel",
+"street": null,
+"length": 4.06,
+"dist": 151.8,
+"bearing": 184,
+"mid_local_xy": [
+-160.2,
+-83.2
+]
+},
+{
+"id": "way/149032866:6",
+"osm_id": "way/149032866",
+"name": "The Eagle",
+"street": "Bene't Street",
+"length": 5.4,
+"dist": 152.5,
+"bearing": 188,
+"mid_local_xy": [
+-167.6,
+-80.7
+]
+},
+{
+"id": "way/137017440:8",
+"osm_id": "way/137017440",
+"name": null,
+"street": null,
+"length": 7.27,
+"dist": 161.8,
+"bearing": 331,
+"mid_local_xy": [
+-218.8,
+170.3
+]
+},
+{
+"id": "way/137017440:9",
+"osm_id": "way/137017440",
+"name": null,
+"street": null,
+"length": 28.05,
+"dist": 175.8,
+"bearing": 326,
+"mid_local_xy": [
+-236.3,
+171.8
+]
+},
+{
+"id": "way/137017426:2",
+"osm_id": "way/137017426",
+"name": "Bateman Auditorium",
+"street": null,
+"length": 8.87,
+"dist": 185.6,
+"bearing": 289,
+"mid_local_xy": [
+-285.3,
+91.5
+]
+},
+{
+"id": "way/166155959:7",
+"osm_id": "way/166155959",
+"name": "Angel Court Y",
+"street": "Trinity Street",
+"length": 4.15,
+"dist": 186.4,
+"bearing": 355,
+"mid_local_xy": [
+-166.7,
+232.5
+]
+},
+{
+"id": "way/166155959:4",
+"osm_id": "way/166155959",
+"name": "Angel Court Y",
+"street": "Trinity Street",
+"length": 3.62,
+"dist": 188.0,
+"bearing": 353,
+"mid_local_xy": [
+-174.8,
+231.1
+]
+},
+{
+"id": "way/137017454:16",
+"osm_id": "way/137017454",
+"name": "Master's Lodge, Hall and Buttery",
+"street": null,
+"length": 6.92,
+"dist": 189.9,
+"bearing": 321,
+"mid_local_xy": [
+-253.8,
+172.7
+]
+},
+{
+"id": "way/95406725:6",
+"osm_id": "way/95406725",
+"name": "Gonville and Caius College Library and Archives",
+"street": null,
+"length": 3.73,
+"dist": 191.9,
+"bearing": 282,
+"mid_local_xy": [
+-294.0,
+75.1
+]
+},
+{
+"id": "way/135762301:46",
+"osm_id": "way/135762301",
+"name": "The Old Schools",
+"street": null,
+"length": 7.24,
+"dist": 196.8,
+"bearing": 264,
+"mid_local_xy": [
+-297.5,
+28.2
+]
+},
+{
+"id": "way/201286462:4",
+"osm_id": "way/201286462",
+"name": "16 Mill Lane",
+"street": "Mill Lane",
+"length": 40.07,
+"dist": 376.5,
+"bearing": 196,
+"mid_local_xy": [
+-246.1,
+-290.8
+]
+},
+{
+"id": "way/148215565:2",
+"osm_id": "way/148215565",
+"name": null,
+"street": null,
+"length": 32.46,
+"dist": 342.6,
+"bearing": 206,
+"mid_local_xy": [
+-286.6,
+-231.8
+]
+},
+{
+"id": "way/157588882:0",
+"osm_id": "way/157588882",
+"name": null,
+"street": null,
+"length": 27.38,
+"dist": 311.5,
+"bearing": 188,
+"mid_local_xy": [
+-189.2,
+-242.0
+]
+},
+{
+"id": "way/137017454:17",
+"osm_id": "way/137017454",
+"name": "Master's Lodge, Hall and Buttery",
+"street": null,
+"length": 24.4,
+"dist": 201.8,
+"bearing": 317,
+"mid_local_xy": [
+-269.4,
+171.4
+]
+},
+{
+"id": "way/137017454:19",
+"osm_id": "way/137017454",
+"name": "Master's Lodge, Hall and Buttery",
+"street": null,
+"length": 23.57,
+"dist": 206.2,
+"bearing": 309,
+"mid_local_xy": [
+-284.4,
+155.2
+]
+},
+{
+"id": "way/166155989:7",
+"osm_id": "way/166155989",
+"name": "The Brewhouse",
+"street": null,
+"length": 23.06,
+"dist": 334.3,
+"bearing": 291,
+"mid_local_xy": [
+-424.8,
+147.7
+]
+},
+{
+"id": "way/158913878:3",
+"osm_id": "way/158913878",
+"name": null,
+"street": null,
+"length": 22.43,
+"dist": 273.3,
+"bearing": 351,
+"mid_local_xy": [
+-195.4,
+314.5
+]
+},
+{
+"id": "way/158913900:11",
+"osm_id": "way/158913900",
+"name": null,
+"street": null,
+"length": 20.9,
+"dist": 373.9,
+"bearing": 356,
+"mid_local_xy": [
+-178.4,
+423.6
+]
+},
+{
+"id": "way/157588876:0",
+"osm_id": "way/157588876",
+"name": "Dining Hall",
+"street": null,
+"length": 19.85,
+"dist": 296.4,
+"bearing": 211,
+"mid_local_xy": [
+-283.4,
+-177.7
+]
+},
+{
+"id": "way/165737342:12",
+"osm_id": "way/165737342",
+"name": "Thornton Building",
+"street": null,
+"length": 18.87,
+"dist": 328.2,
+"bearing": 285,
+"mid_local_xy": [
+-425.1,
+119.7
+]
+},
+{
+"id": "way/158913908:6",
+"osm_id": "way/158913908",
+"name": null,
+"street": null,
+"length": 18.82,
+"dist": 382.1,
+"bearing": 331,
+"mid_local_xy": [
+-328.2,
+366.0
+]
+},
+{
+"id": "way/393081416:0",
+"osm_id": "way/393081416",
+"name": "17 Mill Lane",
+"street": null,
+"length": 18.31,
+"dist": 353.6,
+"bearing": 190,
+"mid_local_xy": [
+-207.9,
+-280.3
+]
+},
+{
+"id": "way/166155937:6",
+"osm_id": "way/166155937",
+"name": "Bishop's Hostel A, B, C",
+"street": null,
+"length": 17.56,
+"dist": 213.6,
+"bearing": 310,
+"mid_local_xy": [
+-289.8,
+160.7
+]
+},
+{
+"id": "way/166155967:31",
+"osm_id": "way/166155967",
+"name": "Great Court L, M, N, O, P and Q",
+"street": null,
+"length": 17.35,
+"dist": 214.6,
+"bearing": 316,
+"mid_local_xy": [
+-280.5,
+177.9
+]
+},
+{
+"id": "way/166155941:6",
+"osm_id": "way/166155941",
+"name": "The Hall",
+"street": null,
+"length": 17.29,
+"dist": 271.1,
+"bearing": 319,
+"mid_local_xy": [
+-312.2,
+229.6
+]
+},
+{
+"id": "way/157588896:1",
+"osm_id": "way/157588896",
+"name": "Master's Lodge",
+"street": null,
+"length": 16.36,
+"dist": 360.8,
+"bearing": 194,
+"mid_local_xy": [
+-234.0,
+-278.8
+]
+},
+{
+"id": "way/157588863:16",
+"osm_id": "way/157588863",
+"name": null,
+"street": null,
+"length": 16.17,
+"dist": 318.5,
+"bearing": 207,
+"mid_local_xy": [
+-279.5,
+-207.7
+]
+},
+{
+"id": "way/158913878:18",
+"osm_id": "way/158913878",
+"name": null,
+"street": null,
+"length": 15.13,
+"dist": 295.5,
+"bearing": 354,
+"mid_local_xy": [
+-183.4,
+341.7
+]
+},
+{
+"id": "way/157588868:5",
+"osm_id": "way/157588868",
+"name": null,
+"street": null,
+"length": 14.92,
+"dist": 263.0,
+"bearing": 194,
+"mid_local_xy": [
+-208.3,
+-183.6
+]
+},
+{
+"id": "way/165737334:0",
+"osm_id": "way/165737334",
+"name": null,
+"street": null,
+"length": 14.59,
+"dist": 201.8,
+"bearing": 301,
+"mid_local_xy": [
+-291.7,
+128.6
+]
+},
+{
+"id": "way/164830069:8",
+"osm_id": "way/164830069",
+"name": "Scott's Building",
+"street": null,
+"length": 14.53,
+"dist": 236.4,
+"bearing": 202,
+"mid_local_xy": [
+-227.7,
+-143.4
+]
+},
+{
+"id": "way/136330924:3",
+"osm_id": "way/136330924",
+"name": "17 Mill Lane",
+"street": null,
+"length": 14.46,
+"dist": 395.9,
+"bearing": 185,
+"mid_local_xy": [
+-184.3,
+-330.1
+]
+},
+{
+"id": "way/191541100:5",
+"osm_id": "way/191541100",
+"name": null,
+"street": "Bridge Street",
+"length": 14.02,
+"dist": 398.4,
+"bearing": 359,
+"mid_local_xy": [
+-156.3,
+452.1
+]
+},
+{
+"id": "way/164830068:21",
+"osm_id": "way/164830068",
+"name": "Old Lodge",
+"street": null,
+"length": 13.78,
+"dist": 279.0,
+"bearing": 223,
+"mid_local_xy": [
+-312.7,
+-126.5
+]
+},
+{
+"id": "way/157588902:1",
+"osm_id": "way/157588902",
+"name": "Shakeshaft Library",
+"street": null,
+"length": 13.28,
+"dist": 239.9,
+"bearing": 202,
+"mid_local_xy": [
+-227.9,
+-147.4
+]
+},
+{
+"id": "way/148215563:20",
+"osm_id": "way/148215563",
+"name": null,
+"street": null,
+"length": 13.17,
+"dist": 379.6,
+"bearing": 201,
+"mid_local_xy": [
+-274.0,
+-281.5
+]
+},
+{
+"id": "way/149032875:1",
+"osm_id": "way/149032875",
+"name": null,
+"street": null,
+"length": 12.98,
+"dist": 343.0,
+"bearing": 180,
+"mid_local_xy": [
+-150.9,
+-282.3
+]
+},
+{
+"id": "way/1288750541:28",
+"osm_id": "way/1288750541",
+"name": null,
+"street": null,
+"length": 12.71,
+"dist": 395.1,
+"bearing": 359,
+"mid_local_xy": [
+-154.6,
+449.0
+]
+},
+{
+"id": "way/148880397:1",
+"osm_id": "way/148880397",
+"name": null,
+"street": null,
+"length": 12.53,
+"dist": 201.4,
+"bearing": 185,
+"mid_local_xy": [
+-164.7,
+-134.4
+]
+},
+{
+"id": "way/157588865:17",
+"osm_id": "way/157588865",
+"name": null,
+"street": null,
+"length": 12.21,
+"dist": 308.0,
+"bearing": 209,
+"mid_local_xy": [
+-281.4,
+-193.6
+]
+},
+{
+"id": "relation/9449789:33",
+"osm_id": "relation/9449789",
+"name": "New Court",
+"street": null,
+"length": 12.13,
+"dist": 324.0,
+"bearing": 303,
+"mid_local_xy": [
+-393.1,
+201.6
+]
+},
+{
+"id": "way/166155989:5",
+"osm_id": "way/166155989",
+"name": "The Brewhouse",
+"street": null,
+"length": 12.11,
+"dist": 327.3,
+"bearing": 290,
+"mid_local_xy": [
+-419.2,
+141.4
+]
+},
+{
+"id": "way/166155989:4",
+"osm_id": "way/166155989",
+"name": "The Brewhouse",
+"street": null,
+"length": 11.94,
+"dist": 331.6,
+"bearing": 288,
+"mid_local_xy": [
+-425.2,
+135.3
+]
+},
+{
+"id": "way/165737342:10",
+"osm_id": "way/165737342",
+"name": "Thornton Building",
+"street": null,
+"length": 11.91,
+"dist": 316.4,
+"bearing": 288,
+"mid_local_xy": [
+-411.5,
+127.2
+]
+},
+{
+"id": "way/13858373:3",
+"osm_id": "way/13858373",
+"name": "Trinity College Chapel",
+"street": "Trinity Street",
+"length": 11.27,
+"dist": 249.1,
+"bearing": 351,
+"mid_local_xy": [
+-187.7,
+291.6
+]
+},
+{
+"id": "way/164848659:8",
+"osm_id": "way/164848659",
+"name": "Webb's Building",
+"street": null,
+"length": 11.16,
+"dist": 289.8,
+"bearing": 220,
+"mid_local_xy": [
+-308.8,
+-146.5
+]
+},
+{
+"id": "way/166155984:18",
+"osm_id": "way/166155984",
+"name": "Nevile's Court F, G, H, I, K, L and M",
+"street": null,
+"length": 10.95,
+"dist": 355.9,
+"bearing": 315,
+"mid_local_xy": [
+-384.4,
+275.2
+]
+},
+{
+"id": "way/158913900:9",
+"osm_id": "way/158913900",
+"name": null,
+"street": null,
+"length": 10.77,
+"dist": 357.8,
+"bearing": 357,
+"mid_local_xy": [
+-167.2,
+409.4
+]
+},
+{
+"id": "way/148215563:36",
+"osm_id": "way/148215563",
+"name": null,
+"street": null,
+"length": 10.61,
+"dist": 364.4,
+"bearing": 203,
+"mid_local_xy": [
+-279.0,
+-261.6
+]
+},
+{
+"id": "way/136330920:4",
+"osm_id": "way/136330920",
+"name": "17 Mill Lane",
+"street": null,
+"length": 10.51,
+"dist": 361.8,
+"bearing": 192,
+"mid_local_xy": [
+-221.7,
+-284.3
+]
+},
+{
+"id": "way/148215571:7",
+"osm_id": "way/148215571",
+"name": "Queens' College Chapel",
+"street": "Silver Street",
+"length": 10.36,
+"dist": 326.2,
+"bearing": 209,
+"mid_local_xy": [
+-289.0,
+-210.5
+]
+},
+{
+"id": "way/165737339:12",
+"osm_id": "way/165737339",
+"name": null,
+"street": null,
+"length": 9.86,
+"dist": 207.3,
+"bearing": 281,
+"mid_local_xy": [
+-309.4,
+75.1
+]
+},
+{
+"id": "way/166155984:27",
+"osm_id": "way/166155984",
+"name": "Nevile's Court F, G, H, I, K, L and M",
+"street": null,
+"length": 9.15,
+"dist": 292.0,
+"bearing": 322,
+"mid_local_xy": [
+-317.7,
+255.2
+]
+},
+{
+"id": "way/59620751:5",
+"osm_id": "way/59620751",
+"name": "St. Botolph",
+"street": "Trumpington Street",
+"length": 8.95,
+"dist": 325.9,
+"bearing": 181,
+"mid_local_xy": [
+-157.4,
+-263.9
+]
+},
+{
+"id": "way/165737340:5",
+"osm_id": "way/165737340",
+"name": null,
+"street": null,
+"length": 8.91,
+"dist": 302.9,
+"bearing": 291,
+"mid_local_xy": [
+-394.8,
+138.1
+]
+},
+{
+"id": "way/157588854:7",
+"osm_id": "way/157588854",
+"name": null,
+"street": null,
+"length": 8.43,
+"dist": 288.7,
+"bearing": 190,
+"mid_local_xy": [
+-194.7,
+-216.3
+]
+},
+{
+"id": "way/201286462:6",
+"osm_id": "way/201286462",
+"name": "16 Mill Lane",
+"street": "Mill Lane",
+"length": 8.12,
+"dist": 397.9,
+"bearing": 198,
+"mid_local_xy": [
+-262.4,
+-307.1
+]
+},
+{
+"id": "way/166155974:4",
+"osm_id": "way/166155974",
+"name": "Great court R and S",
+"street": null,
+"length": 8.04,
+"dist": 264.9,
+"bearing": 314,
+"mid_local_xy": [
+-319.1,
+210.4
+]
+},
+{
+"id": "way/263621279:20",
+"osm_id": "way/263621279",
+"name": "Old Divinity School",
+"street": "St John's Street",
+"length": 8.02,
+"dist": 278.4,
+"bearing": 355,
+"mid_local_xy": [
+-175.0,
+326.2
+]
+},
+{
+"id": "way/166155974:3",
+"osm_id": "way/166155974",
+"name": "Great court R and S",
+"street": null,
+"length": 7.98,
+"dist": 263.2,
+"bearing": 316,
+"mid_local_xy": [
+-314.6,
+213.8
+]
+},
+{
+"id": "way/165737330:0",
+"osm_id": "way/165737330",
+"name": null,
+"street": null,
+"length": 7.52,
+"dist": 204.1,
+"bearing": 283,
+"mid_local_xy": [
+-305.8,
+80.0
+]
+},
+{
+"id": "way/157588896:13",
+"osm_id": "way/157588896",
+"name": "Master's Lodge",
+"street": null,
+"length": 7.5,
+"dist": 347.8,
+"bearing": 198,
+"mid_local_xy": [
+-248.8,
+-258.3
+]
+},
+{
+"id": "way/158913900:13",
+"osm_id": "way/158913900",
+"name": null,
+"street": null,
+"length": 7.37,
+"dist": 385.5,
+"bearing": 353,
+"mid_local_xy": [
+-195.3,
+431.6
+]
+},
+{
+"id": "way/59620751:2",
+"osm_id": "way/59620751",
+"name": "St. Botolph",
+"street": "Trumpington Street",
+"length": 7.32,
+"dist": 322.7,
+"bearing": 183,
+"mid_local_xy": [
+-168.7,
+-258.5
+]
+},
+{
+"id": "way/148880393:5",
+"osm_id": "way/148880393",
+"name": null,
+"street": null,
+"length": 7.25,
+"dist": 239.6,
+"bearing": 190,
+"mid_local_xy": [
+-187.4,
+-166.8
+]
+},
+{
+"id": "way/148215564:3",
+"osm_id": "way/148215564",
+"name": "Queens' College Library",
+"street": null,
+"length": 7.22,
+"dist": 358.0,
+"bearing": 204,
+"mid_local_xy": [
+-281.3,
+-253.0
+]
+},
+{
+"id": "way/149032878:0",
+"osm_id": "way/149032878",
+"name": null,
+"street": "Trumpington Street",
+"length": 7.2,
+"dist": 364.0,
+"bearing": 181,
+"mid_local_xy": [
+-155.9,
+-302.7
+]
+},
+{
+"id": "way/158913878:20",
+"osm_id": "way/158913878",
+"name": null,
+"street": null,
+"length": 7.16,
+"dist": 304.7,
+"bearing": 355,
+"mid_local_xy": [
+-179.6,
+352.2
+]
+},
+{
+"id": "way/157588854:10",
+"osm_id": "way/157588854",
+"name": null,
+"street": null,
+"length": 7.11,
+"dist": 287.3,
+"bearing": 191,
+"mid_local_xy": [
+-202.5,
+-212.1
+]
+},
+{
+"id": "way/136330932:5",
+"osm_id": "way/136330932",
+"name": null,
+"street": "Silver Street",
+"length": 6.95,
+"dist": 391.2,
+"bearing": 199,
+"mid_local_xy": [
+-268.8,
+-296.9
+]
+},
+{
+"id": "way/157588882:8",
+"osm_id": "way/157588882",
+"name": null,
+"street": null,
+"length": 6.88,
+"dist": 310.8,
+"bearing": 191,
+"mid_local_xy": [
+-205.3,
+-236.1
+]
+},
+{
+"id": "way/164830069:9",
+"osm_id": "way/164830069",
+"name": "Scott's Building",
+"street": null,
+"length": 6.76,
+"dist": 229.9,
+"bearing": 200,
+"mid_local_xy": [
+-217.2,
+-142.1
+]
+},
+{
+"id": "way/139308028:13",
+"osm_id": "way/139308028",
+"name": null,
+"street": null,
+"length": 6.71,
+"dist": 233.2,
+"bearing": 257,
+"mid_local_xy": [
+-330.0,
+4.6
+]
+},
+{
+"id": "way/166155989:8",
+"osm_id": "way/166155989",
+"name": "The Brewhouse",
+"street": null,
+"length": 6.57,
+"dist": 344.5,
+"bearing": 289,
+"mid_local_xy": [
+-436.2,
+144.4
+]
+},
+{
+"id": "way/158913900:14",
+"osm_id": "way/158913900",
+"name": null,
+"street": null,
+"length": 6.51,
+"dist": 389.9,
+"bearing": 353,
+"mid_local_xy": [
+-201.6,
+434.6
+]
+},
+{
+"id": "way/165737327:2",
+"osm_id": "way/165737327",
+"name": "Jerwood Library",
+"street": null,
+"length": 6.39,
+"dist": 337.9,
+"bearing": 284,
+"mid_local_xy": [
+-436.1,
+113.5
+]
+},
+{
+"id": "way/158913900:10",
+"osm_id": "way/158913900",
+"name": null,
+"street": null,
+"length": 6.35,
+"dist": 365.0,
+"bearing": 357,
+"mid_local_xy": [
+-166.9,
+416.7
+]
+},
+{
+"id": "way/166155936:1",
+"osm_id": "way/166155936",
+"name": "Bishop's Hostel",
+"street": null,
+"length": 6.33,
+"dist": 205.8,
+"bearing": 305,
+"mid_local_xy": [
+-290.3,
+142.5
+]
+},
+{
+"id": "way/166155989:6",
+"osm_id": "way/166155989",
+"name": "The Brewhouse",
+"street": null,
+"length": 6.28,
+"dist": 322.3,
+"bearing": 291,
+"mid_local_xy": [
+-413.2,
+144.6
+]
+},
+{
+"id": "way/164848659:9",
+"osm_id": "way/164848659",
+"name": "Webb's Building",
+"street": null,
+"length": 6.04,
+"dist": 296.8,
+"bearing": 221,
+"mid_local_xy": [
+-317.4,
+-147.8
+]
+},
+{
+"id": "way/164830069:4",
+"osm_id": "way/164830069",
+"name": "Scott's Building",
+"street": null,
+"length": 5.79,
+"dist": 233.7,
+"bearing": 204,
+"mid_local_xy": [
+-233.0,
+-136.9
+]
+},
+{
+"id": "relation/9449787:12",
+"osm_id": "relation/9449787",
+"name": "Nevile's court A, B, C, D and E",
+"street": null,
+"length": 5.79,
+"dist": 271.3,
+"bearing": 312,
+"mid_local_xy": [
+-329.3,
+206.9
+]
+},
+{
+"id": "way/164848632:38",
+"osm_id": "way/164848632",
+"name": "Bodley's",
+"street": null,
+"length": 5.69,
+"dist": 333.9,
+"bearing": 231,
+"mid_local_xy": [
+-373.5,
+-138.2
+]
+},
+{
+"id": "way/157588872:35",
+"osm_id": "way/157588872",
+"name": "McGrath Centre",
+"street": null,
+"length": 5.63,
+"dist": 271.3,
+"bearing": 211,
+"mid_local_xy": [
+-269.6,
+-156.7
+]
+},
+{
+"id": "way/157588896:17",
+"osm_id": "way/157588896",
+"name": "Master's Lodge",
+"street": null,
+"length": 5.63,
+"dist": 355.1,
+"bearing": 197,
+"mid_local_xy": [
+-244.2,
+-268.4
+]
+},
+{
+"id": "way/164708968:7",
+"osm_id": "way/164708968",
+"name": "Wilkins Building",
+"street": null,
+"length": 5.63,
+"dist": 262.4,
+"bearing": 224,
+"mid_local_xy": [
+-302.9,
+-112.5
+]
+},
+{
+"id": "way/59620751:3",
+"osm_id": "way/59620751",
+"name": "St. Botolph",
+"street": "Trumpington Street",
+"length": 5.61,
+"dist": 324.9,
+"bearing": 183,
+"mid_local_xy": [
+-165.2,
+-261.5
+]
+},
+{
+"id": "way/148880391:5",
+"osm_id": "way/148880391",
+"name": null,
+"street": null,
+"length": 5.6,
+"dist": 249.4,
+"bearing": 189,
+"mid_local_xy": [
+-187.0,
+-177.5
+]
+},
+{
+"id": "way/1210815327:6",
+"osm_id": "way/1210815327",
+"name": "1 Mill Lane",
+"street": "Mill Lane",
+"length": 5.54,
+"dist": 392.5,
+"bearing": 183,
+"mid_local_xy": [
+-167.6,
+-329.8
+]
+},
+{
+"id": "way/164848632:31",
+"osm_id": "way/164848632",
+"name": "Bodley's",
+"street": null,
+"length": 5.51,
+"dist": 378.5,
+"bearing": 228,
+"mid_local_xy": [
+-397.9,
+-179.8
+]
+},
+{
+"id": "way/166155989:10",
+"osm_id": "way/166155989",
+"name": "The Brewhouse",
+"street": null,
+"length": 5.48,
+"dist": 340.7,
+"bearing": 288,
+"mid_local_xy": [
+-433.8,
+138.4
+]
+},
+{
+"id": "way/166155941:12",
+"osm_id": "way/166155941",
+"name": "The Hall",
+"street": null,
+"length": 5.45,
+"dist": 255.9,
+"bearing": 320,
+"mid_local_xy": [
+-299.1,
+221.6
+]
+},
+{
+"id": "way/164830069:0",
+"osm_id": "way/164830069",
+"name": "Scott's Building",
+"street": null,
+"length": 5.42,
+"dist": 222.0,
+"bearing": 201,
+"mid_local_xy": [
+-218.2,
+-132.3
+]
+},
+{
+"id": "way/166155974:27",
+"osm_id": "way/166155974",
+"name": "Great court R and S",
+"street": null,
+"length": 5.4,
+"dist": 251.1,
+"bearing": 318,
+"mid_local_xy": [
+-300.2,
+212.7
+]
+},
+{
+"id": "way/1210815327:0",
+"osm_id": "way/1210815327",
+"name": "1 Mill Lane",
+"street": "Mill Lane",
+"length": 5.4,
+"dist": 390.3,
+"bearing": 181,
+"mid_local_xy": [
+-157.9,
+-329.0
+]
+},
+{
+"id": "way/149032881:0",
+"osm_id": "way/149032881",
+"name": null,
+"street": "Trumpington Street",
+"length": 5.38,
+"dist": 345.7,
+"bearing": 182,
+"mid_local_xy": [
+-160.0,
+-283.6
+]
+},
+{
+"id": "way/157588872:33",
+"osm_id": "way/157588872",
+"name": "McGrath Centre",
+"street": null,
+"length": 5.22,
+"dist": 264.4,
+"bearing": 210,
+"mid_local_xy": [
+-264.8,
+-151.7
+]
+},
+{
+"id": "way/1288750543:1",
+"osm_id": "way/1288750543",
+"name": null,
+"street": "Bridge Street",
+"length": 5.06,
+"dist": 376.0,
+"bearing": 359,
+"mid_local_xy": [
+-157.2,
+429.4
+]
+},
+{
+"id": "way/1288750543:2",
+"osm_id": "way/1288750543",
+"name": null,
+"street": "Bridge Street",
+"length": 4.94,
+"dist": 371.7,
+"bearing": 359,
+"mid_local_xy": [
+-154.2,
+425.5
+]
+},
+{
+"id": "way/136330931:0",
+"osm_id": "way/136330931",
+"name": null,
+"street": "Silver Street",
+"length": 4.91,
+"dist": 395.1,
+"bearing": 200,
+"mid_local_xy": [
+-274.5,
+-298.6
+]
+},
+{
+"id": "way/157588896:0",
+"osm_id": "way/157588896",
+"name": "Master's Lodge",
+"street": null,
+"length": 4.83,
+"dist": 363.8,
+"bearing": 196,
+"mid_local_xy": [
+-242.5,
+-278.6
+]
+},
+{
+"id": "way/136330937:20",
+"osm_id": "way/136330937",
+"name": "Kenmare House",
+"street": "Trumpington Street",
+"length": 4.82,
+"dist": 394.2,
+"bearing": 181,
+"mid_local_xy": [
+-155.3,
+-333.4
+]
+},
+{
+"id": "way/149032882:0",
+"osm_id": "way/149032882",
+"name": null,
+"street": "Trumpington Street",
+"length": 4.82,
+"dist": 358.8,
+"bearing": 181,
+"mid_local_xy": [
+-158.1,
+-297.2
+]
+},
+{
+"id": "way/164830068:4",
+"osm_id": "way/164830068",
+"name": "Old Lodge",
+"street": null,
+"length": 4.8,
+"dist": 266.0,
+"bearing": 224,
+"mid_local_xy": [
+-304.9,
+-115.6
+]
+},
+{
+"id": "way/165737339:7",
+"osm_id": "way/165737339",
+"name": null,
+"street": null,
+"length": 4.68,
+"dist": 208.3,
+"bearing": 277,
+"mid_local_xy": [
+-311.1,
+64.0
+]
+},
+{
+"id": "way/166155984:30",
+"osm_id": "way/166155984",
+"name": "Nevile's Court F, G, H, I, K, L and M",
+"street": null,
+"length": 4.68,
+"dist": 283.7,
+"bearing": 322,
+"mid_local_xy": [
+-311.5,
+249.6
+]
+},
+{
+"id": "way/157588882:2",
+"osm_id": "way/157588882",
+"name": null,
+"street": null,
+"length": 4.67,
+"dist": 294.3,
+"bearing": 189,
+"mid_local_xy": [
+-193.2,
+-222.7
+]
+},
+{
+"id": "way/157588858:8",
+"osm_id": "way/157588858",
+"name": "Ramsden Building",
+"street": null,
+"length": 4.56,
+"dist": 315.3,
+"bearing": 196,
+"mid_local_xy": [
+-227.9,
+-232.1
+]
+},
+{
+"id": "way/158913900:12",
+"osm_id": "way/158913900",
+"name": null,
+"street": null,
+"length": 4.56,
+"dist": 381.7,
+"bearing": 354,
+"mid_local_xy": [
+-189.9,
+429.1
+]
+},
+{
+"id": "way/164830069:3",
+"osm_id": "way/164830069",
+"name": "Scott's Building",
+"street": null,
+"length": 4.55,
+"dist": 230.4,
+"bearing": 203,
+"mid_local_xy": [
+-227.8,
+-136.2
+]
+},
+{
+"id": "way/136330919:3",
+"osm_id": "way/136330919",
+"name": "17 Mill Lane",
+"street": "Mill Lane",
+"length": 4.53,
+"dist": 395.4,
+"bearing": 192,
+"mid_local_xy": [
+-226.0,
+-318.4
+]
+},
+{
+"id": "way/165737340:2",
+"osm_id": "way/165737340",
+"name": null,
+"street": null,
+"length": 4.51,
+"dist": 290.0,
+"bearing": 291,
+"mid_local_xy": [
+-382.5,
+134.3
+]
+},
+{
+"id": "way/157588872:37",
+"osm_id": "way/157588872",
+"name": "McGrath Centre",
+"street": null,
+"length": 4.49,
+"dist": 277.6,
+"bearing": 211,
+"mid_local_xy": [
+-274.1,
+-161.1
+]
+},
+{
+"id": "way/157588877:9",
+"osm_id": "way/157588877",
+"name": "Johns' Building",
+"street": null,
+"length": 4.49,
+"dist": 340.6,
+"bearing": 193,
+"mid_local_xy": [
+-219.8,
+-262.5
+]
+},
+{
+"id": "relation/3240:3",
+"osm_id": "relation/3240",
+"name": "Whewell's Courts A to F",
+"street": null,
+"length": 4.47,
+"dist": 216.9,
+"bearing": 356,
+"mid_local_xy": [
+-167.1,
+264.6
+]
+},
+{
+"id": "way/1210815327:5",
+"osm_id": "way/1210815327",
+"name": "1 Mill Lane",
+"street": "Mill Lane",
+"length": 4.45,
+"dist": 389.6,
+"bearing": 182,
+"mid_local_xy": [
+-163.2,
+-327.5
+]
+},
+{
+"id": "way/164848632:32",
+"osm_id": "way/164848632",
+"name": "Bodley's",
+"street": null,
+"length": 4.44,
+"dist": 380.4,
+"bearing": 228,
+"mid_local_xy": [
+-401.3,
+-178.6
+]
+},
+{
+"id": "way/157588854:11",
+"osm_id": "way/157588854",
+"name": null,
+"street": null,
+"length": 4.4,
+"dist": 290.5,
+"bearing": 193,
+"mid_local_xy": [
+-208.1,
+-213.5
+]
+},
+{
+"id": "way/157588896:15",
+"osm_id": "way/157588896",
+"name": "Master's Lodge",
+"street": null,
+"length": 4.37,
+"dist": 353.1,
+"bearing": 198,
+"mid_local_xy": [
+-248.5,
+-264.4
+]
+},
+{
+"id": "way/157588872:34",
+"osm_id": "way/157588872",
+"name": "McGrath Centre",
+"street": null,
+"length": 4.34,
+"dist": 267.8,
+"bearing": 210,
+"mid_local_xy": [
+-267.1,
+-154.2
+]
+},
+{
+"id": "way/157588896:21",
+"osm_id": "way/157588896",
+"name": "Master's Lodge",
+"street": null,
+"length": 4.3,
+"dist": 361.5,
+"bearing": 197,
+"mid_local_xy": [
+-245.8,
+-274.7
+]
+},
+{
+"id": "way/1288738596:1",
+"osm_id": "way/1288738596",
+"name": null,
+"street": "St John's Street",
+"length": 4.28,
+"dist": 308.7,
+"bearing": 357,
+"mid_local_xy": [
+-167.0,
+359.3
+]
+},
+{
+"id": "way/148880391:4",
+"osm_id": "way/148880391",
+"name": null,
+"street": null,
+"length": 4.23,
+"dist": 244.9,
+"bearing": 190,
+"mid_local_xy": [
+-187.2,
+-172.6
+]
+},
+{
+"id": "way/164830069:2",
+"osm_id": "way/164830069",
+"name": "Scott's Building",
+"street": null,
+"length": 4.19,
+"dist": 227.6,
+"bearing": 202,
+"mid_local_xy": [
+-223.5,
+-135.7
+]
+},
+{
+"id": "way/157588872:38",
+"osm_id": "way/157588872",
+"name": "McGrath Centre",
+"street": null,
+"length": 4.15,
+"dist": 281.2,
+"bearing": 211,
+"mid_local_xy": [
+-277.2,
+-163.3
+]
+},
+{
+"id": "way/165737335:33",
+"osm_id": "way/165737335",
+"name": null,
+"street": null,
+"length": 4.15,
+"dist": 268.5,
+"bearing": 289,
+"mid_local_xy": [
+-364.1,
+119.9
+]
+},
+{
+"id": "way/137017454:18",
+"osm_id": "way/137017454",
+"name": "Master's Lodge, Hall and Buttery",
+"street": null,
+"length": 4.08,
+"dist": 211.5,
+"bearing": 313,
+"mid_local_xy": [
+-282.9,
+168.5
+]
+},
+{
+"id": "way/166155974:26",
+"osm_id": "way/166155974",
+"name": "Great court R and S",
+"street": null,
+"length": 4.03,
+"dist": 248.7,
+"bearing": 317,
+"mid_local_xy": [
+-300.8,
+208.0
+]
+},
+{
+"id": "way/59620751:4",
+"osm_id": "way/59620751",
+"name": "St. Botolph",
+"street": "Trumpington Street",
+"length": 3.89,
+"dist": 325.6,
+"bearing": 182,
+"mid_local_xy": [
+-162.1,
+-262.9
+]
+},
+{
+"id": "way/139308033:4",
+"osm_id": "way/139308033",
+"name": "Clare College Chapel",
+"street": "Trinity Lane",
+"length": 3.89,
+"dist": 208.5,
+"bearing": 271,
+"mid_local_xy": [
+-311.2,
+48.3
+]
+},
+{
+"id": "way/166155948:15",
+"osm_id": "way/166155948",
+"name": "King's Hostel, Great Court D",
+"street": null,
+"length": 3.83,
+"dist": 262.4,
+"bearing": 348,
+"mid_local_xy": [
+-204.8,
+299.2
+]
+},
+{
+"id": "way/166155959:9",
+"osm_id": "way/166155959",
+"name": "Angel Court Y",
+"street": "Trinity Street",
+"length": 3.83,
+"dist": 202.0,
+"bearing": 353,
+"mid_local_xy": [
+-173.6,
+246.6
+]
+},
+{
+"id": "way/59620751:0",
+"osm_id": "way/59620751",
+"name": "St. Botolph",
+"street": "Trumpington Street",
+"length": 3.77,
+"dist": 315.3,
+"bearing": 183,
+"mid_local_xy": [
+-164.2,
+-251.9
+]
+},
+{
+"id": "way/157588871:7",
+"osm_id": "way/157588871",
+"name": null,
+"street": "Trumpington Street",
+"length": 3.71,
+"dist": 231.9,
+"bearing": 199,
+"mid_local_xy": [
+-215.3,
+-145.5
+]
+},
+{
+"id": "way/157588882:1",
+"osm_id": "way/157588882",
+"name": null,
+"street": null,
+"length": 3.67,
+"dist": 297.9,
+"bearing": 189,
+"mid_local_xy": [
+-192.4,
+-226.8
+]
+},
+{
+"id": "way/164708968:43",
+"osm_id": "way/164708968",
+"name": "Wilkins Building",
+"street": null,
+"length": 3.65,
+"dist": 208.9,
+"bearing": 213,
+"mid_local_xy": [
+-243.5,
+-97.2
+]
+},
+{
+"id": "way/681114797:4",
+"osm_id": "way/681114797",
+"name": "The Screens",
+"street": null,
+"length": 3.48,
+"dist": 253.5,
+"bearing": 319,
+"mid_local_xy": [
+-299.7,
+217.1
+]
+},
+{
+"id": "way/164830068:15",
+"osm_id": "way/164830068",
+"name": "Old Lodge",
+"street": null,
+"length": 3.47,
+"dist": 316.8,
+"bearing": 232,
+"mid_local_xy": [
+-364.7,
+-121.0
+]
+},
+{
+"id": "way/681114797:0",
+"osm_id": "way/681114797",
+"name": "The Screens",
+"street": null,
+"length": 3.37,
+"dist": 266.0,
+"bearing": 317,
+"mid_local_xy": [
+-313.8,
+219.4
+]
+},
+{
+"id": "way/1288648577:6",
+"osm_id": "way/1288648577",
+"name": null,
+"street": "Trinity Street",
+"length": 3.35,
+"dist": 206.1,
+"bearing": 356,
+"mid_local_xy": [
+-163.8,
+254.3
+]
+},
+{
+"id": "way/136330937:19",
+"osm_id": "way/136330937",
+"name": "Kenmare House",
+"street": "Trumpington Street",
+"length": 3.23,
+"dist": 397.4,
+"bearing": 180,
+"mid_local_xy": [
+-153.2,
+-336.8
+]
+},
+{
+"id": "way/166155941:23",
+"osm_id": "way/166155941",
+"name": "The Hall",
+"street": null,
+"length": 3.17,
+"dist": 280.7,
+"bearing": 322,
+"mid_local_xy": [
+-309.5,
+247.4
+]
+},
+{
+"id": "way/157588854:8",
+"osm_id": "way/157588854",
+"name": null,
+"street": null,
+"length": 3.15,
+"dist": 285.9,
+"bearing": 190,
+"mid_local_xy": [
+-197.2,
+-212.5
+]
+},
+{
+"id": "way/157588896:16",
+"osm_id": "way/157588896",
+"name": "Master's Lodge",
+"street": null,
+"length": 3.14,
+"dist": 353.8,
+"bearing": 197,
+"mid_local_xy": [
+-246.4,
+-266.1
+]
+},
+{
+"id": "way/263621279:2",
+"osm_id": "way/263621279",
+"name": "Old Divinity School",
+"street": "St John's Street",
+"length": 3.14,
+"dist": 294.4,
+"bearing": 357,
+"mid_local_xy": [
+-167.7,
+344.5
+]
+},
+{
+"id": "way/157588876:15",
+"osm_id": "way/157588876",
+"name": "Dining Hall",
+"street": null,
+"length": 3.09,
+"dist": 288.3,
+"bearing": 212,
+"mid_local_xy": [
+-283.1,
+-167.7
+]
+},
+{
+"id": "relation/9449789:41",
+"osm_id": "relation/9449789",
+"name": "New Court",
+"street": null,
+"length": 3.08,
+"dist": 254.1,
+"bearing": 306,
+"mid_local_xy": [
+-328.3,
+174.8
+]
+},
+{
+"id": "way/164830069:11",
+"osm_id": "way/164830069",
+"name": "Scott's Building",
+"street": null,
+"length": 3.07,
+"dist": 222.3,
+"bearing": 197,
+"mid_local_xy": [
+-206.6,
+-139.2
+]
+},
+{
+"id": "way/164830068:10",
+"osm_id": "way/164830068",
+"name": "Old Lodge",
+"street": null,
+"length": 3.0,
+"dist": 289.8,
+"bearing": 229,
+"mid_local_xy": [
+-334.7,
+-116.5
+]
+}
+]

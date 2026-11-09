@@ -6,7 +6,8 @@ Walls: data/annotations/market_square/walls.json (walls within 90 m of 52.2053N 
 filtered to STREET-FACING walls by zone_walls.faces_street (session 46, the KPI's written definition): length >= 3 m,
 the outward normal reaches a PUBLIC walkable way (not access/foot=private/no) within 25 m before crossing any other
 footprint (no party walls, no walls behind a neighbour). Gated college courts, private yards and stubs < 3 m no
-longer count; the full list is still built. painted_detail_pct still runs over the full list.
+longer count; the full list is still built. Wall-less market stall canopies (building=roof) and vendor trailers
+are not facades and don't count (session 53, as city_facades.py). painted_detail_pct still runs over the full list.
 - facade_geometry_match_pct: per wall, agreement between the annotation (data/annotations/market_square/way_*.json,
   made from non-held-out photos) and the 3D elements the build actually emitted (site/zone/zone.json "walls"):
   mean over [window, door, shopfront, dormer] (storeys not yet counted separately) of min(model, annot) / max(model, annot) (1 if both 0).
@@ -37,6 +38,10 @@ SKIP = [(-102.9, 57.4, 100.0), (-213.3, 80.3, 20.0)]   # keep in step with site/
 def main():
     walls = json.load(open(os.path.join(A, "walls.json")))["walls"]
     street = ZW.street_facing_ids(walls)
+    # wall-less structures are not facades (session 53): market stall canopies (building=roof, as city_facades.py skips)
+    # and street-vendor trailers (Trailer of Life)
+    street = {w["id"] for w in walls if w["id"] in street
+              and w["tags"].get("building") != "roof" and w["tags"].get("street_vendor") != "yes"}
     ann = {}
     for f in glob.glob(os.path.join(A, "way_*.json")):
         try:

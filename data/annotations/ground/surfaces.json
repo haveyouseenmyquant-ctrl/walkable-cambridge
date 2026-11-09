@@ -205,5 +205,6 @@
     "Peas Hill (south, way 908373409)": "asphalt with a sett channel and slab footways (commons Peas Hill NNW view); OSM right.",
     "Rose Crescent, Peas Hill north (3993044)": "session 48: no non-held-out photo showing the surface; left as OSM."
   },
-  "session48": "Market Hill loop, Trinity St and Sidney St are clay paviors, St Mary's St setts, St Mary's Passage flags (photo-checked, non-held-out)."
+  "session48": "Market Hill loop, Trinity St and Sidney St are clay paviors, St Mary's St setts, St Mary's Passage flags (photo-checked, non-held-out).",
+  "session53": "Surface classes re-checked against non-held-out refs (mapillary 918215512073749 Market St, 541914280138693 and 189066929702180 King's Parade, commons 'King's Parade - View North into Trinity Street' and 'Market Hill - View NNW into Rose Crescent'): classes unchanged. The rendering was wrong: the paviors drew as saturated new red (sRGB ~152,101,95) where the photos show weathered grey-plum (median sRGB ~99,89,90 against buff slabs ~118,109,91), and the brick weight faded out between 2 m grid vertices so only about half of the Market St / Market Hill carriageway drew as brick. site/app/materials.js: retoned brickPave + grime patches, and a sharper brick ramp. Open: the King's Parade east sett strip (2.6 m) still reads weakly (sett and slab key colours are close, so it blends with the pavement on the 2 m grid); the north end by Senate House Hill may be setts across the full width (541914280138693), which isn't confirmed yet."
 }

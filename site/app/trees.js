@@ -32,9 +32,9 @@ function leafTexture() {
     const a = rnd() * Math.PI * 2, r = Math.pow(rnd(), 0.6) * S * 0.46;
     if (rnd() > 1.2 - r / (S * 0.46)) continue;
     const x = S / 2 + Math.cos(a) * r, y = S / 2 + Math.sin(a) * r, l = 13 + rnd() * 13, ang = a + (rnd() - 0.5) * 1.6;
-    const lum = (0.5 + 0.5 * rnd()) * (1.08 - 0.45 * y / S) * (0.75 + 0.25 * (1 - r / (S * 0.46)));
+    const lum = (0.6 + 0.45 * rnd()) * (1.1 - 0.4 * y / S) * (0.8 + 0.2 * (1 - r / (S * 0.46)));
     const hue = rnd();
-    const R = (70 + 55 * hue) * lum, G = (118 + 52 * rnd()) * lum, B = (38 + 30 * rnd()) * lum;
+    const R = (82 + 60 * hue) * lum, G = (138 + 58 * rnd()) * lum, B = (44 + 32 * rnd()) * lum;   // s53: brighter, less near-black
     g.save(); g.translate(x, y); g.rotate(ang);
     g.fillStyle = `rgb(${R | 0},${G | 0},${B | 0})`;
     g.beginPath(); g.moveTo(-l, 0); g.quadraticCurveTo(0, -l * 0.5, l, 0); g.quadraticCurveTo(0, l * 0.5, -l, 0); g.fill();
@@ -78,11 +78,11 @@ function crownGeometries(cl, seed) {
   const P = [], N = [], C = [], U = [], I = [];
   const cp = [], cn = [], cc = [];
   for (const { c, r } of cl) {
-    const nCards = Math.round(19 * CARD_K * (r / 0.48) ** 2);
+    const nCards = Math.round(24 * CARD_K * (r / 0.48) ** 2);   // s53: fuller crowns
     for (let i = 0; i < nCards; i++) {
       v.set(rnd() * 2 - 1, rnd() * 2 - 1, rnd() * 2 - 1); if (v.lengthSq() > 1 || v.lengthSq() < 1e-3) { i--; continue; }
       v.normalize(); if (v.y < -0.3 && rnd() < 0.5) v.y *= 0.4;   // fewer cards under the cluster
-      const ctr = v.clone().multiplyScalar(r * (0.6 + 0.4 * rnd())).add(c), sz = r * (0.5 + 0.25 * rnd());
+      const ctr = v.clone().multiplyScalar(r * (0.6 + 0.4 * rnd())).add(c), sz = r * (0.55 + 0.28 * rnd());
       q.setFromEuler(e.set(rnd() * 6.28, rnd() * 6.28, rnd() * 6.28));
       const b = P.length / 3;
       for (const [du, dv] of [[-1, -1], [1, -1], [1, 1], [-1, 1]]) {
@@ -92,7 +92,7 @@ function crownGeometries(cl, seed) {
         const nn = nl.multiplyScalar(0.55).add(ng.multiplyScalar(0.45)).normalize(); N.push(nn.x, nn.y, nn.z);
         // AO: darker deep inside the crown and on the underside of each cluster
         const depth = Math.min(1, Math.hypot(p.x, p.z * 1.0, (p.y - 0.1) * 0.8));
-        const ao = (0.45 + 0.55 * Math.min(1, Math.max(0, (p.y + 1.0) / 1.8))) * (0.6 + 0.45 * depth) * (0.85 + 0.25 * Math.max(0, (p.y - c.y) / r));
+        const ao = (0.58 + 0.47 * Math.min(1, Math.max(0, (p.y + 1.0) / 1.8))) * (0.68 + 0.4 * depth) * (0.85 + 0.25 * Math.max(0, (p.y - c.y) / r));
         C.push(ao, ao, ao); U.push((du + 1) / 2, (dv + 1) / 2);
       }
       I.push(b, b + 1, b + 2, b, b + 2, b + 3);
@@ -170,6 +170,7 @@ const GEOS = VARIANTS.map((v, i) => {
 // summer greens from yellow-green limes to dark blue-green yews/hollies
 const GREENS = [0x4d6b32, 0x5b7a38, 0x3f5d2c, 0x6a8540, 0x56703a, 0x48663a, 0x3a5530, 0x627a34, 0x51683e]
   .map(c => new THREE.Color(c));
+const SPECIES = [[3, 5, 7, 0], [1, 4, 0, 5, 7], [2, 6, 5, 8]].map(ix => ix.map(k => GREENS[k]));
 
 function stamp(o) {
   o.castShadow = true; o.receiveShadow = true; o.computeBoundingSphere(); o.userData.ownMat = false; o.matrixAutoUpdate = false;
@@ -201,7 +202,9 @@ export function makeTrees(buf) {
     q.setFromAxisAngle(Y, seed * 6.283);
     p.set(x, zg + base + cv, -y); s.set(r, cv, r * (0.88 + 0.24 * ((seed * 53) % 1)));
     m.compose(p, q, s);
-    c.copy(GREENS[(seed * 997 | 0) % GREENS.length]).multiplyScalar(0.85 + 0.3 * ((seed * 131) % 1));
+    // s53: species-ish palettes by crown variant: round = lime (yellow-green), tall = plane (mid), spreading = horse chestnut (dark)
+    const pal = SPECIES[vi[i]];
+    c.copy(pal[(seed * 997 | 0) % pal.length]).multiplyScalar(0.85 + 0.3 * ((seed * 131) % 1));
     if (M.cards) {
       M.cards.setMatrixAt(j, m);   // texture is green: tint stays near white, nudged towards the tree's green
       cc.setRGB(0.8 + 0.5 * c.r / (c.g || 1), 0.95 + 0.12 * ((seed * 71) % 1), 0.75 + 0.5 * c.b / (c.g || 1)); M.cards.setColorAt(j, cc);

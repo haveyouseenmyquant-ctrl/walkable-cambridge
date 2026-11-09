@@ -19,10 +19,10 @@ export const CLASSES = {
     spells: [
       { id: 'ember_bolt', name: 'Ember Bolt', glyph: '✦', kind: 'bolt', type: 'fire', mana: 5, cd: 0.45, dmg: 22, speed: 48, range: 60, splash: 1.2, color: 0xff7a2a, sfx: 'ember', look: 'ember' },
       { id: 'cinder_spray', name: 'Cinder Spray', glyph: '≋', kind: 'cone', type: 'fire', mana: 14, cd: 3, dmg: 14, range: 9, angle: 0.6, burn: { dps: 6, dur: 3 }, color: 0xffa040, sfx: 'spray', look: 'spray' },
-      { id: 'fireburst', name: 'Fireburst Orb', glyph: '◉', kind: 'bolt', type: 'fire', mana: 22, cd: 6, dmg: 55, speed: 22, range: 50, splash: 4.5, color: 0xff5010, sfx: 'orb', look: 'orb', size: 1.6 },
+      { id: 'fireburst', name: 'Fireburst Orb', glyph: '◉', kind: 'bolt', type: 'fire', mana: 22, cd: 6, dmg: 48, speed: 22, range: 50, splash: 4.5, color: 0xff5010, sfx: 'orb', look: 'orb', size: 1.6 },
       { id: 'flame_step', name: 'Flame Step', glyph: '➚', kind: 'blink', type: 'fire', mana: 15, cd: 5, dist: 11, dmg: 18, radius: 3, color: 0xff9a30, sfx: 'flamestep', look: 'flamestep' },
       { id: 'kindle_ring', name: 'Kindle Ring', glyph: '◎', kind: 'nova', type: 'fire', mana: 24, cd: 9, dmg: 30, radius: 5.5, knock: 3, burn: { dps: 5, dur: 3 }, color: 0xff6a00, sfx: 'kindle', look: 'kindle' },
-      { id: 'sunfall', name: 'Sunfall', glyph: '☀', kind: 'zone', type: 'fire', mana: 50, cd: 60, dmg: 40, radius: 7, dur: 3, interval: 0.22, tick: 'meteor', splash: 2.5, range: 40, color: 0xffc040, sfx: 'sunfall', look: 'sunfall', ult: true },
+      { id: 'sunfall', name: 'Sunfall', glyph: '☀', kind: 'zone', type: 'fire', mana: 50, cd: 60, dmg: 28, radius: 7, dur: 3, interval: 0.22, tick: 'meteor', splash: 2.5, range: 40, color: 0xffc040, sfx: 'sunfall', look: 'sunfall', ult: true },
     ],
     talents: [
       [{ name: 'Split Embers', desc: 'Ember Bolt fires 3 bolts in a fan', f: S => { S.ember_bolt.count = 3; } },
@@ -36,12 +36,12 @@ export const CLASSES = {
   stormcaller: {
     name: 'Stormcaller', color: '#7fd4ff', blurb: 'Lightning and wind. Fast, mobile, chains between foes. Wind Dash goes further on a broom.',
     spells: [
-      { id: 'spark_lance', name: 'Spark Lance', glyph: 'ϟ', kind: 'beam', type: 'storm', mana: 5, cd: 0.4, dmg: 20, range: 40, chain: 1, color: 0xbfe6ff, sfx: 'lance', look: 'lance' },
+      { id: 'spark_lance', name: 'Spark Lance', glyph: 'ϟ', kind: 'beam', type: 'storm', mana: 5, cd: 0.4, dmg: 22, range: 40, chain: 1, color: 0xbfe6ff, sfx: 'lance', look: 'lance' },
       { id: 'arc_chain', name: 'Arc Chain', glyph: '⚡', kind: 'beam', type: 'storm', mana: 14, cd: 4, dmg: 22, range: 30, chain: 4, chainRange: 8, color: 0x8fb8ff, sfx: 'arc', look: 'arc' },
       { id: 'gale_burst', name: 'Gale Burst', glyph: '༄', kind: 'cone', type: 'storm', mana: 12, cd: 6, dmg: 16, range: 10, angle: 0.8, knock: 5, slow: 2, color: 0xd8fff4, sfx: 'gale', look: 'gale' },
       { id: 'wind_dash', name: 'Wind Dash', glyph: '»', kind: 'blink', type: 'storm', mana: 10, cd: 4, dist: 14, broomMult: 1.6, color: 0xc8f0ff, sfx: 'winddash', look: 'winddash' },
       { id: 'static_field', name: 'Static Field', glyph: '⌁', kind: 'zone', type: 'storm', mana: 22, cd: 12, dmg: 12, radius: 5, dur: 4, interval: 0.5, tick: 'field', slow: 1, range: 30, color: 0x66aaff, sfx: 'static', look: 'static' },
-      { id: 'tempest', name: 'Tempest', glyph: '☈', kind: 'zone', type: 'storm', mana: 50, cd: 70, dmg: 20, radius: 12, dur: 5, interval: 0.3, tick: 'strike', follow: true, color: 0xe0f0ff, sfx: 'tempest', look: 'tempest', ult: true },
+      { id: 'tempest', name: 'Tempest', glyph: '☈', kind: 'zone', type: 'storm', mana: 50, cd: 70, dmg: 24, radius: 12, dur: 5, interval: 0.3, tick: 'strike', follow: true, color: 0xe0f0ff, sfx: 'tempest', look: 'tempest', ult: true },
     ],
     talents: [
       [{ name: 'Forked Lance', desc: 'Spark Lance chains to 2 more foes', f: S => { S.spark_lance.chain += 2; } },

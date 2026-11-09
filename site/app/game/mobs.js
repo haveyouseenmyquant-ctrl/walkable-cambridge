@@ -1345,7 +1345,7 @@ class MobSystem {
     if (mob.kb) {   // decaying knockback shove
       const k = mob.kb, step = k.v * (k.t / 0.22) * Math.min(dt, k.t); k.t -= dt;
       const nx = mob.x + k.x * step, ny = mob.y + k.y * step;
-      if (T.flying) { mob.x = nx; mob.y = ny; }
+      if (T.flying) { if (this.flyOk(mob, nx, ny)) { mob.x = nx; mob.y = ny; } else k.t = 0; }
       else { const z = this.world.standAt(nx, ny, mob.groundZ); if (z != null && Math.abs(z - mob.groundZ) < 0.6) { mob.x = nx; mob.y = ny; mob.groundZ = mob.z = z; } else k.t = 0; }
       if (k.t <= 0) mob.kb = null;
     }
@@ -1422,13 +1422,21 @@ class MobSystem {
   turn(a, b, k) { let d = ((b - a + Math.PI) % TAU + TAU) % TAU - Math.PI; return a + Math.max(-k, Math.min(k, d)); }
 
   // steer towards (tx, ty); walkers slide along walls by trying deflected headings. Returns 1 if moved.
+  // session 53: flyers keep clear of walls at their own height (they used to drift through buildings and hover over
+  // roofs out of every spell's line of sight: 3 of 20 playtest runs failed 'gargoyle/bell_bats not damaged for 30 s').
+  // A flyer already inside geometry may move anywhere so it can get out.
+  flyOk(mob, nx, ny) {
+    const W = this.world, lo = mob.z - 0.8, r = Math.min(0.4, mob.radius);
+    if (!W.blocked(nx, ny, lo, r, 0, 1.6)) return true;
+    return W.blocked(mob.x, mob.y, lo, r, 0, 1.6);
+  }
   moveTo(mob, tx, ty, speed, dt, ignoreGround = false) {
     const dx = tx - mob.x, dy = ty - mob.y, d = Math.hypot(dx, dy);
     if (d < 0.05) return 0;
     const step = Math.min(d, speed * dt), base = Math.atan2(dy, dx);
     for (const off of [0, 0.5, -0.5, 1.0, -1.0, 1.5, -1.5]) {
       const a = base + off, nx = mob.x + Math.cos(a) * step, ny = mob.y + Math.sin(a) * step;
-      if (mob.type.flying) { mob.x = nx; mob.y = ny; }
+      if (mob.type.flying) { if (ignoreGround || this.flyOk(mob, nx, ny)) { mob.x = nx; mob.y = ny; } else continue; }
       else {
         const z = this.world.standAt(nx, ny, mob.groundZ);
         if (z == null || Math.abs(z - mob.groundZ) > 0.6) continue;
@@ -1510,7 +1518,7 @@ class MobSystem {
     if (a.kind === 'charge') {
       const step = a.speed * dt; let moved = false;
       const nx = mob.x + mob.aim.dir.x * step, ny = mob.y + mob.aim.dir.y * step;
-      if (mob.type.flying) { mob.x = nx; mob.y = ny; moved = true; }
+      if (mob.type.flying) { if (this.flyOk(mob, nx, ny)) { mob.x = nx; mob.y = ny; moved = true; } }
       else { const z = this.world.standAt(nx, ny, mob.groundZ); if (z != null && Math.abs(z - mob.groundZ) < 0.6) { mob.x = nx; mob.y = ny; mob.groundZ = mob.z = z; moved = true; } }
       mob.charge.left -= step;
       if (!mob.hitPlayer && Math.hypot(g.px - mob.x, g.py - mob.y) < a.w / 2 + mob.radius && (!mob.type.flying || Math.abs(g.pz + 1 - mob.z) < 2.5)) { mob.hitPlayer = true; this.hit(mob, a.dmg); }

@@ -299,15 +299,16 @@ def st_edward(walls=None):
 
     # --- south wall (wall 3): lean-to | aisle | south chapel
     P = C.P()
-    holes = []
-    for xc in (5.0, 8.6, 12.2):
-        holes.append(window(P, pal, xc, 1.7, 1.2, 4.1, 3))
-    for xc in (17.0, 21.3):
-        holes.append(window(P, pal, xc, 1.8, 1.3, 4.5, 3))
+    # layout from the square-on south elevation (annotation way/26344576:3, session 53): a 3-light aisle window,
+    # the tall 5-light south-chapel window, a smaller 3-light window and a pointed doorway at the east end
+    holes = [window(P, pal, 6.5, 2.2, 1.2, 4.1, 3),
+             window(P, pal, 14.2, 3.2, 1.3, 4.4, 5),
+             window(P, pal, 19.9, 1.5, 1.3, 3.5, 3),
+             door(P, pal, 22.6, 1.1, 2.4)]
     top = [(-0.0, 4.4), (S_N, 4.4), (S_N, ZE), (S_C, ZE), (S_C, Z_SCH - 0.95), (S_E, Z_SCH - 0.95)]
     wall_face(P, pal, 0.0, S_E, top, holes)
     parapet(P, pal, S_C, S_E + 0.08, Z_SCH - 0.95, Z_SCH)
-    for x in (S_N + 0.3, 6.8, 10.4, S_C - 0.2, 19.15, S_E - 0.3):
+    for x in (S_N + 0.3, 10.0, 17.4, 21.4, S_E - 0.3):
         buttress(P, pal, x, (ZE if x < S_C else Z_SCH) - 1.3)
     C.put(P, (0, 0), (S_E, 0), "south")
     # --- east wall (wall 4): south chapel end | chancel gable | north block (parapet) | small gable
@@ -316,7 +317,7 @@ def st_edward(walls=None):
     holes = [window(P, pal, 1.75, 1.6, 1.4, 4.4, 3),
              window(P, pal, ctr, 3.8, 1.6, 8.6, 5),
              window(P, pal, 13.0, 1.8, 1.4, 4.6, 3),
-             door(P, pal, 16.9, 1.1, 2.5)]
+             window(P, pal, 16.4, 0.8, 1.2, 2.4, 2)]   # the vestry's small window (no east door in the photos)
     top = [(0, Z_SCH - 0.95), (ct0, Z_SCH - 0.95), (ct0, cze), (ctr, czr), (ct1, cze), (ct1, Z_NCH - 0.95),
            (NG[0], Z_NCH - 0.95), (NG[0], NG[2]), (NG[4], NG[3]), (NG[1], NG[2])]
     wall_face(P, pal, 0, T_NC, top, holes)

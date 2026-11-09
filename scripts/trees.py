@@ -85,6 +85,8 @@ def main():
     E = tf.c + (tx + 0.5) * tf.a; N = tf.f + (ty + 0.5) * tf.e
     H = chm[ty, tx]; R = np.sqrt(np.maximum(area, 1) / np.pi).clip(1.2, 10)
     keep = (area >= 10) & (pen[ty, tx] > 3.0)   # true canopy: the laser goes deep into it
+    # session 53: tall, thin tops are spires and pinnacles (King's Chapel, Clare), not trees
+    keep &= ~((H > 18) & (R < 3.5)) & ~(H > 6 * R + 6)
     lid = np.stack([E, N, H, R], 1)[keep]
     print("lidar tops", len(lid), flush=True)
 

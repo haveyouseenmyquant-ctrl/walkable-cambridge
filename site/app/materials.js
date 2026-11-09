@@ -57,10 +57,13 @@ vec3 brickPave(vec2 gp, float px) {
   vec2 sz = d < 1.5 ? vec2(2, 1) : vec2(1, 2);
   vec2 l = p - o; vec2 e2 = min(l, sz - l); float e = min(e2.x, e2.y) * 0.1;
   float r = h12(o + sz * 7.0), r2 = h12(o * 1.7 + 3.1);
-  vec3 col = mix(vec3(0.21, 0.09, 0.08), vec3(0.27, 0.115, 0.09), r);
-  col = mix(col, vec3(0.16, 0.075, 0.075), step(0.93, r2));            // a few dark plum bricks
+  // session 53: weathered grey-plum, not new red (Market St / Trinity St photos: median sRGB ~(99, 89, 90) next to
+  // buff slabs at ~(118, 109, 91), mapillary 918215512073749, commons King's Parade view N into Trinity St)
+  vec3 col = mix(vec3(0.175, 0.13, 0.125), vec3(0.235, 0.17, 0.155), r);
+  col = mix(col, vec3(0.13, 0.10, 0.10), step(0.9, r2));               // a few dark plum bricks
   col *= 0.85 + 0.3 * vnoise(gp * 0.4);                                 // large-scale staining
-  vec3 mean = vec3(0.225, 0.095, 0.083);
+  col *= 1.0 - 0.18 * smoothstep(0.55, 0.85, vnoise(gp * 0.9 + 11.0)); // tyre / grime patches
+  vec3 mean = vec3(0.20, 0.148, 0.138);
   col = mix(col, vec3(0.20, 0.17, 0.14), joint(e, 0.005, px) * 0.8);   // sand joints
   return mix(col, mean * (0.85 + 0.3 * vnoise(gp * 0.4)), smoothstep(0.03, 0.08, px));
 }
@@ -108,11 +111,14 @@ const groundFrag = `
   vec2 gp = vec2(vWP.x, -vWP.z);
   float px = length(fwidth(gp));   // metres per pixel
   // surface class weights from the interpolated vertex colour (build.py COLORS). Session 48: the brick key colour
-  // (0.62, 0.60, 0.80) is the only class with blue well above green, so its share t is read from b - g (water,
-  // b - g = 0.06, stays at 0) and the other classes are matched on the colour with that blue excess removed;
+  // (0.62, 0.60, 0.80) is the only class with blue well above green, so its share t is read from b - g (water
+  // stays at 0) and the other classes are matched on the colour with that blue excess removed;
   // edges between brick and road/pavement now blend into the neighbour instead of showing the lavender key.
   vec3 c0 = vColor.rgb;
-  float wb = clamp((c0.b - c0.g - 0.06) / 0.14, 0.0, 1.0);
+  // session 53: sharper ramp, so a 4-6 m brick carriageway on the 2 m grid reaches its kerbs instead of fading out
+  // between vertices (brick-pave / brick-road midpoints have b - g = 0.08 / 0.11); the r - g term keeps water blends
+  // (r well below g) out.
+  float wb = smoothstep(0.03, 0.08, c0.b - c0.g) * smoothstep(-0.09, -0.03, c0.r - c0.g);
   vec3 c = vec3(c0.rg, min(c0.b, c0.g + 0.06));
   float wr = exp(-dot(c - vec3(0.32, 0.32, 0.34), c - vec3(0.32, 0.32, 0.34)) * 200.0);
   float wp = exp(-dot(c - vec3(0.62, 0.60, 0.56), c - vec3(0.62, 0.60, 0.56)) * 200.0)

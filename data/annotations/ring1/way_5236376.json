@@ -8,7 +8,9 @@
   "mapillary:493401452085846",
   "mapillary:380612279911794",
   "mapillary:161531322501007",
-  "mapillary:580694453335865"
+  "mapillary:580694453335865",
+  "mapillary:274844644326291",
+  "mapillary:119896356813047"
  ],
  "walls": [
   {
@@ -744,6 +746,139 @@
    ],
    "confidence": "low",
    "notes": "Corn Exchange (1875 gault-brick hall; OSM way untagged), west side to Corn Exchange St. Yellow gault brick with red/blue polychrome arches and red bands: one bay per short polygon segment (~4.7 m pitch), each with a two-light round-arched window under a rose (modelled as one arched opening ~1.6 x 3.8 m, sill ~2.9 m) over a plinth carrying a row of poster boards (not modelled), aisle eave ~7.6 m; set-back clerestory with three small arched lights per bay above (projected onto this plane). Bay pitch from poster-board count in frontal 2020 Mapillary views; heights scaled from them. Southern end segment: one bay then a plain pier section towards the car park."
+  },
+  {
+   "id": "way/5236376:29",
+   "storeys": 4,
+   "floor_z": [
+    0,
+    5.0,
+    9.0,
+    13.0
+   ],
+   "material": "stone",
+   "wall_colour": "#c9b593",
+   "trim_colour": "#ddd0b0",
+   "cornice_z": 14.4,
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [
+    5.0
+   ],
+   "elements": [
+    {
+     "type": "door",
+     "style": "glazed",
+     "x": 1.9,
+     "w": 2.6,
+     "h": 3.9,
+     "surround": "none"
+    },
+    {
+     "type": "door",
+     "style": "glazed",
+     "x": 5.8,
+     "w": 2.6,
+     "h": 3.9,
+     "surround": "none"
+    },
+    {
+     "type": "door",
+     "style": "glazed",
+     "x": 9.7,
+     "w": 2.6,
+     "h": 3.9,
+     "surround": "none"
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.9,
+     "w": 1.6,
+     "z": 5.6,
+     "h": 2.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.8,
+     "w": 1.6,
+     "z": 5.6,
+     "h": 2.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.7,
+     "w": 1.6,
+     "z": 5.6,
+     "h": 2.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 1.9,
+     "w": 1.6,
+     "z": 9.6,
+     "h": 2.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 5.8,
+     "w": 1.6,
+     "z": 9.6,
+     "h": 2.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "sash_victorian",
+     "x": 9.7,
+     "w": 1.6,
+     "z": 9.6,
+     "h": 2.8,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "arched",
+     "sill": true
+    }
+   ],
+   "confidence": "low",
+   "notes": "Grand Arcade multi-storey car park, south-east corner towards Downing St / Tibbs Row: open ground-floor colonnade of square buff stone piers (three bays, modelled as tall dark openings), buff stone upper levels with round-arched openings in the same three-bay rhythm, plain parapet. From oblique 2017-2019 Mapillary views along Downing St looking west; bay count approximate. (length 11.6 m, height 15.0 m from walls.json)",
+   "pilasters": [],
+   "quoins": false
   }
  ]
 }

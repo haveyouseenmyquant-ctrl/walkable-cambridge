@@ -1,0 +1,166 @@
+{
+ "osm_id": "way/59620751",
+ "sources": [
+  "commons:File:Church of Saint Botolph, Cambridge (Southwest View - 01).jpg"
+ ],
+ "walls": [
+  {
+   "id": "way/59620751:2",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.6,
+    8.6
+   ],
+   "cornice_z": 11.6,
+   "string_courses": [
+    4.6,
+    8.6
+   ],
+   "elements": [
+    {
+     "type": "door",
+     "style": "gothic",
+     "x": 3.65,
+     "w": 1.4,
+     "h": 3.0
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 3.65,
+     "w": 1.4,
+     "z": 4.9,
+     "h": 3.0,
+     "panes": [
+      2,
+      3
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 3.65,
+     "w": 0.8,
+     "z": 9.0,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    }
+   ],
+   "notes": "St Botolph's west tower (15th c.), west face to Trumpington St: clasping buttresses, pointed west door, tall pointed window above, clock, belfry light under battlemented parapet with pinnacles. Rubble clunch/flint-ish stone with ashlar dressings. Commons SW view (CC BY-SA).",
+   "material": "stone",
+   "wall_colour": "#b9a684",
+   "trim_colour": "#cdbb98",
+   "cornice": "simple",
+   "parapet": true,
+   "quoins": false,
+   "confidence": "low"
+  },
+  {
+   "id": "way/59620751:3",
+   "storeys": 3,
+   "floor_z": [
+    0,
+    4.6,
+    8.6
+   ],
+   "cornice_z": 11.6,
+   "string_courses": [
+    4.6,
+    8.6
+   ],
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.8,
+     "w": 0.6,
+     "z": 6.0,
+     "h": 1.2,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.8,
+     "w": 0.8,
+     "z": 9.0,
+     "h": 1.6,
+     "panes": [
+      1,
+      2
+     ],
+     "head": "pointed",
+     "sill": true
+    }
+   ],
+   "notes": "Tower south face: small lancet at clock stage, belfry light above, battlements; buttresses at corners.",
+   "material": "stone",
+   "wall_colour": "#b9a684",
+   "trim_colour": "#cdbb98",
+   "cornice": "simple",
+   "parapet": true,
+   "quoins": false,
+   "confidence": "low"
+  },
+  {
+   "id": "way/59620751:5",
+   "storeys": 1,
+   "floor_z": [
+    0
+   ],
+   "cornice_z": 6.6,
+   "elements": [
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 2.6,
+     "w": 2.0,
+     "z": 1.6,
+     "h": 3.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "pointed",
+     "sill": true
+    },
+    {
+     "type": "window",
+     "style": "gothic",
+     "x": 6.4,
+     "w": 2.0,
+     "z": 1.6,
+     "h": 3.6,
+     "panes": [
+      3,
+      4
+     ],
+     "head": "pointed",
+     "sill": true
+    }
+   ],
+   "notes": "South aisle: rubble stone, two large three-light Perpendicular traceried windows, low parapet; south porch/chapel with battlements to the east.",
+   "material": "stone",
+   "wall_colour": "#b9a684",
+   "trim_colour": "#cdbb98",
+   "cornice": "simple",
+   "parapet": true,
+   "string_courses": [],
+   "quoins": false,
+   "confidence": "low"
+  }
+ ]
+}
