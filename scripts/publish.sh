@@ -12,6 +12,9 @@ git diff --quiet HEAD -- site scripts || { echo "commit first: uncommitted chang
 # live build goes out unscored (measure.sh then reads 0 for all six game KPIs until service.sh catches up)
 [ -n "${WC_SKIP_GAME_KPI:-}" ] || for _ in $(seq 270); do [ -d /tmp/wc_game_kpi.lock ] || break; sleep 10; done
 [ -n "${WC_SKIP_GAME_KPI:-}" ] || scripts/game_kpi.sh || echo "game_kpi.sh failed (service.sh retries for the live hash)"
+# session 64: gameplay_judged too (12-frame clip per class + judge), else measure.sh reads it as 0 until service.sh catches up
+[ -n "${WC_SKIP_GAME_KPI:-}" ] || for _ in $(seq 180); do [ -d /tmp/wc_gameplay_kpi.lock ] || break; sleep 10; done
+[ -n "${WC_SKIP_GAME_KPI:-}" ] || scripts/gameplay_kpi.sh || echo "gameplay_kpi.sh failed (service.sh retries for the live hash)"
 TAG="world-$(date -u +%Y%m%d-%H%M)"
 tar -czf /tmp/world.tar.gz -C site manifest.json landmarks.json tiles collision trees objects facades markings zone cityfac
 ls -lh /tmp/world.tar.gz
