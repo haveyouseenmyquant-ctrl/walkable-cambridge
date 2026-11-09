@@ -2081,3 +2081,6 @@ Next
 2. Ring-1 annotations from Wikimedia Commons photos (licence-checked, not held out) for the big unannotated walls: Downing St, Sidney St, college fronts.
 3. Ring 2 next frontage: St John's College on St John's Street, or Trinity's Trinity Street front.
 4. Game: bat-swarm wings near the camera; tone down the boss danger decals.
+- Publish note: the first Pages run (42671631864) failed with "workflow file issue" (transient). publish.sh doesn't check the
+  run result, so a build can be released but not live. A rerun went through; live hash be82cce5 = data/derived/live_site.
+  TODO: make publish.sh watch the Pages run and retry once on failure.
