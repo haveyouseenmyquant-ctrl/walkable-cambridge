@@ -2110,3 +2110,36 @@ Next
    reactions and deaths.
 3. Annotate the St John's and Clare fronts from non-held-out photos and feed them into the facade KPI.
 4. More ring-1 Commons annotations (pace the downloads to avoid 429s): Downing St, then the college walls.
+
+## 2026-11-09 — Session 75: game scores survive world publishes, clockwork/stone/spirit/swarm body language, St John's front from photos
+
+Published world-20261109-1902 with skip flags; Pages run ok. Live build f16b1a43, game hash 39645f15.
+- Why the game KPIs kept reading 0: every publish made a new build hash, and the route bot (15–30 min under load ~46,
+  shared with the poker project) rarely finished before the next hourly reading. The s73 run was also killed at session end.
+  Fix: `build_hash.py --game` hashes only what the game tests depend on: app/game/*, main/player/collision/avatar JS,
+  index.html and collision/digest.json (new; scripts/collision_digest.py, written by publish.sh, shipped in the tarball).
+  _game.json and _gameplay.json are keyed by it in game_kpi.sh, gameplay_kpi.sh, measure.sh, service.sh and publish.sh's
+  mob_types guard. A world-only publish now keeps the game scores. Caveat: the gameplay clips show the world backdrop,
+  so a world change can shift gameplay_judged a little without a rescore. Roof, judge and msjudge still use the full hash.
+- Ops: service.sh was rendering the live s74 site under the stale s73 hash be82cce5 (killed). I also stopped its s74 game
+  run: s75 game edits replaced it. The game KPIs for 39645f15 were started in-session on site/ (game_kpi.sh, then
+  gameplay_kpi.sh); service.sh finishes the job if the session ends first.
+- Game (subagent): mobs.js has a FAMILY table: stone (gargoyle, statue, griffin, punt revenant), spirit (wisp, wraith,
+  bog hag, ink imp), clockwork (automaton, bicycle golem), swarm (bats, soot sprite). Wind-up pose follows the attack kind:
+  pounce crouch for charge/leap, rear up for ring, draw back for bolt, shoulder twist for line. Each family adds its own
+  flavour (stone grinds, spirit swells, clockwork ratchets in 6 clicks, swarm knots). Hit flinches differ by family, and
+  clockwork has a new 'collapse' death: it spins down like a coin, then sparks. Stone gets a cracking shudder before it
+  topples. test_mobs 12+3, 15/15 encounters. docs/screens/session75_game_{windup,death}.jpg. Aimed at
+  enemy_animation_variety (4.0).
+- Realism (subagent): St John's First Court street front annotated from 5 Commons photos (CC BY-SA, not held out, in DATA.md).
+  The s74 model was wrong: the front has 2 storeys, not 3, and no street door. It is now rebuilt with the real window,
+  dormer and blank-wall layout, and has 2.1k fewer tris. It is fed into the facade KPI (city_facades.py maps the bespoke
+  openings onto ways :3, :18 and :20). Ring 1 went from 52.70 to 53.18 and the city from 12.29 to 12.40; the zone figure
+  is unchanged at 80.9. These walls lie within the 400 m ring-1 radius, so there is no separate ring-2 number yet.
+  Unverified: the north-range window positions and the dormer count.
+
+Next
+1. Read the 39645f15 game scores (playtest, spread, gameplay_judged: did the animation variety rise?) and the s75 msjudge.
+2. Annotate the Clare and King's Gibbs fronts from Commons and feed them into the KPI, the same way as St John's.
+3. More ring-1 Commons annotations: Downing St and Sidney St college walls (3 s pacing, no 429s this time).
+4. Boss TTK spread (51.9% at s72): rebalance once a fresh playtest reading is in.
