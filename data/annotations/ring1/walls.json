@@ -2239,6 +2239,486 @@
    "street_facing": true
   },
   {
+   "id": "way/13864058:1",
+   "osm_id": "way/13864058",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "nohousenumber": "yes",
+    "operator": "Gonville & Caius College (University of Cambridge)",
+    "ref": "CAI010",
+    "roof:levels": "1",
+    "roof:shape": "gambrel",
+    "wheelchair": "yes"
+   },
+   "length": 2.79,
+   "p0": [
+    -194.53,
+    158.06
+   ],
+   "p1": [
+    -194.8,
+    155.28
+   ],
+   "ground_z": 9.61,
+   "eave_z": 26.54,
+   "height": 16.93,
+   "dist_centre": 135.2,
+   "street_facing": false
+  },
+  {
+   "id": "way/13864058:2",
+   "osm_id": "way/13864058",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "nohousenumber": "yes",
+    "operator": "Gonville & Caius College (University of Cambridge)",
+    "ref": "CAI010",
+    "roof:levels": "1",
+    "roof:shape": "gambrel",
+    "wheelchair": "yes"
+   },
+   "length": 8.5,
+   "p0": [
+    -194.8,
+    155.28
+   ],
+   "p1": [
+    -186.44,
+    153.78
+   ],
+   "ground_z": 9.59,
+   "eave_z": 26.04,
+   "height": 16.45,
+   "dist_centre": 130.9,
+   "street_facing": false
+  },
+  {
+   "id": "way/13864058:3",
+   "osm_id": "way/13864058",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "nohousenumber": "yes",
+    "operator": "Gonville & Caius College (University of Cambridge)",
+    "ref": "CAI010",
+    "roof:levels": "1",
+    "roof:shape": "gambrel",
+    "wheelchair": "yes"
+   },
+   "length": 4.61,
+   "p0": [
+    -186.44,
+    153.78
+   ],
+   "p1": [
+    -182.23,
+    151.9
+   ],
+   "ground_z": 9.55,
+   "eave_z": 26.05,
+   "height": 16.5,
+   "dist_centre": 125.5,
+   "street_facing": false
+  },
+  {
+   "id": "way/13864058:8",
+   "osm_id": "way/13864058",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "nohousenumber": "yes",
+    "operator": "Gonville & Caius College (University of Cambridge)",
+    "ref": "CAI010",
+    "roof:levels": "1",
+    "roof:shape": "gambrel",
+    "wheelchair": "yes"
+   },
+   "length": 5.08,
+   "p0": [
+    -178.82,
+    148.18
+   ],
+   "p1": [
+    -179.69,
+    143.18
+   ],
+   "ground_z": 9.68,
+   "eave_z": 26.07,
+   "height": 16.39,
+   "dist_centre": 116.7,
+   "street_facing": false
+  },
+  {
+   "id": "way/13864058:9",
+   "osm_id": "way/13864058",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "nohousenumber": "yes",
+    "operator": "Gonville & Caius College (University of Cambridge)",
+    "ref": "CAI010",
+    "roof:levels": "1",
+    "roof:shape": "gambrel",
+    "wheelchair": "yes"
+   },
+   "length": 12.68,
+   "p0": [
+    -179.69,
+    143.18
+   ],
+   "p1": [
+    -181.43,
+    130.62
+   ],
+   "ground_z": 9.75,
+   "eave_z": 26.09,
+   "height": 16.34,
+   "dist_centre": 111.2,
+   "street_facing": false
+  },
+  {
+   "id": "way/13864058:10",
+   "osm_id": "way/13864058",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "nohousenumber": "yes",
+    "operator": "Gonville & Caius College (University of Cambridge)",
+    "ref": "CAI010",
+    "roof:levels": "1",
+    "roof:shape": "gambrel",
+    "wheelchair": "yes"
+   },
+   "length": 6.47,
+   "p0": [
+    -181.43,
+    130.62
+   ],
+   "p1": [
+    -182.05,
+    124.18
+   ],
+   "ground_z": 9.7,
+   "eave_z": 26.09,
+   "height": 16.39,
+   "dist_centre": 105.5,
+   "street_facing": false
+  },
+  {
+   "id": "way/13864058:13",
+   "osm_id": "way/13864058",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "nohousenumber": "yes",
+    "operator": "Gonville & Caius College (University of Cambridge)",
+    "ref": "CAI010",
+    "roof:levels": "1",
+    "roof:shape": "gambrel",
+    "wheelchair": "yes"
+   },
+   "length": 5.68,
+   "p0": [
+    -182.61,
+    121.96
+   ],
+   "p1": [
+    -183.61,
+    116.36
+   ],
+   "ground_z": 9.7,
+   "eave_z": 26.08,
+   "height": 16.38,
+   "dist_centre": 101.3,
+   "street_facing": false
+  },
+  {
+   "id": "way/13864058:14",
+   "osm_id": "way/13864058",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "nohousenumber": "yes",
+    "operator": "Gonville & Caius College (University of Cambridge)",
+    "ref": "CAI010",
+    "roof:levels": "1",
+    "roof:shape": "gambrel",
+    "wheelchair": "yes"
+   },
+   "length": 13.81,
+   "p0": [
+    -183.61,
+    116.36
+   ],
+   "p1": [
+    -185.0,
+    102.62
+   ],
+   "ground_z": 9.36,
+   "eave_z": 26.14,
+   "height": 16.78,
+   "dist_centre": 96.7,
+   "street_facing": false
+  },
+  {
+   "id": "way/13864058:19",
+   "osm_id": "way/13864058",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "nohousenumber": "yes",
+    "operator": "Gonville & Caius College (University of Cambridge)",
+    "ref": "CAI010",
+    "roof:levels": "1",
+    "roof:shape": "gambrel",
+    "wheelchair": "yes"
+   },
+   "length": 6.48,
+   "p0": [
+    -187.88,
+    98.63
+   ],
+   "p1": [
+    -194.36,
+    98.52
+   ],
+   "ground_z": 9.63,
+   "eave_z": 24.92,
+   "height": 15.29,
+   "dist_centre": 97.4,
+   "street_facing": false
+  },
+  {
+   "id": "way/13864058:20",
+   "osm_id": "way/13864058",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "nohousenumber": "yes",
+    "operator": "Gonville & Caius College (University of Cambridge)",
+    "ref": "CAI010",
+    "roof:levels": "1",
+    "roof:shape": "gambrel",
+    "wheelchair": "yes"
+   },
+   "length": 6.4,
+   "p0": [
+    -194.36,
+    98.52
+   ],
+   "p1": [
+    -200.76,
+    98.33
+   ],
+   "ground_z": 9.7,
+   "eave_z": 24.46,
+   "height": 14.76,
+   "dist_centre": 103.2,
+   "street_facing": false
+  },
+  {
+   "id": "way/13864058:21",
+   "osm_id": "way/13864058",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "nohousenumber": "yes",
+    "operator": "Gonville & Caius College (University of Cambridge)",
+    "ref": "CAI010",
+    "roof:levels": "1",
+    "roof:shape": "gambrel",
+    "wheelchair": "yes"
+   },
+   "length": 2.93,
+   "p0": [
+    -200.76,
+    98.33
+   ],
+   "p1": [
+    -200.71,
+    95.41
+   ],
+   "ground_z": 9.67,
+   "eave_z": 24.52,
+   "height": 14.84,
+   "dist_centre": 105.5,
+   "street_facing": false
+  },
+  {
+   "id": "way/13864058:23",
+   "osm_id": "way/13864058",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "nohousenumber": "yes",
+    "operator": "Gonville & Caius College (University of Cambridge)",
+    "ref": "CAI010",
+    "roof:levels": "1",
+    "roof:shape": "gambrel",
+    "wheelchair": "yes"
+   },
+   "length": 16.36,
+   "p0": [
+    -200.71,
+    93.48
+   ],
+   "p1": [
+    -184.36,
+    94.0
+   ],
+   "ground_z": 9.58,
+   "eave_z": 24.15,
+   "height": 14.57,
+   "dist_centre": 96.7,
+   "street_facing": true
+  },
+  {
+   "id": "way/13864058:29",
+   "osm_id": "way/13864058",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "nohousenumber": "yes",
+    "operator": "Gonville & Caius College (University of Cambridge)",
+    "ref": "CAI010",
+    "roof:levels": "1",
+    "roof:shape": "gambrel",
+    "wheelchair": "yes"
+   },
+   "length": 9.89,
+   "p0": [
+    -176.24,
+    110.96
+   ],
+   "p1": [
+    -174.54,
+    120.7
+   ],
+   "ground_z": 9.72,
+   "eave_z": 24.47,
+   "height": 14.75,
+   "dist_centre": 93.1,
+   "street_facing": true
+  },
+  {
+   "id": "way/13864058:32",
+   "osm_id": "way/13864058",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "nohousenumber": "yes",
+    "operator": "Gonville & Caius College (University of Cambridge)",
+    "ref": "CAI010",
+    "roof:levels": "1",
+    "roof:shape": "gambrel",
+    "wheelchair": "yes"
+   },
+   "length": 6.5,
+   "p0": [
+    -174.25,
+    122.45
+   ],
+   "p1": [
+    -173.1,
+    128.85
+   ],
+   "ground_z": 9.66,
+   "eave_z": 24.33,
+   "height": 14.67,
+   "dist_centre": 98.3,
+   "street_facing": true
+  },
+  {
+   "id": "way/13864058:33",
+   "osm_id": "way/13864058",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "nohousenumber": "yes",
+    "operator": "Gonville & Caius College (University of Cambridge)",
+    "ref": "CAI010",
+    "roof:levels": "1",
+    "roof:shape": "gambrel",
+    "wheelchair": "yes"
+   },
+   "length": 30.62,
+   "p0": [
+    -173.1,
+    128.85
+   ],
+   "p1": [
+    -167.71,
+    158.99
+   ],
+   "ground_z": 9.61,
+   "eave_z": 23.1,
+   "height": 13.49,
+   "dist_centre": 109.8,
+   "street_facing": true
+  },
+  {
+   "id": "way/13864058:35",
+   "osm_id": "way/13864058",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "nohousenumber": "yes",
+    "operator": "Gonville & Caius College (University of Cambridge)",
+    "ref": "CAI010",
+    "roof:levels": "1",
+    "roof:shape": "gambrel",
+    "wheelchair": "yes"
+   },
+   "length": 25.35,
+   "p0": [
+    -168.41,
+    160.03
+   ],
+   "p1": [
+    -193.25,
+    165.09
+   ],
+   "ground_z": 9.2,
+   "eave_z": 15.48,
+   "height": 6.27,
+   "dist_centre": 130.9,
+   "street_facing": true
+  },
+  {
    "id": "way/13864474:2",
    "osm_id": "way/13864474",
    "tags": {
@@ -6120,6 +6600,166 @@
    "height": 17.78,
    "dist_centre": 192.4,
    "street_facing": false
+  },
+  {
+   "id": "way/95406730:1",
+   "osm_id": "way/95406730",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:postcode": "CB2 1SU",
+    "addr:street": "Trinity Street",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "check_date": "2025-08-26",
+    "denomination": "anglican",
+    "name": "St Michael",
+    "religion": "christian",
+    "wheelchair": "yes",
+    "wikidata": "Q17527392",
+    "wikimedia_commons": "Category:St Michael's Church, Cambridge"
+   },
+   "length": 18.36,
+   "p0": [
+    -164.1,
+    143.94
+   ],
+   "p1": [
+    -165.85,
+    125.66
+   ],
+   "ground_z": 9.66,
+   "eave_z": 19.3,
+   "height": 9.64,
+   "dist_centre": 99.2,
+   "street_facing": true
+  },
+  {
+   "id": "way/95406730:2",
+   "osm_id": "way/95406730",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:postcode": "CB2 1SU",
+    "addr:street": "Trinity Street",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "check_date": "2025-08-26",
+    "denomination": "anglican",
+    "name": "St Michael",
+    "religion": "christian",
+    "wheelchair": "yes",
+    "wikidata": "Q17527392",
+    "wikimedia_commons": "Category:St Michael's Church, Cambridge"
+   },
+   "length": 5.31,
+   "p0": [
+    -165.85,
+    125.66
+   ],
+   "p1": [
+    -160.54,
+    125.33
+   ],
+   "ground_z": 9.34,
+   "eave_z": 24.82,
+   "height": 15.48,
+   "dist_centre": 91.0,
+   "street_facing": false
+  },
+  {
+   "id": "way/95406730:6",
+   "osm_id": "way/95406730",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:postcode": "CB2 1SU",
+    "addr:street": "Trinity Street",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "check_date": "2025-08-26",
+    "denomination": "anglican",
+    "name": "St Michael",
+    "religion": "christian",
+    "wheelchair": "yes",
+    "wikidata": "Q17527392",
+    "wikimedia_commons": "Category:St Michael's Church, Cambridge"
+   },
+   "length": 18.21,
+   "p0": [
+    -133.25,
+    141.38
+   ],
+   "p1": [
+    -151.38,
+    142.98
+   ],
+   "ground_z": 9.46,
+   "eave_z": 15.91,
+   "height": 6.45,
+   "dist_centre": 93.5,
+   "street_facing": false
+  },
+  {
+   "id": "way/95406730:8",
+   "osm_id": "way/95406730",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:postcode": "CB2 1SU",
+    "addr:street": "Trinity Street",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "check_date": "2025-08-26",
+    "denomination": "anglican",
+    "name": "St Michael",
+    "religion": "christian",
+    "wheelchair": "yes",
+    "wikidata": "Q17527392",
+    "wikimedia_commons": "Category:St Michael's Church, Cambridge"
+   },
+   "length": 2.91,
+   "p0": [
+    -158.14,
+    143.57
+   ],
+   "p1": [
+    -157.93,
+    146.47
+   ],
+   "ground_z": 9.39,
+   "eave_z": 13.97,
+   "height": 4.58,
+   "dist_centre": 103.5,
+   "street_facing": false
+  },
+  {
+   "id": "way/95406730:10",
+   "osm_id": "way/95406730",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:postcode": "CB2 1SU",
+    "addr:street": "Trinity Street",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "check_date": "2025-08-26",
+    "denomination": "anglican",
+    "name": "St Michael",
+    "religion": "christian",
+    "wheelchair": "yes",
+    "wikidata": "Q17527392",
+    "wikimedia_commons": "Category:St Michael's Church, Cambridge"
+   },
+   "length": 3.01,
+   "p0": [
+    -162.35,
+    146.84
+   ],
+   "p1": [
+    -162.58,
+    143.84
+   ],
+   "ground_z": 9.64,
+   "eave_z": 13.36,
+   "height": 3.72,
+   "dist_centre": 106.2,
+   "street_facing": true
   },
   {
    "id": "way/95408670:6",
@@ -12239,6 +12879,259 @@
    "street_facing": true
   },
   {
+   "id": "way/135595981:1",
+   "osm_id": "way/135595981",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:postcode": "CB2 3AX",
+    "addr:street": "St Andrew's Street",
+    "amenity": "place_of_worship",
+    "anglican": "Church of England",
+    "building": "church",
+    "check_date": "2026-07-31",
+    "denomination": "anglican",
+    "fhrs:id": "1473807",
+    "name": "St Andrew The Great",
+    "ref:dove": "15139",
+    "religion": "christian",
+    "source": "Bing",
+    "wikidata": "Q20128106",
+    "wikimedia_commons": "Category:St Andrew's Church, Cambridge",
+    "wikipedia": "en:St Andrew the Great"
+   },
+   "length": 9.05,
+   "p0": [
+    72.3,
+    33.51
+   ],
+   "p1": [
+    75.19,
+    24.94
+   ],
+   "ground_z": 9.58,
+   "eave_z": 19.67,
+   "height": 10.08,
+   "dist_centre": 178.9,
+   "street_facing": true
+  },
+  {
+   "id": "way/135595981:2",
+   "osm_id": "way/135595981",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:postcode": "CB2 3AX",
+    "addr:street": "St Andrew's Street",
+    "amenity": "place_of_worship",
+    "anglican": "Church of England",
+    "building": "church",
+    "check_date": "2026-07-31",
+    "denomination": "anglican",
+    "fhrs:id": "1473807",
+    "name": "St Andrew The Great",
+    "ref:dove": "15139",
+    "religion": "christian",
+    "source": "Bing",
+    "wikidata": "Q20128106",
+    "wikimedia_commons": "Category:St Andrew's Church, Cambridge",
+    "wikipedia": "en:St Andrew the Great"
+   },
+   "length": 3.16,
+   "p0": [
+    75.19,
+    24.94
+   ],
+   "p1": [
+    76.2,
+    21.94
+   ],
+   "ground_z": 9.54,
+   "eave_z": 30.88,
+   "height": 21.34,
+   "dist_centre": 181.8,
+   "street_facing": true
+  },
+  {
+   "id": "way/135595981:3",
+   "osm_id": "way/135595981",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:postcode": "CB2 3AX",
+    "addr:street": "St Andrew's Street",
+    "amenity": "place_of_worship",
+    "anglican": "Church of England",
+    "building": "church",
+    "check_date": "2026-07-31",
+    "denomination": "anglican",
+    "fhrs:id": "1473807",
+    "name": "St Andrew The Great",
+    "ref:dove": "15139",
+    "religion": "christian",
+    "source": "Bing",
+    "wikidata": "Q20128106",
+    "wikimedia_commons": "Category:St Andrew's Church, Cambridge",
+    "wikipedia": "en:St Andrew the Great"
+   },
+   "length": 4.51,
+   "p0": [
+    76.2,
+    21.94
+   ],
+   "p1": [
+    71.93,
+    20.51
+   ],
+   "ground_z": 9.52,
+   "eave_z": 22.4,
+   "height": 12.88,
+   "dist_centre": 180.6,
+   "street_facing": true
+  },
+  {
+   "id": "way/135595981:4",
+   "osm_id": "way/135595981",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:postcode": "CB2 3AX",
+    "addr:street": "St Andrew's Street",
+    "amenity": "place_of_worship",
+    "anglican": "Church of England",
+    "building": "church",
+    "check_date": "2026-07-31",
+    "denomination": "anglican",
+    "fhrs:id": "1473807",
+    "name": "St Andrew The Great",
+    "ref:dove": "15139",
+    "religion": "christian",
+    "source": "Bing",
+    "wikidata": "Q20128106",
+    "wikimedia_commons": "Category:St Andrew's Church, Cambridge",
+    "wikipedia": "en:St Andrew the Great"
+   },
+   "length": 5.56,
+   "p0": [
+    71.93,
+    20.51
+   ],
+   "p1": [
+    73.7,
+    15.24
+   ],
+   "ground_z": 10.06,
+   "eave_z": 18.53,
+   "height": 8.47,
+   "dist_centre": 180.1,
+   "street_facing": true
+  },
+  {
+   "id": "way/135595981:5",
+   "osm_id": "way/135595981",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:postcode": "CB2 3AX",
+    "addr:street": "St Andrew's Street",
+    "amenity": "place_of_worship",
+    "anglican": "Church of England",
+    "building": "church",
+    "check_date": "2026-07-31",
+    "denomination": "anglican",
+    "fhrs:id": "1473807",
+    "name": "St Andrew The Great",
+    "ref:dove": "15139",
+    "religion": "christian",
+    "source": "Bing",
+    "wikidata": "Q20128106",
+    "wikimedia_commons": "Category:St Andrew's Church, Cambridge",
+    "wikipedia": "en:St Andrew the Great"
+   },
+   "length": 4.46,
+   "p0": [
+    73.7,
+    15.24
+   ],
+   "p1": [
+    77.93,
+    16.66
+   ],
+   "ground_z": 10.19,
+   "eave_z": 18.87,
+   "height": 8.68,
+   "dist_centre": 183.5,
+   "street_facing": true
+  },
+  {
+   "id": "way/135595981:6",
+   "osm_id": "way/135595981",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:postcode": "CB2 3AX",
+    "addr:street": "St Andrew's Street",
+    "amenity": "place_of_worship",
+    "anglican": "Church of England",
+    "building": "church",
+    "check_date": "2026-07-31",
+    "denomination": "anglican",
+    "fhrs:id": "1473807",
+    "name": "St Andrew The Great",
+    "ref:dove": "15139",
+    "religion": "christian",
+    "source": "Bing",
+    "wikidata": "Q20128106",
+    "wikimedia_commons": "Category:St Andrew's Church, Cambridge",
+    "wikipedia": "en:St Andrew the Great"
+   },
+   "length": 27.04,
+   "p0": [
+    77.93,
+    16.66
+   ],
+   "p1": [
+    103.57,
+    25.24
+   ],
+   "ground_z": 9.58,
+   "eave_z": 19.43,
+   "height": 9.86,
+   "dist_centre": 197.1,
+   "street_facing": true
+  },
+  {
+   "id": "way/135595981:7",
+   "osm_id": "way/135595981",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:postcode": "CB2 3AX",
+    "addr:street": "St Andrew's Street",
+    "amenity": "place_of_worship",
+    "anglican": "Church of England",
+    "building": "church",
+    "check_date": "2026-07-31",
+    "denomination": "anglican",
+    "fhrs:id": "1473807",
+    "name": "St Andrew The Great",
+    "ref:dove": "15139",
+    "religion": "christian",
+    "source": "Bing",
+    "wikidata": "Q20128106",
+    "wikimedia_commons": "Category:St Andrew's Church, Cambridge",
+    "wikipedia": "en:St Andrew the Great"
+   },
+   "length": 5.83,
+   "p0": [
+    103.57,
+    25.24
+   ],
+   "p1": [
+    101.71,
+    30.77
+   ],
+   "ground_z": 9.32,
+   "eave_z": 18.72,
+   "height": 9.4,
+   "dist_centre": 207.6,
+   "street_facing": true,
+   "eave_fixed": true
+  },
+  {
    "id": "way/135595983:0",
    "osm_id": "way/135595983",
    "tags": {
@@ -12515,6 +13408,58 @@
    "eave_z": 22.55,
    "height": 13.62,
    "dist_centre": 143.3,
+   "street_facing": false
+  },
+  {
+   "id": "way/135762298:0",
+   "osm_id": "way/135762298",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:postcode": "CB2 1UH",
+    "building": "university",
+    "operator": "University of Cambridge",
+    "ref": "A011",
+    "source": "laser measure ground survey"
+   },
+   "length": 2.05,
+   "p0": [
+    -236.83,
+    40.56
+   ],
+   "p1": [
+    -234.82,
+    40.92
+   ],
+   "ground_z": 9.45,
+   "eave_z": 22.58,
+   "height": 13.13,
+   "dist_centre": 134.0,
+   "street_facing": false
+  },
+  {
+   "id": "way/135762298:4",
+   "osm_id": "way/135762298",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:postcode": "CB2 1UH",
+    "building": "university",
+    "operator": "University of Cambridge",
+    "ref": "A011",
+    "source": "laser measure ground survey"
+   },
+   "length": 2.01,
+   "p0": [
+    -236.75,
+    61.71
+   ],
+   "p1": [
+    -238.75,
+    61.5
+   ],
+   "ground_z": 9.53,
+   "eave_z": 23.57,
+   "height": 14.03,
+   "dist_centre": 134.9,
    "street_facing": false
   },
   {
@@ -14817,6 +15762,286 @@
    "height": 6.13,
    "dist_centre": 185.6,
    "street_facing": true
+  },
+  {
+   "id": "way/137017433:5",
+   "osm_id": "way/137017433",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL013",
+    "roof:levels": "1",
+    "wikidata": "Q26418526"
+   },
+   "length": 14.52,
+   "p0": [
+    -116.15,
+    140.17
+   ],
+   "p1": [
+    -121.84,
+    153.53
+   ],
+   "ground_z": 9.52,
+   "eave_z": 18.01,
+   "height": 8.49,
+   "dist_centre": 90.9,
+   "street_facing": true
+  },
+  {
+   "id": "way/137017433:6",
+   "osm_id": "way/137017433",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL013",
+    "roof:levels": "1",
+    "wikidata": "Q26418526"
+   },
+   "length": 3.74,
+   "p0": [
+    -121.84,
+    153.53
+   ],
+   "p1": [
+    -123.57,
+    156.84
+   ],
+   "ground_z": 9.44,
+   "eave_z": 14.23,
+   "height": 4.78,
+   "dist_centre": 99.8,
+   "street_facing": true
+  },
+  {
+   "id": "way/137017433:7",
+   "osm_id": "way/137017433",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL013",
+    "roof:levels": "1",
+    "wikidata": "Q26418526"
+   },
+   "length": 3.11,
+   "p0": [
+    -123.57,
+    156.84
+   ],
+   "p1": [
+    -126.13,
+    158.6
+   ],
+   "ground_z": 9.48,
+   "eave_z": 19.66,
+   "height": 10.18,
+   "dist_centre": 102.7,
+   "street_facing": true
+  },
+  {
+   "id": "way/137017433:8",
+   "osm_id": "way/137017433",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL013",
+    "roof:levels": "1",
+    "wikidata": "Q26418526"
+   },
+   "length": 2.46,
+   "p0": [
+    -126.13,
+    158.6
+   ],
+   "p1": [
+    -128.39,
+    159.57
+   ],
+   "ground_z": 9.5,
+   "eave_z": 16.71,
+   "height": 7.21,
+   "dist_centre": 104.6,
+   "street_facing": false
+  },
+  {
+   "id": "way/137017433:9",
+   "osm_id": "way/137017433",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL013",
+    "roof:levels": "1",
+    "wikidata": "Q26418526"
+   },
+   "length": 3.58,
+   "p0": [
+    -128.39,
+    159.57
+   ],
+   "p1": [
+    -131.89,
+    160.32
+   ],
+   "ground_z": 9.47,
+   "eave_z": 13.59,
+   "height": 4.12,
+   "dist_centre": 106.1,
+   "street_facing": true
+  },
+  {
+   "id": "way/137017433:10",
+   "osm_id": "way/137017433",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL013",
+    "roof:levels": "1",
+    "wikidata": "Q26418526"
+   },
+   "length": 26.78,
+   "p0": [
+    -131.89,
+    160.32
+   ],
+   "p1": [
+    -158.45,
+    163.76
+   ],
+   "ground_z": 9.47,
+   "eave_z": 21.07,
+   "height": 11.59,
+   "dist_centre": 112.9,
+   "street_facing": true
+  },
+  {
+   "id": "way/137017433:11",
+   "osm_id": "way/137017433",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL013",
+    "roof:levels": "1",
+    "wikidata": "Q26418526"
+   },
+   "length": 10.59,
+   "p0": [
+    -158.45,
+    163.76
+   ],
+   "p1": [
+    -160.49,
+    153.37
+   ],
+   "ground_z": 9.63,
+   "eave_z": 23.85,
+   "height": 14.22,
+   "dist_centre": 115.9,
+   "street_facing": true
+  },
+  {
+   "id": "way/137017433:17",
+   "osm_id": "way/137017433",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL013",
+    "roof:levels": "1",
+    "wikidata": "Q26418526"
+   },
+   "length": 12.07,
+   "p0": [
+    -149.19,
+    150.88
+   ],
+   "p1": [
+    -137.13,
+    150.42
+   ],
+   "ground_z": 9.49,
+   "eave_z": 17.74,
+   "height": 8.25,
+   "dist_centre": 101.6,
+   "street_facing": false
+  },
+  {
+   "id": "way/137017433:19",
+   "osm_id": "way/137017433",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL013",
+    "roof:levels": "1",
+    "wikidata": "Q26418526"
+   },
+   "length": 2.53,
+   "p0": [
+    -135.51,
+    150.27
+   ],
+   "p1": [
+    -133.5,
+    148.71
+   ],
+   "ground_z": 9.51,
+   "eave_z": 16.23,
+   "height": 6.72,
+   "dist_centre": 97.4,
+   "street_facing": false
+  },
+  {
+   "id": "way/137017433:20",
+   "osm_id": "way/137017433",
+   "tags": {
+    "addr:city": "Cambridge",
+    "addr:country": "GB",
+    "building": "university",
+    "building:levels": "3",
+    "operator": "Gonville and Caius College (University of Cambridge)",
+    "ref": "CAI/MICHAEL013",
+    "roof:levels": "1",
+    "wikidata": "Q26418526"
+   },
+   "length": 3.39,
+   "p0": [
+    -133.5,
+    148.71
+   ],
+   "p1": [
+    -132.35,
+    145.53
+   ],
+   "ground_z": 9.52,
+   "eave_z": 20.51,
+   "height": 10.99,
+   "dist_centre": 94.7,
+   "street_facing": false
   },
   {
    "id": "way/137017439:0",
@@ -23683,6 +24908,240 @@
    "street_facing": true
   },
   {
+   "id": "way/148880379:1",
+   "osm_id": "way/148880379",
+   "tags": {
+    "building": "university",
+    "building:levels": "3",
+    "nohousenumber": "yes",
+    "operator": "Corpus Christi College (University of Cambridge)",
+    "ref": "CORPUS010",
+    "roof:levels": "1"
+   },
+   "length": 4.8,
+   "p0": [
+    -175.31,
+    -177.81
+   ],
+   "p1": [
+    -180.01,
+    -178.78
+   ],
+   "ground_z": 9.69,
+   "eave_z": 21.21,
+   "height": 11.51,
+   "dist_centre": 247.2,
+   "street_facing": false
+  },
+  {
+   "id": "way/148880379:3",
+   "osm_id": "way/148880379",
+   "tags": {
+    "building": "university",
+    "building:levels": "3",
+    "nohousenumber": "yes",
+    "operator": "Corpus Christi College (University of Cambridge)",
+    "ref": "CORPUS010",
+    "roof:levels": "1"
+   },
+   "length": 29.71,
+   "p0": [
+    -186.79,
+    -180.25
+   ],
+   "p1": [
+    -180.09,
+    -209.19
+   ],
+   "ground_z": 9.66,
+   "eave_z": 25.69,
+   "height": 16.03,
+   "dist_centre": 264.6,
+   "street_facing": true
+  },
+  {
+   "id": "way/148880379:9",
+   "osm_id": "way/148880379",
+   "tags": {
+    "building": "university",
+    "building:levels": "3",
+    "nohousenumber": "yes",
+    "operator": "Corpus Christi College (University of Cambridge)",
+    "ref": "CORPUS010",
+    "roof:levels": "1"
+   },
+   "length": 2.56,
+   "p0": [
+    -179.67,
+    -210.71
+   ],
+   "p1": [
+    -179.13,
+    -213.21
+   ],
+   "ground_z": 9.57,
+   "eave_z": 25.25,
+   "height": 15.68,
+   "dist_centre": 280.0,
+   "street_facing": false
+  },
+  {
+   "id": "way/148880379:10",
+   "osm_id": "way/148880379",
+   "tags": {
+    "building": "university",
+    "building:levels": "3",
+    "nohousenumber": "yes",
+    "operator": "Corpus Christi College (University of Cambridge)",
+    "ref": "CORPUS010",
+    "roof:levels": "1"
+   },
+   "length": 2.95,
+   "p0": [
+    -179.13,
+    -213.21
+   ],
+   "p1": [
+    -178.52,
+    -216.09
+   ],
+   "ground_z": 9.49,
+   "eave_z": 25.27,
+   "height": 15.78,
+   "dist_centre": 282.4,
+   "street_facing": false
+  },
+  {
+   "id": "way/148880379:16",
+   "osm_id": "way/148880379",
+   "tags": {
+    "building": "university",
+    "building:levels": "3",
+    "nohousenumber": "yes",
+    "operator": "Corpus Christi College (University of Cambridge)",
+    "ref": "CORPUS010",
+    "roof:levels": "1"
+   },
+   "length": 29.12,
+   "p0": [
+    -178.14,
+    -217.48
+   ],
+   "p1": [
+    -171.46,
+    -245.83
+   ],
+   "ground_z": 9.65,
+   "eave_z": 26.22,
+   "height": 16.57,
+   "dist_centre": 297.8,
+   "street_facing": true
+  },
+  {
+   "id": "way/148880379:28",
+   "osm_id": "way/148880379",
+   "tags": {
+    "building": "university",
+    "building:levels": "3",
+    "nohousenumber": "yes",
+    "operator": "Corpus Christi College (University of Cambridge)",
+    "ref": "CORPUS010",
+    "roof:levels": "1"
+   },
+   "length": 3.07,
+   "p0": [
+    -127.81,
+    -227.3
+   ],
+   "p1": [
+    -130.81,
+    -227.94
+   ],
+   "ground_z": 10.05,
+   "eave_z": 18.54,
+   "height": 8.49,
+   "dist_centre": 286.2,
+   "street_facing": false
+  },
+  {
+   "id": "way/148880379:35",
+   "osm_id": "way/148880379",
+   "tags": {
+    "building": "university",
+    "building:levels": "3",
+    "nohousenumber": "yes",
+    "operator": "Corpus Christi College (University of Cambridge)",
+    "ref": "CORPUS010",
+    "roof:levels": "1"
+   },
+   "length": 12.95,
+   "p0": [
+    -133.65,
+    -228.56
+   ],
+   "p1": [
+    -146.31,
+    -231.29
+   ],
+   "ground_z": 10.07,
+   "eave_z": 20.18,
+   "height": 10.11,
+   "dist_centre": 289.7,
+   "street_facing": false
+  },
+  {
+   "id": "way/148880379:36",
+   "osm_id": "way/148880379",
+   "tags": {
+    "building": "university",
+    "building:levels": "3",
+    "nohousenumber": "yes",
+    "operator": "Corpus Christi College (University of Cambridge)",
+    "ref": "CORPUS010",
+    "roof:levels": "1"
+   },
+   "length": 14.38,
+   "p0": [
+    -146.31,
+    -231.29
+   ],
+   "p1": [
+    -160.34,
+    -234.43
+   ],
+   "ground_z": 10.04,
+   "eave_z": 18.4,
+   "height": 8.36,
+   "dist_centre": 294.6,
+   "street_facing": false
+  },
+  {
+   "id": "way/148880379:55",
+   "osm_id": "way/148880379",
+   "tags": {
+    "building": "university",
+    "building:levels": "3",
+    "nohousenumber": "yes",
+    "operator": "Corpus Christi College (University of Cambridge)",
+    "ref": "CORPUS010",
+    "roof:levels": "1"
+   },
+   "length": 3.97,
+   "p0": [
+    -171.97,
+    -191.95
+   ],
+   "p1": [
+    -172.91,
+    -188.09
+   ],
+   "ground_z": 10.4,
+   "eave_z": 16.33,
+   "height": 5.92,
+   "dist_centre": 257.0,
+   "street_facing": false
+  },
+  {
    "id": "way/148880386:3",
    "osm_id": "way/148880386",
    "tags": {
@@ -32411,6 +33870,222 @@
    "height": 9.99,
    "dist_centre": 241.3,
    "street_facing": false
+  },
+  {
+   "id": "way/164708972:3",
+   "osm_id": "way/164708972",
+   "tags": {
+    "building": "university",
+    "building:levels": "3",
+    "name": "Wilkins' screen",
+    "nohousenumber": "yes",
+    "occupier": "porters",
+    "operator": "King's College (University of Cambridge)",
+    "ref": "KINGS010"
+   },
+   "length": 10.49,
+   "p0": [
+    -226.45,
+    -40.41
+   ],
+   "p1": [
+    -224.92,
+    -50.78
+   ],
+   "ground_z": 9.8,
+   "eave_z": 19.72,
+   "height": 9.92,
+   "dist_centre": 160.2,
+   "street_facing": false
+  },
+  {
+   "id": "way/164708972:4",
+   "osm_id": "way/164708972",
+   "tags": {
+    "building": "university",
+    "building:levels": "3",
+    "name": "Wilkins' screen",
+    "nohousenumber": "yes",
+    "occupier": "porters",
+    "operator": "King's College (University of Cambridge)",
+    "ref": "KINGS010"
+   },
+   "length": 2.26,
+   "p0": [
+    -224.92,
+    -50.78
+   ],
+   "p1": [
+    -224.55,
+    -53.01
+   ],
+   "ground_z": 9.91,
+   "eave_z": 18.94,
+   "height": 9.03,
+   "dist_centre": 163.6,
+   "street_facing": false
+  },
+  {
+   "id": "way/164708972:6",
+   "osm_id": "way/164708972",
+   "tags": {
+    "building": "university",
+    "building:levels": "3",
+    "name": "Wilkins' screen",
+    "nohousenumber": "yes",
+    "occupier": "porters",
+    "operator": "King's College (University of Cambridge)",
+    "ref": "KINGS010"
+   },
+   "length": 10.64,
+   "p0": [
+    -224.32,
+    -54.7
+   ],
+   "p1": [
+    -222.77,
+    -65.23
+   ],
+   "ground_z": 9.84,
+   "eave_z": 19.33,
+   "height": 9.49,
+   "dist_centre": 168.3,
+   "street_facing": false
+  },
+  {
+   "id": "way/164708972:11",
+   "osm_id": "way/164708972",
+   "tags": {
+    "building": "university",
+    "building:levels": "3",
+    "name": "Wilkins' screen",
+    "nohousenumber": "yes",
+    "occupier": "porters",
+    "operator": "King's College (University of Cambridge)",
+    "ref": "KINGS010"
+   },
+   "length": 30.47,
+   "p0": [
+    -211.12,
+    -94.31
+   ],
+   "p1": [
+    -216.15,
+    -64.26
+   ],
+   "ground_z": 10.13,
+   "eave_z": 13.66,
+   "height": 3.53,
+   "dist_centre": 175.9,
+   "street_facing": true
+  },
+  {
+   "id": "way/164708972:16",
+   "osm_id": "way/164708972",
+   "tags": {
+    "building": "university",
+    "building:levels": "3",
+    "name": "Wilkins' screen",
+    "nohousenumber": "yes",
+    "occupier": "porters",
+    "operator": "King's College (University of Cambridge)",
+    "ref": "KINGS010"
+   },
+   "length": 4.98,
+   "p0": [
+    -214.44,
+    -58.39
+   ],
+   "p1": [
+    -215.18,
+    -53.47
+   ],
+   "ground_z": 10.0,
+   "eave_z": 18.69,
+   "height": 8.69,
+   "dist_centre": 159.2,
+   "street_facing": true
+  },
+  {
+   "id": "way/164708972:18",
+   "osm_id": "way/164708972",
+   "tags": {
+    "building": "university",
+    "building:levels": "3",
+    "name": "Wilkins' screen",
+    "nohousenumber": "yes",
+    "occupier": "porters",
+    "operator": "King's College (University of Cambridge)",
+    "ref": "KINGS010"
+   },
+   "length": 2.24,
+   "p0": [
+    -215.42,
+    -51.75
+   ],
+   "p1": [
+    -215.72,
+    -49.53
+   ],
+   "ground_z": 9.96,
+   "eave_z": 19.86,
+   "height": 9.89,
+   "dist_centre": 156.1,
+   "street_facing": false
+  },
+  {
+   "id": "way/164708972:19",
+   "osm_id": "way/164708972",
+   "tags": {
+    "building": "university",
+    "building:levels": "3",
+    "name": "Wilkins' screen",
+    "nohousenumber": "yes",
+    "occupier": "porters",
+    "operator": "King's College (University of Cambridge)",
+    "ref": "KINGS010"
+   },
+   "length": 5.11,
+   "p0": [
+    -215.72,
+    -49.53
+   ],
+   "p1": [
+    -216.5,
+    -44.48
+   ],
+   "ground_z": 10.03,
+   "eave_z": 18.27,
+   "height": 8.24,
+   "dist_centre": 154.0,
+   "street_facing": true
+  },
+  {
+   "id": "way/164708972:21",
+   "osm_id": "way/164708972",
+   "tags": {
+    "building": "university",
+    "building:levels": "3",
+    "name": "Wilkins' screen",
+    "nohousenumber": "yes",
+    "occupier": "porters",
+    "operator": "King's College (University of Cambridge)",
+    "ref": "KINGS010"
+   },
+   "length": 4.76,
+   "p0": [
+    -218.18,
+    -44.73
+   ],
+   "p1": [
+    -218.88,
+    -40.02
+   ],
+   "ground_z": 10.11,
+   "eave_z": 19.3,
+   "height": 9.19,
+   "dist_centre": 152.7,
+   "street_facing": true
   },
   {
    "id": "way/164830068:4",

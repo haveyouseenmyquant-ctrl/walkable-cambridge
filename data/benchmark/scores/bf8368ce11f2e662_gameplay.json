@@ -1,0 +1,67 @@
+{
+ "gameplay_judged": 47.5,
+ "n": 4,
+ "model": "claude-opus-5-5",
+ "hash": "bf8368ce11f2e662",
+ "classes": {
+  "hexweaver": {
+   "score": 4.71,
+   "readability_telegraphs": 5.0,
+   "spell_vfx": 5.0,
+   "enemy_animation_variety": 4.0,
+   "hit_feedback": 5.0,
+   "ui_hud_clarity": 6.0,
+   "loot_excitement": 4.0,
+   "polished_arpg_feel": 4.0,
+   "overall": 4.5
+  },
+  "pyromancer": {
+   "score": 4.57,
+   "readability_telegraphs": 5.0,
+   "spell_vfx": 4.0,
+   "enemy_animation_variety": 3.0,
+   "hit_feedback": 5.0,
+   "ui_hud_clarity": 6.0,
+   "loot_excitement": 5.0,
+   "polished_arpg_feel": 4.0,
+   "overall": 4.5
+  },
+  "stormcaller": {
+   "score": 4.93,
+   "readability_telegraphs": 5.0,
+   "spell_vfx": 4.5,
+   "enemy_animation_variety": 4.0,
+   "hit_feedback": 5.0,
+   "ui_hud_clarity": 6.0,
+   "loot_excitement": 6.0,
+   "polished_arpg_feel": 4.0,
+   "overall": 4.8
+  },
+  "warden": {
+   "score": 4.79,
+   "readability_telegraphs": 5.0,
+   "spell_vfx": 4.5,
+   "enemy_animation_variety": 4.0,
+   "hit_feedback": 5.0,
+   "ui_hud_clarity": 5.5,
+   "loot_excitement": 5.0,
+   "polished_arpg_feel": 4.5,
+   "overall": 4.5
+  }
+ },
+ "by_criterion": {
+  "readability_telegraphs": 5.0,
+  "spell_vfx": 4.5,
+  "enemy_animation_variety": 3.75,
+  "hit_feedback": 5.0,
+  "ui_hud_clarity": 5.88,
+  "loot_excitement": 5.0,
+  "polished_arpg_feel": 4.12
+ },
+ "reasons": {
+  "hexweaver": "The boss encounter reads well: the named boss bar shows phases, the 'Phase II' banner and enraged red tint stand out, and red ground telegraphs mark attacks. Floating damage numbers and crits are clear, and the HUD has HP/mana bars, cooldowns, a minimap and loot toasts. However, frames 4-8 contain almost no combat, with tall gray walls blocking the view. Enemies are small, simple models, spell effects are mostly generic glowing orbs, and loot only shows up as tiny text labels plus a couple of beams, with 4 of 18 drops picked up.",
+  "pyromancer": "The boss encounter has the strongest structure: a named boss bar with phase marks, an enrage banner, named attacks, and red ground telegraphs (cones, rings and line markers). The HUD with hp/mana bars, numbered cooldowns and a minimap is clear, and loot gets beams, rarity-coloured toasts and stat cards. However, the camera is third-person over the shoulder rather than the first-person view described. Enemies and the player are simple primitive or low-poly models, and the spell effects are mostly flat sprites and particle bursts with little fire character. In busy fights, overlapping damage numbers and particles turn the screen to clutter.",
+  "stormcaller": "The HUD is clear and complete: a boss bar with phase markers and a named attack ('Change-Ringing Cascade'), a spell bar with cooldowns, a minimap, rarity-coloured loot beams and item toasts, CRIT damage numbers, and red ground telegraphs for the boss slam. The spell effects are mostly thin electric-blue decals and rings with little weight. The enemies are simple low-poly models, and the environment is made of blocky placeholder market stalls. The last third of the clip has no combat, just the player wandering empty streets, and the camera framing (third-person even though the brief says first-person) makes clashes look cluttered rather than dramatic.",
+  "warden": "Strengths: the boss fight is well staged, with a named health bar, phase pips, named attack wind-ups ('Peal of Shards', 'Great Toll') and red ground telegraphs, plus crit damage numbers, rarity-coloured loot toasts and light beams. Weaknesses: the third-person camera often clips into walls and big rock spikes, which hides the action (frames 1, 10, 12). The shield bubble and rune circle repeat across most frames and pebble_shot makes up 66 of 82 casts, so spells look samey. Enemies are low-poly blocky models, loot beams and labels are small and easy to miss, and the HUD is functional but plain."
+ }
+}

@@ -71,6 +71,56 @@ def geometry_match(rows, ann):
     return round(100 * num / max(den, 1e-9), 2)
 
 
+def bespoke_elements(W, ann):
+    """{wall id: opening counts} for the city walls of bespoke buildings (scripts/zone_bespoke_*.py BUILDS), counted
+    from the openings their build() really emits, as zone_bespoke_churches._elements does for the zone: each emitted
+    opening's world xy (Church.openings, or the module's _OPS) goes to the nearest wall of the building within 1.2 m.
+    Only buildings with an annotated wall are built (unannotated walls score 0 whatever their counts). Session 64."""
+    import glob
+    import importlib
+    here = os.path.dirname(os.path.abspath(__file__))
+    by = {}
+    for w in W:
+        by.setdefault(w["osm_id"], []).append(w)
+    res = {w["id"]: {t: 0 for t in TYPES} for w in W}
+    for f in sorted(glob.glob(os.path.join(here, "zone_bespoke_*.py"))):
+        try:
+            mod = importlib.import_module(os.path.basename(f)[:-3])
+            ch = importlib.import_module("zone_bespoke_churches")
+        except Exception as e:
+            print("bespoke module failed:", f, repr(e), file=sys.stderr)
+            continue
+        for oid, fn in getattr(mod, "BUILDS", {}).items():
+            ws = by.get(oid, [])
+            if not any(w["id"] in ann for w in ws):
+                continue
+            ch._LAST[0] = None
+            try:
+                fn(ws)
+            except Exception as e:
+                print("bespoke build failed:", oid, repr(e), file=sys.stderr)
+                continue
+            if getattr(mod, "_OPS", None):
+                ops = [(k, np.array([x, y])) for k, x, y in mod._OPS]
+            elif ch._LAST[0] is not None:
+                ops = [(k, np.asarray(pt, float)) for k, pt in ch._LAST[0].openings]
+            else:
+                print("bespoke", oid, "exposes no openings", file=sys.stderr)
+                continue
+            for kind, pt in ops:
+                best, bd = None, 1.2
+                for w in ws:
+                    a, b = np.asarray(w["p0"], float), np.asarray(w["p1"], float)
+                    u = b - a
+                    fr = float(np.clip((pt - a) @ u / float(u @ u), 0, 1))
+                    dd = float(np.linalg.norm(a + fr * u - pt))
+                    if dd < bd:
+                        best, bd = w["id"], dd
+                if best is not None and kind in TYPES:
+                    res[best][kind] += 1
+    return res
+
+
 def buildings(nodes, ways, rels):
     out = []
     for w in ways.values():
@@ -148,7 +198,7 @@ def main():
     bespoke = set(Z.load_bespoke())
     man = json.load(open(os.path.join(ROOT, "site/manifest.json")))
     landmark = {l["osm_id"] for l in man.get("landmarks", []) if l.get("detailed") and l.get("osm_id")}
-    skip_b = bespoke | landmark | Z.PROP_BUILDINGS
+    skip_b = landmark | Z.PROP_BUILDINGS   # bespoke buildings keep their walls for the KPI rows, but get no city skin
     ann = Z.load_annotations([d for d in ANN_DIRS if os.path.isdir(d)])
 
     # ---- candidate edges
@@ -248,10 +298,18 @@ def main():
                "walls": [{k: v for k, v in w.items() if k != "colour_hint"} for w in W if w["dist_centre"] <= RING1_R]},
               open(os.path.join(ANN_DIRS[0], "walls.json"), "w"), indent=1)
     ext = Z.corner_extents(W)
+    bel = bespoke_elements([w for w in W if w["osm_id"] in bespoke], ann)
     by_tile, rows = {}, []
     nstyle = 0
     for w in W:
         Lw, H = w["length"], w["eave_z"] - w["ground_z"]
+        if w["osm_id"] in bespoke:   # modelled by its zone_bespoke_*.py module: count its emitted openings, build nothing
+            rows.append({"id": w["id"], "osm_id": w["osm_id"], "dist_centre": w["dist_centre"], "length": Lw,
+                         "height": round(H, 2), "area": round(Lw * H, 2), "detail_area": 0.0,
+                         "elements": bel.get(w["id"], {}), "tris": 0, "tile": None, "colour_hint": None,
+                         "annotated": w["id"] in ann, "street_facing": w["street_facing"],
+                         "street": w["tags"].get("addr:street"), "bespoke": True})
+            continue
         lay = ann.get(w["id"])
         if lay is None and S is not None:
             try:
@@ -300,7 +358,8 @@ def main():
              "annotations": len(ann), "walls_annotated": sum(r["annotated"] for r in rows),
              "buildings_annotated": len({r["osm_id"] for r in rows if r["annotated"]}),
              "annotations_unmatched": sorted(k for k in ann if k not in built),
-             "ring1_walls": len(ring1), "ring1_walls_annotated": sum(r["annotated"] for r in ring1),
+             "ring1_walls": len(ring1), "ring1_bespoke_walls": sum(1 for r in ring1 if r.get("bespoke")),
+             "ring1_nonbespoke_facade_geometry_match_pct": geometry_match([r for r in ring1 if not r.get("bespoke")], ann), "ring1_walls_annotated": sum(r["annotated"] for r in ring1),
              "ring1_facade_geometry_match_pct": geometry_match(ring1, ann),
              "ring1_all_walls": len(ring1_all), "ring1_all_walls_facade_geometry_match_pct": geometry_match(ring1_all, ann),
              "city_walls": len(city), "city_walls_annotated": sum(r["annotated"] for r in city),

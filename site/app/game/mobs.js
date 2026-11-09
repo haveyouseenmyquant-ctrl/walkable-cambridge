@@ -40,6 +40,8 @@ const G = {
   disc: new THREE.CircleGeometry(1, 40).rotateX(-Math.PI / 2),
   rect: new THREE.PlaneGeometry(1, 1).rotateX(-Math.PI / 2).translate(0, 0, 0.5),   // unit strip along +Z from origin
   shard: new THREE.TetrahedronGeometry(0.18, 0),
+  slash: new THREE.RingGeometry(0.62, 1, 28, 1, -1.15, 2.3).rotateX(-Math.PI / 2),   // s64: melee swoosh crescent, centred on local +X
+  orb: new THREE.IcosahedronGeometry(0.2, 1),                                       // s64: wind-up charge orb
   bolt: new THREE.IcosahedronGeometry(0.28, 0),
   pillar: (() => {   // session 54: death light column, open cylinder fading to black (= transparent under additive) at the top
     const g = new THREE.CylinderGeometry(0.55, 1, 1, 20, 4, true).translate(0, 0.5, 0), p = g.attributes.position, c = [];
@@ -1024,6 +1026,7 @@ class MobSystem {
     if (mob.aura) { const gz = mob.type.flying ? (mob.groundZ ?? mob.z - mob.type.hover) : mob.state === 'active' && mob.attack?.kind === 'leap' ? mob.groundZ : mob.z; mob.aura.position.set(mob.x, gz + 0.06, -mob.y); }
   }
   remove(mob) {
+    if (mob.chargeOrb) mob.chargeOrb.material.dispose();
     this.root.remove(mob.group); if (mob.aura) this.root.remove(mob.aura); for (const c of mob.mats) c.dispose();
     mob.telegraph && this.clearTelegraph(mob);
     const i = this.game.mobs.indexOf(mob); if (i >= 0) this.game.mobs.splice(i, 1);
@@ -1055,7 +1058,7 @@ class MobSystem {
 
   onDeath(mob) {
     this.clearTelegraph(mob);
-    mob.state = 'dead'; mob.deathT = 0; mob.kb = null;
+    mob.state = 'dead'; mob.deathT = 0; mob.kb = null; if (mob.chargeOrb) mob.chargeOrb.visible = false;
     const T = mob.type, cz = mob.z + 1 * T.scale * (mob.boss ? 2.5 : 1), gz = mob.groundZ ?? mob.z;
     // session 46: three death styles. crumble: stone debris falls + dust ring; dissolve: motes stream upward;
     // burst: the body swells and pops in a wide spray + flash ring
@@ -1160,6 +1163,38 @@ class MobSystem {
     for (const m of this.tele.pool) { const d = m.userData; if (!m.visible || d.fade < 0) continue;
       d.fade += dt; const k = d.fade / 0.25; if (k >= 1) { m.visible = false; d.fade = -1; continue; }
       d.flash = 1 - k; d.op = 1 - k * k; }
+  }
+  // session 64: melee strike swoosh. An additive crescent at weapon height sweeps across the aim direction in 0.24 s
+  // (line attacks) or spins a full turn (ring attacks), so the strike reads in a still frame as a slash, not a pose
+  slash(mob, a, spin) {
+    const c = new THREE.Color(mob.type.color).lerp(_white, 0.4);
+    const mat = new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: 0.95, depthWrite: false, side: THREE.DoubleSide, blending: THREE.AdditiveBlending, fog: false });
+    const o = new THREE.Mesh(G.slash, mat), sc = mob.boss ? 2 : mob.type.scale * MOB_VIS;
+    const R = spin ? Math.max(1.2, a.r * 0.85) : Math.max(1.4, Math.min(a.len * 0.75, 6));
+    const z = (mob.type.flying ? mob.z : mob.z + 0.9 * sc), phi = Math.atan2(mob.aim.dir.y, mob.aim.dir.x);
+    o.position.set(mob.x, z, -mob.y); o.scale.set(R, 1, R); o.renderOrder = 6; o.rotation.z = (mob.id % 2 ? 1 : -1) * 0.25;
+    this.root.add(o);
+    let t = 0; const dur = spin ? 0.3 : 0.24, from = spin ? phi : phi - 0.9, to = spin ? phi + TAU : phi + 0.9;
+    this.fx.push({ update: (dt) => {
+      t += dt; const f = Math.min(1, t / dur), e = 1 - (1 - f) * (1 - f);
+      o.rotation.y = from + (to - from) * e; mat.opacity = 0.95 * (1 - f * f);
+      if (f >= 1) { this.root.remove(o); mat.dispose(); return false; }
+      return true;
+    } });
+  }
+  // session 64: a pulsing additive orb of the mob's colour gathers at the chest during every wind-up, swelling to the
+  // moment of release (the enemy itself telegraphs, not only the ground decal)
+  chargeOrb(mob, f) {
+    let o = mob.chargeOrb;
+    if (f <= 0) { if (o) o.visible = false; return; }
+    if (!o) {
+      o = mob.chargeOrb = new THREE.Mesh(G.orb, new THREE.MeshBasicMaterial({ color: new THREE.Color(mob.type.color).lerp(_white, 0.25), transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, fog: false }));
+      o.renderOrder = 7; o.position.set(0, mob.boss ? 2.6 : mob.type.flying ? 0.2 : 1.05, mob.boss ? 1.2 : 0.35); mob.group.add(o);
+    }
+    o.visible = true;
+    const p = 1 + 0.18 * Math.sin(mob.t * (14 + 26 * f));
+    o.scale.setScalar((0.35 + 1.9 * f * f) * p * (mob.boss ? 1.6 : 1)); o.material.opacity = 0.35 + 0.6 * f;
+    o.rotation.y += 0.3; o.rotation.x += 0.17;
   }
   // expanding ground ring (boss phase change / death)
   shockwave(x, y, z, color, maxR, dur) {
@@ -1340,9 +1375,10 @@ class MobSystem {
     // flash + glow
     mob.flashT = Math.max(0, mob.flashT - dt);
     const glow = mob.state === 'windup' ? 0.4 + 0.6 * Math.min(1, 1 - mob.stateT / mob.windupEff) : 0;
+    this.chargeOrb(mob, mob.state === 'windup' ? Math.min(1, 1 - mob.stateT / mob.windupEff) : 0);
     mob.mats.forEach((c, i) => {
       // session 43: hit flash is a capped warm tint over the material's own colour, not a pure-white blowout
-      if (mob.flashT > 0) { c.emissive.copy(c.color).lerp(HIT_TINT, 0.5); c.emissiveIntensity = mob.boss ? 0.35 : 0.5; }
+      if (mob.flashT > 0) { c.emissive.copy(c.color).lerp(HIT_TINT, 0.7); c.emissiveIntensity = mob.boss ? 0.5 : 0.85; }   // s64: brighter flash (judge: hit feedback weak)
       else if (glow > 0) { c.emissive.setHex(T.color); c.emissiveIntensity = glow * (0.6 + 0.4 * Math.sin(mob.t * 30)); }
       else { c.emissive.copy(mob.baseEmissive[i].c); c.emissiveIntensity = mob.baseEmissive[i].i; }
     });
@@ -1569,9 +1605,12 @@ class MobSystem {
     this.clearTelegraph(mob, true);
     if (a.kind === 'ring') {
       this.burst(mob.x, mob.y, mob.type.flying ? mob.groundZ : mob.z, mob.type.color, 8, 4);
+      this.shockwave(mob.x, mob.y, mob.type.flying ? mob.groundZ : mob.z, mob.type.color, a.r, 0.32);   // s64: the blast visibly fills its ring
+      this.slash(mob, a, true);
       if (Math.hypot(g.px - mob.x, g.py - mob.y) <= a.r + 0.3) this.hit(mob, a.dmg);
       this.recover(mob);
     } else if (a.kind === 'line') {
+      this.slash(mob, a, false);
       if (this.inStrip(mob.x, mob.y, mob.aim.dir, a.len, a.w, g.px, g.py)) this.hit(mob, a.dmg);
       this.recover(mob);
     } else if (a.kind === 'bolt') {
@@ -1610,6 +1649,7 @@ class MobSystem {
         if (z == null) { const s = this.findSpot(mob.x, mob.y, 4); if (s) { mob.x = s.x; mob.y = s.y; mob.groundZ = mob.z = s.z; } else { mob.x = L.x0; mob.y = L.y0; mob.groundZ = mob.z = L.z0; } }
         else mob.groundZ = mob.z = z;
         this.burst(mob.x, mob.y, mob.z, mob.type.color, 12, 5);
+        this.shockwave(mob.x, mob.y, mob.z, mob.type.color, a.r, 0.35);
         if (Math.hypot(g.px - mob.aim.x, g.py - mob.aim.y) <= a.r + 0.3) this.hit(mob, a.dmg);
         this.recover(mob);
       }

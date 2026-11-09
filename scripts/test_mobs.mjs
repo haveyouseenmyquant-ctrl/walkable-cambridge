@@ -45,7 +45,7 @@ try {
   page.on('response', r => { if (r.status() === 404) missing.push(new URL(r.url()).pathname); });
   await page.goto(`http://127.0.0.1:${server.address().port}/?debug`, { waitUntil: 'domcontentloaded', timeout: 300000 });
   await page.waitForFunction('window.__walkReady === true', { timeout: 300000 });
-  await page.waitForFunction('window.__game && window.__game.mobSystem && window.__mobTest', { timeout: 120000 });
+  await page.waitForFunction('window.__game && window.__game.mobSystem && window.__mobTest', { timeout: +(process.env.MOB_WAIT_MS || 120000) });
   await sleep(3000);   // let encounters near the spawn point stream in
   // encounter check: teleport to each encounter, wait for tiles, report whether its mobs spawned on walkable ground
   stage.at = 'encounters';

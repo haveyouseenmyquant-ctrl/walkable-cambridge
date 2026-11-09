@@ -5,6 +5,9 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 # the Pages workflow deploys the viewer from git: refuse to publish with uncommitted changes
 git diff --quiet HEAD -- site scripts || { echo "commit first: uncommitted changes in site/ or scripts/"; exit 1; }
+# session 65: every browser module must parse as an ES module (s64 left a `}` inside a comment in mobs.js: the game
+# layer silently failed to start and every mob/item/playtest test timed out)
+for f in $(find site/app -name '*.js'); do cp "$f" /tmp/wc_check.mjs; node --check /tmp/wc_check.mjs || { echo "syntax error in $f"; exit 1; }; done
 .venv/bin/python -I scripts/roof_match.py site   # roof_match_pct, cached per build hash
 # game KPIs (mob/item/class tests + route bot), cached per build hash as data/benchmark/scores/<hash>_game.json
 # WC_SKIP_GAME_KPI=1: leave it to service.sh (runs it for every new live hash) when a session is short of time
@@ -15,6 +18,11 @@ git diff --quiet HEAD -- site scripts || { echo "commit first: uncommitted chang
 # session 64: gameplay_judged too (12-frame clip per class + judge), else measure.sh reads it as 0 until service.sh catches up
 [ -n "${WC_SKIP_GAME_KPI:-}" ] || for _ in $(seq 180); do [ -d /tmp/wc_gameplay_kpi.lock ] || break; sleep 10; done
 [ -n "${WC_SKIP_GAME_KPI:-}" ] || scripts/gameplay_kpi.sh || echo "gameplay_kpi.sh failed (service.sh retries for the live hash)"
+# session 65: never push a build whose game layer is broken (game KPIs scored but mob_types 0)
+if [ -z "${WC_SKIP_GAME_KPI:-}" ]; then
+  GK=data/benchmark/scores/$(.venv/bin/python -I scripts/build_hash.py site)_game.json
+  [ -s "$GK" ] && ! .venv/bin/python -I -c 'import json,sys; sys.exit(0 if json.load(open(sys.argv[1])).get("mob_types",0) > 0 else 1)' "$GK" && { echo "game KPIs read mob_types 0: not publishing"; exit 1; }
+fi
 TAG="world-$(date -u +%Y%m%d-%H%M)"
 tar -czf /tmp/world.tar.gz -C site manifest.json landmarks.json tiles collision trees objects facades markings zone cityfac
 ls -lh /tmp/world.tar.gz
