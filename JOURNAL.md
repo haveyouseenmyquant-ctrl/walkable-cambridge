@@ -1962,3 +1962,30 @@ Next
    bossMult (0.86) if it is now the outlier.
 2. Annotate the Christ's, Sidney, St John's gate and Round Church walls from non-held-out photos (ELEMENTS={}).
 3. Ring 2: Bridge Street frontages; Trinity Street fascia contrast (Free People).
+
+## 2026-11-09 — Session 70: Bridge Street (ring 2), Market Square colour fixes, tree species, pyromancer survivability
+
+Live 2d9a5402 (s69) scores: playtest 100, boss kill-time spread 51.9% (pyro 27.7 s, storm 17.8, warden 18.6, hex 12.8),
+gameplay_judged 47.0, market_square_realism 30.0.
+- Game balance, real cause: the boss **heals to full whenever the player dies**, and the bot's pyromancer died 4-10 times a run
+  (the others 0-3), so its kill times counted respawns. Its boss damage per second was fine. Fix: pyro starter robe
+  {maxHp 25, armour 8} (was maxHp 10), Ember Bolt drains 10% of damage ("cauterises"), Flame Step 0.4 s invulnerability,
+  the s66 boss nerf is removed (bossMult 1), and Ember Bolt range is 45 (was 60; long bolts seemed to pull extra packs,
+  since pyro runs kill 130-300 mobs against 60-100 for the others). Pyro-only playtest before the range change: 4/5 pass, boss median **16.8 s** (was 27.7);
+  one run hit the 900 s route cap (13 deaths). The range change is untested apart from the publish scoring.
+- Realism, ring 2 (subagent): **Bridge Street**, scripts/zone_bespoke_bridgestreet.py, 20 OSM buildings (8-24 east incl. The Mitre,
+  Baron of Beef, Côte; 29, 33 Galleria; 63-72 west), 29.9k tris. Shopfront lettering comes from OSM shops, materials are gault, red brick or
+  colourwashed render, with LiDAR chimneys, a jetty on 17/29/30, and ELEMENTS for 30 walls. docs/screens/session70_ring_{before,after}_bridgest_*.jpg.
+  The materials of 8-16 and 63-71 and the window counts are not checked against photos.
+- Realism, Market Square (subagent): 12 Market Hill is now Don Pasquale (green fascia, green canvas awning; facade_parts shopfronts
+  can set an awning colour), Great St Mary's stone is darker and greyer (#ab9f86), and the Guildhall brick is warmer. Not done: 15 Market Hill's curved
+  corner and the Guildhall's rounded SW corner (the judge's "curved facade" and "turreted building").
+- Trees (subagent, site/app/trees.js): six species-like crown types (plane, lime, chestnut, birch, yew, oak) picked from height
+  and crown shape, with per-species tint, bark colour, central leaders and twigs. A modest change: crowns are still rounded card blobs.
+  Local fps went from 59 to 54 with the other changes also present. Watch fps_median.
+- Pyromancer spell VFX (subagent): see the result line below.
+
+Next
+1. Check the publish scores: pyro pass rate and spread, fps_median (trees), market_square_realism after the colour fixes.
+2. Curved fronts: 15 Market Hill corner and the Guildhall SW corner, as real curved wall geometry.
+3. Trees: a CC0 leaf atlas, smaller edge cards, and distance LOD to win back fps.

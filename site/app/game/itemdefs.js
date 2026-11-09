@@ -13,7 +13,7 @@ export const SLOTS = ['wand', 'hat', 'robe', 'boots', 'ring', 'amulet', 'broom']
 
 // starter gear (granted by classes.js): stat-only
 const STARTERS = {
-  pyromancer: ['Pyromancer', { power: 0.12 }, { maxHp: 10 }, { critChance: 0.03 }],
+  pyromancer: ['Pyromancer', { power: 0.12 }, { maxHp: 25, armor: 8 }, { critChance: 0.03 }],
   stormcaller: ['Stormcaller', { critChance: 0.05 }, { cdr: 0.05 }, { speedMult: 0.05 }],
   warden: ['Warden', { power: 0.05 }, { maxHp: 20 }, { armor: 10 }],
   hexweaver: ['Hexweaver', { power: 0.08 }, { manaRegen: 2 }, { maxMana: 20 }],

@@ -18,7 +18,7 @@
    ],
    "material": "render",
    "wall_colour": "#eeebe2",
-   "trim_colour": "#2f4a3a",
+   "trim_colour": "#f4f2ec",
    "cornice_z": 12.8,
    "cornice": "simple",
    "parapet": true,
@@ -160,16 +160,17 @@
      "x0": 0.3,
      "x1": 8.0,
      "z1": 4.7,
-     "fascia_text": "Market House",
-     "fascia_colour": "#4b4c4f",
-     "text_colour": "#c9a94a",
+     "fascia_text": "Don Pasquale",
+     "fascia_colour": "#1f4a30",
+     "text_colour": "#efe6c8",
      "door_x": 3.5,
      "stallriser": 0.6,
-     "awning": false
+     "awning": true,
+     "awning_colour": "#2f6b3f"
     }
    ],
    "confidence": "high",
-   "notes": "Market House (OSM name; 2022 photo): orange-red painted brick, 3 bays x 3 upper floors (6/6 sashes, 3rd floor 3/3), stepped parapet; dark grey shopfront with 4 round arches (x~1.6,3.5,5.4,7.3; door in arch 2, 12a door in arch 4). Was white 'Don Pasquale' in 2016-17 Mapillary. x from tower view; heights from straight-on 2022 photo."
+   "notes": "Market House (OSM name; 2022 photo): orange-red painted brick, 3 bays x 3 upper floors (6/6 sashes, 3rd floor 3/3), stepped parapet; dark grey shopfront with 4 round arches (x~1.6,3.5,5.4,7.3; door in arch 2, 12a door in arch 4). Was white 'Don Pasquale' in 2016-17 Mapillary. x from tower view; heights from straight-on 2022 photo. s70: shopfront set to the 2016-19 Don Pasquale fit-out (green fascia + green canvas awning, white render) per the s39 colour audit and the judge's 'white Don Pasquale building with green awnings'."
   }
  ],
  "colour_source": "s39 audit: white-painted (Don Pasquale, green awnings) in mapillary 1114292965734083 and 3304474719779190 (same era as the Mapillary photo set); repainted orange 'Market House' only by 2022 (Commons 12 Market Hill, Cambridge.jpg) -> use white"

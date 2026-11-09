@@ -16,7 +16,9 @@ const CHROME = process.env.CHROME_PATH || '/Applications/Google Chrome.app/Conte
 const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.glb': 'model/gltf-binary' };
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 // [name, eye x, eye y, look-at x, look-at y, look-at height above eye ground]
+const FMT = process.env.VEG_FMT || 'png';   // s70: VEG_FMT=jpg for docs/screens jpgs
 const SPOTS = [
+  ['warmup', -188, 62, -225, 92, 1.0],      // s70: first shot can fire before the camera moves; not saved
   ['senate', -188, 62, -225, 92, 1.0],      // Senate House lawn from King's Parade
   ['kingsparade', -186, 40, -250, 0, 3.0],  // King's front lawn + Parade trees
   ['market', -118, 52, -152, 62, 5.0],      // from Market Square west towards Great St Mary's
@@ -54,8 +56,9 @@ try {
       window.__cam = { pos: [x, y, z], at: [ax, ay, z + dz - 1.0], fov: 70 };
     }, x, y, ax, ay, dz);
     await sleep(3000);
-    const out = path.join(ROOT, 'docs/screens', `${PREFIX}_${name}.png`);
-    await page.screenshot({ path: out });
+    if (name === 'warmup') continue;
+    const out = path.join(ROOT, 'docs/screens', `${PREFIX}_${name}.${FMT}`);
+    await page.screenshot(FMT === 'jpg' ? { path: out, type: 'jpeg', quality: 85 } : { path: out });
     console.error('[veg]', out);
   }
 } finally { await browser.close(); server.close(); }

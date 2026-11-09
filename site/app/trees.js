@@ -64,19 +64,44 @@ function leafTexture() {
 }
 
 // Crown variants in crown space: x/z in units of the crown radius, y in [-1, 1] over the crown height.
+// s70: six species-ish crowns instead of 3 generic ones. Each has its own cluster layout (cone = narrows to the top,
+// droop = outer clusters hang lower), crown base (fraction of the tree height), leaf-card density and size (birch is
+// sparse and see-through, yew dense and dark), a card tint and a bark colour (plane = pale olive, birch = white).
 const VARIANTS = [
-  { n: 7, shell: 0.5, up: [-0.35, 0.55], rs: [0.42, 0.55], top: 0.5 },     // round (lime, oak)
-  { n: 8, shell: 0.42, up: [-0.55, 0.7], rs: [0.38, 0.5], top: 0.62 },     // tall oval (plane, lime avenues)
-  { n: 6, shell: 0.6, up: [-0.15, 0.4], rs: [0.42, 0.56], top: 0.38 },     // spreading (horse chestnut, willow-ish)
+  { name: 'plane', n: 11, shell: 0.62, up: [-0.5, 0.72], rs: [0.3, 0.46], top: 0.6, base: [0.28, 0.36], cardK: 1, cardSz: 0.9, core: 0.3,
+    tint: [0.98, 1.04, 0.82], bark: 0x8c8a72, trunkK: 1.0, leader: false },
+  { name: 'lime', n: 12, shell: 0.46, up: [-0.72, 0.78], rs: [0.34, 0.46], top: 0.72, base: [0.18, 0.26], cardK: 1.05, cardSz: 0.85, cone: 0.3,
+    tint: [1.08, 1.1, 0.68], bark: 0x5e554b, trunkK: 0.9, leader: true },
+  { name: 'chestnut', n: 10, shell: 0.6, up: [-0.55, 0.45], rs: [0.4, 0.52], top: 0.42, base: [0.16, 0.24], cardK: 1.1, cardSz: 1, droop: 0.25,
+    tint: [0.74, 0.86, 0.72], bark: 0x5a5048, trunkK: 1.1, leader: false },
+  { name: 'birch', n: 9, shell: 0.36, up: [-0.75, 0.82], rs: [0.24, 0.36], top: 0.8, base: [0.2, 0.3], cardK: 0.6, cardSz: 0.7, cone: 0.35, droop: 0.2, core: 0.12,
+    tint: [1.12, 1.12, 0.78], bark: 0xd9d4c8, trunkK: 0.55, leader: true },
+  { name: 'yew', n: 12, shell: 0.5, up: [-0.85, 0.65], rs: [0.36, 0.5], top: 0.7, base: [0.04, 0.1], cardK: 1.3, cardSz: 0.75, cone: 0.65,
+    tint: [0.48, 0.62, 0.55], bark: 0x7a4c38, trunkK: 1.2, leader: true },
+  { name: 'oak', n: 9, shell: 0.55, up: [-0.4, 0.55], rs: [0.36, 0.52], top: 0.5, base: [0.24, 0.32], cardK: 1, cardSz: 0.95,
+    tint: [0.86, 0.95, 0.72], bark: 0x635a4e, trunkK: 1.1, leader: false },
 ];
+const SP = Object.fromEntries(VARIANTS.map((v, i) => [v.name, i]));
+// Species from the record (no species in the data): height, crown slenderness and seed. Small trees are mostly birch
+// and yew (college courts), tall slender ones lime, big broad ones plane (the Backs, Parker's Piece) or horse chestnut.
+function species(h, r, seed) {
+  const k = h / Math.max(r, 0.5), u = (seed * 977) % 1;
+  if (h < 8) return u < 0.3 ? SP.yew : u < 0.7 ? SP.birch : SP.oak;
+  if (k > 3.2) return h < 14 && u < 0.35 ? SP.birch : SP.lime;
+  if (h > 17) return u < 0.55 ? SP.plane : u < 0.8 ? SP.lime : SP.chestnut;
+  return u < 0.3 ? SP.chestnut : u < 0.55 ? SP.plane : u < 0.8 ? SP.lime : SP.oak;
+}
 
 function clusters(v, seed) {
   const rnd = mulberry(seed), out = [{ c: new THREE.Vector3(0, v.top, 0), r: v.rs[1] }];
   for (let i = 0; i < v.n; i++) {
-    const a = i / v.n * 6.283 + rnd() * 0.7, d = v.shell * (0.8 + 0.4 * rnd());
+    const a = i * 2.39996 + rnd() * 0.5;   // golden angle: no two neighbours on the same side
     const y = v.up[0] + (v.up[1] - v.up[0]) * ((i * 0.618 + rnd() * 0.4) % 1);
-    out.push({ c: new THREE.Vector3(Math.cos(a) * d, y, Math.sin(a) * d), r: v.rs[0] + (v.rs[1] - v.rs[0]) * rnd() });
+    let d = v.shell * (0.7 + 0.55 * rnd()) * (1 - (v.cone || 0) * (y + 1) / 2);
+    const dr = (v.droop || 0) * d * d * 1.5;
+    out.push({ c: new THREE.Vector3(Math.cos(a) * d, y - dr, Math.sin(a) * d), r: v.rs[0] + (v.rs[1] - v.rs[0]) * rnd() });
   }
+  if (v.cone) out[0].r *= 1 - v.cone * 0.4;
   return out;
 }
 
@@ -91,17 +116,17 @@ function geo(pos, nor, col, uv, idx) {
 }
 
 // Leaf cards around each cluster (shell of the cluster sphere), plus the clusters' dark cores.
-function crownGeometries(cl, seed) {
+function crownGeometries(cl, seed, sp) {
   const rnd = mulberry(seed * 7 + 1), q = new THREE.Quaternion(), e = new THREE.Euler(), v = new THREE.Vector3();
   const P = [], N = [], C = [], U = [], I = [];
   const cp = [], cn = [], cc = [];
   for (const { c, r } of cl) {
     const hj = 0.92 + 0.16 * rnd(), yj = 0.9 + 0.2 * rnd();   // s56: per-cluster tint (yellower / bluer clumps)
-    const nCards = Math.round(24 * CARD_K * (r / 0.48) ** 2);   // s53: fuller crowns
+    const nCards = Math.round(24 * CARD_K * sp.cardK * (r / 0.48) ** 2 / sp.cardSz);   // s53: fuller crowns; s70: per species
     for (let i = 0; i < nCards; i++) {
       v.set(rnd() * 2 - 1, rnd() * 2 - 1, rnd() * 2 - 1); if (v.lengthSq() > 1 || v.lengthSq() < 1e-3) { i--; continue; }
       v.normalize(); if (v.y < -0.3 && rnd() < 0.5) v.y *= 0.4;   // fewer cards under the cluster
-      const ctr = v.clone().multiplyScalar(r * (0.6 + 0.4 * rnd())).add(c), sz = r * (0.55 + 0.28 * rnd());
+      const ctr = v.clone().multiplyScalar(r * (0.6 + 0.4 * rnd())).add(c), sz = r * (0.55 + 0.28 * rnd()) * sp.cardSz;
       q.setFromEuler(e.set(rnd() * 6.28, rnd() * 6.28, rnd() * 6.28));
       const b = P.length / 3;
       for (const [du, dv] of [[-1, -1], [1, -1], [1, 1], [-1, 1]]) {
@@ -116,7 +141,8 @@ function crownGeometries(cl, seed) {
       }
       I.push(b, b + 1, b + 2, b, b + 2, b + 3);
     }
-    const ico = new THREE.IcosahedronGeometry(r * 0.38, 1), ip = ico.attributes.position;
+    // s70: smaller cores where the cards are sparse
+    const ico = new THREE.IcosahedronGeometry(r * (sp.core ?? 0.38), 1), ip = ico.attributes.position;
     for (let i = 0; i < ip.count; i++) {
       const x = ip.getX(i) + c.x, y = ip.getY(i) + c.y, z = ip.getZ(i) + c.z;
       cp.push(x, y, z);
@@ -130,7 +156,7 @@ function crownGeometries(cl, seed) {
 }
 
 // Main limbs: tapered 5-sided tubes from the trunk top (crown space y = -1.05) to each cluster centre.
-function branchGeometry(cl) {
+function branchGeometry(cl, v) {
   const P = [], N = [], C = [], up = new THREE.Vector3(0, 1, 0);
   const tube = (a, b, r0, r1) => {
     const d = b.clone().sub(a), L = d.length(); d.normalize();
@@ -148,10 +174,17 @@ function branchGeometry(cl) {
     }
     return L;
   };
-  const root = new THREE.Vector3(0, -1.05, 0);
-  for (const { c } of cl) {
-    const mid = root.clone().lerp(c, 0.55).add(new THREE.Vector3(c.x * 0.15, 0.1, c.z * 0.15));   // limbs bow outwards
-    tube(root, mid, 0.05, 0.032); tube(mid, c, 0.032, 0.012);
+  const root = new THREE.Vector3(0, -1.05, 0), rnd = mulberry(cl.length * 13 + 5);
+  if (v.leader) tube(root, cl[0].c.clone().setY(cl[0].c.y + 0.1), 0.06 * v.trunkK, 0.015);   // s70: central stem (lime, birch, yew)
+  for (const { c, r } of cl) {
+    // limbs leave the stem at a height below the cluster when there is a leader, else from the trunk top; they bow outwards
+    const st = v.leader ? new THREE.Vector3(0, Math.min(0.5, Math.max(-0.92, c.y - 0.3)), 0) : root;
+    const mid = st.clone().lerp(c, 0.55).add(new THREE.Vector3(c.x * 0.15, 0.1, c.z * 0.15));
+    tube(st, mid, 0.05 * v.trunkK, 0.032 * v.trunkK); tube(mid, c, 0.032 * v.trunkK, 0.012);
+    for (let k = 0; k < 2; k++) {   // s70: two twigs per cluster poke out through the leaves
+      const a = rnd() * 6.283, tip = c.clone().add(new THREE.Vector3(Math.cos(a) * r * 0.9, (rnd() - 0.3) * r * 0.6, Math.sin(a) * r * 0.9));
+      tube(c, tip, 0.012, 0.004);
+    }
   }
   return geo(P, N, C);
 }
@@ -198,17 +231,23 @@ const cardMat = FOLIAGE ? windPatch(new THREE.MeshLambertMaterial({ map: LEAF_TE
   side: THREE.DoubleSide, alphaToCoverage: true }), true) : null;
 if (cardMat) foliageLight(cardMat, 0.5, 0.6, 1.3);
 const coreMat = foliageLight(windPatch(new THREE.MeshLambertMaterial({ vertexColors: true }), false), 0.3, 0.0);
-const barkMat = windPatch(new THREE.MeshLambertMaterial({ color: 0x4f453c, vertexColors: true }), false);
-const trunkMat = new THREE.MeshLambertMaterial({ color: 0x564a3e });
-const TRUNK = new THREE.CylinderGeometry(0.65, 1, 1, 7, 1, true).translate(0, 0.5, 0);
+// s70: colour per instance; wrapped diffuse so the shaded side of a trunk isn't near-black
+const barkMat = foliageLight(windPatch(new THREE.MeshLambertMaterial({ color: 0xffffff, vertexColors: true }), false), 0.45, 0.0);
+const trunkMat = foliageLight(new THREE.MeshLambertMaterial({ color: 0xffffff }), 0.45, 0.0);
+// s70: trunk with a root flare and a slight lean in the geometry (9 sides; top at radius 0.6)
+const TRUNK = (() => {
+  const g = new THREE.CylinderGeometry(0.6, 1, 1, 9, 4, true).translate(0, 0.5, 0), p = g.attributes.position;
+  for (let i = 0; i < p.count; i++) {
+    const y = p.getY(i), f = 1 + 0.55 * Math.max(0, 0.25 - y) / 0.25;   // flare in the bottom quarter
+    p.setX(i, p.getX(i) * f + 0.06 * y * y); p.setZ(i, p.getZ(i) * f);
+  }
+  g.computeVertexNormals(); return g;
+})();
 const GEOS = VARIANTS.map((v, i) => {
-  const cl = clusters(v, 31 + i * 17), g = crownGeometries(cl, 3 + i);
-  return { ...g, branches: branchGeometry(cl) };
+  const cl = clusters(v, 31 + i * 17), g = crownGeometries(cl, 3 + i, v);
+  return { ...g, branches: branchGeometry(cl, v) };
 });
-// summer greens from yellow-green limes to dark blue-green yews/hollies
-const GREENS = [0x4d6b32, 0x5b7a38, 0x3f5d2c, 0x6a8540, 0x56703a, 0x48663a, 0x3a5530, 0x627a34, 0x51683e]
-  .map(c => new THREE.Color(c));
-const SPECIES = [[3, 5, 7, 0], [1, 4, 0, 5, 7], [2, 6, 5, 8]].map(ix => ix.map(k => GREENS[k]));
+const LEAF_BASE = new THREE.Color(0x56723a);   // core (inner shadow mass) green before the species tint
 
 function stamp(o) {
   o.castShadow = true; o.receiveShadow = true; o.computeBoundingSphere(); o.userData.ownMat = false; o.matrixAutoUpdate = false;
@@ -218,12 +257,8 @@ function stamp(o) {
 
 export function makeTrees(buf) {
   const a = new Float32Array(buf), n = a.length / 6 | 0;
-  const vi = new Uint8Array(n), cnt = [0, 0, 0];
-  for (let i = 0; i < n; i++) {
-    const h = a[i * 6 + 3], r = a[i * 6 + 4], seed = a[i * 6 + 5];
-    vi[i] = h / Math.max(r, 0.5) > 3.2 ? 1 : seed < 0.3 ? 2 : seed < 0.62 ? 0 : 1;
-    cnt[vi[i]]++;
-  }
+  const vi = new Uint8Array(n), cnt = VARIANTS.map(() => 0);
+  for (let i = 0; i < n; i++) { vi[i] = species(a[i * 6 + 3], a[i * 6 + 4], a[i * 6 + 5]); cnt[vi[i]]++; }
   const g = new THREE.Group(); g.name = 'trees';
   const meshes = GEOS.map((G, k) => cnt[k] ? {
     core: new THREE.InstancedMesh(G.core, coreMat, cnt[k]),
@@ -232,27 +267,25 @@ export function makeTrees(buf) {
   } : null);
   const trunks = new THREE.InstancedMesh(TRUNK, trunkMat, n);
   const m = new THREE.Matrix4(), q = new THREE.Quaternion(), s = new THREE.Vector3(), p = new THREE.Vector3(), Y = new THREE.Vector3(0, 1, 0);
-  const c = new THREE.Color(), cc = new THREE.Color();
+  const c = new THREE.Color(), bark = new THREE.Color();
   for (let i = 0; i < n; i++) {
     const [x, y, zg, h, r, seed] = a.subarray(i * 6, i * 6 + 6);
-    const M = meshes[vi[i]], j = M.j++;
-    const base = h * (0.24 + 0.12 * seed), cv = (h - base) / 2;   // crown from base to the top
+    const v = VARIANTS[vi[i]], M = meshes[vi[i]], j = M.j++;
+    const u1 = (seed * 131) % 1, u2 = (seed * 71) % 1, u3 = (seed * 53) % 1;
+    const base = h * (v.base[0] + (v.base[1] - v.base[0]) * seed), cv = (h - base) / 2;   // crown from base to the top
     q.setFromAxisAngle(Y, seed * 6.283);
-    p.set(x, zg + base + cv, -y); s.set(r, cv, r * (0.88 + 0.24 * ((seed * 53) % 1)));
+    p.set(x, zg + base + cv, -y); s.set(r, cv, r * (0.88 + 0.24 * u3));
     m.compose(p, q, s);
-    // s53: species-ish palettes by crown variant: round = lime (yellow-green), tall = plane (mid), spreading = horse chestnut (dark)
-    const pal = SPECIES[vi[i]];
-    c.copy(pal[(seed * 997 | 0) % pal.length]).multiplyScalar(0.85 + 0.3 * ((seed * 131) % 1));
-    if (M.cards) {
-      M.cards.setMatrixAt(j, m);   // texture is green: tint stays near white, nudged towards the tree's green
-      cc.setRGB(0.8 + 0.5 * c.r / (c.g || 1), 0.95 + 0.12 * ((seed * 71) % 1), 0.75 + 0.5 * c.b / (c.g || 1)); M.cards.setColorAt(j, cc);
-    }
-    M.core.setMatrixAt(j, m); M.core.setColorAt(j, cc.copy(c).multiplyScalar(0.85));
-    M.br.setMatrixAt(j, m);
-    M.br.setColorAt(j, cc.setScalar(0.85 + 0.3 * ((seed * 211) % 1)));
-    const tr = 0.14 + h * 0.013;
-    p.set(x, zg - 0.2, -y); s.set(tr, base + cv * 0.15 + 0.2, tr);
-    trunks.setMatrixAt(i, m.compose(p, q, s));
+    // card tint (the texture is already green): species tint, brightness and a little yellow/blue shift per tree
+    const br = 0.88 + 0.24 * u1, hy = (u2 - 0.5) * 0.12;
+    c.setRGB(v.tint[0] * br * (1 + hy), v.tint[1] * br, v.tint[2] * br * (1 - hy));
+    if (M.cards) { M.cards.setMatrixAt(j, m); M.cards.setColorAt(j, c); }
+    M.core.setMatrixAt(j, m); M.core.setColorAt(j, bark.copy(LEAF_BASE).multiply(c).multiplyScalar(0.8));
+    bark.set(v.bark).multiplyScalar(0.9 + 0.2 * u2);
+    M.br.setMatrixAt(j, m); M.br.setColorAt(j, bark);
+    const tr = (0.14 + h * 0.013) * v.trunkK;
+    p.set(x, zg - 0.2, -y); s.set(tr, base + cv * (v.leader ? 0.3 : 0.15) + 0.2, tr);
+    trunks.setMatrixAt(i, m.compose(p, q, s)); trunks.setColorAt(i, bark);
   }
   for (const M of meshes) if (M) for (const o of [M.core, M.cards, M.br]) if (o) g.add(stamp(o));
   g.add(stamp(trunks));

@@ -328,8 +328,11 @@ def shopfront(P, el, wall_col, trim_col, yb=SKIN):
     P.extrude_profile([(yb, z1 - 0.12), (yb + 0.2, z1 - 0.12), (yb + 0.26, z1 - 0.05), (yb + 0.26, z1),
                        (yb, z1)], x0 - 0.1, x1 + 0.1, shade(fcol, 0.8))                      # fascia cornice
     if el.get("awning"):
+        acol = rgb(el["awning_colour"]) if el.get("awning_colour") else shade(fcol, 1.2)
         P.quad((x0, yb + 0.15, zf), (x1, yb + 0.15, zf), (x1, yb + 1.3, zf - 0.7), (x0, yb + 1.3, zf - 0.7),
-               (0, 0.5, 0.86), shade(fcol, 1.2))
+               (0, 0.5, 0.86), acol)
+        if el.get("awning_colour"):   # valance strip along the front edge (reads as a canvas awning)
+            P.box(x0, x1, yb + 1.28, yb + 1.33, zf - 0.95, zf - 0.7, shade(acol, 0.9), top=False)
     P.detail_area += (x1 - x0) * z1
     P.count("shopfront")
     return op

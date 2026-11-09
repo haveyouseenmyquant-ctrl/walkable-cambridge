@@ -15,14 +15,15 @@ export const STARTING_GEAR = {
 
 export const CLASSES = {
   pyromancer: {
-    // session 66: bossMult = spell damage vs bosses (s65 kill times: pyro 7.6 s vs all-class median 11.3 s, spread 33%)
-    bossMult: 0.86,
-    name: 'Pyromancer', color: '#ff7a2a', blurb: 'Fire and burst damage. Burns linger, explosions stack.',
+    // session 70: no boss damage nerf (s66 had 0.86). Its slow kills were deaths: the boss heals to full whenever the
+    // player dies, and the glass-cannon pyro died 4-10 times a run. So: tougher starter robe, and Flame Step dodges.
+    bossMult: 1,
+    name: 'Pyromancer', color: '#ff7a2a', blurb: 'Fire and burst damage. Burns linger, explosions stack, and Ember Bolt cauterises your wounds.',
     spells: [
-      { id: 'ember_bolt', name: 'Ember Bolt', glyph: '✦', kind: 'bolt', type: 'fire', mana: 5, cd: 0.45, dmg: 16, speed: 48, range: 60, splash: 1.2, color: 0xff7a2a, sfx: 'ember', look: 'ember' },
+      { id: 'ember_bolt', name: 'Ember Bolt', glyph: '✦', kind: 'bolt', type: 'fire', mana: 5, cd: 0.45, dmg: 16, speed: 48, range: 45, splash: 1.2, drain: 0.1, color: 0xff7a2a, sfx: 'ember', look: 'ember' },
       { id: 'cinder_spray', name: 'Cinder Spray', glyph: '≋', kind: 'cone', type: 'fire', mana: 14, cd: 3, dmg: 14, range: 9, angle: 0.6, burn: { dps: 6, dur: 3 }, color: 0xffa040, sfx: 'spray', look: 'spray' },
       { id: 'fireburst', name: 'Fireburst Orb', glyph: '◉', kind: 'bolt', type: 'fire', mana: 22, cd: 6, dmg: 24, speed: 22, range: 50, splash: 4.5, color: 0xff5010, sfx: 'orb', look: 'orb', size: 1.6 },
-      { id: 'flame_step', name: 'Flame Step', glyph: '➚', kind: 'blink', type: 'fire', mana: 15, cd: 5, dist: 11, dmg: 18, radius: 3, color: 0xff9a30, sfx: 'flamestep', look: 'flamestep' },
+      { id: 'flame_step', name: 'Flame Step', glyph: '➚', kind: 'blink', type: 'fire', mana: 15, cd: 5, dist: 11, invuln: 0.4, dmg: 18, radius: 3, color: 0xff9a30, sfx: 'flamestep', look: 'flamestep' },
       { id: 'kindle_ring', name: 'Kindle Ring', glyph: '◎', kind: 'nova', type: 'fire', mana: 24, cd: 9, dmg: 24, radius: 5.5, knock: 3, burn: { dps: 5, dur: 3 }, color: 0xff6a00, sfx: 'kindle', look: 'kindle' },
       { id: 'sunfall', name: 'Sunfall', glyph: '☀', kind: 'zone', type: 'fire', mana: 50, cd: 60, dmg: 11, radius: 7, dur: 3, interval: 0.22, tick: 'meteor', splash: 2.5, range: 40, color: 0xffc040, sfx: 'sunfall', look: 'sunfall', ult: true },
     ],
@@ -216,14 +217,15 @@ export function install(game) {
   const FIRE = { tex: 'flame', color: 0xfff0b0, color2: 0xff2a00 };
   const SMOKE = { tex: 'smoke', color: 0x3a302a, color2: 0x1a1612, grow: 2.2, drag: 1.5, alpha: 0.5 };
   const DUST = { tex: 'dust', color: 0xb8a080, color2: 0x8a7860, grow: 2, drag: 2.2, alpha: 0.6 };
-  function fireBlast(x, y, z, r, big) {
-    vfx.burst(x, y, z, big ? 70 : 22, { ...FIRE, speed: r * 2.6, size: big ? 1.3 : 0.6, life: big ? 0.75 : 0.45, drag: 3, up: 1.5, jitter: 0.3 });
-    vfx.burst(x, y, z, big ? 50 : 14, { tex: 'ember', color: 0xffd080, color2: 0xff4000, speed: r * 3.5, size: 0.14, life: big ? 1.4 : 0.8, grav: 7, drag: 1.2, up: 2 });
-    vfx.burst(x, y, z + 0.3, big ? 16 : 5, { ...SMOKE, speed: r * 0.6, size: big ? 2.2 : 1, life: big ? 2 : 1.2, up: 1.4, jitter: r * 0.4 });
-    vfx.core(x, y, z, 0xff7020, big ? 0.4 : 0.2, big ? 0.16 : 0.1);
-    const g = nearGround(x, y, z); if (g != null) { vfx.decal('scorch', x, y, g, r * (big ? 1.1 : 0.9), big ? 6 : 3.5, 0xffffff, 0.85); vfx.ring(x, y, g, 0xff8030, 0.3, r * 1.2, big ? 0.45 : 0.3); }
-    vfx.light(x, y, z + 0.5, 0xff8030, big ? 1.4 : 0.5, big ? 0.5 : 0.25);
-  }
+  // session 70: fire blasts use the vfx fire kit (heat-graded layers, ember bed, spark streaks; no per-call allocation).
+  // big: true/2 = fireburst, 1 = meteor, false/0 = bolt hit
+  function fireBlast(x, y, z, r, big) { vfx.fireball(x, y, z, r, big === true ? 2 : big || 0, nearGround(x, y, z)); }
+  const EMB_HEAD = { tex: 'flame', color: 0xfff6d8, color2: 0xff6010, speed: 0, size: 0.6, life: 0.07, drag: 0, jitter: 0.04, spin: 8 };
+  const EMB_LICK = { ...FIRE, speed: 0.6, size: 0.42, life: 0.28, up: 1.4, jitter: 0.12 };
+  const EMB_SPARK = { tex: 'ember', color: 0xffe080, color2: 0xff3000, speed: 1.4, size: 0.1, life: 0.7, grav: 2.5, drag: 0.8, up: 0.6 };
+  const ORB_FIRE = { ...FIRE, color2: 0xc01800, speed: 1.2, size: 0.85, life: 0.38, up: 1.5, jitter: 0.3 };
+  const ORB_SMOKE = { ...SMOKE, color: 0x5a2c16, speed: 0.4, size: 0.8, life: 0.9, up: 0.8, alpha: 0.3 };
+  const MET_FIRE = { ...FIRE, color2: 0xc01800, speed: 1, size: 1, life: 0.3, jitter: 0.4 };
   function stoneHit(x, y, z, n = 6, floor) {
     vfx.debris(x, y, z, n, { color: 0x9a8466, speed: 4, size: 0.12, up: 4, floor: floor ?? groundZ(x, y, z), life: 1.2 });
     vfx.burst(x, y, z, Math.ceil(n * 0.8), { ...DUST, speed: 2, size: 0.9, life: 0.9, up: 0.5 });
@@ -237,14 +239,13 @@ export function install(game) {
   const LOOK = {
     ember: { missile: { envelope: 0xff6a18, stretch: 3, coreColor: 0xffe8b0, radius: 0.16, halo: 0.8, width: 0.42, width2: 0.16, trailColor2: 0xffe080, trailLife: 0.28, trailLife2: 0.42 },
              trail: (x, y, z) => {   // session 51: flickering flame head (random size/colour each frame), licking tongues, ember sparks
-               vfx.burst(x, y, z, 1, { tex: 'flame', color: 0xfff0c0, color2: 0xff6010, speed: 0, size: 0.5 + Math.random() * 0.35, life: 0.07, drag: 0, jitter: 0.04, spin: 8 });
-               vfx.burst(x, y, z, 2, { ...FIRE, speed: 0.6, size: 0.42, life: 0.28, up: 1.4, jitter: 0.12 });
-               if (Math.random() < 0.7) vfx.burst(x, y, z, 1, { tex: 'ember', color: 0xffd070, color2: 0xff3000, speed: 1.4, size: 0.1, life: 0.7, grav: 2.5, drag: 0.8, up: 0.6 }); },
-             impact: (x, y, z) => { fireBlast(x, y, z, 1.2, false); vfx.burst(x, y, z, 4, { tex: 'flame', color: 0xffe0a0, color2: 0xff4000, speed: 2.5, size: 0.8, life: 0.3, up: 2, drag: 3 });
-               const g = nearGround(x, y, z); if (g != null) { vfx.ring(x, y, g, 0xffa040, 0.2, 1.6, 0.3, 0.6); vfx.decal('scorch', x, y, g, 1.1, 4, 0xffffff, 0.8); } } },
+               EMB_HEAD.size = 0.5 + Math.random() * 0.35; vfx.burst(x, y, z, 1, EMB_HEAD);
+               vfx.burst(x, y, z, 2, EMB_LICK);
+               if (Math.random() < 0.7) vfx.burst(x, y, z, 1, EMB_SPARK); },
+             impact: (x, y, z) => fireBlast(x, y, z, 1.2, 0) },
     orb: { missile: { envelope: 0xff4a10, stretch: 1.8, coreColor: 0xfff0c0, radius: 0.26, halo: 1.3, width: 0.75, width2: 0.3, trailColor2: 0xffd060, trailLife: 0.3 },
-           trail: (x, y, z) => { vfx.burst(x, y, z, 4, { ...FIRE, speed: 1.2, size: 0.8, life: 0.35, up: 1.5, jitter: 0.35 }); vfx.burst(x, y, z, 1, { ...SMOKE, speed: 0.4, size: 0.8, life: 0.9, up: 0.8, alpha: 0.35 }); },
-           impact: (x, y, z, sp) => { sfx.play('boom'); fireBlast(x, y, z, sp.splash, true); vfx.ring(x, y, groundZ(x, y, z), 0xffc060, 0.5, sp.splash * 1.4, 0.6, 0.7); } },
+           trail: (x, y, z) => { vfx.burst(x, y, z, 3, ORB_FIRE); if (Math.random() < 0.6) vfx.burst(x, y, z, 1, ORB_SMOKE); },
+           impact: (x, y, z, sp) => { sfx.play('boom'); fireBlast(x, y, z, sp.splash, true); } },
     pebble: { missile: { stretch: 1.8, coreColor: 0xffd890, radius: 0.1, halo: 0.7, width: 0.3, trailColor: 0xd8a860, trailLife: 0.3, width2: 0.1, trailColor2: 0xffe0a0, rock: 0.2 },   // session 52: tumbling stone head
               trail: (x, y, z) => {   // session 51: grit shards shed behind the pebble and a dust wake
                 if (Math.random() < 0.7) vfx.burst(x, y, z, 1, { ...DUST, speed: 0.3, size: 0.45, life: 0.6, alpha: 0.45, grow: 1.5 });
@@ -329,10 +330,10 @@ export function install(game) {
       }
     } else if (sp.tick === 'meteor') {
       const a = Math.random() * 6.283, r = Math.sqrt(Math.random()) * sp.radius, x = z.x + Math.cos(a) * r, y = z.y + Math.sin(a) * r, gz = groundZ(x, y, z.z + 5);
-      const met = vfx.missile(x + 3, y + 3, gz + 25, 0xff8020, { coreColor: 0xfff0c0, radius: 0.35, halo: 1.6, width: 1.1, width2: 0.4, trailColor2: 0xffe080, trailLife: 0.35, trailLife2: 0.5 });
+      const met = vfx.missile(x + 3, y + 3, gz + 25, 0xff8020, { coreColor: 0xfff0c0, envelope: 0xff4a10, stretch: 3, radius: 0.35, halo: 1.6, width: 1.1, width2: 0.4, trailColor2: 0xffe080, trailLife: 0.35, trailLife2: 0.5 });
       meteors.push({ h: met, x0: x + 3, y0: y + 3, z0: gz + 25, x, y, z: gz, t0: game.time });
       vfx.decal('rune', x, y, gz, sp.splash * 0.8, 0.3, 0xff6010, 0.8);
-      after(0.15, () => { vfx.release(met); fireBlast(x, y, gz + 0.3, sp.splash, true); vfx.debris(x, y, gz + 0.2, 5, { color: 0x3a2a20, speed: 5, size: 0.12, up: 6, floor: gz }); aoe(x, y, gz + 1, sp.splash, sp); sfx.play('boom', 0.6); });
+      after(0.15, () => { vfx.release(met); fireBlast(x, y, gz + 0.3, sp.splash, 1); vfx.flameColumn(x, y, gz, 4.5, 0.55, 0.32); vfx.debris(x, y, gz + 0.2, 5, { color: 0x3a2a20, speed: 5, size: 0.12, up: 6, floor: gz }); aoe(x, y, gz + 1, sp.splash, sp); sfx.play('boom', 0.6); });
     } else if (sp.tick === 'strike') {
       let m = null, bd = 1e9;
       for (const c of game.mobsNear(z.x, z.y, sp.radius)) { const d = (c._struck || 0) + Math.random(); if (d < bd) { bd = d; m = c; } }
@@ -360,7 +361,7 @@ export function install(game) {
     for (let i = meteors.length - 1; i >= 0; i--) {   // Sunfall meteors: fall 25 m in 0.15 s (damage timing is unchanged)
       const m = meteors[i], k = Math.min(1, (t - m.t0) / 0.15);
       vfx.moveMissile(m.h, m.x0 + (m.x - m.x0) * k, m.y0 + (m.y - m.y0) * k, m.z0 + (m.z - m.z0) * k);
-      vfx.burst(m.h.x, m.h.y, m.h.z, 2, { ...FIRE, speed: 1, size: 1, life: 0.3, jitter: 0.4 });
+      vfx.burst(m.h.x, m.h.y, m.h.z, 2, MET_FIRE);
       if (k >= 1) { meteors[i] = meteors[meteors.length - 1]; meteors.pop(); }
     }
     for (let i = zones.length - 1; i >= 0; i--) {
@@ -493,11 +494,17 @@ export function install(game) {
         if ((dx * A.hx + dy * A.hy) / l >= cosA && Math.abs(m.z - p.z) < 4) hit(m, sp, 1, p.x, p.y);
       }
       if (sp.look === 'spray') {
-        const sx = A.x + A.hx * 1.2, sy = A.y + A.hy * 1.2, sz = A.z - 0.35;
-        vfx.burst(sx, sy, sz, 90, { ...FIRE, speed: sp.range * 1.5, size: 0.9, life: 0.55, dx: A.hx, dy: A.hy, dz: A.dz * 0.4, cone: 0.5, drag: 2.4, up: 1.2, jitter: 0.2 });
-        vfx.burst(sx, sy, sz, 30, { tex: 'ember', color: 0xffd080, color2: 0xff3000, speed: sp.range * 1.4, size: 0.13, life: 0.9, dx: A.hx, dy: A.hy, dz: 0.15, cone: 0.6, drag: 1.5, grav: 4 });
-        after(0.2, () => vfx.burst(p.x + A.hx * sp.range * 0.6, p.y + A.hy * sp.range * 0.6, p.z + 1, 8, { ...SMOKE, speed: 1, size: 1.6, life: 1.6, up: 1, jitter: sp.range * 0.4, alpha: 0.35 }));
-        for (let k = 1; k <= 2; k++) { const x = p.x + A.hx * sp.range * k * 0.33, y = p.y + A.hy * sp.range * k * 0.33; vfx.decal('scorch', x, y, groundZ(x, y, p.z), 1 + k * 0.6, 3, 0xffffff, 0.7); }
+        // session 70: fewer, hotter tongues (90 made a flat yellow wash over the camera), a white-hot muzzle, a hot inner
+        // jet, spark streaks, red-brown smoke at the far end, and a scorched, glowing ember strip along the ground
+        const sx = A.x + A.hx * 1.6, sy = A.y + A.hy * 1.6, sz = A.z - 0.4;
+        vfx.core(sx, sy, sz, 0xff9a30, 0.22, 0.14);
+        vfx.burst(sx, sy, sz, 46, { ...FIRE, color2: 0xb81800, speed: sp.range * 1.5, size: 0.95, life: 0.55, dx: A.hx, dy: A.hy, dz: A.dz * 0.4, cone: 0.45, drag: 2.4, up: 1.2, jitter: 0.2 });
+        vfx.burst(sx, sy, sz, 14, { tex: 'flame', color: 0xffffff, color2: 0xffa030, speed: sp.range * 1.2, size: 0.55, life: 0.3, dx: A.hx, dy: A.hy, dz: A.dz * 0.3, cone: 0.15, drag: 2, jitter: 0.1 });
+        vfx.burst(sx, sy, sz, 22, { tex: 'ember', color: 0xffe8a0, color2: 0xff2400, speed: sp.range * 1.4, size: 0.13, life: 0.9, dx: A.hx, dy: A.hy, dz: 0.15, cone: 0.6, drag: 1.5, grav: 4 });
+        vfx.emberStreaks(sx, sy, sz, 3, 0xffa040, sp.range * 1.3, A.hx * 2, A.hy * 2);
+        after(0.2, () => vfx.burst(p.x + A.hx * sp.range * 0.7, p.y + A.hy * sp.range * 0.7, p.z + 1, 6, { ...SMOKE, color: 0x5a2c16, speed: 1, size: 1.6, life: 1.8, up: 1.2, jitter: sp.range * 0.35, alpha: 0.4, fadeIn: 0.3 }));
+        for (let k = 1; k <= 2; k++) { const x = p.x + A.hx * sp.range * k * 0.33, y = p.y + A.hy * sp.range * k * 0.33, g = groundZ(x, y, p.z);
+          vfx.decal('scorch', x, y, g, 1 + k * 0.6, 3, 0xffffff, 0.7); vfx.decal('embers', x, y, g + 0.01, 0.8 + k * 0.5, 1.1, 0xff5a10, 0.8); }
       } else {
         for (let k = 0; k < 12; k++) { const a = (Math.random() - 0.5) * sp.angle * 1.8, c = Math.cos(a), s = Math.sin(a);
           vfx.streak(p.x + A.hx * 1.2 + (Math.random() - 0.5), p.y + A.hy * 1.2 + (Math.random() - 0.5), p.z + 0.4 + Math.random() * 1.6, A.hx * c - A.hy * s, A.hx * s + A.hy * c, 0.05, sp.range * 2.2, 0xe0fff8, 0.45, 0.16, 3); }
@@ -510,11 +517,18 @@ export function install(game) {
       const gz = p.z;
       aoe(p.x, p.y, gz + 1, sp.radius, sp, 1);
       if (sp.look === 'kindle') {
-        vfx.ring(p.x, p.y, gz, 0xff6a00, 0.5, sp.radius * 1.1, 0.5); vfx.ring(p.x, p.y, gz + 0.3, 0xffc040, 0.3, sp.radius * 0.8, 0.6, 0.7);
-        vfx.burst(p.x, p.y, gz + 0.4, 90, { ...FIRE, speed: 1, radial: sp.radius * 2.6, size: 1.1, life: 0.55, ring: 1.2, drag: 3, up: 1.8 });
-        vfx.burst(p.x, p.y, gz + 0.5, 40, { tex: 'ember', color: 0xffd080, color2: 0xff3000, speed: 2, radial: sp.radius * 2.4, size: 0.14, life: 1.1, ring: 1, grav: 5, up: 3 });
-        after(0.25, () => vfx.burst(p.x, p.y, gz + 0.5, 12, { ...SMOKE, speed: 1, size: 1.8, life: 1.6, ring: sp.radius * 0.9, up: 1, alpha: 0.35 }));
-        vfx.decal('scorch', p.x, p.y, gz, sp.radius * 1.05, 5, 0xffffff, 0.8); vfx.light(p.x, p.y, gz + 1.5, 0xff7020, 1.2, 0.5);
+        // session 70: a readable ring of fire: a white-hot flash at the caster, a low expanding flame skirt, then a wall of
+        // tongues standing up at the ring's edge, spark streaks, red-brown smoke ring, scorch + glowing ember bed
+        const cx = p.x, cy = p.y;
+        vfx.core(cx, cy, gz + 1, 0xff9a30, 0.5, 0.16);
+        vfx.ring(cx, cy, gz, 0xff6a00, 0.5, sp.radius * 1.1, 0.5); vfx.ring(cx, cy, gz + 0.3, 0xffc040, 0.3, sp.radius * 0.8, 0.6, 0.7);
+        vfx.burst(cx, cy, gz + 0.4, 50, { ...FIRE, color2: 0xb81800, speed: 1, radial: sp.radius * 2.6, size: 1.05, life: 0.5, ring: 1.2, drag: 3, up: 1.4 });
+        vfx.burst(cx, cy, gz + 0.5, 28, { tex: 'ember', color: 0xffe8a0, color2: 0xff2400, speed: 2, radial: sp.radius * 2.4, size: 0.14, life: 1.1, ring: 1, grav: 5, up: 3 });
+        after(0.12, () => vfx.flameWall(cx, cy, gz, sp.radius * 0.95, 34));
+        vfx.emberStreaks(cx, cy, gz + 0.6, 5, 0xffa040, sp.radius * 1.6);
+        after(0.25, () => vfx.burst(cx, cy, gz + 0.5, 10, { ...SMOKE, color: 0x5a2c16, speed: 1, size: 1.8, life: 1.8, ring: sp.radius * 0.9, up: 1.2, alpha: 0.38, fadeIn: 0.3 }));
+        vfx.decal('scorch', cx, cy, gz, sp.radius * 1.05, 5, 0xffffff, 0.8); vfx.decal('embers', cx, cy, gz + 0.01, sp.radius * 0.95, 1.4, 0xff5a10, 0.75);
+        vfx.light(cx, cy, gz + 1.5, 0xff7020, 1.2, 0.5);
       } else {
         vfx.ring(p.x, p.y, gz, 0xd8b070, 0.5, sp.radius * 1.15, 0.6); vfx.ring(p.x, p.y, gz, 0xffd890, 0.3, sp.radius * 0.7, 0.45, 0.6);
         vfx.decal('crack', p.x, p.y, gz, sp.radius * 1.1, 5, 0xffffff, 0.9); vfx.decal('rune', p.x, p.y, gz, sp.radius * 0.6, 0.9, 0xffb040, 0.8, 2);
@@ -536,7 +550,11 @@ export function install(game) {
       if (sp.look === 'sunfall') {
         vfx.decal('rune', x, y, z, sp.radius * 1.1, dur, 0xff7020, 0.9, 0.5); vfx.decal('scorch', x, y, z, sp.radius * 1.2, dur + 4, 0xffffff, 0.6);
         vfx.ring(x, y, z, 0xffc040, 0.5, sp.radius * 1.1, 0.8); vfx.orb(x, y, z + 22, 0xffd080, 6, dur);
-        vfx.burst(x, y, z + 18, 30, { ...FIRE, speed: 3, size: 3, life: 1.2, jitter: sp.radius, jz: 2, drag: 1 });
+        // session 70: a dark, fire-lit cloud overhead (was 30 size-3 flame sprites: a screen-filling yellow wash) and a
+        // glowing ember bed over the target circle
+        vfx.burst(x, y, z + 17, 12, { ...SMOKE, color: 0x6a3018, color2: 0x1a1210, speed: 1, size: 5, life: dur + 1, grow: 0.6, drag: 0.6, alpha: 0.55, jitter: sp.radius * 1.4, jz: 1.5, fadeIn: 0.2 });
+        vfx.burst(x, y, z + 16.5, 8, { ...FIRE, color2: 0xa01800, speed: 0.5, size: 2.2, life: 0.9, jitter: sp.radius * 1.2, jz: 1, drag: 1, alpha: 0.7 });
+        vfx.decal('embers', x, y, z + 0.01, sp.radius * 0.9, dur, 0xff4a10, 0.5);
       } else if (sp.look === 'static') {
         vfx.decal('frost', x, y, z, sp.radius * 1.05, dur, 0x5a90ff, 0.75); vfx.decal('rune', x, y, z, sp.radius, dur, 0x3a70ff, 0.6, -0.6);
         vfx.ring(x, y, z, 0x88ccff, sp.radius * 0.2, sp.radius, 0.5);
@@ -590,15 +608,15 @@ export function install(game) {
       const steps = Math.max(2, Math.round(moved));
       for (let k = 0; k <= steps; k++) {
         const t = k / steps, x = x0 + (p.x - x0) * t, y = y0 + (p.y - y0) * t, z = z0 + (p.z - z0) * t + 1;
-        if (sp.look === 'flamestep') vfx.burst(x, y, z - 0.6, 5, { ...FIRE, speed: 0.6, size: 0.9, life: 0.6, up: 2.2, jitter: 0.6 });
+        if (sp.look === 'flamestep') { vfx.burst(x, y, z - 0.6, 4, { ...FIRE, color2: 0xb81800, speed: 0.6, size: 0.9, life: 0.6, up: 2.2, jitter: 0.5 }); if (k % 2) vfx.decal('embers', x, y, z - 1, 0.9, 1.2, 0xff5a10, 0.7); }
         else if (sp.look === 'shade') { vfx.burst(x, y, z, 2, { tex: 'smoke', color: 0x24102e, color2: 0x0a0410, grow: 1.6, speed: 0.4, size: 1.3, life: 1.1, alpha: 0.55, jitter: 0.6 }); vfx.burst(x, y, z, 2, { tex: 'wisp', color: 0xb070ff, color2: 0x50ff80, speed: 0.6, size: 0.5, life: 0.7, spin: 4, jitter: 0.6 }); }
         else if (sp.look === 'winddash') vfx.burst(x, y, z, 2, { tex: 'spark', color: 0xffffff, color2: 0x80d0ff, speed: 1.5, size: 0.12, life: 0.4, jitter: 0.8 });
         else vfx.burst(x, y, z - 0.7, 2, { ...DUST, speed: 0.8, size: 1, life: 0.9, jitter: 0.6 });
       }
       if (sp.look === 'winddash') for (let k = 0; k < 8; k++) vfx.streak(x0 + (Math.random() - 0.5) * 1.5, y0 + (Math.random() - 0.5) * 1.5, z0 + 0.3 + Math.random() * 1.6, A.hx, A.hy, 0, Math.max(6, moved * 3), 0xd8f4ff, 0.35, 0.14, 1);
       if (sp.look === 'shade') vfx.decal('rune', x0, y0, z0, 1.4, 1.2, 0x9040ff, 0.85, 3);
-      if (sp.look === 'flamestep') { vfx.ring(x0, y0, z0, 0xff9a30, 0.3, sp.radius, 0.4); vfx.decal('scorch', x0, y0, z0, sp.radius * 0.8, 3, 0xffffff, 0.75); fireBlast(x0, y0, z0 + 0.4, sp.radius * 0.6, false); aoe(x0, y0, z0 + 1, sp.radius, sp);
-        after(0.05, () => { vfx.ring(p.x, p.y, p.z, 0xff6a10, 0.3, sp.radius, 0.4); vfx.burst(p.x, p.y, p.z + 0.3, 40, { ...FIRE, speed: 1, radial: sp.radius * 2.2, size: 0.9, life: 0.45, ring: 0.8, drag: 3, up: 1.5 }); vfx.decal('scorch', p.x, p.y, p.z, sp.radius * 0.8, 3, 0xffffff, 0.75); aoe(p.x, p.y, p.z + 1, sp.radius, sp); }); }
+      if (sp.look === 'flamestep') { vfx.fireball(x0, y0, z0 + 0.4, sp.radius * 0.6, 0, z0); vfx.flameColumn(x0, y0, z0, 2.6, 0.5, 0.3); aoe(x0, y0, z0 + 1, sp.radius, sp);
+        after(0.05, () => { vfx.fireball(p.x, p.y, p.z + 0.4, sp.radius * 0.65, 0, p.z); vfx.flameWall(p.x, p.y, p.z, sp.radius * 0.6, 18); aoe(p.x, p.y, p.z + 1, sp.radius, sp); }); }
       if (sp.landing) {
         const land = () => {
           vfx.ring(p.x, p.y, p.z, 0xd8b070, 0.4, sp.radius * 1.2, 0.5); vfx.decal('crack', p.x, p.y, p.z, sp.radius * 1.1, 4, 0xffffff, 0.9);

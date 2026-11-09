@@ -42,9 +42,11 @@ export function createVfx(game) {
   const blob = (cx, cy, r, a) => { const g = a2.createRadialGradient(cx, cy, 0, cx, cy, r); g.addColorStop(0, `rgba(255,255,255,${a})`); g.addColorStop(1, 'rgba(255,255,255,0)'); a2.fillStyle = g; a2.beginPath(); a2.arc(cx, cy, r, 0, TAU); a2.fill(); };
   const tile = (i, fn) => { a2.save(); a2.translate((i % 4) * 64, Math.floor(i / 4) * 64); a2.beginPath(); a2.rect(1, 1, 62, 62); a2.clip(); fn(); a2.restore(); };
   tile(0, () => { const g = a2.createRadialGradient(32, 32, 0, 32, 32, 30); g.addColorStop(0, 'rgba(255,255,255,1)'); g.addColorStop(0.2, 'rgba(255,255,255,0.75)'); g.addColorStop(0.5, 'rgba(255,255,255,0.25)'); g.addColorStop(1, 'rgba(255,255,255,0)'); a2.fillStyle = g; a2.fillRect(0, 0, 64, 64); });
-  tile(1, () => {   // flame tongue: stacked blobs narrowing upwards, flickery edge
-    for (let k = 0; k < 14; k++) { const t = k / 13; blob(32 + Math.sin(t * 9) * 3 * t, 44 - t * 32, 12 * (1 - t * 0.7), 0.42 - t * 0.12); }
-    blob(32, 40, 8, 0.6);
+  tile(1, () => {   // flame tongue (session 70): a wavering main tongue, two side licks and a dense hot root. The shader turns
+    // the dense (high-alpha) root white-hot, so every flame sprite carries its own white -> yellow -> orange -> red gradient
+    for (let k = 0; k < 18; k++) { const t = k / 17; blob(32 + Math.sin(t * 7) * 4 * t, 52 - t * 44, 13 * (1 - t * 0.78), 0.30 - t * 0.14); }
+    for (const sd of [-1, 1]) for (let k = 0; k < 8; k++) { const t = k / 7; blob(32 + sd * (5 + t * 9), 48 - t * 26, 6.5 * (1 - t * 0.7), 0.2); }
+    blob(32, 46, 11, 0.85); blob(32, 43, 6, 1);
   });
   tile(2, () => { for (let k = 0; k < 16; k++) { const a = rnd() * TAU, r = rnd() * 13; blob(32 + Math.cos(a) * r * 0.8, 32 + Math.sin(a) * r * 0.8, 8 + rnd() * 8, 0.18 + rnd() * 0.14); } });
   tile(3, () => { blob(32, 32, 9, 1); a2.globalCompositeOperation = 'lighter';
@@ -93,6 +95,14 @@ export function createVfx(game) {
       d.lineWidth = 2.5; for (let k = 0; k < 24; k++) { const a = k * TAU / 24; d.save(); d.rotate(a); d.translate(0, -109); d.beginPath();
         const v = k % 4; if (v === 0) { d.moveTo(-4, -5); d.lineTo(0, 5); d.lineTo(4, -5); } else if (v === 1) { d.moveTo(-4, 0); d.lineTo(4, 0); d.moveTo(0, -5); d.lineTo(0, 5); } else if (v === 2) { d.arc(0, 0, 4, 0, Math.PI); } else { d.moveTo(-4, 5); d.lineTo(0, -5); d.lineTo(4, 5); d.moveTo(-2, 1); d.lineTo(2, 1); }
         d.stroke(); d.restore(); } }) },
+    // session 70: glowing ember bed under fire blasts (additive, tinted orange): hot radial glow plus bright fissures
+    embers: { blend: 'add', tex: decalTex(d => {
+      const g = d.createRadialGradient(0, 0, 0, 0, 0, 120); g.addColorStop(0, 'rgba(255,255,255,0.75)'); g.addColorStop(0.35, 'rgba(255,255,255,0.3)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+      d.fillStyle = g; d.fillRect(-128, -128, 256, 256);
+      d.strokeStyle = 'rgba(255,255,255,0.9)'; d.shadowColor = 'white'; d.shadowBlur = 6; d.lineCap = 'round';
+      for (let k = 0; k < 12; k++) { let x = 0, y = 0, a = k / 12 * TAU + rnd() * 0.4, w = 4; d.beginPath(); d.moveTo(0, 0);
+        for (let s = 0; s < 7; s++) { a += (rnd() - 0.5) * 0.8; x += Math.cos(a) * 14; y += Math.sin(a) * 14; d.lineWidth = w; w *= 0.8; d.lineTo(x, y); d.stroke(); d.beginPath(); d.moveTo(x, y); } }
+      for (let k = 0; k < 40; k++) { const a = rnd() * TAU, r = 20 + rnd() * 85; d.fillStyle = `rgba(255,255,255,${0.4 + rnd() * 0.5})`; d.beginPath(); d.arc(Math.cos(a) * r, Math.sin(a) * r, 1 + rnd() * 2.5, 0, TAU); d.fill(); } }) },
     crack: { blend: 'alpha', tex: decalTex(d => {
       const g = d.createRadialGradient(0, 0, 0, 0, 0, 60); g.addColorStop(0, 'rgba(40,30,20,0.55)'); g.addColorStop(1, 'rgba(40,30,20,0)'); d.fillStyle = g; d.fillRect(-128, -128, 256, 256);
       d.strokeStyle = 'rgba(25,18,12,0.85)'; d.lineCap = 'round';
@@ -133,7 +143,8 @@ export function createVfx(game) {
           if (p.x < 0.0 || p.y < 0.0 || p.x > 1.0 || p.y > 1.0) discard;
           float col = mod(vTile, 4.0), row = floor(vTile / 4.0);
           vec4 t = texture2D(map, vec2((col + p.x) / 4.0, 1.0 - (row + p.y) / 2.0));
-          ${additive ? 'gl_FragColor = vec4(vC.rgb * t.a * vC.a, t.a * vC.a);' : 'gl_FragColor = vec4(vC.rgb * t.rgb, t.a * vC.a);'} }`,
+          ${additive ? `float hot = (abs(vTile - 1.0) < 0.5 || abs(vTile - 7.0) < 0.5) ? smoothstep(0.5, 0.95, t.a) * min(1.0, vC.a * 1.4) : 0.0;
+            gl_FragColor = vec4(mix(vC.rgb, vec3(1.0, 0.96, 0.84), hot * 0.85) * t.a * vC.a, t.a * vC.a);` : 'gl_FragColor = vec4(vC.rgb * t.rgb, t.a * vC.a);'} }`,
       // session 48: additive sparks use screen blending (src + dst * (1 - src)) so stacked particles saturate softly
       // instead of clipping to a white bloom over the fight
       transparent: true, depthWrite: false, ...(additive ? SCREEN : { blending: THREE.NormalBlending }),
@@ -234,7 +245,7 @@ export function createVfx(game) {
         float a = uOp * smoothstep(uNear0, uNear1, vD); gl_FragColor = vec4(c * a, a); }`,
     transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
   });
-  const cores = pool(40, () => { const m = new THREE.Mesh(coreGeo, coreMat()); m.renderOrder = 12; return m; });
+  const cores = pool(56, () => { const m = new THREE.Mesh(coreGeo, coreMat()); m.renderOrder = 12; return m; });
 
   // ribbon trails
   const TP = 16;
@@ -488,8 +499,68 @@ export function createVfx(game) {
     const L = Math.hypot(dx, dy) || 1, n = Math.round(6 + 6 * strength);
     burst(x, y, z, n, { tex: 'spark', color: 0xffffff, color2: color, speed: 6 + 3 * strength, size: 0.16, life: 0.3, drag: 5, grav: 9, jitter: 0.1, dx: dx / L, dy: dy / L, dz: 0.35, cone: 0.9 });
     burst(x, y, z, Math.round(3 * strength), { tex: 'ember', color, speed: 2.5, size: 0.2, life: 0.4, drag: 3, jitter: 0.2 });
+    // session 70: a white-hot pinpoint core (fresnel, fades in 0.1 s) and, on solid hits, two spark streaks that arc and fall
+    const c = core(x, y, z, color, 0.1 + 0.07 * strength, 0.1); if (c) c.material.uniforms.uOp.value = 0.9;
+    if (strength >= 1.5) emberStreaks(x, y, z, 2, color, 4 + strength, dx / L, dy / L);
     if (strength >= 2) ring(x, y, z - 0.6, color, 0.2, 1.4, 0.25);
     if (strength >= 1.2) light(x, y, z + 0.3, color, 0.35 * strength, 0.16, 7);   // session 54: a brief light pop on solid hits
+  }
+
+  // ---------------- session 70: fire kit ----------------
+  // Heat-graded fire, built from layers that each read in a still frame: a white-hot fresnel flash, an expanding
+  // fireball shell (big blasts), flame tongues whose roots render white-hot (particle shader), orange->red flames, ember
+  // sparks plus a few spark streaks (ribbon trails with gravity), red-brown smoke that fades in late and rises, and on
+  // the ground a dark scorch, a short-lived glowing ember bed and a heat ring; a point-light pop. Option objects are
+  // preallocated and mutated, so a blast allocates nothing. level: 0 small (bolt hit), 1 medium (meteor), 2 big (orb).
+  const freeCount = p => { let n = 0; for (const o of p) if (!o.visible) n++; return n; };
+  function emberStreaks(x, y, z, n, color, speed, bx = 0, by = 0) {
+    if (LOW || freeCount(trails) < 14) return;   // never starve projectile trails
+    for (let k = 0; k < n; k++) {
+      const a = rnd() * TAU, dx = Math.cos(a) * 0.8 + bx * 0.6, dy = Math.sin(a) * 0.8 + by * 0.6, l = Math.hypot(dx, dy) || 1;
+      const e = streak(x, y, z, dx / l, dy / l, 0, speed * (0.7 + rnd() * 0.5), color, 0.45 + rnd() * 0.25, 0.07, 0.6);
+      if (e) { e.auto.grav = 9; e.auto.vz = 3 + rnd() * 3; e.life = 0.16; }
+    }
+  }
+  const FO = {   // preallocated burst options (mutated per call)
+    flame: { tex: 'flame', color: 0xfff2c0, color2: 0xb81800, speed: 1, size: 1, life: 0.5, drag: 4, up: 2, jitter: 0.3, radial: 0, ring: 0, fadeIn: 0.04, dx: undefined, dy: 0, dz: 0, cone: 0.3 },
+    glow: { tex: 'glow', color: 0xffffff, color2: 0xff9020, speed: 0.4, size: 1, life: 0.18, drag: 2, jitter: 0.1 },
+    ember: { tex: 'ember', color: 0xffe8a0, color2: 0xff2400, speed: 4, size: 0.12, life: 1.1, grav: 7, drag: 1.2, up: 3, jitter: 0.3 },
+    smoke: { tex: 'smoke', color: 0x5a2c16, color2: 0x161212, grow: 2.2, drag: 1.6, alpha: 0.5, speed: 0.8, size: 1.5, life: 2, up: 1.6, jitter: 0.5, fadeIn: 0.35, ring: 0 },
+  };
+  function fireball(x, y, z, r, level = 1, ground = null) {
+    const big = level >= 2, mid = level === 1;
+    const f = take(flashes);
+    if (f) { f.material.color.setRGB(1, 0.85, 0.55); f.material.opacity = 0.8; f.material.rotation = rnd() * 6.28; f.position.set(x, z, -y); const s0 = Math.min(3.2, r * (big ? 1.1 : 0.9)); f.scale.setScalar(s0 * 0.5); const e = rec(f, big ? 0.16 : 0.1, 'flash'); e.s0 = s0; }
+    core(x, y, z, 0xff9a30, r * (big ? 0.28 : 0.2), big ? 0.18 : 0.11);
+    if (big) { const sh = core(x, y, z + 0.2, 0xff4a10, r * 0.42, 0.34); if (sh) sh.material.uniforms.uOp.value = 0.75; }
+    const G = FO.glow; G.size = Math.min(2.2, r * (big ? 0.6 : 0.8)); G.life = big ? 0.25 : 0.16; burst(x, y, z, big ? 4 : 2, G);
+    const F = FO.flame; F.dx = undefined; F.ring = 0; F.radial = 0; F.color = 0xfff2c0; F.color2 = 0xb81800;
+    F.speed = r * (big ? 2.4 : 2.1); F.size = r * (big ? 0.42 : 0.5) + 0.25; F.life = big ? 0.6 : 0.42; F.up = big ? 2.4 : 1.6; F.jitter = r * 0.25;
+    burst(x, y, z, big ? 34 : mid ? 16 : 10, F);
+    const E = FO.ember; E.speed = r * 3; E.life = big ? 1.4 : 0.9; E.up = big ? 4 : 2.5; burst(x, y, z, big ? 26 : mid ? 10 : 6, E);
+    emberStreaks(x, y, z, big ? 6 : mid ? 2 : 1, 0xffa040, r * 3 + 3);
+    const S = FO.smoke; S.size = r * (big ? 0.6 : 0.5) + 0.4; S.life = big ? 2.4 : 1.4; S.jitter = r * 0.5; S.speed = r * 0.4; S.ring = 0;
+    burst(x, y, z + 0.4, big ? 10 : mid ? 4 : 2, S);
+    const g = ground;
+    if (g != null) {
+      decal('scorch', x, y, g, r * (big ? 1.15 : 0.95), big ? 7 : 4, 0xffffff, 0.85);
+      decal('embers', x, y, g + 0.01, r * (big ? 0.9 : 0.75), big ? 1.6 : 0.9, 0xff5a10, 0.9);
+      ring(x, y, g, 0xffa040, r * 0.25, r * (big ? 1.35 : 1.15), big ? 0.42 : 0.28, 0.75);
+    }
+    light(x, y, z + 0.6, 0xff8030, big ? 1.3 : mid ? 0.7 : 0.45, big ? 0.45 : 0.22, big ? 18 : 10);
+  }
+  // pillar of flame rising from the ground (sunfall meteor strikes, kindle ring wall): a hot beam core, upward tongues
+  function flameColumn(x, y, z, h = 5, w = 0.6, dur = 0.35) {
+    beam(x, y, z, x, y, z + h, 0xff6a18, w, dur);
+    const F = FO.flame; F.dx = 0; F.dy = 0; F.dz = 1; F.cone = 0.18; F.ring = 0; F.radial = 0; F.color = 0xfff2c0; F.color2 = 0xc02000;
+    F.speed = h * 1.5; F.size = w * 1.8; F.life = 0.42; F.up = 0; F.jitter = w;
+    burst(x, y, z + 0.2, 10, F); F.dx = undefined;
+  }
+  // ring wall of flame tongues licking up around (x, y) at radius r (kindle ring)
+  function flameWall(x, y, z, r, n = 30) {
+    const F = FO.flame; F.dx = undefined; F.ring = r; F.radial = r * 0.6; F.color = 0xfff2c0; F.color2 = 0xc02000;
+    F.speed = 0.6; F.size = 1.1; F.life = 0.5; F.up = 4.5; F.jitter = 0;
+    burst(x, y, z + 0.2, n, F); F.ring = 0; F.radial = 0;
   }
 
   // ---------------- new kit API ----------------
@@ -512,7 +583,8 @@ export function createVfx(game) {
   // wind streak: an auto-moving trail that curls (gale, wind dash, tempest)
   function streak(x, y, z, dx, dy, dz, speed, color = 0xd8fff4, dur = 0.5, width = 0.12, curl = 2) {
     const e = trail(color, width, 0.18); if (!e) return;
-    e.auto = { x, y, z, dx, dy, dz, speed, curl: (rnd() - 0.5) * curl, until: dur }; trailPush(e, x, y, z);
+    e.auto = { x, y, z, dx, dy, dz, speed, curl: (rnd() - 0.5) * curl, until: dur, grav: 0, vz: 0 }; trailPush(e, x, y, z);
+    return e;
   }
   function trailGeom(e) {
     const m = e.obj, pts = m.userData.pts, ts = m.userData.ts, pa = m.geometry.attributes.position.array, aa = m.geometry.attributes.aA.array;
@@ -608,6 +680,7 @@ export function createVfx(game) {
         if (e.auto) { const a = e.auto; a.until -= dt;
           const c = Math.cos(a.curl * dt), s = Math.sin(a.curl * dt), nx = a.dx * c - a.dy * s, ny = a.dx * s + a.dy * c; a.dx = nx; a.dy = ny;
           a.x += a.dx * a.speed * dt; a.y += a.dy * a.speed * dt; a.z += a.dz * a.speed * dt; a.speed *= Math.max(0, 1 - 1.5 * dt);
+          if (a.grav) { a.vz -= a.grav * dt; a.z += a.vz * dt; }
           if (a.until > 0) trailPush(e, a.x, a.y, a.z); else e.ended = true; }
         if (o.visible) trailGeom(e);
         if (e.ended && e.n < 2) k = 1;
@@ -665,5 +738,6 @@ export function createVfx(game) {
     for (const t of [glow, star, atlas, shockTex, ...Object.values(DECAL).map(d => d.tex)]) t.dispose();
   }
   return { burst, orb, release, ring, disc, beam, lightning, spike, dome, impact, update, dispose, glow, star, SCREEN, root,
-    decal, debris, shardWave, trail, trailPush, trailEnd, streak, core, missile, moveMissile, releaseMissile, tether, sigil, light, quality: QUALITY };
+    decal, debris, shardWave, trail, trailPush, trailEnd, streak, core, missile, moveMissile, releaseMissile, tether, sigil, light, quality: QUALITY,
+    fireball, flameColumn, flameWall, emberStreaks };
 }
