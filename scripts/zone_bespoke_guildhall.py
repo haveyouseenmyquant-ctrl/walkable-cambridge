@@ -111,8 +111,11 @@ def attic_panel(P, xc, y, w=1.5):
     return op
 
 
-def section(P, x0, x1, y, bays, front=False, hoods=False, door_x=None, panels=True, attic=True, ret=None):
-    """One flat stretch of facade at skin plane y from x0 to x1 with window bays at x in `bays`."""
+def section(P, x0, x1, y, bays, front=False, hoods=False, door_x=None, panels=True, attic=True, ret=None,
+            ends=(True, True)):
+    """One flat stretch of facade at skin plane y from x0 to x1 with window bays at x in `bays`.
+    ends: (at x0, at x1) False where the stretch runs on into the curved corner (no return, no moulding overrun)."""
+    ov = lambda o: (o if ends[0] else 0.0, o if ends[1] else 0.0)   # noqa: E731
     holes_b, holes_s, holes_a = [], [], []
     for x in bays:
         holes_b.append(win(P, x, 1.75 if front else 1.6, *W1, y, cols=3, rows=4, hood=hoods))
@@ -137,7 +140,7 @@ def section(P, x0, x1, y, bays, front=False, hoods=False, door_x=None, panels=Tr
         # coping (projects 0.45 to hide the tile model's cornice ring) and roof cap back to the wall line
         P.extrude_profile([(y, Z_TOP), (y + 0.3, Z_TOP), (y + 0.3, Z_TOP + 0.12), (y + 0.42, Z_TOP + 0.22),
                            (y + 0.42, Z_TOP + 0.35), (y - SK - 0.3, Z_TOP + 0.35), (y - SK - 0.3, Z_TOP)],
-                          x0 - 0.3, x1 + 0.3, STONE, mat="stone")
+                          x0 - ov(0.3)[0], x1 + ov(0.3)[1], STONE, mat="stone")
     # stone ground storey (proud by 0.1) with rustication channels
     ys = y + 0.1
     base = box(x0, -0.7, x1, Z_BASE_TOP)
@@ -149,7 +152,9 @@ def section(P, x0, x1, y, bays, front=False, hoods=False, door_x=None, panels=Tr
         base = base.difference(unary_union(holes_s))
     P.face_xz(base, ys, STONE, mat="stone")
     yr = y - SK if ret is None else ret            # returns run back to the neighbouring (recessed) skin plane
-    for x in (x0, x1):
+    for x, e in ((x0, ends[0]), (x1, ends[1])):
+        if not e:
+            continue
         nx = -1 if x == x0 else 1
         P.quad((x, yr, Z_BASE_TOP), (x, y, Z_BASE_TOP), (x, y, Z_TOP), (x, yr, Z_TOP), (nx, 0, 0), BRICK, mat="brick")
         P.quad((x, yr, -0.7), (x, ys, -0.7), (x, ys, Z_BASE_TOP), (x, yr, Z_BASE_TOP), (nx, 0, 0), STONE, mat="stone")
@@ -177,12 +182,12 @@ def section(P, x0, x1, y, bays, front=False, hoods=False, door_x=None, panels=Tr
     # moulded band at the top of the stone storey
     b0, b1 = Z_BAND
     P.extrude_profile([(y, b0), (ys + 0.05, b0), (ys + 0.05, b0 + 0.1), (ys + 0.2, b0 + 0.2), (ys + 0.2, b1),
-                       (y, b1)], x0 - 0.2, x1 + 0.2, STONE, mat="stone")
+                       (y, b1)], x0 - ov(0.2)[0], x1 + ov(0.2)[1], STONE, mat="stone")
     # main cornice: architrave band, frieze, dentils, corona
     z = Z_CORN
     P.extrude_profile([(y, z), (y + 0.08, z), (y + 0.08, z + 0.18), (y + 0.2, z + 0.3), (y + 0.24, z + 0.42),
                        (y + 0.7, z + 0.5), (y + 0.7, z + 0.68), (y + 0.8, z + 0.8), (y, z + 0.8)],
-                      x0 - 0.75, x1 + 0.75, STONE, mat="stone")
+                      x0 - ov(0.75)[0], x1 + ov(0.75)[1], STONE, mat="stone")
     nd = int((x1 - x0) / 0.5)
     for i in range(nd):
         x = x0 + (x1 - x0) * (i + 0.5) / nd
@@ -296,7 +301,8 @@ def build_front(walls):
     bays = [xa + bay * (i + 0.5) for i in range(7)]
     # end bays (recessed): one window column each, no hoods
     section(P, -SK, xa, yE, [(xa - SK) / 2 + 0.1], front=False)
-    section(P, xb, L + SK, yE, [(xb + L) / 2], front=False)
+    xr = L + SK - R_NW                             # s71: the NW end bay runs into the rounded corner
+    section(P, xb, xr, yE, [(xb + xr) / 2], front=False, ends=(True, False))
     # main block either side of the frontispiece
     section(P, xa, xc0, yM, [b for b in bays if b < xc0 - 0.5], front=True, hoods=True, ret=yE - 0.05)
     section(P, xc1, xb, yM, [b for b in bays if b > xc1 + 0.5], front=True, hoods=True, ret=yE - 0.05)
@@ -315,14 +321,41 @@ def build_front(walls):
     return to_world(P, p0, d, "guildhall:front")
 
 
-def build_side(w, nb=None, name="side"):
+def build_side(w, nb=None, name="side", x0=None):
+    """x0: start of the stretch when it begins at the rounded NW corner (bays spread over x0..L)."""
     p0, d, L = frame_of(w["p0"], w["p1"])
     P = P_()
     if nb is None:
         nb = int(L // 3.9)
-    bays = [L * (i + 0.5) / nb for i in range(nb)] if nb else []
-    section(P, -SK, L + SK, SK, bays, front=False)
+    xa = 0.0 if x0 is None else x0 + SK
+    bays = [xa + (L - xa) * (i + 0.5) / nb for i in range(nb)] if nb else []
+    section(P, -SK if x0 is None else x0, L + SK, SK, bays, front=False, ends=(x0 is None, True))
     return to_world(P, p0, d, "guildhall:" + name)
+
+
+R_NW = 1.6   # radius of the rounded NW corner (Market Hill / Peas Hill) on the skin plane. Kept < ~1.85 m so the
+             # tile landmark body's square corner (SK behind both skins) stays inside the curved wall.
+
+
+def build_corner(walls):
+    """s71: rounded NW corner between the Market Hill front and the Peas Hill side, as real curved geometry: the
+    plain end-bay section (stone rusticated storey, band, brick body, cornice, attic, coping) built flat on the arc
+    length and bent onto a Bezier tangent to both skin planes. No openings (none recorded on the corner)."""
+    by = {w["id"]: w for w in walls}
+    if "way/5094872:24" not in by or "way/5094872:10" not in by:
+        return None
+    fp0, dF, _ = frame_of(by["way/5094872:10"]["p0"], by["way/5094872:23"]["p1"])
+    side = by["way/5094872:24"]
+    sp0, dS, _ = frame_of(side["p0"], side["p1"])
+    nF, nS = np.array([dF[1], -dF[0]]), np.array([dS[1], -dS[0]])
+    A = F.line_apex(sp0 + SK * nF, dF, sp0 + SK * nS, dS)
+    Lc, path = F.bezier_path(A - R_NW * dF, A, A + R_NW * dS)
+    P = P_()
+    section(P, 0.0, Lc, 0.0, [], front=False, ends=(False, False))
+    T, N, C = P.arrays()
+    W, Nw, C, M = F.bend(T, N, C, P.mats(), Lc, path)
+    W[..., 2] += Z0
+    return {"name": "guildhall:nw_corner", "tris": W, "col": np.clip(C, 0, 1), "mat": M}
 
 
 def build(walls):
@@ -330,10 +363,11 @@ def build(walls):
     out = []
     ids = {w["id"]: w for w in walls}
     out.append(build_front(walls))
+    out.append(build_corner(walls))
     for wid, nb in (("way/5094872:24", 12), ("way/5094872:9", 4), ("way/5094872:8", 7), ("way/5094872:26", 2),
                     ("way/5094872:25", 0), ("way/5094872:7", 0)):
         if wid in ids:
-            out.append(build_side(ids[wid], nb, wid.split(":")[1]))
+            out.append(build_side(ids[wid], nb, wid.split(":")[1], x0=R_NW - SK if wid.endswith(":24") else None))
     ELEMENTS.update(F.count_on_walls(_OPS, walls))
     return [o for o in out if o is not None]
 

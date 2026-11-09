@@ -64,6 +64,38 @@ def corner_extents(walls):
     return ext
 
 
+# s71: corner walls that are really curved (OSM gives a chamfer): the skin is built flat on the curve length and bent
+# onto a Bezier tangent to the neighbouring walls (through the chamfer ends, so it stays proud of the tile body).
+CURVED = {"way/1288730360:1"}   # 15 Market Hill (Franco Manca), rounded Market Hill / Market Street corner
+
+
+def curve_of(w, W):
+    a = next(x for x in W if x["osm_id"] == w["osm_id"] and x["id"] != w["id"]
+             and np.allclose(x["p1"], w["p0"], atol=0.05))
+    b = next(x for x in W if x["osm_id"] == w["osm_id"] and x["id"] != w["id"]
+             and np.allclose(x["p0"], w["p1"], atol=0.05))
+    da = np.subtract(a["p1"], a["p0"]) / a["length"]
+    db = np.subtract(b["p1"], b["p0"]) / b["length"]
+    apex = F.line_apex(w["p0"], da, w["p1"], -db)
+    return a, b, F.bezier_path(w["p0"], apex, w["p1"])
+
+
+def curved_skin(w, lay, H, Lc, path):
+    """Annotated layout of a chamfer wall rebuilt on the curve length Lc and bent onto the curve."""
+    k = Lc / w["length"]
+    lay = json.loads(json.dumps(lay))
+    for wl in ([lay] if "elements" in lay else lay.get("walls", [lay])):
+        for e in wl.get("elements", []):
+            for key in ("x", "x0", "x1", "door_x"):
+                if key in e:
+                    e[key] = round(e[key] * k, 3)
+    P = F.wall_facade(Lc, H, lay, 0.0, Lc)
+    T, N, C = P.arrays()
+    W3, Nw, C, M = F.bend(T, N, C, P.mats(), Lc, path)
+    W3[..., 2] += w["ground_z"]
+    return P, W3, Nw, C, M
+
+
 def to_collision(w, T, N):
     p0 = np.asarray(w["p0"], float)
     d = (np.asarray(w["p1"], float) - p0) / w["length"]
@@ -245,6 +277,12 @@ def main():
     W = json.load(open(os.path.join(ANN_DIR, "walls.json")))["walls"]
     ann = load_annotations(dirs)
     ext = corner_extents(W)
+    curves = {}
+    for w in W:
+        if w["id"] in CURVED:
+            a, b, cv = curve_of(w, W)
+            curves[w["id"]] = cv
+            ext[a["id"]][1], ext[b["id"]][0] = a["length"], 0.0   # neighbours stop at the tangent points
     man = json.load(open(os.path.join(ROOT, "site/manifest.json")))
     landmark = {l["osm_id"]: l["id"] for l in man.get("landmarks", []) if l.get("detailed") and l.get("osm_id")}
     bespoke = load_bespoke()
@@ -271,12 +309,15 @@ def main():
             continue
         lay = a if a is not None else F.default_layout(w)
         x0s, x1s = ext[w["id"]]
-        P = F.wall_facade(L, H, lay, x0s, x1s)
-        T, N, C = P.arrays()
-        M = P.mats()
-        if not len(T):
-            continue
-        Pw, Nw = to_collision(w, T, N)
+        if w["id"] in curves:
+            P, Pw, Nw, C, M = curved_skin(w, lay, H, *curves[w["id"]])
+        else:
+            P = F.wall_facade(L, H, lay, x0s, x1s)
+            T, N, C = P.arrays()
+            M = P.mats()
+            if not len(T):
+                continue
+            Pw, Nw = to_collision(w, T, N)
         Pw, nrm, keep = orient(Pw, Nw)
         col = np.clip(C[keep], 0, 1) ** GAMMA
         by_b.setdefault(w["osm_id"], []).append((Pw, nrm, col, M[keep]))

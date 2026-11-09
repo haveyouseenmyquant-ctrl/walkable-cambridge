@@ -548,3 +548,70 @@ def count_on_walls(ops, walls, maxd=2.5):
         if best is not None:
             out[best][kind] = out[best].get(kind, 0) + 1
     return out
+
+
+# ---------------------------------------------------------------- curved fronts (session 71)
+
+def bezier_path(a, c, b, n=256):
+    """Plan curve for a rounded corner: quadratic Bezier a -> b with control point c (the corner apex), so it is
+    tangent to the wall lines a-c and c-b. Returns (length, f) with f(s) -> (points (m,2), unit tangents (m,2)) at
+    arc length s (0..length)."""
+    a, c, b = (np.asarray(v, float) for v in (a, c, b))
+    t = np.linspace(0, 1, n)[:, None]
+    pts = (1 - t) ** 2 * a + 2 * (1 - t) * t * c + t ** 2 * b
+    seg = np.linalg.norm(np.diff(pts, axis=0), axis=1)
+    s = np.concatenate([[0], np.cumsum(seg)])
+    L = float(s[-1])
+
+    def f(q):
+        q = np.clip(np.asarray(q, float), 0, L)
+        u = np.interp(q, s, t[:, 0])[:, None]
+        p = (1 - u) ** 2 * a + 2 * (1 - u) * u * c + u ** 2 * b
+        d = 2 * (1 - u) * (c - a) + 2 * u * (b - c)
+        return p, d / np.maximum(np.linalg.norm(d, axis=1, keepdims=True), 1e-9)
+    return L, f
+
+
+def bend(T, N, C, M, L, path, maxdx=0.2):
+    """Wrap a flat facade built in a wall frame (x along 0..L, y outward, z up) onto a plan curve: path(s) gives the
+    point/tangent at arc length s (L = curve length; x outside 0..L continues straight along the end tangents).
+    Triangles are split until no edge spans more than maxdx in x, so walls, window reveals, cornices and glazing all
+    follow the curve. Returns world (E, N, z-from-frame) triangles, normals, colours and material ids."""
+    T, N, C, M = np.asarray(T, float), np.asarray(N, float), np.asarray(C, float), np.asarray(M)
+    for _ in range(12):
+        x = T[..., 0]
+        span = np.abs(x[:, [0, 1, 2]] - x[:, [1, 2, 0]])      # edge i: vertex i -> i+1
+        e = span.argmax(1)
+        big = span.max(1) > maxdx
+        if not big.any():
+            break
+        Tk, Ts = T[~big], T[big]
+        es = e[big]
+        r = np.arange(len(Ts))
+        vi, vj, vk = Ts[r, es], Ts[r, (es + 1) % 3], Ts[r, (es + 2) % 3]
+        m = (vi + vj) / 2
+        T = np.concatenate([Tk, np.stack([vi, m, vk], 1), np.stack([m, vj, vk], 1)])
+        N = np.concatenate([N[~big], N[big], N[big]])
+        C = np.concatenate([C[~big], C[big], C[big]])
+        M = np.concatenate([M[~big], M[big], M[big]])
+    V = T.reshape(-1, 3)
+    s = np.clip(V[:, 0], 0, L)
+    p, t = path(s)
+    n = np.stack([t[:, 1], -t[:, 0]], 1)                       # outward = right of the path direction
+    xy = p + (V[:, 0] - s)[:, None] * t + V[:, 1:2] * n
+    W = np.concatenate([xy, V[:, 2:3]], 1).reshape(-1, 3, 3)
+    _, tc = path(np.clip(T[..., 0].mean(1), 0, L))
+    nc = np.stack([tc[:, 1], -tc[:, 0]], 1)
+    Nw = np.concatenate([N[:, :1] * tc + N[:, 1:2] * nc, N[:, 2:3]], 1)
+    g = np.cross(W[:, 1] - W[:, 0], W[:, 2] - W[:, 0])
+    flip = (g * Nw).sum(1) < 0
+    W[flip] = W[flip][:, ::-1]
+    return W, Nw, C, M
+
+
+def line_apex(p0, d0, p1, d1):
+    """Intersection of the lines p0 + a d0 and p1 + b d1 (plan)."""
+    p0, d0, p1, d1 = (np.asarray(v, float) for v in (p0, d0, p1, d1))
+    A = np.array([[d0[0], -d1[0]], [d0[1], -d1[1]]])
+    a, _ = np.linalg.solve(A, p1 - p0)
+    return p0 + a * d0

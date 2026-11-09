@@ -1,6 +1,6 @@
 {
  "zone": "market_square",
- "built": "2026-11-09T16:05:08Z",
+ "built": "2026-11-09T16:46:19Z",
  "walls": [
   {
    "id": "way/40937938:44",
@@ -915,7 +915,7 @@
    "length": 8.95,
    "height": 13.52,
    "area": 121.0,
-   "detail_area": 57.25,
+   "detail_area": 57.19,
    "elements": {
     "cornice": 1,
     "shop_door": 1,
@@ -931,13 +931,13 @@
    "length": 2.07,
    "height": 13.66,
    "area": 28.28,
-   "detail_area": 8.81,
+   "detail_area": 10.17,
    "elements": {
     "cornice": 1,
     "shop_door": 1,
     "shopfront": 1
    },
-   "tris": 140
+   "tris": 3010
   },
   {
    "id": "way/1288730360:2",
@@ -946,7 +946,7 @@
    "length": 5.24,
    "height": 14.18,
    "area": 74.3,
-   "detail_area": 35.08,
+   "detail_area": 35.02,
    "elements": {
     "cornice": 1,
     "shop_door": 1,
@@ -2204,10 +2204,10 @@
   "walls_annotated": 48,
   "walls_total": 153,
   "walls_built": 59,
-  "tris": 644730,
-  "facade_tris": 34384,
-  "prop_tris": 610346,
+  "tris": 702881,
+  "facade_tris": 37254,
+  "prop_tris": 665627,
   "facade_area_m2": 5393.5,
-  "modelled_detail_area_m2": 2324.8
+  "modelled_detail_area_m2": 2326.0
  }
 }
